@@ -1,0 +1,45 @@
+$color-letra: #868e96;
+$color-borde: $color-letra;
+$color-fondo-hover: #495057;
+$color-display: $green;
+$color-imagen: $cyan;
+$color-grupo: $yellow;
+
+//
+// ESTILO GENERAL DE LISTAS
+//
+
+.list-group{
+  max-height: 50vh;
+  overflow-y: scroll;
+  border: 1px solid $color-borde;
+  border-radius: 0.25rem;
+}
+
+// Bordes de los elementos
+.list-group-item{ border-color: $color-borde; border-left: 0px; border-right: 0px; }
+.list-group-item:first-child{ border-top: 0px; }
+.list-group-item:last-child{ border-bottom: 0px; }
+
+// Color de la letra y fondo de los elementos
+.list-group-item{ color: $color-letra; }
+.list-group-item{ background-color: transparent; }
+
+// Color de fondo de los elementos durante hover
+.list-group-item:hover{ background-color: $color-fondo-hover; }
+
+.elemento-inactivo{ margin-right: 2px; }
+.elemento-activo{ margin-right: 0px; }
+
+// LISTAS DE DISPLAYS
+
+// Color de la letra durante hover
+.elemento-display:hover{
+  color: white;
+}
+
+// Color de letra y borde para el elemento activo
+.elemento-display-activo{
+  box-sizing: border-box;
+  border-right: 2px solid $color-display;
+}

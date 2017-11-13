@@ -1,0 +1,86 @@
+@import '~bootstrap/scss/_functions';
+@import 'custom';
+@import '~bootstrap/scss/bootstrap';
+@import 'listados';
+@import 'detalles';
+@import 'botones';
+
+// style
+html, body{
+  height: 100%;
+  font-family: "etica-display";
+}
+
+.custom-select{
+  min-width: 100%;
+}
+
+.custom-file{
+  min-width: 100%;
+}
+
+.login{
+  height: 100vh;
+}
+
+.etiquetas{
+  overflow-x: scroll;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+// buttons
+.btn-outline-secondary:hover{
+  color: #343A40;
+}
+
+.btn-nav{
+  background-color: transparent;
+  text-align: left;
+  color: #868e96;
+}
+
+.btn-nav:hover{
+  color: white;
+}
+
+.btn-active{
+  background-color: #17A2B8;
+  color: white;
+}
+
+// inputs
+.form-control{
+  color: #F8F9FA;
+  border: 1px solid #868e96;
+}
+
+.form-control:focus{
+  color: #FFFFFF;
+}
+
+.buscar{
+  background-color: #495057;
+  color: #dee2e6;
+  border: none;
+}
+
+.nav-list{
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+// colors
+.titulo{
+  color: #495057;
+}
+
+.border-gray{
+  border-color: #868e96;
+}
+
+hr{
+  border-color: #495057;
+}

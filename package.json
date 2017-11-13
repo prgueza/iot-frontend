@@ -1,36 +1,43 @@
 {
-  "name": "iot-frontend",
-  "version": "0.0.1",
+  "name": "eink",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
-    "body-parser": "~1.17.1",
-    "bootstrap": "^4.0.0-alpha.6",
+    "body-parser": "~1.18.2",
+    "bootstrap": "^4.0.0-beta.2",
+    "classnames": "^2.2.5",
     "cookie-parser": "~1.4.3",
-    "debug": "~2.6.3",
-    "express": "~4.15.2",
-    "hbs": "~4.0.1",
-    "morgan": "~1.8.1",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "moment": "^2.19.1",
+    "morgan": "~1.9.0",
+    "node-sass": "^4.5.3",
     "node-sass-middleware": "0.9.8",
-    "react": "^15.6.1",
-    "react-bootstrap": "^0.31.1",
-    "react-dom": "^15.6.1",
-    "serve-favicon": "~2.4.2"
+    "popper.js": "^1.12.5",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "devDependencies": {
-    "ajv": "^5.2.2",
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
+    "jquery": "^3.2.1",
+    "ajv": "^5.2.3",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "node-sass": "^4.5.3",
+    "css-loader": "^0.28.7",
+    "es2015": "0.0.0",
+    "postcss-loader": "^2.0.8",
+    "precss": "^2.0.0",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
-    "webpack": "^3.4.1"
+    "style-loader": "^0.19.0",
+    "webpack": "^3.7.1"
   }
 }

@@ -1,46 +1,44 @@
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-  entry: './public/bundler.jsx',
-  output: { path: path.resolve(__dirname, 'public/dist'), filename: 'bundle.js'},
+  entry: './src/bundler.jsx',
+  output: { filename: 'bundle.js', path: path.resolve(__dirname, 'public/dist')},
   module: {
     rules: [
       {
-        test: /\.sass?$/,
-        use: [
-        {
-          loader: "style-loader" // creates style nodes from JS strings
-        }, {
-          loader: "css-loader" // translates CSS into CommonJS
-        }, {
-          loader: "sass-loader" // compile Sass to CSS
-        }]
-      },
-      {
         test: /.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_nodules/,
+        exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader',
-      },
-      // FONTS LOADERS
-      {
-          test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'file-loader?name=fonts/[name].[ext]'
-      },
-      {
-          test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'file-loader?name=fonts/[name].[ext]'
-      },
-      {
-          test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'file-loader?name=fonts/[name].[ext]'
-      },
-      {
-          test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'file-loader?name=fonts/[name].[ext]'
-      }],
+        test: /\.(scss)$/,
+        use: [{
+          loader: 'style-loader', // inject CSS to page
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS modules
+        }, {
+          loader: 'postcss-loader', // Run post css actions
+          options: {
+            plugins: function () { // post css plugins, can be exported to postcss.config.js
+              return [
+                require('precss'),
+                require('autoprefixer')
+              ];
+            }
+          }
+        }, {
+          loader: 'sass-loader' // compiles SASS to CSS
+        }]
+      }
+    ]
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+        Popper: ['popper.js', 'default'],
+      })
+  ]
 };
