@@ -6,6 +6,7 @@ require('popper.js/dist/umd/popper');
 require('bootstrap/dist/js/bootstrap');
 import "bootstrap";
 
+
 // styles
 require('./stylesheets/style.scss');
 

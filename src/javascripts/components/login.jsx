@@ -4,9 +4,8 @@ const moment = require('moment');
 const ahora = moment(); moment.locale('es');
 const cx = require('classnames');
 
-
 // Declaracion del componente
-module.exports.comp = class Login extends React.Component{
+export class Login extends React.Component{
   render(){
     return(
       <div className="row justify-content-center login">

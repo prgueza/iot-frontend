@@ -10,16 +10,20 @@ $color-grupo: $yellow;
 //
 
 .list-group{
-  max-height: 50vh;
+  max-height: 60vh;
   overflow-y: scroll;
   border: 1px solid $color-borde;
   border-radius: 0.25rem;
 }
 
+.list-group-item{padding: 0px;}
+
+.elemento{padding: 0.75rem 1.25rem;}
+
 // Bordes de los elementos
-.list-group-item{ border-color: $color-borde; border-left: 0px; border-right: 0px; }
-.list-group-item:first-child{ border-top: 0px; }
-.list-group-item:last-child{ border-bottom: 0px; }
+.list-group-item{ border-color: $color-borde; border-left: 0px; border-right: 0px; border-radius: 0px;}
+.list-group-item:first-child{ border-top: 0px; border-radius: 0px;}
+.list-group-item:last-child{ border-bottom: 0px; border-radius: 0px;}
 
 // Color de la letra y fondo de los elementos
 .list-group-item{ color: $color-letra; }
@@ -27,19 +31,20 @@ $color-grupo: $yellow;
 
 // Color de fondo de los elementos durante hover
 .list-group-item:hover{ background-color: $color-fondo-hover; }
-
 .elemento-inactivo{ margin-right: 2px; }
 .elemento-activo{ margin-right: 0px; }
+
+// Estilo de los elementos activos
+.active .elemento{
+  color: white;
+  background-color: $color-fondo-hover;
+  border-right: 0.25rem solid $color-display;
+  padding-right: 1rem;
+}
 
 // LISTAS DE DISPLAYS
 
 // Color de la letra durante hover
 .elemento-display:hover{
   color: white;
-}
-
-// Color de letra y borde para el elemento activo
-.elemento-display-activo{
-  box-sizing: border-box;
-  border-right: 2px solid $color-display;
 }

@@ -1,19 +1,21 @@
 // Importacion de librerias
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 const cx = require('classnames');
 
 // Importacion de componentes
-const LoginComponente = require('./components/login.jsx');
-const MainComponente = require('./components/main.jsx');
-const Login = LoginComponente.comp;
-const Main = MainComponente.comp;
+import { Login } from './components/login.jsx';
+import { Main } from './components/main.jsx';
+
 
 // Declaracion de componentes
 class App extends React.Component{
   render(){
     return(
-      <Main/>
+      <Router>
+        <Main/>
+      </Router>
     );
   }
 }

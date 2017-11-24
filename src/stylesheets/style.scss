@@ -6,9 +6,30 @@
 @import 'botones';
 
 // style
-html, body{
+html {
   height: 100%;
+}
+body{
+  max-height: 100vh;
   font-family: "etica-display";
+}
+
+// SIZING
+
+.main{
+  height: 90vh;
+}
+
+.ventana{
+  overflow-y: hidden;
+}
+
+.detalles{
+  overflow-y: scroll;
+}
+
+.frame{
+  max-height: 100vh;
 }
 
 .custom-select{
@@ -42,11 +63,22 @@ html, body{
   color: #868e96;
 }
 
-.btn-nav:hover{
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover{
+  text-decoration: none;
   color: white;
 }
 
-.btn-active{
+.btn-nav:hover{
+  text-decoration: none;
+  color: white;
+}
+
+.active .btn{
   background-color: #17A2B8;
   color: white;
 }
@@ -74,6 +106,10 @@ html, body{
 
 // colors
 .titulo{
+  color: #868e96;
+}
+
+.titulo-navegacion{
   color: #495057;
 }
 
