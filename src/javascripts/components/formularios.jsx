@@ -1,11 +1,11 @@
 // Importacion de librerias
-import React from 'react';
+import React, { Component } from 'react';
 const moment = require('moment');
 const ahora = moment(); moment.locale('es');
 const cx = require('classnames');
 
 // Declaracion de componentes
-export class FormularioDisplay extends React.Component{
+export class FormularioDisplay extends Component{
   render(){
     var fecha = ahora.format('dddd, D [de] MMMM [de] YYYY');
     return(
@@ -55,7 +55,7 @@ export class FormularioDisplay extends React.Component{
   }
 };
 
-export class FormularioImagen extends React.Component{
+export class FormularioImagen extends Component{
   render(){
     var fecha = ahora.format('dddd, D [de] MMMM [de] YYYY');
     return(
@@ -127,7 +127,7 @@ export class FormularioImagen extends React.Component{
   }
 };
 
-export class FormularioGrupo extends React.Component{
+export class FormularioGrupo extends Component{
   render(){
     var fecha = ahora.format('dddd, D [de] MMMM [de] YYYY');
     return(

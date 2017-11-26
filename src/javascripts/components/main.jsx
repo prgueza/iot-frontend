@@ -1,5 +1,5 @@
 // Importacion de librerias
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
 const moment = require('moment'); moment.locale('es');
 const ahora = moment();
@@ -14,61 +14,57 @@ import { Info } from './info.jsx';
 import { BotonAdd } from './botones.jsx';
 
 // Declaracion de componentes
-export class Main extends React.Component{
-  render(){
-    return(
-      <div className="row main">
-        <Navegacion/>
-        <Contenido/>
-      </div>
-    );
-  }
+export const Main = () => {
+  return(
+    <div className="row main">
+      <Navegacion/>
+      <Contenido/>
+    </div>
+  );
 };
 
-class Navegacion extends React.Component{
-  render(){
-    return(
-      <div className="col-2 navegacion">
-        <div className="titulo mb-4 text-center">
-          <h1>MENU</h1>
-        </div>
-        <hr></hr>
-        <div className="busqueda mb-3">
-          <p className="titulo-navegacion">BÚSQUEDA</p>
-          <input type="text" className="form-control buscar" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..."></input>
-        </div>
-        <div className="navegacion mb-3">
-          <p className="titulo-navegacion">NAVEGACIÓN</p>
-          <ul className="nav-list">
-            <NavLink exact to={'/'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-eye mr-2" aria-hidden="true"></i> Vista general</button></li>
-            </NavLink>
-            <NavLink to={'/displays'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-television mr-2" aria-hidden="true"></i> Displays</button></li>
-            </NavLink>
-            <NavLink to={'/imagenes'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-picture-o mr-2" aria-hidden="true"></i> Imágenes</button></li>
-            </NavLink>
-            <NavLink to={'/grupos'}>
-                <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-list mr-2" aria-hidden="true"></i> Grupos</button></li>
-            </NavLink>
-          </ul>
-        </div>
-        <div className="navegacion mb-3">
-          <p className="titulo-navegacion">AJUSTES</p>
-          <ul className="nav-list">
-            <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-user-o mr-2" aria-hidden="true"></i> Cuenta</button></li>
-            <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-cogs mr-2" aria-hidden="true"></i> Configuración</button></li>
-            <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
-          </ul>
-        </div>
-        <hr></hr>
+const Navegacion = () => {
+  return(
+    <div className="col-2 navegacion">
+      <div className="titulo mb-4 text-center">
+        <h1>MENU</h1>
       </div>
-    );
-  }
+      <hr></hr>
+      <div className="busqueda mb-3">
+        <p className="titulo-navegacion">BÚSQUEDA</p>
+        <input type="text" className="form-control buscar" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..."></input>
+      </div>
+      <div className="navegacion mb-3">
+        <p className="titulo-navegacion">NAVEGACIÓN</p>
+        <ul className="nav-list">
+          <NavLink exact to={'/'}>
+            <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-eye mr-2" aria-hidden="true"></i> Vista general</button></li>
+          </NavLink>
+          <NavLink to={'/displays'}>
+            <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-television mr-2" aria-hidden="true"></i> Displays</button></li>
+          </NavLink>
+          <NavLink to={'/imagenes'}>
+            <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-picture-o mr-2" aria-hidden="true"></i> Imágenes</button></li>
+          </NavLink>
+          <NavLink to={'/grupos'}>
+              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-list mr-2" aria-hidden="true"></i> Grupos</button></li>
+          </NavLink>
+        </ul>
+      </div>
+      <div className="navegacion mb-3">
+        <p className="titulo-navegacion">AJUSTES</p>
+        <ul className="nav-list">
+          <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-user-o mr-2" aria-hidden="true"></i> Cuenta</button></li>
+          <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-cogs mr-2" aria-hidden="true"></i> Configuración</button></li>
+          <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
+        </ul>
+      </div>
+      <hr></hr>
+    </div>
+  );
 };
 
-class Contenido extends React.Component{
+class Contenido extends Component{
 
   constructor(props){
     super(props);
@@ -119,219 +115,184 @@ class Contenido extends React.Component{
   }
 };
 
-class ContenidoVistaGeneral extends React.Component{
-  render(){
-    const { displays, imagenes, grupos }  = this.props;
-    return(
-      <div className="col contenido">
+const ContenidoVistaGeneral = ({ displays, imagenes, grupos }) => {
+  return(
+    <div className="col contenido">
+      <div className="row">
+        <div className="col">
+          <div className="titulo mb-4 text-right">
+            <h1>VISTA GENERAL</h1>
+          </div>
+          <hr></hr>
+        </div>
+      </div>
+      <div className="ventana">
+        <div className="row mb-3">
+          <Panel contenido={displays} categoria="displays"/>
+          <Panel contenido={imagenes} categoria="imagenes"/>
+          <Panel contenido={grupos} categoria="grupos"/>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ContenidoDisplays = ({ contenido }) => {
+  return(
+    <div className="col contenido">
+      <div className="row">
+        <div className="col">
+          <div className="titulo mb-4 text-right">
+            <h1>DISPLAYS</h1>
+          </div>
+          <hr></hr>
+        </div>
+      </div>
+      <div className="ventana">
         <div className="row">
           <div className="col">
-            <div className="titulo mb-4 text-right">
-              <h1>VISTA GENERAL</h1>
-            </div>
-            <hr></hr>
+            <Resumen total={contenido.length} categoria='displays'/>
           </div>
         </div>
-        <div className="ventana">
-          <div className="row mb-3">
-            <Panel contenido={displays} categoria="displays"/>
-            <Panel contenido={imagenes} categoria="imagenes"/>
-            <Panel contenido={grupos} categoria="grupos"/>
+        <div className="row mb-3">
+          <div className="col-4">
+            <Lista categoria='displays' contenido={contenido}/>
+          </div>
+          <div className="col-8">
+            <div className="row mb-3">
+              <Switch>
+                <Route path="/displays/add" component={FormularioDisplay}/>
+                <Route path="/displays/:displayId" render={({ match }) => (<DetallesDisplay elemento={contenido.find(d => d.identificacion == match.params.displayId)}/>)}/>
+              </Switch>
+              <Route exact path="/displays" render={() => (<Info categoria='displays'/>)}/>
+            </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
-class ContenidoDisplays extends React.Component{
-  render(){
-    const { contenido } = this.props;
-    return(
-      <div className="col contenido">
+const ContenidoImagenes = ({ contenido }) => {
+  return(
+    <div className="col contenido">
+      <div className="row">
+        <div className="col">
+          <div className="titulo mb-4 text-right">
+            <h1>IMAGENES</h1>
+          </div>
+          <hr></hr>
+        </div>
+      </div>
+      <div className="ventana">
         <div className="row">
           <div className="col">
-            <div className="titulo mb-4 text-right">
-              <h1>DISPLAYS</h1>
-            </div>
-            <hr></hr>
+            <Resumen total={contenido.length} categoria='imagenes'/>
           </div>
         </div>
-        <div className="ventana">
-          <div className="row">
-            <div className="col">
-              <Resumen total={contenido.length} categoria='displays'/>
-            </div>
+        <div className="row mb-3">
+          <div className="col-4">
+            <Lista categoria='imagenes' contenido={contenido}/>
           </div>
-          <div className="row mb-3">
-            <div className="col-4">
-              <Lista categoria='displays' contenido={contenido}/>
-            </div>
-            <div className="col-8">
-              <div className="row mb-3">
-                <Switch>
-                  <Route path="/displays/add" component={FormularioDisplay}/>
-                  <Route path="/displays/:displayId" render={({ match }) => (<DetallesDisplay elemento={contenido.find(d => d.identificacion == match.params.displayId)}/>)}/>
-                </Switch>
-                <Route exact path="/displays" render={() => (<Info categoria='displays'/>)}/>
-              </div>
+          <div className="col-8">
+            <div className="row mb-3">
+              <Switch>
+                <Route path="/imagenes/add" component={FormularioImagen}/>
+                <Route path="/imagenes/:imagenId" render={({ match }) => (<DetallesImagen elemento={contenido.find(i => i.identificacion == match.params.imagenId)}/>)}/>
+              </Switch>
+              <Route exact path="/imagenes" render={() => (<Info categoria='imagenes'/>)}/>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
-class ContenidoImagenes extends React.Component{
-  render(){
-    const { contenido } = this.props;
-    return(
-      <div className="col contenido">
+const ContenidoGrupos = ({ contenido }) => {
+  return(
+    <div className="col contenido">
+      <div className="row">
+        <div className="col">
+          <div className="titulo mb-4 text-right">
+            <h1>GRUPOS</h1>
+          </div>
+          <hr></hr>
+        </div>
+      </div>
+      <div className="ventana">
         <div className="row">
           <div className="col">
-            <div className="titulo mb-4 text-right">
-              <h1>IMAGENES</h1>
-            </div>
-            <hr></hr>
+            <Resumen total={contenido.length} categoria='grupos'/>
           </div>
         </div>
-        <div className="ventana">
-          <div className="row">
-            <div className="col">
-              <Resumen total={contenido.length} categoria='imagenes'/>
-            </div>
+        <div className="row mb-3">
+          <div className="col-4">
+            <Lista categoria='grupos' contenido={contenido}/>
           </div>
-          <div className="row mb-3">
-            <div className="col-4">
-              <Lista categoria='imagenes' contenido={contenido}/>
-            </div>
-            <div className="col-8">
-              <div className="row mb-3">
-                <Switch>
-                  <Route path="/imagenes/add" component={FormularioDisplay}/>
-                  <Route path="/imagenes/:imagenId" render={({ match }) => (<DetallesImagen elemento={contenido.find(i => i.identificacion == match.params.imagenId)}/>)}/>
-                </Switch>
-                <Route exact path="/imagenes" render={() => (<Info categoria='imagenes'/>)}/>
-              </div>
+          <div className="col-8">
+            <div className="row mb-3">
+              <Switch>
+                <Route path="/grupos/add" component={FormularioGrupo}/>
+                <Route path="/grupos/:grupoId" render={({ match }) => (<DetallesGrupo elemento={contenido.find(g => g.identificacion == match.params.grupoId)}/>)}/>
+              </Switch>
+              <Route exact path="/grupos" render={() => (<Info categoria='grupos'/>)}/>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
-class ContenidoGrupos extends React.Component{
-  render(){
-    const { contenido } = this.props;
-    return(
-      <div className="col contenido">
-        <div className="row">
-          <div className="col">
-            <div className="titulo mb-4 text-right">
-              <h1>GRUPOS</h1>
-            </div>
-            <hr></hr>
-          </div>
-        </div>
-        <div className="ventana">
-          <div className="row">
-            <div className="col">
-              <Resumen total={contenido.length} categoria='grupos'/>
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-4">
-              <Lista categoria='grupos' contenido={contenido}/>
-            </div>
-            <div className="col-8">
-              <div className="row mb-3">
-                <Switch>
-                  <Route path="/grupos/add" component={FormularioGrupo}/>
-                  <Route path="/grupos/:grupoId" render={({ match }) => (<DetallesGrupo elemento={contenido.find(g => g.identificacion == match.params.grupoId)}/>)}/>
-                </Switch>
-                <Route exact path="/grupos" render={() => (<Info categoria='grupos'/>)}/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+const Panel = ({ categoria, contenido }) => {
+  return(
+    <div className="col-4">
+      <Resumen total={contenido.length} categoria={categoria}/>
+      <Lista categoria={categoria} contenido={contenido}/>
+    </div>
+  );
 };
 
-class Panel extends React.Component{
-  render(){
-    const { categoria, contenido } = this.props;
-    return(
-      <div className="col-4">
-        <Resumen total={contenido.length} categoria={categoria}/>
-        <Lista categoria={categoria} contenido={contenido}/>
-      </div>
-    );
-  }
-};
-
-class Resumen extends React.Component{
-  render(){
-    const { categoria, total } = this.props;
-    const icono = cx('fa',
-    {'fa-television': categoria === "displays"},
-    {'fa-picture-o': categoria === "imagenes"},
-    {'fa-list': categoria === "grupos"}); // Depende de a que pertenezca el resumen
-    const estilo = cx('card', 'mb-3', 'bg-transparent',
-    {'border-success text-success': categoria === "displays"},
-    {'border-info text-info': categoria === "imagenes"},
-    {'border-warning text-warning': categoria === "grupos"});
-    return(
-      <div className="resumen">
-        <div className={estilo}>
-          <div className="card-body text-right">
-            <div className="card-text d-flex w-100 justify-content-between">
-              <h1 className="mb-0 display-3"><i className={icono} aria-hidden="true"></i></h1>
-              <h1 className="mb-0 display-3">{total}</h1>
-            </div>
+const Resumen = ({ categoria, total }) => {
+  const icono = cx('fa',
+  {'fa-television': categoria === "displays"},
+  {'fa-picture-o': categoria === "imagenes"},
+  {'fa-list': categoria === "grupos"}); // Depende de a que pertenezca el resumen
+  const estilo = cx('card', 'mb-3', 'bg-transparent',
+  {'border-success text-success': categoria === "displays"},
+  {'border-info text-info': categoria === "imagenes"},
+  {'border-warning text-warning': categoria === "grupos"});
+  return(
+    <div className="resumen">
+      <div className={estilo}>
+        <div className="card-body text-right">
+          <div className="card-text d-flex w-100 justify-content-between">
+            <h1 className="mb-0 display-3"><i className={icono} aria-hidden="true"></i></h1>
+            <h1 className="mb-0 display-3">{total}</h1>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
-class Lista extends React.Component{
-  render(){ // dependiendo de la categoria formateamos el contenido de un modo u otro
-    const { categoria, contenido } = this.props;
-    const elementos = []; // Array donde almacenaremos cada display
-    var key = 0; // clave necesaria para React
-    if (categoria === "displays"){
-      var claseBoton = cx("btn btn-block btn-small btn-outline-success");
-      contenido.forEach(function(elemento){ // Recorremos el array de displays
-        elementos.push(<Display display={elemento} key={key}/>); // Introducimos el elemento
-        key ++; // Aumentamos la clave en una unidad
-      });
-    } else if (categoria === "imagenes"){
-      var claseBoton = cx("btn btn-block btn-small btn-outline-info");
-      contenido.forEach(function(elemento){ // Recorremos el array de displays
-        elementos.push(<Imagen imagen={elemento} key={key}/>); // Introducimos el elemento
-        key ++; // Aumentamos la clave en una unidad
-      });
-    } else if (categoria === "grupos"){
-      var claseBoton = cx("btn btn-block btn-small btn-outline-warning");
-      contenido.forEach(function(elemento){ // Recorremos el array de displays
-        elementos.push(<Grupo grupo={elemento} key={key}/>); // Introducimos el elemento
-        key ++; // Aumentamos la clave en una unidad
-      });
-    }
-    return(
-      <div className="lista">
-        <div className="list-group mb-3">
-          {elementos}
-        </div>
-        <div>
-          <BotonAdd categoria={categoria}/>
-        </div>
-      </div>
-    );
+const Lista = ({ categoria, contenido }) => {
+  if (categoria === "displays"){
+    var elementos = contenido.map(elemento => <Display display={elemento} key={elemento.identificacion}/>);
+  } else if (categoria === "imagenes"){
+    var elementos = contenido.map(elemento => <Imagen imagen={elemento} key={elemento.identificacion}/>);
+  } else if (categoria === "grupos"){
+    var elementos = contenido.map(elemento => <Grupo grupo={elemento} key={elemento.identificacion}/>);
   }
+  return(
+    <div className="lista">
+      <div className="list-group mb-3">
+        {elementos}
+      </div>
+      <div>
+        <BotonAdd categoria={categoria}/>
+      </div>
+    </div>
+  );
 };

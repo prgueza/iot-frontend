@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 router.get('/api/displays', function(req, res, next) {
   setTimeout(function(){
     res.json(displays);
-  }, 3000)
+  }, 2000)
 });
 
 router.get('/api/imagenes', function(req, res, next) {
