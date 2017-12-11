@@ -16,16 +16,40 @@ body{
 
 // SIZING
 
+.form-control[readonly]{
+  background-color: transparent;
+  color: white;
+}
 .main{
   height: 90vh;
 }
 
 .ventana{
-  overflow-y: hidden;
+  max-width: 100%
 }
 
 .detalles{
-  overflow-y: scroll;
+  max-width: 100%;
+}
+
+.vista-previa{
+  padding: 20px;
+}
+
+.vista-imagen{
+  max-width: 100%;
+  border: 1px solid #868e96;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.asociados{
+  padding:20px;
+}
+
+.imagen{
+  width: 100%;
 }
 
 .frame{
@@ -110,6 +134,10 @@ a:hover{
 }
 
 .titulo-navegacion{
+  color: #495057;
+}
+
+.disponible{
   color: #495057;
 }
 

@@ -1,11 +1,9 @@
-// Importacion de librerias
+/* IMPORT MODULES */
 import React from 'react';
-const moment = require('moment');
-const ahora = moment(); moment.locale('es');
 const cx = require('classnames');
 
-// Declaracion del componente
-export const Etiqueta = ({ categoria, etiqueta }) => {
+/* COMPONENTS */
+export const Tag = ({ categoria, etiqueta }) => {
   const claseEtiqueta = cx("btn mr-1",
     {"btn-outline-success": categoria === "displays"},
     {"btn-outline-info": categoria === "imagenes"},

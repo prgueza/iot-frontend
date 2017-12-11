@@ -1,4 +1,29 @@
+$color-display: $green;
+$color-imagen: $cyan;
+$color-grupo: $yellow;
+
 .btn-tiny{
   padding: 0.2rem;
   font-size: 0.75rem;
+}
+
+.btn-outline-display{
+  color: $color-display;
+  background-color: transparent;
+  background-image: none;
+  border-color: $color-display;
+}
+
+.btn-outline-imagen{
+  color: $color-imagen;
+  background-color: transparent;
+  background-image: none;
+  border-color: $color-imagen;
+}
+
+.btn-outline-grupo{
+  color: $color-grupo;
+  background-color: transparent;
+  background-image: none;
+  border-color: $color-grupo;
 }

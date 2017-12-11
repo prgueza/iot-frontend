@@ -1,15 +1,13 @@
 // Importacion de librerias
 import React from 'react';
-import { BrowserRouter as Router, Link, NavLink, Route } from 'react-router-dom';
-const moment = require('moment');
-const ahora = moment(); moment.locale('es');
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 const cx = require('classnames');
 
-export const BotonAdd = ({ categoria }) => {
+export const AddButton = ({ categoria }) => {
   const claseBoton = cx("btn btn-block btn-small",
      {"btn-outline-success": categoria === 'displays'},
-     {"btn-outline-info": categoria === 'imagenes'},
-     {"btn-outline-warning": categoria === 'grupos'}
+     {"btn-outline-info": categoria === 'images'},
+     {"btn-outline-warning": categoria === 'groups'}
   );
   const location = {
       pathname: '/' + categoria + '/add'

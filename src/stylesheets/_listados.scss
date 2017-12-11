@@ -18,7 +18,8 @@ $color-grupo: $yellow;
 
 .list-group-item{padding: 0px;}
 
-.elemento{padding: 0.75rem 1.25rem;}
+.elemento
+{padding: 0.75rem 1.25rem;}
 
 // Bordes de los elementos
 .list-group-item{ border-color: $color-borde; border-left: 0px; border-right: 0px; border-radius: 0px;}
@@ -35,16 +36,31 @@ $color-grupo: $yellow;
 .elemento-activo{ margin-right: 0px; }
 
 // Estilo de los elementos activos
-.active .elemento{
+.active .elemento-display{
   color: white;
   background-color: $color-fondo-hover;
   border-right: 0.25rem solid $color-display;
   padding-right: 1rem;
 }
 
+.active .elemento-imagen{
+  color: white;
+  background-color: $color-fondo-hover;
+  border-right: 0.25rem solid $color-imagen;
+  padding-right: 1rem;
+}
+
+.active .elemento-grupo{
+  color: white;
+  background-color: $color-fondo-hover;
+  border-right: 0.25rem solid $color-grupo;
+  padding-right: 1rem;
+}
+
 // LISTAS DE DISPLAYS
 
 // Color de la letra durante hover
-.elemento-display:hover{
-  color: white;
-}
+.elemento-display:hover
+.elemento-grupo:hover
+.elemento-imagen:hover
+.elemento-asociado:hover{ color: white; }
