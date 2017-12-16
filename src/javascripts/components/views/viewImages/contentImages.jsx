@@ -37,7 +37,7 @@ export const ContentImages = ({ images, ...other }) => {
               <Switch>
                 <Route path="/images/add" render={() => <ImageForm {...other} images={images}/>}/>
                 <Route path="/images/edit/:imageId" render={({ match }) => <ImageForm {...other} image={images.data.find(i => i.id == match.params.imageId)}/>}/>
-                <Route path="/images/delete/:imageId" render={({ match }) => <ImageDelete image={images.data.find(i => i.id == match.params.imageId)}/>}/>
+                <Route path="/images/delete/:imageId" render={({ match }) => <ImageDelete {...other} image={images.data.find(i => i.id == match.params.imageId)}/>}/>
                 <Route path="/images/:imageId" render={({ match }) => (<ImageDetails {...other} image={images.data.find(i => i.id == match.params.imageId)}/>)}/>
               </Switch>
               <Route exact path="/images" render={() => (<ImageGeneric/>)}/>

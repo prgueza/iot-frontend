@@ -25,6 +25,15 @@ export class Main extends Component {
       settings: null,
       user: null
     };
+    this.updateImages = this.updateImages.bind(this);
+  }
+
+  updateImages(e){
+    fetch('http://localhost:4000/images')
+      .then(res => res.json())
+      .then(images => {
+        this.setState({ images })
+      });
   }
 
   componentDidMount(){
@@ -53,8 +62,8 @@ export class Main extends Component {
   render(){
     return(
       <div className="row main">
-        <Navigation { ...this.state }/>
-        <Content { ...this.state }/>
+        <Navigation updateImages={this.updateImages} { ...this.state }/>
+        <Content updateImages={this.updateImages} { ...this.state }/>
       </div>
     );
   }
@@ -102,6 +111,7 @@ class Navigation extends Component{
               <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
             </NavLink>
               <li><a href="/disconect"><button type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-sign-out mr-2" aria-hidden="true"></i> Desconectar</button></a></li>
+              <li><button onClick={this.props.updateImages} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
           </ul>
         </div>
         <hr></hr>

@@ -57327,6 +57327,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Main = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -57381,33 +57383,45 @@ var Main = exports.Main = function (_Component) {
       settings: null,
       user: null
     };
+    _this.updateImages = _this.updateImages.bind(_this);
     return _this;
   }
 
   _createClass(Main, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'updateImages',
+    value: function updateImages(e) {
       var _this2 = this;
 
-      fetch('http://localhost:4000/displays').then(function (res) {
-        return res.json();
-      }).then(function (displays) {
-        _this2.setState({ displays: displays });
-      });
       fetch('http://localhost:4000/images').then(function (res) {
         return res.json();
       }).then(function (images) {
         _this2.setState({ images: images });
       });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      fetch('http://localhost:4000/displays').then(function (res) {
+        return res.json();
+      }).then(function (displays) {
+        _this3.setState({ displays: displays });
+      });
+      fetch('http://localhost:4000/images').then(function (res) {
+        return res.json();
+      }).then(function (images) {
+        _this3.setState({ images: images });
+      });
       fetch('http://localhost:4000/groups').then(function (res) {
         return res.json();
       }).then(function (groups) {
-        _this2.setState({ groups: groups });
+        _this3.setState({ groups: groups });
       });
       fetch('http://localhost:4000/settings').then(function (res) {
         return res.json();
       }).then(function (settings) {
-        _this2.setState({ settings: settings });
+        _this3.setState({ settings: settings });
       });
     }
   }, {
@@ -57416,8 +57430,8 @@ var Main = exports.Main = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'row main' },
-        _react2.default.createElement(Navigation, this.state),
-        _react2.default.createElement(Content, this.state)
+        _react2.default.createElement(Navigation, _extends({ updateImages: this.updateImages }, this.state)),
+        _react2.default.createElement(Content, _extends({ updateImages: this.updateImages }, this.state))
       );
     }
   }]);
@@ -57605,6 +57619,16 @@ var Navigation = function (_Component2) {
                   ' Desconectar'
                 )
               )
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement(
+                'button',
+                { onClick: this.props.updateImages, type: 'button', className: 'btn btn-nav btn-block mb-1' },
+                _react2.default.createElement('i', { className: 'fa fa-refresh mr-2', 'aria-hidden': 'true' }),
+                ' Actualizar'
+              )
             )
           )
         ),
@@ -57644,7 +57668,7 @@ var Content = function (_Component3) {
   _createClass(Content, [{
     key: 'render',
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var _props2 = this.props,
           displays = _props2.displays,
@@ -57657,25 +57681,25 @@ var Content = function (_Component3) {
           'div',
           { className: 'col' },
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-              return _react2.default.createElement(_overview.Overview, _this5.props);
+              return _react2.default.createElement(_overview.Overview, _this6.props);
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/displays', render: function render() {
-              return _react2.default.createElement(_contentDisplays.ContentDisplays, _this5.props);
+              return _react2.default.createElement(_contentDisplays.ContentDisplays, _this6.props);
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/images', render: function render() {
-              return _react2.default.createElement(_contentImages.ContentImages, _this5.props);
+              return _react2.default.createElement(_contentImages.ContentImages, _this6.props);
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/groups', render: function render() {
-              return _react2.default.createElement(_contentGroups.ContentGroups, _this5.props);
+              return _react2.default.createElement(_contentGroups.ContentGroups, _this6.props);
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/account', render: function render() {
-              return _react2.default.createElement(_contentAccount.ContentAccount, _this5.state);
+              return _react2.default.createElement(_contentAccount.ContentAccount, _this6.state);
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/settings', render: function render() {
-              return _react2.default.createElement(_contentSettings.ContentSettings, _this5.state);
+              return _react2.default.createElement(_contentSettings.ContentSettings, _this6.state);
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/docs', render: function render() {
-              return _react2.default.createElement(_contentDocs.ContentDocs, _this5.state);
+              return _react2.default.createElement(_contentDocs.ContentDocs, _this6.state);
             } })
         );
       } else {
@@ -62916,9 +62940,9 @@ var ContentImages = function ContentImages(_ref) {
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/delete/:imageId', render: function render(_ref3) {
                   var match = _ref3.match;
-                  return _react2.default.createElement(_ImageDelete.ImageDelete, { image: images.data.find(function (i) {
+                  return _react2.default.createElement(_ImageDelete.ImageDelete, _extends({}, other, { image: images.data.find(function (i) {
                       return i.id == match.params.imageId;
-                    }) });
+                    }) }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render(_ref4) {
                   var match = _ref4.match;
@@ -63625,6 +63649,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(5);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63637,7 +63663,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var moment = __webpack_require__(0);moment.locale('es');
 
 /* COMPONENTS */
-
 var ImageDelete = exports.ImageDelete = function (_Component) {
   _inherits(ImageDelete, _Component);
 
@@ -63647,6 +63672,9 @@ var ImageDelete = exports.ImageDelete = function (_Component) {
     var _this = _possibleConstructorReturn(this, (ImageDelete.__proto__ || Object.getPrototypeOf(ImageDelete)).call(this, props));
 
     _this.handleDelete = _this.handleDelete.bind(_this);
+    _this.state = {
+      end: false
+    };
     return _this;
   }
 
@@ -63656,64 +63684,68 @@ var ImageDelete = exports.ImageDelete = function (_Component) {
       event.preventDefault();
       fetch(this.props.image.url, {
         method: 'delete'
-      }).catch(function (err) {
+      }).then(this.props.updateImages).then(this.setState({ end: true })).catch(function (err) {
         return console.log(err);
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'col detalles' },
-        _react2.default.createElement(
+      if (this.state.end) {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/images' });
+      } else {
+        return _react2.default.createElement(
           'div',
-          { className: 'card bg-transparent border-gray' },
+          { className: 'col detalles' },
           _react2.default.createElement(
             'div',
-            { className: 'card-header border-gray' },
+            { className: 'card bg-transparent border-gray' },
             _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+              'div',
+              { className: 'card-header border-gray' },
               _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
+                'ul',
+                { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
                 _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-                  'Eliminar Imagen'
+                  'li',
+                  { className: 'nav-item mr-auto' },
+                  _react2.default.createElement(
+                    'h2',
+                    { className: 'detalles-titulo' },
+                    _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+                    'Eliminar Imagen'
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'card-body' },
+              _react2.default.createElement(
+                'div',
+                { className: 'text-center' },
+                _react2.default.createElement(
+                  'h1',
+                  null,
+                  '\xBFEliminar imagen?'
+                ),
+                _react2.default.createElement('hr', null),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'Esta acci\xF3n no se puede deshacer'
+                ),
+                _react2.default.createElement(
+                  'button',
+                  { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
+                  _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+                  'Eliminar'
                 )
               )
             )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'text-center' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                '\xBFEliminar imagen?'
-              ),
-              _react2.default.createElement('hr', null),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Esta acci\xF3n no se puede deshacer'
-              ),
-              _react2.default.createElement(
-                'button',
-                { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
-                _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-                'Eliminar'
-              )
-            )
           )
-        )
-      );
+        );
+      }
     }
   }]);
 
