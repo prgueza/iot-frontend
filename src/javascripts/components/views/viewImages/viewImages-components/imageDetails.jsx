@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 /* IMPORT COMPONENTS */
 import { Associated } from '../../associated.jsx';
@@ -34,10 +35,12 @@ export class ImageDetails extends Component {
 
   render(){
     if(this.state.image){
-      const { id, name, description, src_url, created_at, updated_at, user, resolution, file, size, category, groups, displays, tags_total, tags } = this.state.image;
+      const { id, name, description, src_url, created_at, updated_at, user, dimensions, file, size, category, groups, displays, tags_total, tags } = this.state.image;
       const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
       const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
       const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='imagenes' etiqueta={tag}/>);
+      const linktoEdit = '/images/edit/' + id;
+      const linktoDelete = '/images/delete/' + id;
 
       return(
       <div className="col">
@@ -48,10 +51,14 @@ export class ImageDetails extends Component {
                 <h2 className="detalles-titulo"><i className='fa fa-picture-o mr-3' aria-hidden="true"></i>{name}</h2>
               </li>
               <li className="nav-item mr-2">
-                <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
+                <Link to={linktoEdit}>
+                  <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
+                </Link>
               </li>
               <li className="nav-item ml-2">
-                <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o" aria-hidden="true"></i>Eliminar</button>
+                <Link to={linktoDelete}>
+                  <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o" aria-hidden="true"></i>Eliminar</button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -62,7 +69,7 @@ export class ImageDetails extends Component {
                   <p className="titulo">DETALLES</p>
                   <p className="card-text"><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
                   <p className="card-text"><i className="fa fa-info-circle mr-1" aria-hidden="true"></i> {description}</p>
-                  <p className="card-text"><i className="fa fa-arrows-alt mr-1" aria-hidden="true"></i> {resolution.width} x {resolution.height}</p>
+                  <p className="card-text"><i className="fa fa-arrows-alt mr-1" aria-hidden="true"></i> {dimensions.width} x {dimensions.height}</p>
                   <p className="card-text"><i className="fa fa-file-image-o mr-1" aria-hidden="true"></i> {file}</p>
                   <p className="card-text"><i className="fa fa-database mr-1" aria-hidden="true"></i> {size}</p>
                   <p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {created}</p>

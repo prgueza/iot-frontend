@@ -18,9 +18,9 @@ export const Overview = ({ displays, images, groups }) => {
       </div>
       <div className="ventana">
         <div className="row mb-3">
-          <Panel contenido={displays} categoria="displays"/>
-          <Panel contenido={images} categoria="images"/>
-          <Panel contenido={groups} categoria="groups"/>
+          <Panel contenido={displays.data} categoria="displays"/>
+          <Panel contenido={images.data} categoria="images"/>
+          <Panel contenido={groups.data} categoria="groups"/>
         </div>
       </div>
     </div>

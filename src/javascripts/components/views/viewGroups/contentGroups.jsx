@@ -24,18 +24,18 @@ export const ContentGroups = ({ groups, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={groups.length} categoria='groups'/>
+            <Title total={groups.count} categoria='groups'/>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-4">
-            <List categoria='groups' contenido={groups}/>
+            <List categoria='groups' contenido={groups.data}/>
           </div>
           <div className="col-8">
             <div className="row mb-3">
               <Switch>
                 <Route path="/groups/add" render={() => <GroupForm {...other} groups={groups}/>}/>
-                <Route path="/groups/:groupId" render={({ match }) => (<GroupDetails {...other} group={groups.find(g => g.id == match.params.groupId)}/>)}/>
+                <Route path="/groups/:groupId" render={({ match }) => (<GroupDetails {...other} group={groups.data.find(g => g.id == match.params.groupId)}/>)}/>
               </Switch>
               <Route exact path="/groups" render={() => (<GroupGeneric/>)}/>
             </div>

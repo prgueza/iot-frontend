@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-const logger = require('morgan');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const expressSession = require('express-session');
 
 const app = express();
 
@@ -11,21 +12,11 @@ app.set('view engine', 'ejs');
 
 const index = require('./routes/index');
 
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-// API CROS
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers',
-//    'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//   if (req.method === 'OPTIONS'){
-//     res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-//     return res.status(200).json({});
-//   }
-// });
+app.use(expressSession({secret: 'secretString', saveUninitialized: false, resave: false}));
 
 app.use('/', index);
 

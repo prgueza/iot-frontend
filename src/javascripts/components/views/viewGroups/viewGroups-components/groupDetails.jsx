@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 /* IMPORT COMPONENTS */
 import { Associated } from '../../associated.jsx';
@@ -38,6 +39,7 @@ export class GroupDetails extends Component {
       const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
       const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
       const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='grupos' etiqueta={tag}/>);
+      const src = active_image || 'http://localhost:3000/img/undefined.png';
 
       return(
       <div className="col">
@@ -72,7 +74,7 @@ export class GroupDetails extends Component {
                 <div className="vista-previa">
                   <p className="titulo text-right">IMAGEN ACTIVA</p>
                   <div className="vista-imagen">
-                    <img className="imagen" src={active_image.src_url}/>
+                    <img className="imagen" src={src}/>
                   </div>
                 </div>
               </div>

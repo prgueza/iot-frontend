@@ -27,19 +27,29 @@ export class ImageForm extends Component{
   }
 
   componentDidMount(){
-    const { displays, groups, images, settings, user } = this.props;
-    const fecha = moment().format('dddd, D [de] MMMM [de] YYYY');
-    const opcionesDisplays = displays.map((d) => <option value={d.id} key={d.id}>{d.name}</option>);
-    const opcionesGrupos = groups.map((g) => <option value={g.id} key={g.id}>{g.name}</option>);
+    const { displays, groups, images, image, settings, user } = this.props;
+    const created_at = moment().format('dddd, D [de] MMMM [de] YYYY');
+    const updated_at = moment().format('dddd, D [de] MMMM [de] YYYY');
+    const opcionesDisplays = displays.data.map((d) => <option value={d.id} key={d.id}>{d.name}</option>);
+    const opcionesGrupos = groups.data.map((g) => <option value={g.id} key={g.id}>{g.name}</option>);
     const opcionesResolucion = settings.resolutions.map((r, i) => <option value={i} key={i}>{r.name}</option>);
-    const identificaciones = images.map((i) => i.id);
-    var id = 1;
-    while (identificaciones.indexOf(id) != -1){
-      id++;
+    if (image) {
+      fetch(image.url)
+        .then((res) => res.json())
+        .then((i) => {
+          var created_at = i.created_at;
+          var id = i.id;
+          var user = i.user;
+        }
+      );
+    } else {
+      const identificaciones = images.map((i) => i.id);
+      var id = 1;
+      while (identificaciones.indexOf(id) != -1){id++}
     }
     this.setState({
-      created_at: fecha,
-      updated_at: fecha,
+      created_at: created_at,
+      updated_at: updated_at,
       id: id,
       opcionesDisplays: opcionesDisplays,
       opcionesGrupos: opcionesGrupos,
@@ -59,7 +69,6 @@ export class ImageForm extends Component{
   }
 
   render(){
-
     return(
       <div className="col detalles">
         <form>

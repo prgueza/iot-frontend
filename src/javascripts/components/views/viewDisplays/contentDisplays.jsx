@@ -24,19 +24,19 @@ export const ContentDisplays = ({ displays, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={displays.length} categoria='displays'/>
+            <Title total={displays.count} categoria='displays'/>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-4">
-            <List categoria='displays' contenido={displays}/>
+            <List categoria='displays' contenido={displays.data}/>
           </div>
           <div className="col-8">
             <div className="row mb-3">
               <Switch>
                 <Route path="/displays/add" render={() => <DisplayForm {...other} displays={displays}/>}/>
-                <Route path="/displays/edit/:displayId" render={({ match }) => <DisplayForm {...other} display={displays.find(d => d.id == match.params.displayId)}/>}/>
-                <Route path="/displays/:displayId" render={({ match }) => (<DisplayDetails display={displays.find(d => d.id == match.params.displayId)}/>)}/>
+                <Route path="/displays/edit/:displayId" render={({ match }) => <DisplayForm {...other} display={displays.data.find(d => d.id == match.params.displayId)}/>}/>
+                <Route path="/displays/:displayId" render={({ match }) => (<DisplayDetails display={displays.data.find(d => d.id == match.params.displayId)}/>)}/>
               </Switch>
               <Route exact path="/displays" render={() => (<DisplayGeneric/>)}/>
             </div>

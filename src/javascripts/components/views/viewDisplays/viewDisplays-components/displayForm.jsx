@@ -31,10 +31,10 @@ export class DisplayForm extends Component{
   }
 
   componentDidMount(){
-    const { images, groups, settings, user } = this.props;
-    const opcionesImagenes = images.map((i) => <option value={i.id} key={i.id}>{i.name}</option>);
-    const opcionesGrupos = groups.map((g) => <option value={g.id} key={g.id}>{g.name}</option>);
-    fetch(this.props.display.url)
+    const { images, groups, settings, user, display } = this.props;
+    const opcionesImagenes = images.data.map((i) => <option value={i.id} key={i.id}>{i.name}</option>);
+    const opcionesGrupos = groups.data.map((g) => <option value={g.id} key={g.id}>{g.name}</option>);
+    fetch(display.url)
       .then(res => res.json())
       .then(display => {
         const created_at = moment(display.created_at).format("dddd, D [de] MMMM [de] YYYY");
@@ -44,6 +44,8 @@ export class DisplayForm extends Component{
           name: display.name,
           description: display.description,
           user: display.user,
+          image_id: 'No asignar',
+          group_id: 'No asignar',
           resolution: {
             width: display.resolution.width,
             height: display.resolution.height
@@ -66,35 +68,44 @@ export class DisplayForm extends Component{
   }
 
   handleSubmit(event){
-    const form = this.state;
+    const form = {
+      id: this.state.id,
+      name: this.state.name,
+      description: this.state.description,
+      user: this.state.user,
+      image_id: this.state.image_id,
+      group_id: this.state.group_id,
+      resolution: {
+        width: this.state.resolution.width,
+        height: this.state.resolution.height
+      },
+      tags: this.state.tags,
+    };
+
     event.preventDefault();
-    fetch('http://localhost:3000/api/displays', {
-      method: 'post',
+    fetch(this.props.display.url, {
+      method: 'put',
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
       body: JSON.stringify(form)
     })
-      .then((res) => res.json())
-      .then((res) => alert('Mensaje enviado con ' + res.mensaje));
+    .catch((err) => console.log(err));
   }
 
-
-
   render(){
-
     return(
       <div className="col detalles">
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <div className="card bg-transparent border-gray">
             <div className="card-header border-gray">
               <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                 <li className="nav-item mr-auto">
-                  <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo Display</h2>
+                  <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar display</h2>
                 </li>
                 <li className="nav-item ml-2">
-                  <button value="submit" type="submit" className="btn btn-outline-display"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                  <button onClick={this.handleSubmit} type="button" className="btn btn-outline-display"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button>
                 </li>
               </ul>
             </div>
