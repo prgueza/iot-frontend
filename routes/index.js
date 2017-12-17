@@ -2,15 +2,6 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 
-/* GET user info */
-router.get('/user', function(req, res, next) {
-  // Send session user parameters
-  fetch(req.session.user_url)
-    .then((res) => res.json())
-    .then((user_data) => res.json(user_data))
-    .catch((err) => console.log(err));
-});
-
  /* GET img resources */
  router.get('/img/:image', function(req, res, next) {
    var imgPath = '../public/img/' + req.params.image;
@@ -40,8 +31,8 @@ router.post('/', function(req, res, next){
       if (user && user.password == req.body.password){
         // Save session parameters
         req.session.logedin = true;
-        req.session.user_url = user.url;
-        res.render('index');
+        res.cookie('userID', user._id, { httpOnly:false });
+        res.redirect('/');
       } else {
         res.render('login');
       }

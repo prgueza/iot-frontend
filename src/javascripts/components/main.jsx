@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
-import AlertContainer from 'react-alert';
+import cookie from 'react-cookie';
 
 /* IMPORT COMPONENTS */
 import { ContentDisplays } from './views/viewDisplays/contentDisplays.jsx';
@@ -11,7 +11,8 @@ import { ContentAccount } from './views/viewAccount/contentAccount.jsx';
 import { ContentSettings } from './views/viewSettings/contentSettings.jsx';
 import { ContentDocs } from './views/viewDocs/contentDocs.jsx';
 import { Overview } from './views/overview.jsx';
-
+import { Icon } from './icons/icon.jsx';
+import { NavButton } from './buttons/navButton.jsx';
 
 /* COMPONENTS */
 export class Main extends Component {
@@ -23,47 +24,37 @@ export class Main extends Component {
       images: null,
       groups: null,
       settings: null,
-      user: null
+      user: null,
+      userID: cookie.load('userID')
     };
-    this.updateImages = this.updateImages.bind(this);
+    this.update = this.update.bind(this);
   }
 
-  updateImages(e){
-    fetch('http://localhost:4000/images')
-      .then(res => res.json())
-      .then(images => {
-        this.setState({ images })
-      });
+  // fetch all data from API
+  update(){
+    Promise.all([
+      fetch('http://localhost:4000/displays').then(res => res.json()),
+      fetch('http://localhost:4000/images').then(res => res.json()),
+      fetch('http://localhost:4000/groups').then(res => res.json()),
+    ])
+    .then((docs) => {
+      this.setState({displays: docs[0]});
+      this.setState({images: docs[1]});
+      this.setState({groups: docs[2]});
+    })
+    .catch((err) => console.log(err)); // TODO: error handling
   }
 
   componentDidMount(){
-    fetch('http://localhost:4000/displays')
-      .then(res => res.json())
-      .then(displays => {
-        this.setState({ displays })
-      });
-    fetch('http://localhost:4000/images')
-      .then(res => res.json())
-      .then(images => {
-        this.setState({ images })
-      });
-    fetch('http://localhost:4000/groups')
-      .then(res => res.json())
-      .then(groups => {
-        this.setState({ groups })
-      });
-    fetch('http://localhost:4000/settings')
-      .then(res => res.json())
-      .then(settings => {
-        this.setState({ settings })
-      });
-    }
+    this.update();
+    fetch('http://localhost:4000/users/' + this.state.userID).then(res => res.json()).then((user) =>  this.setState({ user }));
+  }
 
   render(){
     return(
       <div className="row main">
-        <Navigation updateImages={this.updateImages} { ...this.state }/>
-        <Content updateImages={this.updateImages} { ...this.state }/>
+        <Navigation update={this.update} { ...this.state }/>
+        <Content update={this.update} { ...this.state }/>
       </div>
     );
   }
@@ -73,6 +64,22 @@ class Navigation extends Component{
   render(){
 
     const { displays, images, groups, user } = this.props;
+
+    const navigationUser = [
+      {exact: true, linkTo: "", text:"Vista general", icon:"eye", count:false, number:''},
+      {exact: false, linkTo: "displays", text:"Displays", icon:"television", count:true, number:displays ? displays.count : '...'},
+      {exact: false, linkTo: "images", text:"Imagenes", icon:"picture-o", count:true, number:images ? images.count : '...'},
+      {exact: false, linkTo: "groups", text:"Grupos", icon:"list", count:true, number:groups ? groups.count : '...'}
+    ];
+
+    const navigationAdmin = [
+      {exact: true, linkTo: "", text:"Vista general", icon:"eye", count:false, number:''},
+      {exact: false, linkTo: "displays", text:"Displays", icon:"television", count:true, number:displays ? displays.count : '...'}
+    ]
+
+    const nav = user && user.admin ?
+      navigationAdmin.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> ) :
+      navigationUser.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> );
 
     return(
       <div className="col-2 navegacion">
@@ -87,18 +94,7 @@ class Navigation extends Component{
         <div className="navegacion mb-3">
           <p className="titulo-navegacion">NAVEGACIÓN</p>
           <ul className="nav-list">
-            <NavLink exact to={'/'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-eye mr-2" aria-hidden="true"></i> Vista general</button></li>
-            </NavLink>
-            <NavLink to={'/displays'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-television mr-2" aria-hidden="true"></i> Displays <span className="pull-right">{displays ? displays.count : '...'}</span></button></li>
-            </NavLink>
-            <NavLink to={'/images'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-picture-o mr-2" aria-hidden="true"></i> Imágenes <span className="pull-right">{images ? images.count : '...'}</span></button></li>
-            </NavLink>
-            <NavLink to={'/groups'}>
-                <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-list mr-2" aria-hidden="true"></i> Grupos <span className="pull-right">{groups ? groups.count : '...'}</span></button></li>
-            </NavLink>
+            {nav}
           </ul>
         </div>
         <div className="navegacion mb-3">
@@ -110,8 +106,13 @@ class Navigation extends Component{
             <NavLink to={'/docs'}>
               <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
             </NavLink>
+          {user && user.admin &&
+            <NavLink to={'/settings'}>
+              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-cogs mr-2" aria-hidden="true"></i> Configuración</button></li>
+            </NavLink>
+          }
               <li><a href="/disconect"><button type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-sign-out mr-2" aria-hidden="true"></i> Desconectar</button></a></li>
-              <li><button onClick={this.props.updateImages} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
+              <li><button onClick={this.props.update} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
           </ul>
         </div>
         <hr></hr>

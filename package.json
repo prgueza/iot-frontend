@@ -1,6 +1,6 @@
 {
   "name": "iot-frontend",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
@@ -23,7 +23,6 @@
     "node-sass": "^4.5.3",
     "node-sass-middleware": "0.9.8",
     "react": "^16.1.1",
-    "react-alert": "^2.4.0",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
     "react-select": "^1.1.0"

@@ -1,8 +1,41 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
+import cookie from 'react-cookie';
 
 /* COMPONENTS */
 export class Login extends Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      user: '',
+      password: '',
+      remember: false
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    this.setState({ user: localStorage.getItem('user') || '' });
+    this.setState({ remember: localStorage.getItem('user') ? true : false });
+  }
+
+  handleInputChange(event){
+    const target = event.target;
+    const value = target.name != 'remember' ? target.value : !this.state.remember;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event){
+    if(this.state.remember){
+      localStorage.setItem('user', this.state.user);
+    }
+  }
+
   render(){
     return(
       <div className="row login justify-content-center">
@@ -13,16 +46,16 @@ export class Login extends Component{
               <form action="/" method="post">
                 <div className="form-group">
                   <label className="sr-only" htmlFor="user">Usuario</label>
-                  <input type="text" className="form-control" id="user" name="user" placeholder="Usuario"></input>
+                  <input onChange={this.handleInputChange} type="text" className="form-control" id="user" value={this.state.user} name="user" placeholder="Usuario"></input>
                 </div>
                 <div className="form-group">
                   <label className="sr-only" htmlFor="password">Password</label>
-                  <input type="password" className="form-control" id="password" name="password" placeholder="Contraseña"></input>
+                  <input onChange={this.handleInputChange} type="password" className="form-control" id="password" value={this.state.password} name="password" placeholder="Contraseña"></input>
                 </div>
-                <button type="submit" className="btn btn-block btn-outline-secondary">Entrar</button>
+                <button onClick={this.handleSubmit} type="submit" className="btn btn-block btn-outline-secondary">Entrar</button>
                 <div className="form-group mt-2">
                   <label className="custom-control custom-checkbox">
-                    <input type="checkbox" name="remind" className="custom-control-input"></input>
+                    <input onChange={this.handleInputChange} type="checkbox" checked={this.state.remember} name="remember" value={this.state.remember} className="custom-control-input"></input>
                     <span className="custom-control-indicator"></span>
                     <span className="custom-control-description">Recordar usuario</span>
                   </label>

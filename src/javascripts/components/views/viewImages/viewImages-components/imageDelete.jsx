@@ -20,7 +20,7 @@ export class ImageDelete extends Component{
     fetch(this.props.image.url, {
       method: 'delete'
     })
-    .then(this.props.updateImages)
+    .then(this.props.update)
     .then(this.setState({ end: true }))
     .catch((err) => console.log(err));
   }
