@@ -78,8 +78,13 @@ class Navigation extends Component{
     ]
 
     const nav = user && user.admin ?
+<<<<<<< HEAD
       navigationAdmin.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> ) :
       navigationUser.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> );
+=======
+      navigationAdmin.map((nav, i) => <NavButton exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> ) :
+      navigationUser.map((nav, i) => <NavButton exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> );
+>>>>>>> d48fd6e3105bad4f215cae966d06c342a6b50ab4
 
     return(
       <div className="col-2 navegacion">
