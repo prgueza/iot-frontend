@@ -3,6 +3,8 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const expressSession = require('express-session');
+const cookieParser = require('cookie-parser')
+
 
 const app = express();
 
@@ -12,6 +14,7 @@ app.set('view engine', 'ejs');
 
 const index = require('./routes/index');
 
+app.use(cookieParser())
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
