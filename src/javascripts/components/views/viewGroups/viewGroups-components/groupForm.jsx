@@ -69,7 +69,7 @@ export class GroupForm extends Component{
       active_image: group ? group.active_image ? group.active_image._id : '' : '',
       images: group ? group.images.map((i) => i._id) : [],
       displays: group ? group.displays.map((d) => d._id) : [],
-      user: user,
+      user: user.name,
       // form options stored in state
       optionsDisplays: optionsDisplays,
       optionsImages: optionsImages,
@@ -138,7 +138,7 @@ export class GroupForm extends Component{
   handleSubmit = (event) => {
     event.preventDefault();
     const form = {
-      'user'        : this.state.user._id,
+      'user'        : this.props.user._id,
       'id'          : this.state.id,
       'name'        : this.state.name,
       'description' : this.state.description,
@@ -174,7 +174,7 @@ export class GroupForm extends Component{
               <div className="card-header border-gray">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
-                    <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir una nueva Imagen</h2>
+                    <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo Grupo</h2>
                   </li>
                   <li className="nav-item ml-2">
                     <button type="submit" className="btn btn-outline-grupo"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
@@ -198,7 +198,7 @@ export class GroupForm extends Component{
                 </div>
                 <div className="form-group">
                   <label htmlFor="user"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="user" value={this.state.user.name} readOnly></input>
+                  <input type="text" className="form-control" id="user" name="user" value={this.state.user} readOnly></input>
                 </div>
                 <div className="form-row">
                   <div className="form-group col">

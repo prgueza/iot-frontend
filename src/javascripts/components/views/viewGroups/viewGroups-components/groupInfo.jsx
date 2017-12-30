@@ -8,19 +8,21 @@ import { Associated } from '../../associated.jsx';
 import { Tag } from '../../../tags/tag.jsx';
 
 /* COMPONENTS */
-export class ImageInfo extends Component { // TODO: transform to component
+export class GroupInfo extends Component { // TODO: transform to component
 
   render(){
     // define constants from props for better readability
-    const { id, name, description, src_url, created_at, updated_at, user, resolution, file, size, category, groups, displays, tags_total, tags } = this.props.image;
+    const { id, name, description, created_at, updated_at, user, displays, images, active_image, tags_total, tags } = this.props.group;
     // refactor date constants with format
     const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
     const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
     // generate tag list
-    const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='imagenes' etiqueta={tag}/>);
+    const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='grupos' etiqueta={tag}/>);
+    // check if active_image is set and if not set the undefined img
+    const src = active_image ? active_image.src_url : 'http://localhost:3000/img/undefined.png';
     // define routes for edit and delete based on the id
-    const linktoEdit = '/images/' + id + '/edit';
-    const linktoDelete = '/images/' + id + '/delete';
+    const linktoEdit = '/groups/' + id + '/edit';
+    const linktoDelete = '/groups/' + id + '/delete';
 
     return(
     <div className="col">
@@ -28,7 +30,7 @@ export class ImageInfo extends Component { // TODO: transform to component
         <div className="card-header border-gray">
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">
-              <h2 className="detalles-titulo"><i className='fa fa-picture-o mr-3' aria-hidden="true"></i>{name}</h2>
+              <h2 className="detalles-titulo"><i className='fa fa-list mr-3' aria-hidden="true"></i>{name}</h2>
             </li>
             <li className="nav-item mr-2">
               <Link to={linktoEdit}>
@@ -46,44 +48,42 @@ export class ImageInfo extends Component { // TODO: transform to component
           <div className="row">
             <div className="col">
               <div className="card-body">
-                <p className="titulo">DETALLES</p>
-                <p className="card-text"><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
-                <p className="card-text"><i className="fa fa-info-circle mr-1" aria-hidden="true"></i> {description}</p>
-                <p className="card-text"><i className="fa fa-arrows-alt mr-1" aria-hidden="true"></i> {resolution.name}</p>
-                <p className="card-text"><i className="fa fa-file-image-o mr-1" aria-hidden="true"></i> {file}</p>
-                <p className="card-text"><i className="fa fa-database mr-1" aria-hidden="true"></i> {size}</p>
-                <p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {created}</p>
-                <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {user.name}</p>
-                <p className="titulo">ETIQUETAS</p>
-                {tag_list}
+              <p className="titulo">DETALLES</p>
+              <p className="card-text"><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
+              <p className="card-text" data-toggle="tooltip" data-placement="left" title="descripción"><i className="fa fa-info-circle mr-1" aria-hidden="true"></i> {description}</p>
+              <p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i>{created}</p>
+              <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {user.name}</p>
+              <p className="titulo">ETIQUETAS</p>
+              {tag_list}
               </div>
             </div>
             <div className="col">
               <div className="vista-previa">
-                <p className="titulo text-right">VISTA PREVIA</p>
+                <p className="titulo text-right">IMAGEN ACTIVA</p>
                 <div className="vista-imagen">
-                  <img className="imagen" src={src_url}/>
+                  <img className="imagen" src={src}/>
                 </div>
               </div>
             </div>
           </div>
-          <hr></hr> {/* TODO: more info */}
+          <hr></hr>
           <div className="row">
             <div className="col">
               <div className="asociados">
-                <p className="titulo">DISPLAYS ASOCIADOS ({displays.length})</p>
+                <p className="titulo">DISPLAYS ({displays.length})</p>
                 <Associated contenido={displays} categoria='imagenes'/>
               </div>
             </div>
             <div className="col">
               <div className="asociados">
-
+                <p className="titulo text-right">IMAGENES ASOCIADAS({images.length}/5)</p>
+                <Associated contenido={images} categoria='grupos'/>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    );
+  );
   }
 };

@@ -163,7 +163,7 @@ export class ImageForm extends Component{
                   <div className="form-row">
                     <div className="form-group col">
                       <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                      <input type="text" className="form-control" id="creador" value="Pedro Rodriguez Alia" name='user' value={this.state.user} readOnly></input>
+                      <input type="text" className="form-control" id="creador" name='user' value={this.state.user} readOnly></input>
                     </div>
                     <div className="form-group col">
                       <label htmlFor="resolucion"><i className="fa fa-file-image-o mr-2"></i>Archivo</label>

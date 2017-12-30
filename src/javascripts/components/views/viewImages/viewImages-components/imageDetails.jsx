@@ -7,8 +7,6 @@ import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
 import { ImageInfo } from './ImageInfo.jsx';
 import { ImageForm } from './ImageForm.jsx';
 import { ImageDelete } from './ImageDelete.jsx';
-import { Associated } from '../../associated.jsx';
-import { Tag } from '../../../tags/tag.jsx';
 
 /* COMPONENTS */
 export class ImageDetails extends Component {
