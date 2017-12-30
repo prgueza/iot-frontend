@@ -7,7 +7,7 @@ const cx = require('classnames');
 export const NavButton = ({ linkTo, text, count, number, icon, exact }) => {
   const location = { pathname: '/' + linkTo };
   return(
-    <NavLink exact={exact ? exact : ''} to={location}>
+    <NavLink exact={exact ? exact : false} to={location}>
       <li>
         <button type="button" className="btn btn-nav btn-block mb-1">
           <Icon icon={icon} mr="2"/>

@@ -4,6 +4,8 @@
 @import 'listados';
 @import 'detalles';
 @import 'botones';
+@import 'react-select/dist/react-select.css';
+
 
 // style
 html {
@@ -128,6 +130,14 @@ a:hover{
   padding-left: 0px;
 }
 
+.custom-controls-stacked{
+  border: 1px solid #868e96;
+  border-radius: 0.25rem;
+  padding: 10px;
+  height: 200px;
+  overflow-y: scroll;
+}
+
 // colors
 .titulo{
   color: #868e96;
@@ -147,4 +157,10 @@ a:hover{
 
 hr{
   border-color: #495057;
+}
+
+.shadow {
+   -moz-box-shadow:    inset 0 0 5px #1D1D1D;
+   -webkit-box-shadow: inset 0 0 5px #1D1D1D;
+   box-shadow:         inset 0 0 5px #1D1D1D;
 }

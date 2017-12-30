@@ -39,7 +39,9 @@ export class GroupDetails extends Component {
       const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
       const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
       const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='grupos' etiqueta={tag}/>);
-      const src = active_image || 'http://localhost:3000/img/undefined.png';
+      const src = active_image ? active_image.src_url : 'http://localhost:3000/img/undefined.png';
+      const linktoEdit = '/groups/edit/' + id;
+      const linktoDelete = '/groups/delete/' + id;
 
       return(
       <div className="col">
@@ -50,10 +52,14 @@ export class GroupDetails extends Component {
                 <h2 className="detalles-titulo"><i className='fa fa-list mr-3' aria-hidden="true"></i>{name}</h2>
               </li>
               <li className="nav-item mr-2">
-                <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
+                <Link to={linktoEdit}>
+                  <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
+                </Link>
               </li>
               <li className="nav-item ml-2">
-                <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o" aria-hidden="true"></i>Eliminar</button>
+                <Link to={linktoDelete}>
+                  <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o" aria-hidden="true"></i>Eliminar</button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -65,7 +71,7 @@ export class GroupDetails extends Component {
                 <p className="card-text"><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
                 <p className="card-text" data-toggle="tooltip" data-placement="left" title="descripción"><i className="fa fa-info-circle mr-1" aria-hidden="true"></i> {description}</p>
                 <p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i>{created}</p>
-                <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {user}</p>
+                <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {user.name}</p>
                 <p className="titulo">ETIQUETAS</p>
                 {tag_list}
                 </div>

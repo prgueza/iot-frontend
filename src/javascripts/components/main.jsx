@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
 import cookie from 'react-cookie';
+import { ToastContainer, toast, style } from 'react-toastify';
+import { css } from 'glamor';
 
 /* IMPORT COMPONENTS */
 import { ContentDisplays } from './views/viewDisplays/contentDisplays.jsx';
@@ -23,24 +25,43 @@ export class Main extends Component {
       displays: null,
       images: null,
       groups: null,
-      settings: null,
+      resolutions: null,
+      locations: null,
       user: null,
-      userID: cookie.load('userID')
+      userID: cookie.load('userID'),
     };
-    this.update = this.update.bind(this);
   }
 
+  notify = () => {
+    toast.info("Cargando datos", {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: css({
+        borderRadius: ".25em",
+        paddingLeft: "10px",
+        background: "transparent",
+        border: "1px solid #28a745",
+        color: "#28a745",
+      })
+    });
+  } // TODO: Edit alerts
+
   // fetch all data from API
-  update(){
+  update = () => {
+    this.notify();
     Promise.all([
       fetch('http://localhost:4000/displays').then(res => res.json()),
       fetch('http://localhost:4000/images').then(res => res.json()),
       fetch('http://localhost:4000/groups').then(res => res.json()),
+      fetch('http://localhost:4000/resolutions').then(res => res.json()),
+      fetch('http://localhost:4000/locations').then(res => res.json())
     ])
     .then((docs) => {
       this.setState({displays: docs[0]});
       this.setState({images: docs[1]});
       this.setState({groups: docs[2]});
+      this.setState({resolutions: docs[3]});
+      this.setState({locations: docs[4]});
+      this.notify();
     })
     .catch((err) => console.log(err)); // TODO: error handling
   }
@@ -53,6 +74,7 @@ export class Main extends Component {
   render(){
     return(
       <div className="row main">
+        <ToastContainer closeButton={false} hideProgressBar={true}/>
         <Navigation update={this.update} { ...this.state }/>
         <Content update={this.update} { ...this.state }/>
       </div>
@@ -78,13 +100,8 @@ class Navigation extends Component{
     ]
 
     const nav = user && user.admin ?
-<<<<<<< HEAD
       navigationAdmin.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> ) :
       navigationUser.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> );
-=======
-      navigationAdmin.map((nav, i) => <NavButton exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> ) :
-      navigationUser.map((nav, i) => <NavButton exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> );
->>>>>>> d48fd6e3105bad4f215cae966d06c342a6b50ab4
 
     return(
       <div className="col-2 navegacion">
@@ -141,9 +158,9 @@ class Content extends Component{
           <Route path="/displays" render={() => (<ContentDisplays { ...this.props }/>)}/>
           <Route path="/images" render={() => (<ContentImages { ...this.props }/>)}/>
           <Route path="/groups" render={() => (<ContentGroups { ...this.props }/>)}/>
-          <Route path="/account" render={() => (<ContentAccount {...this.state}/>)}/>
-          <Route path="/settings" render={() => (<ContentSettings {...this.state}/>)}/>
-          <Route path="/docs" render={() => (<ContentDocs {...this.state}/>)}/>
+          <Route path="/account" render={() => (<ContentAccount { ...this.props }/>)}/>
+          <Route path="/settings" render={() => (<ContentSettings { ...this.props }/>)}/>
+          <Route path="/docs" render={() => (<ContentDocs { ...this.props }/>)}/>
         </div>;
     } else {
        var content =

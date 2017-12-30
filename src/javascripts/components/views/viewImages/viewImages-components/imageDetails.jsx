@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import Select from 'react-select';
 
 /* IMPORT COMPONENTS */
 import { Associated } from '../../associated.jsx';
@@ -14,6 +15,7 @@ export class ImageDetails extends Component {
     super(props);
     this.state = {
       image: null,
+      selectedOption: '',
     };
   }
 
@@ -33,9 +35,13 @@ export class ImageDetails extends Component {
       });
   }
 
+  handleSelect = (selectedOption) => {
+    this.setState({ selectedOption });
+  }
+
   render(){
     if(this.state.image){
-      const { id, name, description, src_url, created_at, updated_at, user, dimensions, file, size, category, groups, displays, tags_total, tags } = this.state.image;
+      const { id, name, description, src_url, created_at, updated_at, user, resolution, file, size, category, groups, displays, tags_total, tags } = this.state.image;
       const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
       const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
       const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='imagenes' etiqueta={tag}/>);
@@ -69,11 +75,11 @@ export class ImageDetails extends Component {
                   <p className="titulo">DETALLES</p>
                   <p className="card-text"><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
                   <p className="card-text"><i className="fa fa-info-circle mr-1" aria-hidden="true"></i> {description}</p>
-                  <p className="card-text"><i className="fa fa-arrows-alt mr-1" aria-hidden="true"></i> {dimensions.width} x {dimensions.height}</p>
+                  <p className="card-text"><i className="fa fa-arrows-alt mr-1" aria-hidden="true"></i> {resolution.name}</p>
                   <p className="card-text"><i className="fa fa-file-image-o mr-1" aria-hidden="true"></i> {file}</p>
                   <p className="card-text"><i className="fa fa-database mr-1" aria-hidden="true"></i> {size}</p>
                   <p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {created}</p>
-                  <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {user}</p>
+                  <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {user.name}</p>
                   <p className="titulo">ETIQUETAS</p>
                   {tag_list}
                 </div>
@@ -97,8 +103,15 @@ export class ImageDetails extends Component {
               </div>
               <div className="col">
                 <div className="asociados">
-                  <p className="titulo text-right">GRUPOS ({groups.length}/5)</p>
-                  <Associated contenido={groups} categoria='grupos'/>
+                  <Select
+                    name="form-field-name"
+                    value={this.state.selectedOption.value}
+                    onChange={this.handleChange}
+                    options={[
+                      { value: 'one', label: 'One' },
+                      { value: 'two', label: 'Two' },
+                    ]}
+                  />
                 </div>
               </div>
             </div>

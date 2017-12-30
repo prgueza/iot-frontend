@@ -1,5 +1,5 @@
 // Importacion de librerias
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -7,12 +7,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Main } from './components/main.jsx';
 
 // Declaracion de componentes
-const App = () => {
-  return(
-    <Router basename="/">
-      <Main/>
-    </Router>
-  );
+class App extends Component {
+  render(){
+    return(
+      <Router basename="/">
+        <Main/>
+      </Router>
+    );
+  }
 }
 
 ReactDOM.render(<App/>, document.getElementById('root'));

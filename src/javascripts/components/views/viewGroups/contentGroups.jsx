@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 /* IMPORT COMPONENTS */
 import { GroupDetails } from './viewGroups-components/groupDetails.jsx';
+import { GroupDelete } from './viewGroups-components/groupDelete.jsx';
 import { GroupForm } from './viewGroups-components/groupForm.jsx';
 import { GroupGeneric } from './viewGroups-components/groupGeneric.jsx';
 import { List } from '../../lists/list.jsx';
@@ -35,6 +36,8 @@ export const ContentGroups = ({ groups, ...other }) => {
             <div className="row mb-3">
               <Switch>
                 <Route path="/groups/add" render={() => <GroupForm {...other} groups={groups}/>}/>
+                <Route path="/groups/delete/:groupId" render={({ match }) => (<GroupDelete {...other} group={groups.data.find(g => g.id == match.params.groupId)}/>)}/>
+                <Route path="/groups/edit/:groupId" render={({ match }) => (<GroupForm {...other} groups={groups} group={groups.data.find(g => g.id == match.params.groupId)}/>)}/>
                 <Route path="/groups/:groupId" render={({ match }) => (<GroupDetails {...other} group={groups.data.find(g => g.id == match.params.groupId)}/>)}/>
               </Switch>
               <Route exact path="/groups" render={() => (<GroupGeneric/>)}/>

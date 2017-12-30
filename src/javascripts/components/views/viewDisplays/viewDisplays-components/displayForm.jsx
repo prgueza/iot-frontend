@@ -32,8 +32,8 @@ export class DisplayForm extends Component{
 
   componentDidMount(){
     const { images, groups, settings, user, display } = this.props;
-    const opcionesImagenes = images.data.map((i) => <option value={i.id} key={i.id}>{i.name}</option>);
-    const opcionesGrupos = groups.data.map((g) => <option value={g.id} key={g.id}>{g.name}</option>);
+    const opcionesImagenes = images.data.map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+    const opcionesGrupos = groups.data.map((g) => <option value={g._id} key={g.id}>{g.name}</option>);
     fetch(display.url)
       .then(res => res.json())
       .then(display => {
@@ -97,7 +97,7 @@ export class DisplayForm extends Component{
   render(){
     return(
       <div className="col detalles">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="card bg-transparent border-gray">
             <div className="card-header border-gray">
               <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
@@ -105,7 +105,7 @@ export class DisplayForm extends Component{
                   <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar display</h2>
                 </li>
                 <li className="nav-item ml-2">
-                  <button onClick={this.handleSubmit} type="button" className="btn btn-outline-display"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button>
+                  <button type="submit" className="btn btn-outline-display"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button>
                 </li>
               </ul>
             </div>

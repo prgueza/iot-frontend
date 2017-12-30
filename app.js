@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const expressSession = require('express-session');
 const cookieParser = require('cookie-parser')
 
-
 const app = express();
 
 // view engine setup
