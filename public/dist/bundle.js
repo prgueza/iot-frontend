@@ -34667,18 +34667,14 @@ var ImageForm = exports.ImageForm = function (_Component) {
       user: _this.props.user,
       resolution: image ? image.resolution._id : '',
       tags: image ? image.tags : [],
-      created_at: image ? moment(image.created_at).format('dddd, D [de] MMMM [de] YYYY') : moment(),
+      created_at: image ? moment(image.created_at) : moment(),
       updated_at: moment(),
       displays: image ? image.displays.map(function (d) {
         return d._id;
-      }) : null,
+      }) : [],
       groups: image ? image.groups.map(function (g) {
         return g._id;
-      }) : null,
-
-      opcionesGrupos: [],
-      opcionesDisplays: [],
-      opcionesResolucion: [],
+      }) : [],
 
       redirect: false,
       location: '/images'
@@ -34693,48 +34689,10 @@ var ImageForm = exports.ImageForm = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _props = this.props,
-          displays = _props.displays,
-          groups = _props.groups,
           images = _props.images,
-          image = _props.image,
-          resolutions = _props.resolutions,
-          locations = _props.locations,
-          user = _props.user;
-      // options for select inputs
-
-      var opcionesDisplays = displays.data.map(function (d) {
-        return _react2.default.createElement(
-          'option',
-          { value: d._id, key: d.id },
-          d.name
-        );
-      });
-      var opcionesGrupos = groups.data.map(function (g) {
-        return _react2.default.createElement(
-          'option',
-          { value: g._id, key: g.id },
-          g.name
-        );
-      });
-      // default values for select inputs
-      opcionesGrupos.push(_react2.default.createElement(
-        'option',
-        { value: false, key: 0 },
-        'No asignar'
-      ));
-      opcionesDisplays.push(_react2.default.createElement(
-        'option',
-        { value: false, key: 0 },
-        'No asignar'
-      ));
-      var opcionesResolucion = resolutions.map(function (r, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: r._id, key: i },
-          r.name
-        );
-      });
+          image = _props.image;
       // if in post mode get first free id value
+
       if (!image) {
         var identificaciones = images.data.map(function (i) {
           return i.id;
@@ -34747,14 +34705,15 @@ var ImageForm = exports.ImageForm = function (_Component) {
       // set state with initial values
       this.setState({
         id: image ? image.id : id,
-        opcionesDisplays: opcionesDisplays,
-        opcionesGrupos: opcionesGrupos,
-        opcionesResolucion: opcionesResolucion,
         location: image ? '/images/' + image.id : '/images/' + id // Redirect url
       });
     }
 
     /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
+
+
+    /* HANDLE MULTIPLE CHECKBOX */
+    // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
 
     /* HANDLE SUMBIT (PUT OR POST) */
@@ -34765,6 +34724,47 @@ var ImageForm = exports.ImageForm = function (_Component) {
 
     /* RENDER COMPONENT */
     value: function render() {
+      var _this2 = this;
+
+      // Options
+      var optionsResolution = this.props.resolutions.map(function (r, i) {
+        return _react2.default.createElement(
+          'option',
+          { value: r._id, key: i },
+          r.name
+        );
+      });
+      var optionsGroups = this.props.groups.data.map(function (g) {
+        return _react2.default.createElement(
+          'label',
+          { key: g.id, className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: _this2.handleCheckGroups, type: 'checkbox', checked: _this2.state.groups.find(function (c) {
+              return c == g._id;
+            }), name: g._id, value: g._id, className: 'custom-control-input' }),
+          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
+          _react2.default.createElement(
+            'span',
+            { className: 'custom-control-description' },
+            g.name
+          )
+        );
+      });
+      var optionsDisplays = this.props.displays.data.map(function (d) {
+        return _react2.default.createElement(
+          'label',
+          { key: d.id, className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, type: 'checkbox', checked: _this2.state.displays.find(function (c) {
+              return c == d._id;
+            }), name: d._id, value: d._id, className: 'custom-control-input' }),
+          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
+          _react2.default.createElement(
+            'span',
+            { className: 'custom-control-description' },
+            d.name
+          )
+        );
+      });
+
       if (this.state.redirect) {
         return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
       } else {
@@ -34857,7 +34857,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
                       _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
                       'Creador'
                     ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.user, readOnly: true })
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.user.name, readOnly: true })
                   ),
                   _react2.default.createElement(
                     'div',
@@ -34894,7 +34894,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
                       _react2.default.createElement(
                         'select',
                         { className: 'custom-select', name: 'resolution', onChange: this.handleInputChange },
-                        this.state.opcionesResolucion
+                        optionsResolution
                       )
                     )
                   )
@@ -34909,12 +34909,12 @@ var ImageForm = exports.ImageForm = function (_Component) {
                       'label',
                       { htmlFor: 'displays' },
                       _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-                      'Asociar a uno o varios displays'
+                      'Asociar uno o varios displays'
                     ),
                     _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', id: 'displays', name: 'displays', value: this.state.displays, onChange: this.handleInputChange },
-                      this.state.opcionesDisplays
+                      'div',
+                      { className: 'custom-controls-stacked shadow' },
+                      optionsDisplays
                     )
                   ),
                   _react2.default.createElement(
@@ -34922,14 +34922,14 @@ var ImageForm = exports.ImageForm = function (_Component) {
                     { className: 'form-group col' },
                     _react2.default.createElement(
                       'label',
-                      { htmlFor: 'grupos' },
+                      { htmlFor: 'groups' },
                       _react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
-                      'Asociar a uno o varios grupos'
+                      'Asociar uno o varios grupos'
                     ),
                     _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', id: 'groups', name: 'groups', value: this.state.groups, onChange: this.handleInputChange },
-                      this.state.opcionesGrupos
+                      'div',
+                      { className: 'custom-controls-stacked shadow' },
+                      optionsGroups
                     )
                   )
                 ),
@@ -34975,7 +34975,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
                       _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
                       'Fecha de creaci\xF3n'
                     ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: this.state.created_at, readOnly: true })
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
                   ),
                   _react2.default.createElement(
                     'div',
@@ -34986,7 +34986,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
                       _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
                       'Fecha de modificaci\xF3n'
                     ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: this.state.updated_at, readOnly: true })
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
                   )
                 )
               )
@@ -34995,48 +34995,6 @@ var ImageForm = exports.ImageForm = function (_Component) {
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.id
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.name
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.description
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.user
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.dimension
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.tags.map(function (i) {
-                return i;
-              })
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.created_at
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.updated_at
-            ),
             _react2.default.createElement(
               'p',
               null,
@@ -35057,7 +35015,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
+  var _this3 = this;
 
   this.handleInputChange = function (event) {
     var target = event.target;
@@ -35068,25 +35026,69 @@ var _initialiseProps = function _initialiseProps() {
       var value = target.value;
     }
 
-    _this2.setState(_defineProperty({}, name, value));
+    _this3.setState(_defineProperty({}, name, value));
+  };
+
+  this.handleCheckDisplays = function (event) {
+    // get value from the checkbox
+    var target = event.target;
+    var value = target.value;
+    // check if the checkbox has been selected
+    if (!_this3.state.displays.find(function (c) {
+      return c == value;
+    })) {
+      // check if value is stored in state
+      // if it is NOT stored, save the state, push the new value and save back the new state
+      var prevState = _this3.state.displays;
+      prevState.push(value);
+      _this3.setState({ displays: prevState });
+    } else {
+      // if it IS stored, save the state, splice the old value and save back the new state
+      var _prevState = _this3.state.displays;
+      _prevState.splice(_prevState.indexOf(value), 1);
+      _this3.setState({ displays: _prevState });
+    }
+  };
+
+  this.handleCheckGroups = function (event) {
+    // get value from the checkbox
+    var target = event.target;
+    var value = target.value;
+    // check if the checkbox has been selected
+    if (!_this3.state.groups.find(function (c) {
+      return c == value;
+    })) {
+      // check if value is stored in state
+      // if it is NOT stored, save the state, push the new value and save back the new state
+      var prevState = _this3.state.groups;
+      prevState.push(value);
+      _this3.setState({ groups: prevState });
+      target.checked = true;
+    } else {
+      // if it IS stored, save the state, splice the old value and save back the new state
+      var _prevState2 = _this3.state.groups;
+      _prevState2.splice(_prevState2.indexOf(value), 1);
+      _this3.setState({ groups: _prevState2 });
+      target.checked = false;
+    }
   };
 
   this.handleSubmit = function (event) {
     // define form values to send
     var form = {
-      id: _this2.state.id,
-      name: _this2.state.name,
-      description: _this2.state.description,
-      user: _this2.props.user._id, // send user_id
-      resolution: _this2.state.resolution,
-      tags: _this2.state.tags
+      id: _this3.state.id,
+      name: _this3.state.name,
+      description: _this3.state.description,
+      user: _this3.props.user._id, // send user_id
+      resolution: _this3.state.resolution,
+      tags: _this3.state.tags
     };
     // include group/display assignation if needed
-    if (_this2.state.display) {
-      form.display = _this2.state.display;
+    if (_this3.state.display) {
+      form.display = _this3.state.display;
     }
-    if (_this2.state.group) {
-      form.group = _this2.state.group;
+    if (_this3.state.group) {
+      form.group = _this3.state.group;
     }
     // TODO: include image file
     // prevent form default event
@@ -35101,7 +35103,7 @@ var _initialiseProps = function _initialiseProps() {
         },
         body: JSON.stringify(form)
       }).then(function () {
-        return _this2.setState({ redirect: true });
+        return _this3.setState({ redirect: true });
       }).catch(function (err) {
         return console.log(err);
       }); // TODO: error handling
@@ -35115,7 +35117,7 @@ var _initialiseProps = function _initialiseProps() {
         },
         body: JSON.stringify(form)
       }).then(function () {
-        return _this2.setState({ redirect: true });
+        return _this3.setState({ redirect: true });
       }).catch(function (err) {
         return console.log(err);
       }); // TODO: error handling
@@ -35242,6 +35244,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
 
     _this.handleSubmit = function (event) {
       event.preventDefault();
+      // FORM DATA
       var form = {
         'user': _this.props.user._id,
         'id': _this.state.id,
@@ -35252,42 +35255,56 @@ var GroupForm = exports.GroupForm = function (_Component) {
         'active_image': _this.state.active_image,
         'tags': _this.state.tags
       };
+      // HTTP REQUEST
       fetch('http://localhost:4000/groups', {
-        method: 'post', // post method
+        method: _this.props.group ? 'put' : 'post', // post method
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(form)
-      }).then(_this.props.update // update dataset
+      }).then(function (res) {
+        return _this.props.update;
+      } // update dataset
       // TODO: alert with success
       // TODO: throw error and alert with error
-      ).then(function () {
-        return _this.setState({ redirect: true });
-      }).catch(function (err) {
-        return console.log(err);
+      ).then(function (success) {
+        // resolve callback
+        _this.setState({ redirect: true });
+      }, function (error) {
+        // reject callback
+        _this.setstate({ error: error });
+      }).catch(function (error) {
+        _this.setState({ error: error });
       }); // TODO: error handling
     };
 
+    var _this$props = _this.props,
+        group = _this$props.group,
+        user = _this$props.user;
+
     _this.state = {
       // form data stored in state
-      id: '',
-      name: '',
-      description: '',
-      user: '',
-      created_at: '',
-      updated_at: '',
-      tags: [],
-      displays: [],
-      images: [],
-      active_image: '',
+      name: group ? group.name : '',
+      description: group ? group.description : '',
+      created_at: group ? group.created_at : moment(),
+      updated_at: moment(),
+      tags: group ? group.tags : [],
+      active_image: group ? group.active_image ? group.active_image._id : '' : '',
+      images: group ? group.images.map(function (i) {
+        return i._id;
+      }) : [],
+      displays: group ? group.displays.map(function (d) {
+        return d._id;
+      }) : [],
+      user: user.name,
       // form options stored in state
-      optionsImages: [],
-      optionsDisplays: [],
       optionsActiveImage: [],
       // redirect variables
-      redirect: '',
-      location: '' // Redirect url
+      redirect: false,
+      location: '/groups/', // Redirect url
+      // error handling
+      error: null
     };
     return _this;
   }
@@ -35301,46 +35318,12 @@ var GroupForm = exports.GroupForm = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          displays = _props.displays,
           groups = _props.groups,
-          images = _props.images,
-          resolutions = _props.resolutions,
-          locations = _props.locations; // Data from database
+          images = _props.images; // Data from database
 
       var group = this.props.group;
-      var user = this.props.user; // User using the app
       // options for select inputs
 
-      var optionsImages = images.data.map(function (i) {
-        return _react2.default.createElement(
-          'label',
-          { key: i.id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this2.handleCheckImages, type: 'checkbox', checked: _this2.state.images.find(function (c) {
-              return c == i._id;
-            }), name: i._id, value: i._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            i.name
-          )
-        );
-      });
-      var optionsDisplays = displays.data.map(function (d) {
-        return _react2.default.createElement(
-          'label',
-          { key: d.id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, type: 'checkbox', checked: _this2.state.displays.find(function (c) {
-              return c == d._id;
-            }), name: d._id, value: d._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            d.name
-          )
-        );
-      });
       var optionsActiveImage = images.data.filter(function (i) {
         return _this2.state.images.find(function (c) {
           return c == i._id;
@@ -35365,27 +35348,9 @@ var GroupForm = exports.GroupForm = function (_Component) {
       // set state with initial values
       this.setState({
         // form data stored in state
-        created_at: group ? group.created_at : moment(),
-        updated_at: moment(),
         id: group ? group.id : id,
-        name: group ? group.name : '',
-        description: group ? group.description : '',
-        tags: group ? group.tags : [],
-        active_image: group ? group.active_image ? group.active_image._id : '' : '',
-        images: group ? group.images.map(function (i) {
-          return i._id;
-        }) : [],
-        displays: group ? group.displays.map(function (d) {
-          return d._id;
-        }) : [],
-        user: user.name,
         // form options stored in state
-        optionsDisplays: optionsDisplays,
-        optionsImages: optionsImages,
-        optionsActiveImage: optionsActiveImage,
-        // redirect variables
-        redirect: false,
-        location: '/groups/' // Redirect url
+        optionsActiveImage: optionsActiveImage
       });
     }
 
@@ -35400,6 +35365,43 @@ var GroupForm = exports.GroupForm = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
+      // Options
+      var optionsDisplays = this.props.displays.data.map(function (d) {
+        return _react2.default.createElement(
+          'label',
+          { key: d.id, className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: _this3.handleCheckDisplays, type: 'checkbox', checked: _this3.state.displays.find(function (c) {
+              return c == d._id;
+            }), name: d._id, value: d._id, className: 'custom-control-input' }),
+          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
+          _react2.default.createElement(
+            'span',
+            { className: 'custom-control-description' },
+            d.name
+          )
+        );
+      });
+      var optionsImages = this.props.images.data.sort(function (a, b) {
+        return a.id - b.id;
+      }).map(function (i) {
+        return _react2.default.createElement(
+          'label',
+          { key: i.id, className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', checked: _this3.state.images.find(function (c) {
+              return c == i._id;
+            }), name: i._id, value: i._id, className: 'custom-control-input' }),
+          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
+          _react2.default.createElement(
+            'span',
+            { className: 'custom-control-description' },
+            i.name
+          )
+        );
+      });
+
+      // Render return
       if (this.state.redirect) {
         return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
       } else {
@@ -35506,7 +35508,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'custom-controls-stacked shadow' },
-                      this.state.optionsImages
+                      optionsImages
                     )
                   ),
                   _react2.default.createElement(
@@ -35521,7 +35523,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
                     _react2.default.createElement(
                       'div',
                       { className: 'custom-controls-stacked shadow' },
-                      this.state.optionsDisplays
+                      optionsDisplays
                     )
                   )
                 ),
@@ -63899,7 +63901,7 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId', render: function render(_ref3) {
               var match = _ref3.match;
-              return _react2.default.createElement(DisplayInfo, _extends({}, _this4.props, { display: _this4.state.display }));
+              return _react2.default.createElement(_displayDetails.DisplayDetails, _extends({}, _this4.props, { display: _this4.state.display }));
             } })
         );
       }
@@ -65515,7 +65517,9 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
     var _this = _possibleConstructorReturn(this, (GroupRouter.__proto__ || Object.getPrototypeOf(GroupRouter)).call(this, props));
 
     _this.state = {
-      group: null
+      group: null,
+      isLoaded: false,
+      error: null
     };
     return _this;
   }
@@ -65531,7 +65535,9 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
       fetch(this.props.group.url).then(function (res) {
         return res.json();
       }).then(function (group) {
-        _this2.setState({ group: group });
+        _this2.setState({ group: group, isLoaded: true });
+      }, function (error) {
+        _this2.setState({ error: error, isLoaded: true });
       });
     }
 
@@ -65542,12 +65548,14 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
     value: function componentWillReceiveProps(nextProps) {
       var _this3 = this;
 
-      if (nextProps.group._id != this.state.group._id) {
+      if (nextProps.group._id != this.props.group._id) {
         // if props actually changed
         fetch(nextProps.group.url).then(function (res) {
           return res.json();
         }).then(function (group) {
-          _this3.setState({ group: group });
+          _this3.setState({ group: group, isLoaded: true });
+        }, function (error) {
+          _this3.setState({ error: error, isLoaded: true });
         });
       }
     }
@@ -65556,8 +65564,19 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      // if group has been fetched
-      if (this.state.group) {
+      var _state = this.state,
+          error = _state.error,
+          isLoaded = _state.isLoaded,
+          display = _state.display;
+      // wait for resource to be loaded or handle errors if any
+
+      if (error) {
+        // TODO: error handling
+        return null;
+      } else if (!isLoaded) {
+        // TODO: loading
+        return null;
+      } else {
         return _react2.default.createElement(
           _reactRouterDom.Switch,
           null,
@@ -65574,9 +65593,6 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
               return _react2.default.createElement(_groupDetails.GroupDetails, _extends({}, _this4.props, { group: _this4.state.group }));
             } })
         );
-        // while waiting for server response
-      } else {
-        return null; // TODO: Loading...
       }
     }
   }]);

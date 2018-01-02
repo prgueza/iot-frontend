@@ -17,14 +17,10 @@ export class ImageForm extends Component{
       user: this.props.user,
       resolution: image ? image.resolution._id : '',
       tags: image ? image.tags : [],
-      created_at: image ? moment(image.created_at).format('dddd, D [de] MMMM [de] YYYY') : moment(),
+      created_at: image ? moment(image.created_at) : moment(),
       updated_at: moment(),
-      displays: image ? image.displays.map((d) => d._id) : null,
-      groups: image ? image.groups.map((g) => g._id) : null,
-
-      opcionesGrupos: [],
-      opcionesDisplays: [],
-      opcionesResolucion: [],
+      displays: image ? image.displays.map((d) => d._id) : [],
+      groups: image ? image.groups.map((g) => g._id) : [],
 
       redirect: false,
       location: '/images'
@@ -33,14 +29,7 @@ export class ImageForm extends Component{
 
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount(){
-    const { displays, groups, images, image, resolutions, locations, user } = this.props;
-    // options for select inputs
-    const opcionesDisplays = displays.data.map((d) => <option value={d._id} key={d.id}>{d.name}</option>);
-    const opcionesGrupos = groups.data.map((g) => <option value={g._id} key={g.id}>{g.name}</option>);
-    // default values for select inputs
-    opcionesGrupos.push(<option value={false} key={0}>No asignar</option>)
-    opcionesDisplays.push(<option value={false} key={0}>No asignar</option>)
-    const opcionesResolucion = resolutions.map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
+    const { images, image } = this.props;
     // if in post mode get first free id value
     if (!image) {
       const identificaciones = images.data.map((i) => i.id); // get all ids
@@ -50,9 +39,6 @@ export class ImageForm extends Component{
     // set state with initial values
     this.setState({
       id: image ? image.id : id,
-      opcionesDisplays: opcionesDisplays,
-      opcionesGrupos: opcionesGrupos,
-      opcionesResolucion: opcionesResolucion,
       location: image ? '/images/' + image.id : '/images/' + id // Redirect url
     });
   }
@@ -71,6 +57,46 @@ export class ImageForm extends Component{
       [name]: value
     });
   }
+
+  /* HANDLE MULTIPLE CHECKBOX */
+  handleCheckDisplays = (event) => {
+    // get value from the checkbox
+    const target = event.target;
+    const value = target.value;
+    // check if the checkbox has been selected
+    if (!this.state.displays.find((c) => c == value)){ // check if value is stored in state
+      // if it is NOT stored, save the state, push the new value and save back the new state
+      const prevState = this.state.displays;
+      prevState.push(value);
+      this.setState({displays: prevState});
+    } else {
+      // if it IS stored, save the state, splice the old value and save back the new state
+      const prevState = this.state.displays;
+      prevState.splice(prevState.indexOf(value), 1);
+      this.setState({displays: prevState});
+    }
+  }
+
+  handleCheckGroups = (event) => {
+    // get value from the checkbox
+    const target = event.target;
+    const value = target.value;
+    // check if the checkbox has been selected
+    if (!this.state.groups.find((c) => c == value)){ // check if value is stored in state
+      // if it is NOT stored, save the state, push the new value and save back the new state
+      const prevState = this.state.groups;
+      prevState.push(value);
+      this.setState({groups: prevState});
+      target.checked = true;
+    } else {
+      // if it IS stored, save the state, splice the old value and save back the new state
+      const prevState = this.state.groups;
+      prevState.splice(prevState.indexOf(value), 1);
+      this.setState({groups: prevState});
+      target.checked = false;
+    }
+  } // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
+
 
   /* HANDLE SUMBIT (PUT OR POST) */
   handleSubmit = (event) => {
@@ -118,6 +144,24 @@ export class ImageForm extends Component{
 
   /* RENDER COMPONENT */
   render(){
+
+    // Options
+    const optionsResolution = this.props.resolutions.map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
+    const optionsGroups = this.props.groups.data.map((g) => {
+      return(<label key={g.id} className="custom-control custom-checkbox">
+        <input onChange={this.handleCheckGroups} type="checkbox" checked={this.state.groups.find((c) => c == g._id)} name={g._id} value={g._id} className="custom-control-input"></input>
+        <span className="custom-control-indicator"></span>
+        <span className="custom-control-description">{g.name}</span>
+      </label>);
+    });
+    const optionsDisplays = this.props.displays.data.map((d) => {
+      return(<label key={d.id} className="custom-control custom-checkbox">
+        <input onChange={this.handleCheckDisplays} type="checkbox" checked={this.state.displays.find((c) => c == d._id)} name={d._id} value={d._id} className="custom-control-input"></input>
+        <span className="custom-control-indicator"></span>
+        <span className="custom-control-description">{d.name}</span>
+      </label>);
+    });
+
     if(this.state.redirect){
       return( <Redirect to={this.state.location} /> );
     } else {
@@ -153,7 +197,7 @@ export class ImageForm extends Component{
                   <div className="form-row">
                     <div className="form-group col">
                       <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                      <input type="text" className="form-control" id="creador" name='user' value={this.state.user} readOnly></input>
+                      <input type="text" className="form-control" id="creador" name='user' value={this.state.user.name} readOnly></input>
                     </div>
                     <div className="form-group col">
                       <label htmlFor="resolucion"><i className="fa fa-file-image-o mr-2"></i>Archivo</label>
@@ -168,23 +212,23 @@ export class ImageForm extends Component{
                       <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
                       <div>
                         <select className="custom-select" name='resolution' onChange={this.handleInputChange}>
-                          {this.state.opcionesResolucion}
+                          {optionsResolution}
                         </select>
                       </div>
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group col">
-                      <label htmlFor="displays"><i className="fa fa-television mr-2"></i>Asociar a uno o varios displays</label>
-                      <select className="custom-select" id="displays" name='displays' value={this.state.displays} onChange={this.handleInputChange}>
-                        {this.state.opcionesDisplays}
-                      </select>
+                      <label htmlFor="displays"><i className="fa fa-television mr-2"></i>Asociar uno o varios displays</label>
+                      <div className="custom-controls-stacked shadow">
+                        {optionsDisplays}
+                      </div>
                     </div>
                     <div className="form-group col">
-                      <label htmlFor="grupos"><i className="fa fa-list mr-2"></i>Asociar a uno o varios grupos</label>
-                      <select className="custom-select" id="groups" name='groups' value={this.state.groups} onChange={this.handleInputChange}>
-                        {this.state.opcionesGrupos}
-                      </select>
+                      <label htmlFor="groups"><i className="fa fa-list mr-2"></i>Asociar uno o varios grupos</label>
+                      <div className="custom-controls-stacked shadow">
+                        {optionsGroups}
+                      </div>
                     </div>
                   </div>
                   <div className="form-row">
@@ -201,25 +245,17 @@ export class ImageForm extends Component{
                   <div className="form-row">
                     <div className="form-group col-md-6">
                       <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
-                      <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={this.state.created_at} readOnly></input>
+                      <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
                     </div>
                     <div className="form-group col-md-6">
                       <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
-                      <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={this.state.updated_at} readOnly></input>
+                      <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
                     </div>
                   </div>
               </div>
             </div>
           </form>
           <div>
-            <p>{this.state.id}</p>
-            <p>{this.state.name}</p>
-            <p>{this.state.description}</p>
-            <p>{this.state.user}</p>
-            <p>{this.state.dimension}</p>
-            <p>{this.state.tags.map((i) => i)}</p>
-            <p>{this.state.created_at}</p>
-            <p>{this.state.updated_at}</p>
             <p>{this.state.displays}</p>
             <p>{this.state.groups}</p>
           </div>

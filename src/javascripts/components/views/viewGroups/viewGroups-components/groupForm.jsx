@@ -8,48 +8,33 @@ export class GroupForm extends Component{
 
   constructor(props){
     super(props);
+    const { group, user } = this.props;
     this.state = {
       // form data stored in state
-      id: '',
-      name: '',
-      description: '',
-      user: '',
-      created_at: '',
-      updated_at: '',
-      tags: [],
-      displays: [],
-      images: [],
-      active_image: '',
+      name: group ? group.name : '',
+      description: group ? group.description : '',
+      created_at: group ? group.created_at : moment(),
+      updated_at: moment(),
+      tags: group ? group.tags : [],
+      active_image: group ? group.active_image ? group.active_image._id : '' : '',
+      images: group ? group.images.map((i) => i._id) : [],
+      displays: group ? group.displays.map((d) => d._id) : [],
+      user: user.name,
       // form options stored in state
-      optionsImages: [],
-      optionsDisplays: [],
       optionsActiveImage: [],
       // redirect variables
-      redirect: '',
-      location: '' // Redirect url
+      redirect: false,
+      location: '/groups/', // Redirect url
+      // error handling
+      error: null
     };
   }
 
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount(){
-    const { displays, groups, images, resolutions, locations } = this.props; // Data from database
+    const { groups, images } = this.props; // Data from database
     const { group } = this.props;
-    const { user } = this.props; // User using the app
     // options for select inputs
-    const optionsImages = images.data.map((i) => {
-      return(<label key={i.id} className="custom-control custom-checkbox">
-        <input onChange={this.handleCheckImages} type="checkbox" checked={this.state.images.find((c) => c == i._id)} name={i._id} value={i._id} className="custom-control-input"></input>
-        <span className="custom-control-indicator"></span>
-        <span className="custom-control-description">{i.name}</span>
-      </label>);
-    });
-    const optionsDisplays = displays.data.map((d) => {
-      return(<label key={d.id} className="custom-control custom-checkbox">
-        <input onChange={this.handleCheckDisplays} type="checkbox" checked={this.state.displays.find((c) => c == d._id)} name={d._id} value={d._id} className="custom-control-input"></input>
-        <span className="custom-control-indicator"></span>
-        <span className="custom-control-description">{d.name}</span>
-      </label>);
-    });
     const optionsActiveImage = images.data.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
     // if in post mode get first free id value
     if (!group) {
@@ -60,23 +45,9 @@ export class GroupForm extends Component{
     // set state with initial values
     this.setState({
       // form data stored in state
-      created_at: group ? group.created_at : moment(),
-      updated_at: moment(),
       id: group ? group.id : id,
-      name: group ? group.name : '',
-      description: group ? group.description : '',
-      tags: group ? group.tags : [],
-      active_image: group ? group.active_image ? group.active_image._id : '' : '',
-      images: group ? group.images.map((i) => i._id) : [],
-      displays: group ? group.displays.map((d) => d._id) : [],
-      user: user.name,
       // form options stored in state
-      optionsDisplays: optionsDisplays,
-      optionsImages: optionsImages,
       optionsActiveImage: optionsActiveImage,
-      // redirect variables
-      redirect: false,
-      location: '/groups/' // Redirect url
     });
   }
 
@@ -139,6 +110,7 @@ export class GroupForm extends Component{
   /* HANDLE SUBMIT */
   handleSubmit = (event) => {
     event.preventDefault();
+    // FORM DATA
     const form = {
       'user'        : this.props.user._id,
       'id'          : this.state.id,
@@ -149,24 +121,54 @@ export class GroupForm extends Component{
       'active_image': this.state.active_image,
       'tags'        : this.state.tags
     };
+    // HTTP REQUEST
     fetch('http://localhost:4000/groups', {
-      method: 'post', // post method
+      method: this.props.group ? 'put' : 'post', // post method
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
       body: JSON.stringify(form)
     })
-    .then(this.props.update // update dataset
+    .then((res) => this.props.update // update dataset
         // TODO: alert with success
         // TODO: throw error and alert with error
     )
-    .then(() => this.setState({ redirect: true }))
-    .catch((err) => console.log(err)); // TODO: error handling
+    .then(
+      (success) => { // resolve callback
+        this.setState({ redirect: true })
+      },
+      (error) => { // reject callback
+        this.setstate({ error })
+      }
+    )
+    .catch(
+      (error) => {
+        this.setState({ error })
+      }
+    );// TODO: error handling
   }
 
   render(){
-    if(this.state.redirect){
+
+    // Options
+    const optionsDisplays = this.props.displays.data.map((d) => {
+      return(<label key={d.id} className="custom-control custom-checkbox">
+        <input onChange={this.handleCheckDisplays} type="checkbox" checked={this.state.displays.find((c) => c == d._id)} name={d._id} value={d._id} className="custom-control-input"></input>
+        <span className="custom-control-indicator"></span>
+        <span className="custom-control-description">{d.name}</span>
+      </label>);
+    });
+    const optionsImages = this.props.images.data.sort((a, b) => a.id - b.id).map((i) => {
+      return(<label key={i.id} className="custom-control custom-checkbox">
+        <input onChange={this.handleCheckImages} type="checkbox" checked={this.state.images.find((c) => c == i._id)} name={i._id} value={i._id} className="custom-control-input"></input>
+        <span className="custom-control-indicator"></span>
+        <span className="custom-control-description">{i.name}</span>
+      </label>);
+    });
+
+    // Render return
+    if (this.state.redirect) {
       return( <Redirect to={this.state.location} /> );
     } else {
       return(
@@ -206,13 +208,13 @@ export class GroupForm extends Component{
                   <div className="form-group col">
                     <label htmlFor="images"><i className="fa fa-picture-o mr-2"></i>Asociar una o varias imágenes</label>
                     <div className="custom-controls-stacked shadow">
-                      {this.state.optionsImages}
+                      {optionsImages}
                     </div>
                   </div>
                   <div className="form-group col">
                     <label htmlFor="displays"><i className="fa fa-television mr-2"></i>Asociar uno o varios displays</label>
                     <div className="custom-controls-stacked shadow">
-                      {this.state.optionsDisplays}
+                      {optionsDisplays}
                     </div>
                   </div>
                 </div>

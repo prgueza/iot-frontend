@@ -15,6 +15,8 @@ export class GroupRouter extends Component {
     super(props);
     this.state = {
       group: null,
+      isLoaded: false,
+      error: null,
     };
   }
 
@@ -22,25 +24,42 @@ export class GroupRouter extends Component {
   componentDidMount(){
     fetch(this.props.group.url)
       .then(res => res.json())
-      .then(group => {
-        this.setState({ group })
-      });
+      .then(
+        (group) => {
+          this.setState({ group, isLoaded: true })
+        },
+        (error) => {
+          this.setState({ error, isLoaded: true })
+        }
+      );
   }
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
   componentWillReceiveProps(nextProps){
-    if(nextProps.group._id != this.state.group._id){ // if props actually changed
+    if(nextProps.group._id != this.props.group._id){ // if props actually changed
     fetch(nextProps.group.url)
       .then(res => res.json())
-      .then(group => {
-        this.setState({ group })
-      });
+      .then(
+        (group) => {
+          this.setState({ group, isLoaded: true })
+        },
+        (error) => {
+          this.setState({ error, isLoaded: true })
+        }
+      );
     }
   }
 
   render() {
-    // if group has been fetched
-    if(this.state.group){
+    const { error, isLoaded, display } = this.state;
+    // wait for resource to be loaded or handle errors if any
+    if (error) {
+      // TODO: error handling
+      return null;
+    } else if (!isLoaded) {
+      // TODO: loading
+      return null;
+    } else {
       return(
         <Switch>
           <Route path="/groups/:groupId/edit" render={({ match }) => <GroupForm {...this.props} group={this.state.group}/>}/>
@@ -48,9 +67,6 @@ export class GroupRouter extends Component {
           <Route path="/groups/:groupId" render={({ match }) => (<GroupDetails {...this.props} group={this.state.group}/>)}/>
         </Switch>
       );
-    // while waiting for server response
-    } else {
-      return null; // TODO: Loading...
-    }
+    }  
   }
 };
