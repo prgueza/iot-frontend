@@ -9,32 +9,31 @@ export class ImageForm extends Component{
   /* STATE */
   constructor(props){
     super(props);
+    const { image } = this.props;
     this.state = {
-      id: '',
-      name: '',
-      description: '',
-      user: '',
-      resolution: '',
-      tags: [],
-      created_at: '',
-      updated_at: '',
-      displays: '',
-      groups: '',
+      id: image ? image.id : '',
+      name: image ? image.name : '',
+      description: image ? image.description : '',
+      user: this.props.user,
+      resolution: image ? image.resolution._id : '',
+      tags: image ? image.tags : [],
+      created_at: image ? moment(image.created_at).format('dddd, D [de] MMMM [de] YYYY') : moment(),
+      updated_at: moment(),
+      displays: image ? image.displays.map((d) => d._id) : null,
+      groups: image ? image.groups.map((g) => g._id) : null,
 
       opcionesGrupos: [],
       opcionesDisplays: [],
       opcionesResolucion: [],
 
-      redirect: false
+      redirect: false,
+      location: '/images'
     };
   }
 
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount(){
     const { displays, groups, images, image, resolutions, locations, user } = this.props;
-    // dates
-    const created_at = moment().format('dddd, D [de] MMMM [de] YYYY');
-    const updated_at = moment().format('dddd, D [de] MMMM [de] YYYY');
     // options for select inputs
     const opcionesDisplays = displays.data.map((d) => <option value={d._id} key={d.id}>{d.name}</option>);
     const opcionesGrupos = groups.data.map((g) => <option value={g._id} key={g.id}>{g.name}</option>);
@@ -50,19 +49,10 @@ export class ImageForm extends Component{
     }
     // set state with initial values
     this.setState({
-      created_at: image ? moment(image.created_at).format('dddd, D [de] MMMM [de] YYYY') : created_at,
-      updated_at: updated_at,
       id: image ? image.id : id,
-      name: image ? image.name : '',
-      description: image ? image.description : '',
-      tags: image ? image.tags : [],
-      resolution: image ? image.resolution._id : '',
-      groups: false,
-      displays: false,
       opcionesDisplays: opcionesDisplays,
       opcionesGrupos: opcionesGrupos,
       opcionesResolucion: opcionesResolucion,
-      user: user.name,
       location: image ? '/images/' + image.id : '/images/' + id // Redirect url
     });
   }
@@ -100,8 +90,8 @@ export class ImageForm extends Component{
     // prevent form default event
     event.preventDefault();
     // if in edit mode use put and image url
-    if (this.props.image){
-      fetch(this.props.image.url, {
+    if (image){
+      fetch(image.url, {
         method: 'put', // put method
         headers: {
             'Accept': 'form-data',

@@ -118,11 +118,13 @@ export class GroupForm extends Component{
       const prevState = this.state.images;
       prevState.push(value);
       this.setState({images: prevState});
+      target.checked = true;
     } else {
       // if it IS stored, save the state, splice the old value and save back the new state
       const prevState = this.state.images;
       prevState.splice(prevState.indexOf(value), 1);
       this.setState({images: prevState});
+      target.checked = false;
     }
     if (this.state.images.length == 1){
       // set when first image is selected
