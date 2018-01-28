@@ -12,7 +12,7 @@ export class DisplayDetails extends Component {
 
 	render() {
 		// define constants from props for better readability
-		const { id, name, description, location, created_at, updated_at, user, resolution, groups, images, active_image, tags_total, tags } = this.state.display;
+		const { id, name, description, location, created_at, updated_at, created_by, resolution, groups, images, active_image, tags_total, tags } = this.props.display;
 		// refactor date constants with format
 		const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
 		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
@@ -47,7 +47,7 @@ export class DisplayDetails extends Component {
 								<p className="card-text"><i className="fa fa-arrows-alt mr-1" aria-hidden="true"></i> {resolution.size.width} x {resolution.size.height}</p>
 								<p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {created}</p>
 								<p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {updated}</p>
-								<p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {user.name}</p>
+								<p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {created_by.name}</p>
 								<p className="titulo">ETIQUETAS</p>
 								{tag_list}
 							</div>
@@ -65,13 +65,13 @@ export class DisplayDetails extends Component {
 					<div className="row">
 						<div className="col">
 							<div className="asociados">
-								<p className="titulo">IMAGENES ASOCIADAS ({images.length}/5)</p>
+								<p className="titulo">IMAGENES ASOCIADAS ({images.length})</p>
 								<Associated contenido={images} categoria='imagenes'/>
 							</div>
 						</div>
 						<div className="col">
 							<div className="asociados">
-								<p className="titulo text-right">GRUPOS ({groups.length}/5)</p>
+								<p className="titulo text-right">GRUPOS ({groups.length})</p>
 								<Associated contenido={groups} categoria='grupos'/>
 							</div>
 						</div>

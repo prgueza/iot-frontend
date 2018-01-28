@@ -36,21 +36,21 @@ export class DisplayRouter extends Component {
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
   componentWillReceiveProps(nextProps){
-    if(nextProps.display._id != this.props.display._id){ // if props actually changed
+    if(JSON.stringify(nextProps.display) != JSON.stringify(this.props.display)){ // if props actually changed
     fetch(nextProps.display.url)
       .then(res => res.json())
       .then(
-        (display) => {
+        (display) => { // resolve callback
           this.setState({ display, isLoaded: true })
         },
-        (error) => {
+        (error) => { // reject callback
           this.setState({ display, isLoaded: true })
         }
       );
     }
   }
 
-  render(){
+  render() {
     const { error, isLoaded, display } = this.state;
     // wait for resource to be loaded or handle errors if any
     if (error) {

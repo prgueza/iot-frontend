@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
    res.sendFile(imgPath);
  });
 
- /* GET disconect*/
+ /* GET disconect */
  router.get('/disconect', function(req, res, next) {
    req.session.destroy();
    res.redirect('/');
@@ -38,7 +38,6 @@ router.post('/', function(req, res, next){
       }
     })
     .catch(err => console.log(err));
-
 });
 
 

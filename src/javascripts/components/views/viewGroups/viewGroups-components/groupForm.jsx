@@ -13,18 +13,17 @@ export class GroupForm extends Component{
       // form data stored in state
       name: group ? group.name : '',
       description: group ? group.description : '',
-      created_at: group ? group.created_at : moment(),
-      updated_at: moment(),
+      created_by: group ? group.created_by.name : user.name,
+      updated_by: user.name,
       tags: group ? group.tags : [],
       active_image: group ? group.active_image ? group.active_image._id : '' : '',
       images: group ? group.images.map((i) => i._id) : [],
       displays: group ? group.displays.map((d) => d._id) : [],
-      user: user.name,
       // form options stored in state
       optionsActiveImage: [],
       // redirect variables
       redirect: false,
-      location: '/groups/', // Redirect url
+      location: '', // Redirect url
       // error handling
       error: null
     };
@@ -44,10 +43,9 @@ export class GroupForm extends Component{
     }
     // set state with initial values
     this.setState({
-      // form data stored in state
       id: group ? group.id : id,
-      // form options stored in state
       optionsActiveImage: optionsActiveImage,
+      location: group ? '/groups/' + group.id : '/groups/' + id,
     });
   }
 
@@ -112,28 +110,38 @@ export class GroupForm extends Component{
     event.preventDefault();
     // FORM DATA
     const form = {
-      'user'        : this.props.user._id,
+      'updated_by'  : this.state.updated_by._id,
       'id'          : this.state.id,
       'name'        : this.state.name,
       'description' : this.state.description,
-      'displays'    : this.state.displays,
-      'images'      : this.state.images,
-      'active_image': this.state.active_image,
       'tags'        : this.state.tags
     };
+    // possible empty fields
+    if (!this.props.group) form.created_by = this.props.user._id;
+    if (this.state.displays.length > 0) form.displays = this.state.displays;
+    if (this.state.images.length > 0) form.images = this.state.images;
+    if (this.state.active_image != '') form.active_image = this.state.active_image;
     // HTTP REQUEST
-    fetch('http://localhost:4000/groups', {
-      method: this.props.group ? 'put' : 'post', // post method
+    fetch( this.props.group ? 'http://localhost:4000/groups/' + this.props.group._id : 'http://localhost:4000/groups',
+      {
+      method: this.props.group ? 'put' : 'post', // post or put method
       headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
       body: JSON.stringify(form)
-    })
-    .then((res) => this.props.update // update dataset
-        // TODO: alert with success
-        // TODO: throw error and alert with error
+      }
     )
+    .then((res) => res.json())
+    .then((res) => {
+      if (this.props.group) {
+        this.props.updateOne('group', res.result) // IDEA: Alert on updateOne at main
+      } else {
+        this.props.addOne('group', res.result)
+      }
+    }) // update dataset
+    // TODO: alert with success
+    // TODO: throw error and alert with error
     .then(
       (success) => { // resolve callback
         this.setState({ redirect: true })
@@ -141,31 +149,26 @@ export class GroupForm extends Component{
       (error) => { // reject callback
         this.setstate({ error })
       }
-    )
-    .catch(
-      (error) => {
-        this.setState({ error })
-      }
     );// TODO: error handling
   }
 
   render(){
 
     // Options
-    const optionsDisplays = this.props.displays.data.map((d) => {
-      return(<label key={d.id} className="custom-control custom-checkbox">
-        <input onChange={this.handleCheckDisplays} type="checkbox" checked={this.state.displays.find((c) => c == d._id)} name={d._id} value={d._id} className="custom-control-input"></input>
+    const optionsDisplays = this.props.displays.data.sort((a, b) => a.id - b.id).map((d) =>
+      <label key={d.id} className="custom-control custom-checkbox">
+        <input onChange={this.handleCheckDisplays} type="checkbox" defaultChecked={this.state.displays.find((c) => c == d._id)} name={d._id} defaultValue={d._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{d.name}</span>
-      </label>);
-    });
-    const optionsImages = this.props.images.data.sort((a, b) => a.id - b.id).map((i) => {
-      return(<label key={i.id} className="custom-control custom-checkbox">
-        <input onChange={this.handleCheckImages} type="checkbox" checked={this.state.images.find((c) => c == i._id)} name={i._id} value={i._id} className="custom-control-input"></input>
+      </label>
+    );
+    const optionsImages = this.props.images.data.sort((a, b) => a.id - b.id).map((i) =>
+      <label key={i.id} className="custom-control custom-checkbox">
+        <input onChange={this.handleCheckImages} type="checkbox" defaultChecked={this.state.images.find((c) => c == i._id)} name={i._id} defaultValue={i._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{i.name}</span>
-      </label>);
-    });
+      </label>
+    );
 
     // Render return
     if (this.state.redirect) {
@@ -178,10 +181,16 @@ export class GroupForm extends Component{
               <div className="card-header border-gray">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
+                  { this.props.group ?
+                    <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un grupo</h2> :
                     <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo Grupo</h2>
+                  }
                   </li>
                   <li className="nav-item ml-2">
+                  { this.props.group ?
+                    <button type="submit" className="btn btn-outline-grupo"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
                     <button type="submit" className="btn btn-outline-grupo"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                  }
                   </li>
                 </ul>
               </div>
@@ -201,8 +210,8 @@ export class GroupForm extends Component{
                   <input type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleInputChange} placeholder="Descripcion del Grupo"></input>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="user"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="user" name="user" value={this.state.user} readOnly></input>
+                  <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
+                  <input type="text" className="form-control" id="creador" name='user' defaultValue={this.state.created_by} readOnly></input>
                 </div>
                 <div className="form-row">
                   <div className="form-group col">
@@ -227,8 +236,8 @@ export class GroupForm extends Component{
                     </select>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="created"><i className="fa fa-calendar-o mr-2"></i>Fecha</label>
-                    <input type="text" className="form-control" id="created" value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                    <label htmlFor="created"><i className="fa fa-calendar-o mr-2"></i>Fecha de {this.props.group ? 'modificación' : 'creación'}</label>
+                    <input type="text" className="form-control" id="created" value={moment().format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
                   </div>
                 </div>
                 <div className="form-row">
@@ -245,7 +254,7 @@ export class GroupForm extends Component{
               </div>
             </div>
           </form>
-          <div>
+          <div> {/* //TEMP: debug */}
             <p>
               {this.state.displays}
             </p>

@@ -21,7 +21,8 @@ export class GroupDelete extends Component{
     fetch(this.props.group.url, {
       method: 'delete'
     })
-    .then(this.props.update) // TODO: promises
+    .then((res) => res.json())
+    .then((res) => this.props.removeOne('group', res.resourceId)) // TODO: promises
     .then(this.setState({ redirect: true })) // redirect
     .catch((err) => console.log(err));
   }

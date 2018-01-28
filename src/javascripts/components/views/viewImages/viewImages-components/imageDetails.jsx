@@ -12,7 +12,7 @@ export class ImageDetails extends Component { // TODO: transform to component
 
   render(){
     // define constants from props for better readability
-    const { id, name, description, src_url, created_at, updated_at, user, resolution, file, size, category, groups, displays, tags_total, tags } = this.props.image;
+    const { id, name, description, src_url, created_at, updated_at, created_by, resolution, file, size, category, groups, displays, tags_total, tags } = this.props.image;
     // refactor date constants with format
     const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
     const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
@@ -53,7 +53,7 @@ export class ImageDetails extends Component { // TODO: transform to component
                 <p className="card-text"><i className="fa fa-file-image-o mr-1" aria-hidden="true"></i> {file}</p>
                 <p className="card-text"><i className="fa fa-database mr-1" aria-hidden="true"></i> {size}</p>
                 <p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {created}</p>
-                <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {user.name}</p>
+                <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {created_by.name}</p>
                 <p className="titulo">ETIQUETAS</p>
                 {tag_list}
               </div>
@@ -77,7 +77,8 @@ export class ImageDetails extends Component { // TODO: transform to component
             </div>
             <div className="col">
               <div className="asociados">
-
+                <p className="titulo">GRUPOS ASOCIADOS ({groups.length})</p>
+                <Associated contenido={groups} categoria='imagenes'/>
               </div>
             </div>
           </div>

@@ -11,9 +11,29 @@
 html {
   height: 100%;
 }
+
 body{
   max-height: 100vh;
   font-family: "etica-display";
+}
+
+.table-wrapper{
+  border: 1px solid #868e96;
+  border-radius: 0.25rem;
+}
+
+.table{
+  color: #868e96;
+  margin-bottom: 0;
+}
+
+.table thead th{
+  border-top: none;
+  border-bottom: 1px solid #868e96;
+}
+
+.table th, .table td{
+  border-color: #868e96;
 }
 
 // SIZING
@@ -81,6 +101,10 @@ body{
 // buttons
 .btn-outline-secondary:hover{
   color: #343A40;
+}
+
+.btn-block + .btn-block{
+  margin-top: 0;
 }
 
 .btn-nav{

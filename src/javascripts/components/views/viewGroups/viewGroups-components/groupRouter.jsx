@@ -25,10 +25,10 @@ export class GroupRouter extends Component {
     fetch(this.props.group.url)
       .then(res => res.json())
       .then(
-        (group) => {
+        (group) => { // resolve callback
           this.setState({ group, isLoaded: true })
         },
-        (error) => {
+        (error) => { // reject callback
           this.setState({ error, isLoaded: true })
         }
       );
@@ -36,14 +36,14 @@ export class GroupRouter extends Component {
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
   componentWillReceiveProps(nextProps){
-    if(nextProps.group._id != this.props.group._id){ // if props actually changed
+    if(JSON.stringify(nextProps.group) != JSON.stringify(this.props.group)){ // if props actually changed
     fetch(nextProps.group.url)
       .then(res => res.json())
       .then(
-        (group) => {
+        (group) => { // resolve callback
           this.setState({ group, isLoaded: true })
         },
-        (error) => {
+        (error) => { // reject callback
           this.setState({ error, isLoaded: true })
         }
       );
@@ -67,6 +67,6 @@ export class GroupRouter extends Component {
           <Route path="/groups/:groupId" render={({ match }) => (<GroupDetails {...this.props} group={this.state.group}/>)}/>
         </Switch>
       );
-    }  
+    }
   }
 };

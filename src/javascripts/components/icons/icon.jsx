@@ -7,7 +7,7 @@ export const Icon = ({ icon, mr, ml, size }) => {
   const iconSize = size ? "fa-" + size + "x" : '';
   const marginLeft = ml ? "ml-" + ml : '';
   const marginRight = mr ? "mr-" + mr : '';
-  const className = cx("fa", iconName, iconSize, marginLeft, marginRight);
+  const className = cx("fa fa-fw", iconName, iconSize, marginLeft, marginRight);
 
   return(
      <i className={className} aria-hidden="true"></i>
