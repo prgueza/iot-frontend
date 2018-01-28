@@ -47,13 +47,13 @@ export class ImageDetails extends Component { // TODO: transform to component
             <div className="col">
               <div className="card-body">
                 <p className="titulo">DETALLES</p>
-                <p className="card-text"><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
-                <p className="card-text"><i className="fa fa-info-circle mr-1" aria-hidden="true"></i> {description}</p>
-                <p className="card-text"><i className="fa fa-arrows-alt mr-1" aria-hidden="true"></i> {resolution.name}</p>
-                <p className="card-text"><i className="fa fa-file-image-o mr-1" aria-hidden="true"></i> {file}</p>
-                <p className="card-text"><i className="fa fa-database mr-1" aria-hidden="true"></i> {size}</p>
-                <p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {created}</p>
-                <p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {created_by.name}</p>
+                <p className="card-text"><i className="fa fa-fw fa-hashtag mr-2" aria-hidden="true"></i>{id}</p>
+                <p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
+                <p className="card-text"><i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true"></i>{resolution ? resolution.name : 'Resolución no especificada'}</p>
+                <p className="card-text"><i className="fa fa-fw fa-file-image-o mr-2" aria-hidden="true"></i>{file}</p>
+                <p className="card-text"><i className="fa fa-fw fa-database mr-2" aria-hidden="true"></i>{size}</p>
+                <p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{created}</p>
+                <p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>{created_by ? created_by.name : 'Usuario eliminado'}</p>
                 <p className="titulo">ETIQUETAS</p>
                 {tag_list}
               </div>

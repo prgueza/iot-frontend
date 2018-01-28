@@ -59410,7 +59410,7 @@ var Navigation = function (_Component2) {
           _react2.default.createElement(
             'span',
             null,
-            'v0.0.5'
+            'v0.0.10'
           ),
           _react2.default.createElement(
             'span',
@@ -64145,45 +64145,44 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
+										_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
 										id
 									),
 									_react2.default.createElement(
 										'p',
 										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-info-circle mr-1', 'aria-hidden': 'true' }),
-										' ',
+										_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
 										description
 									),
 									_react2.default.createElement(
 										'p',
 										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-1', 'aria-hidden': 'true' }),
-										' ',
-										resolution.size.width,
-										' x ',
-										resolution.size.height
+										_react2.default.createElement('i', { className: 'fa fa-fw fa-map-marker mr-2', 'aria-hidden': 'true' }),
+										location ? location : 'Localización no especificada'
 									),
 									_react2.default.createElement(
 										'p',
 										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-1', 'aria-hidden': 'true' }),
-										' ',
+										_react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-alt mr-2', 'aria-hidden': 'true' }),
+										resolution ? resolution.size.width + 'x' + resolution.size.height : 'Resolución no especificada'
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'card-text' },
+										_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
 										created
 									),
 									_react2.default.createElement(
 										'p',
 										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-1', 'aria-hidden': 'true' }),
-										' ',
+										_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
 										updated
 									),
 									_react2.default.createElement(
 										'p',
 										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-user-o mr-1', 'aria-hidden': 'true' }),
-										' ',
-										created_by.name
+										_react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
+										created_by ? created_by.name : 'Usuario eliminado'
 									),
 									_react2.default.createElement(
 										'p',
@@ -65138,50 +65137,44 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-2', 'aria-hidden': 'true' }),
                     id
                   ),
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-info-circle mr-1', 'aria-hidden': 'true' }),
-                    ' ',
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
                     description
                   ),
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-1', 'aria-hidden': 'true' }),
-                    ' ',
-                    resolution.name
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-alt mr-2', 'aria-hidden': 'true' }),
+                    resolution ? resolution.name : 'Resolución no especificada'
                   ),
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-file-image-o mr-1', 'aria-hidden': 'true' }),
-                    ' ',
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-file-image-o mr-2', 'aria-hidden': 'true' }),
                     file
                   ),
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-database mr-1', 'aria-hidden': 'true' }),
-                    ' ',
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-database mr-2', 'aria-hidden': 'true' }),
                     size
                   ),
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-1', 'aria-hidden': 'true' }),
-                    ' ',
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
                     created
                   ),
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-user-o mr-1', 'aria-hidden': 'true' }),
-                    ' ',
-                    created_by.name
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
+                    created_by ? created_by.name : 'Usuario eliminado'
                   ),
                   _react2.default.createElement(
                     'p',
@@ -65865,28 +65858,27 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-2', 'aria-hidden': 'true' }),
                     id
                   ),
                   _react2.default.createElement(
                     'p',
-                    { className: 'card-text', 'data-toggle': 'tooltip', 'data-placement': 'left', title: 'descripci\xF3n' },
-                    _react2.default.createElement('i', { className: 'fa fa-info-circle mr-1', 'aria-hidden': 'true' }),
-                    ' ',
+                    { className: 'card-text' },
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
                     description
                   ),
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-1', 'aria-hidden': 'true' }),
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
                     created
                   ),
                   _react2.default.createElement(
                     'p',
                     { className: 'card-text' },
-                    _react2.default.createElement('i', { className: 'fa fa-user-o mr-1', 'aria-hidden': 'true' }),
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
                     ' ',
-                    created_by.name
+                    created_by ? created_by.name : 'Usuario eliminado'
                   ),
                   _react2.default.createElement(
                     'p',

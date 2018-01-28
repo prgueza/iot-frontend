@@ -214,7 +214,7 @@ class Navigation extends Component{
         </div>
         <hr></hr>
         <p className="d-flex justify-content-between">
-          <span>v0.0.10</span>
+          <span>v0.0.11</span>
           <span>{ user ? user.name : 'Cargando...'}</span>
         </p>
       </div>

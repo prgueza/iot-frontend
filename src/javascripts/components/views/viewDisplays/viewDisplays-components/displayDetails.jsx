@@ -42,12 +42,13 @@ export class DisplayDetails extends Component {
 						<div className="col">
 							<div className="card-body">
 								<p className="titulo">DETALLES</p>
-								<p className="card-text"><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
-								<p className="card-text"><i className="fa fa-info-circle mr-1" aria-hidden="true"></i> {description}</p>
-								<p className="card-text"><i className="fa fa-arrows-alt mr-1" aria-hidden="true"></i> {resolution.size.width} x {resolution.size.height}</p>
-								<p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {created}</p>
-								<p className="card-text"><i className="fa fa-calendar-o mr-1" aria-hidden="true"></i> {updated}</p>
-								<p className="card-text"><i className="fa fa-user-o mr-1" aria-hidden="true"></i> {created_by.name}</p>
+								<p className="card-text"><i className="fa fa-fw fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
+								<p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
+								<p className="card-text"><i className="fa fa-fw fa-map-marker mr-2" aria-hidden="true"></i>{location ? location : 'Localización no especificada'}</p>
+								<p className="card-text"><i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true"></i>{resolution ? (resolution.size.width + 'x' + resolution.size.height) : 'Resolución no especificada'}</p>
+								<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{created}</p>
+								<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{updated}</p>
+								<p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>{created_by ? created_by.name : 'Usuario eliminado'}</p>
 								<p className="titulo">ETIQUETAS</p>
 								{tag_list}
 							</div>
