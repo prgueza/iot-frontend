@@ -10,6 +10,57 @@ import { Tag } from '../../../tags/tag.jsx';
 /* COMPONENTS */
 export class GroupDetails extends Component { // TODO: transform to component
 
+  constructor(props){
+    super(props);
+    const { group, user } = this.props;
+    this.state = {
+      // form data stored in state
+      group: '',
+      active_image: '',
+      imagesOptions: '',
+      images: '',
+      error: null
+    };
+  }
+
+  componentWillReceiveProps(nextProps){
+    // get data
+    const { active_image, images } = nextProps.group;
+    // images options
+    const imagesMap = images.map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+    // state
+    this.setState({
+      group: nextProps.group,
+      active_image: active_image ? active_image : '',
+      imagesOptions: imagesMap,
+      images: images,
+    })
+  }
+
+  /* HANDLE INPUT CHANGE */
+  handleInputChange = (event) => {
+    const image = this.state.images.find((i) => event.target.value == i._id);
+    const form = { active_image: image._id };
+    fetch(this.state.group.url,
+      {
+      method: 'put', // post or put method
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(form)
+      })
+      .then(res => res.json())
+      .then(
+        (res) => { // resolve callback
+          this.setState({ active_image: image })
+        },
+        (error) => { // reject callback
+          this.setState({ error })
+        }
+    );
+  }
+
   render(){
     // define constants from props for better readability
     const { id, name, description, created_at, updated_at, created_by, displays, images, active_image, tags_total, tags } = this.props.group;
@@ -19,7 +70,7 @@ export class GroupDetails extends Component { // TODO: transform to component
     // generate tag list
     const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='grupos' etiqueta={tag}/>);
     // check if active_image is set and if not set the undefined img
-    const src = active_image ? active_image.src_url : 'http://localhost:3000/img/undefined.png';
+    const src = this.state.active_image ? this.state.active_image.src_url : 'http://localhost:3000/img/undefined.png';
     // define routes for edit and delete based on the id
     const linktoEdit = '/groups/' + id + '/edit';
     const linktoDelete = '/groups/' + id + '/delete';
@@ -63,6 +114,10 @@ export class GroupDetails extends Component { // TODO: transform to component
                 <div className="vista-imagen">
                   <img className="imagen" src={src}/>
                 </div>
+                <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image._id} onChange={this.handleInputChange}>
+                  <option value={''} key={0}>Sin imagen activa</option>
+                  {this.state.imagesOptions}
+                </select>
               </div>
             </div>
           </div>

@@ -9,13 +9,15 @@ export class ImageForm extends Component{
   /* STATE */
   constructor(props){
     super(props);
-    const { image } = this.props;
+    const { image, user, resolutions } = this.props;
     this.state = {
       id: image ? image.id : '',
       name: image ? image.name : '',
       description: image ? image.description : '',
-      user: this.props.user,
-      resolution: image ? image.resolution._id : '',
+      created_by: image ? ( image.created_by ? image.created_by.name : 'Usuario eliminado') : user.name,
+      updated_by: user.name,
+      resolution: image ? ( image.resolution ? image.resolution._id : resolutions[0]._id ) : resolutions[0]._id,
+      category: image ? ( image.category ? image.category : '' ) : '',
       tags: image ? image.tags : [],
       created_at: image ? moment(image.created_at) : moment(),
       updated_at: moment(),
@@ -23,7 +25,8 @@ export class ImageForm extends Component{
       groups: image ? image.groups.map((g) => g._id) : [],
 
       redirect: false,
-      location: '/images'
+      location: '/images',
+      error: null
     };
   }
 
@@ -99,47 +102,48 @@ export class ImageForm extends Component{
 
 
   /* HANDLE SUMBIT (PUT OR POST) */
-  handleSubmit = (event) => {
+  handleSubmit = () => {
     // define form values to send
     const form = {
       id: this.state.id,
       name: this.state.name,
       description: this.state.description,
-      user: this.props.user._id, // send user_id
+      updated_by: this.state.updated_by._id, // send user_id
       resolution: this.state.resolution,
       tags: this.state.tags,
     };
-    // include group/display assignation if needed
-    if(this.state.display){form.display = this.state.display}
-    if(this.state.group){form.group = this.state.group}
-    // TODO: include image file
-    // prevent form default event
-    event.preventDefault();
-    // if in edit mode use put and image url
-    if (image){
-      fetch(image.url, {
-        method: 'put', // put method
-        headers: {
-            'Accept': 'form-data',
-            'Content-Type': 'form-data'
-          },
-        body: JSON.stringify(form)
-      })
-      .then(() => this.setState({ redirect: true }))
-      .catch((err) => console.log(err)); // TODO: error handling
-    // if in post mode use post url for images
-    } else {
-      fetch('http://localhost:4000/images', {
-        method: 'post', // post method
+    // possible empty fields
+    if (!this.props.image) form.created_by = this.props.user._id;
+    if (this.state.displays.length > 0) form.displays = this.state.displays;
+    if (this.state.groups.length > 0) form.groups = this.state.groups;
+    fetch( this.props.image ? 'http://localhost:4000/images/' + this.props.image._id : 'http://localhost:4000/images',
+      {
+        method: this.props.image ? 'put' : 'post', // post or put method
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
         body: JSON.stringify(form)
-      })
-      .then(() => this.setState({ redirect: true }))
-      .catch((err) => console.log(err)); // TODO: error handling
-    }
+      }
+    )
+    .then((res) => res.json())
+    .then((res) => {
+      if (this.props.image) {
+        this.props.updateOne('image', res.result) // IDEA: Alert on updateOne at main
+      } else {
+        this.props.addOne('image', res.result)
+      }
+    }) // update dataset
+    // TODO: alert with success
+    // TODO: throw error and alert with error
+    .then(
+      (success) => { // resolve callback
+        this.setState({ redirect: true })
+      },
+      (error) => { // reject callback
+        this.setState({ error })
+      }
+    );// TODO: error handling
   }
 
   /* RENDER COMPONENT */
@@ -173,10 +177,16 @@ export class ImageForm extends Component{
               <div className="card-header border-gray">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
-                    <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir una nueva imagen</h2>
+                    { this.props.image ?
+                      <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar una imagen</h2> :
+                      <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir una nueva imagen</h2>
+                    }
                   </li>
                   <li className="nav-item ml-2">
-                    <button onClick={this.handleSubmit} type="button" className="btn btn-outline-imagen"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                    { this.props.image ?
+                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-info"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
+                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-info"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                    }
                   </li>
                 </ul>
               </div>
@@ -187,7 +197,7 @@ export class ImageForm extends Component{
                     <input type="text" className="form-control" id="imagenID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
                   </div>
                   <div className="form-group col-md-11">
-                    <label htmlFor="nombre"><i className="fa fa-television mr-2"></i>Nombre</label>
+                    <label htmlFor="nombre"><i className="fa fa-picture-o mr-2"></i>Nombre</label>
                     <input type="text" className="form-control" id="nombre" placeholder="Nombre de la imagen" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
                   </div>
                 </div>
@@ -197,17 +207,12 @@ export class ImageForm extends Component{
                 </div>
                 <div className="form-group">
                   <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="creador" name='user' value={this.state.user.name} readOnly></input>
+                  <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by} readOnly></input>
                 </div>
                 <div className="form-row">
                   <div className="form-group col">
-                    <label htmlFor="resolucion"><i className="fa fa-file-image-o mr-2"></i>Archivo</label>
-                    <div>
-                      <label className="custom-file">
-                        <input type="file" id="archivo" className="custom-file-input"></input>
-                        <span className="custom-file-control"></span>
-                      </label>
-                    </div>
+                    <label htmlFor="category"><i className="fa fa-th-large mr-2"></i>Categoría</label>
+                    <input type="text" className="form-control" id="category" name='category' value={this.state.category} onChange={this.handleInputChange}></input>
                   </div>
                   <div className="form-group col">
                     <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
@@ -257,8 +262,12 @@ export class ImageForm extends Component{
             </div>
           </form>
           <div>
-            <p>{this.state.displays}</p>
-            <p>{this.state.groups}</p>
+            <p>
+              {this.state.category}
+            </p>
+            <p>
+              {this.state.resolution}
+            </p>
           </div>
         </div>
       );

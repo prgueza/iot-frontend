@@ -20,7 +20,7 @@ export class GroupRouter extends Component {
     };
   }
 
-  /* FETCH FULL DATA ABOUT THE IMAGE */
+  /* FETCH FULL DATA ABOUT THE GROUP */
   componentDidMount(){
     fetch(this.props.group.url)
       .then(res => res.json())
@@ -34,9 +34,9 @@ export class GroupRouter extends Component {
       );
   }
 
-  /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
+  /* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP*/
   componentWillReceiveProps(nextProps){
-    if(JSON.stringify(nextProps.group) != JSON.stringify(this.props.group)){ // if props actually changed
+    if(nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at){ // if props actually changed
     fetch(nextProps.group.url)
       .then(res => res.json())
       .then(

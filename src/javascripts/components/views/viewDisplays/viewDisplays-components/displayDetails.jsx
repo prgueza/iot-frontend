@@ -19,7 +19,8 @@ export class DisplayDetails extends Component {
 		// generate tag list
 		const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='displays' etiqueta={tag}/>);
 		// define routes for edit and delete based on the id
-		const linkto = '/displays/edit/' + id;
+		const linktoEdit = '/displays/' + id + '/edit';
+		const linktoDelete = '/displays/' + id + '/delete';
 		const src = active_image || 'http://localhost:3000/img/undefined.png';
 
 		return(
@@ -31,10 +32,15 @@ export class DisplayDetails extends Component {
 							<h2 className="detalles-titulo"><i className='fa fa-television mr-3' aria-hidden="true"></i>{name}</h2>
 						</li>
 						<li className="nav-item mr-2">
-							<Link to={linkto}>
-								<button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
-							</Link>
-						</li>
+              <Link to={linktoEdit}>
+                <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
+              </Link>
+            </li>
+            <li className="nav-item ml-2">
+              <Link to={linktoDelete}>
+                <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o" aria-hidden="true"></i>Eliminar</button>
+              </Link>
+            </li>
 					</ul>
 				</div>
 				<div>

@@ -13,7 +13,7 @@ export class GroupForm extends Component{
       // form data stored in state
       name: group ? group.name : '',
       description: group ? group.description : '',
-      created_by: group ? group.created_by.name : user.name,
+      created_by: group ? ( group.created_by ? group.created_by.name : 'Usuario eliminado') : user.name,
       updated_by: user.name,
       tags: group ? group.tags : [],
       active_image: group ? group.active_image ? group.active_image._id : '' : '',
@@ -106,8 +106,7 @@ export class GroupForm extends Component{
   } // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
   /* HANDLE SUBMIT */
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = () => {
     // FORM DATA
     const form = {
       'updated_by'  : this.state.updated_by._id,
@@ -147,7 +146,7 @@ export class GroupForm extends Component{
         this.setState({ redirect: true })
       },
       (error) => { // reject callback
-        this.setstate({ error })
+        this.setState({ error })
       }
     );// TODO: error handling
   }
@@ -176,7 +175,7 @@ export class GroupForm extends Component{
     } else {
       return(
         <div className="col detalles">
-          <form id='form' onSubmit={this.handleSubmit}>
+          <form id='form'>
             <div className="card bg-transparent border-gray">
               <div className="card-header border-gray">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
@@ -188,8 +187,8 @@ export class GroupForm extends Component{
                   </li>
                   <li className="nav-item ml-2">
                   { this.props.group ?
-                    <button type="submit" className="btn btn-outline-grupo"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
-                    <button type="submit" className="btn btn-outline-grupo"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                    <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-warning"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
+                    <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-warning"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
                   }
                   </li>
                 </ul>

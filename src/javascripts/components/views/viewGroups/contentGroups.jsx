@@ -24,12 +24,12 @@ export const ContentGroups = ({ groups, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={groups.count} categoria='groups'/>
+            <Title total={groups.count} category='groups'/>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-4">
-            <List categoria='groups' contenido={groups.data}/>
+            <List category='groups' content={groups.data}/>
           </div>
           <div className="col-8">
             <div className="row mb-3">

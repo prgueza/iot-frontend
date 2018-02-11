@@ -21,7 +21,7 @@ export const DisplayGeneric = () => {
           <h1><i className="fa fa-arrow-left mr-3"></i>Seleccione un display</h1>
           <hr></hr>
           <p>O añada uno nuevo</p>
-          <AddButton categoria='displays'/>
+          <AddButton category='displays'/>
         </div>
       </div>
     </div>

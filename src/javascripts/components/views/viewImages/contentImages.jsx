@@ -24,12 +24,12 @@ export const ContentImages = ({ images, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={images.count} categoria='images'/>
+            <Title total={images.count} category='images'/>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-4">
-            <List categoria='images' contenido={images.data}/>
+            <List category='images' content={images.data}/>
           </div>
           <div className="col-8">
             <div className="row mb-3">

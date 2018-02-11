@@ -36,7 +36,7 @@ export class ImageRouter extends Component {
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
   componentWillReceiveProps(nextProps){
-    if(nextProps.image._id != this.props.image._id){ // if props actually changed
+    if(nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at){ // if props actually changed
       fetch(nextProps.image.url)
         .then(res => res.json())
         .then(

@@ -4955,6 +4955,61 @@ module.exports = warning;
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				classes.push(classNames.apply(null, arg));
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			return classNames;
+		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-2015, Facebook, Inc.
@@ -5009,61 +5064,6 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-  Copyright (c) 2016 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = [];
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (!arg) continue;
-
-			var argType = typeof arg;
-
-			if (argType === 'string' || argType === 'number') {
-				classes.push(arg);
-			} else if (Array.isArray(arg)) {
-				classes.push(classNames.apply(null, arg));
-			} else if (argType === 'object') {
-				for (var key in arg) {
-					if (hasOwn.call(arg, key) && arg[key]) {
-						classes.push(key);
-					}
-				}
-			}
-		}
-
-		return classes.join(' ');
-	}
-
-	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = classNames;
-	} else if (true) {
-		// register as 'classnames', consistent with npm package name
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-			return classNames;
-		}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {
-		window.classNames = classNames;
-	}
-}());
-
 
 /***/ }),
 /* 8 */
@@ -5222,16 +5222,16 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 /* COMPONENTS */
 /* IMPORT MODULES */
 var Title = exports.Title = function Title(_ref) {
-  var categoria = _ref.categoria,
+  var category = _ref.category,
       total = _ref.total;
 
-  var icono = cx('fa', { 'fa-television': categoria === "displays" }, { 'fa-picture-o': categoria === "images" }, { 'fa-list': categoria === "groups" }, { 'fa-user-o': categoria === "account" }, { 'fa-cogs': categoria === "settings" }, { 'fa-book': categoria === "docs" });
-  var estilo = cx('card', 'mb-3', 'bg-transparent', { 'border-success text-success': categoria === "displays" }, { 'border-info text-info': categoria === "images" }, { 'border-warning text-warning': categoria === "groups" }, { 'border-light text-light': categoria === "account" }, { 'border-light text-light': categoria === "settings" }, { 'border-light text-light': categoria === "docs" });
+  var icono = cx('fa', { 'fa-television': category === "displays" }, { 'fa-picture-o': category === "images" }, { 'fa-list': category === "groups" }, { 'fa-user-o': category === "account" }, { 'fa-cogs': category === "settings" }, { 'fa-book': category === "docs" });
+  var estilo = cx('card', 'mb-3', 'bg-transparent', { 'border-success text-success': category === "displays" }, { 'border-info text-info': category === "images" }, { 'border-warning text-warning': category === "groups" }, { 'border-light text-light': category === "account" }, { 'border-light text-light': category === "settings" }, { 'border-light text-light': category === "docs" });
   return _react2.default.createElement(
     'div',
     { className: 'resumen' },
@@ -6751,14 +6751,14 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Importacion de librerias
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 var AddButton = exports.AddButton = function AddButton(_ref) {
-  var categoria = _ref.categoria;
+  var category = _ref.category;
 
-  var claseBoton = cx("btn btn-block btn-small", { "btn-outline-success": categoria === 'displays' }, { "btn-outline-info": categoria === 'images' }, { "btn-outline-warning": categoria === 'groups' });
+  var claseBoton = cx("btn btn-block btn-small", { "btn-outline-success": category === 'displays' }, { "btn-outline-info": category === 'images' }, { "btn-outline-warning": category === 'groups' });
   var location = {
-    pathname: '/' + categoria + '/add'
+    pathname: '/' + category + '/add'
   };
   return _react2.default.createElement(
     _reactRouterDom.Link,
@@ -6794,35 +6794,39 @@ var _image = __webpack_require__(264);
 
 var _group = __webpack_require__(265);
 
+var _device = __webpack_require__(266);
+
 var _addButton = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* COMPONENT */
-
-
-/* IMPORT COMPONENTS */
+/* IMPORT MODULES */
 var List = exports.List = function List(_ref) {
-  var categoria = _ref.categoria,
-      contenido = _ref.contenido;
+  var category = _ref.category,
+      content = _ref.content;
 
-  contenido = contenido.sort(function (a, b) {
+  content = content.sort(function (a, b) {
     return a.id - b.id;
   });
-  if (categoria === "displays") {
-    var elementos = contenido.map(function (elemento) {
+  if (category === "displays") {
+    var elementos = content.map(function (elemento) {
       return _react2.default.createElement(_display.Display, { display: elemento, key: elemento.id });
     });
-  } else if (categoria === "images") {
-    var elementos = contenido.map(function (elemento) {
+  } else if (category === "images") {
+    var elementos = content.map(function (elemento) {
       return _react2.default.createElement(_image.Image, { image: elemento, key: elemento.id });
     });
-  } else if (categoria === "groups") {
-    var elementos = contenido.map(function (elemento) {
+  } else if (category === "groups") {
+    var elementos = content.map(function (elemento) {
       return _react2.default.createElement(_group.Group, { group: elemento, key: elemento.id });
     });
+  } else if (category === "devices") {
+    var elementos = content.map(function (elemento) {
+      return _react2.default.createElement(_device.Device, { device: elemento, key: elemento.id });
+    });
   }
-  var button = categoria != "displays" ? _react2.default.createElement(_addButton.AddButton, { categoria: categoria }) : '';
+  var button = _react2.default.createElement(_addButton.AddButton, { category: category });
   return _react2.default.createElement(
     'div',
     { className: 'lista' },
@@ -6837,7 +6841,9 @@ var List = exports.List = function List(_ref) {
       button
     )
   );
-}; /* IMPORT MODULES */
+};
+
+/* IMPORT COMPONENTS */
 
 /***/ }),
 /* 23 */
@@ -7118,7 +7124,7 @@ exports.default = createTransitionManager;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -7471,7 +7477,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 /* COMPONENTS */
 /* IMPORT MODULES */
@@ -22233,7 +22239,7 @@ var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isE
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -22352,7 +22358,7 @@ Link.contextTypes = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -22875,6 +22881,8 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(2);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -22889,7 +22897,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var moment = __webpack_require__(0);moment.locale('es');
 
 /* COMPONENTS */
-
 var DisplayForm = exports.DisplayForm = function (_Component) {
   _inherits(DisplayForm, _Component);
 
@@ -22898,287 +22905,438 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (DisplayForm.__proto__ || Object.getPrototypeOf(DisplayForm)).call(this, props));
 
-    _this.state = {
-      id: '',
-      name: '',
-      description: '',
-      user: '',
-      image_id: 'No asignar',
-      group_id: 'No asignar',
-      dimensions: {
-        width: '',
-        height: ''
-      },
-      location: '',
-      tags: [],
-      created_at: '',
-      updated_at: '',
-
-      opciones_grupos: [],
-      opciones_imagenes: []
-    };
-    _this.handleInputChange = _this.handleInputChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    return _this;
-  }
-
-  _createClass(DisplayForm, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var _props = this.props,
-          images = _props.images,
-          groups = _props.groups,
-          settings = _props.settings,
-          user = _props.user,
-          display = _props.display;
-
-      var opcionesImagenes = images.data.map(function (i) {
-        return _react2.default.createElement(
-          'option',
-          { value: i._id, key: i.id },
-          i.name
-        );
-      });
-      var opcionesGrupos = groups.data.map(function (g) {
-        return _react2.default.createElement(
-          'option',
-          { value: g._id, key: g.id },
-          g.name
-        );
-      });
-      fetch(display.url).then(function (res) {
-        return res.json();
-      }).then(function (display) {
-        var created_at = moment(display.created_at).format("dddd, D [de] MMMM [de] YYYY");
-        var updated_at = moment().format("dddd, D [de] MMMM [de] YYYY");
-        _this2.setState({
-          id: display.id,
-          name: display.name,
-          description: display.description,
-          user: display.user,
-          image_id: 'No asignar',
-          group_id: 'No asignar',
-          resolution: {
-            width: display.resolution.width,
-            height: display.resolution.height
-          },
-          tags: display.tags,
-          opciones_imagenes: opcionesImagenes,
-          opciones_grupos: opcionesGrupos
-        });
-      });
-    }
-  }, {
-    key: 'handleInputChange',
-    value: function handleInputChange(event) {
+    _this.handleInputChange = function (event) {
       var target = event.target;
-      var value = target.name === 'tags' ? target.value.split(',') : target.value;
       var name = target.name;
+      if (name === 'tags') {
+        var value = target.value.split(','); // TODO: better string to array conversion
+      } else {
+        var value = target.value;
+      }
 
-      this.setState(_defineProperty({}, name, value));
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
+      _this.setState(_defineProperty({}, name, value));
+    };
+
+    _this.handleCheckImages = function (event) {
+      // get value from the checkbox
+      var target = event.target;
+      var value = target.value;
+      // check if the checkbox has been selected
+      if (!_this.state.images.find(function (c) {
+        return c == value;
+      })) {
+        // check if value is stored in state
+        // if it is NOT stored, save the state, push the new value and save back the new state
+        var prevState = _this.state.images;
+        prevState.push(value);
+        _this.setState({ images: prevState });
+      } else {
+        // if it IS stored, save the state, splice the old value and save back the new state
+        var _prevState = _this.state.images;
+        _prevState.splice(_prevState.indexOf(value), 1);
+        _this.setState({ images: _prevState });
+      }
+    };
+
+    _this.handleCheckGroups = function (event) {
+      // get value from the checkbox
+      var target = event.target;
+      var value = target.value;
+      // check if the checkbox has been selected
+      if (!_this.state.groups.find(function (c) {
+        return c == value;
+      })) {
+        // check if value is stored in state
+        // if it is NOT stored, save the state, push the new value and save back the new state
+        var prevState = _this.state.groups;
+        prevState.push(value);
+        _this.setState({ groups: prevState });
+        target.checked = true;
+      } else {
+        // if it IS stored, save the state, splice the old value and save back the new state
+        var _prevState2 = _this.state.groups;
+        _prevState2.splice(_prevState2.indexOf(value), 1);
+        _this.setState({ groups: _prevState2 });
+        target.checked = false;
+      }
+    };
+
+    _this.handleSubmit = function () {
+      // define form values to send
       var form = {
-        id: this.state.id,
-        name: this.state.name,
-        description: this.state.description,
-        user: this.state.user,
-        image_id: this.state.image_id,
-        group_id: this.state.group_id,
-        resolution: {
-          width: this.state.resolution.width,
-          height: this.state.resolution.height
-        },
-        tags: this.state.tags
+        id: _this.state.id,
+        name: _this.state.name,
+        description: _this.state.description,
+        updated_by: _this.state.updated_by._id, // send user_id
+        resolution: _this.state.resolution,
+        tags: _this.state.tags
       };
-
-      event.preventDefault();
-      fetch(this.props.display.url, {
-        method: 'put',
+      // possible empty fields
+      if (!_this.props.display) form.created_by = _this.props.user._id;
+      if (_this.state.images.length > 0) form.images = _this.state.images;
+      if (_this.state.groups.length > 0) form.groups = _this.state.groups;
+      fetch(_this.props.display ? 'http://localhost:4000/displays/' + _this.props.display._id : 'http://localhost:4000/displays', {
+        method: _this.props.display ? 'put' : 'post', // post or put method
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(form)
-      }).catch(function (err) {
-        return console.log(err);
+      }).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        if (_this.props.display) {
+          _this.props.updateOne('display', res.result); // IDEA: Alert on updateOne at main
+        } else {
+          _this.props.addOne('display', res.result);
+        }
+      }) // update dataset
+      // TODO: alert with success
+      // TODO: throw error and alert with error
+      .then(function (success) {
+        // resolve callback
+        _this.setState({ redirect: true });
+      }, function (error) {
+        // reject callback
+        _this.setState({ error: error });
+      }); // TODO: error handling
+    };
+
+    var _this$props = _this.props,
+        display = _this$props.display,
+        user = _this$props.user,
+        resolutions = _this$props.resolutions;
+
+    _this.state = {
+      id: display ? display.id : '',
+      name: display ? display.name : '',
+      description: display ? display.description : '',
+      created_by: display ? display.created_by ? display.created_by.name : 'Usuario eliminado' : user.name,
+      updated_by: user.name,
+      resolution: display ? display.resolution ? display.resolution._id : resolutions[0]._id : resolutions[0]._id,
+      tags: display ? display.tags : [],
+      created_at: display ? moment(display.created_at) : moment(),
+      updated_at: moment(),
+      images: display ? display.images.map(function (i) {
+        return i._id;
+      }) : [],
+      groups: display ? display.groups.map(function (g) {
+        return g._id;
+      }) : [],
+
+      redirect: false,
+      location: '/displays',
+      error: null
+    };
+    return _this;
+  }
+
+  /* INITIAL VALUES FOR FORM INPUTS */
+
+
+  _createClass(DisplayForm, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props = this.props,
+          displays = _props.displays,
+          display = _props.display;
+      // if in post mode get first free id value
+
+      if (!display) {
+        var identificaciones = displays.data.map(function (d) {
+          return d.id;
+        }); // get all ids
+        var id = 1; // start from 1
+        while (identificaciones.indexOf(id) != -1) {
+          id++;
+        } // stop at first free id value
+      }
+      // set state with initial values
+      this.setState({
+        id: display ? display.id : id,
+        location: display ? '/displays/' + display.id : '/displays/' + id // Redirect url
       });
     }
+
+    /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
+
+
+    /* HANDLE MULTIPLE CHECKBOX */
+    // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
+
+    /* HANDLE SUMBIT (PUT OR POST) */
+
   }, {
     key: 'render',
+
+
+    /* RENDER COMPONENT */
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'col detalles' },
-        _react2.default.createElement(
-          'form',
-          { onSubmit: this.handleSubmit },
+      var _this2 = this;
+
+      // Options
+      var optionsResolution = this.props.resolutions.sort(function (a, b) {
+        return a.id - b.id;
+      }).map(function (r, i) {
+        return _react2.default.createElement(
+          'option',
+          { value: r._id, key: i },
+          r.name
+        );
+      });
+      var optionsGroups = this.props.groups.data.map(function (g) {
+        return _react2.default.createElement(
+          'label',
+          { key: g.id, className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: _this2.handleCheckGroups, type: 'checkbox', defaultChecked: _this2.state.groups.find(function (c) {
+              return c == g._id;
+            }), name: g._id, defaultValue: g._id, className: 'custom-control-input' }),
+          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
           _react2.default.createElement(
-            'div',
-            { className: 'card bg-transparent border-gray' },
+            'span',
+            { className: 'custom-control-description' },
+            g.name
+          )
+        );
+      });
+      var optionsImages = this.props.images.data.sort(function (a, b) {
+        return a.id - b.id;
+      }).map(function (i) {
+        return _react2.default.createElement(
+          'label',
+          { key: i.id, className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: _this2.handleCheckImages, type: 'checkbox', defaultChecked: _this2.state.images.find(function (c) {
+              return c == i._id;
+            }), name: i._id, defaultValue: i._id, className: 'custom-control-input' }),
+          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
+          _react2.default.createElement(
+            'span',
+            { className: 'custom-control-description' },
+            i.name
+          )
+        );
+      });
+
+      // Render return
+      if (this.state.redirect) {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'col detalles' },
+          _react2.default.createElement(
+            'form',
+            { id: 'form' },
             _react2.default.createElement(
               'div',
-              { className: 'card-header border-gray' },
-              _react2.default.createElement(
-                'ul',
-                { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-                _react2.default.createElement(
-                  'li',
-                  { className: 'nav-item mr-auto' },
-                  _react2.default.createElement(
-                    'h2',
-                    { className: 'detalles-titulo' },
-                    _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-                    'Editar display'
-                  )
-                ),
-                _react2.default.createElement(
-                  'li',
-                  { className: 'nav-item ml-2' },
-                  _react2.default.createElement(
-                    'button',
-                    { type: 'submit', className: 'btn btn-outline-display' },
-                    _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
-                    'Guardar cambios'
-                  )
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'card-body' },
+              { className: 'card bg-transparent border-gray' },
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'card-header border-gray' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-1' },
+                  'ul',
+                  { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
                   _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'displayID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
+                    'li',
+                    { className: 'nav-item mr-auto' },
+                    this.props.display ? _react2.default.createElement(
+                      'h2',
+                      { className: 'detalles-titulo' },
+                      _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+                      'Editar un display'
+                    ) : _react2.default.createElement(
+                      'h2',
+                      { className: 'detalles-titulo' },
+                      _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+                      'A\xF1adir un nuevo display'
+                    )
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'displayID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-11' },
                   _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'nombre' },
-                    _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+                    'li',
+                    { className: 'nav-item ml-2' },
+                    this.props.display ? _react2.default.createElement(
+                      'button',
+                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-success' },
+                      _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+                      'Guardar cambios'
+                    ) : _react2.default.createElement(
+                      'button',
+                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-success' },
+                      _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
+                      'A\xF1adir'
+                    )
+                  )
                 )
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'descripcion' },
-                  _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                  'Descripcion'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion del Display', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
+                { className: 'card-body' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-group col' },
+                  { className: 'form-row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group col-md-1' },
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'displayID' },
+                      _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
+                      'ID'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'displayID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group col-md-11' },
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'nombre' },
+                      _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+                      'Nombre'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'descripcion' },
+                    _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+                    'Descripcion'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la imagen', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
                   _react2.default.createElement(
                     'label',
                     { htmlFor: 'creador' },
                     _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
                     'Creador'
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.user, readOnly: true })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.created_by, readOnly: true })
+                ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'image' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Asignar nueva imagen'
-                  ),
+                  { className: 'form-row' },
                   _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'form-group col' },
                     _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'image_id', value: this.state.image_id, onChange: this.handleInputChange },
-                      this.state.opciones_imagenes
+                      'label',
+                      { htmlFor: 'resolucion' },
+                      _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
+                      'Resoluci\xF3n'
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      null,
+                      _react2.default.createElement(
+                        'select',
+                        { className: 'custom-select', name: 'resolution', onChange: this.handleInputChange },
+                        optionsResolution
+                      )
                     )
                   )
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-group col' },
+                  { className: 'form-row' },
                   _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'group' },
-                    _react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
-                    'Incluir en un grupo'
+                    'div',
+                    { className: 'form-group col' },
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'displays' },
+                      _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+                      'Asociar una o varias imagenes'
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'custom-controls-stacked shadow' },
+                      optionsImages
+                    )
                   ),
                   _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'form-group col' },
                     _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'group_id', value: this.state.group_id, onChange: this.handleInputChange },
-                      this.state.opciones_grupos
+                      'label',
+                      { htmlFor: 'groups' },
+                      _react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
+                      'Asociar a uno o varios grupos'
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'custom-controls-stacked shadow' },
+                      optionsGroups
                     )
                   )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
+                ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-group col' },
+                  { className: 'form-row' },
                   _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'etiquetas' },
-                    _react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
-                    'Etiquetas'
+                    'div',
+                    { className: 'form-group col-md-6' },
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'fechaCreacion' },
+                      _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                      'Fecha de creaci\xF3n'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group col-md-6' },
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'fechaModificacion' },
+                      _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                      'Fecha de modificaci\xF3n'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+                  )
+                ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-group col' },
-                  this.state.tags.map(function (t, i) {
-                    return t.length > 1 ? _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn mr-1 btn-outline-display btn-tiny', key: i },
-                      t
-                    ) : '';
-                  })
+                  { className: 'form-row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group col' },
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'etiquetas' },
+                      _react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
+                      'Etiquetas'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group col' },
+                    this.state.tags.map(function (t, i) {
+                      return t.length > 1 ? _react2.default.createElement(
+                        'button',
+                        { type: 'button', className: 'btn mr-1 btn-outline-imagen btn-tiny', key: i },
+                        t
+                      ) : '';
+                    })
+                  )
                 )
               )
             )
           )
-        )
-      );
+        );
+      }
     }
   }]);
 
@@ -34641,16 +34799,116 @@ var ImageForm = exports.ImageForm = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (ImageForm.__proto__ || Object.getPrototypeOf(ImageForm)).call(this, props));
 
-    _initialiseProps.call(_this);
+    _this.handleInputChange = function (event) {
+      var target = event.target;
+      var name = target.name;
+      if (name === 'tags') {
+        var value = target.value.split(','); // TODO: better string to array conversion
+      } else {
+        var value = target.value;
+      }
 
-    var image = _this.props.image;
+      _this.setState(_defineProperty({}, name, value));
+    };
+
+    _this.handleCheckDisplays = function (event) {
+      // get value from the checkbox
+      var target = event.target;
+      var value = target.value;
+      // check if the checkbox has been selected
+      if (!_this.state.displays.find(function (c) {
+        return c == value;
+      })) {
+        // check if value is stored in state
+        // if it is NOT stored, save the state, push the new value and save back the new state
+        var prevState = _this.state.displays;
+        prevState.push(value);
+        _this.setState({ displays: prevState });
+      } else {
+        // if it IS stored, save the state, splice the old value and save back the new state
+        var _prevState = _this.state.displays;
+        _prevState.splice(_prevState.indexOf(value), 1);
+        _this.setState({ displays: _prevState });
+      }
+    };
+
+    _this.handleCheckGroups = function (event) {
+      // get value from the checkbox
+      var target = event.target;
+      var value = target.value;
+      // check if the checkbox has been selected
+      if (!_this.state.groups.find(function (c) {
+        return c == value;
+      })) {
+        // check if value is stored in state
+        // if it is NOT stored, save the state, push the new value and save back the new state
+        var prevState = _this.state.groups;
+        prevState.push(value);
+        _this.setState({ groups: prevState });
+        target.checked = true;
+      } else {
+        // if it IS stored, save the state, splice the old value and save back the new state
+        var _prevState2 = _this.state.groups;
+        _prevState2.splice(_prevState2.indexOf(value), 1);
+        _this.setState({ groups: _prevState2 });
+        target.checked = false;
+      }
+    };
+
+    _this.handleSubmit = function () {
+      // define form values to send
+      var form = {
+        id: _this.state.id,
+        name: _this.state.name,
+        description: _this.state.description,
+        updated_by: _this.state.updated_by._id, // send user_id
+        resolution: _this.state.resolution,
+        tags: _this.state.tags
+      };
+      // possible empty fields
+      if (!_this.props.image) form.created_by = _this.props.user._id;
+      if (_this.state.displays.length > 0) form.displays = _this.state.displays;
+      if (_this.state.groups.length > 0) form.groups = _this.state.groups;
+      fetch(_this.props.image ? 'http://localhost:4000/images/' + _this.props.image._id : 'http://localhost:4000/images', {
+        method: _this.props.image ? 'put' : 'post', // post or put method
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      }).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        if (_this.props.image) {
+          _this.props.updateOne('image', res.result); // IDEA: Alert on updateOne at main
+        } else {
+          _this.props.addOne('image', res.result);
+        }
+      }) // update dataset
+      // TODO: alert with success
+      // TODO: throw error and alert with error
+      .then(function (success) {
+        // resolve callback
+        _this.setState({ redirect: true });
+      }, function (error) {
+        // reject callback
+        _this.setState({ error: error });
+      }); // TODO: error handling
+    };
+
+    var _this$props = _this.props,
+        image = _this$props.image,
+        user = _this$props.user,
+        resolutions = _this$props.resolutions;
 
     _this.state = {
       id: image ? image.id : '',
       name: image ? image.name : '',
       description: image ? image.description : '',
-      user: _this.props.user,
-      resolution: image ? image.resolution._id : '',
+      created_by: image ? image.created_by ? image.created_by.name : 'Usuario eliminado' : user.name,
+      updated_by: user.name,
+      resolution: image ? image.resolution ? image.resolution._id : resolutions[0]._id : resolutions[0]._id,
+      category: image ? image.category ? image.category : '' : '',
       tags: image ? image.tags : [],
       created_at: image ? moment(image.created_at) : moment(),
       updated_at: moment(),
@@ -34662,7 +34920,8 @@ var ImageForm = exports.ImageForm = function (_Component) {
       }) : [],
 
       redirect: false,
-      location: '/images'
+      location: '/images',
+      error: null
     };
     return _this;
   }
@@ -34776,7 +35035,12 @@ var ImageForm = exports.ImageForm = function (_Component) {
                   _react2.default.createElement(
                     'li',
                     { className: 'nav-item mr-auto' },
-                    _react2.default.createElement(
+                    this.props.image ? _react2.default.createElement(
+                      'h2',
+                      { className: 'detalles-titulo' },
+                      _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+                      'Editar una imagen'
+                    ) : _react2.default.createElement(
                       'h2',
                       { className: 'detalles-titulo' },
                       _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
@@ -34786,9 +35050,14 @@ var ImageForm = exports.ImageForm = function (_Component) {
                   _react2.default.createElement(
                     'li',
                     { className: 'nav-item ml-2' },
-                    _react2.default.createElement(
+                    this.props.image ? _react2.default.createElement(
                       'button',
-                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-imagen' },
+                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-info' },
+                      _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+                      'Guardar cambios'
+                    ) : _react2.default.createElement(
+                      'button',
+                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-info' },
                       _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
                       'A\xF1adir'
                     )
@@ -34818,7 +35087,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
                     _react2.default.createElement(
                       'label',
                       { htmlFor: 'nombre' },
-                      _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+                      _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
                       'Nombre'
                     ),
                     _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
@@ -34844,7 +35113,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
                     _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
                     'Creador'
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.user.name, readOnly: true })
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.created_by, readOnly: true })
                 ),
                 _react2.default.createElement(
                   'div',
@@ -34854,20 +35123,11 @@ var ImageForm = exports.ImageForm = function (_Component) {
                     { className: 'form-group col' },
                     _react2.default.createElement(
                       'label',
-                      { htmlFor: 'resolucion' },
-                      _react2.default.createElement('i', { className: 'fa fa-file-image-o mr-2' }),
-                      'Archivo'
+                      { htmlFor: 'category' },
+                      _react2.default.createElement('i', { className: 'fa fa-th-large mr-2' }),
+                      'Categor\xEDa'
                     ),
-                    _react2.default.createElement(
-                      'div',
-                      null,
-                      _react2.default.createElement(
-                        'label',
-                        { className: 'custom-file' },
-                        _react2.default.createElement('input', { type: 'file', id: 'archivo', className: 'custom-file-input' }),
-                        _react2.default.createElement('span', { className: 'custom-file-control' })
-                      )
-                    )
+                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: this.state.category, onChange: this.handleInputChange })
                   ),
                   _react2.default.createElement(
                     'div',
@@ -34988,12 +35248,12 @@ var ImageForm = exports.ImageForm = function (_Component) {
             _react2.default.createElement(
               'p',
               null,
-              this.state.displays
+              this.state.category
             ),
             _react2.default.createElement(
               'p',
               null,
-              this.state.groups
+              this.state.resolution
             )
           )
         );
@@ -35003,117 +35263,6 @@ var ImageForm = exports.ImageForm = function (_Component) {
 
   return ImageForm;
 }(_react.Component);
-
-var _initialiseProps = function _initialiseProps() {
-  var _this3 = this;
-
-  this.handleInputChange = function (event) {
-    var target = event.target;
-    var name = target.name;
-    if (name === 'tags') {
-      var value = target.value.split(','); // TODO: better string to array conversion
-    } else {
-      var value = target.value;
-    }
-
-    _this3.setState(_defineProperty({}, name, value));
-  };
-
-  this.handleCheckDisplays = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this3.state.displays.find(function (c) {
-      return c == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this3.state.displays;
-      prevState.push(value);
-      _this3.setState({ displays: prevState });
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState = _this3.state.displays;
-      _prevState.splice(_prevState.indexOf(value), 1);
-      _this3.setState({ displays: _prevState });
-    }
-  };
-
-  this.handleCheckGroups = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this3.state.groups.find(function (c) {
-      return c == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this3.state.groups;
-      prevState.push(value);
-      _this3.setState({ groups: prevState });
-      target.checked = true;
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState2 = _this3.state.groups;
-      _prevState2.splice(_prevState2.indexOf(value), 1);
-      _this3.setState({ groups: _prevState2 });
-      target.checked = false;
-    }
-  };
-
-  this.handleSubmit = function (event) {
-    // define form values to send
-    var form = {
-      id: _this3.state.id,
-      name: _this3.state.name,
-      description: _this3.state.description,
-      user: _this3.props.user._id, // send user_id
-      resolution: _this3.state.resolution,
-      tags: _this3.state.tags
-    };
-    // include group/display assignation if needed
-    if (_this3.state.display) {
-      form.display = _this3.state.display;
-    }
-    if (_this3.state.group) {
-      form.group = _this3.state.group;
-    }
-    // TODO: include image file
-    // prevent form default event
-    event.preventDefault();
-    // if in edit mode use put and image url
-    if (image) {
-      fetch(image.url, {
-        method: 'put', // put method
-        headers: {
-          'Accept': 'form-data',
-          'Content-Type': 'form-data'
-        },
-        body: JSON.stringify(form)
-      }).then(function () {
-        return _this3.setState({ redirect: true });
-      }).catch(function (err) {
-        return console.log(err);
-      }); // TODO: error handling
-      // if in post mode use post url for images
-    } else {
-      fetch('http://localhost:4000/images', {
-        method: 'post', // post method
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(form)
-      }).then(function () {
-        return _this3.setState({ redirect: true });
-      }).catch(function (err) {
-        return console.log(err);
-      }); // TODO: error handling
-    }
-  };
-};
 
 ;
 
@@ -35232,8 +35381,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
         }) });
     };
 
-    _this.handleSubmit = function (event) {
-      event.preventDefault();
+    _this.handleSubmit = function () {
       // FORM DATA
       var form = {
         'updated_by': _this.state.updated_by._id,
@@ -35271,7 +35419,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
         _this.setState({ redirect: true });
       }, function (error) {
         // reject callback
-        _this.setstate({ error: error });
+        _this.setState({ error: error });
       }); // TODO: error handling
     };
 
@@ -35283,7 +35431,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
       // form data stored in state
       name: group ? group.name : '',
       description: group ? group.description : '',
-      created_by: group ? group.created_by.name : user.name,
+      created_by: group ? group.created_by ? group.created_by.name : 'Usuario eliminado' : user.name,
       updated_by: user.name,
       tags: group ? group.tags : [],
       active_image: group ? group.active_image ? group.active_image._id : '' : '',
@@ -35406,7 +35554,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
           { className: 'col detalles' },
           _react2.default.createElement(
             'form',
-            { id: 'form', onSubmit: this.handleSubmit },
+            { id: 'form' },
             _react2.default.createElement(
               'div',
               { className: 'card bg-transparent border-gray' },
@@ -35436,12 +35584,16 @@ var GroupForm = exports.GroupForm = function (_Component) {
                     { className: 'nav-item ml-2' },
                     this.props.group ? _react2.default.createElement(
                       'button',
-                      { type: 'submit', className: 'btn btn-outline-grupo' },
+                      { onClick: function onClick() {
+                          return _this3.handleSubmit();
+                        }, type: 'button', className: 'btn btn-outline-warning' },
                       _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
                       'Guardar cambios'
                     ) : _react2.default.createElement(
                       'button',
-                      { type: 'submit', className: 'btn btn-outline-grupo' },
+                      { onClick: function onClick() {
+                          return _this3.handleSubmit();
+                        }, type: 'button', className: 'btn btn-outline-warning' },
                       _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
                       'A\xF1adir'
                     )
@@ -35650,7 +35802,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var cx = __webpack_require__(7); // Importacion de librerias
+var cx = __webpack_require__(6); // Importacion de librerias
 var Icon = exports.Icon = function Icon(_ref) {
   var icon = _ref.icon,
       mr = _ref.mr,
@@ -35689,7 +35841,7 @@ __webpack_require__(33);
 
 
 // styles
-__webpack_require__(288);
+__webpack_require__(289);
 
 // react components
 
@@ -56073,7 +56225,7 @@ var _warning = __webpack_require__(5);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(6);
+var _invariant = __webpack_require__(7);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -56450,7 +56602,7 @@ var _warning = __webpack_require__(5);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(6);
+var _invariant = __webpack_require__(7);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -57561,7 +57713,7 @@ module.exports = Array.isArray || function (arr) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_invariant__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -57665,7 +57817,7 @@ Prompt.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(205);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57796,7 +57948,7 @@ Redirect.contextTypes = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(15);
@@ -58100,7 +58252,7 @@ var createBrowserHistory = function createBrowserHistory() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(15);
@@ -58600,7 +58752,7 @@ var createMemoryHistory = function createMemoryHistory() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -58798,7 +58950,7 @@ StaticRouter.childContextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__matchPath__ = __webpack_require__(29);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59052,21 +59204,21 @@ var _glamor = __webpack_require__(12);
 
 var _contentDisplays = __webpack_require__(256);
 
-var _contentImages = __webpack_require__(266);
+var _contentImages = __webpack_require__(267);
 
-var _contentGroups = __webpack_require__(271);
+var _contentGroups = __webpack_require__(272);
 
-var _contentAccount = __webpack_require__(276);
+var _contentAccount = __webpack_require__(277);
 
-var _contentSettings = __webpack_require__(277);
+var _contentSettings = __webpack_require__(278);
 
-var _contentDocs = __webpack_require__(284);
+var _contentDocs = __webpack_require__(285);
 
-var _overview = __webpack_require__(285);
+var _overview = __webpack_require__(286);
 
 var _icon = __webpack_require__(176);
 
-var _navButton = __webpack_require__(287);
+var _navButton = __webpack_require__(288);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59114,12 +59266,18 @@ var Main = exports.Main = function (_Component) {
         return res.json();
       }), fetch('http://localhost:4000/locations').then(function (res) {
         return res.json();
+      }), fetch('http://localhost:4000/devices').then(function (res) {
+        return res.json();
+      }), fetch('http://localhost:4000/gateways').then(function (res) {
+        return res.json();
       })]).then(function (docs) {
         _this.setState({ displays: docs[0] });
         _this.setState({ images: docs[1] });
         _this.setState({ groups: docs[2] });
         _this.setState({ resolutions: docs[3] });
         _this.setState({ locations: docs[4] });
+        _this.setState({ devices: docs[5] });
+        _this.setState({ gateways: docs[6] });
         _this.notify();
       }).catch(function (err) {
         return console.log(err);
@@ -59141,11 +59299,31 @@ var Main = exports.Main = function (_Component) {
             _this.setState({ groups: groups });
           }
           break;
-        case expression:
+        case 'image':
+          console.log(doc);
+          var images = _this.state.images;
 
+          var index = images.data.findIndex(function (i) {
+            return i._id == doc._id;
+          });
+          if (index !== -1) {
+            // as it should be
+            images.data[index] = doc;
+            _this.setState({ images: images });
+          }
           break;
-        case expression:
+        case 'display':
+          console.log(doc);
+          var displays = _this.state.displays;
 
+          var index = displays.data.findIndex(function (d) {
+            return d._id == doc._id;
+          });
+          if (index !== -1) {
+            // as it should be
+            displays.data[index] = doc;
+            _this.setState({ displays: displays });
+          }
           break;
       }
     };
@@ -59160,11 +59338,21 @@ var Main = exports.Main = function (_Component) {
           groups.count++;
           _this.setState({ groups: groups });
           break;
-        case expression:
+        case 'image':
+          console.log(doc);
+          var images = _this.state.images;
 
+          images.data.push(doc);
+          images.count++;
+          _this.setState({ images: images });
           break;
-        case expression:
+        case 'display':
+          console.log(doc);
+          var displays = _this.state.displays;
 
+          displays.data.push(doc);
+          displays.count++;
+          _this.setState({ displays: displays });
           break;
       }
     };
@@ -59216,6 +59404,8 @@ var Main = exports.Main = function (_Component) {
       groups: null,
       resolutions: null,
       locations: null,
+      gateways: null,
+      devices: null,
       user: null,
       userID: _reactCookie2.default.load('userID'),
       isLoaded: false,
@@ -59274,12 +59464,14 @@ var Navigation = function (_Component2) {
           displays = _props.displays,
           images = _props.images,
           groups = _props.groups,
-          user = _props.user;
+          user = _props.user,
+          devices = _props.devices,
+          gateways = _props.gateways;
 
 
       var navigationUser = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "displays", text: "Displays", icon: "television", count: true, number: displays ? displays.count : '...' }, { exact: false, linkTo: "images", text: "Imagenes", icon: "picture-o", count: true, number: images ? images.count : '...' }, { exact: false, linkTo: "groups", text: "Grupos", icon: "list", count: true, number: groups ? groups.count : '...' }];
 
-      var navigationAdmin = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "displays", text: "Displays", icon: "television", count: true, number: displays ? displays.count : '...' }, { exact: false, linkTo: "gateways", text: "Puertas de enlace", icon: "map-marker", count: true, number: '...' }];
+      var navigationAdmin = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "devices", text: "Dispositivos", icon: "tablet", count: true, number: devices ? devices.count : '...' }, { exact: false, linkTo: "gateways", text: "Puertas de enlace", icon: "map-marker", count: true, number: gateways ? gateways.count : '...' }];
 
       var nav = user && user.admin ? navigationAdmin.map(function (nav, i) {
         return _react2.default.createElement(_navButton.NavButton, { key: i, exact: nav.exact, linkTo: nav.linkTo, text: nav.text, icon: nav.icon, count: nav.count, number: nav.number });
@@ -59335,20 +59527,6 @@ var Navigation = function (_Component2) {
           _react2.default.createElement(
             'ul',
             { className: 'nav-list' },
-            _react2.default.createElement(
-              _reactRouterDom.NavLink,
-              { to: '/account' },
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'button',
-                  { type: 'button', className: 'btn btn-nav btn-block mb-1' },
-                  _react2.default.createElement('i', { className: 'fa fa-user-o mr-2', 'aria-hidden': 'true' }),
-                  ' Cuenta'
-                )
-              )
-            ),
             _react2.default.createElement(
               _reactRouterDom.NavLink,
               { to: '/docs' },
@@ -59410,7 +59588,7 @@ var Navigation = function (_Component2) {
           _react2.default.createElement(
             'span',
             null,
-            'v0.0.10'
+            'v0.0.11'
           ),
           _react2.default.createElement(
             'span',
@@ -59445,9 +59623,10 @@ var Content = function (_Component3) {
           displays = _props2.displays,
           images = _props2.images,
           groups = _props2.groups,
+          devices = _props2.devices,
           user = _props2.user;
 
-      if (displays && images && groups) {
+      if (displays && images && groups && devices) {
         var content = _react2.default.createElement(
           'div',
           { className: 'col' },
@@ -63543,7 +63722,7 @@ var ContentDisplays = function ContentDisplays(_ref) {
         _react2.default.createElement(
           'div',
           { className: 'col' },
-          _react2.default.createElement(_title.Title, { total: displays.count, categoria: 'displays' })
+          _react2.default.createElement(_title.Title, { total: displays.count, category: 'displays' })
         )
       ),
       _react2.default.createElement(
@@ -63552,7 +63731,7 @@ var ContentDisplays = function ContentDisplays(_ref) {
         _react2.default.createElement(
           'div',
           { className: 'col-4' },
-          _react2.default.createElement(_list.List, { categoria: 'displays', contenido: displays.data })
+          _react2.default.createElement(_list.List, { category: 'displays', content: displays.data })
         ),
         _react2.default.createElement(
           'div',
@@ -63954,7 +64133,7 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
     value: function componentWillReceiveProps(nextProps) {
       var _this3 = this;
 
-      if (JSON.stringify(nextProps.display) != JSON.stringify(this.props.display)) {
+      if (nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at) {
         // if props actually changed
         fetch(nextProps.display.url).then(function (res) {
           return res.json();
@@ -64084,7 +64263,8 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 				return _react2.default.createElement(_tag.Tag, { key: i, categoria: 'displays', etiqueta: tag });
 			});
 			// define routes for edit and delete based on the id
-			var linkto = '/displays/edit/' + id;
+			var linktoEdit = '/displays/' + id + '/edit';
+			var linktoDelete = '/displays/' + id + '/delete';
 			var src = active_image || 'http://localhost:3000/img/undefined.png';
 
 			return _react2.default.createElement(
@@ -64114,12 +64294,26 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 								{ className: 'nav-item mr-2' },
 								_react2.default.createElement(
 									_reactRouterDom.Link,
-									{ to: linkto },
+									{ to: linktoEdit },
 									_react2.default.createElement(
 										'button',
 										{ type: 'button', className: 'btn btn-outline-warning' },
 										_react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-1', 'aria-hidden': 'true' }),
 										'Editar'
+									)
+								)
+							),
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item ml-2' },
+								_react2.default.createElement(
+									_reactRouterDom.Link,
+									{ to: linktoDelete },
+									_react2.default.createElement(
+										'button',
+										{ type: 'button', className: 'btn btn-outline-danger' },
+										_react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
+										'Eliminar'
 									)
 								)
 							)
@@ -64451,7 +64645,7 @@ var DisplayGeneric = exports.DisplayGeneric = function DisplayGeneric() {
             null,
             'O a\xF1ada uno nuevo'
           ),
-          _react2.default.createElement(_addButton.AddButton, { categoria: 'displays' })
+          _react2.default.createElement(_addButton.AddButton, { category: 'displays' })
         )
       )
     )
@@ -64482,7 +64676,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* IMPORT MODULES */
 var moment = __webpack_require__(0);moment.locale('es');
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 /* COMPONENT */
 var Display = exports.Display = function Display(_ref) {
@@ -64572,7 +64766,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* IMPORT MODULES */
 var moment = __webpack_require__(0);moment.locale('es');
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 /* COMPONENT */
 var Image = exports.Image = function Image(_ref) {
@@ -64662,7 +64856,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* IMPORT MODULES */
 var moment = __webpack_require__(0);moment.locale('es');
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 /* COMPONENT */
 var Group = exports.Group = function Group(_ref) {
@@ -64740,6 +64934,90 @@ var Group = exports.Group = function Group(_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Device = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* IMPORT MODULES */
+var moment = __webpack_require__(0);moment.locale('es');
+var cx = __webpack_require__(6);
+
+/* COMPONENT */
+var Device = exports.Device = function Device(_ref) {
+  var device = _ref.device;
+  var url = device.url,
+      id = device.id,
+      name = device.name,
+      description = device.description,
+      ip_address = device.ip_address,
+      mac_address = device.mac_address,
+      created_at = device.created_at;
+
+  var created = moment(device.created_at).from(moment());
+  var elementClass = cx("list-group-item-action elemento-display list-group-item flex-column align-items-start");
+
+  return _react2.default.createElement(
+    'div',
+    { className: elementClass },
+    _react2.default.createElement(
+      'div',
+      { className: 'elemento elemento-grupo' },
+      _react2.default.createElement(
+        'div',
+        { className: 'd-flex w-100 justify-content-between' },
+        _react2.default.createElement(
+          'h5',
+          { className: 'mb-1' },
+          name
+        ),
+        _react2.default.createElement(
+          'small',
+          null,
+          'IP: ',
+          ip_address
+        )
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: 'mb-1' },
+        description
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'd-flex w-100 justify-content-between' },
+        _react2.default.createElement(
+          'small',
+          null,
+          'MAC: ',
+          mac_address
+        ),
+        _react2.default.createElement(
+          'small',
+          null,
+          created,
+          _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
+        )
+      )
+    )
+  );
+};
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.ContentImages = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -64752,9 +65030,9 @@ var _reactRouterDom = __webpack_require__(2);
 
 var _ImageForm = __webpack_require__(174);
 
-var _ImageRouter = __webpack_require__(267);
+var _ImageRouter = __webpack_require__(268);
 
-var _ImageGeneric = __webpack_require__(270);
+var _ImageGeneric = __webpack_require__(271);
 
 var _list = __webpack_require__(22);
 
@@ -64803,7 +65081,7 @@ var ContentImages = function ContentImages(_ref) {
         _react2.default.createElement(
           'div',
           { className: 'col' },
-          _react2.default.createElement(_title.Title, { total: images.count, categoria: 'images' })
+          _react2.default.createElement(_title.Title, { total: images.count, category: 'images' })
         )
       ),
       _react2.default.createElement(
@@ -64812,7 +65090,7 @@ var ContentImages = function ContentImages(_ref) {
         _react2.default.createElement(
           'div',
           { className: 'col-4' },
-          _react2.default.createElement(_list.List, { categoria: 'images', contenido: images.data })
+          _react2.default.createElement(_list.List, { category: 'images', content: images.data })
         ),
         _react2.default.createElement(
           'div',
@@ -64845,7 +65123,7 @@ var ContentImages = function ContentImages(_ref) {
 exports.ContentImages = ContentImages;
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64866,11 +65144,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _ImageDetails = __webpack_require__(268);
+var _ImageDetails = __webpack_require__(269);
 
 var _ImageForm = __webpack_require__(174);
 
-var _ImageDelete = __webpack_require__(269);
+var _ImageDelete = __webpack_require__(270);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64928,7 +65206,7 @@ var ImageRouter = exports.ImageRouter = function (_Component) {
     value: function componentWillReceiveProps(nextProps) {
       var _this3 = this;
 
-      if (nextProps.image._id != this.props.image._id) {
+      if (nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at) {
         // if props actually changed
         fetch(nextProps.image.url).then(function (res) {
           return res.json();
@@ -64985,7 +65263,7 @@ var ImageRouter = exports.ImageRouter = function (_Component) {
 ;
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65253,7 +65531,7 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
 ;
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65380,7 +65658,7 @@ var ImageDelete = exports.ImageDelete = function (_Component) {
 ;
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65444,7 +65722,7 @@ var ImageGeneric = exports.ImageGeneric = function ImageGeneric() {
             null,
             'O a\xF1ada una nueva'
           ),
-          _react2.default.createElement(_addButton.AddButton, { categoria: 'images' })
+          _react2.default.createElement(_addButton.AddButton, { category: 'images' })
         )
       )
     )
@@ -65454,7 +65732,7 @@ var ImageGeneric = exports.ImageGeneric = function ImageGeneric() {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65473,11 +65751,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _groupRouter = __webpack_require__(272);
+var _groupRouter = __webpack_require__(273);
 
 var _groupForm = __webpack_require__(175);
 
-var _groupGeneric = __webpack_require__(275);
+var _groupGeneric = __webpack_require__(276);
 
 var _list = __webpack_require__(22);
 
@@ -65526,7 +65804,7 @@ var ContentGroups = function ContentGroups(_ref) {
         _react2.default.createElement(
           'div',
           { className: 'col' },
-          _react2.default.createElement(_title.Title, { total: groups.count, categoria: 'groups' })
+          _react2.default.createElement(_title.Title, { total: groups.count, category: 'groups' })
         )
       ),
       _react2.default.createElement(
@@ -65535,7 +65813,7 @@ var ContentGroups = function ContentGroups(_ref) {
         _react2.default.createElement(
           'div',
           { className: 'col-4' },
-          _react2.default.createElement(_list.List, { categoria: 'groups', contenido: groups.data })
+          _react2.default.createElement(_list.List, { category: 'groups', content: groups.data })
         ),
         _react2.default.createElement(
           'div',
@@ -65568,7 +65846,7 @@ var ContentGroups = function ContentGroups(_ref) {
 exports.ContentGroups = ContentGroups;
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65589,11 +65867,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _groupDetails = __webpack_require__(273);
+var _groupDetails = __webpack_require__(274);
 
 var _groupForm = __webpack_require__(175);
 
-var _groupDelete = __webpack_require__(274);
+var _groupDelete = __webpack_require__(275);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65625,7 +65903,7 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
     return _this;
   }
 
-  /* FETCH FULL DATA ABOUT THE IMAGE */
+  /* FETCH FULL DATA ABOUT THE GROUP */
 
 
   _createClass(GroupRouter, [{
@@ -65644,14 +65922,14 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
       });
     }
 
-    /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
+    /* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP*/
 
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       var _this3 = this;
 
-      if (JSON.stringify(nextProps.group) != JSON.stringify(this.props.group)) {
+      if (nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at) {
         // if props actually changed
         fetch(nextProps.group.url).then(function (res) {
           return res.json();
@@ -65708,7 +65986,7 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
 ;
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65748,16 +66026,80 @@ var moment = __webpack_require__(0);moment.locale('es');
 var GroupDetails = exports.GroupDetails = function (_Component) {
   _inherits(GroupDetails, _Component);
 
-  function GroupDetails() {
+  // TODO: transform to component
+
+  function GroupDetails(props) {
     _classCallCheck(this, GroupDetails);
 
-    return _possibleConstructorReturn(this, (GroupDetails.__proto__ || Object.getPrototypeOf(GroupDetails)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (GroupDetails.__proto__ || Object.getPrototypeOf(GroupDetails)).call(this, props));
+
+    _this.handleInputChange = function (event) {
+      var image = _this.state.images.find(function (i) {
+        return event.target.value == i._id;
+      });
+      var form = { active_image: image._id };
+      fetch(_this.state.group.url, {
+        method: 'put', // post or put method
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      }).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        // resolve callback
+        _this.setState({ active_image: image });
+      }, function (error) {
+        // reject callback
+        _this.setState({ error: error });
+      });
+    };
+
+    var _this$props = _this.props,
+        group = _this$props.group,
+        user = _this$props.user;
+
+    _this.state = {
+      // form data stored in state
+      group: '',
+      active_image: '',
+      imagesOptions: '',
+      images: '',
+      error: null
+    };
+    return _this;
   }
 
   _createClass(GroupDetails, [{
-    key: 'render',
-    // TODO: transform to component
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      // get data
+      var _nextProps$group = nextProps.group,
+          active_image = _nextProps$group.active_image,
+          images = _nextProps$group.images;
+      // images options
 
+      var imagesMap = images.map(function (i) {
+        return _react2.default.createElement(
+          'option',
+          { value: i._id, key: i.id },
+          i.name
+        );
+      });
+      // state
+      this.setState({
+        group: nextProps.group,
+        active_image: active_image ? active_image : '',
+        imagesOptions: imagesMap,
+        images: images
+      });
+    }
+
+    /* HANDLE INPUT CHANGE */
+
+  }, {
+    key: 'render',
     value: function render() {
       // define constants from props for better readability
       var _props$group = this.props.group,
@@ -65781,7 +66123,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
         return _react2.default.createElement(_tag.Tag, { key: i, categoria: 'grupos', etiqueta: tag });
       });
       // check if active_image is set and if not set the undefined img
-      var src = active_image ? active_image.src_url : 'http://localhost:3000/img/undefined.png';
+      var src = this.state.active_image ? this.state.active_image.src_url : 'http://localhost:3000/img/undefined.png';
       // define routes for edit and delete based on the id
       var linktoEdit = '/groups/' + id + '/edit';
       var linktoDelete = '/groups/' + id + '/delete';
@@ -65903,6 +66245,16 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
                     'div',
                     { className: 'vista-imagen' },
                     _react2.default.createElement('img', { className: 'imagen', src: src })
+                  ),
+                  _react2.default.createElement(
+                    'select',
+                    { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image._id, onChange: this.handleInputChange },
+                    _react2.default.createElement(
+                      'option',
+                      { value: '', key: 0 },
+                      'Sin imagen activa'
+                    ),
+                    this.state.imagesOptions
                   )
                 )
               )
@@ -65956,7 +66308,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
 ;
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66087,7 +66439,7 @@ var GroupDelete = exports.GroupDelete = function (_Component) {
 ;
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66151,7 +66503,7 @@ var GroupGeneric = exports.GroupGeneric = function GroupGeneric() {
             null,
             'O a\xF1ada uno nuevo'
           ),
-          _react2.default.createElement(_addButton.AddButton, { categoria: 'groups' })
+          _react2.default.createElement(_addButton.AddButton, { category: 'groups' })
         )
       )
     )
@@ -66161,7 +66513,7 @@ var GroupGeneric = exports.GroupGeneric = function GroupGeneric() {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66271,7 +66623,7 @@ var ContentAccount = function ContentAccount(_ref) {
 exports.ContentAccount = ContentAccount;
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66292,11 +66644,11 @@ var _reactRouterDom = __webpack_require__(2);
 
 var _title = __webpack_require__(10);
 
-var _manageUsers = __webpack_require__(278);
+var _manageUsers = __webpack_require__(279);
 
-var _manageLocations = __webpack_require__(280);
+var _manageLocations = __webpack_require__(281);
 
-var _manageResolutions = __webpack_require__(282);
+var _manageResolutions = __webpack_require__(283);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66376,7 +66728,7 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
 ;
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66395,7 +66747,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _user = __webpack_require__(279);
+var _user = __webpack_require__(280);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66770,7 +67122,7 @@ var _initialiseProps = function _initialiseProps() {
 ;
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66791,7 +67143,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* IMPORT MODULES */
 var moment = __webpack_require__(0);moment.locale('es');
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 /* COMPONENT */
 var User = exports.User = function User(_ref) {
@@ -66856,7 +67208,7 @@ var User = exports.User = function User(_ref) {
 };
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66875,7 +67227,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _location = __webpack_require__(281);
+var _location = __webpack_require__(282);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67173,7 +67525,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
 ;
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67194,7 +67546,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* IMPORT MODULES */
 var moment = __webpack_require__(0);moment.locale('es');
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 /* COMPONENT */
 var Location = exports.Location = function Location(_ref) {
@@ -67236,7 +67588,7 @@ var Location = exports.Location = function Location(_ref) {
 };
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67255,7 +67607,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _resolution = __webpack_require__(283);
+var _resolution = __webpack_require__(284);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67578,7 +67930,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
 ;
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67599,7 +67951,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* IMPORT MODULES */
 var moment = __webpack_require__(0);moment.locale('es');
-var cx = __webpack_require__(7);
+var cx = __webpack_require__(6);
 
 /* COMPONENT */
 var Resolution = exports.Resolution = function Resolution(_ref) {
@@ -67654,7 +68006,7 @@ var Resolution = exports.Resolution = function Resolution(_ref) {
 };
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67764,7 +68116,7 @@ var ContentDocs = function ContentDocs(_ref) {
 exports.ContentDocs = ContentDocs;
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67779,7 +68131,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _panel = __webpack_require__(286);
+var _panel = __webpack_require__(287);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67788,7 +68140,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Overview = exports.Overview = function Overview(_ref) {
   var displays = _ref.displays,
       images = _ref.images,
-      groups = _ref.groups;
+      groups = _ref.groups,
+      user = _ref.user,
+      devices = _ref.devices;
 
   return _react2.default.createElement(
     'div',
@@ -67814,12 +68168,17 @@ var Overview = exports.Overview = function Overview(_ref) {
     _react2.default.createElement(
       'div',
       { className: 'ventana' },
-      _react2.default.createElement(
+      !user.admin && _react2.default.createElement(
         'div',
         { className: 'row mb-3' },
-        _react2.default.createElement(_panel.Panel, { contenido: displays.data, categoria: 'displays' }),
-        _react2.default.createElement(_panel.Panel, { contenido: images.data, categoria: 'images' }),
-        _react2.default.createElement(_panel.Panel, { contenido: groups.data, categoria: 'groups' })
+        _react2.default.createElement(_panel.Panel, { content: displays.data, category: 'displays', size: 'small' }),
+        _react2.default.createElement(_panel.Panel, { content: images.data, category: 'images', size: 'small' }),
+        _react2.default.createElement(_panel.Panel, { content: groups.data, category: 'groups', size: 'small' })
+      ),
+      user.admin && _react2.default.createElement(
+        'div',
+        { className: 'row mb-3' },
+        _react2.default.createElement(_panel.Panel, { content: devices.data, category: 'devices', size: 'big' })
       )
     )
   );
@@ -67828,7 +68187,7 @@ var Overview = exports.Overview = function Overview(_ref) {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67854,19 +68213,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* IMPORT COMPONENTS */
 var Panel = exports.Panel = function Panel(_ref) {
-  var categoria = _ref.categoria,
-      contenido = _ref.contenido;
+  var category = _ref.category,
+      content = _ref.content,
+      size = _ref.size;
 
   return _react2.default.createElement(
     'div',
-    { className: 'col-4' },
-    _react2.default.createElement(_title.Title, { total: contenido.length, categoria: categoria }),
-    _react2.default.createElement(_list.List, { categoria: categoria, contenido: contenido })
+    { className: size == "small" ? "col-4" : "col-8" },
+    _react2.default.createElement(_title.Title, { total: content.length, category: category }),
+    _react2.default.createElement(_list.List, { category: category, content: content })
   );
 }; /* IMPORT MODULES */
 
 /***/ }),
-/* 287 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67887,7 +68247,7 @@ var _icon = __webpack_require__(176);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var cx = __webpack_require__(7); // Importacion de librerias
+var cx = __webpack_require__(6); // Importacion de librerias
 var NavButton = exports.NavButton = function NavButton(_ref) {
   var linkTo = _ref.linkTo,
       text = _ref.text,
@@ -67919,13 +68279,13 @@ var NavButton = exports.NavButton = function NavButton(_ref) {
 };
 
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(289);
+var content = __webpack_require__(290);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -67933,7 +68293,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(291)(content, options);
+var update = __webpack_require__(292)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -67950,10 +68310,10 @@ if(false) {
 }
 
 /***/ }),
-/* 289 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(290)(undefined);
+exports = module.exports = __webpack_require__(291)(undefined);
 // imports
 
 
@@ -67964,7 +68324,7 @@ exports.push([module.i, "/*!\n * Bootstrap v4.0.0-beta.2 (https://getbootstrap.c
 
 
 /***/ }),
-/* 290 */
+/* 291 */
 /***/ (function(module, exports) {
 
 /*
@@ -68046,7 +68406,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 291 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -68102,7 +68462,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(292);
+var	fixUrls = __webpack_require__(293);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -68418,7 +68778,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 292 */
+/* 293 */
 /***/ (function(module, exports) {
 
 

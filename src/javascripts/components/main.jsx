@@ -27,6 +27,8 @@ export class Main extends Component {
       groups: null,
       resolutions: null,
       locations: null,
+      gateways: null,
+      devices: null,
       user: null,
       userID: cookie.load('userID'),
       isLoaded: false,
@@ -55,7 +57,9 @@ export class Main extends Component {
       fetch('http://localhost:4000/images').then(res => res.json()),
       fetch('http://localhost:4000/groups').then(res => res.json()),
       fetch('http://localhost:4000/resolutions').then(res => res.json()),
-      fetch('http://localhost:4000/locations').then(res => res.json())
+      fetch('http://localhost:4000/locations').then(res => res.json()),
+      fetch('http://localhost:4000/devices').then(res => res.json()),
+      fetch('http://localhost:4000/gateways').then(res => res.json())
     ])
     .then((docs) => {
       this.setState({displays: docs[0]});
@@ -63,6 +67,8 @@ export class Main extends Component {
       this.setState({groups: docs[2]});
       this.setState({resolutions: docs[3]});
       this.setState({locations: docs[4]});
+      this.setState({devices: docs[5]});
+      this.setState({gateways: docs[6]});
       this.notify();
     })
     .catch((err) => console.log(err)); // TODO: error handling
@@ -73,17 +79,29 @@ export class Main extends Component {
       case 'group':
         console.log(doc);
         const { groups } = this.state;
-        const index = groups.data.findIndex((g) => g._id == doc._id);
+        var index = groups.data.findIndex((g) => g._id == doc._id);
         if (index !== -1) { // as it should be
           groups.data[index] = doc;
           this.setState({ groups });
         }
         break;
-      case expression:
-
+      case 'image':
+        console.log(doc);
+        const { images } = this.state;
+        var index = images.data.findIndex((i) => i._id == doc._id);
+        if (index !== -1) { // as it should be
+          images.data[index] = doc;
+          this.setState({ images });
+        }
         break;
-      case expression:
-
+      case 'display':
+        console.log(doc);
+        const { displays } = this.state;
+        var index = displays.data.findIndex((d) => d._id == doc._id);
+        if (index !== -1) { // as it should be
+          displays.data[index] = doc;
+          this.setState({ displays });
+        }
         break;
     }
   }
@@ -97,11 +115,19 @@ export class Main extends Component {
         groups.count++;
         this.setState({ groups });
         break;
-      case expression:
-
+      case 'image':
+        console.log(doc);
+        const { images } = this.state;
+        images.data.push(doc);
+        images.count++;
+        this.setState({ images });
         break;
-      case expression:
-
+      case 'display':
+        console.log(doc);
+        const { displays } = this.state;
+        displays.data.push(doc);
+        displays.count++;
+        this.setState({ displays });
         break;
     }
   }
@@ -159,19 +185,19 @@ export class Main extends Component {
 class Navigation extends Component{
   render(){
 
-    const { displays, images, groups, user } = this.props;
+    const { displays, images, groups, user, devices, gateways } = this.props;
 
     const navigationUser = [
       {exact: true, linkTo: "", text:"Vista general", icon:"eye", count:false, number:''},
-      {exact: false, linkTo: "displays", text:"Displays", icon:"television", count:true, number:displays ? displays.count : '...'},
-      {exact: false, linkTo: "images", text:"Imagenes", icon:"picture-o", count:true, number:images ? images.count : '...'},
-      {exact: false, linkTo: "groups", text:"Grupos", icon:"list", count:true, number:groups ? groups.count : '...'}
+      {exact: false, linkTo: "displays", text:"Displays", icon:"television", count:true, number: displays ? displays.count : '...'},
+      {exact: false, linkTo: "images", text:"Imagenes", icon:"picture-o", count:true, number: images ? images.count : '...'},
+      {exact: false, linkTo: "groups", text:"Grupos", icon:"list", count:true, number: groups ? groups.count : '...'}
     ];
 
     const navigationAdmin = [
       {exact: true, linkTo: "", text:"Vista general", icon:"eye", count: false, number:''},
-      {exact: false, linkTo: "displays", text:"Displays", icon:"television", count:true, number:displays ? displays.count : '...'},
-      {exact: false, linkTo: "gateways", text:"Puertas de enlace", icon:"map-marker", count:true, number: '...'}
+      {exact: false, linkTo: "devices", text:"Dispositivos", icon:"tablet", count:true, number: devices ? devices.count : '...'},
+      {exact: false, linkTo: "gateways", text:"Puertas de enlace", icon:"map-marker", count:true, number: gateways ? gateways.count : '...'}
     ]
 
     const nav = user && user.admin ?
@@ -197,9 +223,6 @@ class Navigation extends Component{
         <div className="navegacion mb-3">
           <p className="titulo-navegacion">AJUSTES</p>
           <ul className="nav-list">
-            <NavLink to={'/account'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-user-o mr-2" aria-hidden="true"></i> Cuenta</button></li>
-            </NavLink>
             <NavLink to={'/docs'}>
               <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
             </NavLink>
@@ -214,7 +237,7 @@ class Navigation extends Component{
         </div>
         <hr></hr>
         <p className="d-flex justify-content-between">
-          <span>v0.0.11</span>
+          <span>v0.0.12</span>
           <span>{ user ? user.name : 'Cargando...'}</span>
         </p>
       </div>
@@ -225,8 +248,8 @@ class Navigation extends Component{
 class Content extends Component{
 
   render(){
-    const { displays, images, groups, user } = this.props;
-    if ( displays && images && groups){
+    const { displays, images, groups, devices, user } = this.props;
+    if ( displays && images && groups && devices ){
        var content =
         <div className="col">
           <Route exact={true} path="/" render={() => (<Overview { ...this.props }/>)}/>

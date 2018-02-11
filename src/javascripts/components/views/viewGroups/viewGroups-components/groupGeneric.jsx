@@ -21,7 +21,7 @@ export const GroupGeneric = () => {
           <h1><i className="fa fa-arrow-left mr-3"></i>Seleccione un grupo</h1>
           <hr></hr>
           <p>O añada uno nuevo</p>
-          <AddButton categoria='groups'/>
+          <AddButton category='groups'/>
         </div>
       </div>
     </div>
