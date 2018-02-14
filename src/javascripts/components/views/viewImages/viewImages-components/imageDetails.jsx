@@ -1,5 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
 const moment = require('moment'); moment.locale('es');
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
@@ -10,9 +11,25 @@ import { Tag } from '../../../tags/tag.jsx';
 /* COMPONENTS */
 export class ImageDetails extends Component { // TODO: transform to component
 
+  constructor(props){
+    super(props);
+    this.state = {
+      file: [],
+      accepted: false,
+    }
+  }
+
+  onDrop = (acceptedFile, rejectedFile) => {
+    this.setState({
+      file: acceptedFile,
+      accepted: true
+    });
+  }
+
+
   render(){
     // define constants from props for better readability
-    const { id, name, description, src_url, created_at, updated_at, created_by, resolution, file, size, category, groups, displays, tags_total, tags } = this.props.image;
+    const { id, name, description, src_url, created_at, updated_at, created_by, color_profile, resolution, file, size, category, groups, displays, tags_total, tags } = this.props.image;
     // refactor date constants with format
     const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
     const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
@@ -52,6 +69,7 @@ export class ImageDetails extends Component { // TODO: transform to component
                 <p className="card-text"><i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true"></i>{resolution ? resolution.name : 'Resolución no especificada'}</p>
                 <p className="card-text"><i className="fa fa-fw fa-file-image-o mr-2" aria-hidden="true"></i>{file}</p>
                 <p className="card-text"><i className="fa fa-fw fa-database mr-2" aria-hidden="true"></i>{size}</p>
+                <p className="card-text"><i className="fa fa-fw fa-tint mr-2" aria-hidden="true"></i>{color_profile}</p>
                 <p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{created}</p>
                 <p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>{created_by ? created_by.name : 'Usuario eliminado'}</p>
                 <p className="titulo">ETIQUETAS</p>
@@ -61,9 +79,21 @@ export class ImageDetails extends Component { // TODO: transform to component
             <div className="col">
               <div className="vista-previa">
                 <p className="titulo text-right">VISTA PREVIA</p>
-                <div className="vista-imagen">
-                  <img className="imagen" src={src_url}/>
-                </div>
+                <Dropzone onDrop={this.onDrop} activeClassName="dropzone-accepted" className={this.state.accepted ? "dropzone dropzone-accepted" : "dropzone"}>
+                  <div className="vista-imagen d-flex w-100 justify-content-center">
+                    {!this.state.accepted ?
+                      <div className="align-self-center">
+                        <h4>Arrastre una imagen</h4>
+                        <small>formatos permitidos: png/jpeg</small>
+                      </div> :
+                      <div className="align-self-center">
+                        <h4>{this.state.file[0].name}</h4>
+                        <small>tamaño: {this.state.file[0].size}</small>
+                      </div>
+                    }
+                    {src_url && <img className="imagen" src={src_url}/>}
+                  </div>
+                </Dropzone>
               </div>
             </div>
           </div>

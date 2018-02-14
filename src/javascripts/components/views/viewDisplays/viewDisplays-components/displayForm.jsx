@@ -21,6 +21,7 @@ export class DisplayForm extends Component{
       updated_at: moment(),
       images: display ? display.images.map((i) => i._id) : [],
       groups: display ? display.groups.map((g) => g._id) : [],
+      device: display ? (display.device ? display.device._id : this.props.devices.data[0]._id ) : this.props.devices.data[0]._id,
 
       redirect: false,
       location: '/displays',
@@ -108,6 +109,7 @@ export class DisplayForm extends Component{
       updated_by: this.state.updated_by._id, // send user_id
       resolution: this.state.resolution,
       tags: this.state.tags,
+      device: this.state.device
     };
     // possible empty fields
     if (!this.props.display) form.created_by = this.props.user._id;
@@ -148,6 +150,7 @@ export class DisplayForm extends Component{
 
     // Options
     const optionsResolution = this.props.resolutions.sort((a, b) => a.id - b.id).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
+    const optionsDevices = this.props.devices.data.map((d, i) => <option value={d._id} key={i}>{d.name}</option>);
     const optionsGroups = this.props.groups.data.map((g) =>
       <label key={g.id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckGroups} type="checkbox" defaultChecked={this.state.groups.find((c) => c == g._id)} name={g._id} defaultValue={g._id} className="custom-control-input"></input>
@@ -189,18 +192,33 @@ export class DisplayForm extends Component{
               </div>
               <div className="card-body">
                 <div className="form-row">
+                  <div className="form-group col">
+                    <label htmlFor="device"><i className="fa fa-tablet mr-2"></i>Dispositivo físico asociado</label>
+                    <div>
+                      <select className="custom-select" name='devices' onChange={this.handleInputChange}>
+                        {optionsDevices}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group col">
+                    <label htmlFor="ip"><i className="fa fa-wifi mr-2"></i>Dirección IP</label>
+                    <input type="text" className="form-control" id="ip" name="ip" readOnly></input>
+                  </div>
+                </div>
+                <hr></hr>
+                <div className="form-row">
                   <div className="form-group col-md-1">
                     <label htmlFor="displayID"><i className="fa fa-hashtag mr-2"></i>ID</label>
                     <input type="text" className="form-control" id="displayID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
                   </div>
                   <div className="form-group col-md-11">
                     <label htmlFor="nombre"><i className="fa fa-television mr-2"></i>Nombre</label>
-                    <input type="text" className="form-control" id="nombre" placeholder="Nombre de la imagen" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
+                    <input type="text" className="form-control" id="nombre" placeholder="Nombre del display" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
                   </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
-                  <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la imagen" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
+                  <input type="text" className="form-control" id="descripcion" placeholder="Descripcion del display" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
                 </div>
                 <div className="form-group">
                   <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>

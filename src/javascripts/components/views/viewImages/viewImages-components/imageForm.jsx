@@ -23,6 +23,7 @@ export class ImageForm extends Component{
       updated_at: moment(),
       displays: image ? image.displays.map((d) => d._id) : [],
       groups: image ? image.groups.map((g) => g._id) : [],
+      color: image ? image.color_profile : 'color',
 
       redirect: false,
       location: '/images',
@@ -110,7 +111,9 @@ export class ImageForm extends Component{
       description: this.state.description,
       updated_by: this.state.updated_by._id, // send user_id
       resolution: this.state.resolution,
+      category: this.state.category,
       tags: this.state.tags,
+      color_profile: this.state.color
     };
     // possible empty fields
     if (!this.props.image) form.created_by = this.props.user._id;
@@ -210,15 +213,24 @@ export class ImageForm extends Component{
                   <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by} readOnly></input>
                 </div>
                 <div className="form-row">
-                  <div className="form-group col">
+                  <div className="form-group col-6">
                     <label htmlFor="category"><i className="fa fa-th-large mr-2"></i>Categoría</label>
                     <input type="text" className="form-control" id="category" name='category' value={this.state.category} onChange={this.handleInputChange}></input>
                   </div>
                   <div className="form-group col">
                     <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
                     <div>
-                      <select className="custom-select" name='resolution' onChange={this.handleInputChange}>
+                      <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
                         {optionsResolution}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group col">
+                    <label htmlFor="color"><i className="fa fa-tint mr-2"></i>Color</label>
+                    <div>
+                      <select className="custom-select" name='color' value={this.state.color} onChange={this.handleInputChange}>
+                        <option value="color">Color</option>
+                        <option value="escala de grises">Escala de grises</option>
                       </select>
                     </div>
                   </div>
@@ -261,14 +273,6 @@ export class ImageForm extends Component{
               </div>
             </div>
           </form>
-          <div>
-            <p>
-              {this.state.category}
-            </p>
-            <p>
-              {this.state.resolution}
-            </p>
-          </div>
         </div>
       );
     }

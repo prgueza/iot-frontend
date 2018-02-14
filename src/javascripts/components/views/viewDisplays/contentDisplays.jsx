@@ -3,11 +3,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 /* IMPORT COMPONENTS */
+import { List } from '../../lists/list.jsx';
+import { Title } from '../../tags/title.jsx';
 import { DisplayForm } from './viewDisplays-components/displayForm.jsx';
 import { DisplayRouter } from './viewDisplays-components/displayRouter.jsx';
 import { DisplayGeneric } from './viewDisplays-components/displayGeneric.jsx';
-import { List } from '../../lists/list.jsx';
-import { Title } from '../../tags/title.jsx';
+
 
 /* COMPONENTS */
 export const ContentDisplays = ({ displays, ...other }) => {

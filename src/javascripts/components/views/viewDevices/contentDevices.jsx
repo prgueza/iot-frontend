@@ -5,18 +5,18 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 /* IMPORT COMPONENTS */
 import { List } from '../../lists/list.jsx';
 import { Title } from '../../tags/title.jsx';
-import { GatewayGeneric } from './viewGateways-components/gatewayGeneric.jsx';
-import { GatewayRouter } from './viewGateways-components/gatewayRouter.jsx';
-import { GatewayForm } from './viewGateways-components/gatewayForm.jsx';
+import { DeviceGeneric } from './viewDevices-components/deviceGeneric.jsx';
+import { DeviceRouter } from './viewDevices-components/deviceRouter.jsx';
+import { DeviceForm } from './viewDevices-components/deviceForm.jsx';
 
 /* COMPONENTS */
-export const ContentGateways = ({ gateways, ...other }) => {
+export const ContentDevices = ({ devices, ...other }) => {
   return(
     <div className="col contenido">
       <div className="row">
         <div className="col">
           <div className="titulo mb-4 text-right">
-            <h1>PUERTAS DE ENLACE</h1>
+            <h1>DISPOSITIVOS FÍSICOS</h1>
           </div>
           <hr></hr>
         </div>
@@ -24,22 +24,22 @@ export const ContentGateways = ({ gateways, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={gateways.count} category='gateways'/>
+            <Title total={devices.count} category='devices'/>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-4">
-            <List category='gateways' content={gateways.data}/>
+            <List category='devices' content={devices.data}/>
           </div>
           <div className="col-8">
             <div className="row mb-3">
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
-                <Route path="/gateways/add" render={() => <GatewayForm {...other} gateways={gateways}/>}/>
-                {/* For route /gatewayId we select the gateway based on the id and pass it separately */}
-                <Route path="/gateways/:gatewayId" render={({ match }) => (<GatewayRouter {...other} gateway={gateways.data.find(g => g.id == match.params.gatewayId)}/>)}/>
+                <Route path="/devices/add" render={() => <DeviceForm {...other} devices={devices}/>}/>
+                {/* For route /deviceId we select the device based on the id and pass it separately */}
+                <Route path="/devices/:deviceId" render={({ match }) => (<DeviceRouter {...other} device={devices.data.find(d => d.id == match.params.deviceId)}/>)}/>
               </Switch>
-              <Route exact path="/gateways" render={() => (<GatewayGeneric/>)}/>
+              <Route exact path="/devices" render={() => (<DeviceGeneric/>)}/>
             </div>
           </div>
         </div>

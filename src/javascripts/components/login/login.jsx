@@ -8,7 +8,7 @@ export class Login extends Component{
   constructor(props){
     super(props);
     this.state = {
-      user: '',
+      login: '',
       password: '',
       remember: false
     }
@@ -17,8 +17,8 @@ export class Login extends Component{
   }
 
   componentDidMount(){
-    this.setState({ user: localStorage.getItem('user') || '' });
-    this.setState({ remember: localStorage.getItem('user') ? true : false });
+    this.setState({ login: localStorage.getItem('login') || '' });
+    this.setState({ remember: localStorage.getItem('login') ? true : false });
   }
 
   handleInputChange(event){
@@ -32,7 +32,7 @@ export class Login extends Component{
 
   handleSubmit(event){
     if(this.state.remember){
-      localStorage.setItem('user', this.state.user);
+      localStorage.setItem('login', this.state.login);
     }
   }
 
@@ -45,8 +45,8 @@ export class Login extends Component{
               <h1 className="text-center"><i className="fa fa-barcode fa-4x mb-3"></i></h1>
               <form action="/" method="post">
                 <div className="form-group">
-                  <label className="sr-only" htmlFor="user">Usuario</label>
-                  <input onChange={this.handleInputChange} type="text" className="form-control" id="user" value={this.state.user} name="user" placeholder="Usuario"></input>
+                  <label className="sr-only" htmlFor="login">Usuario</label>
+                  <input onChange={this.handleInputChange} type="text" className="form-control" id="login" value={this.state.login} name="login" placeholder="Usuario"></input>
                 </div>
                 <div className="form-group">
                   <label className="sr-only" htmlFor="password">Password</label>

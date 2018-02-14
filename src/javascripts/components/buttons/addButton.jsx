@@ -7,7 +7,9 @@ export const AddButton = ({ category }) => {
   const claseBoton = cx("btn btn-block btn-small",
      {"btn-outline-success": category === 'displays'},
      {"btn-outline-info": category === 'images'},
-     {"btn-outline-warning": category === 'groups'}
+     {"btn-outline-warning": category === 'groups'},
+     {"btn-outline-light": category === 'devices'},
+     {"btn-outline-light": category === 'gateways'}
   );
   const location = {
       pathname: '/' + category + '/add'

@@ -33,7 +33,7 @@ export class ContentSettings extends Component{
           <div className="ventana">
             <div className="row">
               <div className="col">
-                <Title total='Configuración' categoria='settings'/>
+                <Title total='Configuración' category='settings'/>
               </div>
             </div>
             <ManageUsers {...this.props}/>

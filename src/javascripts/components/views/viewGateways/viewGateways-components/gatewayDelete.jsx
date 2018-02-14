@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 
 /* COMPONENTS */
-export class DisplayDelete extends Component{
+export class GatewayDelete extends Component{
 
   constructor(props){
     super(props);
@@ -18,7 +18,7 @@ export class DisplayDelete extends Component{
   /* HANDLE DELETE EVENT */
   handleDelete = (event) =>{
     event.preventDefault();
-    fetch(this.props.display.url, {
+    fetch(this.props.gateway.url, {
       method: 'delete'
     })
     .then(this.props.update) // TODO: promises
@@ -28,7 +28,7 @@ export class DisplayDelete extends Component{
 
   render(){
     if (this.state.redirect) {
-      return(<Redirect to="/displays"/>);
+      return(<Redirect to="/gateways"/>);
     } else {
       return(
         <div className="col detalles">
@@ -36,13 +36,13 @@ export class DisplayDelete extends Component{
               <div className="card-header border-gray">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
-                    <h2 className="detalles-titulo"><i className="fa fa-trash mr-3" aria-hidden="true"></i>Eliminar Display</h2>
+                    <h2 className="detalles-titulo"><i className="fa fa-trash mr-3" aria-hidden="true"></i>Eliminar Puerta de enlace</h2>
                   </li>
                 </ul>
               </div>
               <div className="card-body">
                 <div className="text-center">
-                  <h1>¿Eliminar display?</h1>
+                  <h1>¿Eliminar puerta de enlace?</h1>
                   <hr></hr>
                   <p>Esta acción no se puede deshacer</p>
                   <button onClick={this.handleDelete} type="button" className="btn btn-block btn-outline-danger"><i className="fa fa-trash mr-1" aria-hidden="true"></i>Eliminar</button>

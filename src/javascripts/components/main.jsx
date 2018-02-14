@@ -12,6 +12,8 @@ import { ContentGroups } from './views/viewGroups/contentGroups.jsx';
 import { ContentAccount } from './views/viewAccount/contentAccount.jsx';
 import { ContentSettings } from './views/viewSettings/contentSettings.jsx';
 import { ContentDocs } from './views/viewDocs/contentDocs.jsx';
+import { ContentGateways } from './views/viewGateways/contentGateways.jsx';
+import { ContentDevices } from './views/viewDevices/contentDevices.jsx';
 import { Overview } from './views/overview.jsx';
 import { Icon } from './icons/icon.jsx';
 import { NavButton } from './buttons/navButton.jsx';
@@ -103,6 +105,15 @@ export class Main extends Component {
           this.setState({ displays });
         }
         break;
+      case 'gateway':
+        console.log(doc);
+        const { gatewayss } = this.state;
+        var index = gateways.data.findIndex((g) => g._id == doc._id);
+        if (index !== -1) { // as it should be
+          gateways.data[index] = doc;
+          this.setState({ gateways });
+        }
+        break;
     }
   }
 
@@ -122,12 +133,12 @@ export class Main extends Component {
         images.count++;
         this.setState({ images });
         break;
-      case 'display':
+      case 'gateway':
         console.log(doc);
-        const { displays } = this.state;
-        displays.data.push(doc);
-        displays.count++;
-        this.setState({ displays });
+        const { gateways } = this.state;
+        gateways.data.push(doc);
+        gateways.count++;
+        this.setState({ gateways });
         break;
     }
   }
@@ -144,15 +155,6 @@ export class Main extends Component {
         this.setState({ groups });
         break;
       case 'image':
-        const { displays } = this.state;
-        var index = displays.data.findIndex((d) => d._id == id);
-        if (index!=-1) {
-          displays.data.splice(index, 1);
-          displays.count--;
-        }
-        this.setState({ displays });
-        break;
-      case 'image':
         const { images } = this.state;
         var index = images.data.findIndex((i) => i._id == id);
         if (index!=-1) {
@@ -160,6 +162,15 @@ export class Main extends Component {
           images.count--;
         }
         this.setState({ images });
+        break;
+      case 'display':
+        const { displays } = this.state;
+        var index = displays.data.findIndex((d) => d._id == id);
+        if (index!=-1) {
+          displays.data.splice(index, 1);
+          displays.count--;
+        }
+        this.setState({ displays });
         break;
     }
   }
@@ -197,7 +208,7 @@ class Navigation extends Component{
     const navigationAdmin = [
       {exact: true, linkTo: "", text:"Vista general", icon:"eye", count: false, number:''},
       {exact: false, linkTo: "devices", text:"Dispositivos", icon:"tablet", count:true, number: devices ? devices.count : '...'},
-      {exact: false, linkTo: "gateways", text:"Puertas de enlace", icon:"map-marker", count:true, number: gateways ? gateways.count : '...'}
+      {exact: false, linkTo: "gateways", text:"Puertas de enlace", icon:"sitemap", count:true, number: gateways ? gateways.count : '...'}
     ]
 
     const nav = user && user.admin ?
@@ -237,7 +248,7 @@ class Navigation extends Component{
         </div>
         <hr></hr>
         <p className="d-flex justify-content-between">
-          <span>v0.0.12</span>
+          <span>v0.0.13</span>
           <span>{ user ? user.name : 'Cargando...'}</span>
         </p>
       </div>
@@ -248,8 +259,8 @@ class Navigation extends Component{
 class Content extends Component{
 
   render(){
-    const { displays, images, groups, devices, user } = this.props;
-    if ( displays && images && groups && devices ){
+    const { displays, images, groups, devices, user, gateways } = this.props;
+    if ( displays && images && groups && devices && gateways ){
        var content =
         <div className="col">
           <Route exact={true} path="/" render={() => (<Overview { ...this.props }/>)}/>
@@ -259,6 +270,8 @@ class Content extends Component{
           <Route path="/account" render={() => (<ContentAccount { ...this.props }/>)}/>
           <Route path="/settings" render={() => (<ContentSettings { ...this.props }/>)}/>
           <Route path="/docs" render={() => (<ContentDocs { ...this.props }/>)}/>
+          <Route path="/gateways" render={() => (<ContentGateways { ...this.props }/>)}/>
+          <Route path="/devices" render={() => (<ContentDevices { ...this.props }/>)}/>
         </div>;
     } else {
        var content =

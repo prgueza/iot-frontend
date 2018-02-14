@@ -114,6 +114,15 @@ export class ManageLocations extends Component {
           return <Location location={location} key={location._id} edit={this.edit} active={false}/>
         }
       });
+      list.push(
+        <div key="0" className="list-group-item-action elemento-display list-group-item flex-column align-items-start">
+          <div className="text-center elemento elemento-display">
+            <h4 className="mb-1">No se han encontrado {locations.length > 0 && 'más'} localizaciones</h4>
+            <hr></hr>
+            <small>Número de localizaciones: {locations.length}</small>
+          </div>
+        </div>
+      );
       return(
         <div className="row mb-3">
           <div className="col">

@@ -24,20 +24,33 @@ router.get('/*'  , function(req, res, next) {
 });
 
 router.post('/', function(req, res, next){
-  fetch('http://localhost:4000/users')
-    .then(res => res.json())
-    .then(usr => {
-      const user = usr.find((u) => u.login == req.body.user);
-      if (user && user.password == req.body.password){
-        // Save session parameters
-        req.session.logedin = true;
-        res.cookie('userID', user._id, { httpOnly:false });
-        res.redirect('/');
-      } else {
-        res.render('login');
-      }
+  console.log(req.body);
+  fetch(
+    'http://localhost:4000/users/login',
+    {
+    method: 'post', // post method
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    body: JSON.stringify({
+      login: req.body.login,
+      password: req.body.password
     })
-    .catch(err => console.log(err));
+    }
+  )
+  .then(res => res.json())
+  .then(auth => {
+    if (auth.userID) {
+      // Save session parameters
+      req.session.logedin = true;
+      res.cookie('userID', auth.userID, { httpOnly:false });
+      res.redirect('/');
+    } else {
+      res.render('login');
+    }
+  })
+  .catch(err => console.log(err));
 });
 
 

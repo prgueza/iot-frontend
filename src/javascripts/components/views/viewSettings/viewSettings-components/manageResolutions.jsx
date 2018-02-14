@@ -100,7 +100,7 @@ export class ManageResolutions extends Component {
           height: '',
           description: '',
           element_id: '',
-          edit: false 
+          edit: false
         });
       },
       (error) => { // reject callback
@@ -124,6 +124,15 @@ export class ManageResolutions extends Component {
           return <Resolution resolution={resolution} key={resolution._id} edit={this.edit} active={false}/>
         }
       });
+      list.push(
+        <div key="0" className="list-group-item-action elemento-display list-group-item flex-column align-items-start">
+          <div className="text-center elemento elemento-display">
+            <h4 className="mb-1">No se han encontrado {resolutions.length > 0 && 'más'} resoluciones</h4>
+            <hr></hr>
+            <small>Número de resoluciones: {resolutions.length}</small>
+          </div>
+        </div>
+      );
       return(
         <div className="row mb-3">
           <div className="col">
@@ -148,11 +157,11 @@ export class ManageResolutions extends Component {
                         </div>
                         <div className="form-group col-3">
                           <label htmlFor="heigth"><i className="fa fa-arrows-v mr-2"></i>Alto</label>
-                          <input type="number" className="form-control" id="heigth" placeholder="Alto" name="height" value={this.state.height} onChange={this.handleInputChange}></input>
+                          <input type="text" className="form-control" id="heigth" placeholder="Alto" name="height" value={this.state.height} onChange={this.handleInputChange}></input>
                         </div>
                         <div className="form-group col-3">
                           <label htmlFor="width"><i className="fa fa-arrows-h mr-2"></i>Ancho</label>
-                          <input type="number" className="form-control" id="width" placeholder="Ancho" name="width" value={this.state.width} onChange={this.handleInputChange}></input>
+                          <input type="text" className="form-control" id="width" placeholder="Ancho" name="width" value={this.state.width} onChange={this.handleInputChange}></input>
                         </div>
                       </div>
                       <div className="form-group">
