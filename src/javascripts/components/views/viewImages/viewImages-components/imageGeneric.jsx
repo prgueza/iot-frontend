@@ -21,7 +21,7 @@ export const ImageGeneric = () => {
           <h1><i className="fa fa-arrow-left mr-3"></i>Seleccione una imagen</h1>
           <hr></hr>
           <p>O añada una nueva</p>
-          <AddButton categoria='images'/>
+          <AddButton category='images'/>
         </div>
       </div>
     </div>

@@ -6,11 +6,11 @@ import { List } from './list.jsx';
 import { Title } from '../tags/title.jsx';
 
 /* COMPONENTS */
-export const Panel = ({ categoria, contenido }) => {
+export const Panel = ({ category, content, size }) => {
   return(
-    <div className="col-4">
-      <Title total={contenido.length} categoria={categoria}/>
-      <List categoria={categoria} contenido={contenido}/>
+    <div className={ size == "small" ? "col-4" : "col-8" }>
+      <Title total={content.length} category={category}/>
+      <List category={category} content={content}/>
     </div>
   );
 };

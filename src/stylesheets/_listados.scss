@@ -4,7 +4,6 @@ $color-fondo-hover: #495057;
 $color-display: $green;
 $color-imagen: $cyan;
 $color-grupo: $yellow;
-
 //
 // ESTILO GENERAL DE LISTAS
 //
@@ -17,6 +16,7 @@ $color-grupo: $yellow;
 }
 
 .list-group-item{padding: 0px;}
+.list-group-item.active{border-color: $color-borde;}
 
 .elemento
 {padding: 0.75rem 1.25rem;}
@@ -32,6 +32,7 @@ $color-grupo: $yellow;
 
 // Color de fondo de los elementos durante hover
 .list-group-item:hover{ background-color: $color-fondo-hover; }
+.list-group-item:hover{ color: white; }
 .elemento-inactivo{ margin-right: 2px; }
 .elemento-activo{ margin-right: 0px; }
 
@@ -54,6 +55,13 @@ $color-grupo: $yellow;
   color: white;
   background-color: $color-fondo-hover;
   border-right: 0.25rem solid $color-grupo;
+  padding-right: 1rem;
+}
+
+.active .elemento-configuracion{
+  color: white;
+  background-color: $color-fondo-hover;
+  border-right: 0.25rem solid $color-imagen;
   padding-right: 1rem;
 }
 

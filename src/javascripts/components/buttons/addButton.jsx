@@ -3,14 +3,16 @@ import React from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 const cx = require('classnames');
 
-export const AddButton = ({ categoria }) => {
+export const AddButton = ({ category }) => {
   const claseBoton = cx("btn btn-block btn-small",
-     {"btn-outline-success": categoria === 'displays'},
-     {"btn-outline-info": categoria === 'images'},
-     {"btn-outline-warning": categoria === 'groups'}
+     {"btn-outline-success": category === 'displays'},
+     {"btn-outline-info": category === 'images'},
+     {"btn-outline-warning": category === 'groups'},
+     {"btn-outline-light": category === 'devices'},
+     {"btn-outline-light": category === 'gateways'}
   );
   const location = {
-      pathname: '/' + categoria + '/add'
+      pathname: '/' + category + '/add'
   }
   return(
     <Link to={location}>

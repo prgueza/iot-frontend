@@ -20,7 +20,7 @@ export const ContentDocs = ({ user, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total='Documentación' categoria='docs'/>
+            <Title total='Documentación' category='docs'/>
           </div>
         </div>
         <div className="row mb-3">
@@ -29,13 +29,11 @@ export const ContentDocs = ({ user, ...other }) => {
               <div>
                 <div className="row">
                   <div className="col">
-                    <div className="card-body">
-                      <p className="titulo">DETALLES</p>
-                      <p className="titulo">ETIQUETAS</p>
+                    <div className="card-body docs-body d-flex w-100 justify-content-center">
+                      <div className="align-self-center">
+                        <h1><i className="fa fa-wrench mr-3" aria-hidden="true"></i>En desarrollo</h1>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col">
-
                   </div>
                 </div>
               </div>

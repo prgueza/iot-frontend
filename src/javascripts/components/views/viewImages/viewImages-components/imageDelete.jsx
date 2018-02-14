@@ -10,17 +10,19 @@ export class ImageDelete extends Component{
   constructor(props){
     super(props);
     this.state = {
+      // for redirect after deletion
       redirect: false
     }
   }
 
+  /* HANDLE DELETE EVENT */
   handleDelete = (event) =>{
     event.preventDefault();
     fetch(this.props.image.url, {
       method: 'delete'
     })
     .then(this.props.update) // TODO: promises
-    .then(this.setState({ redirect: true }))
+    .then(this.setState({ redirect: true })) // redirect
     .catch((err) => console.log(err));
   }
 

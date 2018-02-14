@@ -1,48 +1,45 @@
 /* IMPORT MODULES */
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 /* IMPORT COMPONENTS */
 import { Title } from '../../tags/title.jsx';
+import { ManageUsers } from './viewSettings-components/manageUsers.jsx';
+import { ManageLocations } from './viewSettings-components/manageLocations.jsx';
+import { ManageResolutions } from './viewSettings-components/manageResolutions.jsx';
+
 
 /* COMPONENTS */
-export const ContentSettings = ({ user, ...other }) => {
-  return(
-    <div className="col contenido">
-      <div className="row">
-        <div className="col">
-          <div className="titulo mb-4 text-right">
-            <h1>CUENTA</h1>
-          </div>
-          <hr></hr>
-        </div>
-      </div>
-      <div className="ventana">
-        <div className="row">
-          <div className="col">
-            <Title total='Configuración' categoria='settings'/>
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col">
-            <div className="card detalles bg-transparent border-gray">
-              <div>
-                <div className="row">
-                  <div className="col">
-                    <div className="card-body">
-                      <p className="titulo">DETALLES</p>
-                      <p className="titulo">ETIQUETAS</p>
-                    </div>
-                  </div>
-                  <div className="col">
+export class ContentSettings extends Component{
 
-                  </div>
-                </div>
+  constructor(props){
+    super(props);
+    this.state = { };
+  }
+
+  componentDidMount(){ }
+
+  render(){
+      return(
+        <div className="col contenido">
+          <div className="row">
+            <div className="col">
+              <div className="titulo mb-4 text-right">
+                <h1>CUENTA</h1>
               </div>
+              <hr></hr>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
+          <div className="ventana">
+            <div className="row">
+              <div className="col">
+                <Title total='Configuración' category='settings'/>
+              </div>
+            </div>
+            <ManageUsers {...this.props}/>
+            <ManageLocations {...this.props}/>
+            <ManageResolutions {...this.props}/>
+          </div>
+        </div>);
+    }
 };
