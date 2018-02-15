@@ -8,7 +8,7 @@ export class DeviceForm extends Component{
 
   constructor(props){
     super(props);
-    const { device, user, resolutions, gateways } = this.props;
+    const { device, user, resolutions, gateways, userGroups } = this.props;
     this.state = {
       id: device ? device.id : '',
       name: device ? device.name : '',
@@ -21,6 +21,7 @@ export class DeviceForm extends Component{
       mac_address: device ? device.mac_address : '',
       bt_address: device ? device.bt_address : '',
       gateway: device ? device.gateway._id : gateways.data[0]._id,
+      userGroup: device ? device.userGroup._id : userGroups[0]._id,
 
       redirect: false,
       redirect_location: '/devices',
@@ -40,7 +41,7 @@ export class DeviceForm extends Component{
     // set state with initial values
     this.setState({
       id: device ? device.id : id,
-      rediract_location: device ? '/devices/' + device.id : '/devices/' + id // Redirect url
+      redirect_location: device ? '/devices/' + device.id : '/devices/' + id // Redirect url
     });
   }
 
@@ -67,6 +68,7 @@ export class DeviceForm extends Component{
       resolution: this.state.resolution,
       mac_address: this.state.mac_address,
       bt_address: this.state.bt_address,
+      userGroup: this.state.userGroup,
     };
     // possible empty fields
     if (!this.props.device) form.created_by = this.props.user._id;
@@ -106,6 +108,7 @@ export class DeviceForm extends Component{
     // Options
     const optionsGateway = this.props.gateways.data.map((g, i) => <option value={g._id} key={i}>{g.name}</option>);
     const optionsResolution = this.props.resolutions.map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
+    const optionsUserGroup = this.props.userGroups.map((u, i) => <option value={u._id} key={i}>{u.name}</option>);
 
     // Render return
     if (this.state.redirect) {
@@ -160,7 +163,7 @@ export class DeviceForm extends Component{
                   <div className="form-group col">
                     <label htmlFor="resolution"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
                     <div>
-                      <select className="custom-select" name="resolution" onChange={this.handleInputChange}>
+                      <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
                         {optionsResolution}
                       </select>
                     </div>
@@ -168,10 +171,18 @@ export class DeviceForm extends Component{
                   <div className="form-group col">
                     <label htmlFor="gateway"><i className="fa fa-sitemap mr-2"></i>Puerta de enlace</label>
                     <div>
-                      <select className="custom-select" name="gateway" onChange={this.handleInputChange}>
+                      <select className="custom-select" name="gateway" value={this.state.gateway} onChange={this.handleInputChange}>
                         {optionsGateway}
                       </select>
                     </div>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="userGroup"><i className="fa fa-users mr-2"></i>Grupo de gestión del dispositivo</label>
+                  <div>
+                    <select className="custom-select" name="userGroup" value={this.state.userGroup} onChange={this.handleInputChange}>
+                      {optionsUserGroup}
+                    </select>
                   </div>
                 </div>
                 <div className="form-group">

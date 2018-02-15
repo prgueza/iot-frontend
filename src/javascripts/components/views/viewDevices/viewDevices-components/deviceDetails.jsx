@@ -12,7 +12,7 @@ export class DeviceDetails extends Component {
 
 	render() {
 		// define constants from props for better readability
-		const { id, name, description, created_at, updated_at, created_by, mac_address, bt_address, gateway } = this.props.device;
+		const { id, name, description, created_at, updated_at, created_by, mac_address, bt_address, gateway, userGroup } = this.props.device;
 		// refactor date constants with format
 		const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
 		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
@@ -50,6 +50,7 @@ export class DeviceDetails extends Component {
 								<p className="card-text"><i className="fa fa-fw fa-server mr-2" aria-hidden="true"></i>{mac_address}</p>
 								<p className="card-text"><i className="fa fa-fw fa-bluetooth-b mr-2" aria-hidden="true"></i>{bt_address}</p>
 								<p className="card-text"><i className="fa fa-fw fa-sitemap mr-2" aria-hidden="true"></i>{gateway.name}</p>
+								<p className="card-text"><i className="fa fa-fw fa-users mr-2" aria-hidden="true"></i>{userGroup.name}</p>
 								<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{updated}</p>
 								<p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>{created_by ? created_by.name : 'Usuario eliminado'}</p>
 							</div>

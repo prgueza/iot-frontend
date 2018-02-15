@@ -36357,7 +36357,8 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
         gateway: _this.state.gateway,
         resolution: _this.state.resolution,
         mac_address: _this.state.mac_address,
-        bt_address: _this.state.bt_address
+        bt_address: _this.state.bt_address,
+        userGroup: _this.state.userGroup
       };
       // possible empty fields
       if (!_this.props.device) form.created_by = _this.props.user._id;
@@ -36392,7 +36393,8 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
         device = _this$props.device,
         user = _this$props.user,
         resolutions = _this$props.resolutions,
-        gateways = _this$props.gateways;
+        gateways = _this$props.gateways,
+        userGroups = _this$props.userGroups;
 
     _this.state = {
       id: device ? device.id : '',
@@ -36406,6 +36408,7 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
       mac_address: device ? device.mac_address : '',
       bt_address: device ? device.bt_address : '',
       gateway: device ? device.gateway._id : gateways.data[0]._id,
+      userGroup: device ? device.userGroup._id : userGroups[0]._id,
 
       redirect: false,
       redirect_location: '/devices',
@@ -36437,7 +36440,7 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
       // set state with initial values
       this.setState({
         id: device ? device.id : id,
-        rediract_location: device ? '/devices/' + device.id : '/devices/' + id // Redirect url
+        redirect_location: device ? '/devices/' + device.id : '/devices/' + id // Redirect url
       });
     }
 
@@ -36466,6 +36469,13 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
           'option',
           { value: r._id, key: i },
           r.name
+        );
+      });
+      var optionsUserGroup = this.props.userGroups.map(function (u, i) {
+        return _react2.default.createElement(
+          'option',
+          { value: u._id, key: i },
+          u.name
         );
       });
 
@@ -36519,6 +36529,11 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                     )
                   )
                 )
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                this.state.redirect_location
               ),
               _react2.default.createElement(
                 'div',
@@ -36603,7 +36618,7 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                       null,
                       _react2.default.createElement(
                         'select',
-                        { className: 'custom-select', name: 'resolution', onChange: this.handleInputChange },
+                        { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
                         optionsResolution
                       )
                     )
@@ -36622,9 +36637,28 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                       null,
                       _react2.default.createElement(
                         'select',
-                        { className: 'custom-select', name: 'gateway', onChange: this.handleInputChange },
+                        { className: 'custom-select', name: 'gateway', value: this.state.gateway, onChange: this.handleInputChange },
                         optionsGateway
                       )
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'userGroup' },
+                    _react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
+                    'Grupo de gesti\xF3n del dispositivo'
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                      'select',
+                      { className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
+                      optionsUserGroup
                     )
                   )
                 ),
@@ -36735,7 +36769,7 @@ __webpack_require__(33);
 
 
 // styles
-__webpack_require__(306);
+__webpack_require__(308);
 
 // react components
 
@@ -60106,17 +60140,17 @@ var _contentAccount = __webpack_require__(284);
 
 var _contentSettings = __webpack_require__(285);
 
-var _contentDocs = __webpack_require__(292);
+var _contentDocs = __webpack_require__(294);
 
-var _contentGateways = __webpack_require__(293);
+var _contentGateways = __webpack_require__(295);
 
-var _contentDevices = __webpack_require__(298);
+var _contentDevices = __webpack_require__(300);
 
-var _overview = __webpack_require__(303);
+var _overview = __webpack_require__(305);
 
 var _icon = __webpack_require__(178);
 
-var _navButton = __webpack_require__(305);
+var _navButton = __webpack_require__(307);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60168,6 +60202,8 @@ var Main = exports.Main = function (_Component) {
         return res.json();
       }), fetch('http://localhost:4000/gateways').then(function (res) {
         return res.json();
+      }), fetch('http://localhost:4000/userGroups').then(function (res) {
+        return res.json();
       })]).then(function (docs) {
         _this.setState({ displays: docs[0] });
         _this.setState({ images: docs[1] });
@@ -60176,6 +60212,7 @@ var Main = exports.Main = function (_Component) {
         _this.setState({ locations: docs[4] });
         _this.setState({ devices: docs[5] });
         _this.setState({ gateways: docs[6] });
+        _this.setState({ userGroups: docs[7] });
         _this.notify();
       }).catch(function (err) {
         return console.log(err);
@@ -60317,6 +60354,7 @@ var Main = exports.Main = function (_Component) {
       locations: null,
       gateways: null,
       devices: null,
+      userGroups: null,
       user: null,
       userID: _reactCookie2.default.load('userID'),
       isLoaded: false,
@@ -68448,9 +68486,11 @@ var _title = __webpack_require__(9);
 
 var _manageUsers = __webpack_require__(286);
 
-var _manageLocations = __webpack_require__(288);
+var _manageUserGroups = __webpack_require__(288);
 
-var _manageResolutions = __webpack_require__(290);
+var _manageLocations = __webpack_require__(290);
+
+var _manageResolutions = __webpack_require__(292);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -68517,6 +68557,7 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
             )
           ),
           _react2.default.createElement(_manageUsers.ManageUsers, this.props),
+          _react2.default.createElement(_manageUserGroups.ManageUserGroups, this.props),
           _react2.default.createElement(_manageLocations.ManageLocations, this.props),
           _react2.default.createElement(_manageResolutions.ManageResolutions, this.props)
         )
@@ -68574,9 +68615,86 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (ManageUsers.__proto__ || Object.getPrototypeOf(ManageUsers)).call(this, props));
 
-    _initialiseProps.call(_this);
+    _this.handleInputChange = function (event) {
+      var target = event.target;
+      var name = target.name;
+      var value = name != 'admin' ? target.value : !_this.state.admin;
+      _this.setState(_defineProperty({}, name, value));
+    };
 
-    var user = _this.props.user;
+    _this.edit = function (element_id) {
+      var user = _this.state.users.find(function (u) {
+        return u._id == element_id;
+      });
+      _this.setState({
+        login: user.login,
+        name: user.name,
+        email: user.email,
+        password: '',
+        checkPassword: '',
+        admin: user.admin,
+        edit: true,
+        element_id: element_id
+      });
+    };
+
+    _this.cancel = function () {
+      _this.setState({
+        login: '',
+        name: '',
+        email: '',
+        password: '',
+        checkPassword: '',
+        admin: false,
+        edit: false,
+        element_id: ''
+      });
+    };
+
+    _this.handleSubmit = function (method) {
+      // FORM DATA
+      var form = {
+        'name': _this.state.name,
+        'login': _this.state.login,
+        'email': _this.state.email,
+        'admin': _this.state.admin
+      };
+      if (_this.state.password != '') {
+        form.password = _this.state.password;
+      };
+      if (_this.state.checkPassword != '') {
+        form.checkPassword = _this.state.checkPassword;
+      };
+      fetch(_this.state.edit ? 'http://localhost:4000/users/' + _this.state.element_id : 'http://localhost:4000/users/signup', {
+        method: method, // post, delete or put method
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      }).then(function () {
+        return fetch('http://localhost:4000/users/');
+      }).then(function (res) {
+        return res.json();
+      }).then(function (users) {
+        // resolve callback
+        _this.setState({
+          isLoaded: true,
+          users: users,
+          login: '',
+          name: '',
+          email: '',
+          password: '',
+          checkPassword: '',
+          admin: false,
+          edit: false,
+          element_id: ''
+        });
+      }, function (error) {
+        // reject callback
+        _this.setState({ isLoaded: true, error: error });
+      });
+    };
 
     _this.state = {
       users: null,
@@ -68657,7 +68775,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                     _react2.default.createElement(
                       'h2',
                       { className: 'detalles-titulo' },
-                      _react2.default.createElement('i', { className: 'fa fa-users mr-3', 'aria-hidden': 'true' }),
+                      _react2.default.createElement('i', { className: 'fa fa-user mr-3', 'aria-hidden': 'true' }),
                       'Usuarios'
                     )
                   )
@@ -68836,91 +68954,6 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
   return ManageUsers;
 }(_react.Component);
 
-var _initialiseProps = function _initialiseProps() {
-  var _this4 = this;
-
-  this.handleInputChange = function (event) {
-    var target = event.target;
-    var name = target.name;
-    var value = name != 'admin' ? target.value : !_this4.state.admin;
-    _this4.setState(_defineProperty({}, name, value));
-  };
-
-  this.edit = function (element_id) {
-    var user = _this4.state.users.find(function (u) {
-      return u._id == element_id;
-    });
-    _this4.setState({
-      login: user.login,
-      name: user.name,
-      email: user.email,
-      password: '',
-      checkPassword: '',
-      admin: user.admin,
-      edit: true,
-      element_id: element_id
-    });
-  };
-
-  this.cancel = function () {
-    _this4.setState({
-      login: '',
-      name: '',
-      email: '',
-      password: '',
-      checkPassword: '',
-      admin: false,
-      edit: false,
-      element_id: ''
-    });
-  };
-
-  this.handleSubmit = function (method) {
-    // FORM DATA
-    var form = {
-      'name': _this4.state.name,
-      'login': _this4.state.login,
-      'email': _this4.state.email,
-      'admin': _this4.state.admin
-    };
-    if (_this4.state.password != '') {
-      form.password = _this4.state.password;
-    };
-    if (_this4.state.checkPassword != '') {
-      form.checkPassword = _this4.state.checkPassword;
-    };
-    fetch(_this4.state.edit ? 'http://localhost:4000/users/' + _this4.state.element_id : 'http://localhost:4000/users/signup', {
-      method: method, // post, delete or put method
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(form)
-    }).then(function () {
-      return fetch('http://localhost:4000/users/');
-    }).then(function (res) {
-      return res.json();
-    }).then(function (users) {
-      // resolve callback
-      _this4.setState({
-        isLoaded: true,
-        users: users,
-        login: '',
-        name: '',
-        email: '',
-        password: '',
-        checkPassword: '',
-        admin: false,
-        edit: false,
-        element_id: ''
-      });
-    }, function (error) {
-      // reject callback
-      _this4.setState({ isLoaded: true, error: error });
-    });
-  };
-};
-
 ;
 
 /***/ }),
@@ -69019,6 +69052,434 @@ var User = exports.User = function User(_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.ManageUserGroups = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(2);
+
+var _userGroup = __webpack_require__(289);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
+
+
+/* IMPORT COMPONENTS */
+
+
+/* COMPONENTS */
+var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
+  _inherits(ManageUserGroups, _Component);
+
+  function ManageUserGroups(props) {
+    _classCallCheck(this, ManageUserGroups);
+
+    var _this = _possibleConstructorReturn(this, (ManageUserGroups.__proto__ || Object.getPrototypeOf(ManageUserGroups)).call(this, props));
+
+    _this.handleInputChange = function (event) {
+      var target = event.target;
+      var name = target.name;
+      var value = target.value;
+      _this.setState(_defineProperty({}, name, value));
+    };
+
+    _this.edit = function (element_id) {
+      var userGroup = _this.state.userGroups.find(function (u) {
+        return u._id == element_id;
+      });
+      _this.setState({
+        name: userGroup.name,
+        description: userGroup.description,
+        edit: true,
+        element_id: element_id
+      });
+    };
+
+    _this.cancel = function () {
+      _this.setState({
+        name: '',
+        description: '',
+        edit: false,
+        element_id: ''
+      });
+    };
+
+    _this.handleSubmit = function (method) {
+      // FORM DATA
+      var form = {
+        'name': _this.state.name,
+        'description': _this.state.description
+      };
+      fetch(_this.state.edit ? 'http://localhost:4000/userGroups/' + _this.state.element_id : 'http://localhost:4000/userGroups', {
+        method: method, // post, delete or put method
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      }).then(function () {
+        return fetch('http://localhost:4000/userGroups/');
+      }).then(function (res) {
+        return res.json();
+      }).then(function (userGroups) {
+        // resolve callback
+        _this.setState({
+          userGroups: userGroups,
+          isLoaded: true,
+          name: '',
+          description: '',
+          edit: false,
+          element_id: ''
+        });
+      }, function (error) {
+        // reject callback
+        _this.setState({ isLoaded: true, error: error });
+      });
+    };
+
+    _this.state = {
+      userGroups: null,
+      isLoaded: false,
+      error: null,
+      edit: false,
+      element_id: '',
+      // form
+      name: '',
+      description: ''
+    };
+    return _this;
+  }
+
+  _createClass(ManageUserGroups, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      fetch("http://localhost:4000/userGroups").then(function (res) {
+        return res.json();
+      }).then(function (userGroups) {
+        // resolve callback
+        _this2.setState({ isLoaded: true, userGroups: userGroups });
+      }, function (error) {
+        // reject callback
+        _this2.setState({ isLoaded: true, error: error });
+      });
+    }
+
+    /* HANDLE SUBMIT */
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var _state = this.state,
+          userGroups = _state.userGroups,
+          error = _state.error,
+          isLoaded = _state.isLoaded;
+
+
+      if (error) {
+        return null; // TODO: handle error
+      } else if (!isLoaded) {
+        return null; // TODO: handle loading
+      } else {
+        var list = userGroups.map(function (userGroup) {
+          if (userGroup._id == _this3.state.element_id) {
+            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this3.edit, active: true });
+          } else {
+            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this3.edit, active: false });
+          }
+        });
+        list.push(_react2.default.createElement(
+          'div',
+          { key: '0', className: 'list-group-item-action elemento-display list-group-item flex-column align-items-start' },
+          _react2.default.createElement(
+            'div',
+            { className: 'text-center elemento elemento-display' },
+            _react2.default.createElement(
+              'h4',
+              { className: 'mb-1' },
+              'No se han encontrado ',
+              userGroups.length > 0 && 'más',
+              ' grupos de gesti\xF3n'
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              'small',
+              null,
+              'N\xFAmero de grupos de gesti\xF3n: ',
+              userGroups.length
+            )
+          )
+        ));
+        return _react2.default.createElement(
+          'div',
+          { className: 'row mb-3' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card detalles bg-transparent border-gray' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card-header border-gray' },
+                _react2.default.createElement(
+                  'ul',
+                  { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+                  _react2.default.createElement(
+                    'li',
+                    { className: 'nav-item mr-auto' },
+                    _react2.default.createElement(
+                      'h2',
+                      { className: 'detalles-titulo' },
+                      _react2.default.createElement('i', { className: 'fa fa-users mr-3', 'aria-hidden': 'true' }),
+                      'Grupos de gesti\xF3n'
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'card-body' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'col-6' },
+                    _react2.default.createElement(
+                      'h3',
+                      null,
+                      this.state.edit ? 'Editar Grupo de gestión' : 'Añadir Grupo de gestión'
+                    ),
+                    _react2.default.createElement('hr', null),
+                    _react2.default.createElement(
+                      'form',
+                      null,
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'form-row' },
+                        _react2.default.createElement(
+                          'div',
+                          { className: 'form-group col' },
+                          _react2.default.createElement(
+                            'label',
+                            { htmlFor: 'name' },
+                            _react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
+                            'Nombre'
+                          ),
+                          _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre del grupo de gesti\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'form-row' },
+                        _react2.default.createElement(
+                          'div',
+                          { className: 'form-group col' },
+                          _react2.default.createElement(
+                            'label',
+                            { htmlFor: 'description' },
+                            _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+                            'Descripci\xF3n'
+                          ),
+                          _react2.default.createElement('input', { type: 'description', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n del grupo de gesti\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+                        )
+                      ),
+                      !this.state.edit ? _react2.default.createElement(
+                        'button',
+                        { onClick: function onClick() {
+                            return _this3.handleSubmit('post');
+                          }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
+                        _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+                        'A\xF1adir'
+                      ) : _react2.default.createElement(
+                        'div',
+                        { className: 'd-flex w-100 justify-content-between' },
+                        _react2.default.createElement(
+                          'button',
+                          { onClick: function onClick() {
+                              return _this3.handleSubmit('put');
+                            }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
+                          _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+                          'Actualizar'
+                        ),
+                        _react2.default.createElement(
+                          'button',
+                          { onClick: function onClick() {
+                              return _this3.handleSubmit('delete');
+                            }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
+                          _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+                          'Eliminar'
+                        ),
+                        _react2.default.createElement(
+                          'button',
+                          { onClick: function onClick() {
+                              return _this3.cancel();
+                            }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
+                          _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+                          'Cancelar'
+                        )
+                      )
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'col-6' },
+                    _react2.default.createElement(
+                      'h3',
+                      { className: 'd-flex w-100 justify-content-between' },
+                      'Grupos de gesti\xF3n',
+                      _react2.default.createElement(
+                        'span',
+                        null,
+                        this.state.userGroups.length
+                      )
+                    ),
+                    _react2.default.createElement('hr', null),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'lista' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'list-group mb-3' },
+                        list
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        );
+      }
+    }
+  }]);
+
+  return ManageUserGroups;
+}(_react.Component);
+
+;
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UserGroup = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* IMPORT MODULES */
+var moment = __webpack_require__(0);moment.locale('es');
+var cx = __webpack_require__(6);
+
+/* COMPONENT */
+var UserGroup = exports.UserGroup = function UserGroup(_ref) {
+  var userGroup = _ref.userGroup,
+      edit = _ref.edit,
+      active = _ref.active;
+  var url = userGroup.url,
+      _id = userGroup._id,
+      name = userGroup.name,
+      description = userGroup.description,
+      created_at = userGroup.created_at,
+      devices = userGroup.devices,
+      displays = userGroup.displays,
+      groups = userGroup.groups,
+      images = userGroup.images,
+      users = userGroup.users;
+
+  var elementClass = cx("list-group-item-action elemento-configuracion list-group-item flex-column align-items-start", { "active": active });
+  return _react2.default.createElement(
+    'div',
+    { className: elementClass, onClick: function onClick() {
+        return edit(_id);
+      } },
+    _react2.default.createElement(
+      'div',
+      { className: 'elemento elemento-configuracion' },
+      _react2.default.createElement(
+        'div',
+        { className: 'd-flex w-100 justify-content-between' },
+        _react2.default.createElement(
+          'h5',
+          { className: 'mb-1' },
+          _react2.default.createElement('i', { className: 'fa fa-users mr-2', 'aria-hidden': 'true' }),
+          name
+        ),
+        _react2.default.createElement(
+          'small',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-user-o mr-2', 'aria-hidden': 'true' }),
+          users ? users.length : '0'
+        )
+      ),
+      _react2.default.createElement(
+        'p',
+        { className: 'mb-1' },
+        description
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'd-flex w-100 justify-content-between' },
+        _react2.default.createElement(
+          'small',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-tablet mr-2', 'aria-hidden': 'true' }),
+          devices ? devices.length : '0',
+          _react2.default.createElement('i', { className: 'fa fa-television mr-2 ml-2', 'aria-hidden': 'true' }),
+          displays ? displays.length : '0',
+          _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2 ml-2', 'aria-hidden': 'true' }),
+          images ? images.length : '0',
+          _react2.default.createElement('i', { className: 'fa fa-list mr-2 ml-2', 'aria-hidden': 'true' }),
+          groups ? groups.length : '0'
+        ),
+        _react2.default.createElement(
+          'small',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2', 'aria-hidden': 'true' }),
+          moment(created_at).format("dddd, D [de] MMMM [de] YYYY")
+        )
+      )
+    )
+  );
+};
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.ManageLocations = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -69029,7 +69490,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _location = __webpack_require__(289);
+var _location = __webpack_require__(291);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69349,7 +69810,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
 ;
 
 /***/ }),
-/* 289 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69412,7 +69873,7 @@ var Location = exports.Location = function Location(_ref) {
 };
 
 /***/ }),
-/* 290 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69431,7 +69892,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _resolution = __webpack_require__(291);
+var _resolution = __webpack_require__(293);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69776,7 +70237,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
 ;
 
 /***/ }),
-/* 291 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69852,7 +70313,7 @@ var Resolution = exports.Resolution = function Resolution(_ref) {
 };
 
 /***/ }),
-/* 292 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69961,7 +70422,7 @@ var ContentDocs = function ContentDocs(_ref) {
 exports.ContentDocs = ContentDocs;
 
 /***/ }),
-/* 293 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69984,9 +70445,9 @@ var _list = __webpack_require__(13);
 
 var _title = __webpack_require__(9);
 
-var _gatewayGeneric = __webpack_require__(294);
+var _gatewayGeneric = __webpack_require__(296);
 
-var _gatewayRouter = __webpack_require__(295);
+var _gatewayRouter = __webpack_require__(297);
 
 var _gatewayForm = __webpack_require__(176);
 
@@ -70075,7 +70536,7 @@ var ContentGateways = function ContentGateways(_ref) {
 exports.ContentGateways = ContentGateways;
 
 /***/ }),
-/* 294 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70149,7 +70610,7 @@ var GatewayGeneric = exports.GatewayGeneric = function GatewayGeneric() {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 295 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70170,11 +70631,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _gatewayDetails = __webpack_require__(296);
+var _gatewayDetails = __webpack_require__(298);
 
 var _gatewayForm = __webpack_require__(176);
 
-var _gatewayDelete = __webpack_require__(297);
+var _gatewayDelete = __webpack_require__(299);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70289,7 +70750,7 @@ var GatewayRouter = exports.GatewayRouter = function (_Component) {
 ;
 
 /***/ }),
-/* 296 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70485,7 +70946,7 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 ;
 
 /***/ }),
-/* 297 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70612,7 +71073,7 @@ var GatewayDelete = exports.GatewayDelete = function (_Component) {
 ;
 
 /***/ }),
-/* 298 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70635,9 +71096,9 @@ var _list = __webpack_require__(13);
 
 var _title = __webpack_require__(9);
 
-var _deviceGeneric = __webpack_require__(299);
+var _deviceGeneric = __webpack_require__(301);
 
-var _deviceRouter = __webpack_require__(300);
+var _deviceRouter = __webpack_require__(302);
 
 var _deviceForm = __webpack_require__(177);
 
@@ -70726,7 +71187,7 @@ var ContentDevices = function ContentDevices(_ref) {
 exports.ContentDevices = ContentDevices;
 
 /***/ }),
-/* 299 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70800,7 +71261,7 @@ var DeviceGeneric = exports.DeviceGeneric = function DeviceGeneric() {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 300 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70821,11 +71282,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _deviceDetails = __webpack_require__(301);
+var _deviceDetails = __webpack_require__(303);
 
 var _deviceForm = __webpack_require__(177);
 
-var _deviceDelete = __webpack_require__(302);
+var _deviceDelete = __webpack_require__(304);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70940,7 +71401,7 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
 ;
 
 /***/ }),
-/* 301 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70999,7 +71460,8 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 			    created_by = _props$device.created_by,
 			    mac_address = _props$device.mac_address,
 			    bt_address = _props$device.bt_address,
-			    gateway = _props$device.gateway;
+			    gateway = _props$device.gateway,
+			    userGroup = _props$device.userGroup;
 			// refactor date constants with format
 
 			var created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
@@ -71026,7 +71488,7 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 								_react2.default.createElement(
 									'h2',
 									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-sitemap mr-3', 'aria-hidden': 'true' }),
+									_react2.default.createElement('i', { className: 'fa fa-tablet mr-3', 'aria-hidden': 'true' }),
 									name
 								)
 							),
@@ -71110,6 +71572,12 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 									_react2.default.createElement(
 										'p',
 										{ className: 'card-text' },
+										_react2.default.createElement('i', { className: 'fa fa-fw fa-users mr-2', 'aria-hidden': 'true' }),
+										userGroup.name
+									),
+									_react2.default.createElement(
+										'p',
+										{ className: 'card-text' },
 										_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
 										updated
 									),
@@ -71135,7 +71603,7 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 ;
 
 /***/ }),
-/* 302 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71262,7 +71730,7 @@ var DeviceDelete = exports.DeviceDelete = function (_Component) {
 ;
 
 /***/ }),
-/* 303 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71277,7 +71745,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _panel = __webpack_require__(304);
+var _panel = __webpack_require__(306);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -71333,7 +71801,7 @@ var Overview = exports.Overview = function Overview(_ref) {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 304 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71372,7 +71840,7 @@ var Panel = exports.Panel = function Panel(_ref) {
 }; /* IMPORT MODULES */
 
 /***/ }),
-/* 305 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71425,13 +71893,13 @@ var NavButton = exports.NavButton = function NavButton(_ref) {
 };
 
 /***/ }),
-/* 306 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(307);
+var content = __webpack_require__(309);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -71439,7 +71907,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(309)(content, options);
+var update = __webpack_require__(311)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -71456,10 +71924,10 @@ if(false) {
 }
 
 /***/ }),
-/* 307 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(308)(undefined);
+exports = module.exports = __webpack_require__(310)(undefined);
 // imports
 
 
@@ -71470,7 +71938,7 @@ exports.push([module.i, "/*!\n * Bootstrap v4.0.0-beta.2 (https://getbootstrap.c
 
 
 /***/ }),
-/* 308 */
+/* 310 */
 /***/ (function(module, exports) {
 
 /*
@@ -71552,7 +72020,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 309 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -71608,7 +72076,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(310);
+var	fixUrls = __webpack_require__(312);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -71924,7 +72392,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 310 */
+/* 312 */
 /***/ (function(module, exports) {
 
 

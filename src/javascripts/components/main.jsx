@@ -31,6 +31,7 @@ export class Main extends Component {
       locations: null,
       gateways: null,
       devices: null,
+      userGroups: null,
       user: null,
       userID: cookie.load('userID'),
       isLoaded: false,
@@ -61,7 +62,8 @@ export class Main extends Component {
       fetch('http://localhost:4000/resolutions').then(res => res.json()),
       fetch('http://localhost:4000/locations').then(res => res.json()),
       fetch('http://localhost:4000/devices').then(res => res.json()),
-      fetch('http://localhost:4000/gateways').then(res => res.json())
+      fetch('http://localhost:4000/gateways').then(res => res.json()),
+      fetch('http://localhost:4000/userGroups').then(res => res.json())
     ])
     .then((docs) => {
       this.setState({displays: docs[0]});
@@ -71,6 +73,7 @@ export class Main extends Component {
       this.setState({locations: docs[4]});
       this.setState({devices: docs[5]});
       this.setState({gateways: docs[6]});
+      this.setState({userGroups: docs[7]});
       this.notify();
     })
     .catch((err) => console.log(err)); // TODO: error handling
@@ -248,7 +251,7 @@ class Navigation extends Component{
         </div>
         <hr></hr>
         <p className="d-flex justify-content-between">
-          <span>v0.0.13</span>
+          <span>v0.0.14</span>
           <span>{ user ? user.name : 'Cargando...'}</span>
         </p>
       </div>

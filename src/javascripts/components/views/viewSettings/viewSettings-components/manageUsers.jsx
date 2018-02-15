@@ -10,7 +10,6 @@ export class ManageUsers extends Component {
 
   constructor(props){
     super(props);
-    const { user } = this.props;
     this.state = {
       users: null,
       isLoaded: false,
@@ -140,7 +139,7 @@ export class ManageUsers extends Component {
               <div className="card-header border-gray">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
-                    <h2 className="detalles-titulo"><i className='fa fa-users mr-3' aria-hidden="true"></i>Usuarios</h2>
+                    <h2 className="detalles-titulo"><i className='fa fa-user mr-3' aria-hidden="true"></i>Usuarios</h2>
                   </li>
                 </ul>
               </div>

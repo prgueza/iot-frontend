@@ -40,7 +40,7 @@ export class GatewayForm extends Component{
     // set state with initial values
     this.setState({
       id: gateway ? gateway.id : id,
-      rediract_location: gateway ? '/gateways/' + gateway.id : '/gateways/' + id // Redirect url
+      redirect_location: gateway ? '/gateways/' + gateway.id : '/gateways/' + id // Redirect url
     });
   }
 
