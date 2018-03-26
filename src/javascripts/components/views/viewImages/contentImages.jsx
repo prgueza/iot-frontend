@@ -10,7 +10,7 @@ import { List } from '../../lists/list.jsx';
 import { Title } from '../../tags/title.jsx';
 
 /* COMPONENTS */
-export const ContentImages = ({ images, ...other }) => {
+export const ContentImages = ({ images, filterValue, ...other }) => {
   return(
     <div className="col contenido">
       <div className="row">
@@ -24,12 +24,12 @@ export const ContentImages = ({ images, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={images.count} category='images'/>
+            <Title total={images.length} category='images'/>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-4">
-            <List category='images' content={images.data}/>
+            <List filterValue={filterValue} category='images' content={images}/>
           </div>
           <div className="col-8">
             <div className="row mb-3">
@@ -37,7 +37,7 @@ export const ContentImages = ({ images, ...other }) => {
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
                 <Route path="/images/add" render={() => <ImageForm {...other} images={images}/>}/>
                 {/* For route /imageId we select the image based on the id and pass it separately */}
-                <Route path="/images/:imageId" render={({ match }) => (<ImageRouter {...other} image={images.data.find(i => i.id == match.params.imageId)}/>)}/>
+                <Route path="/images/:imageId" render={({ match }) => (<ImageRouter {...other} image={images.find(i => i.id == match.params.imageId)}/>)}/>
               </Switch>
               <Route exact path="/images" render={() => (<ImageGeneric/>)}/>
             </div>

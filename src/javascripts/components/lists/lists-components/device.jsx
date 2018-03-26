@@ -15,7 +15,7 @@ export const Device = ({ device }) => {
   return(
     <div className={elementClass}>
       <NavLink to={location}>
-        <div className="elemento elemento-grupo">
+        <div className="elemento elemento-dispositivo">
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1">{name}</h5>
             <small><i className="fa fa-bluetooth-b mr-1" aria-hidden="true"></i>{bt_address}</small>

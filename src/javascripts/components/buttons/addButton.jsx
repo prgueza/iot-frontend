@@ -16,7 +16,10 @@ export const AddButton = ({ category }) => {
   }
   return(
     <Link to={location}>
-      <button type="button" className={claseBoton}><i className="fa fa-plus-circle mr-1" aria-hidden="true"></i>Añadir</button>
+      { category != "displays" ?
+        <button type="button" className={claseBoton}><i className="fa fa-plus-circle mr-1" aria-hidden="true"></i>Añadir</button> :
+        <button type="button" className={claseBoton}><i className="fa fa-wrench mr-1" aria-hidden="true"></i>Configurar</button>
+      }
     </Link>
   );
 };

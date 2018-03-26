@@ -73,6 +73,26 @@ body{
   padding: 30 0 30 0;
 }
 
+.vista-imagen-grupo{
+  border: 1px solid $color-borde;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: 300px;
+  overflow: hidden;
+  text-align: center;
+  padding: 30 0 30 0;
+}
+
+.vista-imagen-display{
+  border: 1px solid $color-borde;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: 300px;
+  overflow: hidden;
+  text-align: center;
+  padding: 30 0 30 0;
+}
+
 .asociados{
   padding:20px;
 }

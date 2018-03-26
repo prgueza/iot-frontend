@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 /* IMPORT COMPONENTS */
 import { GroupDetails } from './groupDetails.jsx';
@@ -22,26 +22,26 @@ export class GroupRouter extends Component {
 
   /* FETCH FULL DATA ABOUT THE GROUP */
   componentDidMount(){
-    fetch(this.props.group.url)
-      .then(res => res.json())
-      .then(
-        (group) => { // resolve callback
-          this.setState({ group, isLoaded: true })
-        },
-        (error) => { // reject callback
-          this.setState({ error, isLoaded: true })
-        }
-      );
+    if(this.props.group){
+      axios.get(this.props.group.url)
+        .then(
+          (group) => { // resolve callback
+            this.setState({ group: group.data, isLoaded: true })
+          },
+          (error) => { // reject callback
+            this.setState({ error, isLoaded: true })
+          }
+        );
+      }
   }
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP*/
   componentWillReceiveProps(nextProps){
-    if(nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at){ // if props actually changed
-    fetch(nextProps.group.url)
-      .then(res => res.json())
+    if(nextProps.group && (nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at)){ // if props actually changed
+    axios.get(nextProps.group.url)
       .then(
         (group) => { // resolve callback
-          this.setState({ group, isLoaded: true })
+          this.setState({ group: group.data, isLoaded: true })
         },
         (error) => { // reject callback
           this.setState({ error, isLoaded: true })
@@ -51,7 +51,7 @@ export class GroupRouter extends Component {
   }
 
   render() {
-    const { error, isLoaded, display } = this.state;
+    const { error, isLoaded, group } = this.state;
     // wait for resource to be loaded or handle errors if any
     if (error) {
       // TODO: error handling
@@ -62,9 +62,9 @@ export class GroupRouter extends Component {
     } else {
       return(
         <Switch>
-          <Route path="/groups/:groupId/edit" render={({ match }) => <GroupForm {...this.props} group={this.state.group}/>}/>
-          <Route path="/groups/:groupId/delete" render={({ match }) => <GroupDelete {...this.props} group={this.state.group}/>}/>
-          <Route path="/groups/:groupId" render={({ match }) => (<GroupDetails {...this.props} group={this.state.group}/>)}/>
+          <Route path="/groups/:groupId/edit" render={({ match }) => <GroupForm {...this.props} group={group}/>}/>
+          <Route path="/groups/:groupId/delete" render={({ match }) => <GroupDelete {...this.props} group={group}/>}/>
+          <Route path="/groups/:groupId" render={({ match }) => (<GroupDetails {...this.props} group={group}/>)}/>
         </Switch>
       );
     }

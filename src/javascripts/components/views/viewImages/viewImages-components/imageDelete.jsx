@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 
 /* COMPONENTS */
@@ -16,14 +16,18 @@ export class ImageDelete extends Component{
   }
 
   /* HANDLE DELETE EVENT */
-  handleDelete = (event) =>{
+  handleDelete = (event) => {
     event.preventDefault();
-    fetch(this.props.image.url, {
-      method: 'delete'
-    })
-    .then(this.props.update) // TODO: promises
-    .then(this.setState({ redirect: true })) // redirect
-    .catch((err) => console.log(err));
+    axios.delete(this.props.image.url)
+    .then(this.props.update(this.props.user))
+    .then(
+      (success) => { // resolve callback
+        this.setState({ redirect: true })
+      },
+      (error) => { // reject callback
+        this.setState({ error })
+      }
+    );// TODO: error handling
   }
 
   render(){

@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 
 /* COMPONENTS */
@@ -18,11 +18,8 @@ export class GroupDelete extends Component{
   /* HANDLE DELETE EVENT */
   handleDelete = (event) =>{
     event.preventDefault();
-    fetch(this.props.group.url, {
-      method: 'delete'
-    })
-    .then((res) => res.json())
-    .then((res) => this.props.removeOne('group', res.resourceId)) // TODO: promises
+    axios.delete(this.props.group.url)
+    .then((res) => this.props.update(this.props.user)) // TODO: promises
     .then(this.setState({ redirect: true })) // redirect
     .catch((err) => console.log(err));
   }

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import axios from 'axios';
 
 /* IMPORT COMPONENTS */
 import { Associated } from '../../associated.jsx';
@@ -17,48 +18,43 @@ export class GroupDetails extends Component { // TODO: transform to component
       // form data stored in state
       group: '',
       active_image: '',
-      imagesOptions: '',
       images: '',
       error: null
     };
   }
 
-  componentWillReceiveProps(nextProps){
+  componentDidMount(){
     // get data
-    const { active_image, images } = nextProps.group;
-    // images options
-    const imagesMap = images.map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+    const { active_image } = this.props.group;
     // state
     this.setState({
-      group: nextProps.group,
-      active_image: active_image ? active_image : '',
-      imagesOptions: imagesMap,
-      images: images,
+      group: this.props.group,
+      active_image: active_image ? active_image._id : '',
+      src_url: active_image ? active_image.src_url : null
     })
   }
 
   /* HANDLE INPUT CHANGE */
   handleInputChange = (event) => {
-    const image = this.state.images.find((i) => event.target.value == i._id);
-    const form = { active_image: image._id };
-    fetch(this.state.group.url,
-      {
-      method: 'put', // post or put method
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      body: JSON.stringify(form)
+    const value = event.target.value;
+    const image = this.props.images.find((i) => value == i._id);
+    const form = { active_image: image ? image._id : null, userGroup: this.props.userGroup._id };
+    axios({
+        method: 'put',
+        url: this.state.group.url,
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        data: form
       })
-      .then(res => res.json())
-      .then(
-        (res) => { // resolve callback
-          this.setState({ active_image: image })
-        },
-        (error) => { // reject callback
-          this.setState({ error })
+      .then((res) => {
+        if (res.status == 201){
+          const new_image = this.state.group.images.find((i) => value == i._id);
+          const src_url = new_image ? new_image.src_url : null;
+          this.setState({ active_image: value, src_url: src_url });
+          return this.props.update(this.props.user); // update dataset
+        } else {
+          return this.setState({ error: res.data }); // set error
         }
-    );
+      });
   }
 
   render(){
@@ -70,10 +66,12 @@ export class GroupDetails extends Component { // TODO: transform to component
     // generate tag list
     const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='grupos' etiqueta={tag}/>);
     // check if active_image is set and if not set the undefined img
-    const src = this.state.active_image ? this.state.active_image.src_url : 'http://localhost:3000/img/undefined.png';
+    const src = this.state.src_url;
     // define routes for edit and delete based on the id
     const linktoEdit = '/groups/' + id + '/edit';
     const linktoDelete = '/groups/' + id + '/delete';
+    const imagesOptions = images.map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+
 
     return(
     <div className="col">
@@ -111,12 +109,18 @@ export class GroupDetails extends Component { // TODO: transform to component
             <div className="col">
               <div className="vista-previa">
                 <p className="titulo text-right">IMAGEN ACTIVA</p>
-                <div className="vista-imagen">
-                  <img className="imagen" src={src}/>
+                <div className="vista-imagen-grupo d-flex w-100 justify-content-center mb-3">
+                  { src ?
+                    <img className="imagen" src={src}/> :
+                    <div className="align-self-center">
+                      <h4>La imagen activa aun no ha sido determinada</h4>
+                      <small>Suba una imagen al servidor</small>
+                    </div>
+                  }
                 </div>
-                <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image._id} onChange={this.handleInputChange}>
+                <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
                   <option value={''} key={0}>Sin imagen activa</option>
-                  {this.state.imagesOptions}
+                  {imagesOptions}
                 </select>
               </div>
             </div>

@@ -1,12 +1,13 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import axios from 'axios'
 
 /* IMPORT COMPONENTS */
 import { GatewayDetails } from './gatewayDetails.jsx';
 import { GatewayForm } from './gatewayForm.jsx';
 import { GatewayDelete } from './gatewayDelete.jsx';
+import { Error } from '../../../tags/error.jsx';
 
 /* COMPONENTS */
 export class GatewayRouter extends Component {
@@ -22,29 +23,29 @@ export class GatewayRouter extends Component {
 
   /* FETCH FULL DATA ABOUT THE IMAGE */
   componentDidMount(){
-    fetch(this.props.gateway.url)
-      .then(res => res.json())
-      .then(
-        (gateway) => { // resolve callback
-          this.setState({ gateway, isLoaded: true })
-        },
-        (error) => { // reject callback
-          this.setState({ error, isLoaded: true})
-        }
-      );
-  }
-
-  /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
-  componentWillReceiveProps(nextProps){
-    if(nextProps.gateway._id != this.props.gateway._id || nextProps.gateway.updated_at != this.props.gateway.updated_at){ // if props actually changed
-      fetch(nextProps.gateway.url)
-        .then(res => res.json())
+    if(this.props.gateway){
+      axios.get(this.props.gateway.url)
         .then(
           (gateway) => { // resolve callback
-            this.setState({ gateway, isLoaded: true })
+            this.setState({ gateway: gateway.data, isLoaded: true })
           },
           (error) => { // reject callback
-            this.setState({ gateway, isLoaded: true })
+            this.setState({ error, isLoaded: true})
+          }
+        );
+    }
+  }
+
+  /* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
+  componentWillReceiveProps(nextProps){
+    if(nextProps.gateway && (nextProps.gateway._id != this.props.gateway._id || nextProps.gateway.updated_at != this.props.gateway.updated_at)){ // if props actually changed
+      axios.get(nextProps.gateway.url)
+        .then(
+          (gateway) => { // resolve callback
+            this.setState({ gateway: gateway.data, isLoaded: true })
+          },
+          (error) => { // reject callback
+            this.setState({ error, isLoaded: true })
           }
         );
     }
@@ -54,8 +55,7 @@ export class GatewayRouter extends Component {
     const { error, isLoaded, gateway } = this.state;
     // wait for resource to be loaded or handle errors if any
     if (error) {
-      // TODO: error handling
-      return null;
+      // TODO: Error handling
     } else if (!isLoaded) {
       // TODO: loading
       return null;

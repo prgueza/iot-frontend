@@ -10,7 +10,7 @@ import { List } from '../../lists/list.jsx';
 import { Title } from '../../tags/title.jsx';
 
 /* COMPONENTS */
-export const ContentGroups = ({ groups, ...other }) => {
+export const ContentGroups = ({ groups, filterValue, ...other }) => {
   return(
     <div className="col contenido">
       <div className="row">
@@ -24,12 +24,12 @@ export const ContentGroups = ({ groups, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={groups.count} category='groups'/>
+            <Title total={groups.length} category='groups'/>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-4">
-            <List category='groups' content={groups.data}/>
+            <List filterValue={filterValue} category='groups' content={groups}/>
           </div>
           <div className="col-8">
             <div className="row mb-3">
@@ -37,7 +37,7 @@ export const ContentGroups = ({ groups, ...other }) => {
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
                 <Route path="/groups/add" render={() => <GroupForm {...other} groups={groups}/>}/>
                 {/* For route /groupId we select the image based on the id and pass it separately */}
-                <Route path="/groups/:groupId" render={({ match }) => (<GroupRouter {...other} group={groups.data.find(g => g.id == match.params.groupId)}/>)}/>
+                <Route path="/groups/:groupId" render={({ match }) => (<GroupRouter {...other} group={groups.find(g => g.id == match.params.groupId)}/>)}/>
               </Switch>
               <Route exact path="/groups" render={() => (<GroupGeneric/>)}/>
             </div>

@@ -12,14 +12,7 @@ import { ManageResolutions } from './viewSettings-components/manageResolutions.j
 
 /* COMPONENTS */
 export class ContentSettings extends Component{
-
-  constructor(props){
-    super(props);
-    this.state = { };
-  }
-
-  componentDidMount(){ }
-
+  
   render(){
       return(
         <div className="col contenido">

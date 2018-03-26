@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 /* COMPONENTS */
 export class DisplayForm extends Component{
@@ -13,36 +14,54 @@ export class DisplayForm extends Component{
       id: display ? display.id : '',
       name: display ? display.name : '',
       description: display ? display.description : '',
-      created_by: display ? ( display.created_by ? display.created_by.name : 'Usuario eliminado') : user.name,
-      updated_by: user.name,
-      resolution: display ? ( display.resolution ? display.resolution._id : resolutions[0]._id ) : resolutions[0]._id,
+      created_by: display ? ( display.created_by || { name:'Usuario eliminado' }) : user,
+      updated_by: user,
       tags: display ? display.tags : [],
+      category: display ? display.category : '',
       created_at: display ? moment(display.created_at) : moment(),
       updated_at: moment(),
+      active_image: display ? display.active_image ? display.active_image._id : '' : '',
       images: display ? display.images.map((i) => i._id) : [],
       groups: display ? display.groups.map((g) => g._id) : [],
-      device: display ? (display.device ? display.device._id : this.props.devices.data[0]._id ) : this.props.devices.data[0]._id,
-
+      device: '',
+      deviceDescription: '',
+      // form options stored in state
+      optionsActiveImage: [],
+      // redirect variables
       redirect: false,
       location: '/displays',
+      // error handling
       error: null
     };
   }
 
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount(){
-    const { displays, display } = this.props;
+    const { displays, display, devices, images } = this.props;
     // if in post mode get first free id value
     if (!display) {
-      const identificaciones = displays.data.map((d) => d.id); // get all ids
+      const identificaciones = displays.map((d) => d.id); // get all ids
       var id = 1; // start from 1
       while (identificaciones.indexOf(id) != -1){id++} // stop at first free id value
     }
+    // get options for active image
+    const optionsActiveImage = images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+    // get a list of unused devices
+    const unusedDevices = devices.filter((d) => !d.display);
     // set state with initial values
-    this.setState({
+    if (unusedDevices.length > 0 || display){
+      this.setState({
       id: display ? display.id : id,
-      location: display ? '/displays/' + display.id : '/displays/' + id // Redirect url
-    });
+      location: display ? '/displays/' + display.id : '/displays/' + id, // Redirect url
+      device: display ? (display.device ? display.device._id : unusedDevices[0]._id ) : unusedDevices[0]._id,
+      deviceDescription: display ? display.device.description : unusedDevices[0].description,
+      optionsActiveImage: optionsActiveImage
+      });
+    } else {
+      this.setState({
+        device: null
+      })
+    }
   }
 
   /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
@@ -53,6 +72,11 @@ export class DisplayForm extends Component{
       var value = target.value.split(','); // TODO: better string to array conversion
     } else {
       var value = target.value;
+    }
+
+    if (name === 'device') {
+      const unusedDevices = this.props.devices.filter((d) => !d.display)
+      this.setState({ deviceDescription: unusedDevices.find((d) => d._id == value).description })
     }
 
     this.setState({
@@ -77,6 +101,14 @@ export class DisplayForm extends Component{
       prevState.splice(prevState.indexOf(value), 1);
       this.setState({images: prevState});
     }
+    if (this.state.images.length == 1){
+      // set when first image is selected
+      this.setState({active_image: this.state.images[0]})
+    } else if (this.state.images.length == 0){
+      // if there are no images deselect
+      this.setState({active_image: ''})
+    }
+    this.setState({optionsActiveImage: this.props.images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>)});
   }
 
   handleCheckGroups = (event) => {
@@ -101,64 +133,57 @@ export class DisplayForm extends Component{
 
   /* HANDLE SUMBIT (PUT OR POST) */
   handleSubmit = () => {
+    // get display if any
+    const { display } = this.props;
     // define form values to send
     const form = {
       id: this.state.id,
       name: this.state.name,
       description: this.state.description,
-      updated_by: this.state.updated_by._id, // send user_id
-      resolution: this.state.resolution,
+      category: this.state.category,
+      updated_by: this.props.user._id, // send user_id
       tags: this.state.tags,
-      device: this.state.device
+      device: this.state.device,
+      userGroup: this.props.userGroup._id
     };
     // possible empty fields
     if (!this.props.display) form.created_by = this.props.user._id;
-    if (this.state.images.length > 0) form.images = this.state.images;
-    if (this.state.groups.length > 0) form.groups = this.state.groups;
-    fetch( this.props.display ? 'http://localhost:4000/displays/' + this.props.display._id : 'http://localhost:4000/displays',
-      {
-        method: this.props.display ? 'put' : 'post', // post or put method
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-        body: JSON.stringify(form)
-      }
-    )
-    .then((res) => res.json())
+    this.state.active_image != '' ? form.active_image = this.state.active_image : form.active_image = null;
+    this.state.images.length > 0 ? form.images = this.state.images : form.images = [];
+    this.state.groups.length > 0 ? form.groups = this.state.groups : form.groups = [];
+    // HTTP request
+    axios({
+      method: display ? 'put' : 'post',
+      url: display ? display.url : 'http://localhost:4000/displays',
+      data: form,
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    })
     .then((res) => {
-      if (this.props.display) {
-        this.props.updateOne('display', res.result) // IDEA: Alert on updateOne at main
+      if (res.status == 201){
+        return this.props.update(this.props.user); // update dataset
       } else {
-        this.props.addOne('display', res.result)
+        return this.setState({ error: res.data }); // set error
       }
-    }) // update dataset
-    // TODO: alert with success
-    // TODO: throw error and alert with error
-    .then(
-      (success) => { // resolve callback
-        this.setState({ redirect: true })
-      },
-      (error) => { // reject callback
-        this.setState({ error })
-      }
-    );// TODO: error handling
+    })
+    .then((res) => {
+      this.setState({ redirect : true });
+      return res;
+    });
   }
 
   /* RENDER COMPONENT */
   render(){
 
     // Options
-    const optionsResolution = this.props.resolutions.sort((a, b) => a.id - b.id).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
-    const optionsDevices = this.props.devices.data.map((d, i) => <option value={d._id} key={i}>{d.name}</option>);
-    const optionsGroups = this.props.groups.data.map((g) =>
+    const optionsDevices = this.props.devices.filter((d) => !d.display || d.display._id == (this.props.display && this.props.display._id)).map((d, i) => <option value={d._id} key={i}>{d.name}</option>);
+    const optionsGroups = this.props.groups.map((g) =>
       <label key={g.id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckGroups} type="checkbox" defaultChecked={this.state.groups.find((c) => c == g._id)} name={g._id} defaultValue={g._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{g.name}</span>
       </label>
     );
-    const optionsImages = this.props.images.data.sort((a, b) => a.id - b.id).map((i) =>
+    const optionsImages = this.props.images.sort((a, b) => a.id - b.id).map((i) =>
       <label key={i.id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckImages} type="checkbox" defaultChecked={this.state.images.find((c) => c == i._id)} name={i._id} defaultValue={i._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
@@ -169,6 +194,25 @@ export class DisplayForm extends Component{
     // Render return
     if (this.state.redirect) {
       return( <Redirect to={this.state.location} /> );
+    } else if(this.state.device == null) {
+      return( <div className="col">
+        <div className="card detalles bg-transparent border-gray">
+          <div className="card-header border-gray">
+            <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
+              <li className="nav-item mr-auto">
+                <h2 className="detalles-titulo text-center"><i className='fa-picture-o' aria-hidden="true"></i>Configurar dispositivo</h2>
+              </li>
+            </ul>
+          </div>
+          <div className="card-body">
+            <div className="text-center">
+              <h1>No hay dispositivos libres</h1>
+              <hr></hr>
+              <small>Pida al administrador del sistema que de de alta un dispositivo para configurarlo.</small>
+            </div>
+          </div>
+        </div>
+      </div> )
     } else {
       return(
         <div className="col detalles">
@@ -179,13 +223,13 @@ export class DisplayForm extends Component{
                   <li className="nav-item mr-auto">
                     { this.props.display ?
                       <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un display</h2> :
-                      <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo display</h2>
+                      <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Configurar un nuevo display</h2>
                     }
                   </li>
                   <li className="nav-item ml-2">
                     { this.props.display ?
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-3" aria-hidden="true"></i>Guardar cambios</button> :
+                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Guardar configuración</button>
                     }
                   </li>
                 </ul>
@@ -195,14 +239,14 @@ export class DisplayForm extends Component{
                   <div className="form-group col">
                     <label htmlFor="device"><i className="fa fa-tablet mr-2"></i>Dispositivo físico asociado</label>
                     <div>
-                      <select className="custom-select" name='devices' onChange={this.handleInputChange}>
+                      <select className="custom-select" name='device' onChange={this.handleInputChange}>
                         {optionsDevices}
                       </select>
                     </div>
                   </div>
                   <div className="form-group col">
-                    <label htmlFor="ip"><i className="fa fa-wifi mr-2"></i>Dirección IP</label>
-                    <input type="text" className="form-control" id="ip" name="ip" readOnly></input>
+                    <label htmlFor="bt"><i className="fa fa-info-circle mr-2"></i>Descripción</label>
+                    <input type="text" className="form-control text-truncate" id="bt" name="bt" value={this.state.deviceDescription} readOnly></input>
                   </div>
                 </div>
                 <hr></hr>
@@ -220,18 +264,17 @@ export class DisplayForm extends Component{
                   <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
                   <input type="text" className="form-control" id="descripcion" placeholder="Descripcion del display" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by} readOnly></input>
-                </div>
                 <div className="form-row">
                   <div className="form-group col">
-                    <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
-                    <div>
-                      <select className="custom-select" name='resolution' onChange={this.handleInputChange}>
-                        {optionsResolution}
-                      </select>
-                    </div>
+                    <label htmlFor="category"><i className="fa fa-arrows-alt mr-2"></i>Categoría</label>
+                    <input type="text" className="form-control" id="category" placeholder="Categoría" name='category' value={this.state.category} onChange={this.handleInputChange}></input>
+                  </div>
+                  <div className="form-group col">
+                    <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
+                    <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
+                      <option value={''} key={0}>Sin imagen activa</option>
+                      {this.state.optionsActiveImage}
+                    </select>
                   </div>
                 </div>
                 <div className="form-row">
@@ -249,16 +292,6 @@ export class DisplayForm extends Component{
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
-                    <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
-                    <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                </div>
-                <div className="form-row">
                   <div className="form-group col">
                     <label htmlFor="etiquetas"><i className="fa fa-tags mr-2"></i>Etiquetas</label>
                     <input type="text" className="form-control" name="tags" id="etiquetas" value={this.state.tags} onChange={this.handleInputChange}></input>
@@ -268,6 +301,20 @@ export class DisplayForm extends Component{
                   <div className="form-group col">
                     {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-imagen btn-tiny" key={i}>{t}</button> : '')}
                   </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
+                    <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
+                    <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
+                  <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by.name} readOnly></input>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 /* IMPORT COMPONENTS */
 import { ImageDetails } from './ImageDetails.jsx';
@@ -22,26 +22,26 @@ export class ImageRouter extends Component {
 
   /* FETCH FULL DATA ABOUT THE IMAGE */
   componentDidMount(){
-    fetch(this.props.image.url)
-      .then(res => res.json())
-      .then(
-        (image) => { // resolve callback
-          this.setState({ image, isLoaded: true })
-        },
-        (error) => { // reject callback
-          this.setState({ error, isLoaded: true })
-        }
-    );
+    if(this.props.image){
+      axios.get(this.props.image.url)
+        .then(
+          (image) => { // resolve callback
+            this.setState({ image: image.data, isLoaded: true })
+          },
+          (error) => { // reject callback
+            this.setState({ error, isLoaded: true })
+          }
+      );
+    }
   }
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
   componentWillReceiveProps(nextProps){
-    if(nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at){ // if props actually changed
-      fetch(nextProps.image.url)
-        .then(res => res.json())
+    if(nextProps.image && (nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at)){ // if props actually changed
+      axios.get(nextProps.image.url)
         .then(
           (image) => { // resolve callback
-            this.setState({ image, isLoaded: true })
+            this.setState({ image: image.data, isLoaded: true })
           },
           (error) => { // reject callback
             this.setState({ error, isLoaded: true })
@@ -62,9 +62,9 @@ export class ImageRouter extends Component {
     } else {
       return(
         <Switch>
-          <Route path="/images/:imageId/edit" render={({ match }) => <ImageForm {...this.props} image={this.state.image}/>}/>
-          <Route path="/images/:imageId/delete" render={({ match }) => <ImageDelete {...this.props} image={this.state.image}/>}/>
-          <Route path="/images/:imageId" render={({ match }) => (<ImageDetails {...this.props} image={this.state.image}/>)}/>
+          <Route path="/images/:imageId/edit" render={({ match }) => <ImageForm {...this.props} image={image}/>}/>
+          <Route path="/images/:imageId/delete" render={({ match }) => <ImageDelete {...this.props} image={image}/>}/>
+          <Route path="/images/:imageId" render={({ match }) => (<ImageDetails {...this.props} image={image}/>)}/>
         </Switch>
       );
     }

@@ -12,7 +12,7 @@ export const Title = ({ category, total }) => {
   {'fa-cogs': category === "settings"},
   {'fa-book': category === "docs"},
   {'fa-tablet': category === "devices"},
-  {'fa-map-marker': category === "gateways"});
+  {'fa-sitemap': category === "gateways"});
   const estilo = cx('card', 'mb-3', 'bg-transparent',
   {'border-success text-success': category === "displays"},
   {'border-info text-info': category === "images"},

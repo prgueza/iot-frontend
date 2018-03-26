@@ -49,7 +49,7 @@ export class DeviceDetails extends Component {
 								<p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
 								<p className="card-text"><i className="fa fa-fw fa-server mr-2" aria-hidden="true"></i>{mac_address}</p>
 								<p className="card-text"><i className="fa fa-fw fa-bluetooth-b mr-2" aria-hidden="true"></i>{bt_address}</p>
-								<p className="card-text"><i className="fa fa-fw fa-sitemap mr-2" aria-hidden="true"></i>{gateway.name}</p>
+								<p className={gateway ? "card-text" : "card-text text-danger"}><i className="fa fa-fw fa-sitemap mr-2" aria-hidden="true"></i>{gateway ? gateway.name : 'Dispositivo sin asignar'}</p>
 								<p className="card-text"><i className="fa fa-fw fa-users mr-2" aria-hidden="true"></i>{userGroup.name}</p>
 								<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{updated}</p>
 								<p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>{created_by ? created_by.name : 'Usuario eliminado'}</p>

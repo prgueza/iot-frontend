@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 /* COMPONENTS */
 export class GatewayForm extends Component{
@@ -33,7 +34,7 @@ export class GatewayForm extends Component{
     const { gateways, gateway } = this.props;
     // if in post mode get first free id value
     if (!gateway) {
-      const identificaciones = gateways.data.map((d) => d.id); // get all ids
+      const identificaciones = gateways.map((d) => d.id); // get all ids
       var id = 1; // start from 1
       while (identificaciones.indexOf(id) != -1){id++} // stop at first free id value
     }
@@ -90,34 +91,24 @@ export class GatewayForm extends Component{
     // possible empty fields
     if (!this.props.gateway) form.created_by = this.props.user._id;
     if (this.state.devices.length > 0) form.devices = this.state.devices;
-    fetch( this.props.gateway ? 'http://localhost:4000/gateways/' + this.props.gateway._id : 'http://localhost:4000/gateways',
-      {
-        method: this.props.gateway ? 'put' : 'post', // post or put method
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-        body: JSON.stringify(form)
-      }
-    )
-    .then((res) => res.json())
+    // HTTP request
+    axios({
+      method: gateway ? 'put' : 'post',
+      url: gateway ? gateway.url : 'http://localhost:4000/gateways',
+      data: form,
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    })
     .then((res) => {
-      if (this.props.gateway) {
-        this.props.updateOne('gateway', res.result) // IDEA: Alert on updateOne at main
+      if (res.status == 201){
+        return this.props.update(this.props.user); // update dataset
       } else {
-        this.props.addOne('gateway', res.result)
+        return this.setState({ error: res.data }); // set error
       }
-    }) // update dataset
-    // TODO: alert with success
-    // TODO: throw error and alert with error
-    .then(
-      (success) => { // resolve callback
-        this.setState({ redirect: true })
-      },
-      (error) => { // reject callback
-        this.setState({ error })
-      }
-    );// TODO: error handling
+    })
+    .then((res) => {
+      this.setState({ redirect : true });
+      return res;
+    });
   }
 
   /* RENDER COMPONENT */
@@ -125,7 +116,7 @@ export class GatewayForm extends Component{
 
     // Options
     const optionsLocation = this.props.locations.sort((a, b) => a.id - b.id).map((l, i) => <option value={l._id} key={i}>{l.name}</option>);
-    const optionsDevices = this.props.devices.data.map((d) =>
+    const optionsDevices = this.props.devices.map((d) =>
       <label key={d._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckDevices} type="checkbox" defaultChecked={this.state.devices.find((c) => c == d._id)} name={d._id} defaultValue={d._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>

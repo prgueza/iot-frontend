@@ -10,8 +10,8 @@ import { Gateway } from './lists-components/gateway.jsx';
 import { AddButton } from '../buttons/addButton.jsx';
 
 /* COMPONENT */
-export const List = ({ category, content }) => {
-  content  = content.sort((a, b) => a.id - b.id);
+export const List = ({ category, content, filterValue }) => {
+  content = content.filter((e) => e.name.indexOf(filterValue) > -1).sort((a, b) => a.id - b.id);
   if (category === "displays"){
     var elementos = content.map(elemento => <Display display={elemento} key={elemento._id}/>);
     var elementName = "displays";

@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 /* IMPORT COMPONENTS */
 import { User } from '../../../lists/lists-components/user.jsx';
@@ -22,6 +23,7 @@ export class ManageUsers extends Component {
       password: '',
       checkPassword: '',
       email: '',
+      userGroup: '',
       admin: false
     };
   }
@@ -34,11 +36,10 @@ export class ManageUsers extends Component {
   }
 
   componentDidMount(){
-    fetch("http://localhost:4000/users")
-      .then(res => res.json())
+    axios('/users')
       .then(
-        (users) => { // resolve callback
-          this.setState({ isLoaded: true, users });
+        (res) => { // resolve callback
+          this.setState({ isLoaded: true, users: res.data });
         },
         (error) => { // reject callback
           this.setState({ isLoaded: true, error });
@@ -55,6 +56,7 @@ export class ManageUsers extends Component {
       password: '',
       checkPassword: '',
       admin: user.admin,
+      userGroup: user.userGroup ? user.userGroup._id : '',
       edit: true,
       element_id: element_id
     })
@@ -68,6 +70,7 @@ export class ManageUsers extends Component {
       password: '',
       checkPassword: '',
       admin: false,
+      userGroup: '',
       edit: false,
       element_id: '',
     })
@@ -82,6 +85,7 @@ export class ManageUsers extends Component {
       'email'   : this.state.email,
       'admin'   : this.state.admin,
     };
+    if(this.state.userGroup != ''){ form.userGroup = this.state.userGroup };
     if(this.state.password != ''){ form.password = this.state.password };
     if(this.state.checkPassword != ''){ form.checkPassword = this.state.checkPassword };
     fetch( this.state.edit ? 'http://localhost:4000/users/' + this.state.element_id : 'http://localhost:4000/users/signup',
@@ -106,6 +110,7 @@ export class ManageUsers extends Component {
           email: '',
           password: '',
           checkPassword: '',
+          userGroup: '',
           admin: false,
           edit: false,
           element_id: '',
@@ -119,6 +124,7 @@ export class ManageUsers extends Component {
 
   render(){
     const { users, error, isLoaded } = this.state;
+    const optionsUserGroup = this.props.userGroups.map((u, i) => <option value={u._id} key={i}>{u.name}</option>);
 
     if (error) {
       return null // TODO: handle error
@@ -173,6 +179,15 @@ export class ManageUsers extends Component {
                         <div className="form-group col">
                           <label htmlFor="checkPassword"><i className="fa fa-key mr-2"></i>Confirmar contraseña</label>
                           <input type="password" className="form-control" id="checkPassword"  placeholder="Confirmar contraseña" name="checkPassword" value={this.state.checkPassword} onChange={this.handleInputChange}></input>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="userGroup"><i className="fa fa-users mr-2"></i>Grupo de gestión de dispositivos</label>
+                        <div>
+                          <select className="custom-select" name="userGroup" value={this.state.userGroup} onChange={this.handleInputChange}>
+                            <option value="" key="0">Sin asignar</option>
+                            {optionsUserGroup}
+                          </select>
                         </div>
                       </div>
                       <div className="form-group">

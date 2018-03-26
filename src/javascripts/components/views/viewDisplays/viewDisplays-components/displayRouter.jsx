@@ -1,12 +1,13 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 /* IMPORT COMPONENTS */
 import { DisplayDetails } from './displayDetails.jsx';
 import { DisplayForm } from './displayForm.jsx';
 import { DisplayDelete } from './displayDelete.jsx';
+import { DisplayLoading } from './displayLoading.jsx';
 
 /* COMPONENTS */
 export class DisplayRouter extends Component {
@@ -20,31 +21,31 @@ export class DisplayRouter extends Component {
     };
   }
 
-  /* FETCH FULL DATA ABOUT THE IMAGE */
+  /* FETCH FULL DATA ABOUT THE DISPLAY */
   componentDidMount(){
-    fetch(this.props.display.url)
-      .then(res => res.json())
-      .then(
-        (display) => { // resolve callback
-          this.setState({ display, isLoaded: true })
-        },
-        (error) => { // reject callback
-          this.setState({ error, isLoaded: true})
-        }
-      );
-  }
-
-  /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
-  componentWillReceiveProps(nextProps){
-    if(nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at){ // if props actually changed
-      fetch(nextProps.display.url)
-        .then(res => res.json())
+    if(this.props.display){
+      axios.get(this.props.display.url)
         .then(
           (display) => { // resolve callback
-            this.setState({ display, isLoaded: true })
+            this.setState({ display: display.data, isLoaded: true })
           },
           (error) => { // reject callback
-            this.setState({ display, isLoaded: true })
+            this.setState({ error, isLoaded: true})
+          }
+        );
+    }
+  }
+
+  /* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
+  componentWillReceiveProps(nextProps){
+    if(nextProps.display && (nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at)){ // if props actually changed
+      axios.get(nextProps.display.url)
+        .then(
+          (display) => { // resolve callback
+            this.setState({ display: display.data, isLoaded: true })
+          },
+          (error) => { // reject callback
+            this.setState({ error, isLoaded: true })
           }
         );
     }
@@ -57,14 +58,13 @@ export class DisplayRouter extends Component {
       // TODO: error handling
       return null;
     } else if (!isLoaded) {
-      // TODO: loading
-      return null;
+      return (<DisplayLoading/>);
     } else {
       return(
         <Switch>
-          <Route path="/displays/:displayId/edit" render={({ match }) => <DisplayForm {...this.props} display={this.state.display}/>}/>
-          <Route path="/displays/:displayId/delete" render={({ match }) => <DisplayDelete {...this.props} display={this.state.display}/>}/>
-          <Route path="/displays/:displayId" render={({ match }) => (<DisplayDetails {...this.props} display={this.state.display}/>)}/>
+          <Route path="/displays/:displayId/edit" render={({ match }) => <DisplayForm {...this.props} display={display}/>}/>
+          <Route path="/displays/:displayId/delete" render={({ match }) => <DisplayDelete {...this.props} display={display}/>}/>
+          <Route path="/displays/:displayId" render={({ match }) => (<DisplayDetails {...this.props} display={display}/>)}/>
         </Switch>
       );
     }

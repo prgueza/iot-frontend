@@ -1,19 +1,52 @@
-// Importacion de librerias
+/* IMPORT MODULES */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-// Importacion de componentes
+/* IMPORT COMPONENTS */
 import { Main } from './components/main.jsx';
+import { Login } from './components/login/login.jsx'
 
-// Declaracion de componentes
+/* COMPONENTS */
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      // user data
+      user: null,
+      token: null,
+      // login flag
+      isLoggedIn: false,
+      // eror handling
+      error: null
+    }
+  }
+
+  login = (user, token) => {
+    this.setState({ isLoggedIn: true, user, token });
+  }
+
+  logout = () => {
+    this.setState({ isLoggedIn: false, user: null, token: null})
+  }
+
   render(){
-    return(
-      <Router basename="/">
-        <Main/>
-      </Router>
-    );
+    // get state
+    const { isLoggedIn, error } = this.state;
+    // return for rendering
+    if (error) {
+      // TODO: error handling
+      return null;
+    } else if (!isLoggedIn) {
+      return ( <Login login={this.login}/> )
+    } else {
+      return (
+        <Router basename="/">
+          <Main logout={this.logout} {...this.state}/>
+        </Router>
+      )
+    }
   }
 }
 

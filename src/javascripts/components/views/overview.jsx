@@ -5,7 +5,7 @@ import React from 'react';
 import { Panel } from '../lists/panel.jsx';
 
 /* COMPONENTS */
-export const Overview = ({ displays, images, groups, user, devices }) => {
+export const Overview = ({ displays, images, groups, user, devices, gateways, filterValue }) => {
   return(
     <div className="col contenido">
       <div className="row">
@@ -19,14 +19,15 @@ export const Overview = ({ displays, images, groups, user, devices }) => {
       <div className="ventana">
         { !user.admin &&
           <div className="row mb-3">
-            <Panel content={displays.data} category="displays" size="small"/>
-            <Panel content={images.data} category="images" size="small"/>
-            <Panel content={groups.data} category="groups" size="small"/>
+            <Panel filterValue={filterValue} content={displays} category="displays" size="small"/>
+            <Panel filterValue={filterValue} content={images} category="images" size="small"/>
+            <Panel filterValue={filterValue} content={groups} category="groups" size="small"/>
           </div>
         }
         { user.admin &&
           <div className="row mb-3">
-            <Panel content={devices.data} category="devices" size="big"/>
+            <Panel filterValue={filterValue} content={devices} category="devices" size="big"/>
+            <Panel filterValue={filterValue} content={gateways} category="gateways" size="big"/>
           </div>
         }
       </div>

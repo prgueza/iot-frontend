@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 /* COMPONENTS */
 export class GroupForm extends Component{
@@ -11,9 +12,10 @@ export class GroupForm extends Component{
     const { group, user } = this.props;
     this.state = {
       // form data stored in state
+      id: '',
       name: group ? group.name : '',
       description: group ? group.description : '',
-      created_by: group ? ( group.created_by ? group.created_by.name : 'Usuario eliminado') : user.name,
+      created_by: group ? ( group.created_by ? group.created_by : 'Usuario eliminado') : user,
       updated_by: user.name,
       tags: group ? group.tags : [],
       active_image: group ? group.active_image ? group.active_image._id : '' : '',
@@ -34,10 +36,10 @@ export class GroupForm extends Component{
     const { groups, images } = this.props; // Data from database
     const { group } = this.props;
     // options for select inputs
-    const optionsActiveImage = images.data.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+    const optionsActiveImage = images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
     // if in post mode get first free id value
     if (!group) {
-      const ids = groups.data.map((g) => g.id); // get all ids
+      const ids = groups.map((g) => g.id); // get all ids
       var id = 1; // start from 1
       while (ids.indexOf(id) != -1){id++} // stop at first free id value
     }
@@ -102,66 +104,60 @@ export class GroupForm extends Component{
       // if there are no images deselect
       this.setState({active_image: ''})
     }
-    this.setState({optionsActiveImage: this.props.images.data.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>)});
+    this.setState({optionsActiveImage: this.props.images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>)});
   } // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
   /* HANDLE SUBMIT */
   handleSubmit = () => {
-    // FORM DATA
+    // get image if any
+    const { group } = this.props;
+    // define form values to send
     const form = {
-      'updated_by'  : this.state.updated_by._id,
-      'id'          : this.state.id,
-      'name'        : this.state.name,
-      'description' : this.state.description,
-      'tags'        : this.state.tags
+      id: this.state.id,
+      name: this.state.name,
+      description: this.state.description,
+      updated_by: this.state.updated_by._id, // send user_id
+      resolution: this.state.resolution,
+      tags: this.state.tags,
+      userGroup: this.props.userGroup._id
     };
     // possible empty fields
     if (!this.props.group) form.created_by = this.props.user._id;
-    if (this.state.displays.length > 0) form.displays = this.state.displays;
-    if (this.state.images.length > 0) form.images = this.state.images;
-    if (this.state.active_image != '') form.active_image = this.state.active_image;
-    // HTTP REQUEST
-    fetch( this.props.group ? 'http://localhost:4000/groups/' + this.props.group._id : 'http://localhost:4000/groups',
-      {
-      method: this.props.group ? 'put' : 'post', // post or put method
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      body: JSON.stringify(form)
-      }
-    )
-    .then((res) => res.json())
+    this.state.active_image != '' ? form.active_image = this.state.active_image : form.active_image = null;
+    this.state.displays.length > 0 ? form.displays = this.state.displays : form.displays = [];
+    this.state.images.length > 0 ? form.images = this.state.images : form.images = [];
+    // HTTP request
+    axios({
+      method: group ? 'put' : 'post',
+      url: group ? group.url : 'http://localhost:4000/groups',
+      data: form,
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    })
     .then((res) => {
-      if (this.props.group) {
-        this.props.updateOne('group', res.result) // IDEA: Alert on updateOne at main
+      if (res.status == 201){
+        return this.props.update(this.props.user); // update dataset
       } else {
-        this.props.addOne('group', res.result)
+        return this.setState({ error: res.data }); // set error
       }
-    }) // update dataset
-    // TODO: alert with success
-    // TODO: throw error and alert with error
-    .then(
-      (success) => { // resolve callback
-        this.setState({ redirect: true })
-      },
-      (error) => { // reject callback
-        this.setState({ error })
-      }
-    );// TODO: error handling
+    })
+    .then((res) => {
+      this.setState({ redirect : true });
+      return res;
+    });
   }
 
   render(){
 
     // Options
-    const optionsDisplays = this.props.displays.data.sort((a, b) => a.id - b.id).map((d) =>
+    const optionsResolution = this.props.resolutions.sort((a, b) => a.id - b.id).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
+    const optionsDisplays = this.props.displays.sort((a, b) => a.id - b.id).map((d) =>
       <label key={d.id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckDisplays} type="checkbox" defaultChecked={this.state.displays.find((c) => c == d._id)} name={d._id} defaultValue={d._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{d.name}</span>
       </label>
     );
-    const optionsImages = this.props.images.data.sort((a, b) => a.id - b.id).map((i) =>
+    const optionsImages = this.props.images.sort((a, b) => a.id - b.id).map((i) =>
       <label key={i.id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckImages} type="checkbox" defaultChecked={this.state.images.find((c) => c == i._id)} name={i._id} defaultValue={i._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
@@ -208,9 +204,22 @@ export class GroupForm extends Component{
                   <label htmlFor="description"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
                   <input type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleInputChange} placeholder="Descripcion del Grupo"></input>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="creador" name='user' defaultValue={this.state.created_by} readOnly></input>
+                <div className="form-row">
+                  <div className="form-group col">
+                    <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
+                    <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
+                      <option value={''} key={0}>Sin imagen activa</option>
+                      {this.state.optionsActiveImage}
+                    </select>
+                  </div>
+                  <div className="form-group col">
+                    <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
+                    <div>
+                      <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
+                        {optionsResolution}
+                      </select>
+                    </div>
+                  </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col">
@@ -227,43 +236,33 @@ export class GroupForm extends Component{
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
-                    <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
-                      <option value={''} key={0}>Sin imagen activa</option>
-                      {this.state.optionsActiveImage}
-                    </select>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="created"><i className="fa fa-calendar-o mr-2"></i>Fecha de {this.props.group ? 'modificación' : 'creación'}</label>
-                    <input type="text" className="form-control" id="created" value={moment().format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                </div>
-                <div className="form-row">
                   <div className="form-group col">
                     <label htmlFor="tags"><i className="fa fa-tags mr-2"></i>Etiquetas</label>
                     <input type="text" className="form-control" name="tags" id="tags" value={this.state.tags} onChange={this.handleInputChange}></input>
                   </div>
                 </div>
-                <div className="form-row">
+                <div className="form-group">
                   <div className="form-group col">
                     {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-grupo btn-tiny" key={i}>{t}</button> : '')}
                   </div>
                 </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
+                    <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
+                    <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
+                  <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by.name} readOnly></input>
+                </div>
               </div>
             </div>
           </form>
-          <div> {/* //TEMP: debug */}
-            <p>
-              {this.state.displays}
-            </p>
-            <p>
-              {this.state.images}
-            </p>
-            <p>
-              {this.state.active_image}
-            </p>
-          </div>
         </div>
       );
     }

@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 /* IMPORT COMPONENTS */
 import { DeviceDetails } from './deviceDetails.jsx';
@@ -22,29 +22,29 @@ export class DeviceRouter extends Component {
 
   /* FETCH FULL DATA ABOUT THE IMAGE */
   componentDidMount(){
-    fetch(this.props.device.url)
-      .then(res => res.json())
-      .then(
-        (device) => { // resolve callback
-          this.setState({ device, isLoaded: true })
-        },
-        (error) => { // reject callback
-          this.setState({ error, isLoaded: true})
-        }
-      );
-  }
-
-  /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
-  componentWillReceiveProps(nextProps){
-    if(nextProps.device._id != this.props.device._id || nextProps.device.updated_at != this.props.device.updated_at){ // if props actually changed
-      fetch(nextProps.device.url)
-        .then(res => res.json())
+    if(this.props.device){
+      axios.get(this.props.device.url)
         .then(
           (device) => { // resolve callback
-            this.setState({ device, isLoaded: true })
+            this.setState({ device: device.data, isLoaded: true })
           },
           (error) => { // reject callback
-            this.setState({ device, isLoaded: true })
+            this.setState({ error, isLoaded: true})
+          }
+        );
+    }
+  }
+
+  /* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
+  componentWillReceiveProps(nextProps){
+    if(nextProps.device && (nextProps.device._id != this.props.device._id || nextProps.device.updated_at != this.props.device.updated_at)){ // if props actually changed
+      axios.get(nextProps.device.url)
+        .then(
+          (device) => { // resolve callback
+            this.setState({ device: device.data, isLoaded: true })
+          },
+          (error) => { // reject callback
+            this.setState({ error, isLoaded: true })
           }
         );
     }

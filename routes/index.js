@@ -19,7 +19,8 @@ router.get('/*'  , function(req, res, next) {
   if(req.session.logedin){
     res.render('index');
   } else {
-    res.render('login');
+    //res.render('login');
+    res.render('index')
   }
 });
 

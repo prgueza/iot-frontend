@@ -134,7 +134,7 @@ export class ManageResolutions extends Component {
         </div>
       );
       return(
-        <div className="row mb-3">
+        <div className="row mb-3 pb-3">
           <div className="col">
             <div className="card detalles bg-transparent border-gray">
               <div className="card-header border-gray">

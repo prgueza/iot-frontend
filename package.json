@@ -1,11 +1,10 @@
 {
   "name": "iot-frontend",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "webpack --config webpack.config.js",
-    "build-login": "webpack --config webpackLogin.config.js"
+    "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "axios": "^0.17.1",

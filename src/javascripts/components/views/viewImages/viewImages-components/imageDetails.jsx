@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 const moment = require('moment'); moment.locale('es');
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import axios from 'axios';
 
 /* IMPORT COMPONENTS */
 import { Associated } from '../../associated.jsx';
@@ -19,11 +20,24 @@ export class ImageDetails extends Component { // TODO: transform to component
     }
   }
 
-  onDrop = (acceptedFile, rejectedFile) => {
+  onDropAccepted = (acceptedFile) => {
     this.setState({
       file: acceptedFile,
       accepted: true
     });
+    
+    // Form
+    const data = new FormData();
+    data.append('image', acceptedFile[0]);
+
+     // upload file
+     axios.post('http://localhost:4000/images/' + this.props.image._id, data)
+       .then(function (res) {
+         console.log(res);
+       })
+       .catch(function (err) {
+
+       });
   }
 
 
@@ -79,9 +93,10 @@ export class ImageDetails extends Component { // TODO: transform to component
             <div className="col">
               <div className="vista-previa">
                 <p className="titulo text-right">VISTA PREVIA</p>
-                <Dropzone onDrop={this.onDrop} activeClassName="dropzone-accepted" className={this.state.accepted ? "dropzone dropzone-accepted" : "dropzone"}>
+                <Dropzone onDropAccepted={this.onDropAccepted} activeClassName="dropzone-accepted" className={this.state.accepted ? "dropzone dropzone-accepted" : "dropzone"}>
                   <div className="vista-imagen d-flex w-100 justify-content-center">
-                    {!this.state.accepted ?
+                    { src_url ? <img className="imagen" src={src_url}/> :
+                      (!this.state.accepted ?
                       <div className="align-self-center">
                         <h4>Arrastre una imagen</h4>
                         <small>formatos permitidos: png/jpeg</small>
@@ -89,9 +104,8 @@ export class ImageDetails extends Component { // TODO: transform to component
                       <div className="align-self-center">
                         <h4>{this.state.file[0].name}</h4>
                         <small>tamaño: {this.state.file[0].size}</small>
-                      </div>
+                      </div>)
                     }
-                    {src_url && <img className="imagen" src={src_url}/>}
                   </div>
                 </Dropzone>
               </div>

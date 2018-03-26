@@ -1,6 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 /* IMPORT COMPONENTS */
 import { Location } from '../../../lists/lists-components/location.jsx';
@@ -70,33 +70,34 @@ export class ManageLocations extends Component {
       'name': this.state.name,
     };
     if(this.state.description != ''){form.description = this.state.description}
-    fetch( this.state.edit ? 'http://localhost:4000/locations/' + this.state.element_id : 'http://localhost:4000/locations',
-      {
-      method: method, // post, delete or put method
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      body: JSON.stringify(form)
-      }
-    )
-    .then(() => fetch('http://localhost:4000/locations'))
-    .then(res => res.json())
-    .then(
-      (locations) => { // resolve callback
-        this.setState({
+
+    // HTTP request
+    axios({
+      method: method,
+      url: this.state.edit ? 'http://localhost:4000/locations/' + this.state.element_id : 'http://localhost:4000/locations',
+      data: form,
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    })
+    .then((res) => {
+      if(res.status == 201 || res.status == 200){
+        return axios.get('/locations')
+        .then((res) => {
+          this.setState({
+            isLoaded: true,
+            locations: res.data,
+            name: '',
+            description: '',
+            element_id: '',
+            edit: false
+          })
+        })
+      } else {
+        return this.setState({
           isLoaded: true,
-          locations,
-          name: '',
-          description: '',
-          element_id: '',
-          edit: false
-        });
-      },
-      (error) => { // reject callback
-        this.setState({ isLoaded: true, error });
+          error: res.data
+        })
       }
-    )
+    })
   }
 
   render(){

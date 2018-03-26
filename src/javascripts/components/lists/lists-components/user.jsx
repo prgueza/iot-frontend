@@ -6,8 +6,8 @@ const cx = require('classnames');
 
 /* COMPONENT */
 export const User = ({ user, edit, active }) => {
-  const { url, _id, id, name, login, email, created_at, admin } = user;
-  const elementClass = cx("list-group-item-action elemento-configuracion list-group-item flex-column align-items-start", { "active": active }); 
+  const { url, _id, id, name, login, email, created_at, admin, userGroup } = user;
+  const elementClass = cx("list-group-item-action elemento-configuracion list-group-item flex-column align-items-start", { "active": active });
   return(
     <div className={elementClass} onClick={() => edit(_id)}>
       <div className="elemento elemento-configuracion">
@@ -18,7 +18,7 @@ export const User = ({ user, edit, active }) => {
         <p className="mb-1">{email}</p>
         <div className="d-flex w-100 justify-content-between">
           <small>{login}</small>
-          <small><i className="fa fa-calendar-o mr-2" aria-hidden="true"></i>{moment(created_at).format("dddd, D [de] MMMM [de] YYYY")}</small>
+          <small className={userGroup || "text-danger"}><i className="fa fa-users mr-2" aria-hidden="true"></i>{userGroup ? userGroup.name : 'Sin asignar'}</small>
         </div>
       </div>
     </div>

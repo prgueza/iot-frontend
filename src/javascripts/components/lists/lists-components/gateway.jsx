@@ -15,7 +15,7 @@ export const Gateway = ({ gateway }) => {
   return(
     <div className={elementClass}>
       <NavLink to={location}>
-        <div className="elemento elemento-grupo">
+        <div className="elemento elemento-gateway">
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1">{name}</h5>
             <small><i className="fa fa-wifi mr-1" aria-hidden="true"></i> {ip_address}</small>

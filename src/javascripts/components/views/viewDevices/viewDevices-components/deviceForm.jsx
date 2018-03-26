@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 /* COMPONENTS */
 export class DeviceForm extends Component{
@@ -20,7 +21,7 @@ export class DeviceForm extends Component{
       resolution: device ? device.resolution._id : resolutions[0]._id,
       mac_address: device ? device.mac_address : '',
       bt_address: device ? device.bt_address : '',
-      gateway: device ? device.gateway._id : gateways.data[0]._id,
+      gateway: device ? (device.gateway ? device.gateway._id : gateways[0]._id) : gateways[0]._id,
       userGroup: device ? device.userGroup._id : userGroups[0]._id,
 
       redirect: false,
@@ -34,7 +35,7 @@ export class DeviceForm extends Component{
     const { devices, device } = this.props;
     // if in post mode get first free id value
     if (!device) {
-      const identificaciones = devices.data.map((d) => d.id); // get all ids
+      const identificaciones = devices.map((d) => d.id); // get all ids
       var id = 1; // start from 1
       while (identificaciones.indexOf(id) != -1){id++} // stop at first free id value
     }
@@ -56,7 +57,7 @@ export class DeviceForm extends Component{
     });
   }
 
-  /* HANDLE SUMBIT (PUT OR POST) */
+  /* HANDLE SUBMIT (PUT OR POST) */
   handleSubmit = () => {
     // define form values to send
     const form = {
@@ -72,41 +73,31 @@ export class DeviceForm extends Component{
     };
     // possible empty fields
     if (!this.props.device) form.created_by = this.props.user._id;
-    fetch( this.props.device ? 'http://localhost:4000/devices/' + this.props.device._id : 'http://localhost:4000/devices',
-      {
-        method: this.props.device ? 'put' : 'post', // post or put method
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-        body: JSON.stringify(form)
-      }
-    )
-    .then((res) => res.json())
+    // HTTP request
+    axios({
+      method: device ? 'put' : 'post',
+      url: device ? device.url : 'http://localhost:4000/devices',
+      data: form,
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    })
     .then((res) => {
-      if (this.props.device) {
-        this.props.updateOne('device', res.result) // IDEA: Alert on updateOne at main
+      if (res.status == 201){
+        return this.props.update(this.props.user); // update dataset
       } else {
-        this.props.addOne('device', res.result)
+        return this.setState({ error: res.data }); // set error
       }
-    }) // update dataset
-    // TODO: alert with success
-    // TODO: throw error and alert with error
-    .then(
-      (success) => { // resolve callback
-        this.setState({ redirect: true })
-      },
-      (error) => { // reject callback
-        this.setState({ error })
-      }
-    );// TODO: error handling
+    })
+    .then((res) => {
+      this.setState({ redirect : true });
+      return res;
+    });
   }
 
   /* RENDER COMPONENT */
   render(){
 
     // Options
-    const optionsGateway = this.props.gateways.data.map((g, i) => <option value={g._id} key={i}>{g.name}</option>);
+    const optionsGateway = this.props.gateways.map((g, i) => <option value={g._id} key={i}>{g.name}</option>);
     const optionsResolution = this.props.resolutions.map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
     const optionsUserGroup = this.props.userGroups.map((u, i) => <option value={u._id} key={i}>{u.name}</option>);
 

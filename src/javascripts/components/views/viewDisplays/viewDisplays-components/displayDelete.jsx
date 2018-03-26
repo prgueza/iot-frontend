@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
-
+import axios from 'axios';
 
 /* COMPONENTS */
 export class DisplayDelete extends Component{
@@ -18,11 +18,9 @@ export class DisplayDelete extends Component{
   /* HANDLE DELETE EVENT */
   handleDelete = (event) =>{
     event.preventDefault();
-    fetch(this.props.display.url, {
-      method: 'delete'
-    })
-    .then(this.props.update) // TODO: promises
+    axios.delete(this.props.display.url)
     .then(this.setState({ redirect: true })) // redirect
+    .then(this.props.update(this.props.user)) // TODO: error handling
     .catch((err) => console.log(err));
   }
 
