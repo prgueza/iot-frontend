@@ -69,7 +69,7 @@ export class DisplayForm extends Component{
     const target = event.target;
     const name = target.name;
     if (name === 'tags'){
-      var value = target.value.split(','); // TODO: better string to array conversion
+      var value = target.value.split(/\s+/);
     } else {
       var value = target.value;
     }

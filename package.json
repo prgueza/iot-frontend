@@ -1,6 +1,6 @@
 {
   "name": "iot-frontend",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",

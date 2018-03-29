@@ -55,7 +55,7 @@ export class GroupForm extends Component{
   handleInputChange = (event) => {
     const target = event.target;
     const name = target.name;
-    if (name === 'tags'){ var value = target.value.split(','); // TODO: better string to array conversion
+    if (name === 'tags'){ var value = target.value.split(/\s+/);
     } else { var value = target.value; }
     this.setState({[name]:value});
   }

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, NavLink, Route, Switch } from 'react-router-dom';
 import cookie from 'react-cookie';
-import { ToastContainer, toast, style } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ axios.defaults.baseURL = 'http://localhost:4000';
 /* IMPORT COMPONENTS */
 import { Navigation } from './views/navigation.jsx';
 import { Content } from './views/content.jsx';
+import { Notification } from './tags/notification.jsx';
 
 /* COMPONENTS */
 export class Main extends Component {
@@ -71,20 +72,24 @@ export class Main extends Component {
             isLoaded: true
           });
         }))
+        .then(() => this.notify('Datos cargados.', 'notify-success', 'check'))
+        .catch(() => this.notify('Error al cargar datos.', 'notify-error', 'times'));
     // else get resources within the userGroup
     } else {
       return axios.all([axios(user.userGroup.url), axios('/resolutions')])
         .then(axios.spread((res, resolutions) => {
-        this.setState({
-          userGroup: res.data,
-          displays: res.data.displays, // set displays that the user can manage
-          images: res.data.images, // set images that the user can manage
-          groups: res.data.groups, // set groups that the user can manage
-          devices: res.data.devices, // set devices that the user can manage
-          resolutions: resolutions.data,
-          isLoaded: true,
-        });
-      }))
+          this.setState({
+            userGroup: res.data,
+            displays: res.data.displays, // set displays that the user can manage
+            images: res.data.images, // set images that the user can manage
+            groups: res.data.groups, // set groups that the user can manage
+            devices: res.data.devices, // set devices that the user can manage
+            resolutions: resolutions.data,
+            isLoaded: true,
+          });
+        }))
+        .then(() => this.notify('Datos cargados.', 'notify-success', 'check'))
+        .catch(() => this.notify('Error al cargar datos.', 'notify-error', 'times'));
     }
   }
 
@@ -93,12 +98,19 @@ export class Main extends Component {
     this.setState({filterValue: value});
   }
 
+  /* ALERTS */
+  notify = (text, style, icon) => {
+    toast(<Notification text={text} icon={icon} />, {
+      position: toast.POSITION.BOTTOM_LEFT,
+      className: style
+    });
+  }
 
   /* RENDER COMPONENT */
   render(){
     return(
       <div className="row main">
-        <ToastContainer closeButton={false} hideProgressBar={false}/>
+        <ToastContainer closeButton={false} hideProgressBar={true}/>
         <Navigation filterData={this.filterData} update={this.update} { ...this.state }/>
         <Content update={this.update} { ...this.state }/>
       </div>
