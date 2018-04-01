@@ -53,11 +53,11 @@ export class Main extends Component {
     // set user id and token
     this.setState({ user, token, isLoggedIn: true });
     // get data
-    this.update(user);
+    this.update(user, true);
   }
 
   /* UPDATE DATA */
-  update = (user) => {
+  update = (user, notify) => {
     // if admin get all the resources needed from the database
     if (user.admin) {
       return axios.all([axios('/users'), axios('/devices'), axios('/gateways'), axios('userGroups'), axios('/locations'), axios('/resolutions')])
@@ -72,8 +72,8 @@ export class Main extends Component {
             isLoaded: true
           });
         }))
-        .then(() => this.notify('Datos cargados.', 'notify-success', 'check'))
-        .catch(() => this.notify('Error al cargar datos.', 'notify-error', 'times'));
+        .then(() => notify && this.notify('Datos cargados', 'notify-success', 'download', toast.POSITION.BOTTOM_LEFT))
+        .catch(() => this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
     // else get resources within the userGroup
     } else {
       return axios.all([axios(user.userGroup.url), axios('/resolutions')])
@@ -88,8 +88,8 @@ export class Main extends Component {
             isLoaded: true,
           });
         }))
-        .then(() => this.notify('Datos cargados.', 'notify-success', 'check'))
-        .catch(() => this.notify('Error al cargar datos.', 'notify-error', 'times'));
+        .then(() => notify && this.notify('Datos cargados', 'notify-success', 'download', toast.POSITION.BOTTOM_LEFT))
+        .catch(() => this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
     }
   }
 
@@ -99,9 +99,9 @@ export class Main extends Component {
   }
 
   /* ALERTS */
-  notify = (text, style, icon) => {
+  notify = (text, style, icon, position) => {
     toast(<Notification text={text} icon={icon} />, {
-      position: toast.POSITION.BOTTOM_LEFT,
+      position: position,
       className: style
     });
   }
@@ -112,7 +112,7 @@ export class Main extends Component {
       <div className="row main">
         <ToastContainer closeButton={false} hideProgressBar={true}/>
         <Navigation filterData={this.filterData} update={this.update} { ...this.state }/>
-        <Content update={this.update} { ...this.state }/>
+        <Content update={this.update} notify={this.notify} { ...this.state }/>
       </div>
     );
   }

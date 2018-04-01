@@ -62,12 +62,12 @@ export class Navigation extends Component{
             </NavLink>
           }
               <li><a href="/disconect"><button type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-sign-out mr-2" aria-hidden="true"></i> Desconectar</button></a></li>
-              <li><button onClick={() => this.props.update(user)} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
+              <li><button onClick={() => this.props.update(user, true)} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
           </ul>
         </div>
         <hr></hr>
         <p className="d-flex justify-content-between">
-          <span>v0.0.16</span>
+          <span>v0.1.0</span>
           <span>{ user ? user.name : 'Cargando...' }</span>
         </p>
       </div>

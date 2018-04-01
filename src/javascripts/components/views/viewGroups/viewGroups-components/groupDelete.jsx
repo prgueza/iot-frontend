@@ -19,9 +19,20 @@ export class GroupDelete extends Component{
   handleDelete = (event) =>{
     event.preventDefault();
     axios.delete(this.props.group.url)
-    .then((res) => this.props.update(this.props.user)) // TODO: promises
-    .then(this.setState({ redirect: true })) // redirect
-    .catch((err) => console.log(err));
+    .then((res) => {
+      if (res.status == 200){
+        this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT);
+        return this.props.update(this.props.user, false); // update dataset
+      }
+    })
+    .then((res) => {
+      this.setState({ redirect : true });
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+    });
   }
 
   render(){

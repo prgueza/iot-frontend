@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 /* IMPORT COMPONENTS */
 import { User } from '../../../lists/lists-components/user.jsx';
@@ -36,10 +36,10 @@ export class ManageUsers extends Component {
   }
 
   componentDidMount(){
-    axios('/users')
+    axios.get('/users')
       .then(
-        (res) => { // resolve callback
-          this.setState({ isLoaded: true, users: res.data });
+        (users) => { // resolve callback
+          this.setState({ isLoaded: true, users: users.data });
         },
         (error) => { // reject callback
           this.setState({ isLoaded: true, error });
@@ -88,38 +88,54 @@ export class ManageUsers extends Component {
     if(this.state.userGroup != ''){ form.userGroup = this.state.userGroup };
     if(this.state.password != ''){ form.password = this.state.password };
     if(this.state.checkPassword != ''){ form.checkPassword = this.state.checkPassword };
-    fetch( this.state.edit ? 'http://localhost:4000/users/' + this.state.element_id : 'http://localhost:4000/users/signup',
-      {
-      method: method, // post, delete or put method
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      body: JSON.stringify(form)
-      }
-    )
-    .then(() => fetch('http://localhost:4000/users/'))
-    .then(res => res.json())
-    .then(
-      (users) => { // resolve callback
-        this.setState({
+    axios({
+      method: method,
+      url: this.state.edit ? 'http://localhost:4000/users/' + this.state.element_id : 'http://localhost:4000/users/signup',
+      data: form,
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    })
+    .then((res) => { // resolve callback
+      if(res.status == 201 || res.status == 200){
+        switch (method) {
+          case 'put':
+            this.props.notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
+            break;
+          case 'post':
+            this.props.notify('Usuario creado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
+            break;
+          case 'delete':
+            this.props.notify('Usuario eliminado con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
+            break;
+          default:
+            console.log('error');
+        }
+        return axios.get('/users')
+        .then((res) => {
+          this.setState({
+            isLoaded: true,
+            users: res.data,
+            login: '',
+            name: '',
+            email: '',
+            password: '',
+            checkPassword: '',
+            userGroup: '',
+            admin: false,
+            edit: false,
+            element_id: '',
+          })
+        })
+      } else {
+        return this.setState({
           isLoaded: true,
-          users,
-          login: '',
-          name: '',
-          email: '',
-          password: '',
-          checkPassword: '',
-          userGroup: '',
-          admin: false,
-          edit: false,
-          element_id: '',
-        });
-      },
-      (error) => { // reject callback
-        this.setState({ isLoaded: true, error });
+          error: res.data
+        })
       }
-    )
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+    });
   }
 
   render(){

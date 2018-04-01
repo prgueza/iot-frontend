@@ -1,8 +1,8 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
-
 
 /* COMPONENTS */
 export class ImageDelete extends Component{
@@ -19,15 +19,20 @@ export class ImageDelete extends Component{
   handleDelete = (event) => {
     event.preventDefault();
     axios.delete(this.props.image.url)
-    .then(this.props.update(this.props.user))
-    .then(
-      (success) => { // resolve callback
-        this.setState({ redirect: true })
-      },
-      (error) => { // reject callback
-        this.setState({ error })
+    .then((res) => {
+      if (res.status == 200){
+        this.props.notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT);
+        return this.props.update(this.props.user, false); // update dataset
       }
-    );// TODO: error handling
+    })
+    .then((res) => {
+      this.setState({ redirect : true });
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+    });
   }
 
   render(){

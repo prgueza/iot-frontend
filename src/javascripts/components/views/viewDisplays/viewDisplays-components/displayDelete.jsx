@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 /* COMPONENTS */
@@ -19,9 +20,20 @@ export class DisplayDelete extends Component{
   handleDelete = (event) =>{
     event.preventDefault();
     axios.delete(this.props.display.url)
-    .then(this.setState({ redirect: true })) // redirect
-    .then(this.props.update(this.props.user)) // TODO: error handling
-    .catch((err) => console.log(err));
+    .then((res) => {
+      if (res.status == 200){
+        this.props.notify('Display eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT);
+        return this.props.update(this.props.user); // update dataset
+      }
+    })
+    .then((res) => {
+      this.setState({ redirect : true });
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+    });
   }
 
   render(){

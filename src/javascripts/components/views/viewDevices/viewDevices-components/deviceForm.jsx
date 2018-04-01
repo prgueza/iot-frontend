@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 /* COMPONENTS */
@@ -59,6 +60,7 @@ export class DeviceForm extends Component{
 
   /* HANDLE SUBMIT (PUT OR POST) */
   handleSubmit = () => {
+    const { device } = this.props;
     // define form values to send
     const form = {
       id: this.state.id,
@@ -82,14 +84,17 @@ export class DeviceForm extends Component{
     })
     .then((res) => {
       if (res.status == 201){
+        this.props.notify('Dispositivo configurado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
         return this.props.update(this.props.user); // update dataset
-      } else {
-        return this.setState({ error: res.data }); // set error
       }
     })
     .then((res) => {
       this.setState({ redirect : true });
       return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT)
     });
   }
 

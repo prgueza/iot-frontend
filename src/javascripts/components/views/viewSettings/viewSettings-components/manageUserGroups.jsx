@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 /* IMPORT COMPONENTS */
 import { UserGroup } from '../../../lists/lists-components/userGroup.jsx';
@@ -30,11 +31,10 @@ export class ManageUserGroups extends Component {
   }
 
   componentDidMount(){
-    fetch("http://localhost:4000/userGroups")
-      .then(res => res.json())
+    axios.get('/userGroups')
       .then(
         (userGroups) => { // resolve callback
-          this.setState({ isLoaded: true, userGroups });
+          this.setState({ isLoaded: true, userGroups: userGroups.data });
         },
         (error) => { // reject callback
           this.setState({ isLoaded: true, error });
@@ -68,33 +68,49 @@ export class ManageUserGroups extends Component {
       'name': this.state.name,
       'description': this.state.description,
     };
-    fetch( this.state.edit ? 'http://localhost:4000/userGroups/' + this.state.element_id : 'http://localhost:4000/userGroups',
-      {
-      method: method, // post, delete or put method
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      body: JSON.stringify(form)
-      }
-    )
-    .then(() => fetch('http://localhost:4000/userGroups/'))
-    .then(res => res.json())
-    .then(
-      (userGroups) => { // resolve callback
-        this.setState({
-          userGroups: userGroups,
+    axios({
+      method: method,
+      url: this.state.edit ? 'http://localhost:4000/userGroups/' + this.state.element_id : 'http://localhost:4000/userGroups',
+      data: form,
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    })
+    .then((res) => { // resolve callback
+      if(res.status == 201 || res.status == 200){
+        switch (method) {
+          case 'put':
+            this.props.notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
+            break;
+          case 'post':
+            this.props.notify('Grupo creado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
+            break;
+          case 'delete':
+            this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
+            break;
+          default:
+            console.log('error');
+        }
+        return axios.get('/userGroups')
+        .then((res) => {
+          this.setState({
+            isLoaded: true,
+            userGroups: res.data,
+            name: '',
+            description: '',
+            element_id: '',
+            edit: false
+          })
+        })
+      } else {
+        return this.setState({
           isLoaded: true,
-          name: '',
-          description: '',
-          edit: false,
-          element_id: '',
-        });
-      },
-      (error) => { // reject callback
-        this.setState({ isLoaded: true, error });
+          error: res.data
+        })
       }
-    )
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+    });
   }
 
   render(){

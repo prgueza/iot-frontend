@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 const moment = require('moment'); moment.locale('es');
+import { toast } from 'react-toastify';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -45,12 +46,20 @@ export class ImageDetails extends Component { // TODO: transform to component
 
      // upload file
      axios.post('http://localhost:4000/images/' + this.props.image._id, data)
-       .then((res) => this.setState({
-         src_url: res.data.result.src_url,
-         extension: res.data.result.extension,
-         size: res.data.result.size
-       }))
-       .catch((err) => { });
+       .then((res) => {
+         if (res.status == 200){
+           this.setState({
+             src_url: res.data.result.src_url,
+             extension: res.data.result.extension,
+             size: res.data.result.size
+           });
+           return this.props.notify('Imagen cargada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
+         }
+       })
+       .catch((err) => {
+         console.log(err);
+         return this.props.notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+       });
   }
 
 
