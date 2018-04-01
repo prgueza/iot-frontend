@@ -1,0 +1,37 @@
+.text-secondary{
+  color: $font-secondary-color;
+}
+
+.text-display{
+  color: $display-color;
+}
+
+.text-image{
+  color: $image-color;
+}
+
+.text-group{
+  color: $group-color;
+}
+
+hr{
+  border-color: #495057;
+}
+
+small{
+  color: $font-secondary-color;
+}
+
+label > i,
+.card-text > i{
+  color: $font-secondary-color;
+}
+
+label,
+.form-group,
+.disable-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -1,0 +1,29 @@
+.custom-select{
+  min-width: 100%;
+}
+
+// inputs
+.form-control{
+  color: $font-primary-color;
+}
+
+.form-control[readonly]{
+  color: $font-primary-color;
+}
+
+.form-control:focus{
+  color: $font-primary-color;
+}
+
+.search{
+  background-color: $bg-color;
+}
+
+.custom-controls-stacked{
+  border: 1px solid $bd-color;
+  border-color: $bd-color;
+  border-radius: $bd-radius;
+  padding: 10px;
+  height: 200px;
+  overflow-y: scroll;
+}

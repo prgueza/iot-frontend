@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 /* IMPORT COMPONENTS */
 import { Resolution } from '../../../lists/lists-components/resolution.jsx';
@@ -55,11 +56,10 @@ export class ManageResolutions extends Component {
   }
 
   componentDidMount(){
-    fetch("http://localhost:4000/resolutions")
-      .then(res => res.json())
+    axios.get('/resolutions')
       .then(
         (resolutions) => { // resolve callback
-          this.setState({ isLoaded: true, resolutions });
+          this.setState({ isLoaded: true, resolutions: resolutions.data });
         },
         (error) => { // reject callback
           this.setState({ isLoaded: true, error });
@@ -78,35 +78,49 @@ export class ManageResolutions extends Component {
       },
     };
     if(this.state.description != ''){form.description = this.state.description}
-    fetch( this.state.edit ? 'http://localhost:4000/resolutions/' + this.state.element_id : 'http://localhost:4000/resolutions',
-      {
-      method: method, // post, delete or put method
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      body: JSON.stringify(form)
-      }
-    )
-    .then(() => fetch('http://localhost:4000/resolutions'))
-    .then(res => res.json())
-    .then(
-      (resolutions) => { // resolve callback
-        this.setState({
+    axios({
+      method: method,
+      url: this.state.edit ? 'http://localhost:4000/resolutions/' + this.state.element_id : 'http://localhost:4000/resolutions',
+      data: form,
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    })
+    .then((res) => { // resolve callback
+      if(res.status == 201 || res.status == 200){
+        switch (method) {
+          case 'put':
+            this.props.notify('Resolución modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
+            break;
+          case 'post':
+            this.props.notify('Resolución creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
+            break;
+          case 'delete':
+            this.props.notify('Resolución eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
+            break;
+          default:
+            console.log('error');
+        }
+        return axios.get('/resolutions')
+        .then((res) => {
+          this.setState({
+            isLoaded: true,
+            resolutions: res.data,
+            name: '',
+            description: '',
+            element_id: '',
+            edit: false
+          })
+        })
+      } else {
+        return this.setState({
           isLoaded: true,
-          resolutions,
-          name: '',
-          width: '',
-          height: '',
-          description: '',
-          element_id: '',
-          edit: false
-        });
-      },
-      (error) => { // reject callback
-        this.setState({ isLoaded: true, error });
+          error: res.data
+        })
       }
-    )
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al añadir/modificar resolución', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+    });
   }
 
   render(){
@@ -125,10 +139,10 @@ export class ManageResolutions extends Component {
         }
       });
       list.push(
-        <div key="0" className="list-group-item-action elemento-display list-group-item flex-column align-items-start">
-          <div className="text-center elemento elemento-display">
+        <div key="0" className="list-group-item-action list-group-item flex-column align-items-start">
+          <div className="text-center elemento">
             <h4 className="mb-1">No se han encontrado {resolutions.length > 0 && 'más'} resoluciones</h4>
-            <hr></hr>
+            <hr className="card-division"></hr>
             <small>Número de resoluciones: {resolutions.length}</small>
           </div>
         </div>
@@ -136,8 +150,8 @@ export class ManageResolutions extends Component {
       return(
         <div className="row mb-3 pb-3">
           <div className="col">
-            <div className="card detalles bg-transparent border-gray">
-              <div className="card-header border-gray">
+            <div className="card detalles">
+              <div className="card-header">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
                     <h2 className="detalles-titulo"><i className='fa fa-arrows-alt mr-3' aria-hidden="true"></i>Resoluciones</h2>
@@ -148,7 +162,7 @@ export class ManageResolutions extends Component {
                 <div className="row">
                   <div className="col-6">
                     <h3>{ this.state.edit ? 'Editar Resolución' : 'Añadir Resolución'}</h3>
-                    <hr></hr>
+                    <hr className="card-division"></hr>
                     <form>
                       <div className="form-row">
                         <div className="form-group col-6">
@@ -180,7 +194,7 @@ export class ManageResolutions extends Component {
                   </div>
                   <div className="col-6">
                     <h3 className="d-flex w-100 justify-content-between">Resoluciones<span>{this.state.resolutions.length}</span></h3>
-                    <hr></hr>
+                    <hr className="card-division"></hr>
                     <div className="lista">
                       <div className="list-group mb-3">
                         {list}

@@ -48,13 +48,13 @@ export class List extends Component{
     }
     const button = <AddButton category={category}/>;
     return(
-      <div className="lista">
+      <div className="list">
         <div className="list-group mb-3">
           {elementos}
-          <div className="list-group-item-action elemento-display list-group-item flex-column align-items-start">
-              <div className="text-center elemento elemento-display">
+          <div className="list-group-item-action list-group-item flex-column align-items-start">
+              <div className="text-center elemento">
                 <h4 className="mb-1">No se han encontrado {content.length > 0 && 'más'} {elementName}</h4>
-                <hr></hr>
+                <hr className="element-division"></hr>
                 <small>Número de {elementName}: {content.length}</small>
               </div>
           </div>

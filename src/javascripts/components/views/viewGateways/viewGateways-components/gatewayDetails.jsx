@@ -22,8 +22,8 @@ export class GatewayDetails extends Component {
 
 		return(
 		<div className="col">
-			<div className="card detalles bg-transparent border-gray">
-				<div className="card-header border-gray">
+			<div className="card detalles">
+				<div className="card-header">
 					<ul className="nav nav-pills card-header-pills justify-content-end mx-1">
 						<li className="nav-item mr-auto">
 							<h2 className="detalles-titulo"><i className='fa fa-sitemap mr-3' aria-hidden="true"></i>{name}</h2>
@@ -55,6 +55,10 @@ export class GatewayDetails extends Component {
 							</div>
 						</div>
 						<div className="col">
+							<div className="asociados">
+								<p className="titulo text-right">DISPOSITIVOS ({devices.length})</p>
+								<Associated contenido={devices} category="devices" appearance="elemento-dispositivo" icon="tablet"/>
+							</div>
 						</div>
 					</div>
 				</div>

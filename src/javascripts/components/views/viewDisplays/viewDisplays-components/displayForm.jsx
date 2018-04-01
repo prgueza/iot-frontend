@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 /* COMPONENTS */
@@ -69,7 +70,7 @@ export class DisplayForm extends Component{
     const target = event.target;
     const name = target.name;
     if (name === 'tags'){
-      var value = target.value.split(/\s+/);
+      var value = target.value.split(','); // TODO: better string to array conversion
     } else {
       var value = target.value;
     }
@@ -160,14 +161,17 @@ export class DisplayForm extends Component{
     })
     .then((res) => {
       if (res.status == 201){
+        this.props.notify('Display configurado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
         return this.props.update(this.props.user); // update dataset
-      } else {
-        return this.setState({ error: res.data }); // set error
       }
     })
     .then((res) => {
       this.setState({ redirect : true });
       return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al configurar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT)
     });
   }
 
@@ -196,8 +200,8 @@ export class DisplayForm extends Component{
       return( <Redirect to={this.state.location} /> );
     } else if(this.state.device == null) {
       return( <div className="col">
-        <div className="card detalles bg-transparent border-gray">
-          <div className="card-header border-gray">
+        <div className="card detalles">
+          <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
                 <h2 className="detalles-titulo text-center"><i className='fa-picture-o' aria-hidden="true"></i>Configurar dispositivo</h2>
@@ -206,9 +210,9 @@ export class DisplayForm extends Component{
           </div>
           <div className="card-body">
             <div className="text-center">
-              <h1>No hay dispositivos libres</h1>
+              <h1>No hay dispositivos sin configurar</h1>
               <hr></hr>
-              <small>Pida al administrador del sistema que de de alta un dispositivo para configurarlo.</small>
+              <small>Pida al administrador del sistema que de de alta un nuevo dispositivo para configurarlo.</small>
             </div>
           </div>
         </div>
@@ -217,8 +221,8 @@ export class DisplayForm extends Component{
       return(
         <div className="col detalles">
           <form id='form'>
-            <div className="card bg-transparent border-gray">
-              <div className="card-header border-gray">
+            <div className="card">
+              <div className="card-header">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
                     { this.props.display ?
@@ -249,7 +253,7 @@ export class DisplayForm extends Component{
                     <input type="text" className="form-control text-truncate" id="bt" name="bt" value={this.state.deviceDescription} readOnly></input>
                   </div>
                 </div>
-                <hr></hr>
+                <hr className="card-division"></hr>
                 <div className="form-row">
                   <div className="form-group col-md-1">
                     <label htmlFor="displayID"><i className="fa fa-hashtag mr-2"></i>ID</label>
@@ -280,13 +284,13 @@ export class DisplayForm extends Component{
                 <div className="form-row">
                   <div className="form-group col">
                     <label htmlFor="displays"><i className="fa fa-television mr-2"></i>Asociar una o varias imagenes</label>
-                    <div className="custom-controls-stacked shadow">
+                    <div className="custom-controls-stacked">
                       {optionsImages}
                     </div>
                   </div>
                   <div className="form-group col">
                     <label htmlFor="groups"><i className="fa fa-list mr-2"></i>Asociar a uno o varios grupos</label>
-                    <div className="custom-controls-stacked shadow">
+                    <div className="custom-controls-stacked">
                       {optionsGroups}
                     </div>
                   </div>
@@ -299,7 +303,7 @@ export class DisplayForm extends Component{
                 </div>
                 <div className="form-row">
                   <div className="form-group col">
-                    {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-imagen btn-tiny" key={i}>{t}</button> : '')}
+                    {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-display btn-tiny" key={i}>{t}</button> : '')}
                   </div>
                 </div>
                 <div className="form-row">

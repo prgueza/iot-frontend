@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 /* COMPONENTS */
@@ -59,6 +60,7 @@ export class DeviceForm extends Component{
 
   /* HANDLE SUBMIT (PUT OR POST) */
   handleSubmit = () => {
+    const { device } = this.props;
     // define form values to send
     const form = {
       id: this.state.id,
@@ -82,14 +84,17 @@ export class DeviceForm extends Component{
     })
     .then((res) => {
       if (res.status == 201){
+        this.props.notify('Dispositivo configurado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
         return this.props.update(this.props.user); // update dataset
-      } else {
-        return this.setState({ error: res.data }); // set error
       }
     })
     .then((res) => {
       this.setState({ redirect : true });
       return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT)
     });
   }
 
@@ -108,8 +113,8 @@ export class DeviceForm extends Component{
       return(
         <div className="col detalles">
           <form id='form'>
-            <div className="card bg-transparent border-gray">
-              <div className="card-header border-gray">
+            <div className="card">
+              <div className="card-header">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
                     { this.props.device ?
@@ -119,8 +124,8 @@ export class DeviceForm extends Component{
                   </li>
                   <li className="nav-item ml-2">
                     { this.props.device ?
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
+                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
                     }
                   </li>
                 </ul>

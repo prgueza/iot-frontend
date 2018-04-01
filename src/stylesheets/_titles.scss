@@ -1,0 +1,59 @@
+.title{
+  background-color: $bg-secondary-color;
+}
+
+.title-displays{
+  color: $display-color;
+  border-width: $bd-width;
+  border-color: $display-color;
+  border-radius: $bd-radius;
+  margin-bottom: 20px;
+}
+
+.title-images{
+  color: $image-color;
+  border-width: $bd-width;
+  border-color: $image-color;
+  border-radius: $bd-radius;
+  margin-bottom: 20px;
+}
+
+.title-groups{
+  color: $group-color;
+  border-width: $bd-width;
+  border-color: $group-color;
+  border-radius: $bd-radius;
+  margin-bottom: 20px;
+}
+
+.title-devices{
+  color: $device-color;
+  border-width: $bd-width;
+  border-color: $device-color;
+  border-radius: $bd-radius;
+  margin-bottom: 20px;
+}
+
+.title-gateways{
+  color: $gateway-color;
+  border-width: $bd-width;
+  border-color: $gateway-color;
+  border-radius: $bd-radius;
+  margin-bottom: 20px;
+}
+
+.title-docs{
+  color: $docs-color;
+  border-width: $bd-width;
+  border-color: $docs-color;
+  border-radius: $bd-radius;
+  margin-bottom: 20px;
+}
+
+.title-settings{
+  color: $settings-color;
+  border-width: $bd-width;
+  border-color: $settings-color;
+  border-radius: $bd-radius;
+  margin-bottom: 20px;
+}

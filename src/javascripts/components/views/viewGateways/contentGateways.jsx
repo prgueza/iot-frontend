@@ -12,7 +12,7 @@ import { GatewayForm } from './viewGateways-components/gatewayForm.jsx';
 /* COMPONENTS */
 export const ContentGateways = ({ gateways, filterValue, ...other }) => {
   return(
-    <div className="col contenido">
+    <div className="col content">
       <div className="row">
         <div className="col">
           <div className="titulo mb-4 text-right">
@@ -24,7 +24,7 @@ export const ContentGateways = ({ gateways, filterValue, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={gateways.length} category='gateways'/>
+            <Title total={gateways.length} appearance="card title-gateways" icon="sitemap"/>
           </div>
         </div>
         <div className="row mb-3">

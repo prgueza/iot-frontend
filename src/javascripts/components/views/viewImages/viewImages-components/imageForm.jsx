@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
+import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
@@ -131,15 +132,18 @@ export class ImageForm extends Component{
       headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
     })
     .then((res) => {
-      if (res.status == 201){
+      if (res.status == 201 || res.status == 200){
+        this.props.notify('Imagen configurada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT);
         return this.props.update(this.props.user); // update dataset
-      } else {
-        return this.setState({ error: res.data }); // set error
       }
     })
     .then((res) => {
       this.setState({ redirect : true });
       return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
     });
   }
 
@@ -170,8 +174,8 @@ export class ImageForm extends Component{
       return(
         <div className="col detalles">
           <form id='form'>
-            <div className="card bg-transparent border-gray">
-              <div className="card-header border-gray">
+            <div className="card">
+              <div className="card-header">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
                     { this.props.image ?

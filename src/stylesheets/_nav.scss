@@ -1,0 +1,32 @@
+.btn-block + .btn-block{
+  margin-top: 0;
+}
+
+.btn-nav{
+  background-color: transparent;
+  text-align: left;
+  color: $font-secondary-color;
+}
+
+.btn-nav:hover{
+  text-decoration: none;
+  color: $font-primary-color;
+}
+
+.active .btn{
+  background-color: $primary-color;
+  color: white;
+}
+
+.nav-list{
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.menu{
+  padding: 30px 20px 30px 20px;
+}
+
+.navigation{
+  padding: 30px 0 0 0;
+}

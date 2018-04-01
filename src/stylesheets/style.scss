@@ -1,14 +1,17 @@
 @import '~bootstrap/scss/_functions';
+@import 'variables';
 @import 'custom';
 @import '~bootstrap/scss/bootstrap';
-@import 'listados';
-@import 'detalles';
+@import 'forms';
+@import 'text';
+@import 'nav';
+@import 'notifications';
+@import 'titles';
+@import 'cards';
+@import 'lists';
+@import 'details';
 @import 'botones';
 @import 'react-select/dist/react-select.css';
-
-$color-letra: #868e96;
-$color-borde: $color-letra;
-$color-display: $green;
 
 // style
 html {
@@ -20,35 +23,10 @@ body{
   font-family: "etica-display";
 }
 
-.doc-body{
-  height: 500px;
+::-webkit-scrollbar{
+  display: none;
 }
 
-.table-wrapper{
-  border: 1px solid #868e96;
-  border-radius: 0.25rem;
-}
-
-.table{
-  color: #868e96;
-  margin-bottom: 0;
-}
-
-.table thead th{
-  border-top: none;
-  border-bottom: 1px solid #868e96;
-}
-
-.table th, .table td{
-  border-color: #868e96;
-}
-
-// SIZING
-
-.form-control[readonly]{
-  background-color: transparent;
-  color: white;
-}
 .main{
   height: 90vh;
 }
@@ -56,6 +34,17 @@ body{
 .ventana{
   max-width: 100%
 }
+
+.content{
+  padding-top: 30px;
+}
+
+.doc-body{
+  height: 500px;
+}
+
+// SIZING
+
 
 .detalles{
   max-width: 100%;
@@ -74,7 +63,7 @@ body{
 }
 
 .vista-imagen-grupo{
-  border: 1px solid $color-borde;
+  border: 1px solid $bd-color;
   border-radius: 0.25rem;
   max-width: 100%;
   height: 300px;
@@ -84,7 +73,7 @@ body{
 }
 
 .vista-imagen-display{
-  border: 1px solid $color-borde;
+  border: 1px solid $bd-color;
   border-radius: 0.25rem;
   max-width: 100%;
   height: 300px;
@@ -93,9 +82,7 @@ body{
   padding: 30 0 30 0;
 }
 
-.asociados{
-  padding:20px;
-}
+
 
 .imagen{
   width: 100%;
@@ -104,7 +91,7 @@ body{
 .dropzone-accepted{
   width: 100%;
   border-radius: 0.25rem;
-  border: 1px solid $color-display !important;
+  border: 1px solid $display-color !important;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -113,21 +100,13 @@ body{
   width: 100%;
   height: 300px;
   border-radius: 0.25rem;
-  border: 1px dashed $color-borde;
+  border: 1px dashed $bd-color;
   text-align: center;
   margin-bottom: 20px;
 }
 
 .frame{
   max-height: 100vh;
-}
-
-.custom-select{
-  min-width: 100%;
-}
-
-.custom-file{
-  min-width: 100%;
 }
 
 .login{
@@ -138,97 +117,16 @@ body{
   overflow-x: scroll;
 }
 
-::-webkit-scrollbar{
-  display: none;
-}
-
-// buttons
-.btn-outline-secondary:hover{
-  color: #343A40;
-}
-
-.btn-block + .btn-block{
-  margin-top: 0;
-}
-
-.btn-nav{
-  background-color: transparent;
-  text-align: left;
-  color: #868e96;
-}
-
 a{
+  color: $font-primary-color;
   text-decoration: none;
-  color: inherit;
 }
 
 a:hover{
+  color: $font-primary-color;
   text-decoration: none;
-  color: white;
-}
-
-.btn-nav:hover{
-  text-decoration: none;
-  color: white;
-}
-
-.active .btn{
-  background-color: #17A2B8;
-  color: white;
-}
-
-// inputs
-.form-control{
-  color: #F8F9FA;
-  border: 1px solid #868e96;
-}
-
-.form-control:focus{
-  color: #FFFFFF;
-}
-
-.buscar{
-  background-color: #495057;
-  color: #dee2e6;
-  border: none;
-}
-
-.nav-list{
-  margin-left: 0px;
-  padding-left: 0px;
-}
-
-.custom-controls-stacked{
-  border: 1px solid #868e96;
-  border-radius: 0.25rem;
-  padding: 10px;
-  height: 200px;
-  overflow-y: scroll;
-}
-
-// colors
-.titulo{
-  color: #868e96;
-}
-
-.titulo-navegacion{
-  color: #495057;
 }
 
 .disponible{
   color: #495057;
-}
-
-.border-gray{
-  border-color: #868e96;
-}
-
-hr{
-  border-color: #495057;
-}
-
-.shadow {
-   -moz-box-shadow:    inset 0 0 5px #1D1D1D;
-   -webkit-box-shadow: inset 0 0 5px #1D1D1D;
-   box-shadow:         inset 0 0 5px #1D1D1D;
 }

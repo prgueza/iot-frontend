@@ -75,8 +75,8 @@ export class GroupDetails extends Component { // TODO: transform to component
 
     return(
     <div className="col">
-      <div className="card detalles bg-transparent border-gray">
-        <div className="card-header border-gray">
+      <div className="card detalles">
+        <div className="card-header">
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">
               <h2 className="detalles-titulo"><i className='fa fa-list mr-3' aria-hidden="true"></i>{name}</h2>
@@ -125,18 +125,18 @@ export class GroupDetails extends Component { // TODO: transform to component
               </div>
             </div>
           </div>
-          <hr></hr>
+          <hr className="card-division"></hr>
           <div className="row">
             <div className="col">
               <div className="asociados">
                 <p className="titulo">DISPLAYS ({displays.length})</p>
-                <Associated contenido={displays} categoria='imagenes'/>
+                <Associated contenido={displays} category="displays" appearance="elemento-display" icon="television"/>
               </div>
             </div>
             <div className="col">
               <div className="asociados">
                 <p className="titulo text-right">IMAGENES ASOCIADAS ({images.length})</p>
-                <Associated contenido={images} categoria='grupos'/>
+                <Associated contenido={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
               </div>
             </div>
           </div>

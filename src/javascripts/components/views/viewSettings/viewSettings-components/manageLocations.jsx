@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 /* IMPORT COMPONENTS */
 import { Location } from '../../../lists/lists-components/location.jsx';
@@ -32,11 +33,10 @@ export class ManageLocations extends Component {
   }
 
   componentDidMount(){
-    fetch("http://localhost:4000/locations")
-      .then(res => res.json())
+    axios.get('/locations')
       .then(
         (locations) => { // resolve callback
-          this.setState({ isLoaded: true, locations });
+          this.setState({ isLoaded: true, locations: locations.data });
         },
         (error) => { // reject callback
           this.setState({ isLoaded: true, error });
@@ -66,11 +66,8 @@ export class ManageLocations extends Component {
   /* HANDLE SUBMIT */
   handleSubmit = (method) => {
     // FORM DATA
-    const form = {
-      'name': this.state.name,
-    };
-    if(this.state.description != ''){form.description = this.state.description}
-
+    const form = { 'name': this.state.name };
+    if(this.state.description != ''){ form.description = this.state.description }
     // HTTP request
     axios({
       method: method,
@@ -80,6 +77,19 @@ export class ManageLocations extends Component {
     })
     .then((res) => {
       if(res.status == 201 || res.status == 200){
+        switch (method) {
+          case 'put':
+            this.props.notify('Localización modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
+            break;
+          case 'post':
+            this.props.notify('Localización creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
+            break;
+          case 'delete':
+            this.props.notify('Localización eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
+            break;
+          default:
+            console.log('error');
+        }
         return axios.get('/locations')
         .then((res) => {
           this.setState({
@@ -98,6 +108,10 @@ export class ManageLocations extends Component {
         })
       }
     })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+    });
   }
 
   render(){
@@ -116,19 +130,20 @@ export class ManageLocations extends Component {
         }
       });
       list.push(
-        <div key="0" className="list-group-item-action elemento-display list-group-item flex-column align-items-start">
-          <div className="text-center elemento elemento-display">
+        <div key="0" className="list-group-item-action list-group-item flex-column align-items-start">
+          <div className="text-center elemento">
             <h4 className="mb-1">No se han encontrado {locations.length > 0 && 'más'} localizaciones</h4>
-            <hr></hr>
+            <hr className="card-division"></hr>
             <small>Número de localizaciones: {locations.length}</small>
           </div>
         </div>
       );
+
       return(
         <div className="row mb-3">
           <div className="col">
-            <div className="card detalles bg-transparent border-gray">
-              <div className="card-header border-gray">
+            <div className="card detalles">
+              <div className="card-header">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
                     <h2 className="detalles-titulo"><i className='fa fa-map-marker mr-3' aria-hidden="true"></i>Localizaciones</h2>
@@ -139,7 +154,7 @@ export class ManageLocations extends Component {
                 <div className="row">
                   <div className="col-6">
                     <h3>{ this.state.edit ? 'Editar Localización' : 'Añadir Localizacion'}</h3>
-                    <hr></hr>
+                    <hr className="card-division"></hr>
                     <form>
                       <div className="form-row">
                         <div className="form-group col">
@@ -165,7 +180,7 @@ export class ManageLocations extends Component {
                   </div>
                   <div className="col-6">
                     <h3 className="d-flex w-100 justify-content-between">Localizaciones<span>{this.state.locations.length}</span></h3>
-                    <hr></hr>
+                    <hr className="card-division"></hr>
                     <div className="lista">
                       <div className="list-group mb-3">
                         {list}

@@ -1,0 +1,125 @@
+//
+// ESTILO GENERAL DE LISTAS
+//
+
+.element-division{
+  border-color: $bd-color;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.list-group{
+  background-color: $bg-color;
+  color: $font-primary-color;
+  max-height: 60vh;
+  overflow-y: scroll;
+  border: 1px solid $bd-color;
+  border-radius: $bd-radius;
+}
+
+.list-group-small{
+  max-height: 30vh;
+}
+
+.asociados{
+  padding:20px;
+}
+
+.list-group-item{padding: 0px;}
+.list-group-item.active{
+  border-color: $bd-color;
+  background-color: $bg-secondary-color;
+  color: $font-primary-color;
+}
+
+.elemento{padding: 0.75rem 1.25rem;}
+
+// Bordes de los elementos
+.list-group-item{ border-color: $bd-color; border-left: 0px; border-right: 0px; border-radius: 0px;}
+.list-group-item:first-child{ border-top: 0px; border-radius: 0px;}
+.list-group-item:last-child{ border-bottom: 0px; border-radius: 0px;}
+
+// Color de la letra y fondo de los elementos
+.list-group-item{ color: $font-primary-color; }
+
+// Color de fondo de los elementos durante hover
+.elemento-inactivo{ margin-right: 2px; }
+.elemento-activo{ margin-right: 0px; }
+
+// Estilo de los elementos activos
+.elemento-display:hover{
+  margin-right: 0px;
+  border-right: $bd-active-width solid $display-color;
+  padding-right: 1rem;
+}
+
+.active .elemento-display{
+  border-right: $bd-active-width solid $display-color;
+  padding-right: 1rem;
+}
+
+.elemento-dispositivo:hover{
+  margin-right: 0px;
+  border-right: $bd-active-width solid $device-color;
+  padding-right: 1rem;
+}
+
+.active .elemento-dispositivo{
+  border-right: $bd-active-width solid $device-color;
+  padding-right: 1rem;
+}
+
+.elemento-gateway:hover{
+  margin-right: 0px;
+  border-right: $bd-active-width solid $gateway-color;
+  padding-right: 1rem;
+}
+
+.active .elemento-gateway{
+  border-right: $bd-active-width solid $gateway-color;
+  padding-right: 1rem;
+}
+
+.elemento-imagen:hover{
+  margin-right: 0px;
+  border-right: $bd-active-width solid $image-color;
+  padding-right: 1rem;
+}
+
+.active .elemento-imagen{
+  border-right: $bd-active-width solid $image-color;
+  padding-right: 1rem;
+}
+
+.elemento-grupo:hover{
+  margin-right: 0px;
+  border-right: $bd-active-width solid $group-color;
+  padding-right: 1rem;
+}
+
+.active .elemento-grupo{
+  border-right: $bd-active-width solid $group-color;
+  padding-right: 1rem;
+}
+
+.elemento-asociado:hover{
+  margin-right: 0px;
+  border-right: $bd-active-width solid $group-color;
+  padding-right: 1rem;
+}
+
+.active .elemento-asociado{
+  border-right: $bd-active-width solid $group-color;
+  padding-right: 1rem;
+}
+
+.elemento-configuracion:hover{
+  margin-right: 0px;
+  border-right: $bd-active-width solid $settings-color;
+  padding-right: 1rem;
+}
+
+.active .elemento-configuracion{
+  border-right: $bd-active-width solid $settings-color;
+  padding-right: 1rem;
+}

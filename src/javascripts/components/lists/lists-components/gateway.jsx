@@ -8,7 +8,7 @@ const cx = require('classnames');
 export const Gateway = ({ gateway }) => {
   const { url, id, name, description, ip_address, mac_address, created_at } = gateway;
   const created = moment(gateway.created_at).from(moment());
-  const elementClass = cx("list-group-item-action elemento-display list-group-item flex-column align-items-start");
+  const elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   const location = {
     pathname: '/gateways/' + id
   }
@@ -17,12 +17,12 @@ export const Gateway = ({ gateway }) => {
       <NavLink to={location}>
         <div className="elemento elemento-gateway">
           <div className="d-flex w-100 justify-content-between">
-            <h5 className="mb-1">{name}</h5>
+            <h5 className="w-60"><strong>{name}</strong></h5>
             <small><i className="fa fa-wifi mr-1" aria-hidden="true"></i> {ip_address}</small>
           </div>
-          <hr></hr>
-          <p className="mb-1">{description}</p>
-          <div className="d-flex w-100 justify-content-between">
+          <hr className="element-division"></hr>
+          <p className="mb-3 mt-2">{description}</p>
+          <div className="d-flex w-100 justify-content-between mt-3">
             <small><i className="fa fa-server mr-1" aria-hidden="true"></i> {mac_address}</small>
             <small>{created}<i className="fa fa-calendar-o ml-1" aria-hidden="true"></i></small>
           </div>

@@ -86,20 +86,20 @@ export class DisplayDetails extends Component {
 
 		return(
 		<div className="col">
-			<div className="card detalles bg-transparent border-gray">
-				<div className="card-header border-gray">
+			<div className="card detalles">
+				<div className="card-header">
 					<ul className="nav nav-pills card-header-pills justify-content-end mx-1">
 						<li className="nav-item mr-auto">
 							<h2 className="detalles-titulo"><i className='fa fa-television mr-3' aria-hidden="true"></i>{name}</h2>
 						</li>
 						<li className="nav-item mr-2">
               <Link to={linktoEdit}>
-                <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
+                <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>Editar</button>
               </Link>
             </li>
             <li className="nav-item ml-2">
               <Link to={linktoDelete}>
-                <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o mr-1" aria-hidden="true"></i>Eliminar</button>
+                <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o mr-2" aria-hidden="true"></i>Eliminar</button>
               </Link>
             </li>
 					</ul>
@@ -138,18 +138,18 @@ export class DisplayDetails extends Component {
               </div>
 						</div>
 					</div>
-					<hr></hr>
+					<hr className="card-division"></hr>
 					<div className="row">
 						<div className="col">
 							<div className="asociados">
 								<p className="titulo">IMAGENES ASOCIADAS ({images.length})</p>
-								<Associated contenido={images} categoria='imagenes'/>
+								<Associated contenido={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
 							</div>
 						</div>
 						<div className="col">
 							<div className="asociados">
 								<p className="titulo text-right">GRUPOS ({groups.length})</p>
-								<Associated contenido={groups} categoria='grupos'/>
+								<Associated contenido={groups} category="groups" appearance="elemento-grupo" icon="list"/>
 							</div>
 						</div>
 					</div>

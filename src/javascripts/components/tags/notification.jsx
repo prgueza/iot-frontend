@@ -8,7 +8,7 @@ import { Icon } from '../icons/icon.jsx';
 export const Notification = ({ text, icon }) => {
   return(
     <div>
-      <Icon icon={icon} mr="2"/> {text}
+      <Icon icon={icon} mr="2" ml="1"/> {text}
     </div>
   );
 };

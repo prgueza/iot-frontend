@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
+import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
@@ -55,9 +56,16 @@ export class GroupForm extends Component{
   handleInputChange = (event) => {
     const target = event.target;
     const name = target.name;
-    if (name === 'tags'){ var value = target.value.split(/\s+/);
-    } else { var value = target.value; }
-    this.setState({[name]:value});
+
+    if (name === 'tags'){
+      var value = target.value.split(','); // TODO: better string to array conversion
+    } else {
+      var value = target.value;
+    }
+
+    this.setState({
+      [name]:value
+    });
   }
 
   /* HANDLE MULTIPLE CHECKBOX */
@@ -135,14 +143,17 @@ export class GroupForm extends Component{
     })
     .then((res) => {
       if (res.status == 201){
+        this.props.notify('Grupo configurada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT);
         return this.props.update(this.props.user); // update dataset
-      } else {
-        return this.setState({ error: res.data }); // set error
       }
     })
     .then((res) => {
       this.setState({ redirect : true });
       return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return this.props.notify('Error al configurar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
     });
   }
 
@@ -172,8 +183,8 @@ export class GroupForm extends Component{
       return(
         <div className="col detalles">
           <form id='form'>
-            <div className="card bg-transparent border-gray">
-              <div className="card-header border-gray">
+            <div className="card">
+              <div className="card-header">
                 <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
                   <li className="nav-item mr-auto">
                   { this.props.group ?
@@ -183,8 +194,8 @@ export class GroupForm extends Component{
                   </li>
                   <li className="nav-item ml-2">
                   { this.props.group ?
-                    <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-warning"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
-                    <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-warning"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                    <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
+                    <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
                   }
                   </li>
                 </ul>
@@ -241,9 +252,9 @@ export class GroupForm extends Component{
                     <input type="text" className="form-control" name="tags" id="tags" value={this.state.tags} onChange={this.handleInputChange}></input>
                   </div>
                 </div>
-                <div className="form-group">
+                <div className="form-row">
                   <div className="form-group col">
-                    {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-grupo btn-tiny" key={i}>{t}</button> : '')}
+                    {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-group btn-tiny" key={i}>{t}</button> : '')}
                   </div>
                 </div>
                 <div className="form-row">

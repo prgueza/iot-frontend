@@ -12,7 +12,7 @@ import { DeviceForm } from './viewDevices-components/deviceForm.jsx';
 /* COMPONENTS */
 export const ContentDevices = ({ devices, filterValue, ...other }) => {
   return(
-    <div className="col contenido">
+    <div className="col content">
       <div className="row">
         <div className="col">
           <div className="titulo mb-4 text-right">
@@ -24,7 +24,7 @@ export const ContentDevices = ({ devices, filterValue, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={devices.length} category='devices'/>
+            <Title total={devices.length} appearance="card title-devices" icon="tablet"/>
           </div>
         </div>
         <div className="row mb-3">

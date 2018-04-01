@@ -12,10 +12,10 @@ import { ManageResolutions } from './viewSettings-components/manageResolutions.j
 
 /* COMPONENTS */
 export class ContentSettings extends Component{
-  
+
   render(){
       return(
-        <div className="col contenido">
+        <div className="col content">
           <div className="row">
             <div className="col">
               <div className="titulo mb-4 text-right">
@@ -27,7 +27,7 @@ export class ContentSettings extends Component{
           <div className="ventana">
             <div className="row">
               <div className="col">
-                <Title total='Configuración' category='settings'/>
+                <Title total='Configuración' appearance="card title-settings" icon="cogs"/>
               </div>
             </div>
             <ManageUsers {...this.props}/>

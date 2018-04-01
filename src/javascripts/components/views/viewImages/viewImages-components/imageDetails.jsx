@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 const moment = require('moment'); moment.locale('es');
+import { toast } from 'react-toastify';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -33,6 +34,15 @@ export class ImageDetails extends Component { // TODO: transform to component
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { src_url, extension, size } = nextProps.image;
+    this.setState({
+      src_url: src_url,
+      extension: extension,
+      size: size
+    });
+  }
+
   onDropAccepted = (acceptedFile) => {
     this.setState({
       file: acceptedFile,
@@ -45,12 +55,20 @@ export class ImageDetails extends Component { // TODO: transform to component
 
      // upload file
      axios.post('http://localhost:4000/images/' + this.props.image._id, data)
-       .then((res) => this.setState({
-         src_url: res.data.result.src_url,
-         extension: res.data.result.extension,
-         size: res.data.result.size
-       }))
-       .catch((err) => { });
+       .then((res) => {
+         if (res.status == 200){
+           this.setState({
+             src_url: res.data.result.src_url,
+             extension: res.data.result.extension,
+             size: res.data.result.size
+           });
+           return this.props.notify('Imagen cargada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
+         }
+       })
+       .catch((err) => {
+         console.log(err);
+         return this.props.notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+       });
   }
 
 
@@ -68,20 +86,20 @@ export class ImageDetails extends Component { // TODO: transform to component
 
     return(
     <div className="col">
-      <div className="card detalles bg-transparent border-gray">
-        <div className="card-header border-gray">
+      <div className="card detalles">
+        <div className="card-header">
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">
               <h2 className="detalles-titulo"><i className='fa fa-picture-o mr-3' aria-hidden="true"></i>{name}</h2>
             </li>
             <li className="nav-item mr-2">
               <Link to={linktoEdit}>
-                <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
+                <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>Editar</button>
               </Link>
             </li>
             <li className="nav-item ml-2">
               <Link to={linktoDelete}>
-                <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o" aria-hidden="true"></i>Eliminar</button>
+                <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o mr-2" aria-hidden="true"></i>Eliminar</button>
               </Link>
             </li>
           </ul>
@@ -120,18 +138,18 @@ export class ImageDetails extends Component { // TODO: transform to component
               </div>
             </div>
           </div>
-          <hr></hr> {/* TODO: more info */}
+          <hr className="card-division"></hr> {/* TODO: more info */}
           <div className="row">
             <div className="col">
               <div className="asociados">
                 <p className="titulo">DISPLAYS ASOCIADOS ({displays.length})</p>
-                <Associated contenido={displays} categoria='imagenes'/>
+                <Associated contenido={displays} category="displays" appearance="elemento-display" icon="television"/>
               </div>
             </div>
             <div className="col">
               <div className="asociados">
                 <p className="titulo">GRUPOS ASOCIADOS ({groups.length})</p>
-                <Associated contenido={groups} categoria='imagenes'/>
+                <Associated contenido={groups} category="groups" appearance="elemento-grupo" icon="list"/>
               </div>
             </div>
           </div>

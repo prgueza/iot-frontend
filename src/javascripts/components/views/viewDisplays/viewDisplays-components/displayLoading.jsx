@@ -6,8 +6,8 @@ export class DisplayLoading extends Component {
 	render() {
 		return(
 		<div className="col">
-			<div className="card detalles bg-transparent border-gray">
-				<div className="card-header border-gray">
+			<div className="card detalles">
+				<div className="card-header">
 					<ul className="nav nav-pills card-header-pills justify-content-end mx-1">
 						<li className="nav-item mr-auto">
 							<h2 className="detalles-titulo"><i className='fa fa-television mr-3' aria-hidden="true"></i>Cargando...</h2>
@@ -30,7 +30,6 @@ export class DisplayLoading extends Component {
 								<p className="card-text"><i className="fa fa-fw fa-map-marker mr-2" aria-hidden="true"></i>Cargando...</p>
 								<p className="card-text"><i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true"></i>Cargando...</p>
 								<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>Cargando...</p>
-								<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>Cargando...</p>
 								<p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>Cargando...</p>
 								<p className="titulo">ETIQUETAS</p>
 								Cargando...
@@ -45,7 +44,7 @@ export class DisplayLoading extends Component {
 							</div>
 						</div>
 					</div>
-					<hr></hr>
+					<hr className="card-division"></hr>
 					<div className="row">
 						<div className="col">
 							<div className="asociados">

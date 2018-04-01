@@ -12,7 +12,7 @@ import { Title } from '../../tags/title.jsx';
 /* COMPONENTS */
 export const ContentGroups = ({ groups, filterValue, ...other }) => {
   return(
-    <div className="col contenido">
+    <div className="col content">
       <div className="row">
         <div className="col">
           <div className="titulo mb-4 text-right">
@@ -24,7 +24,7 @@ export const ContentGroups = ({ groups, filterValue, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={groups.length} category='groups'/>
+            <Title total={groups.length} appearance="card title-groups" icon="list"/>
           </div>
         </div>
         <div className="row mb-3">

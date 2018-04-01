@@ -12,7 +12,7 @@ import { Title } from '../../tags/title.jsx';
 /* COMPONENTS */
 export const ContentImages = ({ images, filterValue, ...other }) => {
   return(
-    <div className="col contenido">
+    <div className="col content">
       <div className="row">
         <div className="col">
           <div className="titulo mb-4 text-right">
@@ -24,7 +24,7 @@ export const ContentImages = ({ images, filterValue, ...other }) => {
       <div className="ventana">
         <div className="row">
           <div className="col">
-            <Title total={images.length} category='images'/>
+            <Title total={images.length} appearance="card title-images" icon="picture-o"/>
           </div>
         </div>
         <div className="row mb-3">

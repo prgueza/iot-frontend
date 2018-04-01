@@ -112,7 +112,7 @@ $colors: (
 ) !default;
 
 $theme-colors: (
-  primary: $blue,
+  primary: $primary-color,
   secondary: $gray-100,
   success: $green,
   info: $cyan,
@@ -166,8 +166,8 @@ $sizes: (
 //
 // Settings for the `<body>` element.
 
-$body-bg: $gray-900;
-$body-color: $gray-600;
+$body-bg: $bg-color;
+$body-color: $font-primary-color;
 
 
 // Links
@@ -230,7 +230,7 @@ $line-height-lg:         1.5 !default;
 $line-height-sm:         1.5 !default;
 
 $border-width: 1px !default;
-$border-color: $gray-200 !default;
+$border-color: $bd-color !default;
 
 $border-radius:          .25rem !default;
 $border-radius-lg:       .3rem !default;
@@ -377,8 +377,8 @@ $btn-transition:                 background-color .15s ease-in-out, border-color
 $input-bg:                       transparent; // edit: Campos de formularios sin fondo
 $input-disabled-bg:              $gray-200 !default;
 
-$input-color:                    $white; // edit:
-$input-border-color:             $bordes; // edit: Campos de formularios con color de borde
+$input-color:                    $font-primary-color; // edit:
+$input-border-color:             $border-color; // edit: Campos de formularios con color de borde
 $input-btn-border-width:         $border-width !default; // For form controls and buttons
 $input-box-shadow:               inset 0 1px 1px rgba($black,.075) !default;
 
@@ -391,7 +391,7 @@ $input-focus-border-color:       lighten(theme-color("primary"), 25%) !default;
 $input-focus-box-shadow:         $input-box-shadow, $btn-focus-box-shadow !default;
 $input-focus-color:              $input-color !default;
 
-$input-placeholder-color:        $bordes; // edit:
+$input-placeholder-color:        $font-secondary-color; // edit:
 
 $input-height-border:           $input-btn-border-width * 2 !default;
 
@@ -637,11 +637,11 @@ $jumbotron-bg:                   $gray-200 !default;
 $card-spacer-y:            .75rem !default;
 $card-spacer-x:            1.25rem !default;
 $card-border-width:        1px !default;
-$card-border-radius:       $border-radius !default;
-$card-border-color:        rgba($black,.125) !default;
+$card-border-radius:       $bd-radius !default;
+$card-border-color:        $bd-color !default;
 $card-inner-border-radius: calc(#{$card-border-radius} - #{$card-border-width}) !default;
 $card-cap-bg:              rgba($black, .03) !default;
-$card-bg:                  $white !default;
+$card-bg:                  $bg-secondary-color !default;
 
 $card-img-overlay-padding: 1.25rem !default;
 
