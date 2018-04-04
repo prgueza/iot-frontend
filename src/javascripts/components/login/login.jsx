@@ -65,7 +65,11 @@ export class Login extends Component{
     return(
       <div className="row login justify-content-center">
         <div className="col-4 align-self-center">
+<<<<<<< HEAD
           <div className="card">
+=======
+          <div className="card bg-transparent border-gray">
+>>>>>>> b67df45c9f1a5779a0d2cb2a7389dbaf8569e37a
             <div className="card-body">
               <h1 className="text-center"><i className="fa fa-barcode fa-4x mb-3"></i></h1>
               <small className="float-right">v0.1.0</small>
@@ -78,7 +82,11 @@ export class Login extends Component{
                   <label className="sr-only" htmlFor="password">Password</label>
                   <input onChange={this.handleInputChange} type="password" className="form-control" id="password" value={this.state.password} name="password" placeholder="Contraseña"></input>
                 </div>
+<<<<<<< HEAD
                 <button onClick={this.handleSubmit} type="submit" className="btn btn-block btn-outline-primary">Entrar</button>
+=======
+                <button onClick={this.handleSubmit} type="submit" className="btn btn-block btn-outline-secondary">Entrar</button>
+>>>>>>> b67df45c9f1a5779a0d2cb2a7389dbaf8569e37a
                 <div className="form-group mt-2">
                   <label className="custom-control custom-checkbox">
                     <input onChange={this.handleInputChange} type="checkbox" checked={this.state.remember} name="remember" value={this.state.remember} className="custom-control-input"></input>

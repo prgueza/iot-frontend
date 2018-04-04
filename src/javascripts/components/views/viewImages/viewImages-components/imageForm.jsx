@@ -132,7 +132,11 @@ export class ImageForm extends Component{
       headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
     })
     .then((res) => {
+<<<<<<< HEAD
       if (res.status == 201 || res.status == 200){
+=======
+      if (res.status == 201){
+>>>>>>> b67df45c9f1a5779a0d2cb2a7389dbaf8569e37a
         this.props.notify('Imagen configurada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT);
         return this.props.update(this.props.user); // update dataset
       }
