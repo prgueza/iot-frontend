@@ -77,35 +77,6 @@ export class Navigation extends Component{
             <span>{ user ? user.name : 'Cargando...' }</span>
           </p>
         </div>
-<<<<<<< HEAD
-=======
-        <div className="navegacion mb-3">
-          <p className="titulo-navegacion">NAVEGACIÓN</p>
-          <ul className="nav-list">
-            {nav}
-          </ul>
-        </div>
-        <div className="navegacion mb-3">
-          <p className="titulo-navegacion">AJUSTES</p>
-          <ul className="nav-list">
-            <NavLink to={'/docs'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
-            </NavLink>
-          { user && user.admin &&
-            <NavLink to={'/settings'}>
-              <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-cogs mr-2" aria-hidden="true"></i> Configuración</button></li>
-            </NavLink>
-          }
-              <li><a href="/disconect"><button type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-sign-out mr-2" aria-hidden="true"></i> Desconectar</button></a></li>
-              <li><button onClick={() => this.props.update(user, true)} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
-          </ul>
-        </div>
-        <hr></hr>
-        <p className="d-flex justify-content-between">
-          <span>v0.1.0</span>
-          <span>{ user ? user.name : 'Cargando...' }</span>
-        </p>
->>>>>>> b67df45c9f1a5779a0d2cb2a7389dbaf8569e37a
       </div>
     );
   }
