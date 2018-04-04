@@ -7,9 +7,9 @@ const cx = require('classnames');
 /* COMPONENT */
 export const Location = ({ location, edit, active }) => {
   const { url, _id, id, name, description } = location;
-  const elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", {"active": active}); // TODO: Change elemento-display class
-  return(
-    <div className={elementClass} onClick={() => edit(_id)}>
+  const elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", {"active": active});
+
+  return(<div className={elementClass} onClick={() => edit(_id)}>
       <div className="elemento elemento-configuracion">
         <div className="d-flex w-100 justify-content-between">
           <h5 className="mb-1"><strong><i className="fa fa-map-marker mr-2" aria-hidden="true"></i>{name}</strong></h5>

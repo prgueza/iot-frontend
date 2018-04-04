@@ -7,7 +7,7 @@ const cx = require('classnames');
 /* COMPONENT */
 export const Resolution = ({ resolution, edit, active }) => {
   const { url, _id, id, name, size, created_at, description } = resolution;
-  const elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", {"active": active}); // TODO: Change elemento-display class
+  const elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", {"active": active});
   return(
     <div className={elementClass} onClick={() => edit(_id)}>
       <div className="elemento elemento-configuracion">

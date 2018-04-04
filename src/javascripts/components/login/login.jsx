@@ -64,11 +64,11 @@ export class Login extends Component{
   render(){
     return(
       <div className="row login justify-content-center">
-        <div className="col-4 align-self-center">
+        <div className="col-lg-4 col-md-8 col-sm-12 align-self-center">
           <div className="card">
             <div className="card-body">
               <h1 className="text-center"><i className="fa fa-barcode fa-4x mb-3"></i></h1>
-              <small className="float-right">v0.1.0</small>
+              <small className="float-right">v0.1.1</small>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label className="sr-only" htmlFor="login">Usuario</label>

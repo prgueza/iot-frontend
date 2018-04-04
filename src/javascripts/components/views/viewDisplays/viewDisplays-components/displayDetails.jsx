@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 /* IMPORT COMPONENTS*/
@@ -35,16 +36,13 @@ export class DisplayDetails extends Component {
   }
 
 	componentWillReceiveProps(nextProps){
-		if (nextProps.updated_at != this.props.updated_at) {
-			// get data
-			const { active_image } = nextProps.display;
-			// state
-			this.setState({
-				display: nextProps.display,
-				active_image: active_image ? active_image._id : '',
-				src_url: active_image ? active_image.src_url : null
-			})
-		}
+		const { active_image } = nextProps.display;
+		// state
+		this.setState({
+			display: nextProps.display,
+			active_image: active_image ? active_image._id : '',
+			src_url: active_image ? active_image.src_url : null
+		})
 	}
 
 	/* HANDLE INPUT CHANGE */
@@ -60,9 +58,10 @@ export class DisplayDetails extends Component {
       })
       .then((res) => {
         if (res.status >= 200 && res.status < 300){
-          const new_image = this.props.display.images.find((i) => value == i._id);
-          const src_url = new_image ? new_image.src_url : null;
-          this.setState({ active_image: value, src_url: src_url });
+          // const new_image = this.props.display.images.find((i) => value == i._id);
+          // const src_url = new_image ? new_image.src_url : null;
+          // this.setState({ active_image: value, src_url: src_url });
+					this.props.notify('Imagen cambiada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
           return this.props.update(this.props.user); // update dataset
         } else {
           return this.setState({ error: res.data }); // set error

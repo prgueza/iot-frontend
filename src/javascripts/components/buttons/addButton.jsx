@@ -8,8 +8,8 @@ export const AddButton = ({ category }) => {
      {"btn-outline-success": category === 'displays'},
      {"btn-outline-info": category === 'images'},
      {"btn-outline-warning": category === 'groups'},
-     {"btn-outline-light": category === 'devices'},
-     {"btn-outline-light": category === 'gateways'}
+     {"btn-outline-primary": category === 'devices'},
+     {"btn-outline-primary": category === 'gateways'}
   );
   const location = {
       pathname: '/' + category + '/add'

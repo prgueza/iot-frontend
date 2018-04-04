@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 const moment = require('moment'); moment.locale('es');
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 /* IMPORT COMPONENTS */
@@ -9,7 +10,7 @@ import { Associated } from '../../associated.jsx';
 import { Tag } from '../../../tags/tag.jsx';
 
 /* COMPONENTS */
-export class GroupDetails extends Component { // TODO: transform to component
+export class GroupDetails extends Component {
 
   constructor(props){
     super(props);
@@ -34,6 +35,17 @@ export class GroupDetails extends Component { // TODO: transform to component
     })
   }
 
+  componentWillReceiveProps(nextProps){
+    // get data
+    const { active_image } = nextProps.group;
+    // state
+    this.setState({
+      group: nextProps.group,
+      active_image: active_image ? active_image._id : '',
+      src_url: active_image ? active_image.src_url : null
+    })
+  }
+
   /* HANDLE INPUT CHANGE */
   handleInputChange = (event) => {
     const value = event.target.value;
@@ -49,7 +61,8 @@ export class GroupDetails extends Component { // TODO: transform to component
         if (res.status == 201){
           const new_image = this.state.group.images.find((i) => value == i._id);
           const src_url = new_image ? new_image.src_url : null;
-          this.setState({ active_image: value, src_url: src_url });
+          this.props.notify('Imagen cambiada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
+          // this.setState({ active_image: value, src_url: src_url });
           return this.props.update(this.props.user); // update dataset
         } else {
           return this.setState({ error: res.data }); // set error

@@ -8,11 +8,12 @@ $bg-secondary-color: #ffffff;
 $bd-color: rgba(0, 0, 0, 0.125);
 //
 $primary-color: #20c997;
-$display-color: #28a745;
+$display-color: $primary-color;
+//$display-color: #28a745;
 $image-color: #17a2b8;
 $group-color: #ffc107;
-$gateway-color: #000000;
-$device-color: #000000;
+$gateway-color: $primary-color;
+$device-color: $primary-color;
 $docs-color: #000000;
 $settings-color: $primary-color;
 //
