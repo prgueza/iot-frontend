@@ -46,7 +46,6 @@ export class List extends Component{
       var elementos = content.map(elemento => <Gateway gateway={elemento} key={elemento._id}/>);
       var elementName = "puertas de enlace";
     }
-    const button = <AddButton category={category}/>;
     return(
       <div className="list">
         <div className="list-group mb-3">
@@ -59,9 +58,7 @@ export class List extends Component{
               </div>
           </div>
         </div>
-        <div>
-          {button}
-        </div>
+        <AddButton category={category}/>
       </div>
     );
   }

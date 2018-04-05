@@ -181,99 +181,97 @@ export class GroupForm extends Component{
       return( <Redirect to={this.state.location} /> );
     } else {
       return(
-        <div className="col detalles">
-          <form id='form'>
-            <div className="card">
-              <div className="card-header">
-                <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
-                  <li className="nav-item mr-auto">
-                  { this.props.group ?
-                    <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un grupo</h2> :
-                    <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo Grupo</h2>
-                  }
-                  </li>
-                  <li className="nav-item ml-2">
-                  { this.props.group ?
-                    <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
-                    <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
-                  }
-                  </li>
-                </ul>
+        <div className="card detalles">
+          <div className="card-header">
+            <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
+              <li className="nav-item mr-auto">
+              { this.props.group ?
+                <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un grupo</h2> :
+                <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo Grupo</h2>
+              }
+              </li>
+              <li className="nav-item ml-2">
+              { this.props.group ?
+                <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
+                <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+              }
+              </li>
+            </ul>
+          </div>
+          <div className="card-body">
+            <form id="form">
+              <div className="form-row">
+                <div className="form-group col-md-1">
+                  <label htmlFor="groupID"><i className="fa fa-hashtag mr-2"></i>ID</label>
+                  <input type="text" className="form-control" id="groupID" placeholder="ID" name="id" value={this.state.id} readOnly></input>
+                </div>
+                <div className="form-group col-md-11">
+                  <label htmlFor="name"><i className="fa fa-picture-o mr-2"></i>Nombre</label>
+                  <input type="text" className="form-control" id="name" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="Nombre del grupo"></input>
+                </div>
               </div>
-              <div className="card-body">
-                <div className="form-row">
-                  <div className="form-group col-md-1">
-                    <label htmlFor="groupID"><i className="fa fa-hashtag mr-2"></i>ID</label>
-                    <input type="text" className="form-control" id="groupID" placeholder="ID" name="id" value={this.state.id} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-11">
-                    <label htmlFor="name"><i className="fa fa-picture-o mr-2"></i>Nombre</label>
-                    <input type="text" className="form-control" id="name" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="Nombre del grupo"></input>
-                  </div>
+              <div className="form-group">
+                <label htmlFor="description"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
+                <input type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleInputChange} placeholder="Descripcion del Grupo"></input>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
+                  <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
+                    <option value={''} key={0}>Sin imagen activa</option>
+                    {this.state.optionsActiveImage}
+                  </select>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="description"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
-                  <input type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleInputChange} placeholder="Descripcion del Grupo"></input>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
-                    <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
-                      <option value={''} key={0}>Sin imagen activa</option>
-                      {this.state.optionsActiveImage}
+                <div className="form-group col">
+                  <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
+                  <div>
+                    <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
+                      {optionsResolution}
                     </select>
                   </div>
-                  <div className="form-group col">
-                    <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
-                    <div>
-                      <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
-                        {optionsResolution}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="images"><i className="fa fa-picture-o mr-2"></i>Asociar una o varias imágenes</label>
-                    <div className="custom-controls-stacked shadow">
-                      {optionsImages}
-                    </div>
-                  </div>
-                  <div className="form-group col">
-                    <label htmlFor="displays"><i className="fa fa-television mr-2"></i>Asociar uno o varios displays</label>
-                    <div className="custom-controls-stacked shadow">
-                      {optionsDisplays}
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="tags"><i className="fa fa-tags mr-2"></i>Etiquetas</label>
-                    <input type="text" className="form-control" name="tags" id="tags" value={this.state.tags} onChange={this.handleInputChange}></input>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-group btn-tiny" key={i}>{t}</button> : '')}
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
-                    <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
-                    <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by.name} readOnly></input>
                 </div>
               </div>
-            </div>
-          </form>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="images"><i className="fa fa-picture-o mr-2"></i>Asociar una o varias imágenes</label>
+                  <div className="custom-controls-stacked shadow">
+                    {optionsImages}
+                  </div>
+                </div>
+                <div className="form-group col">
+                  <label htmlFor="displays"><i className="fa fa-television mr-2"></i>Asociar uno o varios displays</label>
+                  <div className="custom-controls-stacked shadow">
+                    {optionsDisplays}
+                  </div>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="tags"><i className="fa fa-tags mr-2"></i>Etiquetas</label>
+                  <input type="text" className="form-control" name="tags" id="tags" value={this.state.tags} onChange={this.handleInputChange}></input>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-group btn-tiny" key={i}>{t}</button> : '')}
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
+                  <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
+                  <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
+                <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by.name} readOnly></input>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }

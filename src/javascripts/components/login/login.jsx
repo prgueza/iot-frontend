@@ -16,7 +16,7 @@ export class Login extends Component{
     this.state = {
       // form fields
       login: '', // username
-      password: '', // pasword
+      password: '', // password
       remember: false, // if true save login in local sotorage
       // error handling
       error: null
@@ -58,7 +58,9 @@ export class Login extends Component{
         (error) => { // reject callback
           this.setState({ error }); // set error on failure
         }
-      );
+      ).catch((error) => {
+        this.setState({ error });
+      });
   }
 
   render(){
@@ -68,7 +70,7 @@ export class Login extends Component{
           <div className="card">
             <div className="card-body">
               <h1 className="text-center"><i className="fa fa-barcode fa-4x mb-3"></i></h1>
-              <small className="float-right">v0.1.1</small>
+              <small className="float-right">v0.1.2</small>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label className="sr-only" htmlFor="login">Usuario</label>
@@ -87,7 +89,7 @@ export class Login extends Component{
                   </label>
                 </div>
               </form>
-              { this.state.error && <p className="text-center"><i className="fa fa-times mr-2"></i>Usuario o contraseña incorrectos</p> }
+              { this.state.error && <p className="text-center text-danger"><i className="fa fa-times mr-2"></i>Usuario o contraseña incorrectos</p> }
             </div>
           </div>
         </div>
