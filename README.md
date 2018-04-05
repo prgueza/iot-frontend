@@ -34,7 +34,7 @@ Las acciones que se pueden realizar desde una cuenta de administrador son:
   * E-mail del usuario
   * Contraseña de acceso del usuario
   * Permisos de administrador del usuario (determina si el usuario será un administrador o un usuario)
-  * Grupo de gestión del usuario (determina sobre que grupo de recursos tendrá control el usuario desde su cuenta)
+  * Grupo de gestión del usuario (determina sobre qué grupo de recursos tendrá control el usuario desde su cuenta)
 
 * Dar de alta un grupo de gestión: Un grupo de gestión es un conjunto de usuarios que tienen acceso a un conjunto de dispositivos físicos determinado para su gestión. El administrador determina que dispositivos físicos están disponibles para gestionar por qué grupo de usuarios.
 
