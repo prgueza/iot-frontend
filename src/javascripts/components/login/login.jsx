@@ -70,7 +70,7 @@ export class Login extends Component{
           <div className="card">
             <div className="card-body">
               <h1 className="text-center"><i className="fa fa-barcode fa-4x mb-3"></i></h1>
-              <small className="float-right">v0.1.3</small>
+              <small className="float-right">v0.1.4</small>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label className="sr-only" htmlFor="login">Usuario</label>
