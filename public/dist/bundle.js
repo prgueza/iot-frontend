@@ -37681,7 +37681,48 @@ var _initialiseProps = function _initialiseProps() {
 ;
 
 /***/ }),
+<<<<<<< HEAD
 /* 188 */
+=======
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Notification = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _icon = __webpack_require__(23);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* COMPONENTS */
+/* IMPORT MODULES */
+var Notification = exports.Notification = function Notification(_ref) {
+  var text = _ref.text,
+      icon = _ref.icon;
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_icon.Icon, { icon: icon, mr: '2', ml: '1' }),
+    ' ',
+    text
+  );
+};
+
+/* IMPORT COMPONENTS */
+
+/***/ }),
+/* 191 */
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66304,7 +66345,11 @@ var Navigation = exports.Navigation = function (_Component) {
             _react2.default.createElement(
               'span',
               null,
+<<<<<<< HEAD
               'v0.1.4'
+=======
+              'v0.1.3'
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
             ),
             _react2.default.createElement(
               'span',
@@ -66409,13 +66454,19 @@ var _contentAccount = __webpack_require__(314);
 
 var _contentSettings = __webpack_require__(315);
 
+<<<<<<< HEAD
 var _contentDocs = __webpack_require__(325);
 
 var _contentGateways = __webpack_require__(326);
+=======
+var _contentDocs = __webpack_require__(327);
 
-var _contentDevices = __webpack_require__(332);
+var _contentGateways = __webpack_require__(328);
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 
-var _overview = __webpack_require__(337);
+var _contentDevices = __webpack_require__(333);
+
+var _overview = __webpack_require__(338);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70732,6 +70783,10 @@ var _settingsGeneric = __webpack_require__(324);
 
 var _icon = __webpack_require__(23);
 
+var _settingsGeneric = __webpack_require__(326);
+
+var _icon = __webpack_require__(23);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72784,6 +72839,69 @@ var SettingsGeneric = exports.SettingsGeneric = function SettingsGeneric() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.SettingsGeneric = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _addButton = __webpack_require__(14);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* COMPONENTS */
+/* IMPORT MODULES */
+var SettingsGeneric = exports.SettingsGeneric = function SettingsGeneric() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'card detalles' },
+    _react2.default.createElement(
+      'div',
+      { className: 'card-header' },
+      _react2.default.createElement(
+        'ul',
+        { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+        _react2.default.createElement(
+          'li',
+          { className: 'nav-item mr-auto' },
+          _react2.default.createElement(
+            'h2',
+            { className: 'detalles-titulo text-center' },
+            _react2.default.createElement('i', { className: 'fa-map-marker', 'aria-hidden': 'true' }),
+            'Configuraci\xF3n'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'card-body' },
+      _react2.default.createElement(
+        'div',
+        { className: 'text-center' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
+          'Seleccione qu\xE9 desea configurar'
+        )
+      )
+    )
+  );
+};
+
+/* IMPORT COMPONENTS */
+
+/***/ }),
+/* 327 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.ContentDocs = undefined;
 
 var _react = __webpack_require__(1);
@@ -72868,7 +72986,11 @@ var ContentDocs = function ContentDocs(_ref) {
 exports.ContentDocs = ContentDocs;
 
 /***/ }),
+<<<<<<< HEAD
 /* 326 */
+=======
+/* 328 */
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72891,9 +73013,15 @@ var _list = __webpack_require__(17);
 
 var _title = __webpack_require__(12);
 
+<<<<<<< HEAD
 var _gatewayGeneric = __webpack_require__(327);
 
 var _gatewayRouter = __webpack_require__(328);
+=======
+var _gatewayGeneric = __webpack_require__(329);
+
+var _gatewayRouter = __webpack_require__(330);
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 
 var _gatewayForm = __webpack_require__(186);
 
@@ -72975,7 +73103,11 @@ var ContentGateways = function ContentGateways(_ref) {
 exports.ContentGateways = ContentGateways;
 
 /***/ }),
+<<<<<<< HEAD
 /* 327 */
+=======
+/* 329 */
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73045,7 +73177,11 @@ var GatewayGeneric = exports.GatewayGeneric = function GatewayGeneric() {
 /* IMPORT COMPONENTS */
 
 /***/ }),
+<<<<<<< HEAD
 /* 328 */
+=======
+/* 330 */
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73070,11 +73206,19 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+<<<<<<< HEAD
 var _gatewayDetails = __webpack_require__(329);
+=======
+var _gatewayDetails = __webpack_require__(331);
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 
 var _gatewayForm = __webpack_require__(186);
 
+<<<<<<< HEAD
 var _gatewayDelete = __webpack_require__(330);
+=======
+var _gatewayDelete = __webpack_require__(332);
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 
 var _error = __webpack_require__(331);
 
@@ -73187,7 +73331,11 @@ var GatewayRouter = exports.GatewayRouter = function (_Component) {
 ;
 
 /***/ }),
+<<<<<<< HEAD
 /* 329 */
+=======
+/* 331 */
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73390,7 +73538,11 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 ;
 
 /***/ }),
+<<<<<<< HEAD
 /* 330 */
+=======
+/* 332 */
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73524,6 +73676,7 @@ var GatewayDelete = exports.GatewayDelete = function (_Component) {
 ;
 
 /***/ }),
+<<<<<<< HEAD
 /* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -73600,6 +73753,9 @@ var Error = exports.Error = function (_Component) {
 
 /***/ }),
 /* 332 */
+=======
+/* 333 */
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73622,9 +73778,9 @@ var _list = __webpack_require__(17);
 
 var _title = __webpack_require__(12);
 
-var _deviceGeneric = __webpack_require__(333);
+var _deviceGeneric = __webpack_require__(334);
 
-var _deviceRouter = __webpack_require__(334);
+var _deviceRouter = __webpack_require__(335);
 
 var _deviceForm = __webpack_require__(187);
 
@@ -73706,7 +73862,7 @@ var ContentDevices = function ContentDevices(_ref) {
 exports.ContentDevices = ContentDevices;
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73776,7 +73932,7 @@ var DeviceGeneric = exports.DeviceGeneric = function DeviceGeneric() {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73801,11 +73957,11 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _deviceDetails = __webpack_require__(335);
+var _deviceDetails = __webpack_require__(336);
 
 var _deviceForm = __webpack_require__(187);
 
-var _deviceDelete = __webpack_require__(336);
+var _deviceDelete = __webpack_require__(337);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73917,7 +74073,7 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
 ;
 
 /***/ }),
-/* 335 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74111,7 +74267,7 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 ;
 
 /***/ }),
-/* 336 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74245,7 +74401,7 @@ var DeviceDelete = exports.DeviceDelete = function (_Component) {
 ;
 
 /***/ }),
-/* 337 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74260,7 +74416,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _panel = __webpack_require__(338);
+var _panel = __webpack_require__(339);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74315,7 +74471,7 @@ var Overview = exports.Overview = function Overview(_ref) {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 338 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74367,7 +74523,7 @@ var Panel = exports.Panel = function Panel(_ref) {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 339 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74401,7 +74557,91 @@ var Notification = exports.Notification = function Notification(_ref) {
   );
 };
 
+<<<<<<< HEAD
 /* IMPORT COMPONENTS */
+=======
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'row login justify-content-center' },
+        _react2.default.createElement(
+          'div',
+          { className: 'col-lg-4 col-md-8 col-sm-12 align-self-center' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-body' },
+              _react2.default.createElement(
+                'h1',
+                { className: 'text-center' },
+                _react2.default.createElement('i', { className: 'fa fa-barcode fa-4x mb-3' })
+              ),
+              _react2.default.createElement(
+                'small',
+                { className: 'float-right' },
+                'v0.1.3'
+              ),
+              _react2.default.createElement(
+                'form',
+                { onSubmit: this.handleSubmit },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(
+                    'label',
+                    { className: 'sr-only', htmlFor: 'login' },
+                    'Usuario'
+                  ),
+                  _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'text', className: 'form-control', id: 'login', value: this.state.login, name: 'login', placeholder: 'Usuario' })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(
+                    'label',
+                    { className: 'sr-only', htmlFor: 'password' },
+                    'Password'
+                  ),
+                  _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'password', className: 'form-control', id: 'password', value: this.state.password, name: 'password', placeholder: 'Contrase\xF1a' })
+                ),
+                _react2.default.createElement(
+                  'button',
+                  { onClick: this.handleSubmit, type: 'submit', className: 'btn btn-block btn-outline-primary' },
+                  'Entrar'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group mt-2' },
+                  _react2.default.createElement(
+                    'label',
+                    { className: 'custom-control custom-checkbox' },
+                    _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'checkbox', checked: this.state.remember, name: 'remember', value: this.state.remember, className: 'custom-control-input' }),
+                    _react2.default.createElement('span', { className: 'custom-control-indicator' }),
+                    _react2.default.createElement(
+                      'span',
+                      { className: 'custom-control-description' },
+                      'Recordar usuario'
+                    )
+                  )
+                )
+              ),
+              this.state.error && _react2.default.createElement(
+                'p',
+                { className: 'text-center text-danger' },
+                _react2.default.createElement('i', { className: 'fa fa-times mr-2' }),
+                'Usuario o contrase\xF1a incorrectos'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+>>>>>>> 7e71e23b302d1cd9540dc5792e9343c0611a2a6f
 
 /***/ }),
 /* 340 */
