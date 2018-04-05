@@ -14,6 +14,11 @@
   margin-bottom: 15px;
 }
 
+.settings-list{
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
 .list-group{
   background-color: $bg-color;
   color: $font-primary-color;
@@ -32,6 +37,11 @@
   border-color: $bd-color;
   background-color: $bg-secondary-color;
   color: $font-primary-color;
+}
+
+.active .settings-menu-item{
+  background-color: $primary-color;
+  color: white;
 }
 
 .elemento{padding: 0.75rem 1.25rem;}
