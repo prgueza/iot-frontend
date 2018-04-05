@@ -12,6 +12,11 @@ Por ello, el objetivo de este trabajo es desarrollar un front-end en NODE.JS y M
 
 Este repositorio hace uso de la API contenida en el repositorio [iot-api](https://github.com/pedro-rodalia/iot-api)
 
+Cuentas de acceso recomendadas:
+
+* **Administrador:** Usuario: admin - Contraseña: 1234
+* **Usuario:** Usuario: gisai - Contraseña: 1234 
+
 ## Manual
 
 Existen dos tipos de cuentas:
