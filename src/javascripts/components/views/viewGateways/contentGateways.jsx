@@ -12,7 +12,7 @@ import { GatewayForm } from './viewGateways-components/gatewayForm.jsx';
 /* COMPONENTS */
 export const ContentGateways = ({ gateways, filterValue, ...other }) => {
   return(
-    <div className="col content">
+    <div className="overview">
       <div className="row">
         <div className="col">
           <div className="titulo mb-4 text-right">
@@ -21,18 +21,14 @@ export const ContentGateways = ({ gateways, filterValue, ...other }) => {
           <hr></hr>
         </div>
       </div>
-      <div className="ventana">
-        <div className="row">
-          <div className="col">
-            <Title total={gateways.length} appearance="card title-gateways" icon="sitemap"/>
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col-4">
-            <List filterValue={filterValue} category='gateways' content={gateways}/>
-          </div>
-          <div className="col-8">
-            <div className="row mb-3">
+      <div className="row-panel">
+        <div className="panel">
+          <Title total={gateways.length} appearance="card title-gateways" icon="sitemap"/>
+          <div className="row controls">
+            <div className="col-4">
+              <List filterValue={filterValue} category='gateways' content={gateways}/>
+            </div>
+            <div className="col-8">
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
                 <Route path="/gateways/add" render={() => <GatewayForm {...other} gateways={gateways}/>}/>

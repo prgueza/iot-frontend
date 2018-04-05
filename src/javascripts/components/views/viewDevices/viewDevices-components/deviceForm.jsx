@@ -111,93 +111,91 @@ export class DeviceForm extends Component{
       return( <Redirect to={this.state.redirect_location} /> );
     } else {
       return(
-        <div className="col detalles">
-          <form id='form'>
-            <div className="card">
-              <div className="card-header">
-                <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
-                  <li className="nav-item mr-auto">
-                    { this.props.device ?
-                      <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un dispositivo físico</h2> :
-                      <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo dispositivo físico</h2>
-                    }
-                  </li>
-                  <li className="nav-item ml-2">
-                    { this.props.device ?
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
-                    }
-                  </li>
-                </ul>
+        <div className="card detalles">
+          <div className="card-header">
+            <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
+              <li className="nav-item mr-auto">
+                { this.props.device ?
+                  <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un dispositivo físico</h2> :
+                  <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo dispositivo físico</h2>
+                }
+              </li>
+              <li className="nav-item ml-2">
+                { this.props.device ?
+                  <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
+                  <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                }
+              </li>
+            </ul>
+          </div>
+          <div className="card-body">
+            <form id="form">
+              <div className="form-row">
+                <div className="form-group col-md-1">
+                  <label htmlFor="deviceID"><i className="fa fa-hashtag mr-2"></i>ID</label>
+                  <input type="text" className="form-control" id="deviceID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
+                </div>
+                <div className="form-group col-md-11">
+                  <label htmlFor="nombre"><i className="fa fa-tablet mr-2"></i>Nombre</label>
+                  <input type="text" className="form-control" id="nombre" placeholder="Nombre del dispositivo físico" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
+                </div>
               </div>
-              <div className="card-body">
-                <div className="form-row">
-                  <div className="form-group col-md-1">
-                    <label htmlFor="deviceID"><i className="fa fa-hashtag mr-2"></i>ID</label>
-                    <input type="text" className="form-control" id="deviceID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-11">
-                    <label htmlFor="nombre"><i className="fa fa-tablet mr-2"></i>Nombre</label>
-                    <input type="text" className="form-control" id="nombre" placeholder="Nombre del dispositivo físico" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
-                  </div>
+              <div className="form-group">
+                <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
+                <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="mac_address"><i className="fa fa-server mr-2"></i>Dirección MAC</label>
+                  <input type="text" className="form-control" id="mac_address" placeholder="Dirección MAC de la puerta de enlace" name="mac_address" value={this.state.mac_address} onChange={this.handleInputChange}></input>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
-                  <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
+                <div className="form-group col">
+                  <label htmlFor="bt_address"><i className="fa fa-bluetooth-b mr-2"></i>Dirección BT</label>
+                  <input type="text" className="form-control" id="bt_address" placeholder="Dirección BT de la puerta de enlace" name="bt_address" value={this.state.bt_address} onChange={this.handleInputChange}></input>
                 </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="mac_address"><i className="fa fa-server mr-2"></i>Dirección MAC</label>
-                    <input type="text" className="form-control" id="mac_address" placeholder="Dirección MAC de la puerta de enlace" name="mac_address" value={this.state.mac_address} onChange={this.handleInputChange}></input>
-                  </div>
-                  <div className="form-group col">
-                    <label htmlFor="bt_address"><i className="fa fa-bluetooth-b mr-2"></i>Dirección BT</label>
-                    <input type="text" className="form-control" id="bt_address" placeholder="Dirección BT de la puerta de enlace" name="bt_address" value={this.state.bt_address} onChange={this.handleInputChange}></input>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="resolution"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
-                    <div>
-                      <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
-                        {optionsResolution}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-group col">
-                    <label htmlFor="gateway"><i className="fa fa-sitemap mr-2"></i>Puerta de enlace</label>
-                    <div>
-                      <select className="custom-select" name="gateway" value={this.state.gateway} onChange={this.handleInputChange}>
-                        {optionsGateway}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="userGroup"><i className="fa fa-users mr-2"></i>Grupo de gestión del dispositivo</label>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="resolution"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
                   <div>
-                    <select className="custom-select" name="userGroup" value={this.state.userGroup} onChange={this.handleInputChange}>
-                      {optionsUserGroup}
+                    <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
+                      {optionsResolution}
                     </select>
                   </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="created_by"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="created_by" name="created_by" value={this.state.created_by} readOnly></input>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
-                    <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
-                    <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                <div className="form-group col">
+                  <label htmlFor="gateway"><i className="fa fa-sitemap mr-2"></i>Puerta de enlace</label>
+                  <div>
+                    <select className="custom-select" name="gateway" value={this.state.gateway} onChange={this.handleInputChange}>
+                      {optionsGateway}
+                    </select>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+              <div className="form-group">
+                <label htmlFor="userGroup"><i className="fa fa-users mr-2"></i>Grupo de gestión del dispositivo</label>
+                <div>
+                  <select className="custom-select" name="userGroup" value={this.state.userGroup} onChange={this.handleInputChange}>
+                    {optionsUserGroup}
+                  </select>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="created_by"><i className="fa fa-user-o mr-2"></i>Creador</label>
+                <input type="text" className="form-control" id="created_by" name="created_by" value={this.state.created_by} readOnly></input>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
+                  <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
+                  <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }
