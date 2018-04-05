@@ -134,85 +134,83 @@ export class GatewayForm extends Component{
       return( <Redirect to={this.state.redirect_location} /> );
     } else {
       return(
-        <div className="col detalles">
-          <form id='form'>
-            <div className="card">
-              <div className="card-header">
-                <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
-                  <li className="nav-item mr-auto">
-                    { this.props.gateway ?
-                      <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar una puerta de enlace</h2> :
-                      <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir una nueva puerta de enlace</h2>
-                    }
-                  </li>
-                  <li className="nav-item ml-2">
-                    { this.props.gateway ?
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
-                    }
-                  </li>
-                </ul>
+        <div className="card detalles">
+          <div className="card-header">
+            <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
+              <li className="nav-item mr-auto">
+                { this.props.gateway ?
+                  <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar una puerta de enlace</h2> :
+                  <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir una nueva puerta de enlace</h2>
+                }
+              </li>
+              <li className="nav-item ml-2">
+                { this.props.gateway ?
+                  <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
+                  <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
+                }
+              </li>
+            </ul>
+          </div>
+          <div className="card-body">
+            <form id="form">
+              <div className="form-row">
+                <div className="form-group col-md-1">
+                  <label htmlFor="gatewayID"><i className="fa fa-hashtag mr-2"></i>ID</label>
+                  <input type="text" className="form-control" id="gatewayID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
+                </div>
+                <div className="form-group col-md-11">
+                  <label htmlFor="nombre"><i className="fa fa-sitemap mr-2"></i>Nombre</label>
+                  <input type="text" className="form-control" id="nombre" placeholder="Nombre de la puerta de enlace" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
+                </div>
               </div>
-              <div className="card-body">
-                <div className="form-row">
-                  <div className="form-group col-md-1">
-                    <label htmlFor="gatewayID"><i className="fa fa-hashtag mr-2"></i>ID</label>
-                    <input type="text" className="form-control" id="gatewayID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-11">
-                    <label htmlFor="nombre"><i className="fa fa-sitemap mr-2"></i>Nombre</label>
-                    <input type="text" className="form-control" id="nombre" placeholder="Nombre de la puerta de enlace" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
-                  </div>
+              <div className="form-group">
+                <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
+                <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="mac_address"><i className="fa fa-server mr-2"></i>Dirección MAC</label>
+                  <input type="text" className="form-control" id="mac_address" placeholder="Dirección MAC de la puerta de enlace" name="mac_address" value={this.state.mac_address} onChange={this.handleInputChange}></input>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
-                  <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
+                <div className="form-group col">
+                  <label htmlFor="ip_address"><i className="fa fa-wifi mr-2"></i>Dirección IP</label>
+                  <input type="text" className="form-control" id="ip_address" placeholder="Dirección IP de la puerta de enlace" name="ip_address" value={this.state.ip_address} onChange={this.handleInputChange}></input>
                 </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="mac_address"><i className="fa fa-server mr-2"></i>Dirección MAC</label>
-                    <input type="text" className="form-control" id="mac_address" placeholder="Dirección MAC de la puerta de enlace" name="mac_address" value={this.state.mac_address} onChange={this.handleInputChange}></input>
-                  </div>
-                  <div className="form-group col">
-                    <label htmlFor="ip_address"><i className="fa fa-wifi mr-2"></i>Dirección IP</label>
-                    <input type="text" className="form-control" id="ip_address" placeholder="Dirección IP de la puerta de enlace" name="ip_address" value={this.state.ip_address} onChange={this.handleInputChange}></input>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="location"><i className="fa fa-map-marker mr-2"></i>Location</label>
-                    <div>
-                      <select className="custom-select" name='location' onChange={this.handleInputChange}>
-                        {optionsLocation}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="devices"><i className="fa fa-tablet mr-2"></i>Asociar uno o varios dispositivos</label>
-                    <div className="custom-controls-stacked shadow">
-                      {optionsDevices}
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="created_by"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="created_by" name="created_by" value={this.state.created_by} readOnly></input>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
-                    <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
-                    <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="location"><i className="fa fa-map-marker mr-2"></i>Location</label>
+                  <div>
+                    <select className="custom-select" name='location' onChange={this.handleInputChange}>
+                      {optionsLocation}
+                    </select>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="devices"><i className="fa fa-tablet mr-2"></i>Asociar uno o varios dispositivos</label>
+                  <div className="custom-controls-stacked shadow">
+                    {optionsDevices}
+                  </div>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="created_by"><i className="fa fa-user-o mr-2"></i>Creador</label>
+                <input type="text" className="form-control" id="created_by" name="created_by" value={this.state.created_by} readOnly></input>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
+                  <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
+                  <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }

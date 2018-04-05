@@ -21,43 +21,39 @@ export class DeviceDetails extends Component {
 		const linktoDelete = '/devices/' + id + '/delete';
 
 		return(
-		<div className="col">
-			<div className="card detalles">
-				<div className="card-header">
-					<ul className="nav nav-pills card-header-pills justify-content-end mx-1">
-						<li className="nav-item mr-auto">
-							<h2 className="detalles-titulo"><i className='fa fa-tablet mr-3' aria-hidden="true"></i>{name}</h2>
-						</li>
-						<li className="nav-item mr-2">
-              <Link to={linktoEdit}>
-                <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
-              </Link>
-            </li>
-            <li className="nav-item ml-2">
-              <Link to={linktoDelete}>
-                <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o" aria-hidden="true"></i>Eliminar</button>
-              </Link>
-            </li>
-					</ul>
-				</div>
-				<div>
-					<div className="row">
-						<div className="col">
-							<div className="card-body">
-								<p className="titulo">DETALLES</p>
-								<p className="card-text"><i className="fa fa-fw fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
-								<p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
-								<p className="card-text"><i className="fa fa-fw fa-server mr-2" aria-hidden="true"></i>{mac_address}</p>
-								<p className="card-text"><i className="fa fa-fw fa-bluetooth-b mr-2" aria-hidden="true"></i>{bt_address}</p>
-								<p className={gateway ? "card-text" : "card-text text-danger"}><i className="fa fa-fw fa-sitemap mr-2" aria-hidden="true"></i>{gateway ? gateway.name : 'Dispositivo sin asignar'}</p>
-								<p className="card-text"><i className="fa fa-fw fa-users mr-2" aria-hidden="true"></i>{userGroup.name}</p>
-								<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{updated}</p>
-								<p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>{created_by ? created_by.name : 'Usuario eliminado'}</p>
-							</div>
-						</div>
-						<div className="col">
-						</div>
+		<div className="card detalles">
+			<div className="card-header">
+				<ul className="nav nav-pills card-header-pills justify-content-end mx-1">
+					<li className="nav-item mr-auto">
+						<h2 className="detalles-titulo"><i className='fa fa-tablet mr-3' aria-hidden="true"></i>{name}</h2>
+					</li>
+					<li className="nav-item mr-2">
+            <Link to={linktoEdit}>
+              <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true"></i>Editar</button>
+            </Link>
+          </li>
+          <li className="nav-item ml-2">
+            <Link to={linktoDelete}>
+              <button type="button" className="btn btn-outline-danger"><i className="fa fa-trash-o" aria-hidden="true"></i>Eliminar</button>
+            </Link>
+          </li>
+				</ul>
+			</div>
+			<div className="card-body">
+				<div className="row">
+					<div className="col">
+						<p className="titulo">DETALLES</p>
+						<p className="card-text"><i className="fa fa-fw fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
+						<p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
+						<p className="card-text"><i className="fa fa-fw fa-server mr-2" aria-hidden="true"></i>{mac_address}</p>
+						<p className="card-text"><i className="fa fa-fw fa-bluetooth-b mr-2" aria-hidden="true"></i>{bt_address}</p>
+						<p className={gateway ? "card-text" : "card-text text-danger"}><i className="fa fa-fw fa-sitemap mr-2" aria-hidden="true"></i>{gateway ? gateway.name : 'Dispositivo sin asignar'}</p>
+						<p className="card-text"><i className="fa fa-fw fa-users mr-2" aria-hidden="true"></i>{userGroup.name}</p>
+						<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{updated}</p>
+						<p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>{created_by ? created_by.name : 'Usuario eliminado'}</p>
 					</div>
+				</div>
+				<div className="col">
 				</div>
 			</div>
 		</div>

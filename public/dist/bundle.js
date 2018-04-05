@@ -37165,195 +37165,191 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'col detalles' },
+          { className: 'card detalles' },
           _react2.default.createElement(
-            'form',
-            { id: 'form' },
+            'div',
+            { className: 'card-header' },
             _react2.default.createElement(
-              'div',
-              { className: 'card' },
+              'ul',
+              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+              _react2.default.createElement(
+                'li',
+                { className: 'nav-item mr-auto' },
+                this.props.gateway ? _react2.default.createElement(
+                  'h2',
+                  { className: 'detalles-titulo' },
+                  _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+                  'Editar una puerta de enlace'
+                ) : _react2.default.createElement(
+                  'h2',
+                  { className: 'detalles-titulo' },
+                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+                  'A\xF1adir una nueva puerta de enlace'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'nav-item ml-2' },
+                this.props.gateway ? _react2.default.createElement(
+                  'button',
+                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
+                  _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+                  'Guardar cambios'
+                ) : _react2.default.createElement(
+                  'button',
+                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
+                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
+                  'A\xF1adir'
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-body' },
+            _react2.default.createElement(
+              'form',
+              { id: 'form' },
               _react2.default.createElement(
                 'div',
-                { className: 'card-header' },
+                { className: 'form-row' },
                 _react2.default.createElement(
-                  'ul',
-                  { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+                  'div',
+                  { className: 'form-group col-md-1' },
                   _react2.default.createElement(
-                    'li',
-                    { className: 'nav-item mr-auto' },
-                    this.props.gateway ? _react2.default.createElement(
-                      'h2',
-                      { className: 'detalles-titulo' },
-                      _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-                      'Editar una puerta de enlace'
-                    ) : _react2.default.createElement(
-                      'h2',
-                      { className: 'detalles-titulo' },
-                      _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-                      'A\xF1adir una nueva puerta de enlace'
-                    )
+                    'label',
+                    { htmlFor: 'gatewayID' },
+                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
+                    'ID'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'gatewayID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col-md-11' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'nombre' },
+                    _react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
+                    'Nombre'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la puerta de enlace', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'descripcion' },
+                  _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+                  'Descripcion'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-row' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'mac_address' },
+                    _react2.default.createElement('i', { className: 'fa fa-server mr-2' }),
+                    'Direcci\xF3n MAC'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac_address', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac_address', value: this.state.mac_address, onChange: this.handleInputChange })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'ip_address' },
+                    _react2.default.createElement('i', { className: 'fa fa-wifi mr-2' }),
+                    'Direcci\xF3n IP'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'ip_address', placeholder: 'Direcci\xF3n IP de la puerta de enlace', name: 'ip_address', value: this.state.ip_address, onChange: this.handleInputChange })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-row' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'location' },
+                    _react2.default.createElement('i', { className: 'fa fa-map-marker mr-2' }),
+                    'Location'
                   ),
                   _react2.default.createElement(
-                    'li',
-                    { className: 'nav-item ml-2' },
-                    this.props.gateway ? _react2.default.createElement(
-                      'button',
-                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                      _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
-                      'Guardar cambios'
-                    ) : _react2.default.createElement(
-                      'button',
-                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                      _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
-                      'A\xF1adir'
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                      'select',
+                      { className: 'custom-select', name: 'location', onChange: this.handleInputChange },
+                      optionsLocation
                     )
                   )
                 )
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'card-body' },
+                { className: 'form-row' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-row' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col-md-1' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'gatewayID' },
-                      _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                      'ID'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'gatewayID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col-md-11' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'nombre' },
-                      _react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
-                      'Nombre'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la puerta de enlace', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group' },
+                  { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'descripcion' },
-                    _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                    'Descripcion'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-row' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'mac_address' },
-                      _react2.default.createElement('i', { className: 'fa fa-server mr-2' }),
-                      'Direcci\xF3n MAC'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac_address', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac_address', value: this.state.mac_address, onChange: this.handleInputChange })
+                    { htmlFor: 'devices' },
+                    _react2.default.createElement('i', { className: 'fa fa-tablet mr-2' }),
+                    'Asociar uno o varios dispositivos'
                   ),
                   _react2.default.createElement(
                     'div',
-                    { className: 'form-group col' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'ip_address' },
-                      _react2.default.createElement('i', { className: 'fa fa-wifi mr-2' }),
-                      'Direcci\xF3n IP'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'ip_address', placeholder: 'Direcci\xF3n IP de la puerta de enlace', name: 'ip_address', value: this.state.ip_address, onChange: this.handleInputChange })
+                    { className: 'custom-controls-stacked shadow' },
+                    optionsDevices
                   )
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'created_by' },
+                  _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+                  'Creador'
                 ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'created_by', name: 'created_by', value: this.state.created_by, readOnly: true })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-row' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-row' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'location' },
-                      _react2.default.createElement('i', { className: 'fa fa-map-marker mr-2' }),
-                      'Location'
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      null,
-                      _react2.default.createElement(
-                        'select',
-                        { className: 'custom-select', name: 'location', onChange: this.handleInputChange },
-                        optionsLocation
-                      )
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-row' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'devices' },
-                      _react2.default.createElement('i', { className: 'fa fa-tablet mr-2' }),
-                      'Asociar uno o varios dispositivos'
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'custom-controls-stacked shadow' },
-                      optionsDevices
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group' },
+                  { className: 'form-group col-md-6' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'created_by' },
-                    _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-                    'Creador'
+                    { htmlFor: 'fechaCreacion' },
+                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                    'Fecha de creaci\xF3n'
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'created_by', name: 'created_by', value: this.state.created_by, readOnly: true })
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-row' },
+                  { className: 'form-group col-md-6' },
                   _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col-md-6' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'fechaCreacion' },
-                      _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                      'Fecha de creaci\xF3n'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+                    'label',
+                    { htmlFor: 'fechaModificacion' },
+                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                    'Fecha de modificaci\xF3n'
                   ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col-md-6' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'fechaModificacion' },
-                      _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                      'Fecha de modificaci\xF3n'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
-                  )
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
                 )
               )
             )
@@ -37660,214 +37656,210 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'col detalles' },
+          { className: 'card detalles' },
           _react2.default.createElement(
-            'form',
-            { id: 'form' },
+            'div',
+            { className: 'card-header' },
             _react2.default.createElement(
-              'div',
-              { className: 'card' },
+              'ul',
+              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+              _react2.default.createElement(
+                'li',
+                { className: 'nav-item mr-auto' },
+                this.props.device ? _react2.default.createElement(
+                  'h2',
+                  { className: 'detalles-titulo' },
+                  _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+                  'Editar un dispositivo f\xEDsico'
+                ) : _react2.default.createElement(
+                  'h2',
+                  { className: 'detalles-titulo' },
+                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+                  'A\xF1adir un nuevo dispositivo f\xEDsico'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'nav-item ml-2' },
+                this.props.device ? _react2.default.createElement(
+                  'button',
+                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
+                  _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+                  'Guardar cambios'
+                ) : _react2.default.createElement(
+                  'button',
+                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
+                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
+                  'A\xF1adir'
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-body' },
+            _react2.default.createElement(
+              'form',
+              { id: 'form' },
               _react2.default.createElement(
                 'div',
-                { className: 'card-header' },
+                { className: 'form-row' },
                 _react2.default.createElement(
-                  'ul',
-                  { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+                  'div',
+                  { className: 'form-group col-md-1' },
                   _react2.default.createElement(
-                    'li',
-                    { className: 'nav-item mr-auto' },
-                    this.props.device ? _react2.default.createElement(
-                      'h2',
-                      { className: 'detalles-titulo' },
-                      _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-                      'Editar un dispositivo f\xEDsico'
-                    ) : _react2.default.createElement(
-                      'h2',
-                      { className: 'detalles-titulo' },
-                      _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-                      'A\xF1adir un nuevo dispositivo f\xEDsico'
-                    )
+                    'label',
+                    { htmlFor: 'deviceID' },
+                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
+                    'ID'
                   ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'deviceID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col-md-11' },
                   _react2.default.createElement(
-                    'li',
-                    { className: 'nav-item ml-2' },
-                    this.props.device ? _react2.default.createElement(
-                      'button',
-                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                      _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
-                      'Guardar cambios'
-                    ) : _react2.default.createElement(
-                      'button',
-                      { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                      _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
-                      'A\xF1adir'
-                    )
-                  )
+                    'label',
+                    { htmlFor: 'nombre' },
+                    _react2.default.createElement('i', { className: 'fa fa-tablet mr-2' }),
+                    'Nombre'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del dispositivo f\xEDsico', name: 'name', value: this.state.name, onChange: this.handleInputChange })
                 )
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'card-body' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-row' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col-md-1' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'deviceID' },
-                      _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                      'ID'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'deviceID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col-md-11' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'nombre' },
-                      _react2.default.createElement('i', { className: 'fa fa-tablet mr-2' }),
-                      'Nombre'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del dispositivo f\xEDsico', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                  )
+                  'label',
+                  { htmlFor: 'descripcion' },
+                  _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+                  'Descripcion'
                 ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-row' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-group' },
+                  { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'descripcion' },
-                    _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                    'Descripcion'
+                    { htmlFor: 'mac_address' },
+                    _react2.default.createElement('i', { className: 'fa fa-server mr-2' }),
+                    'Direcci\xF3n MAC'
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac_address', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac_address', value: this.state.mac_address, onChange: this.handleInputChange })
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-row' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'mac_address' },
-                      _react2.default.createElement('i', { className: 'fa fa-server mr-2' }),
-                      'Direcci\xF3n MAC'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac_address', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac_address', value: this.state.mac_address, onChange: this.handleInputChange })
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'bt_address' },
-                      _react2.default.createElement('i', { className: 'fa fa-bluetooth-b mr-2' }),
-                      'Direcci\xF3n BT'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'bt_address', placeholder: 'Direcci\xF3n BT de la puerta de enlace', name: 'bt_address', value: this.state.bt_address, onChange: this.handleInputChange })
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-row' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'resolution' },
-                      _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
-                      'Resoluci\xF3n'
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      null,
-                      _react2.default.createElement(
-                        'select',
-                        { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
-                        optionsResolution
-                      )
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'gateway' },
-                      _react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
-                      'Puerta de enlace'
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      null,
-                      _react2.default.createElement(
-                        'select',
-                        { className: 'custom-select', name: 'gateway', value: this.state.gateway, onChange: this.handleInputChange },
-                        optionsGateway
-                      )
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group' },
+                  { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'userGroup' },
-                    _react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
-                    'Grupo de gesti\xF3n del dispositivo'
+                    { htmlFor: 'bt_address' },
+                    _react2.default.createElement('i', { className: 'fa fa-bluetooth-b mr-2' }),
+                    'Direcci\xF3n BT'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'bt_address', placeholder: 'Direcci\xF3n BT de la puerta de enlace', name: 'bt_address', value: this.state.bt_address, onChange: this.handleInputChange })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-row' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'resolution' },
+                    _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
+                    'Resoluci\xF3n'
                   ),
                   _react2.default.createElement(
                     'div',
                     null,
                     _react2.default.createElement(
                       'select',
-                      { className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
-                      optionsUserGroup
+                      { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
+                      optionsResolution
                     )
                   )
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-group' },
+                  { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'created_by' },
-                    _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-                    'Creador'
+                    { htmlFor: 'gateway' },
+                    _react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
+                    'Puerta de enlace'
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'created_by', name: 'created_by', value: this.state.created_by, readOnly: true })
+                  _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                      'select',
+                      { className: 'custom-select', name: 'gateway', value: this.state.gateway, onChange: this.handleInputChange },
+                      optionsGateway
+                    )
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'userGroup' },
+                  _react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
+                  'Grupo de gesti\xF3n del dispositivo'
                 ),
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-row' },
+                  null,
                   _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col-md-6' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'fechaCreacion' },
-                      _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                      'Fecha de creaci\xF3n'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group col-md-6' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'fechaModificacion' },
-                      _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                      'Fecha de modificaci\xF3n'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+                    'select',
+                    { className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
+                    optionsUserGroup
                   )
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'created_by' },
+                  _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+                  'Creador'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'created_by', name: 'created_by', value: this.state.created_by, readOnly: true })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-row' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col-md-6' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'fechaCreacion' },
+                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                    'Fecha de creaci\xF3n'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col-md-6' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'fechaModificacion' },
+                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                    'Fecha de modificaci\xF3n'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
                 )
               )
             )
@@ -66424,7 +66416,7 @@ var Navigation = exports.Navigation = function (_Component) {
             _react2.default.createElement(
               'span',
               null,
-              'v0.1.1'
+              'v0.1.2'
             ),
             _react2.default.createElement(
               'span',
@@ -72949,7 +72941,7 @@ var ContentGateways = function ContentGateways(_ref) {
 
   return _react2.default.createElement(
     'div',
-    { className: 'col content' },
+    { className: 'overview' },
     _react2.default.createElement(
       'div',
       { className: 'row' },
@@ -72970,30 +72962,22 @@ var ContentGateways = function ContentGateways(_ref) {
     ),
     _react2.default.createElement(
       'div',
-      { className: 'ventana' },
+      { className: 'row-panel' },
       _react2.default.createElement(
         'div',
-        { className: 'row' },
+        { className: 'panel' },
+        _react2.default.createElement(_title.Title, { total: gateways.length, appearance: 'card title-gateways', icon: 'sitemap' }),
         _react2.default.createElement(
           'div',
-          { className: 'col' },
-          _react2.default.createElement(_title.Title, { total: gateways.length, appearance: 'card title-gateways', icon: 'sitemap' })
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'row mb-3' },
-        _react2.default.createElement(
-          'div',
-          { className: 'col-4' },
-          _react2.default.createElement(_list.List, { filterValue: filterValue, category: 'gateways', content: gateways })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'col-8' },
+          { className: 'row controls' },
           _react2.default.createElement(
             'div',
-            { className: 'row mb-3' },
+            { className: 'col-4' },
+            _react2.default.createElement(_list.List, { filterValue: filterValue, category: 'gateways', content: gateways })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-8' },
             _react2.default.createElement(
               _reactRouterDom.Switch,
               null,
@@ -73043,48 +73027,44 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var GatewayGeneric = exports.GatewayGeneric = function GatewayGeneric() {
   return _react2.default.createElement(
     'div',
-    { className: 'col' },
+    { className: 'card detalles' },
     _react2.default.createElement(
       'div',
-      { className: 'card detalles' },
+      { className: 'card-header' },
       _react2.default.createElement(
-        'div',
-        { className: 'card-header' },
+        'ul',
+        { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
         _react2.default.createElement(
-          'ul',
-          { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+          'li',
+          { className: 'nav-item mr-auto' },
           _react2.default.createElement(
-            'li',
-            { className: 'nav-item mr-auto' },
-            _react2.default.createElement(
-              'h2',
-              { className: 'detalles-titulo text-center' },
-              _react2.default.createElement('i', { className: 'fa-map-marker', 'aria-hidden': 'true' }),
-              'Detalles'
-            )
+            'h2',
+            { className: 'detalles-titulo text-center' },
+            _react2.default.createElement('i', { className: 'fa-map-marker', 'aria-hidden': 'true' }),
+            'Detalles'
           )
         )
-      ),
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'card-body' },
       _react2.default.createElement(
         'div',
-        { className: 'card-body' },
+        { className: 'text-center' },
         _react2.default.createElement(
-          'div',
-          { className: 'text-center' },
-          _react2.default.createElement(
-            'h1',
-            null,
-            _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
-            'Seleccione una puerta de enlace'
-          ),
-          _react2.default.createElement('hr', { className: 'card-division' }),
-          _react2.default.createElement(
-            'p',
-            null,
-            'O a\xF1ada una nueva'
-          ),
-          _react2.default.createElement(_addButton.AddButton, { category: 'gateways' })
-        )
+          'h1',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
+          'Seleccione una puerta de enlace'
+        ),
+        _react2.default.createElement('hr', { className: 'card-division' }),
+        _react2.default.createElement(
+          'p',
+          null,
+          'O a\xF1ada una nueva'
+        ),
+        _react2.default.createElement(_addButton.AddButton, { category: 'gateways' })
       )
     )
   );
@@ -73306,132 +73286,124 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'col' },
+				{ className: 'card detalles' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'card detalles' },
+					{ className: 'card-header' },
 					_react2.default.createElement(
-						'div',
-						{ className: 'card-header' },
+						'ul',
+						{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
 						_react2.default.createElement(
-							'ul',
-							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							'li',
+							{ className: 'nav-item mr-auto' },
 							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-auto' },
+								'h2',
+								{ className: 'detalles-titulo' },
+								_react2.default.createElement('i', { className: 'fa fa-sitemap mr-3', 'aria-hidden': 'true' }),
+								name
+							)
+						),
+						_react2.default.createElement(
+							'li',
+							{ className: 'nav-item mr-2' },
+							_react2.default.createElement(
+								_reactRouterDom.Link,
+								{ to: linktoEdit },
 								_react2.default.createElement(
-									'h2',
-									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-sitemap mr-3', 'aria-hidden': 'true' }),
-									name
+									'button',
+									{ type: 'button', className: 'btn btn-outline-warning' },
+									_react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-1', 'aria-hidden': 'true' }),
+									'Editar'
 								)
-							),
+							)
+						),
+						_react2.default.createElement(
+							'li',
+							{ className: 'nav-item ml-2' },
 							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-2' },
+								_reactRouterDom.Link,
+								{ to: linktoDelete },
 								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: linktoEdit },
-									_react2.default.createElement(
-										'button',
-										{ type: 'button', className: 'btn btn-outline-warning' },
-										_react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-1', 'aria-hidden': 'true' }),
-										'Editar'
-									)
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item ml-2' },
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: linktoDelete },
-									_react2.default.createElement(
-										'button',
-										{ type: 'button', className: 'btn btn-outline-danger' },
-										_react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
-										'Eliminar'
-									)
+									'button',
+									{ type: 'button', className: 'btn btn-outline-danger' },
+									_react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
+									'Eliminar'
 								)
 							)
 						)
-					),
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'card-body' },
 					_react2.default.createElement(
 						'div',
-						null,
+						{ className: 'row' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'row' },
+							{ className: 'col' },
 							_react2.default.createElement(
-								'div',
-								{ className: 'col' },
-								_react2.default.createElement(
-									'div',
-									{ className: 'card-body' },
-									_react2.default.createElement(
-										'p',
-										{ className: 'titulo' },
-										'DETALLES'
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
-										id
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
-										description
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2', 'aria-hidden': 'true' }),
-										mac_address
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-wifi mr-2', 'aria-hidden': 'true' }),
-										ip_address
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-map-marker mr-2', 'aria-hidden': 'true' }),
-										location ? location.name : 'Localización no especificada'
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
-										updated
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
-										created_by ? created_by.name : 'Usuario eliminado'
-									)
-								)
+								'p',
+								{ className: 'titulo' },
+								'DETALLES'
 							),
 							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
+								id
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
+								description
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2', 'aria-hidden': 'true' }),
+								mac_address
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-wifi mr-2', 'aria-hidden': 'true' }),
+								ip_address
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-map-marker mr-2', 'aria-hidden': 'true' }),
+								location ? location.name : 'Localización no especificada'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
+								updated
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
+								created_by ? created_by.name : 'Usuario eliminado'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'col' },
+							_react2.default.createElement(
 								'div',
-								{ className: 'col' },
+								{ className: 'asociados' },
 								_react2.default.createElement(
-									'div',
-									{ className: 'asociados' },
-									_react2.default.createElement(
-										'p',
-										{ className: 'titulo text-right' },
-										'DISPOSITIVOS (',
-										devices.length,
-										')'
-									),
-									_react2.default.createElement(_associated.Associated, { contenido: devices, category: 'devices', appearance: 'elemento-dispositivo', icon: 'tablet' })
-								)
+									'p',
+									{ className: 'titulo text-right' },
+									'DISPOSITIVOS (',
+									devices.length,
+									')'
+								),
+								_react2.default.createElement(_associated.Associated, { contenido: devices, category: 'devices', appearance: 'elemento-dispositivo', icon: 'tablet' })
 							)
 						)
 					)
@@ -73525,51 +73497,47 @@ var GatewayDelete = exports.GatewayDelete = function (_Component) {
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'col detalles' },
+          { className: 'card detalles' },
           _react2.default.createElement(
             'div',
-            { className: 'card' },
+            { className: 'card-header' },
             _react2.default.createElement(
-              'div',
-              { className: 'card-header' },
+              'ul',
+              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
               _react2.default.createElement(
-                'ul',
-                { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+                'li',
+                { className: 'nav-item mr-auto' },
                 _react2.default.createElement(
-                  'li',
-                  { className: 'nav-item mr-auto' },
-                  _react2.default.createElement(
-                    'h2',
-                    { className: 'detalles-titulo' },
-                    _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-                    'Eliminar Puerta de enlace'
-                  )
+                  'h2',
+                  { className: 'detalles-titulo' },
+                  _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+                  'Eliminar Puerta de enlace'
                 )
               )
-            ),
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-body' },
             _react2.default.createElement(
               'div',
-              { className: 'card-body' },
+              { className: 'text-center' },
               _react2.default.createElement(
-                'div',
-                { className: 'text-center' },
-                _react2.default.createElement(
-                  'h1',
-                  null,
-                  '\xBFEliminar puerta de enlace?'
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  'Esta acci\xF3n no se puede deshacer'
-                ),
-                _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-                  'Eliminar'
-                )
+                'h1',
+                null,
+                '\xBFEliminar puerta de enlace?'
+              ),
+              _react2.default.createElement('hr', { className: 'card-division' }),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Esta acci\xF3n no se puede deshacer'
+              ),
+              _react2.default.createElement(
+                'button',
+                { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
+                _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+                'Eliminar'
               )
             )
           )
@@ -73629,7 +73597,7 @@ var ContentDevices = function ContentDevices(_ref) {
 
   return _react2.default.createElement(
     'div',
-    { className: 'col content' },
+    { className: 'overview' },
     _react2.default.createElement(
       'div',
       { className: 'row' },
@@ -73650,30 +73618,22 @@ var ContentDevices = function ContentDevices(_ref) {
     ),
     _react2.default.createElement(
       'div',
-      { className: 'ventana' },
+      { className: 'row-panel' },
       _react2.default.createElement(
         'div',
-        { className: 'row' },
+        { className: 'panel' },
+        _react2.default.createElement(_title.Title, { total: devices.length, appearance: 'card title-devices', icon: 'tablet' }),
         _react2.default.createElement(
           'div',
-          { className: 'col' },
-          _react2.default.createElement(_title.Title, { total: devices.length, appearance: 'card title-devices', icon: 'tablet' })
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'row mb-3' },
-        _react2.default.createElement(
-          'div',
-          { className: 'col-4' },
-          _react2.default.createElement(_list.List, { filterValue: filterValue, category: 'devices', content: devices })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'col-8' },
+          { className: 'row controls' },
           _react2.default.createElement(
             'div',
-            { className: 'row mb-3' },
+            { className: 'col-4' },
+            _react2.default.createElement(_list.List, { filterValue: filterValue, category: 'devices', content: devices })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-8' },
             _react2.default.createElement(
               _reactRouterDom.Switch,
               null,
@@ -73723,48 +73683,44 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var DeviceGeneric = exports.DeviceGeneric = function DeviceGeneric() {
   return _react2.default.createElement(
     'div',
-    { className: 'col' },
+    { className: 'card detalles' },
     _react2.default.createElement(
       'div',
-      { className: 'card detalles' },
+      { className: 'card-header' },
       _react2.default.createElement(
-        'div',
-        { className: 'card-header' },
+        'ul',
+        { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
         _react2.default.createElement(
-          'ul',
-          { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+          'li',
+          { className: 'nav-item mr-auto' },
           _react2.default.createElement(
-            'li',
-            { className: 'nav-item mr-auto' },
-            _react2.default.createElement(
-              'h2',
-              { className: 'detalles-titulo text-center' },
-              _react2.default.createElement('i', { className: 'fa-map-marker', 'aria-hidden': 'true' }),
-              'Detalles'
-            )
+            'h2',
+            { className: 'detalles-titulo text-center' },
+            _react2.default.createElement('i', { className: 'fa-map-marker', 'aria-hidden': 'true' }),
+            'Detalles'
           )
         )
-      ),
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'card-body' },
       _react2.default.createElement(
         'div',
-        { className: 'card-body' },
+        { className: 'text-center' },
         _react2.default.createElement(
-          'div',
-          { className: 'text-center' },
-          _react2.default.createElement(
-            'h1',
-            null,
-            _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
-            'Seleccione un dispositivo f\xEDsico'
-          ),
-          _react2.default.createElement('hr', { className: 'card-division' }),
-          _react2.default.createElement(
-            'p',
-            null,
-            'O a\xF1ada uno nuevo'
-          ),
-          _react2.default.createElement(_addButton.AddButton, { category: 'devices' })
-        )
+          'h1',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
+          'Seleccione un dispositivo f\xEDsico'
+        ),
+        _react2.default.createElement('hr', { className: 'card-division' }),
+        _react2.default.createElement(
+          'p',
+          null,
+          'O a\xF1ada uno nuevo'
+        ),
+        _react2.default.createElement(_addButton.AddButton, { category: 'devices' })
       )
     )
   );
@@ -73985,126 +73941,118 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 
 			return _react2.default.createElement(
 				'div',
-				{ className: 'col' },
+				{ className: 'card detalles' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'card detalles' },
+					{ className: 'card-header' },
 					_react2.default.createElement(
-						'div',
-						{ className: 'card-header' },
+						'ul',
+						{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
 						_react2.default.createElement(
-							'ul',
-							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							'li',
+							{ className: 'nav-item mr-auto' },
 							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-auto' },
+								'h2',
+								{ className: 'detalles-titulo' },
+								_react2.default.createElement('i', { className: 'fa fa-tablet mr-3', 'aria-hidden': 'true' }),
+								name
+							)
+						),
+						_react2.default.createElement(
+							'li',
+							{ className: 'nav-item mr-2' },
+							_react2.default.createElement(
+								_reactRouterDom.Link,
+								{ to: linktoEdit },
 								_react2.default.createElement(
-									'h2',
-									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-tablet mr-3', 'aria-hidden': 'true' }),
-									name
+									'button',
+									{ type: 'button', className: 'btn btn-outline-warning' },
+									_react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-1', 'aria-hidden': 'true' }),
+									'Editar'
 								)
-							),
+							)
+						),
+						_react2.default.createElement(
+							'li',
+							{ className: 'nav-item ml-2' },
 							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-2' },
+								_reactRouterDom.Link,
+								{ to: linktoDelete },
 								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: linktoEdit },
-									_react2.default.createElement(
-										'button',
-										{ type: 'button', className: 'btn btn-outline-warning' },
-										_react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-1', 'aria-hidden': 'true' }),
-										'Editar'
-									)
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item ml-2' },
-								_react2.default.createElement(
-									_reactRouterDom.Link,
-									{ to: linktoDelete },
-									_react2.default.createElement(
-										'button',
-										{ type: 'button', className: 'btn btn-outline-danger' },
-										_react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
-										'Eliminar'
-									)
+									'button',
+									{ type: 'button', className: 'btn btn-outline-danger' },
+									_react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
+									'Eliminar'
 								)
 							)
 						)
-					),
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'card-body' },
 					_react2.default.createElement(
 						'div',
-						null,
+						{ className: 'row' },
 						_react2.default.createElement(
 							'div',
-							{ className: 'row' },
+							{ className: 'col' },
 							_react2.default.createElement(
-								'div',
-								{ className: 'col' },
-								_react2.default.createElement(
-									'div',
-									{ className: 'card-body' },
-									_react2.default.createElement(
-										'p',
-										{ className: 'titulo' },
-										'DETALLES'
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
-										id
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
-										description
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2', 'aria-hidden': 'true' }),
-										mac_address
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-bluetooth-b mr-2', 'aria-hidden': 'true' }),
-										bt_address
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: gateway ? "card-text" : "card-text text-danger" },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-sitemap mr-2', 'aria-hidden': 'true' }),
-										gateway ? gateway.name : 'Dispositivo sin asignar'
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-users mr-2', 'aria-hidden': 'true' }),
-										userGroup.name
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
-										updated
-									),
-									_react2.default.createElement(
-										'p',
-										{ className: 'card-text' },
-										_react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
-										created_by ? created_by.name : 'Usuario eliminado'
-									)
-								)
+								'p',
+								{ className: 'titulo' },
+								'DETALLES'
 							),
-							_react2.default.createElement('div', { className: 'col' })
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
+								id
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
+								description
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2', 'aria-hidden': 'true' }),
+								mac_address
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-bluetooth-b mr-2', 'aria-hidden': 'true' }),
+								bt_address
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: gateway ? "card-text" : "card-text text-danger" },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-sitemap mr-2', 'aria-hidden': 'true' }),
+								gateway ? gateway.name : 'Dispositivo sin asignar'
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-users mr-2', 'aria-hidden': 'true' }),
+								userGroup.name
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
+								updated
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								_react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
+								created_by ? created_by.name : 'Usuario eliminado'
+							)
 						)
-					)
+					),
+					_react2.default.createElement('div', { className: 'col' })
 				)
 			);
 		}
@@ -74195,51 +74143,47 @@ var DeviceDelete = exports.DeviceDelete = function (_Component) {
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'col detalles' },
+          { className: 'card detalles' },
           _react2.default.createElement(
             'div',
-            { className: 'card' },
+            { className: 'card-header' },
             _react2.default.createElement(
-              'div',
-              { className: 'card-header' },
+              'ul',
+              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
               _react2.default.createElement(
-                'ul',
-                { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+                'li',
+                { className: 'nav-item mr-auto' },
                 _react2.default.createElement(
-                  'li',
-                  { className: 'nav-item mr-auto' },
-                  _react2.default.createElement(
-                    'h2',
-                    { className: 'detalles-titulo' },
-                    _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-                    'Eliminar dispositivo f\xEDsico'
-                  )
+                  'h2',
+                  { className: 'detalles-titulo' },
+                  _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+                  'Eliminar dispositivo f\xEDsico'
                 )
               )
-            ),
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'card-body' },
             _react2.default.createElement(
               'div',
-              { className: 'card-body' },
+              { className: 'text-center' },
               _react2.default.createElement(
-                'div',
-                { className: 'text-center' },
-                _react2.default.createElement(
-                  'h1',
-                  null,
-                  '\xBFEliminar dispositivo f\xEDsico'
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  'Esta acci\xF3n no se puede deshacer'
-                ),
-                _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-                  'Eliminar'
-                )
+                'h1',
+                null,
+                '\xBFEliminar dispositivo f\xEDsico'
+              ),
+              _react2.default.createElement('hr', { className: 'card-division' }),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Esta acci\xF3n no se puede deshacer'
+              ),
+              _react2.default.createElement(
+                'button',
+                { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
+                _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+                'Eliminar'
               )
             )
           )
@@ -74508,7 +74452,7 @@ var Login = exports.Login = function (_Component) {
               _react2.default.createElement(
                 'small',
                 { className: 'float-right' },
-                'v0.1.1'
+                'v0.1.2'
               ),
               _react2.default.createElement(
                 'form',
