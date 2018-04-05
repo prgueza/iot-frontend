@@ -25,7 +25,7 @@ Las funciones y acciones que puede llevar a cabo cada tipo de cuenta son distint
 
 Las acciones que se pueden realizar desde una cuenta de administrador son:
 
-* Dar de alta un dispositivo físico: Puede dar de alta un dispositivo físico y asignarlo a una puerta de enlace ya configurada. Además puede elegir que grupo de gestión se encargara de controlar la información que se verá representada en dicho dispositivo.
+* Dar de alta un dispositivo físico: Puede dar de alta un dispositivo físico y asignarlo a una puerta de enlace ya configurada. Además puede elegir que grupo de gestión se encargará de controlar la información que se verá representada en dicho dispositivo.
 
 * Dar de alta una puerta de enlace: Una puerta de enlace sirve como conexión entre el sistema y los distintos dispositivos físicos. Se encarga de varios dispositivos físicos a la vez. La función del administrador será dar de alta dicha puerta de enlace y asignarle un conjunto de dispositivos físicos.
 
