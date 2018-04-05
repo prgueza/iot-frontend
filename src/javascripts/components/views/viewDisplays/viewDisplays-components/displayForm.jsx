@@ -199,7 +199,7 @@ export class DisplayForm extends Component{
     if (this.state.redirect) {
       return( <Redirect to={this.state.location} /> );
     } else if(this.state.device == null) {
-      return( <div className="col">
+      return(
         <div className="card detalles">
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
@@ -211,118 +211,115 @@ export class DisplayForm extends Component{
           <div className="card-body">
             <div className="text-center">
               <h1>No hay dispositivos sin configurar</h1>
-              <hr></hr>
+              <hr className="card-division"></hr>
               <small>Pida al administrador del sistema que de de alta un nuevo dispositivo para configurarlo.</small>
             </div>
           </div>
-        </div>
-      </div> )
+        </div>)
     } else {
       return(
-        <div className="col detalles">
-          <form id='form'>
-            <div className="card">
-              <div className="card-header">
-                <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
-                  <li className="nav-item mr-auto">
-                    { this.props.display ?
-                      <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un display</h2> :
-                      <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Configurar un nuevo display</h2>
-                    }
-                  </li>
-                  <li className="nav-item ml-2">
-                    { this.props.display ?
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-3" aria-hidden="true"></i>Guardar cambios</button> :
-                      <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Guardar configuración</button>
-                    }
-                  </li>
-                </ul>
-              </div>
-              <div className="card-body">
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="device"><i className="fa fa-tablet mr-2"></i>Dispositivo físico asociado</label>
-                    <div>
-                      <select className="custom-select" name='device' onChange={this.handleInputChange}>
-                        {optionsDevices}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-group col">
-                    <label htmlFor="bt"><i className="fa fa-info-circle mr-2"></i>Descripción</label>
-                    <input type="text" className="form-control text-truncate" id="bt" name="bt" value={this.state.deviceDescription} readOnly></input>
-                  </div>
-                </div>
-                <hr className="card-division"></hr>
-                <div className="form-row">
-                  <div className="form-group col-md-1">
-                    <label htmlFor="displayID"><i className="fa fa-hashtag mr-2"></i>ID</label>
-                    <input type="text" className="form-control" id="displayID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-11">
-                    <label htmlFor="nombre"><i className="fa fa-television mr-2"></i>Nombre</label>
-                    <input type="text" className="form-control" id="nombre" placeholder="Nombre del display" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
-                  <input type="text" className="form-control" id="descripcion" placeholder="Descripcion del display" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="category"><i className="fa fa-arrows-alt mr-2"></i>Categoría</label>
-                    <input type="text" className="form-control" id="category" placeholder="Categoría" name='category' value={this.state.category} onChange={this.handleInputChange}></input>
-                  </div>
-                  <div className="form-group col">
-                    <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
-                    <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
-                      <option value={''} key={0}>Sin imagen activa</option>
-                      {this.state.optionsActiveImage}
+        <div className="card detalles">
+          <div className="card-header">
+            <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
+              <li className="nav-item mr-auto">
+                { this.props.display ?
+                  <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un display</h2> :
+                  <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Configurar un nuevo display</h2>
+                }
+              </li>
+              <li className="nav-item ml-2">
+                { this.props.display ?
+                  <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-3" aria-hidden="true"></i>Guardar cambios</button> :
+                  <button onClick={this.handleSubmit} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Guardar configuración</button>
+                }
+              </li>
+            </ul>
+          </div>
+          <div className="card-body">
+            <form id='form'>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="device"><i className="fa fa-tablet mr-2"></i>Dispositivo físico asociado</label>
+                  <div>
+                    <select className="custom-select" name='device' onChange={this.handleInputChange}>
+                      {optionsDevices}
                     </select>
                   </div>
                 </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="displays"><i className="fa fa-television mr-2"></i>Asociar una o varias imagenes</label>
-                    <div className="custom-controls-stacked">
-                      {optionsImages}
-                    </div>
-                  </div>
-                  <div className="form-group col">
-                    <label htmlFor="groups"><i className="fa fa-list mr-2"></i>Asociar a uno o varios grupos</label>
-                    <div className="custom-controls-stacked">
-                      {optionsGroups}
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    <label htmlFor="etiquetas"><i className="fa fa-tags mr-2"></i>Etiquetas</label>
-                    <input type="text" className="form-control" name="tags" id="etiquetas" value={this.state.tags} onChange={this.handleInputChange}></input>
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col">
-                    {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-display btn-tiny" key={i}>{t}</button> : '')}
-                  </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
-                    <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
-                    <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
-                  <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by.name} readOnly></input>
+                <div className="form-group col">
+                  <label htmlFor="bt"><i className="fa fa-info-circle mr-2"></i>Descripción</label>
+                  <input type="text" className="form-control text-truncate" id="bt" name="bt" value={this.state.deviceDescription} readOnly></input>
                 </div>
               </div>
-            </div>
-          </form>
+              <hr className="card-division"></hr>
+              <div className="form-row">
+                <div className="form-group col-md-1">
+                  <label htmlFor="displayID"><i className="fa fa-hashtag mr-2"></i>ID</label>
+                  <input type="text" className="form-control" id="displayID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
+                </div>
+                <div className="form-group col-md-11">
+                  <label htmlFor="nombre"><i className="fa fa-television mr-2"></i>Nombre</label>
+                  <input type="text" className="form-control" id="nombre" placeholder="Nombre del display" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
+                <input type="text" className="form-control" id="descripcion" placeholder="Descripcion del display" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="category"><i className="fa fa-arrows-alt mr-2"></i>Categoría</label>
+                  <input type="text" className="form-control" id="category" placeholder="Categoría" name='category' value={this.state.category} onChange={this.handleInputChange}></input>
+                </div>
+                <div className="form-group col">
+                  <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
+                  <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
+                    <option value={''} key={0}>Sin imagen activa</option>
+                    {this.state.optionsActiveImage}
+                  </select>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="displays"><i className="fa fa-television mr-2"></i>Asociar una o varias imagenes</label>
+                  <div className="custom-controls-stacked">
+                    {optionsImages}
+                  </div>
+                </div>
+                <div className="form-group col">
+                  <label htmlFor="groups"><i className="fa fa-list mr-2"></i>Asociar a uno o varios grupos</label>
+                  <div className="custom-controls-stacked">
+                    {optionsGroups}
+                  </div>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="etiquetas"><i className="fa fa-tags mr-2"></i>Etiquetas</label>
+                  <input type="text" className="form-control" name="tags" id="etiquetas" value={this.state.tags} onChange={this.handleInputChange}></input>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  {this.state.tags.map((t, i) => t.length > 1 ? <button type="button" className="btn mr-1 btn-outline-display btn-tiny" key={i}>{t}</button> : '')}
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de creación</label>
+                  <input type="text" className="form-control" id="fechaCreacion" name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2"></i>Fecha de modificación</label>
+                  <input type="text" className="form-control" id="fechaModificacion" name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="creador"><i className="fa fa-user-o mr-2"></i>Creador</label>
+                <input type="text" className="form-control" id="creador" name='user' value={this.state.created_by.name} readOnly></input>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }

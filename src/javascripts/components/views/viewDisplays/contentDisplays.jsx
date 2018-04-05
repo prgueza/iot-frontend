@@ -13,7 +13,7 @@ import { DisplayGeneric } from './viewDisplays-components/displayGeneric.jsx';
 /* COMPONENTS */
 export const ContentDisplays = ({ displays, filterValue, ...other }) => {
   return(
-    <div className="col content">
+    <div className="overview">
       <div className="row">
         <div className="col">
           <div className="titulo mb-4 text-right">
@@ -22,18 +22,14 @@ export const ContentDisplays = ({ displays, filterValue, ...other }) => {
           <hr></hr>
         </div>
       </div>
-      <div className="ventana">
-        <div className="row">
-          <div className="col">
-            <Title total={displays.length} appearance="card title-displays" icon="television"/>
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col-4">
-            <List filterValue={filterValue} category='displays' content={displays}/>
-          </div>
-          <div className="col-8">
-            <div className="row mb-3">
+      <div className="row-panel">
+        <div className="panel">
+          <Title total={displays.length} appearance="card title-displays" icon="television"/>
+          <div className="row controls">
+            <div className="col-4">
+              <List filterValue={filterValue} category='displays' content={displays}/>
+            </div>
+            <div className="col-8">
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
                 <Route path="/displays/add" render={() => <DisplayForm {...other} displays={displays}/>}/>

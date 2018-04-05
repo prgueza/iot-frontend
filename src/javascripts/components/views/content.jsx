@@ -18,7 +18,7 @@ export class Content extends Component{
   render(){
     if ( this.props.isLoaded ){
        var content =
-        <div className="col">
+        <div className="col content">
           <Route exact={true} path="/" render={() => (<Overview { ...this.props }/>)}/>
           <Route path="/displays" render={() => (<ContentDisplays { ...this.props }/>)}/>
           <Route path="/images" render={() => (<ContentImages { ...this.props }/>)}/>

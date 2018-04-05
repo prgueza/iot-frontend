@@ -12,7 +12,7 @@ import { Title } from '../../tags/title.jsx';
 /* COMPONENTS */
 export const ContentGroups = ({ groups, filterValue, ...other }) => {
   return(
-    <div className="col content">
+    <div className="overview">
       <div className="row">
         <div className="col">
           <div className="titulo mb-4 text-right">
@@ -21,18 +21,14 @@ export const ContentGroups = ({ groups, filterValue, ...other }) => {
           <hr></hr>
         </div>
       </div>
-      <div className="ventana">
-        <div className="row">
-          <div className="col">
-            <Title total={groups.length} appearance="card title-groups" icon="list"/>
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col-4">
-            <List filterValue={filterValue} category='groups' content={groups}/>
-          </div>
-          <div className="col-8">
-            <div className="row mb-3">
+      <div className="row-panel">
+        <div className="panel">
+          <Title total={groups.length} appearance="card title-groups" icon="list"/>
+          <div className="row controls">
+            <div className="col-4">
+              <List filterValue={filterValue} category='groups' content={groups}/>
+            </div>
+            <div className="col-8">
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
                 <Route path="/groups/add" render={() => <GroupForm {...other} groups={groups}/>}/>

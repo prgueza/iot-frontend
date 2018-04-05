@@ -19,24 +19,76 @@ html {
 }
 
 body{
+  height: 100vh;
   max-height: 100vh;
   font-family: "etica-display";
+}
+
+.frame{
+  height: 100%;
+  max-height: 100%;
+  padding-top: 3rem;
+  padding-right: $padding-right;
+  padding-bottom: 3rem;
+  padding-left: $padding-left;
+}
+
+.login{
+  height: 100%;
+}
+
+.main{
+  height: 100%;
+  max-height: 100%;
+  padding-left: 15px;
+}
+
+.content{
+  height: 100%;
+  margin-right: 0;
+}
+
+.overview{
+  height: 100%;
+  max-height: 100%;
+}
+
+.row-panel{
+  height: 80%;
+  max-height: 80%;
+}
+
+.panel{
+  height: 100%;
+  max-height: 100%;
+}
+
+.controls{
+  height: 70%;
+  max-height: 70%;
+  margin-bottom: 15px;
+}
+
+.detalles{
+  max-height: 100%;
+}
+
+.detalles .card-body{
+  max-height: 90%;
+  padding-bottom: 15px;
+  overflow-y: scroll;
+}
+
+.asociados{
+
 }
 
 ::-webkit-scrollbar{
   display: none;
 }
 
-.main{
-  height: 90vh;
-}
-
 .ventana{
   max-width: 100%
-}
-
-.content{
-  padding-top: 30px;
 }
 
 .doc-body{
@@ -44,14 +96,12 @@ body{
 }
 
 // SIZING
-
-
 .detalles{
   max-width: 100%;
 }
 
 .vista-previa{
-  padding: 20px;
+  padding: 0;
 }
 
 .vista-imagen{
@@ -82,8 +132,6 @@ body{
   padding: 30 0 30 0;
 }
 
-
-
 .imagen{
   width: 100%;
 }
@@ -103,14 +151,6 @@ body{
   border: 1px dashed $bd-color;
   text-align: center;
   margin-bottom: 20px;
-}
-
-.frame{
-  max-height: 100vh;
-}
-
-.login{
-  height: 100vh;
 }
 
 .etiquetas{

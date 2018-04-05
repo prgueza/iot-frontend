@@ -41,39 +41,41 @@ export class Navigation extends Component{
         </div>
         <hr></hr>
         <div className="card menu">
-          <div className="busqueda mb-3">
-            <p>BÚSQUEDA</p>
-            <input onChange={this.handleSearch} type="text" className="form-control search" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..."></input>
-          </div>
-          <div className="mb-3">
-            <p>NAVEGACIÓN</p>
-            <ul className="nav-list">
-              {nav}
-            </ul>
-          </div>
-          <div className="mb-3">
-            <p>AJUSTES</p>
-            <ul className="nav-list">
-            { user && !user.admin &&
-              <NavLink to={''}>
-                <li><button type="button" className="btn btn-nav btn-block mb-1" disabled><i className="fa fa-clock-o mr-2" aria-hidden="true"></i> Temporizadores</button></li>
-              </NavLink>
-            }
-              <NavLink to={'/docs'}>
-                <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
-              </NavLink>
-            { user && user.admin &&
-              <NavLink to={'/settings'}>
-                <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-cogs mr-2" aria-hidden="true"></i> Configuración</button></li>
-              </NavLink>
-            }
-                <li><a href="/disconect"><button type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-sign-out mr-2" aria-hidden="true"></i> Desconectar</button></a></li>
-                <li><button onClick={() => this.props.update(user, true)} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
-            </ul>
+          <div className="button-menu">
+            <div className="busqueda mb-3">
+              <p>BÚSQUEDA</p>
+              <input onChange={this.handleSearch} type="text" className="form-control search" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..."></input>
+            </div>
+            <div className="mb-3">
+              <p>NAVEGACIÓN</p>
+              <ul className="nav-list">
+                {nav}
+              </ul>
+            </div>
+            <div className="mb-3">
+              <p>AJUSTES</p>
+              <ul className="nav-list">
+              { user && !user.admin &&
+                <NavLink to={''}>
+                  <li><button type="button" className="btn btn-nav btn-block mb-1" disabled><i className="fa fa-clock-o mr-2" aria-hidden="true"></i> Temporizadores</button></li>
+                </NavLink>
+              }
+                <NavLink to={'/docs'}>
+                  <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
+                </NavLink>
+              { user && user.admin &&
+                <NavLink to={'/settings'}>
+                  <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-cogs mr-2" aria-hidden="true"></i> Configuración</button></li>
+                </NavLink>
+              }
+                  <li><a href="/disconect"><button type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-sign-out mr-2" aria-hidden="true"></i> Desconectar</button></a></li>
+                  <li><button onClick={() => this.props.update(user, true)} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
+              </ul>
+            </div>
           </div>
           <hr></hr>
           <p className="d-flex justify-content-between">
-            <span>v0.1.1</span>
+            <span>v0.1.2</span>
             <span>{ user ? user.name : 'Cargando...' }</span>
           </p>
         </div>

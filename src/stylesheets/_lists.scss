@@ -8,10 +8,16 @@
   margin-bottom: 15px;
 }
 
+.list{
+  height: 100%;
+  max-height: 100%;
+  margin-bottom: 15px;
+}
+
 .list-group{
   background-color: $bg-color;
   color: $font-primary-color;
-  max-height: 60vh;
+  max-height: 100%;
   overflow-y: scroll;
   border: 1px solid $bd-color;
   border-radius: $bd-radius;
@@ -19,10 +25,6 @@
 
 .list-group-small{
   max-height: 30vh;
-}
-
-.asociados{
-  padding:20px;
 }
 
 .list-group-item{padding: 0px;}
