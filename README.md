@@ -40,7 +40,7 @@ Las acciones que se pueden realizar desde una cuenta de administrador son:
 
 * Dar de alta una nueva localización: La localización es un parámetro que se asigna a las puertas de enlace y que determinan su posición geográfica dentro del espacio del sistema.
 
-* Dar de alta una nueva resolución: La resolución es un parámetro que se asigna a los dispositivos físicos y que indica la resolución de la pantalla de estos. Se utilizará para indicar al usuario que resolución de imagen debe asignar a cada dispositivo.
+* Dar de alta una nueva resolución: La resolución es un parámetro que se asigna a los dispositivos físicos y que indica la resolución de la pantalla de estos. Se utilizará para indicar al usuario qué resolución de imagen debe asignar a cada dispositivo.
 
 ### Usuario
 
