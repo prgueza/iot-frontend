@@ -7,7 +7,6 @@ import axios from 'axios'
 import { GatewayDetails } from './gatewayDetails.jsx';
 import { GatewayForm } from './gatewayForm.jsx';
 import { GatewayDelete } from './gatewayDelete.jsx';
-import { Error } from '../../../tags/error.jsx';
 
 /* COMPONENTS */
 export class GatewayRouter extends Component {

@@ -18,16 +18,16 @@ export class ContentSettings extends Component{
   render(){
 
       const menu_items = [
-        {text: 'Usuarios', icon: 'user-o', location: '/settings/users'},
-        {text: 'Grupos de gestión', icon: 'users', location: '/settings/groups'},
-        {text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations'},
-        {text: 'Resoluciones', icon: 'arrows-alt', location: '/settings/resolutions'}
+        {exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings'},
+        {exact: false, text: 'Grupos de gestión', icon: 'users', location: '/settings/groups'},
+        {exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations'},
+        {exact: false, text: 'Resoluciones', icon: 'arrows-alt', location: '/settings/resolutions'}
       ];
 
       const menu = menu_items.map((i, j) => {
         return(
         <div key={j} className="list-group-item flex-column align-items-start">
-          <NavLink to={i.location}>
+          <NavLink exact={i.exact} to={i.location}>
             <div className="d-flex elemento settings-menu-item">
               <p className="mb-0"><Icon icon={i.icon} mr={3}/>{i.text}</p>
             </div>
@@ -55,8 +55,7 @@ export class ContentSettings extends Component{
                   </div>
                 </div>
                 <div className="col">
-                  <Route exact path="/settings" render={() => (<SettingsGeneric { ...this.props }/>)}/>
-                  <Route path="/settings/users" render={() => (<ManageUsers { ...this.props }/>)}/>
+                  <Route exact path="/settings" render={() => (<ManageUsers { ...this.props }/>)}/>
                   <Route path="/settings/groups" render={() => (<ManageUserGroups { ...this.props }/>)}/>
                   <Route path="/settings/locations" render={() => (<ManageLocations { ...this.props }/>)}/>
                   <Route path="/settings/resolutions" render={() => (<ManageResolutions { ...this.props }/>)}/>
