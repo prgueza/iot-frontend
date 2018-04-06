@@ -75,7 +75,7 @@ export class Navigation extends Component{
           </div>
           <hr></hr>
           <p className="d-flex justify-content-between">
-            <span>v0.1.4</span>
+            <span>v0.1.5</span>
             <span>{ user ? user.name : 'Cargando...' }</span>
           </p>
         </div>
