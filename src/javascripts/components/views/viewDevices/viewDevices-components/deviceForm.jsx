@@ -12,7 +12,6 @@ export class DeviceForm extends Component{
     super(props);
     const { device, user, resolutions, gateways, userGroups } = this.props;
     this.state = {
-      id: device ? device.id : '',
       name: device ? device.name : '',
       description: device ? device.description : '',
       created_by: device ? ( device.created_by ? device.created_by.name : 'Usuario eliminado') : user.name,
@@ -20,9 +19,8 @@ export class DeviceForm extends Component{
       created_at: device ? moment(device.created_at) : moment(),
       updated_at: moment(),
       resolution: device ? device.resolution._id : resolutions[0]._id,
-      mac_address: device ? device.mac_address : '',
-      bt_address: device ? device.bt_address : '',
-      gateway: device ? (device.gateway ? device.gateway._id : gateways[0]._id) : gateways[0]._id,
+      mac: device ? device.mac : '',
+      pref_gateway: device ? (device.pref_gateway ? device.pref_gateway._id : gateways[0]._id) : gateways[0]._id,
       userGroup: device ? device.userGroup._id : userGroups[0]._id,
 
       redirect: false,
@@ -34,16 +32,9 @@ export class DeviceForm extends Component{
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount(){
     const { devices, device } = this.props;
-    // if in post mode get first free id value
-    if (!device) {
-      const identificaciones = devices.map((d) => d.id); // get all ids
-      var id = 1; // start from 1
-      while (identificaciones.indexOf(id) != -1){id++} // stop at first free id value
-    }
     // set state with initial values
     this.setState({
-      id: device ? device.id : id,
-      redirect_location: device ? '/devices/' + device.id : '/devices/' + id // Redirect url
+      redirect_location: device ? '/devices/' + device._id : '/devices' // Redirect url
     });
   }
 
@@ -63,14 +54,12 @@ export class DeviceForm extends Component{
     const { device } = this.props;
     // define form values to send
     const form = {
-      id: this.state.id,
       name: this.state.name,
       description: this.state.description,
       updated_by: this.state.updated_by._id, // send user_id
-      gateway: this.state.gateway,
+      pref_gateway: this.state.pref_gateway,
       resolution: this.state.resolution,
-      mac_address: this.state.mac_address,
-      bt_address: this.state.bt_address,
+      mac: this.state.mac,
       userGroup: this.state.userGroup,
     };
     // possible empty fields
@@ -130,29 +119,17 @@ export class DeviceForm extends Component{
           </div>
           <div className="card-body">
             <form id="form">
-              <div className="form-row">
-                <div className="form-group col-md-1">
-                  <label htmlFor="deviceID"><i className="fa fa-hashtag mr-2"></i>ID</label>
-                  <input type="text" className="form-control" id="deviceID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
-                </div>
-                <div className="form-group col-md-11">
-                  <label htmlFor="nombre"><i className="fa fa-tablet mr-2"></i>Nombre</label>
-                  <input type="text" className="form-control" id="nombre" placeholder="Nombre del dispositivo físico" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
-                </div>
+              <div className="form-group">
+                <label htmlFor="nombre"><i className="fa fa-tablet mr-2"></i>Nombre</label>
+                <input type="text" className="form-control" id="nombre" placeholder="Nombre del dispositivo físico" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
               </div>
               <div className="form-group">
                 <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
                 <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name='description' value={this.state.description} onChange={this.handleInputChange}></input>
               </div>
-              <div className="form-row">
-                <div className="form-group col">
-                  <label htmlFor="mac_address"><i className="fa fa-server mr-2"></i>Dirección MAC</label>
-                  <input type="text" className="form-control" id="mac_address" placeholder="Dirección MAC de la puerta de enlace" name="mac_address" value={this.state.mac_address} onChange={this.handleInputChange}></input>
-                </div>
-                <div className="form-group col">
-                  <label htmlFor="bt_address"><i className="fa fa-bluetooth-b mr-2"></i>Dirección BT</label>
-                  <input type="text" className="form-control" id="bt_address" placeholder="Dirección BT de la puerta de enlace" name="bt_address" value={this.state.bt_address} onChange={this.handleInputChange}></input>
-                </div>
+              <div className="form-group">
+                <label htmlFor="mac"><i className="fa fa-server mr-2"></i>Dirección MAC</label>
+                <input type="text" className="form-control" id="mac" placeholder="Dirección MAC de la puerta de enlace" name="mac" value={this.state.mac} readOnly></input>
               </div>
               <div className="form-row">
                 <div className="form-group col">
@@ -164,9 +141,9 @@ export class DeviceForm extends Component{
                   </div>
                 </div>
                 <div className="form-group col">
-                  <label htmlFor="gateway"><i className="fa fa-sitemap mr-2"></i>Puerta de enlace</label>
+                  <label htmlFor="gateway"><i className="fa fa-sitemap mr-2"></i>Puerta de enlace preferida</label>
                   <div>
-                    <select className="custom-select" name="gateway" value={this.state.gateway} onChange={this.handleInputChange}>
+                    <select className="custom-select" name="gateway" value={this.state.pref_gateway} onChange={this.handleInputChange}>
                       {optionsGateway}
                     </select>
                   </div>

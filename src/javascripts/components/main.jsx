@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, NavLink, Route, Switch } from 'react-router-dom';
 import cookie from 'react-cookie';
+import moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import axios from 'axios';
@@ -34,6 +35,10 @@ export class Main extends Component {
       displays: null,
       images: null,
       groups: null,
+      // sync
+      synced_devices: [],
+      sync_status: 0, // 0: unsynced; 1: sync_ready; 2: synced; 3: syncing
+      last_synced: null,
       // search value
       filterValue: '',
       // others
@@ -54,6 +59,17 @@ export class Main extends Component {
     this.setState({ user, token, isLoggedIn: true });
     // get data
     this.update(user, true);
+    this.sync_api();
+    // check syncronization
+    this.check_sync_id = setInterval(() => {
+      if(this.state.last_synced && moment().diff(this.state.last_synced, 'seconds') > 20){
+        this.setState({ sync_status: 0 }); //unsynced
+      }
+    }, 1000);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.check_sync_id);
   }
 
   /* UPDATE DATA */
@@ -93,6 +109,27 @@ export class Main extends Component {
     }
   }
 
+  /* SYNC DATA */
+  sync_api = () => {
+    this.setState({ sync_status: 3, last_synced: moment() }); //syncing
+    this.notify_sync('Buscando dispositivos...', 'notify-success', 'refresh');
+    axios.get('/update', {timeout: 10000})
+    .then((res) => {
+      this.update_sync('Pulse para sincronizar', 'notify-success', 'link', false);
+      this.setState({ synced_devices: res.data, sync_status: 1, last_synced: moment() }); //synced_ready
+    })
+    .catch((err) => {
+      this.update_sync('Error en la búsqueda', 'notify-error', 'times', true);
+      this.setState({ syncing: false, sync_status: 0 }) //unsynced
+    })
+  }
+
+  sync = () => {
+    const devices = this.state.synced_devices;
+    this.update_sync('Datos sincronizados', 'notify-success', 'check', true);
+    this.setState({ devices, sync_status: 2 }); //synced
+  }
+
   /* HANDLE SEARCH */
   filterData = (value) => {
     this.setState({filterValue: value});
@@ -106,12 +143,34 @@ export class Main extends Component {
     });
   }
 
+  notify_sync = (text, style, icon) => {
+    this.toast_sync_id = toast(<Notification text={text} icon={icon} spin={true} />, {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: false,
+      className: style
+    });
+  }
+
+  update_sync = (text, style, icon, autoClose) => {
+    toast.update(this.toast_sync_id, {
+      render: <Notification text={text} icon={icon} />,
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: autoClose,
+      className: style,
+      onClose: () => { this.state.sync_status == 1 && this.sync() }
+    })
+  }
+
+  dismiss = () => {
+    this.toast_sync_id && toast.dismiss(this.toast_sync_id);
+  }
+
   /* RENDER COMPONENT */
   render(){
     return(
       <div className="row main">
         <ToastContainer closeButton={false} hideProgressBar={true}/>
-        <Navigation filterData={this.filterData} update={this.update} { ...this.state }/>
+        <Navigation filterData={this.filterData} update={this.update} sync={this.sync} sync_api={this.sync_api} { ...this.state }/>
         <Content update={this.update} notify={this.notify} { ...this.state }/>
       </div>
     );

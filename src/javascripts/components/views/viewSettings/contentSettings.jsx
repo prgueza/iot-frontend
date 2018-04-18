@@ -8,7 +8,6 @@ import { ManageUsers } from './viewSettings-components/manageUsers.jsx';
 import { ManageUserGroups } from './viewSettings-components/manageUserGroups.jsx';
 import { ManageLocations } from './viewSettings-components/manageLocations.jsx';
 import { ManageResolutions } from './viewSettings-components/manageResolutions.jsx';
-import { SettingsGeneric } from './viewSettings-components/settingsGeneric.jsx';
 import { Icon } from '../../icons/icon.jsx';
 
 

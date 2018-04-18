@@ -21,7 +21,8 @@ export class List extends Component{
       var e = element.resolution && element.resolution.size.width.indexOf(filterValue) > -1;
       var f = element.resolution && element.resolution.size.height.indexOf(filterValue) > -1;
       var g = element.location && element.location.name.indexOf(filterValue) > -1;
-      return a || b || c || d || e || f || g;
+      var h = element.mac && element.mac.indexOf(filterValue) > 1;
+      return a || b || c || d || e || f || g || h;
     });
     return filteredData;
   }
