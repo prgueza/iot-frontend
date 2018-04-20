@@ -12,13 +12,14 @@ export class GatewayDetails extends Component {
 
 	render() {
 		// define constants from props for better readability
-		const { id, name, description, location, created_at, updated_at, created_by, mac_address, ip_address, devices } = this.props.gateway;
+		const { _id, name, description, location, created_at, updated_at, created_by, mac, ip } = this.props.gateway;
+		const devices = this.props.devices.filter((d) => d.gateway._id == _id);
 		// refactor date constants with format
 		const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
 		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
 		// define routes for edit and delete based on the id
-		const linktoEdit = '/gateways/' + id + '/edit';
-		const linktoDelete = '/gateways/' + id + '/delete';
+		const linktoEdit = '/gateways/' + _id + '/edit';
+		const linktoDelete = '/gateways/' + _id + '/delete';
 
 		return(
 		<div className="card detalles">
@@ -43,10 +44,9 @@ export class GatewayDetails extends Component {
 				<div className="row">
 					<div className="col">
 						<p className="titulo">DETALLES</p>
-						<p className="card-text"><i className="fa fa-fw fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
 						<p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
-						<p className="card-text"><i className="fa fa-fw fa-server mr-2" aria-hidden="true"></i>{mac_address}</p>
-						<p className="card-text"><i className="fa fa-fw fa-wifi mr-2" aria-hidden="true"></i>{ip_address}</p>
+						<p className="card-text"><i className="fa fa-fw fa-server mr-2" aria-hidden="true"></i>{mac}</p>
+						<p className="card-text"><i className="fa fa-fw fa-wifi mr-2" aria-hidden="true"></i>{ip}</p>
 						<p className="card-text"><i className="fa fa-fw fa-map-marker mr-2" aria-hidden="true"></i>{location ? location.name : 'Localización no especificada'}</p>
 						<p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{updated}</p>
 						<p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i>{created_by ? created_by.name : 'Usuario eliminado'}</p>
@@ -54,12 +54,12 @@ export class GatewayDetails extends Component {
 					<div className="col">
 						<div className="asociados">
 							<p className="titulo text-right">DISPOSITIVOS ({devices.length})</p>
-							<Associated contenido={devices} category="devices" appearance="elemento-dispositivo" icon="tablet"/>
+							<Associated content={devices} category="devices" appearance="elemento-dispositivo" icon="tablet"/>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 		);
 	}
 };

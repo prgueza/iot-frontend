@@ -33,7 +33,7 @@ export const ContentGateways = ({ gateways, filterValue, ...other }) => {
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
                 <Route path="/gateways/add" render={() => <GatewayForm {...other} gateways={gateways}/>}/>
                 {/* For route /gatewayId we select the gateway based on the id and pass it separately */}
-                <Route path="/gateways/:gatewayId" render={({ match }) => (<GatewayRouter {...other} gateway={gateways.find(g => g.id == match.params.gatewayId)}/>)}/>
+                <Route path="/gateways/:gatewayId" render={({ match }) => (<GatewayRouter {...other} gateway={gateways.find(g => g._id == match.params.gatewayId)}/>)}/>
               </Switch>
               <Route exact path="/gateways" render={() => (<GatewayGeneric/>)}/>
             </div>

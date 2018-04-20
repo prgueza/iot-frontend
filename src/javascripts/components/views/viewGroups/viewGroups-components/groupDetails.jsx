@@ -140,13 +140,13 @@ export class GroupDetails extends Component {
           <div className="col">
             <div className="asociados">
               <p className="titulo">DISPLAYS ({displays.length})</p>
-              <Associated contenido={displays} category="displays" appearance="elemento-display" icon="television"/>
+              <Associated content={displays} category="displays" appearance="elemento-display" icon="television"/>
             </div>
           </div>
           <div className="col">
             <div className="asociados">
               <p className="titulo text-right">IMAGENES ASOCIADAS ({images.length})</p>
-              <Associated contenido={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
+              <Associated content={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
             </div>
           </div>
         </div>

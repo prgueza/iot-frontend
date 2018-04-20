@@ -10,7 +10,7 @@ import { DeviceRouter } from './viewDevices-components/deviceRouter.jsx';
 import { DeviceForm } from './viewDevices-components/deviceForm.jsx';
 
 /* COMPONENTS */
-export const ContentDevices = ({ devices, filterValue, ...other }) => {
+export const ContentDevices = ({ devices, filterValue, filterFound, filterFoundValue, ...other }) => {
   return(
     <div className="overview">
       <div className="row">
@@ -26,12 +26,10 @@ export const ContentDevices = ({ devices, filterValue, ...other }) => {
           <Title total={devices.length} appearance="card title-devices" icon="tablet"/>
           <div className="row controls">
             <div className="col-4">
-              <List filterValue={filterValue} category='devices' content={devices}/>
+              <List filterValue={filterValue} filterFound={filterFound} filterFoundValue={filterFoundValue} category='devices' content={devices}/>
             </div>
             <div className="col-8">
               <Switch>
-                {/* For route /add we pass all props incluldying displays, groups, images and functions */}
-                <Route path="/devices/add" render={() => <DeviceForm {...other} devices={devices}/>}/>
                 {/* For route /deviceId we select the device based on the id and pass it separately */}
                 <Route path="/devices/:deviceId" render={({ match }) => (<DeviceRouter {...other} device={devices.find(d => d._id == match.params.deviceId)}/>)}/>
               </Switch>

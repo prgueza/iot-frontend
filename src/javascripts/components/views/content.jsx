@@ -32,7 +32,7 @@ export class Content extends Component{
     } else {
        var content =
         <div className="col text-center d-flex align-items-center justify-content-center">
-          <h1 className="text-secondary"><i className="fa fa-circle-o-notch fa-spin fa-fw mr-4"></i>Cargando</h1>
+          <h1><i className="fa fa-circle-o-notch fa-spin fa-fw mr-4"></i>Cargando</h1>
         </div>;
     }
     return( content );

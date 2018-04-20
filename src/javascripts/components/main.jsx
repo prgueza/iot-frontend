@@ -26,7 +26,7 @@ export class Main extends Component {
       // userGroup data
       userGroup: null,
       // admin data
-      resolutions: null,
+      screens: null,
       locations: null,
       gateways: null,
       devices: null,
@@ -41,6 +41,7 @@ export class Main extends Component {
       last_synced: null,
       // search value
       filterValue: '',
+      filterFoundValue: true,
       // others
       userID: cookie.load('userID'),
       isLoaded: false,
@@ -58,8 +59,8 @@ export class Main extends Component {
     // set user id and token
     this.setState({ user, token, isLoggedIn: true });
     // get data
-    this.update(user, true);
-    this.sync_api();
+    this.update(user, true, true);
+    // this.sync_api();
     // check syncronization
     this.check_sync_id = setInterval(() => {
       if(this.state.last_synced && moment().diff(this.state.last_synced, 'seconds') > 20){
@@ -73,22 +74,23 @@ export class Main extends Component {
   }
 
   /* UPDATE DATA */
-  update = (user, notify) => {
+  update = (user, notify, sync) => {
     // if admin get all the resources needed from the database
     if (user.admin) {
       return axios.all([axios('/users'), axios('/devices'), axios('/gateways'), axios('userGroups'), axios('/locations'), axios('/resolutions')])
-        .then(axios.spread((users, devices, gateways, userGroups, locations, resolutions) => {
+        .then(axios.spread((users, devices, gateways, userGroups, locations, screens) => {
           this.setState({
             users: users.data,
             devices: devices.data,
             gateways: gateways.data,
             userGroups: userGroups.data,
             locations: locations.data,
-            resolutions: resolutions.data,
+            screens: screens.data,
             isLoaded: true
           });
         }))
         .then(() => notify && this.notify('Datos cargados', 'notify-success', 'download', toast.POSITION.BOTTOM_LEFT))
+        .then(() => sync && this.sync_api())
         .catch(() => this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
     // else get resources within the userGroup
     } else {
@@ -100,11 +102,12 @@ export class Main extends Component {
             images: res.data.images, // set images that the user can manage
             groups: res.data.groups, // set groups that the user can manage
             devices: res.data.devices, // set devices that the user can manage
-            resolutions: resolutions.data,
+            screens: screens.data,
             isLoaded: true,
           });
         }))
         .then(() => notify && this.notify('Datos cargados', 'notify-success', 'download', toast.POSITION.BOTTOM_LEFT))
+        .then(() => sync && this.sync_api())
         .catch(() => this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
     }
   }
@@ -113,7 +116,11 @@ export class Main extends Component {
   sync_api = () => {
     this.setState({ sync_status: 3, last_synced: moment() }); //syncing
     this.notify_sync('Buscando dispositivos...', 'notify-success', 'refresh');
-    axios.get('/update', {timeout: 10000})
+    const data = this.state.gateways;
+    axios.post('/update',
+      { data }, // data
+      { timeout: 10000 }
+    )
     .then((res) => {
       this.update_sync('Pulse para sincronizar', 'notify-success', 'link', false);
       this.setState({ synced_devices: res.data, sync_status: 1, last_synced: moment() }); //synced_ready
@@ -132,7 +139,14 @@ export class Main extends Component {
 
   /* HANDLE SEARCH */
   filterData = (value) => {
-    this.setState({filterValue: value});
+    this.setState({ filterValue: value });
+  }
+
+  filterFound = () => {
+    // get value from the checkbox
+    console.log('called');
+    const { filterFoundValue } = this.state;
+    this.setState({ filterFoundValue: !filterFoundValue });
   }
 
   /* ALERTS */
@@ -171,7 +185,7 @@ export class Main extends Component {
       <div className="row main">
         <ToastContainer closeButton={false} hideProgressBar={true}/>
         <Navigation filterData={this.filterData} update={this.update} sync={this.sync} sync_api={this.sync_api} { ...this.state }/>
-        <Content update={this.update} notify={this.notify} { ...this.state }/>
+        <Content filterFound={this.filterFound} update={this.update} notify={this.notify} { ...this.state }/>
       </div>
     );
   }

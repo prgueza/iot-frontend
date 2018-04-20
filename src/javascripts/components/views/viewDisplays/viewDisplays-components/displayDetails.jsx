@@ -139,13 +139,13 @@ export class DisplayDetails extends Component {
 					<div className="col">
 						<div className="asociados">
 							<p className="titulo">IMAGENES ASOCIADAS ({images.length})</p>
-							<Associated contenido={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
+							<Associated content={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
 						</div>
 					</div>
 					<div className="col">
 						<div className="asociados">
 							<p className="titulo text-right">GRUPOS ({groups.length})</p>
-							<Associated contenido={groups} category="groups" appearance="elemento-grupo" icon="list"/>
+							<Associated content={groups} category="groups" appearance="elemento-grupo" icon="list"/>
 						</div>
 					</div>
 				</div>

@@ -13,7 +13,8 @@ export class DeviceDetails extends Component {
 
 	render() {
 		// define constants from props for better readability
-		const { _id, name, description, updated_at, created_by, mac, gateway, batt, rssi, init_code, found, userGroup } = this.props.device;
+		const { _id, name, description, updated_at, updated_by, mac, gateway, batt, rssi, screen, initcode, found, userGroup } = this.props.device;
+		const { screens } = this.props;
 		// refactor date constants with format
 		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
 		// define routes for edit and delete based on the id
@@ -22,6 +23,11 @@ export class DeviceDetails extends Component {
 		else if ( batt && batt < 50){ battery_icon = "fa fa-fw fa-battery-half mr-2" }
 		else if ( batt && batt < 75){ battery_icon = "fa fa-fw fa-battery-three-quarters mr-2" }
 		else if ( batt ){ battery_icon = "fa fa-fw fa-battery-full mr-2" }
+
+		const screenObj = screens.find((r) => r.screen_code == screen);
+		const screenName = screenObj ? screenObj.name : "No se encuentra la pantalla (código: " + screen + " )";
+		const color = screenObj ? screenObj.color_profile : "No se encuentra la pantalla (código: " + screen + " )";
+		const size = screenObj ? screenObj.size.width + "x" + screenObj.size.height : "No se encuentra la pantalla (código: " + screen + " )";
 
 		const linktoEdit = '/devices/' + _id + '/edit';
 		const linktoDelete = '/devices/' + _id + '/delete';
@@ -53,10 +59,13 @@ export class DeviceDetails extends Component {
 						<p className="card-text"><Icon icon="server" fw="true" mr="2"></Icon>{ mac }</p>
 						<p className={ found ? "card-text" : "card-text text-danger" }><Icon icon="battery" fw="true" mr="2" batt={ batt || 0 }></Icon>{ found ? batt + '%' : "Información no disponible" }</p>
 						<p className={ found ? "card-text" : "card-text text-danger" }><Icon icon="signal" fw="true" mr="2"></Icon>{ found ? rssi : "Información no disponible"}</p>
+						<p className={ found ? "card-text" : "card-text text-danger" }><Icon icon="tint" fw="true" mr="2"></Icon>{ screenName }</p>
+						<p className={ found ? "card-text" : "card-text text-danger" }><Icon icon="adjust" fw="true" mr="2"></Icon>{ color }</p>
+						<p className={ found ? "card-text" : "card-text text-danger" }><Icon icon="arrows-alt" fw="true" mr="2"></Icon>{ size }</p>
 						<p className={ (gateway && found) ? "card-text" : "card-text text-danger" }><Icon icon="sitemap" fw="true" mr="2"></Icon>{ (gateway && found) ? gateway.name : 'Información no disponible' }</p>
 						<p className="card-text"><Icon icon="users" fw="true" mr="2"></Icon>{ userGroup ? userGroup.name : 'Dispositivo sin configurar' }</p>
 						<p className="card-text"><Icon icon="calendar-o" fw="true" mr="2"></Icon>{ updated }</p>
-						<p className="card-text"><Icon icon="user-o" fw="true" mr="2"></Icon>{ created_by ? created_by.name : 'Usuario eliminado' }</p>
+						<p className="card-text"><Icon icon="user-o" fw="true" mr="2"></Icon>{ updated_by ? updated_by.name : 'Usuario eliminado' }</p>
 					</div>
 				</div>
 				<div className="col">

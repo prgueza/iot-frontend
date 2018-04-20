@@ -140,13 +140,13 @@ export class ImageDetails extends Component { // TODO: transform to component
           <div className="col">
             <div className="asociados">
               <p className="titulo">DISPLAYS ASOCIADOS ({displays.length})</p>
-              <Associated contenido={displays} category="displays" appearance="elemento-display" icon="television"/>
+              <Associated content={displays} category="displays" appearance="elemento-display" icon="television"/>
             </div>
           </div>
           <div className="col">
             <div className="asociados">
               <p className="titulo">GRUPOS ASOCIADOS ({groups.length})</p>
-              <Associated contenido={groups} category="groups" appearance="elemento-grupo" icon="list"/>
+              <Associated content={groups} category="groups" appearance="elemento-grupo" icon="list"/>
             </div>
           </div>
         </div>
