@@ -1,11 +1,10 @@
 /* IMPORT MODULES */
-import React from 'react';
-const cx = require('classnames');
+import React from 'react'
 
 /* IMPORT COMPONENTS */
-import { Icon } from '../icons/icon.jsx';
+import { Icon } from '../icons/icon.jsx'
 
-/* COMPONENTS */
+/* COMPONENT */
 export const Title = ({ appearance, total, icon }) => {
   return(
     <div className="title">
@@ -18,5 +17,5 @@ export const Title = ({ appearance, total, icon }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

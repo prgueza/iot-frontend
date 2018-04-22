@@ -13,7 +13,6 @@ export class GroupForm extends Component{
     const { group, user } = this.props;
     this.state = {
       // form data stored in state
-      id: '',
       name: group ? group.name : '',
       description: group ? group.description : '',
       created_by: group ? ( group.created_by ? group.created_by : 'Usuario eliminado') : user,
@@ -37,18 +36,11 @@ export class GroupForm extends Component{
     const { groups, images } = this.props; // Data from database
     const { group } = this.props;
     // options for select inputs
-    const optionsActiveImage = images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
-    // if in post mode get first free id value
-    if (!group) {
-      const ids = groups.map((g) => g.id); // get all ids
-      var id = 1; // start from 1
-      while (ids.indexOf(id) != -1){id++} // stop at first free id value
-    }
+    const optionsActiveImage = images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i._id}>{i.name}</option>);
     // set state with initial values
     this.setState({
-      id: group ? group.id : id,
       optionsActiveImage: optionsActiveImage,
-      location: group ? '/groups/' + group.id : '/groups/' + id,
+      location: group ? '/groups/' + group._id : '/groups/',
     });
   }
 
@@ -112,7 +104,7 @@ export class GroupForm extends Component{
       // if there are no images deselect
       this.setState({active_image: ''})
     }
-    this.setState({optionsActiveImage: this.props.images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i.id}>{i.name}</option>)});
+    this.setState({optionsActiveImage: this.props.images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i._id}>{i.name}</option>)});
   } // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
   /* HANDLE SUBMIT */
@@ -121,7 +113,6 @@ export class GroupForm extends Component{
     const { group } = this.props;
     // define form values to send
     const form = {
-      id: this.state.id,
       name: this.state.name,
       description: this.state.description,
       updated_by: this.state.updated_by._id, // send user_id
@@ -160,16 +151,16 @@ export class GroupForm extends Component{
   render(){
 
     // Options
-    const optionsResolution = this.props.resolutions.sort((a, b) => a.id - b.id).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
-    const optionsDisplays = this.props.displays.sort((a, b) => a.id - b.id).map((d) =>
-      <label key={d.id} className="custom-control custom-checkbox">
+    const optionsScreens = this.props.screens.sort((a, b) => a.updated_at - b.updated_at).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
+    const optionsDisplays = this.props.displays.sort((a, b) => a.updated_at - b.updated_at).map((d) =>
+      <label key={d._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckDisplays} type="checkbox" defaultChecked={this.state.displays.find((c) => c == d._id)} name={d._id} defaultValue={d._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{d.name}</span>
       </label>
     );
-    const optionsImages = this.props.images.sort((a, b) => a.id - b.id).map((i) =>
-      <label key={i.id} className="custom-control custom-checkbox">
+    const optionsImages = this.props.images.sort((a, b) => a.updated_at - b.updated_at).map((i) =>
+      <label key={i._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckImages} type="checkbox" defaultChecked={this.state.images.find((c) => c == i._id)} name={i._id} defaultValue={i._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{i.name}</span>
@@ -200,15 +191,9 @@ export class GroupForm extends Component{
           </div>
           <div className="card-body">
             <form id="form">
-              <div className="form-row">
-                <div className="form-group col-md-1">
-                  <label htmlFor="groupID"><i className="fa fa-hashtag mr-2"></i>ID</label>
-                  <input type="text" className="form-control" id="groupID" placeholder="ID" name="id" value={this.state.id} readOnly></input>
-                </div>
-                <div className="form-group col-md-11">
-                  <label htmlFor="name"><i className="fa fa-picture-o mr-2"></i>Nombre</label>
-                  <input type="text" className="form-control" id="name" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="Nombre del grupo"></input>
-                </div>
+              <div className="form-group">
+                <label htmlFor="name"><i className="fa fa-picture-o mr-2"></i>Nombre</label>
+                <input type="text" className="form-control" id="name" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="Nombre del grupo"></input>
               </div>
               <div className="form-group">
                 <label htmlFor="description"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
@@ -223,10 +208,10 @@ export class GroupForm extends Component{
                   </select>
                 </div>
                 <div className="form-group col">
-                  <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
+                  <label htmlFor="screens"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
                   <div>
                     <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
-                      {optionsResolution}
+                      {optionsScreens}
                     </select>
                   </div>
                 </div>

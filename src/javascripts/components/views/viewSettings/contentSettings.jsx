@@ -39,7 +39,7 @@ export class ContentSettings extends Component{
           <div className="row">
             <div className="col">
               <div className="titulo mb-4 text-right">
-                <h1>CUENTA</h1>
+                <h1>SISTEMA</h1>
               </div>
               <hr></hr>
             </div>

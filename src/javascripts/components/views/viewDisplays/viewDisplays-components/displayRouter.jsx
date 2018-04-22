@@ -1,19 +1,18 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import axios from 'axios'
 
 /* IMPORT COMPONENTS */
-import { DisplayDetails } from './displayDetails.jsx';
-import { DisplayForm } from './displayForm.jsx';
-import { DisplayDelete } from './displayDelete.jsx';
-import { DisplayLoading } from './displayLoading.jsx';
+import { DisplayDetails } from './displayDetails.jsx'
+import { DisplayForm } from './displayForm.jsx'
+import { DisplayDelete } from './displayDelete.jsx'
 
-/* COMPONENTS */
+/* COMPONENT */
 export class DisplayRouter extends Component {
 
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       display: null,
       isLoaded: false,
@@ -32,7 +31,7 @@ export class DisplayRouter extends Component {
           (error) => { // reject callback
             this.setState({ error, isLoaded: true})
           }
-        );
+        )
     }
   }
 
@@ -47,7 +46,7 @@ export class DisplayRouter extends Component {
           (error) => { // reject callback
             this.setState({ error, isLoaded: true })
           }
-        );
+        )
     }
   }
 
@@ -56,9 +55,9 @@ export class DisplayRouter extends Component {
     // wait for resource to be loaded or handle errors if any
     if (error) {
       // TODO: error handling
-      return null;
+      return null
     } else if (!isLoaded) {
-      return (<DisplayLoading/>);
+      return null
     } else {
       return(
         <Switch>
@@ -66,7 +65,7 @@ export class DisplayRouter extends Component {
           <Route path="/displays/:displayId/delete" render={({ match }) => <DisplayDelete {...this.props} display={display}/>}/>
           <Route path="/displays/:displayId" render={({ match }) => (<DisplayDetails {...this.props} display={display}/>)}/>
         </Switch>
-      );
+      )
     }
   }
-};
+}

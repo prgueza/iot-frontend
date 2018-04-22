@@ -5526,13 +5526,8 @@ var _icon = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var cx = __webpack_require__(8);
-
-/* IMPORT COMPONENTS */
+/* COMPONENT */
 /* IMPORT MODULES */
-
-
-/* COMPONENTS */
 var Title = exports.Title = function Title(_ref) {
   var appearance = _ref.appearance,
       total = _ref.total,
@@ -5565,6 +5560,8 @@ var Title = exports.Title = function Title(_ref) {
     )
   );
 };
+
+/* IMPORT COMPONENTS */
 
 /***/ }),
 /* 13 */
@@ -6801,15 +6798,15 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _display = __webpack_require__(291);
+var _display = __webpack_require__(292);
 
-var _image = __webpack_require__(292);
+var _image = __webpack_require__(293);
 
-var _group = __webpack_require__(293);
+var _group = __webpack_require__(294);
 
-var _device = __webpack_require__(294);
+var _device = __webpack_require__(295);
 
-var _gateway = __webpack_require__(295);
+var _gateway = __webpack_require__(296);
 
 var _addButton = __webpack_require__(15);
 
@@ -6947,8 +6944,6 @@ var List = exports.List = function (_Component) {
 
   return List;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 19 */
@@ -7224,7 +7219,7 @@ var _icon = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* COMPONENTS */
+/* COMPONENT */
 /* IMPORT MODULES */
 var Associated = exports.Associated = function Associated(_ref) {
   var content = _ref.content,
@@ -7327,17 +7322,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var cx = __webpack_require__(8);
 
-/* COMPONENTS */
+/* COMPONENT */
 /* IMPORT MODULES */
 var Tag = exports.Tag = function Tag(_ref) {
-  var categoria = _ref.categoria,
-      etiqueta = _ref.etiqueta;
+  var category = _ref.category,
+      tag = _ref.tag;
 
-  var claseEtiqueta = cx("btn mr-1", { "btn-outline-success": categoria === "displays" }, { "btn-outline-info": categoria === "imagenes" }, { "btn-outline-warning": categoria === "grupos" }, "btn-tiny");
+  var tagClass = cx("btn mr-1", { "btn-outline-success": category === "displays" }, { "btn-outline-info": category === "images" }, { "btn-outline-warning": category === "groups" }, "btn-tiny");
   return _react2.default.createElement(
     'button',
-    { type: 'button', className: claseEtiqueta },
-    etiqueta
+    { type: 'button', className: tagClass },
+    tag
   );
 };
 
@@ -35402,7 +35397,6 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
         resolutions = _this$props.resolutions;
 
     _this.state = {
-      id: display ? display.id : '',
       name: display ? display.name : '',
       description: display ? display.description : '',
       created_by: display ? display.created_by || { name: 'Usuario eliminado' } : user,
@@ -35440,22 +35434,13 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          displays = _props.displays,
-          display = _props.display,
-          devices = _props.devices,
-          images = _props.images;
-      // if in post mode get first free id value
-
-      if (!display) {
-        var identificaciones = displays.map(function (d) {
-          return d.id;
-        }); // get all ids
-        var id = 1; // start from 1
-        while (identificaciones.indexOf(id) != -1) {
-          id++;
-        } // stop at first free id value
-      }
+          _props$data = _props.data,
+          displays = _props$data.displays,
+          devices = _props$data.devices,
+          images = _props$data.images,
+          display = _props.display;
       // get options for active image
+
       var optionsActiveImage = images.filter(function (i) {
         return _this2.state.images.find(function (c) {
           return c == i._id;
@@ -35463,7 +35448,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
       }).map(function (i) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i.id },
+          { value: i._id, key: i._id },
           i.name
         );
       });
@@ -35474,8 +35459,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
       // set state with initial values
       if (unusedDevices.length > 0 || display) {
         this.setState({
-          id: display ? display.id : id,
-          location: display ? '/displays/' + display.id : '/displays/' + id, // Redirect url
+          location: display ? '/displays/' + display._id : '/displays', // Redirect url
           device: display ? display.device ? display.device._id : unusedDevices[0]._id : unusedDevices[0]._id,
           deviceDescription: display ? display.device.description : unusedDevices[0].description,
           optionsActiveImage: optionsActiveImage
@@ -35503,9 +35487,18 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var _props2 = this.props,
+          _props2$data = _props2.data,
+          devices = _props2$data.devices,
+          images = _props2$data.images,
+          groups = _props2$data.groups,
+          displays = _props2$data.displays,
+          display = _props2.display;
+
       // Options
-      var optionsDevices = this.props.devices.filter(function (d) {
-        return !d.display || d.display._id == (_this3.props.display && _this3.props.display._id);
+
+      var optionsDevices = devices.filter(function (d) {
+        return !d.display || d.display._id == (display && display._id);
       }).map(function (d, i) {
         return _react2.default.createElement(
           'option',
@@ -35513,10 +35506,10 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
           d.name
         );
       });
-      var optionsGroups = this.props.groups.map(function (g) {
+      var optionsGroups = groups.map(function (g) {
         return _react2.default.createElement(
           'label',
-          { key: g.id, className: 'custom-control custom-checkbox' },
+          { key: g._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this3.handleCheckGroups, type: 'checkbox', defaultChecked: _this3.state.groups.find(function (c) {
               return c == g._id;
             }), name: g._id, defaultValue: g._id, className: 'custom-control-input' }),
@@ -35528,12 +35521,12 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
           )
         );
       });
-      var optionsImages = this.props.images.sort(function (a, b) {
-        return a.id - b.id;
+      var optionsImages = images.sort(function (a, b) {
+        return a.updated_at - b.updated_at;
       }).map(function (i) {
         return _react2.default.createElement(
           'label',
-          { key: i.id, className: 'custom-control custom-checkbox' },
+          { key: i._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
               return c == i._id;
             }), name: i._id, defaultValue: i._id, className: 'custom-control-input' }),
@@ -35604,7 +35597,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item mr-auto' },
-                this.props.display ? _react2.default.createElement(
+                display ? _react2.default.createElement(
                   'h2',
                   { className: 'detalles-titulo' },
                   _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
@@ -35619,7 +35612,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item ml-2' },
-                this.props.display ? _react2.default.createElement(
+                display ? _react2.default.createElement(
                   'button',
                   { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-success' },
                   _react2.default.createElement('i', { className: 'fa fa-save mr-3', 'aria-hidden': 'true' }),
@@ -35676,29 +35669,14 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
               _react2.default.createElement('hr', { className: 'card-division' }),
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-1' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'displayID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'displayID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  'label',
+                  { htmlFor: 'nombre' },
+                  _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+                  'Nombre'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-11' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'nombre' },
-                    _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: this.state.name, onChange: this.handleInputChange })
               ),
               _react2.default.createElement(
                 'div',
@@ -35870,7 +35848,7 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     if (name === 'device') {
-      var unusedDevices = _this4.props.devices.filter(function (d) {
+      var unusedDevices = _this4.props.data.devices.filter(function (d) {
         return !d.display;
       });
       _this4.setState({ deviceDescription: unusedDevices.find(function (d) {
@@ -35907,7 +35885,7 @@ var _initialiseProps = function _initialiseProps() {
       // if there are no images deselect
       _this4.setState({ active_image: '' });
     }
-    _this4.setState({ optionsActiveImage: _this4.props.images.filter(function (i) {
+    _this4.setState({ optionsActiveImage: _this4.props.data.images.filter(function (i) {
         return _this4.state.images.find(function (c) {
           return c == i._id;
         });
@@ -35949,14 +35927,13 @@ var _initialiseProps = function _initialiseProps() {
     // define form values to send
 
     var form = {
-      id: _this4.state.id,
       name: _this4.state.name,
       description: _this4.state.description,
       category: _this4.state.category,
       updated_by: _this4.props.user._id, // send user_id
       tags: _this4.state.tags,
       device: _this4.state.device,
-      userGroup: _this4.props.userGroup._id
+      userGroup: _this4.props.data.userGroup._id
     };
     // possible empty fields
     if (!_this4.props.display) form.created_by = _this4.props.user._id;
@@ -35983,8 +35960,6 @@ var _initialiseProps = function _initialiseProps() {
     });
   };
 };
-
-;
 
 /***/ }),
 /* 185 */
@@ -36040,15 +36015,14 @@ var ImageForm = exports.ImageForm = function (_Component) {
     var _this$props = _this.props,
         image = _this$props.image,
         user = _this$props.user,
-        resolutions = _this$props.resolutions;
+        screens = _this$props.screens;
 
     _this.state = {
-      id: image ? image.id : '',
       name: image ? image.name : '',
       description: image ? image.description : '',
       created_by: image ? image.created_by || { name: 'Usuario eliminado' } : user,
       updated_by: user.name,
-      resolution: image ? image.resolution ? image.resolution._id : resolutions[0]._id : resolutions[0]._id,
+      resolution: image ? image.resolution ? image.resolution._id : screens[0]._id : screens[0]._id,
       category: image ? image.category ? image.category : '' : '',
       tags: image ? image.tags : [],
       created_at: image ? moment(image.created_at) : moment(),
@@ -36077,21 +36051,10 @@ var ImageForm = exports.ImageForm = function (_Component) {
       var _props = this.props,
           images = _props.images,
           image = _props.image;
-      // if in post mode get first free id value
-
-      if (!image) {
-        var identificaciones = images.map(function (i) {
-          return i.id;
-        }); // get all ids
-        var id = 1; // start from 1
-        while (identificaciones.indexOf(id) != -1) {
-          id++;
-        } // stop at first free id value
-      }
       // set state with initial values
+
       this.setState({
-        id: image ? image.id : id,
-        location: image ? '/images/' + image.id : '/images/' + id // Redirect url
+        location: image ? '/images/' + image._id : '/images' // Redirect url
       });
     }
 
@@ -36113,8 +36076,8 @@ var ImageForm = exports.ImageForm = function (_Component) {
       var _this2 = this;
 
       // Options
-      var optionsResolution = this.props.resolutions.sort(function (a, b) {
-        return a.id - b.id;
+      var optionsScreens = this.props.screens.sort(function (a, b) {
+        return a.updated_at - b.updated_at;
       }).map(function (r, i) {
         return _react2.default.createElement(
           'option',
@@ -36125,7 +36088,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
       var optionsGroups = this.props.groups.map(function (g) {
         return _react2.default.createElement(
           'label',
-          { key: g.id, className: 'custom-control custom-checkbox' },
+          { key: g._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this2.handleCheckGroups, type: 'checkbox', defaultChecked: _this2.state.groups.find(function (c) {
               return c == g._id;
             }), name: g._id, defaultValue: g._id, className: 'custom-control-input' }),
@@ -36138,11 +36101,11 @@ var ImageForm = exports.ImageForm = function (_Component) {
         );
       });
       var optionsDisplays = this.props.displays.sort(function (a, b) {
-        return a.id - b.id;
+        return a.updated_at - b.updated_at;
       }).map(function (d) {
         return _react2.default.createElement(
           'label',
-          { key: d.id, className: 'custom-control custom-checkbox' },
+          { key: d._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, type: 'checkbox', defaultChecked: _this2.state.displays.find(function (c) {
               return c == d._id;
             }), name: d._id, defaultValue: d._id, className: 'custom-control-input' }),
@@ -36208,29 +36171,14 @@ var ImageForm = exports.ImageForm = function (_Component) {
               { id: 'form' },
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-1' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'imagenID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'imagenID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  'label',
+                  { htmlFor: 'nombre' },
+                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+                  'Nombre'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-11' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'nombre' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
               ),
               _react2.default.createElement(
                 'div',
@@ -36262,7 +36210,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
                   { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'resolucion' },
+                    { htmlFor: 'screen' },
                     _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
                     'Resoluci\xF3n'
                   ),
@@ -36272,7 +36220,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
                     _react2.default.createElement(
                       'select',
                       { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
-                      optionsResolution
+                      optionsScreens
                     )
                   )
                 ),
@@ -36481,7 +36429,6 @@ var _initialiseProps = function _initialiseProps() {
     // define form values to send
 
     var form = {
-      id: _this3.state.id,
       name: _this3.state.name,
       description: _this3.state.description,
       updated_by: _this3.state.updated_by._id, // send user_id
@@ -36574,7 +36521,6 @@ var GroupForm = exports.GroupForm = function (_Component) {
 
     _this.state = {
       // form data stored in state
-      id: '',
       name: group ? group.name : '',
       description: group ? group.description : '',
       created_by: group ? group.created_by ? group.created_by : 'Usuario eliminado' : user,
@@ -36620,25 +36566,14 @@ var GroupForm = exports.GroupForm = function (_Component) {
       }).map(function (i) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i.id },
+          { value: i._id, key: i._id },
           i.name
         );
       });
-      // if in post mode get first free id value
-      if (!group) {
-        var ids = groups.map(function (g) {
-          return g.id;
-        }); // get all ids
-        var id = 1; // start from 1
-        while (ids.indexOf(id) != -1) {
-          id++;
-        } // stop at first free id value
-      }
       // set state with initial values
       this.setState({
-        id: group ? group.id : id,
         optionsActiveImage: optionsActiveImage,
-        location: group ? '/groups/' + group.id : '/groups/' + id
+        location: group ? '/groups/' + group._id : '/groups/'
       });
     }
 
@@ -36656,8 +36591,8 @@ var GroupForm = exports.GroupForm = function (_Component) {
       var _this3 = this;
 
       // Options
-      var optionsResolution = this.props.resolutions.sort(function (a, b) {
-        return a.id - b.id;
+      var optionsScreens = this.props.screens.sort(function (a, b) {
+        return a.updated_at - b.updated_at;
       }).map(function (r, i) {
         return _react2.default.createElement(
           'option',
@@ -36666,11 +36601,11 @@ var GroupForm = exports.GroupForm = function (_Component) {
         );
       });
       var optionsDisplays = this.props.displays.sort(function (a, b) {
-        return a.id - b.id;
+        return a.updated_at - b.updated_at;
       }).map(function (d) {
         return _react2.default.createElement(
           'label',
-          { key: d.id, className: 'custom-control custom-checkbox' },
+          { key: d._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this3.handleCheckDisplays, type: 'checkbox', defaultChecked: _this3.state.displays.find(function (c) {
               return c == d._id;
             }), name: d._id, defaultValue: d._id, className: 'custom-control-input' }),
@@ -36683,11 +36618,11 @@ var GroupForm = exports.GroupForm = function (_Component) {
         );
       });
       var optionsImages = this.props.images.sort(function (a, b) {
-        return a.id - b.id;
+        return a.updated_at - b.updated_at;
       }).map(function (i) {
         return _react2.default.createElement(
           'label',
-          { key: i.id, className: 'custom-control custom-checkbox' },
+          { key: i._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
               return c == i._id;
             }), name: i._id, defaultValue: i._id, className: 'custom-control-input' }),
@@ -36757,29 +36692,14 @@ var GroupForm = exports.GroupForm = function (_Component) {
               { id: 'form' },
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-1' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'groupID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'groupID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  'label',
+                  { htmlFor: 'name' },
+                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+                  'Nombre'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-11' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'name' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', value: this.state.name, onChange: this.handleInputChange, placeholder: 'Nombre del grupo' })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', value: this.state.name, onChange: this.handleInputChange, placeholder: 'Nombre del grupo' })
               ),
               _react2.default.createElement(
                 'div',
@@ -36820,7 +36740,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
                   { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'resolucion' },
+                    { htmlFor: 'screens' },
                     _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
                     'Resoluci\xF3n'
                   ),
@@ -36830,7 +36750,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
                     _react2.default.createElement(
                       'select',
                       { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
-                      optionsResolution
+                      optionsScreens
                     )
                   )
                 )
@@ -37018,7 +36938,7 @@ var _initialiseProps = function _initialiseProps() {
       }).map(function (i) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i.id },
+          { value: i._id, key: i._id },
           i.name
         );
       }) });
@@ -37030,7 +36950,6 @@ var _initialiseProps = function _initialiseProps() {
     // define form values to send
 
     var form = {
-      id: _this4.state.id,
       name: _this4.state.name,
       description: _this4.state.description,
       updated_by: _this4.state.updated_by._id, // send user_id
@@ -37475,7 +37394,7 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
       updated_at: moment(),
       mac: device.mac,
       pref_gateway: device.pref_gateway ? device.pref_gateway._id : gateways[0]._id,
-      userGroup: device.userGroup ? device.userGroup._id : userGroups[0]._id,
+      userGroup: device.userGroup ? device.userGroup._id : '',
 
       redirect: false,
       redirect_location: '/devices',
@@ -37566,7 +37485,7 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                 _react2.default.createElement(
                   'button',
                   { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                  _react2.default.createElement('i', { className: 'fa-fw fa-save mr-2', 'aria-hidden': 'true' }),
+                  _react2.default.createElement('i', { className: 'fa  fa-fw fa-floppy-o mr-2', 'aria-hidden': 'true' }),
                   'Guardar cambios'
                 )
               )
@@ -37736,9 +37655,9 @@ var _initialiseProps = function _initialiseProps() {
       description: _this2.state.description,
       updated_by: _this2.state.updated_by._id, // send user_id
       pref_gateway: _this2.state.pref_gateway,
-      mac: _this2.state.mac,
-      userGroup: _this2.state.userGroup
+      mac: _this2.state.mac
     };
+    if (_this2.state.userGroup) form.userGroup = _this2.state.userGroup;
     // HTTP request
     (0, _axios2.default)({
       method: 'put',
@@ -37823,7 +37742,7 @@ __webpack_require__(38);
 
 
 // styles
-__webpack_require__(339);
+__webpack_require__(340);
 
 // react components
 
@@ -40323,7 +40242,7 @@ var _reactRouterDom = __webpack_require__(2);
 
 var _main = __webpack_require__(230);
 
-var _login = __webpack_require__(338);
+var _login = __webpack_require__(339);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -40346,18 +40265,19 @@ var App = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.login = function (user, token) {
-      _this.setState({ isLoggedIn: true, user: user, token: token });
+    _this.login = function (user, token, data) {
+      _this.setState({ isLoggedIn: true, user: user, token: token, data: data });
     };
 
     _this.logout = function () {
-      _this.setState({ isLoggedIn: false, user: null, token: null });
+      _this.setState({ isLoggedIn: false, user: null, token: null, data: null });
     };
 
     _this.state = {
       // user data
       user: null,
       token: null,
+      data: null,
       // login flag
       isLoggedIn: false,
       // eror handling
@@ -61228,9 +61148,11 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _navigation = __webpack_require__(287);
+var _enviroment = __webpack_require__(287);
 
-var _content = __webpack_require__(289);
+var _navigation = __webpack_require__(288);
+
+var _content = __webpack_require__(290);
 
 var _notification = __webpack_require__(189);
 
@@ -61244,11 +61166,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* CONFIGURE AXIOS */
-_axios2.default.defaults.baseURL = 'http://localhost:4000';
+_axios2.default.defaults.baseURL = _enviroment.env.API_URL;
 
 /* IMPORT COMPONENTS */
 
-/* COMPONENTS */
+/* COMPONENT */
 var Main = exports.Main = function (_Component) {
   _inherits(Main, _Component);
 
@@ -61273,15 +61195,16 @@ var Main = exports.Main = function (_Component) {
         })).then(function () {
           return notify && _this.notify('Datos cargados', 'notify-success', 'download', _reactToastify.toast.POSITION.BOTTOM_LEFT);
         }).then(function () {
-          return sync && _this.sync_api();
+          return sync && _this.sync_api(token);
         }).catch(function () {
           return _this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
         });
         // else get resources within the userGroup
       } else {
-        return _axios2.default.all([(0, _axios2.default)(user.userGroup.url), (0, _axios2.default)('/resolutions')]).then(_axios2.default.spread(function (res, resolutions) {
+        return _axios2.default.all([(0, _axios2.default)(user.userGroup.url), (0, _axios2.default)('/resolutions'), (0, _axios2.default)('/gateways')]).then(_axios2.default.spread(function (res, screens, gateways) {
           _this.setState({
             userGroup: res.data,
+            gateways: gateways.data,
             displays: res.data.displays, // set displays that the user can manage
             images: res.data.images, // set images that the user can manage
             groups: res.data.groups, // set groups that the user can manage
@@ -61292,19 +61215,17 @@ var Main = exports.Main = function (_Component) {
         })).then(function () {
           return notify && _this.notify('Datos cargados', 'notify-success', 'download', _reactToastify.toast.POSITION.BOTTOM_LEFT);
         }).then(function () {
-          return sync && _this.sync_api();
+          return sync && _this.sync_api(token);
         }).catch(function () {
           return _this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
         });
       }
     };
 
-    _this.sync_api = function () {
+    _this.sync_api = function (token) {
       _this.setState({ sync_status: 3, last_synced: (0, _moment2.default)() }); //syncing
       _this.notify_sync('Buscando dispositivos...', 'notify-success', 'refresh');
-      var data = _this.state.gateways;
-      _axios2.default.post('/update', { data: data }, // data
-      { timeout: 10000 }).then(function (res) {
+      _axios2.default.get('/update', { timeout: _enviroment.env.TIMEOUT, headers: { Authorization: 'Bearer ' + token } }).then(function (res) {
         _this.update_sync('Pulse para sincronizar', 'notify-success', 'link', false);
         _this.setState({ synced_devices: res.data, sync_status: 1, last_synced: (0, _moment2.default)() }); //synced_ready
       }).catch(function (err) {
@@ -61315,8 +61236,10 @@ var Main = exports.Main = function (_Component) {
 
     _this.sync = function () {
       var devices = _this.state.synced_devices;
+      var data = _this.state.data;
+      data.devices = devices;
       _this.update_sync('Datos sincronizados', 'notify-success', 'check', true);
-      _this.setState({ devices: devices, sync_status: 2 }); //synced
+      _this.setState({ data: data, sync_status: 2 }); //synced
     };
 
     _this.filterData = function (value) {
@@ -61365,16 +61288,19 @@ var Main = exports.Main = function (_Component) {
     _this.state = {
       // active user
       user: null,
+      token: null,
       // userGroup data
       userGroup: null,
+      // data
+      data: [],
       // admin data
       screens: null,
       locations: null,
-      gateways: null,
-      devices: null,
+      gateways: [],
+      devices: [],
       userGroups: null,
       // user data
-      displays: null,
+      displays: [],
       images: null,
       groups: null,
       // sync
@@ -61389,8 +61315,7 @@ var Main = exports.Main = function (_Component) {
       isLoaded: false,
       isLoggedIn: false,
       error: null,
-      redirect: false,
-      location: ''
+      redirect: false
     };
     return _this;
   }
@@ -61406,13 +61331,13 @@ var Main = exports.Main = function (_Component) {
       // get user id and token
       var _props = this.props,
           user = _props.user,
-          token = _props.token;
+          token = _props.token,
+          data = _props.data;
       // set user id and token
 
-      this.setState({ user: user, token: token, isLoggedIn: true });
-      // get data
-      this.update(user, true, true);
-      // this.sync_api();
+      this.setState({ user: user, token: token, data: data, isLoggedIn: true, isLoaded: true });
+      // sync
+      this.sync_api(token);
       // check syncronization
       this.check_sync_id = setInterval(function () {
         if (_this2.state.last_synced && (0, _moment2.default)().diff(_this2.state.last_synced, 'seconds') > 20) {
@@ -66416,6 +66341,21 @@ module.exports = function spread(callback) {
 
 
 Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+var env = exports.env = {
+   API_URL: 'http://localhost:4000/', // api url for the requests
+   TIMEOUT: '30000' // timeout for sync request which can take up to 30 seconds
+};
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Navigation = undefined;
@@ -66428,7 +66368,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _navButton = __webpack_require__(288);
+var _navButton = __webpack_require__(289);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66475,13 +66415,15 @@ var Navigation = exports.Navigation = function (_Component) {
 
       // get
       var _props = this.props,
-          displays = _props.displays,
-          images = _props.images,
-          groups = _props.groups,
+          _props$data = _props.data,
+          displays = _props$data.displays,
+          images = _props$data.images,
+          groups = _props$data.groups,
+          devices = _props$data.devices,
+          gateways = _props$data.gateways,
           user = _props.user,
-          devices = _props.devices,
-          gateways = _props.gateways,
-          sync_status = _props.sync_status;
+          sync_status = _props.sync_status,
+          token = _props.token;
 
       var navigationUser = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "displays", text: "Displays", icon: "television", count: true, number: displays ? displays.length + '/' + devices.length : '...' }, { exact: false, linkTo: "images", text: "Imagenes", icon: "picture-o", count: true, number: images ? images.length : '...' }, { exact: false, linkTo: "groups", text: "Grupos", icon: "list", count: true, number: groups ? groups.length : '...' }];
 
@@ -66502,7 +66444,7 @@ var Navigation = exports.Navigation = function (_Component) {
             _react2.default.createElement(
               'button',
               { onClick: function onClick() {
-                  return _this2.props.sync_api();
+                  return _this2.props.sync_api(token);
                 }, type: 'button', className: 'btn btn-nav btn-block mb-1' },
               _react2.default.createElement('i', { className: 'fa fa-refresh mr-2', 'aria-hidden': 'true' }),
               ' Buscar dispositivos'
@@ -66547,15 +66489,13 @@ var Navigation = exports.Navigation = function (_Component) {
             _react2.default.createElement(
               'button',
               { onClick: function onClick() {
-                  return _this2.props.sync_api();
+                  return _this2.props.sync_api(token);
                 }, type: 'button', className: 'btn btn-nav btn-block mb-1', disabled: true },
               _react2.default.createElement('i', { className: 'fa fa-refresh fa-spin mr-2', 'aria-hidden': 'true' }),
               ' Sincronizando'
             )
           );
           break;
-        default:
-
       }
 
       return _react2.default.createElement(
@@ -66695,10 +66635,8 @@ var Navigation = exports.Navigation = function (_Component) {
   return Navigation;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66755,7 +66693,7 @@ var NavButton = exports.NavButton = function NavButton(_ref) {
 };
 
 /***/ }),
-/* 289 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66766,7 +66704,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Content = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -66774,7 +66712,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _contentDisplays = __webpack_require__(290);
+var _contentDisplays = __webpack_require__(291);
 
 var _contentImages = __webpack_require__(301);
 
@@ -66792,88 +66730,61 @@ var _contentDevices = __webpack_require__(331);
 
 var _overview = __webpack_require__(336);
 
+var _protectedRoute = __webpack_require__(338);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /* IMPORT MODULES */
 
 
 /* IMPORT COMPONENTS */
 
 
-/* COMPONENTS */
-var Content = exports.Content = function (_Component) {
-  _inherits(Content, _Component);
+/* COMPONENT */
+var Content = function Content(_ref) {
+  var isLoaded = _ref.isLoaded,
+      rest = _objectWithoutProperties(_ref, ['isLoaded']);
 
-  function Content() {
-    _classCallCheck(this, Content);
-
-    return _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).apply(this, arguments));
+  if (isLoaded) {
+    return _react2.default.createElement(
+      'div',
+      { className: 'col content' },
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+          return _react2.default.createElement(_overview.Overview, rest);
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/displays', render: function render() {
+          return _react2.default.createElement(_contentDisplays.ContentDisplays, rest);
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/images', render: function render() {
+          return _react2.default.createElement(_contentImages.ContentImages, rest);
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/groups', render: function render() {
+          return _react2.default.createElement(_contentGroups.ContentGroups, rest);
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/docs', render: function render() {
+          return _react2.default.createElement(_contentDocs.ContentDocs, rest);
+        } }),
+      _react2.default.createElement(_protectedRoute.ProtectedRoute, _extends({}, rest, { path: '/settings', component: _contentSettings.ContentSettings })),
+      _react2.default.createElement(_protectedRoute.ProtectedRoute, _extends({}, rest, { path: '/devices', component: _contentDevices.ContentDevices })),
+      _react2.default.createElement(_protectedRoute.ProtectedRoute, _extends({}, rest, { path: '/gateways', component: _contentGateways.ContentGateways }))
+    );
+  } else {
+    return _react2.default.createElement(
+      'div',
+      { className: 'col text-center d-flex align-items-center justify-content-center' },
+      _react2.default.createElement(
+        'h1',
+        null,
+        _react2.default.createElement('i', { className: 'fa fa-circle-o-notch fa-spin fa-fw mr-4' }),
+        'Cargando'
+      )
+    );
   }
-
-  _createClass(Content, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      if (this.props.isLoaded) {
-        var content = _react2.default.createElement(
-          'div',
-          { className: 'col content' },
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-              return _react2.default.createElement(_overview.Overview, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/displays', render: function render() {
-              return _react2.default.createElement(_contentDisplays.ContentDisplays, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/images', render: function render() {
-              return _react2.default.createElement(_contentImages.ContentImages, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/groups', render: function render() {
-              return _react2.default.createElement(_contentGroups.ContentGroups, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/account', render: function render() {
-              return _react2.default.createElement(_contentAccount.ContentAccount, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/settings', render: function render() {
-              return _react2.default.createElement(_contentSettings.ContentSettings, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/docs', render: function render() {
-              return _react2.default.createElement(_contentDocs.ContentDocs, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways', render: function render() {
-              return _react2.default.createElement(_contentGateways.ContentGateways, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/devices', render: function render() {
-              return _react2.default.createElement(_contentDevices.ContentDevices, _this2.props);
-            } })
-        );
-      } else {
-        var content = _react2.default.createElement(
-          'div',
-          { className: 'col text-center d-flex align-items-center justify-content-center' },
-          _react2.default.createElement(
-            'h1',
-            null,
-            _react2.default.createElement('i', { className: 'fa fa-circle-o-notch fa-spin fa-fw mr-4' }),
-            'Cargando'
-          )
-        );
-      }
-      return content;
-    }
-  }]);
-
-  return Content;
-}(_react.Component);
-
-;
+};
+exports.Content = Content;
 
 /***/ }),
-/* 290 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66898,7 +66809,7 @@ var _title = __webpack_require__(12);
 
 var _displayForm = __webpack_require__(184);
 
-var _displayRouter = __webpack_require__(296);
+var _displayRouter = __webpack_require__(297);
 
 var _displayGeneric = __webpack_require__(300);
 
@@ -66912,9 +66823,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentDisplays = function ContentDisplays(_ref) {
-  var displays = _ref.displays,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['displays', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      props = _objectWithoutProperties(_ref, ['filterValue']);
+
+  var displays = props.data.displays;
+
 
   return _react2.default.createElement(
     'div',
@@ -66959,12 +66872,12 @@ var ContentDisplays = function ContentDisplays(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/add', render: function render() {
-                  return _react2.default.createElement(_displayForm.DisplayForm, _extends({}, other, { displays: displays }));
+                  return _react2.default.createElement(_displayForm.DisplayForm, _extends({}, props, { displays: displays }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_displayRouter.DisplayRouter, _extends({}, other, { display: displays.find(function (d) {
-                      return d.id == match.params.displayId;
+                  return _react2.default.createElement(_displayRouter.DisplayRouter, _extends({}, props, { display: displays.find(function (d) {
+                      return d._id == match.params.displayId;
                     }) }));
                 } })
             ),
@@ -66980,7 +66893,7 @@ var ContentDisplays = function ContentDisplays(_ref) {
 exports.ContentDisplays = ContentDisplays;
 
 /***/ }),
-/* 291 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67006,8 +66919,8 @@ var cx = __webpack_require__(8);
 /* COMPONENT */
 var Display = exports.Display = function Display(_ref) {
   var display = _ref.display;
-  var url = display.url,
-      id = display.id,
+  var _id = display._id,
+      url = display.url,
       name = display.name,
       description = display.description,
       tags_total = display.tags_total,
@@ -67017,7 +66930,7 @@ var Display = exports.Display = function Display(_ref) {
   var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
   var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   var location = {
-    pathname: '/displays/' + id
+    pathname: '/displays/' + _id
   };
   return _react2.default.createElement(
     'div',
@@ -67044,102 +66957,7 @@ var Display = exports.Display = function Display(_ref) {
             'small',
             null,
             _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
-            id
-          )
-        ),
-        _react2.default.createElement('hr', { className: 'element-division' }),
-        _react2.default.createElement(
-          'p',
-          { className: 'mb-3 mt-2' },
-          description
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'd-flex w-100 justify-content-between mt-3' },
-          _react2.default.createElement(
-            'small',
-            null,
-            _react2.default.createElement('i', { className: tagsClass, 'aria-hidden': 'true' }),
-            tags_total
-          ),
-          _react2.default.createElement(
-            'small',
-            null,
-            updated,
-            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
-          )
-        )
-      )
-    )
-  );
-};
-
-/***/ }),
-/* 292 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Image = undefined;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
-var cx = __webpack_require__(8);
-
-/* COMPONENT */
-var Image = exports.Image = function Image(_ref) {
-  var image = _ref.image;
-  var url = image.url,
-      id = image.id,
-      name = image.name,
-      description = image.description,
-      tags_total = image.tags_total,
-      updated_at = image.updated_at;
-
-  var updated = moment(updated_at).from(moment());
-  var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
-  var location = {
-    pathname: '/images/' + id
-  };
-  return _react2.default.createElement(
-    'div',
-    { className: elementClass },
-    _react2.default.createElement(
-      _reactRouterDom.NavLink,
-      { to: location },
-      _react2.default.createElement(
-        'div',
-        { className: 'elemento elemento-imagen' },
-        _react2.default.createElement(
-          'div',
-          { className: 'd-flex w-100 justify-content-between' },
-          _react2.default.createElement(
-            'h5',
-            { className: 'w-75' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              name
-            )
-          ),
-          _react2.default.createElement(
-            'small',
-            null,
-            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
-            id
+            '?'
           )
         ),
         _react2.default.createElement('hr', { className: 'element-division' }),
@@ -67179,7 +66997,7 @@ var Image = exports.Image = function Image(_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Group = undefined;
+exports.Image = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -67194,20 +67012,20 @@ var moment = __webpack_require__(0);moment.locale('es');
 var cx = __webpack_require__(8);
 
 /* COMPONENT */
-var Group = exports.Group = function Group(_ref) {
-  var group = _ref.group;
-  var url = group.url,
-      id = group.id,
-      name = group.name,
-      description = group.description,
-      tags_total = group.tags_total,
-      updated_at = group.updated_at;
+var Image = exports.Image = function Image(_ref) {
+  var image = _ref.image;
+  var _id = image._id,
+      url = image.url,
+      name = image.name,
+      description = image.description,
+      tags_total = image.tags_total,
+      updated_at = image.updated_at;
 
   var updated = moment(updated_at).from(moment());
   var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
   var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   var location = {
-    pathname: '/groups/' + id
+    pathname: '/images/' + _id
   };
   return _react2.default.createElement(
     'div',
@@ -67217,7 +67035,7 @@ var Group = exports.Group = function Group(_ref) {
       { to: location },
       _react2.default.createElement(
         'div',
-        { className: 'elemento elemento-grupo' },
+        { className: 'elemento elemento-imagen' },
         _react2.default.createElement(
           'div',
           { className: 'd-flex w-100 justify-content-between' },
@@ -67234,7 +67052,7 @@ var Group = exports.Group = function Group(_ref) {
             'small',
             null,
             _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
-            id
+            '?'
           )
         ),
         _react2.default.createElement('hr', { className: 'element-division' }),
@@ -67266,6 +67084,101 @@ var Group = exports.Group = function Group(_ref) {
 
 /***/ }),
 /* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Group = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* IMPORT MODULES */
+var moment = __webpack_require__(0);moment.locale('es');
+var cx = __webpack_require__(8);
+
+/* COMPONENT */
+var Group = exports.Group = function Group(_ref) {
+  var group = _ref.group;
+  var _id = group._id,
+      url = group.url,
+      name = group.name,
+      description = group.description,
+      tags_total = group.tags_total,
+      updated_at = group.updated_at;
+
+  var updated = moment(updated_at).from(moment());
+  var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
+  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
+  var location = {
+    pathname: '/groups/' + _id
+  };
+  return _react2.default.createElement(
+    'div',
+    { className: elementClass },
+    _react2.default.createElement(
+      _reactRouterDom.NavLink,
+      { to: location },
+      _react2.default.createElement(
+        'div',
+        { className: 'elemento elemento-grupo' },
+        _react2.default.createElement(
+          'div',
+          { className: 'd-flex w-100 justify-content-between' },
+          _react2.default.createElement(
+            'h5',
+            { className: 'w-75' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              name
+            )
+          ),
+          _react2.default.createElement(
+            'small',
+            null,
+            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
+            '?'
+          )
+        ),
+        _react2.default.createElement('hr', { className: 'element-division' }),
+        _react2.default.createElement(
+          'p',
+          { className: 'mb-3 mt-2' },
+          description
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'd-flex w-100 justify-content-between mt-3' },
+          _react2.default.createElement(
+            'small',
+            null,
+            _react2.default.createElement('i', { className: tagsClass, 'aria-hidden': 'true' }),
+            tags_total
+          ),
+          _react2.default.createElement(
+            'small',
+            null,
+            updated,
+            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
+          )
+        )
+      )
+    )
+  );
+};
+
+/***/ }),
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67368,7 +67281,7 @@ var Device = exports.Device = function Device(_ref) {
 };
 
 /***/ }),
-/* 295 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67465,7 +67378,7 @@ var Gateway = exports.Gateway = function Gateway(_ref) {
 };
 
 /***/ }),
-/* 296 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67490,13 +67403,11 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _displayDetails = __webpack_require__(297);
+var _displayDetails = __webpack_require__(298);
 
 var _displayForm = __webpack_require__(184);
 
-var _displayDelete = __webpack_require__(298);
-
-var _displayLoading = __webpack_require__(299);
+var _displayDelete = __webpack_require__(299);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67510,7 +67421,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /* IMPORT COMPONENTS */
 
 
-/* COMPONENTS */
+/* COMPONENT */
 var DisplayRouter = exports.DisplayRouter = function (_Component) {
   _inherits(DisplayRouter, _Component);
 
@@ -67579,7 +67490,7 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
         // TODO: error handling
         return null;
       } else if (!isLoaded) {
-        return _react2.default.createElement(_displayLoading.DisplayLoading, null);
+        return null;
       } else {
         return _react2.default.createElement(
           _reactRouterDom.Switch,
@@ -67604,10 +67515,8 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
   return DisplayRouter;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 297 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67649,7 +67558,7 @@ var moment = __webpack_require__(0);moment.locale('es');
 
 /* IMPORT COMPONENTS*/
 
-/* COMPONENTS */
+/* COMPONENT */
 var DisplayDetails = exports.DisplayDetails = function (_Component) {
 	_inherits(DisplayDetails, _Component);
 
@@ -67729,32 +67638,32 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 		value: function render() {
 			// define constants from props for better readability
 			var _props$display = this.props.display,
-			    id = _props$display.id,
+			    _id = _props$display._id,
 			    name = _props$display.name,
 			    description = _props$display.description,
-			    updated_at = _props$display.updated_at,
-			    updated_by = _props$display.updated_by,
 			    groups = _props$display.groups,
 			    images = _props$display.images,
 			    active_image = _props$display.active_image,
 			    device = _props$display.device,
-			    tags = _props$display.tags;
+			    tags = _props$display.tags,
+			    updated_at = _props$display.updated_at,
+			    updated_by = _props$display.updated_by;
 			// refactor date constants with format
 
 			var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
 			// generate tag list
 			var tag_list = tags.map(function (tag, i) {
-				return _react2.default.createElement(_tag.Tag, { key: i, categoria: 'displays', etiqueta: tag });
+				return _react2.default.createElement(_tag.Tag, { key: i, category: 'displays', tag: tag });
 			});
 			// define routes for edit and delete based on the id
-			var linktoEdit = '/displays/' + id + '/edit';
-			var linktoDelete = '/displays/' + id + '/delete';
+			var linktoEdit = '/displays/' + _id + '/edit';
+			var linktoDelete = '/displays/' + _id + '/delete';
 			// check if active_image is set and if not set the undefined img
 			var src = this.state.src_url;
 			var imagesOptions = images.map(function (i) {
 				return _react2.default.createElement(
 					'option',
-					{ value: i._id, key: i.id },
+					{ value: i._id, key: i._id },
 					i.name
 				);
 			});
@@ -67821,12 +67730,6 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 								'p',
 								{ className: 'titulo' },
 								'DETALLES'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
-								id
 							),
 							_react2.default.createElement(
 								'p',
@@ -67952,10 +67855,8 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 	return DisplayDetails;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 298 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67991,7 +67892,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var moment = __webpack_require__(0);moment.locale('es');
 
-/* COMPONENTS */
+/* COMPONENT */
 var DisplayDelete = exports.DisplayDelete = function (_Component) {
   _inherits(DisplayDelete, _Component);
 
@@ -68086,210 +67987,6 @@ var DisplayDelete = exports.DisplayDelete = function (_Component) {
   return DisplayDelete;
 }(_react.Component);
 
-;
-
-/***/ }),
-/* 299 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.DisplayLoading = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
-
-
-/* COMPONENTS */
-var DisplayLoading = exports.DisplayLoading = function (_Component) {
-	_inherits(DisplayLoading, _Component);
-
-	function DisplayLoading() {
-		_classCallCheck(this, DisplayLoading);
-
-		return _possibleConstructorReturn(this, (DisplayLoading.__proto__ || Object.getPrototypeOf(DisplayLoading)).apply(this, arguments));
-	}
-
-	_createClass(DisplayLoading, [{
-		key: "render",
-		value: function render() {
-			return _react2.default.createElement(
-				"div",
-				{ className: "card detalles" },
-				_react2.default.createElement(
-					"div",
-					{ className: "card-header" },
-					_react2.default.createElement(
-						"ul",
-						{ className: "nav nav-pills card-header-pills justify-content-end mx-1" },
-						_react2.default.createElement(
-							"li",
-							{ className: "nav-item mr-auto" },
-							_react2.default.createElement(
-								"h2",
-								{ className: "detalles-titulo" },
-								_react2.default.createElement("i", { className: "fa fa-television mr-3", "aria-hidden": "true" }),
-								"Cargando..."
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							{ className: "nav-item mr-2" },
-							_react2.default.createElement(
-								"button",
-								{ type: "button", className: "btn btn-outline-warning" },
-								_react2.default.createElement("i", { className: "fa fa-pencil-square-o mr-1", "aria-hidden": "true" }),
-								"Editar"
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							{ className: "nav-item ml-2" },
-							_react2.default.createElement(
-								"button",
-								{ type: "button", className: "btn btn-outline-danger" },
-								_react2.default.createElement("i", { className: "fa fa-trash-o", "aria-hidden": "true" }),
-								"Eliminar"
-							)
-						)
-					)
-				),
-				_react2.default.createElement(
-					"div",
-					null,
-					_react2.default.createElement(
-						"div",
-						{ className: "row" },
-						_react2.default.createElement(
-							"div",
-							{ className: "col" },
-							_react2.default.createElement(
-								"div",
-								{ className: "card-body" },
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo" },
-									"DETALLES"
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-hashtag mr-1", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-info-circle mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-map-marker mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-arrows-alt mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-calendar-o mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-user-o mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo" },
-									"ETIQUETAS"
-								),
-								"Cargando..."
-							)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "col" },
-							_react2.default.createElement(
-								"div",
-								{ className: "vista-previa" },
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo text-right" },
-									"IMAGEN ACTIVA"
-								),
-								_react2.default.createElement(
-									"div",
-									{ className: "vista-imagen-display" },
-									_react2.default.createElement("img", { className: "imagen" })
-								)
-							)
-						)
-					),
-					_react2.default.createElement("hr", { className: "card-division" }),
-					_react2.default.createElement(
-						"div",
-						{ className: "row" },
-						_react2.default.createElement(
-							"div",
-							{ className: "col" },
-							_react2.default.createElement(
-								"div",
-								{ className: "asociados" },
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo" },
-									"IMAGENES ASOCIADAS (...)"
-								)
-							)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "col" },
-							_react2.default.createElement(
-								"div",
-								{ className: "asociados" },
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo text-right" },
-									"GRUPOS (...)"
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-	}]);
-
-	return DisplayLoading;
-}(_react.Component);
-
-;
-
 /***/ }),
 /* 300 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -68310,7 +68007,7 @@ var _addButton = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* COMPONENTS */
+/* COMPONENT */
 /* IMPORT MODULES */
 var DisplayGeneric = exports.DisplayGeneric = function DisplayGeneric() {
   return _react2.default.createElement(
@@ -68452,7 +68149,7 @@ var ContentImages = function ContentImages(_ref) {
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render(_ref2) {
                   var match = _ref2.match;
                   return _react2.default.createElement(_ImageRouter.ImageRouter, _extends({}, other, { image: images.find(function (i) {
-                      return i.id == match.params.imageId;
+                      return i._id == match.params.imageId;
                     }) }));
                 } })
             ),
@@ -68738,7 +68435,7 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
     value: function render() {
       // define constants from props for better readability
       var _props$image2 = this.props.image,
-          id = _props$image2.id,
+          _id = _props$image2._id,
           name = _props$image2.name,
           description = _props$image2.description,
           src_url = _props$image2.src_url,
@@ -68761,8 +68458,8 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
         return _react2.default.createElement(_tag.Tag, { key: i, categoria: 'imagenes', etiqueta: tag });
       });
       // define routes for edit and delete based on the id
-      var linktoEdit = '/images/' + id + '/edit';
-      var linktoDelete = '/images/' + id + '/delete';
+      var linktoEdit = '/images/' + _id + '/edit';
+      var linktoDelete = '/images/' + _id + '/delete';
 
       return _react2.default.createElement(
         'div',
@@ -68826,12 +68523,6 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                 'p',
                 { className: 'titulo' },
                 'DETALLES'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-2', 'aria-hidden': 'true' }),
-                id
               ),
               _react2.default.createElement(
                 'p',
@@ -69987,7 +69678,7 @@ var ContentGroups = function ContentGroups(_ref) {
               _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', render: function render(_ref2) {
                   var match = _ref2.match;
                   return _react2.default.createElement(_groupRouter.GroupRouter, _extends({}, other, { group: groups.find(function (g) {
-                      return g.id == match.params.groupId;
+                      return g._id == match.params.groupId;
                     }) }));
                 } })
             ),
@@ -70269,7 +69960,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
     value: function render() {
       // define constants from props for better readability
       var _props$group = this.props.group,
-          id = _props$group.id,
+          _id = _props$group._id,
           name = _props$group.name,
           description = _props$group.description,
           created_at = _props$group.created_at,
@@ -70291,8 +69982,8 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
       // check if active_image is set and if not set the undefined img
       var src = this.state.src_url;
       // define routes for edit and delete based on the id
-      var linktoEdit = '/groups/' + id + '/edit';
-      var linktoDelete = '/groups/' + id + '/delete';
+      var linktoEdit = '/groups/' + _id + '/edit';
+      var linktoDelete = '/groups/' + _id + '/delete';
       var imagesOptions = images.map(function (i) {
         return _react2.default.createElement(
           'option',
@@ -70363,12 +70054,6 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
                 'p',
                 { className: 'titulo' },
                 'DETALLES'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-2', 'aria-hidden': 'true' }),
-                id
               ),
               _react2.default.createElement(
                 'p',
@@ -70892,7 +70577,7 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
               _react2.default.createElement(
                 'h1',
                 null,
-                'CUENTA'
+                'SISTEMA'
               )
             ),
             _react2.default.createElement('hr', null)
@@ -74309,6 +73994,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Overview = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -74317,18 +74004,22 @@ var _panel = __webpack_require__(337);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* COMPONENTS */
-/* IMPORT MODULES */
-var Overview = exports.Overview = function Overview(_ref) {
-  var displays = _ref.displays,
-      images = _ref.images,
-      groups = _ref.groups,
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /* IMPORT MODULES */
+
+
+/* IMPORT COMPONENTS */
+
+
+/* COMPONENT */
+var Overview = function Overview(_ref) {
+  var _ref$data = _ref.data,
+      displays = _ref$data.displays,
+      images = _ref$data.images,
+      groups = _ref$data.groups,
+      devices = _ref$data.devices,
+      gateways = _ref$data.gateways,
       user = _ref.user,
-      devices = _ref.devices,
-      gateways = _ref.gateways,
-      filterValue = _ref.filterValue,
-      filterFound = _ref.filterFound,
-      filterFoundValue = _ref.filterFoundValue;
+      rest = _objectWithoutProperties(_ref, ['data', 'user']);
 
   return _react2.default.createElement(
     'div',
@@ -74354,20 +74045,19 @@ var Overview = exports.Overview = function Overview(_ref) {
     !user.admin && _react2.default.createElement(
       'div',
       { className: 'row row-panel' },
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: displays, category: 'displays', appearance: 'card title-displays', icon: 'television', size: 'small' }),
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: images, category: 'images', appearance: 'card title-images', icon: 'picture-o', size: 'small' }),
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: groups, category: 'groups', appearance: 'card title-groups', icon: 'list', size: 'small' })
+      _react2.default.createElement(_panel.Panel, _extends({ content: displays }, rest, { category: 'displays', appearance: 'card title-displays', icon: 'television', size: 'small' })),
+      _react2.default.createElement(_panel.Panel, _extends({ content: images }, rest, { category: 'images', appearance: 'card title-images', icon: 'picture-o', size: 'small' })),
+      _react2.default.createElement(_panel.Panel, _extends({ content: groups }, rest, { category: 'groups', appearance: 'card title-groups', icon: 'list', size: 'small' }))
     ),
     user.admin && _react2.default.createElement(
       'div',
       { className: 'row row-panel' },
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: devices, filterFound: filterFound, filterFoundValue: filterFoundValue, category: 'devices', appearance: 'card title-devices', icon: 'tablet', size: 'big' }),
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: gateways, category: 'gateways', appearance: 'card title-gateways', icon: 'sitemap', size: 'big' })
+      _react2.default.createElement(_panel.Panel, _extends({ content: devices }, rest, { category: 'devices', appearance: 'card title-devices', icon: 'tablet', size: 'big' })),
+      _react2.default.createElement(_panel.Panel, _extends({ content: gateways }, rest, { category: 'gateways', appearance: 'card title-gateways', icon: 'sitemap', size: 'big' }))
     )
   );
 };
-
-/* IMPORT COMPONENTS */
+exports.Overview = Overview;
 
 /***/ }),
 /* 337 */
@@ -74425,6 +74115,43 @@ var Panel = exports.Panel = function Panel(_ref) {
 
 /***/ }),
 /* 338 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProtectedRoute = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /* IMPORT MODULES */
+
+
+/* COMPONENT */
+var ProtectedRoute = function ProtectedRoute(_ref) {
+  var Component = _ref.component,
+      user = _ref.user,
+      rest = _objectWithoutProperties(_ref, ['component', 'user']);
+
+  return _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, { render: function render(props) {
+      return user.admin == true ? _react2.default.createElement(Component, _extends({ user: user }, rest)) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+    } }));
+};
+exports.ProtectedRoute = ProtectedRoute;
+
+/***/ }),
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74497,7 +74224,7 @@ var Login = exports.Login = function (_Component) {
         // resolve callback
         if (res.status == 200) {
           // if auth is successful
-          return _this.props.login(res.data.user, res.data.token); // login function
+          return _this.props.login(res.data.user, res.data.token, res.data.data); // login function
         }
       }, function (error) {
         // reject callback
@@ -74619,13 +74346,13 @@ var Login = exports.Login = function (_Component) {
 ;
 
 /***/ }),
-/* 339 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(340);
+var content = __webpack_require__(341);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -74633,7 +74360,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(342)(content, options);
+var update = __webpack_require__(343)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -74650,10 +74377,10 @@ if(false) {
 }
 
 /***/ }),
-/* 340 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(341)(undefined);
+exports = module.exports = __webpack_require__(342)(undefined);
 // imports
 
 
@@ -74664,7 +74391,7 @@ exports.push([module.i, "/*!\n * Bootstrap v4.0.0-beta.2 (https://getbootstrap.c
 
 
 /***/ }),
-/* 341 */
+/* 342 */
 /***/ (function(module, exports) {
 
 /*
@@ -74746,7 +74473,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 342 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -74802,7 +74529,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(343);
+var	fixUrls = __webpack_require__(344);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -75118,7 +74845,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 343 */
+/* 344 */
 /***/ (function(module, exports) {
 
 

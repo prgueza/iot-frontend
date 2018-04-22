@@ -1,10 +1,10 @@
 /* IMPORT MODULES */
-import React from 'react';
+import React from 'react'
 
 /* IMPORT COMPONENTS */
-import { AddButton } from '../../../buttons/addButton.jsx';
+import { AddButton } from '../../../buttons/addButton.jsx'
 
-/* COMPONENTS */
+/* COMPONENT */
 export const DisplayGeneric = () => {
   return(
   <div className="card detalles">
@@ -24,5 +24,5 @@ export const DisplayGeneric = () => {
       </div>
     </div>
   </div>
-  );
-};
+  )
+}

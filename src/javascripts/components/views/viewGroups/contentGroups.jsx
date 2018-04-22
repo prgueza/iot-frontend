@@ -33,7 +33,7 @@ export const ContentGroups = ({ groups, filterValue, ...other }) => {
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
                 <Route path="/groups/add" render={() => <GroupForm {...other} groups={groups}/>}/>
                 {/* For route /groupId we select the image based on the id and pass it separately */}
-                <Route path="/groups/:groupId" render={({ match }) => (<GroupRouter {...other} group={groups.find(g => g.id == match.params.groupId)}/>)}/>
+                <Route path="/groups/:groupId" render={({ match }) => (<GroupRouter {...other} group={groups.find(g => g._id == match.params.groupId)}/>)}/>
               </Switch>
               <Route exact path="/groups" render={() => (<GroupGeneric/>)}/>
             </div>

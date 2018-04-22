@@ -11,14 +11,13 @@ export class ImageForm extends Component{
   /* STATE */
   constructor(props){
     super(props);
-    const { image, user, resolutions } = this.props;
+    const { image, user, screens } = this.props;
     this.state = {
-      id: image ? image.id : '',
       name: image ? image.name : '',
       description: image ? image.description : '',
       created_by: image ? ( image.created_by || { name:'Usuario eliminado' }) : user,
       updated_by: user.name,
-      resolution: image ? ( image.resolution ? image.resolution._id : resolutions[0]._id ) : resolutions[0]._id,
+      resolution: image ? ( image.resolution ? image.resolution._id : screens[0]._id ) : screens[0]._id,
       category: image ? ( image.category ? image.category : '' ) : '',
       tags: image ? image.tags : [],
       created_at: image ? moment(image.created_at) : moment(),
@@ -36,16 +35,9 @@ export class ImageForm extends Component{
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount(){
     const { images, image } = this.props;
-    // if in post mode get first free id value
-    if (!image) {
-      const identificaciones = images.map((i) => i.id); // get all ids
-      var id = 1; // start from 1
-      while (identificaciones.indexOf(id) != -1){id++} // stop at first free id value
-    }
     // set state with initial values
     this.setState({
-      id: image ? image.id : id,
-      location: image ? '/images/' + image.id : '/images/' + id // Redirect url
+      location: image ? '/images/' + image._id : '/images' // Redirect url
     });
   }
 
@@ -110,7 +102,6 @@ export class ImageForm extends Component{
     const { image } = this.props;
     // define form values to send
     const form = {
-      id: this.state.id,
       name: this.state.name,
       description: this.state.description,
       updated_by: this.state.updated_by._id, // send user_id
@@ -151,16 +142,16 @@ export class ImageForm extends Component{
   render(){
 
     // Options
-    const optionsResolution = this.props.resolutions.sort((a, b) => a.id - b.id).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
+    const optionsScreens = this.props.screens.sort((a, b) => a.updated_at - b.updated_at).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
     const optionsGroups = this.props.groups.map((g) =>
-      <label key={g.id} className="custom-control custom-checkbox">
+      <label key={g._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckGroups} type="checkbox" defaultChecked={this.state.groups.find((c) => c == g._id)} name={g._id} defaultValue={g._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{g.name}</span>
       </label>
     );
-    const optionsDisplays = this.props.displays.sort((a, b) => a.id - b.id).map((d) =>
-      <label key={d.id} className="custom-control custom-checkbox">
+    const optionsDisplays = this.props.displays.sort((a, b) => a.updated_at - b.updated_at).map((d) =>
+      <label key={d._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckDisplays} type="checkbox" defaultChecked={this.state.displays.find((c) => c == d._id)} name={d._id} defaultValue={d._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{d.name}</span>
@@ -191,15 +182,9 @@ export class ImageForm extends Component{
           </div>
           <div className="card-body">
             <form id="form">
-              <div className="form-row">
-                <div className="form-group col-md-1">
-                  <label htmlFor="imagenID"><i className="fa fa-hashtag mr-2"></i>ID</label>
-                  <input type="text" className="form-control" id="imagenID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
-                </div>
-                <div className="form-group col-md-11">
-                  <label htmlFor="nombre"><i className="fa fa-picture-o mr-2"></i>Nombre</label>
-                  <input type="text" className="form-control" id="nombre" placeholder="Nombre de la imagen" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
-                </div>
+              <div className="form-group">
+                <label htmlFor="nombre"><i className="fa fa-picture-o mr-2"></i>Nombre</label>
+                <input type="text" className="form-control" id="nombre" placeholder="Nombre de la imagen" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
               </div>
               <div className="form-group">
                 <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
@@ -211,10 +196,10 @@ export class ImageForm extends Component{
                   <input type="text" className="form-control" id="category" name='category' value={this.state.category} onChange={this.handleInputChange}></input>
                 </div>
                 <div className="form-group col">
-                  <label htmlFor="resolucion"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
+                  <label htmlFor="screen"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
                   <div>
                     <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
-                      {optionsResolution}
+                      {optionsScreens}
                     </select>
                   </div>
                 </div>

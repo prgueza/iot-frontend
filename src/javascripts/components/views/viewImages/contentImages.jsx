@@ -33,10 +33,10 @@ export const ContentImages = ({ images, filterValue, ...other }) => {
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
                 <Route path="/images/add" render={() => <ImageForm {...other} images={images}/>}/>
                 {/* For route /imageId we select the image based on the id and pass it separately */}
-                <Route path="/images/:imageId" render={({ match }) => (<ImageRouter {...other} image={images.find(i => i.id == match.params.imageId)}/>)}/>
+                <Route path="/images/:imageId" render={({ match }) => (<ImageRouter {...other} image={images.find(i => i._id == match.params.imageId)}/>)}/>
               </Switch>
               <Route exact path="/images" render={() => (<ImageGeneric/>)}/>
-            </div>  
+            </div>
           </div>
         </div>
       </div>

@@ -1,10 +1,10 @@
 /* IMPORT MODULES */
-import React from 'react';
+import React from 'react'
 
 /* IMPORT COMPONENTS */
-import { List } from './list.jsx';
-import { Title } from '../tags/title.jsx';
-import { AddButton } from '../buttons/addButton.jsx';
+import { List } from './list.jsx'
+import { Title } from '../tags/title.jsx'
+import { AddButton } from '../buttons/addButton.jsx'
 
 /* COMPONENTS */
 export const Panel = ({ category, content, size, appearance, icon, filterValue, filterFound, filterFoundValue }) => {

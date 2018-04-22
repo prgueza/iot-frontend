@@ -19,7 +19,7 @@ export class DeviceForm extends Component{
       updated_at: moment(),
       mac: device.mac,
       pref_gateway: device.pref_gateway ? device.pref_gateway._id : gateways[0]._id,
-      userGroup: device.userGroup ? device.userGroup._id : userGroups[0]._id,
+      userGroup: device.userGroup ? device.userGroup._id : '',
 
       redirect: false,
       redirect_location: '/devices',
@@ -57,8 +57,8 @@ export class DeviceForm extends Component{
       updated_by: this.state.updated_by._id, // send user_id
       pref_gateway: this.state.pref_gateway,
       mac: this.state.mac,
-      userGroup: this.state.userGroup,
     };
+    if (this.state.userGroup) form.userGroup = this.state.userGroup;
     // HTTP request
     axios({
       method: 'put',
@@ -105,7 +105,7 @@ export class DeviceForm extends Component{
                 <h2 className="detalles-titulo"><i className="fa fa-fw fa-pencil mr-3" aria-hidden="true"></i>Configurar un dispositivo físico</h2>
               </li>
               <li className="nav-item ml-2">
-                <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa-fw fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button>
+                <button onClick={this.handleSubmit} type="button" className="btn btn-outline-primary"><i className="fa  fa-fw fa-floppy-o mr-2" aria-hidden="true"></i>Guardar cambios</button>
               </li>
             </ul>
           </div>

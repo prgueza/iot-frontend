@@ -6,16 +6,17 @@ import moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import axios from 'axios';
+import { env } from '../enviroment.jsx';
 
 /* CONFIGURE AXIOS */
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = env.API_URL;
 
 /* IMPORT COMPONENTS */
 import { Navigation } from './views/navigation.jsx';
 import { Content } from './views/content.jsx';
 import { Notification } from './tags/notification.jsx';
 
-/* COMPONENTS */
+/* COMPONENT */
 export class Main extends Component {
 
   constructor(props){
@@ -23,16 +24,19 @@ export class Main extends Component {
     this.state = {
       // active user
       user: null,
+      token: null,
       // userGroup data
       userGroup: null,
+      // data
+      data: [],
       // admin data
       screens: null,
       locations: null,
-      gateways: null,
-      devices: null,
+      gateways: [],
+      devices: [],
       userGroups: null,
       // user data
-      displays: null,
+      displays: [],
       images: null,
       groups: null,
       // sync
@@ -48,29 +52,27 @@ export class Main extends Component {
       isLoggedIn: false,
       error: null,
       redirect: false,
-      location: ''
-    };
+    }
   }
 
   /* COMPONENT MOUNT */
   componentDidMount(){
     // get user id and token
-    const { user, token } = this.props;
+    const { user, token, data } = this.props
     // set user id and token
-    this.setState({ user, token, isLoggedIn: true });
-    // get data
-    this.update(user, true, true);
-    // this.sync_api();
+    this.setState({ user, token, data, isLoggedIn: true, isLoaded: true })
+    // sync
+    this.sync_api(token);
     // check syncronization
     this.check_sync_id = setInterval(() => {
       if(this.state.last_synced && moment().diff(this.state.last_synced, 'seconds') > 20){
-        this.setState({ sync_status: 0 }); //unsynced
+        this.setState({ sync_status: 0 }) //unsynced
       }
-    }, 1000);
+    }, 1000)
   }
 
   componentWillUnmount(){
-    clearInterval(this.check_sync_id);
+    clearInterval(this.check_sync_id)
   }
 
   /* UPDATE DATA */
@@ -90,14 +92,15 @@ export class Main extends Component {
           });
         }))
         .then(() => notify && this.notify('Datos cargados', 'notify-success', 'download', toast.POSITION.BOTTOM_LEFT))
-        .then(() => sync && this.sync_api())
+        .then(() => sync && this.sync_api(token))
         .catch(() => this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
     // else get resources within the userGroup
     } else {
-      return axios.all([axios(user.userGroup.url), axios('/resolutions')])
-        .then(axios.spread((res, resolutions) => {
+      return axios.all([axios(user.userGroup.url), axios('/resolutions'), axios('/gateways')])
+        .then(axios.spread((res, screens, gateways) => {
           this.setState({
             userGroup: res.data,
+            gateways: gateways.data,
             displays: res.data.displays, // set displays that the user can manage
             images: res.data.images, // set images that the user can manage
             groups: res.data.groups, // set groups that the user can manage
@@ -107,20 +110,16 @@ export class Main extends Component {
           });
         }))
         .then(() => notify && this.notify('Datos cargados', 'notify-success', 'download', toast.POSITION.BOTTOM_LEFT))
-        .then(() => sync && this.sync_api())
+        .then(() => sync && this.sync_api(token))
         .catch(() => this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
     }
   }
 
   /* SYNC DATA */
-  sync_api = () => {
+  sync_api = (token) => {
     this.setState({ sync_status: 3, last_synced: moment() }); //syncing
     this.notify_sync('Buscando dispositivos...', 'notify-success', 'refresh');
-    const data = this.state.gateways;
-    axios.post('/update',
-      { data }, // data
-      { timeout: 10000 }
-    )
+    axios.get('/update', {timeout: env.TIMEOUT, headers: { Authorization: 'Bearer ' + token } } )
     .then((res) => {
       this.update_sync('Pulse para sincronizar', 'notify-success', 'link', false);
       this.setState({ synced_devices: res.data, sync_status: 1, last_synced: moment() }); //synced_ready
@@ -133,8 +132,10 @@ export class Main extends Component {
 
   sync = () => {
     const devices = this.state.synced_devices;
+    const data = this.state.data;
+    data.devices = devices;
     this.update_sync('Datos sincronizados', 'notify-success', 'check', true);
-    this.setState({ devices, sync_status: 2 }); //synced
+    this.setState({ data, sync_status: 2 }); //synced
   }
 
   /* HANDLE SEARCH */
@@ -176,7 +177,7 @@ export class Main extends Component {
   }
 
   dismiss = () => {
-    this.toast_sync_id && toast.dismiss(this.toast_sync_id);
+    this.toast_sync_id && toast.dismiss(this.toast_sync_id)
   }
 
   /* RENDER COMPONENT */

@@ -1,17 +1,20 @@
 /* IMPORT MODULES */
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 /* IMPORT COMPONENTS */
-import { List } from '../../lists/list.jsx';
-import { Title } from '../../tags/title.jsx';
-import { DisplayForm } from './viewDisplays-components/displayForm.jsx';
-import { DisplayRouter } from './viewDisplays-components/displayRouter.jsx';
-import { DisplayGeneric } from './viewDisplays-components/displayGeneric.jsx';
+import { List } from '../../lists/list.jsx'
+import { Title } from '../../tags/title.jsx'
+import { DisplayForm } from './viewDisplays-components/displayForm.jsx'
+import { DisplayRouter } from './viewDisplays-components/displayRouter.jsx'
+import { DisplayGeneric } from './viewDisplays-components/displayGeneric.jsx'
 
 
 /* COMPONENTS */
-export const ContentDisplays = ({ displays, filterValue, ...other }) => {
+export const ContentDisplays = ({ filterValue, ...props }) => {
+
+  const { data: { displays } } = props
+
   return(
     <div className="overview">
       <div className="row">
@@ -32,9 +35,9 @@ export const ContentDisplays = ({ displays, filterValue, ...other }) => {
             <div className="col-8">
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
-                <Route path="/displays/add" render={() => <DisplayForm {...other} displays={displays}/>}/>
+                <Route path="/displays/add" render={() => <DisplayForm {...props} displays={displays}/>}/>
                 {/* For route /displayId we select the display based on the id and pass it separately */}
-                <Route path="/displays/:displayId" render={({ match }) => (<DisplayRouter {...other} display={displays.find(d => d.id == match.params.displayId)}/>)}/>
+                <Route path="/displays/:displayId" render={({ match }) => (<DisplayRouter {...props} display={displays.find(d => d._id == match.params.displayId)}/>)}/>
               </Switch>
               <Route exact path="/displays" render={() => (<DisplayGeneric/>)}/>
             </div>
@@ -42,5 +45,5 @@ export const ContentDisplays = ({ displays, filterValue, ...other }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
