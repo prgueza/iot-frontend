@@ -10,7 +10,7 @@ export class DisplayForm extends Component{
 
   constructor(props){
     super(props)
-    const { display, user, resolutions } = this.props
+    const { display, user } = this.props
     this.state = {
       name: display ? display.name : '',
       description: display ? display.description : '',
@@ -136,7 +136,6 @@ export class DisplayForm extends Component{
       updated_by: this.props.user._id, // send user_id
       tags: this.state.tags,
       device: this.state.device,
-      userGroup: this.props.data.userGroup._id
     };
     // possible empty fields
     if (!this.props.display) form.created_by = this.props.user._id
@@ -148,12 +147,13 @@ export class DisplayForm extends Component{
       method: display ? 'put' : 'post',
       url: display ? display.url : 'http://localhost:4000/displays',
       data: form,
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', Authorization: 'Bearer ' + this.props.token }
     })
     .then((res) => {
       if (res.status == 201){
         this.props.notify('Display configurado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT)
-        return this.props.update(this.props.user) // update dataset
+        var action = display ? 'edit' : 'add'
+        return this.props.update('displays', res.resourceId, action, res.data.resource, res.data.devices) // update dataset
       }
     })
     .then((res) => {

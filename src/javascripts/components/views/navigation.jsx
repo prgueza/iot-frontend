@@ -70,11 +70,6 @@ export class Navigation extends Component{
             <div className="mb-3">
               <p>AJUSTES</p>
               <ul className="nav-list">
-              { user && !user.admin &&
-                <NavLink to={''}>
-                  <li><button type="button" className="btn btn-nav btn-block mb-1" disabled><i className="fa fa-clock-o mr-2" aria-hidden="true"></i> Temporizadores</button></li>
-                </NavLink>
-              }
                 <NavLink to={'/docs'}>
                   <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
                 </NavLink>

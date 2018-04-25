@@ -11,13 +11,12 @@ export class ImageForm extends Component{
   /* STATE */
   constructor(props){
     super(props);
-    const { image, user, screens } = this.props;
+    const { image, user } = this.props;
     this.state = {
       name: image ? image.name : '',
       description: image ? image.description : '',
       created_by: image ? ( image.created_by || { name:'Usuario eliminado' }) : user,
       updated_by: user.name,
-      resolution: image ? ( image.resolution ? image.resolution._id : screens[0]._id ) : screens[0]._id,
       category: image ? ( image.category ? image.category : '' ) : '',
       tags: image ? image.tags : [],
       created_at: image ? moment(image.created_at) : moment(),
@@ -105,7 +104,6 @@ export class ImageForm extends Component{
       name: this.state.name,
       description: this.state.description,
       updated_by: this.state.updated_by._id, // send user_id
-      resolution: this.state.resolution,
       category: this.state.category,
       tags: this.state.tags,
       color_profile: this.state.color,
@@ -141,16 +139,17 @@ export class ImageForm extends Component{
   /* RENDER COMPONENT */
   render(){
 
+    const { data: { devices, images, groups, displays }, image } = this.props;
+
     // Options
-    const optionsScreens = this.props.screens.sort((a, b) => a.updated_at - b.updated_at).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
-    const optionsGroups = this.props.groups.map((g) =>
+    const optionsGroups = groups.map((g) =>
       <label key={g._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckGroups} type="checkbox" defaultChecked={this.state.groups.find((c) => c == g._id)} name={g._id} defaultValue={g._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{g.name}</span>
       </label>
     );
-    const optionsDisplays = this.props.displays.sort((a, b) => a.updated_at - b.updated_at).map((d) =>
+    const optionsDisplays = displays.sort((a, b) => a.updated_at - b.updated_at).map((d) =>
       <label key={d._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckDisplays} type="checkbox" defaultChecked={this.state.displays.find((c) => c == d._id)} name={d._id} defaultValue={d._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
@@ -167,13 +166,13 @@ export class ImageForm extends Component{
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
-                { this.props.image ?
+                { image ?
                   <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar una imagen</h2> :
                   <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir una nueva imagen</h2>
                 }
               </li>
               <li className="nav-item ml-2">
-                { this.props.image ?
+                { image ?
                   <button onClick={this.handleSubmit} type="button" className="btn btn-outline-info"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
                   <button onClick={this.handleSubmit} type="button" className="btn btn-outline-info"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
                 }
@@ -194,14 +193,6 @@ export class ImageForm extends Component{
                 <div className="form-group col-6">
                   <label htmlFor="category"><i className="fa fa-th-large mr-2"></i>Categoría</label>
                   <input type="text" className="form-control" id="category" name='category' value={this.state.category} onChange={this.handleInputChange}></input>
-                </div>
-                <div className="form-group col">
-                  <label htmlFor="screen"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
-                  <div>
-                    <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
-                      {optionsScreens}
-                    </select>
-                  </div>
                 </div>
                 <div className="form-group col">
                   <label htmlFor="color"><i className="fa fa-tint mr-2"></i>Color</label>

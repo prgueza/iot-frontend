@@ -19,17 +19,14 @@ export class DisplayDelete extends Component{
   /* HANDLE DELETE EVENT */
   handleDelete = (event) =>{
     event.preventDefault()
-    axios.delete(this.props.display.url)
+    axios.delete(this.props.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } })
     .then((res) => {
       if (res.status == 200){
         this.props.notify('Display eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT)
-        return this.props.update(this.props.user) // update dataset
+        return this.props.update('displays', res.resourceId, 'remove', res.data.resource, res.data.devices) // update dataset
       }
     })
-    .then((res) => {
-      this.setState({ redirect : true })
-      return res
-    })
+    .then((res) => this.setState({ redirect : true }))
     .catch((err) => {
       console.log(err)
       return this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT)

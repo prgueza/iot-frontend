@@ -72,18 +72,18 @@ export class GroupDetails extends Component {
 
   render(){
     // define constants from props for better readability
-    const { _id, name, description, created_at, updated_at, created_by, displays, images, active_image, tags_total, tags } = this.props.group;
+    const { _id, name, description, created_at, updated_at, created_by, displays, images, active_image, tags } = this.props.group;
     // refactor date constants with format
     const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
     const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
     // generate tag list
-    const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='grupos' etiqueta={tag}/>);
+    const tag_list = tags.map(( tag, i ) => <Tag key={i} category='groups' tag={tag}/>);
     // check if active_image is set and if not set the undefined img
     const src = this.state.src_url;
     // define routes for edit and delete based on the id
     const linktoEdit = '/groups/' + _id + '/edit';
     const linktoDelete = '/groups/' + _id + '/delete';
-    const imagesOptions = images.map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+    const imagesOptions = images.map((i) => <option value={i._id} key={i._id}>{i.name}</option>);
 
 
     return(

@@ -18,7 +18,7 @@ export class ImageDelete extends Component{
   /* HANDLE DELETE EVENT */
   handleDelete = (event) => {
     event.preventDefault();
-    axios.delete(this.props.image.url)
+    axios.delete(this.props.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } })
     .then((res) => {
       if (res.status == 200){
         this.props.notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT);

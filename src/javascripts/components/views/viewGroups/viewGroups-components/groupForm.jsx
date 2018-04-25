@@ -33,8 +33,7 @@ export class GroupForm extends Component{
 
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount(){
-    const { groups, images } = this.props; // Data from database
-    const { group } = this.props;
+    const { data: { displays, devices, images }, group } = this.props
     // options for select inputs
     const optionsActiveImage = images.filter((i) => this.state.images.find((c) => c == i._id)).map((i) => <option value={i._id} key={i._id}>{i.name}</option>);
     // set state with initial values
@@ -116,9 +115,7 @@ export class GroupForm extends Component{
       name: this.state.name,
       description: this.state.description,
       updated_by: this.state.updated_by._id, // send user_id
-      resolution: this.state.resolution,
       tags: this.state.tags,
-      userGroup: this.props.userGroup._id
     };
     // possible empty fields
     if (!this.props.group) form.created_by = this.props.user._id;
@@ -130,12 +127,13 @@ export class GroupForm extends Component{
       method: group ? 'put' : 'post',
       url: group ? group.url : 'http://localhost:4000/groups',
       data: form,
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.props.token},
     })
     .then((res) => {
       if (res.status == 201){
         this.props.notify('Grupo configurada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT);
-        return this.props.update(this.props.user); // update dataset
+        var action = group ? 'edit' : 'add'
+        return this.props.update('groups', res.resourceId, action, res.data.resource) // update dataset
       }
     })
     .then((res) => {
@@ -150,16 +148,17 @@ export class GroupForm extends Component{
 
   render(){
 
+    const { data: { devices, images, groups, displays }, group } = this.props;
+
     // Options
-    const optionsScreens = this.props.screens.sort((a, b) => a.updated_at - b.updated_at).map((r, i) => <option value={r._id} key={i}>{r.name}</option>);
-    const optionsDisplays = this.props.displays.sort((a, b) => a.updated_at - b.updated_at).map((d) =>
+    const optionsDisplays = displays.sort((a, b) => a.updated_at - b.updated_at).map((d) =>
       <label key={d._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckDisplays} type="checkbox" defaultChecked={this.state.displays.find((c) => c == d._id)} name={d._id} defaultValue={d._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
         <span className="custom-control-description">{d.name}</span>
       </label>
     );
-    const optionsImages = this.props.images.sort((a, b) => a.updated_at - b.updated_at).map((i) =>
+    const optionsImages = images.sort((a, b) => a.updated_at - b.updated_at).map((i) =>
       <label key={i._id} className="custom-control custom-checkbox">
         <input onChange={this.handleCheckImages} type="checkbox" defaultChecked={this.state.images.find((c) => c == i._id)} name={i._id} defaultValue={i._id} className="custom-control-input"></input>
         <span className="custom-control-indicator"></span>
@@ -176,13 +175,13 @@ export class GroupForm extends Component{
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
-              { this.props.group ?
+              { group ?
                 <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true"></i>Editar un grupo</h2> :
                 <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true"></i>Añadir un nuevo Grupo</h2>
               }
               </li>
               <li className="nav-item ml-2">
-              { this.props.group ?
+              { group ?
                 <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-success"><i className="fa fa-save mr-2" aria-hidden="true"></i>Guardar cambios</button> :
                 <button onClick={() => this.handleSubmit()} type="button" className="btn btn-outline-success"><i className="fa fa-plus-circle mr-2" aria-hidden="true"></i>Añadir</button>
               }
@@ -199,22 +198,12 @@ export class GroupForm extends Component{
                 <label htmlFor="description"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
                 <input type="text" className="form-control" id="description" name="description" value={this.state.description} onChange={this.handleInputChange} placeholder="Descripcion del Grupo"></input>
               </div>
-              <div className="form-row">
-                <div className="form-group col">
-                  <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
-                  <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
-                    <option value={''} key={0}>Sin imagen activa</option>
-                    {this.state.optionsActiveImage}
-                  </select>
-                </div>
-                <div className="form-group col">
-                  <label htmlFor="screens"><i className="fa fa-arrows-alt mr-2"></i>Resolución</label>
-                  <div>
-                    <select className="custom-select" name="resolution" value={this.state.resolution} onChange={this.handleInputChange}>
-                      {optionsScreens}
-                    </select>
-                  </div>
-                </div>
+              <div className="form-group">
+                <label htmlFor="active_image"><i className="fa fa-picture-o mr-2"></i>Seleccionar la imagen activa</label>
+                <select className="custom-select" id="active_image" name='active_image' value={this.state.active_image} onChange={this.handleInputChange}>
+                  <option value={''} key={0}>Sin imagen activa</option>
+                  {this.state.optionsActiveImage}
+                </select>
               </div>
               <div className="form-row">
                 <div className="form-group col">

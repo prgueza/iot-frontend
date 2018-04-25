@@ -1,29 +1,29 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import axios from 'axios'
 
 /* IMPORT COMPONENTS */
-import { ImageDetails } from './ImageDetails.jsx';
-import { ImageForm } from './ImageForm.jsx';
-import { ImageDelete } from './ImageDelete.jsx';
+import { ImageDetails } from './ImageDetails.jsx'
+import { ImageForm } from './ImageForm.jsx'
+import { ImageDelete } from './ImageDelete.jsx'
 
 /* COMPONENTS */
 export class ImageRouter extends Component {
 
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       image: null,
       isLoaded: false,
       error: null,
-    };
+    }
   }
 
   /* FETCH FULL DATA ABOUT THE IMAGE */
   componentDidMount(){
     if(this.props.image){
-      axios.get(this.props.image.url)
+      axios.get(this.props.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } })
         .then(
           (image) => { // resolve callback
             this.setState({ image: image.data, isLoaded: true })
@@ -31,14 +31,14 @@ export class ImageRouter extends Component {
           (error) => { // reject callback
             this.setState({ error, isLoaded: true })
           }
-      );
+      )
     }
   }
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
   componentWillReceiveProps(nextProps){
     if(nextProps.image && (nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at)){ // if props actually changed
-      axios.get(nextProps.image.url)
+      axios.get(nextProps.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } })
         .then(
           (image) => { // resolve callback
             this.setState({ image: image.data, isLoaded: true })
@@ -46,19 +46,19 @@ export class ImageRouter extends Component {
           (error) => { // reject callback
             this.setState({ error, isLoaded: true })
           }
-        );
+        )
     }
   }
 
   render(){
-    const { error, isLoaded, image } = this.state;
+    const { error, isLoaded, image } = this.state
     // wait for resource to be loaded or handle errors if any
     if (error) {
       // TODO: error handling
-      return null;
+      return null
     } else if (!isLoaded) {
       // TODO: loading
-      return null;
+      return null
     } else {
       return(
         <Switch>
@@ -66,7 +66,7 @@ export class ImageRouter extends Component {
           <Route path="/images/:imageId/delete" render={({ match }) => <ImageDelete {...this.props} image={image}/>}/>
           <Route path="/images/:imageId" render={({ match }) => (<ImageDetails {...this.props} image={image}/>)}/>
         </Switch>
-      );
+      )
     }
   }
-};
+}

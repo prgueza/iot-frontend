@@ -35393,8 +35393,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
 
     var _this$props = _this.props,
         display = _this$props.display,
-        user = _this$props.user,
-        resolutions = _this$props.resolutions;
+        user = _this$props.user;
 
     _this.state = {
       name: display ? display.name : '',
@@ -35932,8 +35931,7 @@ var _initialiseProps = function _initialiseProps() {
       category: _this4.state.category,
       updated_by: _this4.props.user._id, // send user_id
       tags: _this4.state.tags,
-      device: _this4.state.device,
-      userGroup: _this4.props.data.userGroup._id
+      device: _this4.state.device
     };
     // possible empty fields
     if (!_this4.props.display) form.created_by = _this4.props.user._id;
@@ -35945,11 +35943,12 @@ var _initialiseProps = function _initialiseProps() {
       method: display ? 'put' : 'post',
       url: display ? display.url : 'http://localhost:4000/displays',
       data: form,
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', Authorization: 'Bearer ' + _this4.props.token }
     }).then(function (res) {
       if (res.status == 201) {
         _this4.props.notify('Display configurado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        return _this4.props.update(_this4.props.user); // update dataset
+        var action = display ? 'edit' : 'add';
+        return _this4.props.update('displays', res.resourceId, action, res.data.resource, res.data.devices); // update dataset
       }
     }).then(function (res) {
       _this4.setState({ redirect: true });
@@ -36014,15 +36013,13 @@ var ImageForm = exports.ImageForm = function (_Component) {
 
     var _this$props = _this.props,
         image = _this$props.image,
-        user = _this$props.user,
-        screens = _this$props.screens;
+        user = _this$props.user;
 
     _this.state = {
       name: image ? image.name : '',
       description: image ? image.description : '',
       created_by: image ? image.created_by || { name: 'Usuario eliminado' } : user,
       updated_by: user.name,
-      resolution: image ? image.resolution ? image.resolution._id : screens[0]._id : screens[0]._id,
       category: image ? image.category ? image.category : '' : '',
       tags: image ? image.tags : [],
       created_at: image ? moment(image.created_at) : moment(),
@@ -36075,17 +36072,17 @@ var ImageForm = exports.ImageForm = function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      var _props2 = this.props,
+          _props2$data = _props2.data,
+          devices = _props2$data.devices,
+          images = _props2$data.images,
+          groups = _props2$data.groups,
+          displays = _props2$data.displays,
+          image = _props2.image;
+
       // Options
-      var optionsScreens = this.props.screens.sort(function (a, b) {
-        return a.updated_at - b.updated_at;
-      }).map(function (r, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: r._id, key: i },
-          r.name
-        );
-      });
-      var optionsGroups = this.props.groups.map(function (g) {
+
+      var optionsGroups = groups.map(function (g) {
         return _react2.default.createElement(
           'label',
           { key: g._id, className: 'custom-control custom-checkbox' },
@@ -36100,7 +36097,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
           )
         );
       });
-      var optionsDisplays = this.props.displays.sort(function (a, b) {
+      var optionsDisplays = displays.sort(function (a, b) {
         return a.updated_at - b.updated_at;
       }).map(function (d) {
         return _react2.default.createElement(
@@ -36134,7 +36131,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item mr-auto' },
-                this.props.image ? _react2.default.createElement(
+                image ? _react2.default.createElement(
                   'h2',
                   { className: 'detalles-titulo' },
                   _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
@@ -36149,7 +36146,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item ml-2' },
-                this.props.image ? _react2.default.createElement(
+                image ? _react2.default.createElement(
                   'button',
                   { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-info' },
                   _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
@@ -36204,25 +36201,6 @@ var ImageForm = exports.ImageForm = function (_Component) {
                     'Categor\xEDa'
                   ),
                   _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: this.state.category, onChange: this.handleInputChange })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'screen' },
-                    _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
-                    'Resoluci\xF3n'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
-                      optionsScreens
-                    )
-                  )
                 ),
                 _react2.default.createElement(
                   'div',
@@ -36432,7 +36410,6 @@ var _initialiseProps = function _initialiseProps() {
       name: _this3.state.name,
       description: _this3.state.description,
       updated_by: _this3.state.updated_by._id, // send user_id
-      resolution: _this3.state.resolution,
       category: _this3.state.category,
       tags: _this3.state.tags,
       color_profile: _this3.state.color,
@@ -36553,10 +36530,11 @@ var GroupForm = exports.GroupForm = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          groups = _props.groups,
-          images = _props.images; // Data from database
-
-      var group = this.props.group;
+          _props$data = _props.data,
+          displays = _props$data.displays,
+          devices = _props$data.devices,
+          images = _props$data.images,
+          group = _props.group;
       // options for select inputs
 
       var optionsActiveImage = images.filter(function (i) {
@@ -36590,17 +36568,17 @@ var GroupForm = exports.GroupForm = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var _props2 = this.props,
+          _props2$data = _props2.data,
+          devices = _props2$data.devices,
+          images = _props2$data.images,
+          groups = _props2$data.groups,
+          displays = _props2$data.displays,
+          group = _props2.group;
+
       // Options
-      var optionsScreens = this.props.screens.sort(function (a, b) {
-        return a.updated_at - b.updated_at;
-      }).map(function (r, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: r._id, key: i },
-          r.name
-        );
-      });
-      var optionsDisplays = this.props.displays.sort(function (a, b) {
+
+      var optionsDisplays = displays.sort(function (a, b) {
         return a.updated_at - b.updated_at;
       }).map(function (d) {
         return _react2.default.createElement(
@@ -36617,7 +36595,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
           )
         );
       });
-      var optionsImages = this.props.images.sort(function (a, b) {
+      var optionsImages = images.sort(function (a, b) {
         return a.updated_at - b.updated_at;
       }).map(function (i) {
         return _react2.default.createElement(
@@ -36651,7 +36629,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item mr-auto' },
-                this.props.group ? _react2.default.createElement(
+                group ? _react2.default.createElement(
                   'h2',
                   { className: 'detalles-titulo' },
                   _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
@@ -36666,7 +36644,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item ml-2' },
-                this.props.group ? _react2.default.createElement(
+                group ? _react2.default.createElement(
                   'button',
                   { onClick: function onClick() {
                       return _this3.handleSubmit();
@@ -36714,45 +36692,22 @@ var GroupForm = exports.GroupForm = function (_Component) {
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'active_image' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Seleccionar la imagen activa'
-                  ),
-                  _react2.default.createElement(
-                    'select',
-                    { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
-                    _react2.default.createElement(
-                      'option',
-                      { value: '', key: 0 },
-                      'Sin imagen activa'
-                    ),
-                    this.state.optionsActiveImage
-                  )
+                  'label',
+                  { htmlFor: 'active_image' },
+                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+                  'Seleccionar la imagen activa'
                 ),
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
+                  'select',
+                  { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
                   _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'screens' },
-                    _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
-                    'Resoluci\xF3n'
+                    'option',
+                    { value: '', key: 0 },
+                    'Sin imagen activa'
                   ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
-                      optionsScreens
-                    )
-                  )
+                  this.state.optionsActiveImage
                 )
               ),
               _react2.default.createElement(
@@ -36953,9 +36908,7 @@ var _initialiseProps = function _initialiseProps() {
       name: _this4.state.name,
       description: _this4.state.description,
       updated_by: _this4.state.updated_by._id, // send user_id
-      resolution: _this4.state.resolution,
-      tags: _this4.state.tags,
-      userGroup: _this4.props.userGroup._id
+      tags: _this4.state.tags
     };
     // possible empty fields
     if (!_this4.props.group) form.created_by = _this4.props.user._id;
@@ -36967,11 +36920,12 @@ var _initialiseProps = function _initialiseProps() {
       method: group ? 'put' : 'post',
       url: group ? group.url : 'http://localhost:4000/groups',
       data: form,
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this4.props.token }
     }).then(function (res) {
       if (res.status == 201) {
         _this4.props.notify('Grupo configurada con éxito', 'notify-success', 'check', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        return _this4.props.update(_this4.props.user); // update dataset
+        var action = group ? 'edit' : 'add';
+        return _this4.props.update('groups', res.resourceId, action, res.data.resource); // update dataset
       }
     }).then(function (res) {
       _this4.setState({ redirect: true });
@@ -61179,47 +61133,30 @@ var Main = exports.Main = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-    _this.update = function (user, notify, sync) {
-      // if admin get all the resources needed from the database
-      if (user.admin) {
-        return _axios2.default.all([(0, _axios2.default)('/users'), (0, _axios2.default)('/devices'), (0, _axios2.default)('/gateways'), (0, _axios2.default)('userGroups'), (0, _axios2.default)('/locations'), (0, _axios2.default)('/resolutions')]).then(_axios2.default.spread(function (users, devices, gateways, userGroups, locations, screens) {
-          _this.setState({
-            users: users.data,
-            devices: devices.data,
-            gateways: gateways.data,
-            userGroups: userGroups.data,
-            locations: locations.data,
-            screens: screens.data,
-            isLoaded: true
+    _this.update = function (resource, _id, action, data, devices) {
+      var stateData = _this.state.data;
+      switch (action) {
+        case 'remove':
+          var index = stateData[resource].findIndex(function (r) {
+            return r._id == _id;
           });
-        })).then(function () {
-          return notify && _this.notify('Datos cargados', 'notify-success', 'download', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        }).then(function () {
-          return sync && _this.sync_api(token);
-        }).catch(function () {
-          return _this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        });
-        // else get resources within the userGroup
-      } else {
-        return _axios2.default.all([(0, _axios2.default)(user.userGroup.url), (0, _axios2.default)('/resolutions'), (0, _axios2.default)('/gateways')]).then(_axios2.default.spread(function (res, screens, gateways) {
-          _this.setState({
-            userGroup: res.data,
-            gateways: gateways.data,
-            displays: res.data.displays, // set displays that the user can manage
-            images: res.data.images, // set images that the user can manage
-            groups: res.data.groups, // set groups that the user can manage
-            devices: res.data.devices, // set devices that the user can manage
-            screens: screens.data,
-            isLoaded: true
+          stateData[resource].splice(index, 1);
+          stateData['devices'] = devices;
+          break;
+        case 'add':
+          stateData[resource].push(data);
+          stateData['devices'] = devices;
+          break;
+        case 'edit':
+          var index = stateData[resource].findIndex(function (r) {
+            return r._id == _id;
           });
-        })).then(function () {
-          return notify && _this.notify('Datos cargados', 'notify-success', 'download', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        }).then(function () {
-          return sync && _this.sync_api(token);
-        }).catch(function () {
-          return _this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        });
+          stateData[resource].splice(index, 1, data);
+          stateData['devices'] = devices;
+          break;
+        default:
       }
+      _this.setState({ data: stateData });
     };
 
     _this.sync_api = function (token) {
@@ -61289,20 +61226,8 @@ var Main = exports.Main = function (_Component) {
       // active user
       user: null,
       token: null,
-      // userGroup data
-      userGroup: null,
       // data
       data: [],
-      // admin data
-      screens: null,
-      locations: null,
-      gateways: [],
-      devices: [],
-      userGroups: null,
-      // user data
-      displays: [],
-      images: null,
-      groups: null,
       // sync
       synced_devices: [],
       sync_status: 0, // 0: unsynced; 1: sync_ready; 2: synced; 3: syncing
@@ -66552,20 +66477,6 @@ var Navigation = exports.Navigation = function (_Component) {
               _react2.default.createElement(
                 'ul',
                 { className: 'nav-list' },
-                user && !user.admin && _react2.default.createElement(
-                  _reactRouterDom.NavLink,
-                  { to: '' },
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn btn-nav btn-block mb-1', disabled: true },
-                      _react2.default.createElement('i', { className: 'fa fa-clock-o mr-2', 'aria-hidden': 'true' }),
-                      ' Temporizadores'
-                    )
-                  )
-                ),
                 _react2.default.createElement(
                   _reactRouterDom.NavLink,
                   { to: '/docs' },
@@ -67447,7 +67358,7 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.display) {
-        _axios2.default.get(this.props.display.url).then(function (display) {
+        _axios2.default.get(this.props.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
           // resolve callback
           _this2.setState({ display: display.data, isLoaded: true });
         }, function (error) {
@@ -67466,7 +67377,7 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
 
       if (nextProps.display && (nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.display.url).then(function (display) {
+        _axios2.default.get(nextProps.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
           // resolve callback
           _this3.setState({ display: display.data, isLoaded: true });
         }, function (error) {
@@ -67903,14 +67814,13 @@ var DisplayDelete = exports.DisplayDelete = function (_Component) {
 
     _this.handleDelete = function (event) {
       event.preventDefault();
-      _axios2.default.delete(_this.props.display.url).then(function (res) {
+      _axios2.default.delete(_this.props.display.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
         if (res.status == 200) {
           _this.props.notify('Display eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          return _this.props.update(_this.props.user); // update dataset
+          return _this.props.update('displays', res.resourceId, 'remove', res.data.resource, res.data.devices); // update dataset
         }
       }).then(function (res) {
-        _this.setState({ redirect: true });
-        return res;
+        return _this.setState({ redirect: true });
       }).catch(function (err) {
         console.log(err);
         return _this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
@@ -68097,9 +68007,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentImages = function ContentImages(_ref) {
-  var images = _ref.images,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['images', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      props = _objectWithoutProperties(_ref, ['filterValue']);
+
+  var images = props.data.images;
+
 
   return _react2.default.createElement(
     'div',
@@ -68144,11 +68056,11 @@ var ContentImages = function ContentImages(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/add', render: function render() {
-                  return _react2.default.createElement(_ImageForm.ImageForm, _extends({}, other, { images: images }));
+                  return _react2.default.createElement(_ImageForm.ImageForm, _extends({}, props, { images: images }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_ImageRouter.ImageRouter, _extends({}, other, { image: images.find(function (i) {
+                  return _react2.default.createElement(_ImageRouter.ImageRouter, _extends({}, props, { image: images.find(function (i) {
                       return i._id == match.params.imageId;
                     }) }));
                 } })
@@ -68234,7 +68146,7 @@ var ImageRouter = exports.ImageRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.image) {
-        _axios2.default.get(this.props.image.url).then(function (image) {
+        _axios2.default.get(this.props.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
           // resolve callback
           _this2.setState({ image: image.data, isLoaded: true });
         }, function (error) {
@@ -68253,7 +68165,7 @@ var ImageRouter = exports.ImageRouter = function (_Component) {
 
       if (nextProps.image && (nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.image.url).then(function (image) {
+        _axios2.default.get(nextProps.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
           // resolve callback
           _this3.setState({ image: image.data, isLoaded: true });
         }, function (error) {
@@ -68302,8 +68214,6 @@ var ImageRouter = exports.ImageRouter = function (_Component) {
 
   return ImageRouter;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 303 */
@@ -69430,7 +69340,7 @@ var ImageDelete = exports.ImageDelete = function (_Component) {
 
     _this.handleDelete = function (event) {
       event.preventDefault();
-      _axios2.default.delete(_this.props.image.url).then(function (res) {
+      _axios2.default.delete(_this.props.image.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
         if (res.status == 200) {
           _this.props.notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
           return _this.props.update(_this.props.user, false); // update dataset
@@ -69626,9 +69536,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentGroups = function ContentGroups(_ref) {
-  var groups = _ref.groups,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['groups', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      props = _objectWithoutProperties(_ref, ['filterValue']);
+
+  var groups = props.data.groups;
+
 
   return _react2.default.createElement(
     'div',
@@ -69673,11 +69585,11 @@ var ContentGroups = function ContentGroups(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/add', render: function render() {
-                  return _react2.default.createElement(_groupForm.GroupForm, _extends({}, other, { groups: groups }));
+                  return _react2.default.createElement(_groupForm.GroupForm, _extends({}, props, { groups: groups }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_groupRouter.GroupRouter, _extends({}, other, { group: groups.find(function (g) {
+                  return _react2.default.createElement(_groupRouter.GroupRouter, _extends({}, props, { group: groups.find(function (g) {
                       return g._id == match.params.groupId;
                     }) }));
                 } })
@@ -69763,7 +69675,7 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.group) {
-        _axios2.default.get(this.props.group.url).then(function (group) {
+        _axios2.default.get(this.props.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
           // resolve callback
           _this2.setState({ group: group.data, isLoaded: true });
         }, function (error) {
@@ -69782,7 +69694,7 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
 
       if (nextProps.group && (nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.group.url).then(function (group) {
+        _axios2.default.get(nextProps.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
           // resolve callback
           _this3.setState({ group: group.data, isLoaded: true });
         }, function (error) {
@@ -69831,8 +69743,6 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
 
   return GroupRouter;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 312 */
@@ -69969,7 +69879,6 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
           displays = _props$group.displays,
           images = _props$group.images,
           active_image = _props$group.active_image,
-          tags_total = _props$group.tags_total,
           tags = _props$group.tags;
       // refactor date constants with format
 
@@ -69977,7 +69886,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
       var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
       // generate tag list
       var tag_list = tags.map(function (tag, i) {
-        return _react2.default.createElement(_tag.Tag, { key: i, categoria: 'grupos', etiqueta: tag });
+        return _react2.default.createElement(_tag.Tag, { key: i, category: 'groups', tag: tag });
       });
       // check if active_image is set and if not set the undefined img
       var src = this.state.src_url;
@@ -69987,7 +69896,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
       var imagesOptions = images.map(function (i) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i.id },
+          { value: i._id, key: i._id },
           i.name
         );
       });
@@ -70194,6 +70103,8 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactToastify = __webpack_require__(6);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70214,17 +70125,17 @@ var GroupDelete = exports.GroupDelete = function (_Component) {
 
     _this.handleDelete = function (event) {
       event.preventDefault();
-      _axios2.default.delete(_this.props.group.url).then(function (res) {
+      _axios2.default.delete(_this.props.group.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
         if (res.status == 200) {
-          _this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT);
-          return _this.props.update(_this.props.user, false); // update dataset
+          _this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+          return _this.props.update('groups', res.resourceId, 'remove'); // update dataset
         }
       }).then(function (res) {
         _this.setState({ redirect: true });
         return res;
       }).catch(function (err) {
         console.log(err);
-        return _this.props.notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+        return _this.props.notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
       });
     };
 

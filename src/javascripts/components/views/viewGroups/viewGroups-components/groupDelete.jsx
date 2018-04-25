@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 /* COMPONENTS */
@@ -18,11 +19,11 @@ export class GroupDelete extends Component{
   /* HANDLE DELETE EVENT */
   handleDelete = (event) =>{
     event.preventDefault();
-    axios.delete(this.props.group.url)
+    axios.delete(this.props.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } })
     .then((res) => {
       if (res.status == 200){
         this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT);
-        return this.props.update(this.props.user, false); // update dataset
+        return this.props.update('groups', res.resourceId, 'remove'); // update dataset
       }
     })
     .then((res) => {

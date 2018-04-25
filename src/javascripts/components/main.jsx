@@ -25,20 +25,8 @@ export class Main extends Component {
       // active user
       user: null,
       token: null,
-      // userGroup data
-      userGroup: null,
       // data
       data: [],
-      // admin data
-      screens: null,
-      locations: null,
-      gateways: [],
-      devices: [],
-      userGroups: null,
-      // user data
-      displays: [],
-      images: null,
-      groups: null,
       // sync
       synced_devices: [],
       sync_status: 0, // 0: unsynced; 1: sync_ready; 2: synced; 3: syncing
@@ -76,43 +64,26 @@ export class Main extends Component {
   }
 
   /* UPDATE DATA */
-  update = (user, notify, sync) => {
-    // if admin get all the resources needed from the database
-    if (user.admin) {
-      return axios.all([axios('/users'), axios('/devices'), axios('/gateways'), axios('userGroups'), axios('/locations'), axios('/resolutions')])
-        .then(axios.spread((users, devices, gateways, userGroups, locations, screens) => {
-          this.setState({
-            users: users.data,
-            devices: devices.data,
-            gateways: gateways.data,
-            userGroups: userGroups.data,
-            locations: locations.data,
-            screens: screens.data,
-            isLoaded: true
-          });
-        }))
-        .then(() => notify && this.notify('Datos cargados', 'notify-success', 'download', toast.POSITION.BOTTOM_LEFT))
-        .then(() => sync && this.sync_api(token))
-        .catch(() => this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
-    // else get resources within the userGroup
-    } else {
-      return axios.all([axios(user.userGroup.url), axios('/resolutions'), axios('/gateways')])
-        .then(axios.spread((res, screens, gateways) => {
-          this.setState({
-            userGroup: res.data,
-            gateways: gateways.data,
-            displays: res.data.displays, // set displays that the user can manage
-            images: res.data.images, // set images that the user can manage
-            groups: res.data.groups, // set groups that the user can manage
-            devices: res.data.devices, // set devices that the user can manage
-            screens: screens.data,
-            isLoaded: true,
-          });
-        }))
-        .then(() => notify && this.notify('Datos cargados', 'notify-success', 'download', toast.POSITION.BOTTOM_LEFT))
-        .then(() => sync && this.sync_api(token))
-        .catch(() => this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
+  update = (resource, _id, action, data, devices) => {
+    const stateData = this.state.data
+    switch (action) {
+      case 'remove':
+        var index = stateData[resource].findIndex((r) => r._id == _id)
+          stateData[resource].splice(index, 1)
+          stateData['devices'] = devices
+        break
+      case 'add':
+          stateData[resource].push(data)
+          stateData['devices'] = devices
+        break
+      case 'edit':
+        var index = stateData[resource].findIndex((r) => r._id == _id)
+          stateData[resource].splice(index, 1, data)
+          stateData['devices'] = devices
+        break
+      default:
     }
+    this.setState({data: stateData});
   }
 
   /* SYNC DATA */
