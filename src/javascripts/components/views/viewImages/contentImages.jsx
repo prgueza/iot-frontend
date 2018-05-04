@@ -1,16 +1,19 @@
 /* IMPORT MODULES */
-import React from 'react';
-import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom'
 
 /* IMPORT COMPONENTS */
-import { ImageForm } from './viewImages-components/ImageForm.jsx';
-import { ImageRouter } from './viewImages-components/ImageRouter.jsx';
-import { ImageGeneric } from './viewImages-components/ImageGeneric.jsx';
-import { List } from '../../lists/list.jsx';
-import { Title } from '../../tags/title.jsx';
+import { ImageForm } from './viewImages-components/ImageForm.jsx'
+import { ImageRouter } from './viewImages-components/ImageRouter.jsx'
+import { ImageGeneric } from './viewImages-components/ImageGeneric.jsx'
+import { List } from '../../lists/list.jsx'
+import { Title } from '../../tags/title.jsx'
 
 /* COMPONENTS */
-export const ContentImages = ({ images, filterValue, ...other }) => {
+export const ContentImages = ({ filterValue, ...props }) => {
+
+  const { data: { images } } = props
+
   return(
     <div className="overview">
       <div className="row">
@@ -31,15 +34,15 @@ export const ContentImages = ({ images, filterValue, ...other }) => {
             <div className="col-8">
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
-                <Route path="/images/add" render={() => <ImageForm {...other} images={images}/>}/>
+                <Route path="/images/add" render={() => <ImageForm {...props} images={images}/>}/>
                 {/* For route /imageId we select the image based on the id and pass it separately */}
-                <Route path="/images/:imageId" render={({ match }) => (<ImageRouter {...other} image={images.find(i => i.id == match.params.imageId)}/>)}/>
+                <Route path="/images/:imageId" render={({ match }) => (<ImageRouter {...props} image={images.find(i => i._id == match.params.imageId)}/>)}/>
               </Switch>
               <Route exact path="/images" render={() => (<ImageGeneric/>)}/>
-            </div>  
+            </div>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

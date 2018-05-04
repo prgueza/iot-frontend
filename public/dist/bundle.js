@@ -1911,7 +1911,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(291)("./" + name);
+            __webpack_require__(234)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4582,7 +4582,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(290)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(233)(module)))
 
 /***/ }),
 /* 1 */
@@ -4852,7 +4852,7 @@ process.umask = function() { return 0; };
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(267);
+module.exports = __webpack_require__(269);
 
 /***/ }),
 /* 5 */
@@ -4901,11 +4901,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.style = exports.toast = exports.ToastContainer = undefined;
 
-var _ToastContainer = __webpack_require__(233);
+var _ToastContainer = __webpack_require__(235);
 
 var _ToastContainer2 = _interopRequireDefault(_ToastContainer);
 
-var _toaster = __webpack_require__(266);
+var _toaster = __webpack_require__(268);
 
 var _toaster2 = _interopRequireDefault(_toaster);
 
@@ -5047,8 +5047,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 "use strict";
 
 
-var bind = __webpack_require__(61);
-var isBuffer = __webpack_require__(268);
+var bind = __webpack_require__(179);
+var isBuffer = __webpack_require__(270);
 
 /*global toString:true*/
 
@@ -5522,17 +5522,12 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _icon = __webpack_require__(23);
+var _icon = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var cx = __webpack_require__(8);
-
-/* IMPORT COMPONENTS */
+/* COMPONENT */
 /* IMPORT MODULES */
-
-
-/* COMPONENTS */
 var Title = exports.Title = function Title(_ref) {
   var appearance = _ref.appearance,
       total = _ref.total,
@@ -5565,6 +5560,8 @@ var Title = exports.Title = function Title(_ref) {
     )
   );
 };
+
+/* IMPORT COMPONENTS */
 
 /***/ }),
 /* 13 */
@@ -5618,6 +5615,46 @@ module.exports = emptyFunction;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Icon = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var cx = __webpack_require__(8); // Importacion de librerias
+var Icon = exports.Icon = function Icon(_ref) {
+  var icon = _ref.icon,
+      mr = _ref.mr,
+      ml = _ref.ml,
+      fw = _ref.fw,
+      size = _ref.size,
+      batt = _ref.batt,
+      spin = _ref.spin;
+
+  var iconName = "fa-" + icon;
+  if (batt >= 0) iconName = iconName + "-" + Math.ceil(batt / 25);
+  var iconSpin = spin ? "fa-spin" : '';
+  var iconSize = size ? "fa-" + size + "x" : '';
+  var marginLeft = ml ? "ml-" + ml : '';
+  var marginRight = mr ? "mr-" + mr : '';
+  var fullWidth = fw ? "fa-fw" : '';
+  var className = cx("fa fa-fw", iconName, iconSize, marginLeft, marginRight, fullWidth, iconSpin);
+
+  return _react2.default.createElement('i', { className: className, 'aria-hidden': 'true' });
+};
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.AddButton = undefined;
 
 var _react = __webpack_require__(1);
@@ -5656,7 +5693,7 @@ var AddButton = exports.AddButton = function AddButton(_ref) {
 };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5725,7 +5762,7 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5802,17 +5839,17 @@ var _objectAssign = __webpack_require__(11);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _sheet = __webpack_require__(234);
+var _sheet = __webpack_require__(236);
 
-var _CSSPropertyOperations = __webpack_require__(57);
+var _CSSPropertyOperations = __webpack_require__(175);
 
-var _clean = __webpack_require__(238);
+var _clean = __webpack_require__(240);
 
 var _clean2 = _interopRequireDefault(_clean);
 
-var _plugins = __webpack_require__(239);
+var _plugins = __webpack_require__(241);
 
-var _hash = __webpack_require__(256);
+var _hash = __webpack_require__(258);
 
 var _hash2 = _interopRequireDefault(_hash);
 
@@ -6744,7 +6781,7 @@ function attribsFor() {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6761,17 +6798,17 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _display = __webpack_require__(289);
+var _display = __webpack_require__(292);
 
-var _image = __webpack_require__(292);
+var _image = __webpack_require__(293);
 
-var _group = __webpack_require__(293);
+var _group = __webpack_require__(294);
 
-var _device = __webpack_require__(294);
+var _device = __webpack_require__(295);
 
-var _gateway = __webpack_require__(295);
+var _gateway = __webpack_require__(296);
 
-var _addButton = __webpack_require__(14);
+var _addButton = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6805,13 +6842,14 @@ var List = exports.List = function (_Component) {
         var a = element.name && element.name.indexOf(filterValue) > -1;
         var b = element.description && element.description.indexOf(filterValue) > -1;
         var c = element.category && element.category.indexOf(filterValue) > -1;
-        var d = element.resolution && element.resolution.name.indexOf(filterValue) > -1;
-        var e = element.resolution && element.resolution.size.width.indexOf(filterValue) > -1;
-        var f = element.resolution && element.resolution.size.height.indexOf(filterValue) > -1;
-        var g = element.location && element.location.name.indexOf(filterValue) > -1;
-        return a || b || c || d || e || f || g;
+        var d = element.screen && element.screen.indexOf(filterValue) > -1;
+        var e = element.location && element.location.name.indexOf(filterValue) > -1;
+        var f = element.mac && element.mac.indexOf(filterValue) > -1;
+        return a || b || c || d || e || f;
       });
       return filteredData;
+    }, _this.handleFilter = function () {
+      _this.props.filterFound();
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -6820,15 +6858,15 @@ var List = exports.List = function (_Component) {
     value: function render() {
       var _props = this.props,
           category = _props.category,
-          filterValue = _props.filterValue;
+          filterValue = _props.filterValue,
+          filterFoundValue = _props.filterFoundValue;
 
-      var content = this.props.content.filter(function (e) {
-        return e.name.indexOf(filterValue) > -1;
-      }).sort(function (a, b) {
-        return a.id - b.id;
+      var content = this.props.content;
+      if (category == 'devices') content = this.props.content.filter(function (c) {
+        return !filterFoundValue || c.found;
       });
-      var content = this.filter(this.props.content, filterValue).sort(function (a, b) {
-        return a.id - b.id;
+      content = this.filter(content, filterValue).sort(function (a, b) {
+        return b.found - a.found;
       });
       if (category === "displays") {
         var elementos = content.map(function (elemento) {
@@ -6889,7 +6927,17 @@ var List = exports.List = function (_Component) {
             )
           )
         ),
-        _react2.default.createElement(_addButton.AddButton, { category: category })
+        category != "devices" ? _react2.default.createElement(_addButton.AddButton, { category: category }) : _react2.default.createElement(
+          'label',
+          { className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: this.handleFilter, type: 'checkbox', defaultChecked: this.props.filterFoundValue, value: this.props.filterFoundValue, name: 'found', className: 'custom-control-input' }),
+          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
+          _react2.default.createElement(
+            'span',
+            { className: 'custom-control-description' },
+            ' Mostrar \xFAnicamente dispositivos localizados'
+          )
+        )
       );
     }
   }]);
@@ -6897,10 +6945,8 @@ var List = exports.List = function (_Component) {
   return List;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6960,7 +7006,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7027,7 +7073,7 @@ var createPath = exports.createPath = function createPath(location) {
 };
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7098,7 +7144,7 @@ var createPath = function createPath(location) {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7116,7 +7162,7 @@ function isPrefixedValue(value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7148,40 +7194,6 @@ var ACTION = exports.ACTION = {
 };
 
 /***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Icon = undefined;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var cx = __webpack_require__(8); // Importacion de librerias
-var Icon = exports.Icon = function Icon(_ref) {
-  var icon = _ref.icon,
-      mr = _ref.mr,
-      ml = _ref.ml,
-      size = _ref.size;
-
-  var iconName = "fa-" + icon;
-  var iconSize = size ? "fa-" + size + "x" : '';
-  var marginLeft = ml ? "ml-" + ml : '';
-  var marginRight = mr ? "mr-" + mr : '';
-  var className = cx("fa fa-fw", iconName, iconSize, marginLeft, marginRight);
-
-  return _react2.default.createElement('i', { className: className, 'aria-hidden': 'true' });
-};
-
-/***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7203,28 +7215,32 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _icon = __webpack_require__(23);
+var _icon = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* COMPONENTS */
+/* COMPONENT */
 /* IMPORT MODULES */
 var Associated = exports.Associated = function Associated(_ref) {
-  var contenido = _ref.contenido,
+  var content = _ref.content,
       category = _ref.category,
       active = _ref.active,
       appearance = _ref.appearance,
       icon = _ref.icon;
 
 
-  if (contenido.length > 0) {
+  if (category == 'devices') content.sort(function (a, b) {
+    return b.found - a.found;
+  });
+
+  if (content.length > 0) {
     return _react2.default.createElement(
       'div',
       { className: 'list-group list-group-small mb-3' },
-      contenido.map(function (e, i) {
+      content.map(function (e, i) {
         var className = "d-flex elemento" + ' ' + appearance;
         var location = {
-          pathname: '/' + category + '/' + e.id
+          pathname: '/' + category + '/' + e._id
         };
         return _react2.default.createElement(
           'div',
@@ -7235,7 +7251,36 @@ var Associated = exports.Associated = function Associated(_ref) {
             _react2.default.createElement(
               _reactRouterDom.Link,
               { to: location },
-              _react2.default.createElement(
+              category == "devices" ? _react2.default.createElement(
+                'div',
+                { className: 'd-flex elemento elemento-dispositivo w-100 justify-content-between align-items-center' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'mb-0' },
+                  _react2.default.createElement(_icon.Icon, { icon: icon, mr: 3 }),
+                  e.name
+                ),
+                e.found ? _react2.default.createElement(
+                  'span',
+                  null,
+                  _react2.default.createElement(
+                    'small',
+                    { className: 'mb-0' },
+                    _react2.default.createElement(_icon.Icon, { icon: 'battery', mr: '1' }),
+                    e.batt,
+                    _react2.default.createElement(_icon.Icon, { icon: 'signal', mr: '1', ml: '2' }),
+                    e.rssi
+                  )
+                ) : _react2.default.createElement(
+                  'span',
+                  null,
+                  _react2.default.createElement(
+                    'small',
+                    { className: 'mb-0' },
+                    _react2.default.createElement(_icon.Icon, { icon: 'chain-broken', mr: '1' })
+                  )
+                )
+              ) : _react2.default.createElement(
                 'div',
                 { className: className },
                 _react2.default.createElement(
@@ -7277,17 +7322,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var cx = __webpack_require__(8);
 
-/* COMPONENTS */
+/* COMPONENT */
 /* IMPORT MODULES */
 var Tag = exports.Tag = function Tag(_ref) {
-  var categoria = _ref.categoria,
-      etiqueta = _ref.etiqueta;
+  var category = _ref.category,
+      tag = _ref.tag;
 
-  var claseEtiqueta = cx("btn mr-1", { "btn-outline-success": categoria === "displays" }, { "btn-outline-info": categoria === "imagenes" }, { "btn-outline-warning": categoria === "grupos" }, "btn-tiny");
+  var tagClass = cx("btn mr-1", { "btn-outline-success": category === "displays" }, { "btn-outline-info": category === "images" }, { "btn-outline-warning": category === "groups" }, "btn-tiny");
   return _react2.default.createElement(
     'button',
-    { type: 'button', className: claseEtiqueta },
-    etiqueta
+    { type: 'button', className: tagClass },
+    tag
   );
 };
 
@@ -7324,7 +7369,7 @@ module.exports = emptyObject;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return locationsAreEqual; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_resolve_pathname__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_value_equal__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PathUtils__ = __webpack_require__(21);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -7440,8 +7485,8 @@ exports.default = style;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(18);
-  var warning = __webpack_require__(15);
+  var invariant = __webpack_require__(19);
+  var warning = __webpack_require__(16);
   var ReactPropTypesSecret = __webpack_require__(30);
   var loggedTypeFailures = {};
 }
@@ -7531,7 +7576,7 @@ var _valueEqual = __webpack_require__(50);
 
 var _valueEqual2 = _interopRequireDefault(_valueEqual);
 
-var _PathUtils = __webpack_require__(19);
+var _PathUtils = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7986,7 +8031,7 @@ var createTransitionManager = function createTransitionManager() {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(9);
-var normalizeHeaderName = __webpack_require__(270);
+var normalizeHeaderName = __webpack_require__(272);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -8002,10 +8047,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(62);
+    adapter = __webpack_require__(180);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(62);
+    adapter = __webpack_require__(180);
   }
   return adapter;
 }
@@ -23323,572 +23368,6 @@ exports.default = {
 /* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.processStyleName = undefined;
-exports.createMarkupForStyles = createMarkupForStyles;
-
-var _camelizeStyleName = __webpack_require__(48);
-
-var _camelizeStyleName2 = _interopRequireDefault(_camelizeStyleName);
-
-var _dangerousStyleValue = __webpack_require__(235);
-
-var _dangerousStyleValue2 = _interopRequireDefault(_dangerousStyleValue);
-
-var _hyphenateStyleName = __webpack_require__(47);
-
-var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
-
-var _memoizeStringOnly = __webpack_require__(237);
-
-var _memoizeStringOnly2 = _interopRequireDefault(_memoizeStringOnly);
-
-var _warning = __webpack_require__(15);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var processStyleName = exports.processStyleName = (0, _memoizeStringOnly2.default)(_hyphenateStyleName2.default); /**
-                                                                                                                   * Copyright 2013-present, Facebook, Inc.
-                                                                                                                   * All rights reserved.
-                                                                                                                   *
-                                                                                                                   * This source code is licensed under the BSD-style license found in the
-                                                                                                                   * LICENSE file in the root directory of this source tree. An additional grant
-                                                                                                                   * of patent rights can be found in the PATENTS file in the same directory.
-                                                                                                                   *
-                                                                                                                   * @providesModule CSSPropertyOperations
-                                                                                                                   */
-
-if (process.env.NODE_ENV !== 'production') {
-  // 'msTransform' is correct, but the other prefixes should be capitalized
-  var badVendoredStyleNamePattern = /^(?:webkit|moz|o)[A-Z]/;
-
-  // style values shouldn't contain a semicolon
-  var badStyleValueWithSemicolonPattern = /;\s*$/;
-
-  var warnedStyleNames = {};
-  var warnedStyleValues = {};
-  var warnedForNaNValue = false;
-
-  var warnHyphenatedStyleName = function warnHyphenatedStyleName(name, owner) {
-    if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
-      return;
-    }
-
-    warnedStyleNames[name] = true;
-    process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(false, 'Unsupported style property %s. Did you mean %s?%s', name, (0, _camelizeStyleName2.default)(name), checkRenderMessage(owner)) : void 0;
-  };
-
-  var warnBadVendoredStyleName = function warnBadVendoredStyleName(name, owner) {
-    if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
-      return;
-    }
-
-    warnedStyleNames[name] = true;
-    process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(false, 'Unsupported vendor-prefixed style property %s. Did you mean %s?%s', name, name.charAt(0).toUpperCase() + name.slice(1), checkRenderMessage(owner)) : void 0;
-  };
-
-  var warnStyleValueWithSemicolon = function warnStyleValueWithSemicolon(name, value, owner) {
-    if (warnedStyleValues.hasOwnProperty(value) && warnedStyleValues[value]) {
-      return;
-    }
-
-    warnedStyleValues[value] = true;
-    process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(false, 'Style property values shouldn\'t contain a semicolon.%s ' + 'Try "%s: %s" instead.', checkRenderMessage(owner), name, value.replace(badStyleValueWithSemicolonPattern, '')) : void 0;
-  };
-
-  var warnStyleValueIsNaN = function warnStyleValueIsNaN(name, value, owner) {
-    if (warnedForNaNValue) {
-      return;
-    }
-
-    warnedForNaNValue = true;
-    process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(false, '`NaN` is an invalid value for the `%s` css style property.%s', name, checkRenderMessage(owner)) : void 0;
-  };
-
-  var checkRenderMessage = function checkRenderMessage(owner) {
-    if (owner) {
-      var name = owner.getName();
-      if (name) {
-        return ' Check the render method of `' + name + '`.';
-      }
-    }
-    return '';
-  };
-
-  /**
-   * @param {string} name
-   * @param {*} value
-   * @param {ReactDOMComponent} component
-   */
-  var warnValidStyle = function warnValidStyle(name, value, component) {
-    //eslint-disable-line no-var
-    var owner = void 0;
-    if (component) {
-      owner = component._currentElement._owner;
-    }
-    if (name.indexOf('-') > -1) {
-      warnHyphenatedStyleName(name, owner);
-    } else if (badVendoredStyleNamePattern.test(name)) {
-      warnBadVendoredStyleName(name, owner);
-    } else if (badStyleValueWithSemicolonPattern.test(value)) {
-      warnStyleValueWithSemicolon(name, value, owner);
-    }
-
-    if (typeof value === 'number' && isNaN(value)) {
-      warnStyleValueIsNaN(name, value, owner);
-    }
-  };
-}
-
-/**
-   * Serializes a mapping of style properties for use as inline styles:
-   *
-   *   > createMarkupForStyles({width: '200px', height: 0})
-   *   "width:200px;height:0;"
-   *
-   * Undefined values are ignored so that declarative programming is easier.
-   * The result should be HTML-escaped before insertion into the DOM.
-   *
-   * @param {object} styles
-   * @param {ReactDOMComponent} component
-   * @return {?string}
-   */
-
-function createMarkupForStyles(styles, component) {
-  var serialized = '';
-  for (var styleName in styles) {
-    var isCustomProp = styleName.indexOf('--') === 0;
-    if (!styles.hasOwnProperty(styleName)) {
-      continue;
-    }
-    if (styleName === 'label') {
-      continue;
-    }
-    var styleValue = styles[styleName];
-    if (process.env.NODE_ENV !== 'production' && !isCustomProp) {
-      warnValidStyle(styleName, styleValue, component);
-    }
-    if (styleValue != null) {
-      if (isCustomProp) {
-        serialized += styleName + ':' + styleValue + ';';
-      } else {
-        serialized += processStyleName(styleName) + ':';
-        serialized += (0, _dangerousStyleValue2.default)(styleName, styleValue, component) + ';';
-      }
-    }
-  }
-  return serialized || null;
-}
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = capitalizeString;
-function capitalizeString(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-module.exports = exports["default"];
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.falseOrElement = exports.falseOrDelay = undefined;
-exports.isValidDelay = isValidDelay;
-exports.objectValues = objectValues;
-
-var _react = __webpack_require__(1);
-
-function isValidDelay(val) {
-  return typeof val === "number" && !isNaN(val) && val > 0;
-}
-
-function objectValues(obj) {
-  return Object.keys(obj).map(function (key) {
-    return obj[key];
-  });
-}
-
-function withRequired(fn) {
-  fn.isRequired = function (props, propName, componentName) {
-    var prop = props[propName];
-
-    if (typeof prop === "undefined") {
-      return new Error("The prop " + propName + " is marked as required in \n      " + componentName + ", but its value is undefined.");
-    }
-
-    fn(props, propName, componentName);
-  };
-  return fn;
-}
-
-var falseOrDelay = exports.falseOrDelay = withRequired(function (props, propName, componentName) {
-  var prop = props[propName];
-
-  if (prop !== false && !isValidDelay(prop)) {
-    return new Error(componentName + " expect " + propName + " \n      to be a valid Number > 0 or equal to false. " + prop + " given.");
-  }
-
-  return null;
-});
-
-var falseOrElement = exports.falseOrElement = withRequired(function (props, propName, componentName) {
-  var prop = props[propName];
-
-  if (prop !== false && !(0, _react.isValidElement)(prop)) {
-    return new Error(componentName + " expect " + propName + " \n      to be a valid react element or equal to false. " + prop + " given.");
-  }
-
-  return null;
-});
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var eventManager = {
-  eventList: new Map(),
-
-  on: function on(event, callback) {
-    this.eventList.has(event) || this.eventList.set(event, []);
-
-    this.eventList.get(event).push(callback);
-
-    return this;
-  },
-  off: function off() {
-    var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-    return this.eventList.delete(event);
-  },
-  emit: function emit(event) {
-    var _this = this;
-
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    if (!this.eventList.has(event)) {
-      /* eslint no-console: 0 */
-      console.warn("<" + event + "> Event is not registered. Did you forgot to bind the event ?");
-      return false;
-    }
-
-    this.eventList.get(event).forEach(function (callback) {
-      return setTimeout(function () {
-        return callback.call.apply(callback, [_this].concat(_toConsumableArray(args)));
-      }, 0);
-    });
-
-    return true;
-  }
-};
-
-exports.default = eventManager;
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function bind(fn, thisArg) {
-  return function wrap() {
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-    return fn.apply(thisArg, args);
-  };
-};
-
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(9);
-var settle = __webpack_require__(271);
-var buildURL = __webpack_require__(273);
-var parseHeaders = __webpack_require__(274);
-var isURLSameOrigin = __webpack_require__(275);
-var createError = __webpack_require__(63);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(276);
-
-module.exports = function xhrAdapter(config) {
-  return new Promise(function dispatchXhrRequest(resolve, reject) {
-    var requestData = config.data;
-    var requestHeaders = config.headers;
-
-    if (utils.isFormData(requestData)) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
-    var request = new XMLHttpRequest();
-    var loadEvent = 'onreadystatechange';
-    var xDomain = false;
-
-    // For IE 8/9 CORS support
-    // Only supports POST and GET calls and doesn't returns the response headers.
-    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-    if (process.env.NODE_ENV !== 'test' &&
-        typeof window !== 'undefined' &&
-        window.XDomainRequest && !('withCredentials' in request) &&
-        !isURLSameOrigin(config.url)) {
-      request = new window.XDomainRequest();
-      loadEvent = 'onload';
-      xDomain = true;
-      request.onprogress = function handleProgress() {};
-      request.ontimeout = function handleTimeout() {};
-    }
-
-    // HTTP basic authentication
-    if (config.auth) {
-      var username = config.auth.username || '';
-      var password = config.auth.password || '';
-      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-    }
-
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-
-    // Set the request timeout in MS
-    request.timeout = config.timeout;
-
-    // Listen for ready state
-    request[loadEvent] = function handleLoad() {
-      if (!request || (request.readyState !== 4 && !xDomain)) {
-        return;
-      }
-
-      // The request errored out and we didn't get a response, this will be
-      // handled by onerror instead
-      // With one exception: request that using file: protocol, most browsers
-      // will return status as 0 even though it's a successful request
-      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-        return;
-      }
-
-      // Prepare the response
-      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-      var response = {
-        data: responseData,
-        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
-        status: request.status === 1223 ? 204 : request.status,
-        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-        headers: responseHeaders,
-        config: config,
-        request: request
-      };
-
-      settle(resolve, reject, response);
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle low level network errors
-    request.onerror = function handleError() {
-      // Real errors are hidden from us by the browser
-      // onerror should only fire if it's a network error
-      reject(createError('Network Error', config, null, request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Handle timeout
-    request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
-        request));
-
-      // Clean up request
-      request = null;
-    };
-
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(277);
-
-      // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-          cookies.read(config.xsrfCookieName) :
-          undefined;
-
-      if (xsrfValue) {
-        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-      }
-    }
-
-    // Add headers to the request
-    if ('setRequestHeader' in request) {
-      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-          // Remove Content-Type if data is undefined
-          delete requestHeaders[key];
-        } else {
-          // Otherwise add header to the request
-          request.setRequestHeader(key, val);
-        }
-      });
-    }
-
-    // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
-    }
-
-    // Add responseType to request if needed
-    if (config.responseType) {
-      try {
-        request.responseType = config.responseType;
-      } catch (e) {
-        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
-        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
-        if (config.responseType !== 'json') {
-          throw e;
-        }
-      }
-    }
-
-    // Handle progress if needed
-    if (typeof config.onDownloadProgress === 'function') {
-      request.addEventListener('progress', config.onDownloadProgress);
-    }
-
-    // Not all browsers support upload events
-    if (typeof config.onUploadProgress === 'function' && request.upload) {
-      request.upload.addEventListener('progress', config.onUploadProgress);
-    }
-
-    if (config.cancelToken) {
-      // Handle cancellation
-      config.cancelToken.promise.then(function onCanceled(cancel) {
-        if (!request) {
-          return;
-        }
-
-        request.abort();
-        reject(cancel);
-        // Clean up request
-        request = null;
-      });
-    }
-
-    if (requestData === undefined) {
-      requestData = null;
-    }
-
-    // Send the request
-    request.send(requestData);
-  });
-};
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var enhanceError = __webpack_require__(272);
-
-/**
- * Create an Error with the specified message, config, error code, request and response.
- *
- * @param {string} message The error message.
- * @param {Object} config The config.
- * @param {string} [code] The error code (for example, 'ECONNABORTED').
- * @param {Object} [request] The request.
- * @param {Object} [response] The response.
- * @returns {Error} The created error.
- */
-module.exports = function createError(message, config, code, request, response) {
-  var error = new Error(message);
-  return enhanceError(error, config, code, request, response);
-};
-
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function isCancel(value) {
-  return !!(value && value.__CANCEL__);
-};
-
-
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * A `Cancel` is an object that is thrown when an operation is canceled.
- *
- * @class
- * @param {string=} message The message.
- */
-function Cancel(message) {
-  this.message = message;
-}
-
-Cancel.prototype.toString = function toString() {
-  return 'Cancel' + (this.message ? ': ' + this.message : '');
-};
-
-Cancel.prototype.__CANCEL__ = true;
-
-module.exports = Cancel;
-
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
 //! moment.js locale configuration
 //! locale : Afrikaans [af]
 //! author : Werner Mollentze : https://github.com/wernerm
@@ -23964,7 +23443,7 @@ return af;
 
 
 /***/ }),
-/* 67 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24111,7 +23590,7 @@ return ar;
 
 
 /***/ }),
-/* 68 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24175,7 +23654,7 @@ return arDz;
 
 
 /***/ }),
-/* 69 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24239,7 +23718,7 @@ return arKw;
 
 
 /***/ }),
-/* 70 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24370,7 +23849,7 @@ return arLy;
 
 
 /***/ }),
-/* 71 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24435,7 +23914,7 @@ return arMa;
 
 
 /***/ }),
-/* 72 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24545,7 +24024,7 @@ return arSa;
 
 
 /***/ }),
-/* 73 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24609,7 +24088,7 @@ return arTn;
 
 
 /***/ }),
-/* 74 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24719,7 +24198,7 @@ return az;
 
 
 /***/ }),
-/* 75 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24858,7 +24337,7 @@ return be;
 
 
 /***/ }),
-/* 76 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -24953,7 +24432,7 @@ return bg;
 
 
 /***/ }),
-/* 77 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25017,7 +24496,7 @@ return bm;
 
 
 /***/ }),
-/* 78 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25141,7 +24620,7 @@ return bn;
 
 
 /***/ }),
-/* 79 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25265,7 +24744,7 @@ return bo;
 
 
 /***/ }),
-/* 80 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25378,7 +24857,7 @@ return br;
 
 
 /***/ }),
-/* 81 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25526,7 +25005,7 @@ return bs;
 
 
 /***/ }),
-/* 82 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25619,7 +25098,7 @@ return ca;
 
 
 /***/ }),
-/* 83 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25796,7 +25275,7 @@ return cs;
 
 
 /***/ }),
-/* 84 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25864,7 +25343,7 @@ return cv;
 
 
 /***/ }),
-/* 85 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -25950,7 +25429,7 @@ return cy;
 
 
 /***/ }),
-/* 86 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26015,7 +25494,7 @@ return da;
 
 
 /***/ }),
-/* 87 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26098,7 +25577,7 @@ return de;
 
 
 /***/ }),
-/* 88 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26182,7 +25661,7 @@ return deAt;
 
 
 /***/ }),
-/* 89 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26265,7 +25744,7 @@ return deCh;
 
 
 /***/ }),
-/* 90 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26370,7 +25849,7 @@ return dv;
 
 
 /***/ }),
-/* 91 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26475,7 +25954,7 @@ return el;
 
 
 /***/ }),
-/* 92 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26547,7 +26026,7 @@ return enAu;
 
 
 /***/ }),
-/* 93 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26615,7 +26094,7 @@ return enCa;
 
 
 /***/ }),
-/* 94 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26687,7 +26166,7 @@ return enGb;
 
 
 /***/ }),
-/* 95 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26759,7 +26238,7 @@ return enIe;
 
 
 /***/ }),
-/* 96 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26831,7 +26310,7 @@ return enNz;
 
 
 /***/ }),
-/* 97 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -26909,7 +26388,7 @@ return eo;
 
 
 /***/ }),
-/* 98 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27006,7 +26485,7 @@ return es;
 
 
 /***/ }),
-/* 99 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27102,7 +26581,7 @@ return esDo;
 
 
 /***/ }),
-/* 100 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27190,7 +26669,7 @@ return esUs;
 
 
 /***/ }),
-/* 101 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27275,7 +26754,7 @@ return et;
 
 
 /***/ }),
-/* 102 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27346,7 +26825,7 @@ return eu;
 
 
 /***/ }),
-/* 103 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27458,7 +26937,7 @@ return fa;
 
 
 /***/ }),
-/* 104 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27570,7 +27049,7 @@ return fi;
 
 
 /***/ }),
-/* 105 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27635,7 +27114,7 @@ return fo;
 
 
 /***/ }),
-/* 106 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27723,7 +27202,7 @@ return fr;
 
 
 /***/ }),
-/* 107 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27802,7 +27281,7 @@ return frCa;
 
 
 /***/ }),
-/* 108 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27885,7 +27364,7 @@ return frCh;
 
 
 /***/ }),
-/* 109 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -27965,7 +27444,7 @@ return fy;
 
 
 /***/ }),
-/* 110 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28046,7 +27525,7 @@ return gd;
 
 
 /***/ }),
-/* 111 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28128,7 +27607,7 @@ return gl;
 
 
 /***/ }),
-/* 112 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28255,7 +27734,7 @@ return gomLatn;
 
 
 /***/ }),
-/* 113 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28384,7 +27863,7 @@ return gu;
 
 
 /***/ }),
-/* 114 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28488,7 +27967,7 @@ return he;
 
 
 /***/ }),
-/* 115 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28617,7 +28096,7 @@ return hi;
 
 
 /***/ }),
-/* 116 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28767,7 +28246,7 @@ return hr;
 
 
 /***/ }),
-/* 117 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28881,7 +28360,7 @@ return hu;
 
 
 /***/ }),
-/* 118 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -28981,7 +28460,7 @@ return hyAm;
 
 
 /***/ }),
-/* 119 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29069,7 +28548,7 @@ return id;
 
 
 /***/ }),
-/* 120 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29201,7 +28680,7 @@ return is;
 
 
 /***/ }),
-/* 121 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29276,7 +28755,7 @@ return it;
 
 
 /***/ }),
-/* 122 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29361,7 +28840,7 @@ return ja;
 
 
 /***/ }),
-/* 123 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29449,7 +28928,7 @@ return jv;
 
 
 /***/ }),
-/* 124 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29543,7 +29022,7 @@ return ka;
 
 
 /***/ }),
-/* 125 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29635,7 +29114,7 @@ return kk;
 
 
 /***/ }),
-/* 126 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29698,7 +29177,7 @@ return km;
 
 
 /***/ }),
-/* 127 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29829,7 +29308,7 @@ return kn;
 
 
 /***/ }),
-/* 128 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -29917,7 +29396,7 @@ return ko;
 
 
 /***/ }),
-/* 129 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30010,7 +29489,7 @@ return ky;
 
 
 /***/ }),
-/* 130 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30152,7 +29631,7 @@ return lb;
 
 
 /***/ }),
-/* 131 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30227,7 +29706,7 @@ return lo;
 
 
 /***/ }),
-/* 132 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30349,7 +29828,7 @@ return lt;
 
 
 /***/ }),
-/* 133 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30451,7 +29930,7 @@ return lv;
 
 
 /***/ }),
-/* 134 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30567,7 +30046,7 @@ return me;
 
 
 /***/ }),
-/* 135 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30636,7 +30115,7 @@ return mi;
 
 
 /***/ }),
-/* 136 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30731,7 +30210,7 @@ return mk;
 
 
 /***/ }),
-/* 137 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30817,7 +30296,7 @@ return ml;
 
 
 /***/ }),
-/* 138 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -30981,7 +30460,7 @@ return mr;
 
 
 /***/ }),
-/* 139 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31068,7 +30547,7 @@ return ms;
 
 
 /***/ }),
-/* 140 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31156,7 +30635,7 @@ return msMy;
 
 
 /***/ }),
-/* 141 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31257,7 +30736,7 @@ return my;
 
 
 /***/ }),
-/* 142 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31325,7 +30804,7 @@ return nb;
 
 
 /***/ }),
-/* 143 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31453,7 +30932,7 @@ return ne;
 
 
 /***/ }),
-/* 144 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31546,7 +31025,7 @@ return nl;
 
 
 /***/ }),
-/* 145 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31639,7 +31118,7 @@ return nlBe;
 
 
 /***/ }),
-/* 146 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31704,7 +31183,7 @@ return nn;
 
 
 /***/ }),
-/* 147 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31833,7 +31312,7 @@ return paIn;
 
 
 /***/ }),
-/* 148 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -31962,7 +31441,7 @@ return pl;
 
 
 /***/ }),
-/* 149 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32032,7 +31511,7 @@ return pt;
 
 
 /***/ }),
-/* 150 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32099,7 +31578,7 @@ return ptBr;
 
 
 /***/ }),
-/* 151 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32179,7 +31658,7 @@ return ro;
 
 
 /***/ }),
-/* 152 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32367,7 +31846,7 @@ return ru;
 
 
 /***/ }),
-/* 153 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32470,7 +31949,7 @@ return sd;
 
 
 /***/ }),
-/* 154 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32536,7 +32015,7 @@ return se;
 
 
 /***/ }),
-/* 155 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32612,7 +32091,7 @@ return si;
 
 
 /***/ }),
-/* 156 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32767,7 +32246,7 @@ return sk;
 
 
 /***/ }),
-/* 157 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -32934,7 +32413,7 @@ return sl;
 
 
 /***/ }),
-/* 158 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33009,7 +32488,7 @@ return sq;
 
 
 /***/ }),
-/* 159 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33124,7 +32603,7 @@ return sr;
 
 
 /***/ }),
-/* 160 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33239,7 +32718,7 @@ return srCyrl;
 
 
 /***/ }),
-/* 161 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33333,7 +32812,7 @@ return ss;
 
 
 /***/ }),
-/* 162 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33407,7 +32886,7 @@ return sv;
 
 
 /***/ }),
-/* 163 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33471,7 +32950,7 @@ return sw;
 
 
 /***/ }),
-/* 164 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33606,7 +33085,7 @@ return ta;
 
 
 /***/ }),
-/* 165 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33700,7 +33179,7 @@ return te;
 
 
 /***/ }),
-/* 166 */
+/* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33773,7 +33252,7 @@ return tet;
 
 
 /***/ }),
-/* 167 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33845,7 +33324,7 @@ return th;
 
 
 /***/ }),
-/* 168 */
+/* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -33912,7 +33391,7 @@ return tlPh;
 
 
 /***/ }),
-/* 169 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34037,7 +33516,7 @@ return tlh;
 
 
 /***/ }),
-/* 170 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34132,7 +33611,7 @@ return tr;
 
 
 /***/ }),
-/* 171 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34228,7 +33707,7 @@ return tzl;
 
 
 /***/ }),
-/* 172 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34291,7 +33770,7 @@ return tzm;
 
 
 /***/ }),
-/* 173 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34354,7 +33833,7 @@ return tzmLatn;
 
 
 /***/ }),
-/* 174 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34510,7 +33989,7 @@ return uk;
 
 
 /***/ }),
-/* 175 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34614,7 +34093,7 @@ return ur;
 
 
 /***/ }),
-/* 176 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34677,7 +34156,7 @@ return uz;
 
 
 /***/ }),
-/* 177 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34740,7 +34219,7 @@ return uzLatn;
 
 
 /***/ }),
-/* 178 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34824,7 +34303,7 @@ return vi;
 
 
 /***/ }),
-/* 179 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34897,7 +34376,7 @@ return xPseudo;
 
 
 /***/ }),
-/* 180 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -34962,7 +34441,7 @@ return yo;
 
 
 /***/ }),
-/* 181 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35078,7 +34557,7 @@ return zhCn;
 
 
 /***/ }),
-/* 182 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35188,7 +34667,7 @@ return zhHk;
 
 
 /***/ }),
-/* 183 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -35297,6 +34776,572 @@ return zhTw;
 
 
 /***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.processStyleName = undefined;
+exports.createMarkupForStyles = createMarkupForStyles;
+
+var _camelizeStyleName = __webpack_require__(48);
+
+var _camelizeStyleName2 = _interopRequireDefault(_camelizeStyleName);
+
+var _dangerousStyleValue = __webpack_require__(237);
+
+var _dangerousStyleValue2 = _interopRequireDefault(_dangerousStyleValue);
+
+var _hyphenateStyleName = __webpack_require__(47);
+
+var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
+
+var _memoizeStringOnly = __webpack_require__(239);
+
+var _memoizeStringOnly2 = _interopRequireDefault(_memoizeStringOnly);
+
+var _warning = __webpack_require__(16);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var processStyleName = exports.processStyleName = (0, _memoizeStringOnly2.default)(_hyphenateStyleName2.default); /**
+                                                                                                                   * Copyright 2013-present, Facebook, Inc.
+                                                                                                                   * All rights reserved.
+                                                                                                                   *
+                                                                                                                   * This source code is licensed under the BSD-style license found in the
+                                                                                                                   * LICENSE file in the root directory of this source tree. An additional grant
+                                                                                                                   * of patent rights can be found in the PATENTS file in the same directory.
+                                                                                                                   *
+                                                                                                                   * @providesModule CSSPropertyOperations
+                                                                                                                   */
+
+if (process.env.NODE_ENV !== 'production') {
+  // 'msTransform' is correct, but the other prefixes should be capitalized
+  var badVendoredStyleNamePattern = /^(?:webkit|moz|o)[A-Z]/;
+
+  // style values shouldn't contain a semicolon
+  var badStyleValueWithSemicolonPattern = /;\s*$/;
+
+  var warnedStyleNames = {};
+  var warnedStyleValues = {};
+  var warnedForNaNValue = false;
+
+  var warnHyphenatedStyleName = function warnHyphenatedStyleName(name, owner) {
+    if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
+      return;
+    }
+
+    warnedStyleNames[name] = true;
+    process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(false, 'Unsupported style property %s. Did you mean %s?%s', name, (0, _camelizeStyleName2.default)(name), checkRenderMessage(owner)) : void 0;
+  };
+
+  var warnBadVendoredStyleName = function warnBadVendoredStyleName(name, owner) {
+    if (warnedStyleNames.hasOwnProperty(name) && warnedStyleNames[name]) {
+      return;
+    }
+
+    warnedStyleNames[name] = true;
+    process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(false, 'Unsupported vendor-prefixed style property %s. Did you mean %s?%s', name, name.charAt(0).toUpperCase() + name.slice(1), checkRenderMessage(owner)) : void 0;
+  };
+
+  var warnStyleValueWithSemicolon = function warnStyleValueWithSemicolon(name, value, owner) {
+    if (warnedStyleValues.hasOwnProperty(value) && warnedStyleValues[value]) {
+      return;
+    }
+
+    warnedStyleValues[value] = true;
+    process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(false, 'Style property values shouldn\'t contain a semicolon.%s ' + 'Try "%s: %s" instead.', checkRenderMessage(owner), name, value.replace(badStyleValueWithSemicolonPattern, '')) : void 0;
+  };
+
+  var warnStyleValueIsNaN = function warnStyleValueIsNaN(name, value, owner) {
+    if (warnedForNaNValue) {
+      return;
+    }
+
+    warnedForNaNValue = true;
+    process.env.NODE_ENV !== 'production' ? (0, _warning2.default)(false, '`NaN` is an invalid value for the `%s` css style property.%s', name, checkRenderMessage(owner)) : void 0;
+  };
+
+  var checkRenderMessage = function checkRenderMessage(owner) {
+    if (owner) {
+      var name = owner.getName();
+      if (name) {
+        return ' Check the render method of `' + name + '`.';
+      }
+    }
+    return '';
+  };
+
+  /**
+   * @param {string} name
+   * @param {*} value
+   * @param {ReactDOMComponent} component
+   */
+  var warnValidStyle = function warnValidStyle(name, value, component) {
+    //eslint-disable-line no-var
+    var owner = void 0;
+    if (component) {
+      owner = component._currentElement._owner;
+    }
+    if (name.indexOf('-') > -1) {
+      warnHyphenatedStyleName(name, owner);
+    } else if (badVendoredStyleNamePattern.test(name)) {
+      warnBadVendoredStyleName(name, owner);
+    } else if (badStyleValueWithSemicolonPattern.test(value)) {
+      warnStyleValueWithSemicolon(name, value, owner);
+    }
+
+    if (typeof value === 'number' && isNaN(value)) {
+      warnStyleValueIsNaN(name, value, owner);
+    }
+  };
+}
+
+/**
+   * Serializes a mapping of style properties for use as inline styles:
+   *
+   *   > createMarkupForStyles({width: '200px', height: 0})
+   *   "width:200px;height:0;"
+   *
+   * Undefined values are ignored so that declarative programming is easier.
+   * The result should be HTML-escaped before insertion into the DOM.
+   *
+   * @param {object} styles
+   * @param {ReactDOMComponent} component
+   * @return {?string}
+   */
+
+function createMarkupForStyles(styles, component) {
+  var serialized = '';
+  for (var styleName in styles) {
+    var isCustomProp = styleName.indexOf('--') === 0;
+    if (!styles.hasOwnProperty(styleName)) {
+      continue;
+    }
+    if (styleName === 'label') {
+      continue;
+    }
+    var styleValue = styles[styleName];
+    if (process.env.NODE_ENV !== 'production' && !isCustomProp) {
+      warnValidStyle(styleName, styleValue, component);
+    }
+    if (styleValue != null) {
+      if (isCustomProp) {
+        serialized += styleName + ':' + styleValue + ';';
+      } else {
+        serialized += processStyleName(styleName) + ':';
+        serialized += (0, _dangerousStyleValue2.default)(styleName, styleValue, component) + ';';
+      }
+    }
+  }
+  return serialized || null;
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = capitalizeString;
+function capitalizeString(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+module.exports = exports["default"];
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.falseOrElement = exports.falseOrDelay = undefined;
+exports.isValidDelay = isValidDelay;
+exports.objectValues = objectValues;
+
+var _react = __webpack_require__(1);
+
+function isValidDelay(val) {
+  return typeof val === "number" && !isNaN(val) && val > 0;
+}
+
+function objectValues(obj) {
+  return Object.keys(obj).map(function (key) {
+    return obj[key];
+  });
+}
+
+function withRequired(fn) {
+  fn.isRequired = function (props, propName, componentName) {
+    var prop = props[propName];
+
+    if (typeof prop === "undefined") {
+      return new Error("The prop " + propName + " is marked as required in \n      " + componentName + ", but its value is undefined.");
+    }
+
+    fn(props, propName, componentName);
+  };
+  return fn;
+}
+
+var falseOrDelay = exports.falseOrDelay = withRequired(function (props, propName, componentName) {
+  var prop = props[propName];
+
+  if (prop !== false && !isValidDelay(prop)) {
+    return new Error(componentName + " expect " + propName + " \n      to be a valid Number > 0 or equal to false. " + prop + " given.");
+  }
+
+  return null;
+});
+
+var falseOrElement = exports.falseOrElement = withRequired(function (props, propName, componentName) {
+  var prop = props[propName];
+
+  if (prop !== false && !(0, _react.isValidElement)(prop)) {
+    return new Error(componentName + " expect " + propName + " \n      to be a valid react element or equal to false. " + prop + " given.");
+  }
+
+  return null;
+});
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var eventManager = {
+  eventList: new Map(),
+
+  on: function on(event, callback) {
+    this.eventList.has(event) || this.eventList.set(event, []);
+
+    this.eventList.get(event).push(callback);
+
+    return this;
+  },
+  off: function off() {
+    var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+    return this.eventList.delete(event);
+  },
+  emit: function emit(event) {
+    var _this = this;
+
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    if (!this.eventList.has(event)) {
+      /* eslint no-console: 0 */
+      console.warn("<" + event + "> Event is not registered. Did you forgot to bind the event ?");
+      return false;
+    }
+
+    this.eventList.get(event).forEach(function (callback) {
+      return setTimeout(function () {
+        return callback.call.apply(callback, [_this].concat(_toConsumableArray(args)));
+      }, 0);
+    });
+
+    return true;
+  }
+};
+
+exports.default = eventManager;
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(9);
+var settle = __webpack_require__(273);
+var buildURL = __webpack_require__(275);
+var parseHeaders = __webpack_require__(276);
+var isURLSameOrigin = __webpack_require__(277);
+var createError = __webpack_require__(181);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(278);
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+    var loadEvent = 'onreadystatechange';
+    var xDomain = false;
+
+    // For IE 8/9 CORS support
+    // Only supports POST and GET calls and doesn't returns the response headers.
+    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+    if (process.env.NODE_ENV !== 'test' &&
+        typeof window !== 'undefined' &&
+        window.XDomainRequest && !('withCredentials' in request) &&
+        !isURLSameOrigin(config.url)) {
+      request = new window.XDomainRequest();
+      loadEvent = 'onload';
+      xDomain = true;
+      request.onprogress = function handleProgress() {};
+      request.ontimeout = function handleTimeout() {};
+    }
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request[loadEvent] = function handleLoad() {
+      if (!request || (request.readyState !== 4 && !xDomain)) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        // IE sends 1223 instead of 204 (https://github.com/axios/axios/issues/201)
+        status: request.status === 1223 ? 204 : request.status,
+        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(279);
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+          cookies.read(config.xsrfCookieName) :
+          undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (config.withCredentials) {
+      request.withCredentials = true;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(274);
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
 /* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35348,11 +35393,9 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
 
     var _this$props = _this.props,
         display = _this$props.display,
-        user = _this$props.user,
-        resolutions = _this$props.resolutions;
+        user = _this$props.user;
 
     _this.state = {
-      id: display ? display.id : '',
       name: display ? display.name : '',
       description: display ? display.description : '',
       created_by: display ? display.created_by || { name: 'Usuario eliminado' } : user,
@@ -35390,22 +35433,13 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          displays = _props.displays,
-          display = _props.display,
-          devices = _props.devices,
-          images = _props.images;
-      // if in post mode get first free id value
-
-      if (!display) {
-        var identificaciones = displays.map(function (d) {
-          return d.id;
-        }); // get all ids
-        var id = 1; // start from 1
-        while (identificaciones.indexOf(id) != -1) {
-          id++;
-        } // stop at first free id value
-      }
+          _props$data = _props.data,
+          displays = _props$data.displays,
+          devices = _props$data.devices,
+          images = _props$data.images,
+          display = _props.display;
       // get options for active image
+
       var optionsActiveImage = images.filter(function (i) {
         return _this2.state.images.find(function (c) {
           return c == i._id;
@@ -35413,7 +35447,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
       }).map(function (i) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i.id },
+          { value: i._id, key: i._id },
           i.name
         );
       });
@@ -35424,8 +35458,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
       // set state with initial values
       if (unusedDevices.length > 0 || display) {
         this.setState({
-          id: display ? display.id : id,
-          location: display ? '/displays/' + display.id : '/displays/' + id, // Redirect url
+          location: display ? '/displays/' + display._id : '/displays', // Redirect url
           device: display ? display.device ? display.device._id : unusedDevices[0]._id : unusedDevices[0]._id,
           deviceDescription: display ? display.device.description : unusedDevices[0].description,
           optionsActiveImage: optionsActiveImage
@@ -35453,9 +35486,18 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var _props2 = this.props,
+          _props2$data = _props2.data,
+          devices = _props2$data.devices,
+          images = _props2$data.images,
+          groups = _props2$data.groups,
+          displays = _props2$data.displays,
+          display = _props2.display;
+
       // Options
-      var optionsDevices = this.props.devices.filter(function (d) {
-        return !d.display || d.display._id == (_this3.props.display && _this3.props.display._id);
+
+      var optionsDevices = devices.filter(function (d) {
+        return !d.display || d.display._id == (display && display._id);
       }).map(function (d, i) {
         return _react2.default.createElement(
           'option',
@@ -35463,10 +35505,10 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
           d.name
         );
       });
-      var optionsGroups = this.props.groups.map(function (g) {
+      var optionsGroups = groups.map(function (g) {
         return _react2.default.createElement(
           'label',
-          { key: g.id, className: 'custom-control custom-checkbox' },
+          { key: g._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this3.handleCheckGroups, type: 'checkbox', defaultChecked: _this3.state.groups.find(function (c) {
               return c == g._id;
             }), name: g._id, defaultValue: g._id, className: 'custom-control-input' }),
@@ -35478,12 +35520,12 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
           )
         );
       });
-      var optionsImages = this.props.images.sort(function (a, b) {
-        return a.id - b.id;
+      var optionsImages = images.sort(function (a, b) {
+        return a.updated_at - b.updated_at;
       }).map(function (i) {
         return _react2.default.createElement(
           'label',
-          { key: i.id, className: 'custom-control custom-checkbox' },
+          { key: i._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
               return c == i._id;
             }), name: i._id, defaultValue: i._id, className: 'custom-control-input' }),
@@ -35554,7 +35596,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item mr-auto' },
-                this.props.display ? _react2.default.createElement(
+                display ? _react2.default.createElement(
                   'h2',
                   { className: 'detalles-titulo' },
                   _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
@@ -35569,7 +35611,7 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item ml-2' },
-                this.props.display ? _react2.default.createElement(
+                display ? _react2.default.createElement(
                   'button',
                   { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-success' },
                   _react2.default.createElement('i', { className: 'fa fa-save mr-3', 'aria-hidden': 'true' }),
@@ -35626,29 +35668,14 @@ var DisplayForm = exports.DisplayForm = function (_Component) {
               _react2.default.createElement('hr', { className: 'card-division' }),
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-1' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'displayID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'displayID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  'label',
+                  { htmlFor: 'nombre' },
+                  _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+                  'Nombre'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-11' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'nombre' },
-                    _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: this.state.name, onChange: this.handleInputChange })
               ),
               _react2.default.createElement(
                 'div',
@@ -35820,7 +35847,7 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     if (name === 'device') {
-      var unusedDevices = _this4.props.devices.filter(function (d) {
+      var unusedDevices = _this4.props.data.devices.filter(function (d) {
         return !d.display;
       });
       _this4.setState({ deviceDescription: unusedDevices.find(function (d) {
@@ -35857,7 +35884,7 @@ var _initialiseProps = function _initialiseProps() {
       // if there are no images deselect
       _this4.setState({ active_image: '' });
     }
-    _this4.setState({ optionsActiveImage: _this4.props.images.filter(function (i) {
+    _this4.setState({ optionsActiveImage: _this4.props.data.images.filter(function (i) {
         return _this4.state.images.find(function (c) {
           return c == i._id;
         });
@@ -35899,14 +35926,12 @@ var _initialiseProps = function _initialiseProps() {
     // define form values to send
 
     var form = {
-      id: _this4.state.id,
       name: _this4.state.name,
       description: _this4.state.description,
       category: _this4.state.category,
       updated_by: _this4.props.user._id, // send user_id
       tags: _this4.state.tags,
-      device: _this4.state.device,
-      userGroup: _this4.props.userGroup._id
+      device: _this4.state.device
     };
     // possible empty fields
     if (!_this4.props.display) form.created_by = _this4.props.user._id;
@@ -35918,11 +35943,12 @@ var _initialiseProps = function _initialiseProps() {
       method: display ? 'put' : 'post',
       url: display ? display.url : 'http://localhost:4000/displays',
       data: form,
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', Authorization: 'Bearer ' + _this4.props.token }
     }).then(function (res) {
       if (res.status == 201) {
         _this4.props.notify('Display configurado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        return _this4.props.update(_this4.props.user); // update dataset
+        var action = display ? 'edit' : 'add';
+        return _this4.props.update('displays', res.resourceId, action, res.data.resource, res.data.devices); // update dataset
       }
     }).then(function (res) {
       _this4.setState({ redirect: true });
@@ -35933,8 +35959,6 @@ var _initialiseProps = function _initialiseProps() {
     });
   };
 };
-
-;
 
 /***/ }),
 /* 185 */
@@ -35989,16 +36013,13 @@ var ImageForm = exports.ImageForm = function (_Component) {
 
     var _this$props = _this.props,
         image = _this$props.image,
-        user = _this$props.user,
-        resolutions = _this$props.resolutions;
+        user = _this$props.user;
 
     _this.state = {
-      id: image ? image.id : '',
       name: image ? image.name : '',
       description: image ? image.description : '',
       created_by: image ? image.created_by || { name: 'Usuario eliminado' } : user,
       updated_by: user.name,
-      resolution: image ? image.resolution ? image.resolution._id : resolutions[0]._id : resolutions[0]._id,
       category: image ? image.category ? image.category : '' : '',
       tags: image ? image.tags : [],
       created_at: image ? moment(image.created_at) : moment(),
@@ -36027,21 +36048,10 @@ var ImageForm = exports.ImageForm = function (_Component) {
       var _props = this.props,
           images = _props.images,
           image = _props.image;
-      // if in post mode get first free id value
-
-      if (!image) {
-        var identificaciones = images.map(function (i) {
-          return i.id;
-        }); // get all ids
-        var id = 1; // start from 1
-        while (identificaciones.indexOf(id) != -1) {
-          id++;
-        } // stop at first free id value
-      }
       // set state with initial values
+
       this.setState({
-        id: image ? image.id : id,
-        location: image ? '/images/' + image.id : '/images/' + id // Redirect url
+        location: image ? '/images/' + image._id : '/images' // Redirect url
       });
     }
 
@@ -36062,20 +36072,20 @@ var ImageForm = exports.ImageForm = function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      var _props2 = this.props,
+          _props2$data = _props2.data,
+          devices = _props2$data.devices,
+          images = _props2$data.images,
+          groups = _props2$data.groups,
+          displays = _props2$data.displays,
+          image = _props2.image;
+
       // Options
-      var optionsResolution = this.props.resolutions.sort(function (a, b) {
-        return a.id - b.id;
-      }).map(function (r, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: r._id, key: i },
-          r.name
-        );
-      });
-      var optionsGroups = this.props.groups.map(function (g) {
+
+      var optionsGroups = groups.map(function (g) {
         return _react2.default.createElement(
           'label',
-          { key: g.id, className: 'custom-control custom-checkbox' },
+          { key: g._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this2.handleCheckGroups, type: 'checkbox', defaultChecked: _this2.state.groups.find(function (c) {
               return c == g._id;
             }), name: g._id, defaultValue: g._id, className: 'custom-control-input' }),
@@ -36087,12 +36097,12 @@ var ImageForm = exports.ImageForm = function (_Component) {
           )
         );
       });
-      var optionsDisplays = this.props.displays.sort(function (a, b) {
-        return a.id - b.id;
+      var optionsDisplays = displays.sort(function (a, b) {
+        return a.updated_at - b.updated_at;
       }).map(function (d) {
         return _react2.default.createElement(
           'label',
-          { key: d.id, className: 'custom-control custom-checkbox' },
+          { key: d._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, type: 'checkbox', defaultChecked: _this2.state.displays.find(function (c) {
               return c == d._id;
             }), name: d._id, defaultValue: d._id, className: 'custom-control-input' }),
@@ -36121,7 +36131,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item mr-auto' },
-                this.props.image ? _react2.default.createElement(
+                image ? _react2.default.createElement(
                   'h2',
                   { className: 'detalles-titulo' },
                   _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
@@ -36136,7 +36146,7 @@ var ImageForm = exports.ImageForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item ml-2' },
-                this.props.image ? _react2.default.createElement(
+                image ? _react2.default.createElement(
                   'button',
                   { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-info' },
                   _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
@@ -36158,29 +36168,14 @@ var ImageForm = exports.ImageForm = function (_Component) {
               { id: 'form' },
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-1' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'imagenID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'imagenID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  'label',
+                  { htmlFor: 'nombre' },
+                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+                  'Nombre'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-11' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'nombre' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
               ),
               _react2.default.createElement(
                 'div',
@@ -36206,25 +36201,6 @@ var ImageForm = exports.ImageForm = function (_Component) {
                     'Categor\xEDa'
                   ),
                   _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: this.state.category, onChange: this.handleInputChange })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'resolucion' },
-                    _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
-                    'Resoluci\xF3n'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
-                      optionsResolution
-                    )
-                  )
                 ),
                 _react2.default.createElement(
                   'div',
@@ -36431,11 +36407,9 @@ var _initialiseProps = function _initialiseProps() {
     // define form values to send
 
     var form = {
-      id: _this3.state.id,
       name: _this3.state.name,
       description: _this3.state.description,
       updated_by: _this3.state.updated_by._id, // send user_id
-      resolution: _this3.state.resolution,
       category: _this3.state.category,
       tags: _this3.state.tags,
       color_profile: _this3.state.color,
@@ -36524,7 +36498,6 @@ var GroupForm = exports.GroupForm = function (_Component) {
 
     _this.state = {
       // form data stored in state
-      id: '',
       name: group ? group.name : '',
       description: group ? group.description : '',
       created_by: group ? group.created_by ? group.created_by : 'Usuario eliminado' : user,
@@ -36557,10 +36530,11 @@ var GroupForm = exports.GroupForm = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          groups = _props.groups,
-          images = _props.images; // Data from database
-
-      var group = this.props.group;
+          _props$data = _props.data,
+          displays = _props$data.displays,
+          devices = _props$data.devices,
+          images = _props$data.images,
+          group = _props.group;
       // options for select inputs
 
       var optionsActiveImage = images.filter(function (i) {
@@ -36570,25 +36544,14 @@ var GroupForm = exports.GroupForm = function (_Component) {
       }).map(function (i) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i.id },
+          { value: i._id, key: i._id },
           i.name
         );
       });
-      // if in post mode get first free id value
-      if (!group) {
-        var ids = groups.map(function (g) {
-          return g.id;
-        }); // get all ids
-        var id = 1; // start from 1
-        while (ids.indexOf(id) != -1) {
-          id++;
-        } // stop at first free id value
-      }
       // set state with initial values
       this.setState({
-        id: group ? group.id : id,
         optionsActiveImage: optionsActiveImage,
-        location: group ? '/groups/' + group.id : '/groups/' + id
+        location: group ? '/groups/' + group._id : '/groups/'
       });
     }
 
@@ -36605,22 +36568,22 @@ var GroupForm = exports.GroupForm = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var _props2 = this.props,
+          _props2$data = _props2.data,
+          devices = _props2$data.devices,
+          images = _props2$data.images,
+          groups = _props2$data.groups,
+          displays = _props2$data.displays,
+          group = _props2.group;
+
       // Options
-      var optionsResolution = this.props.resolutions.sort(function (a, b) {
-        return a.id - b.id;
-      }).map(function (r, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: r._id, key: i },
-          r.name
-        );
-      });
-      var optionsDisplays = this.props.displays.sort(function (a, b) {
-        return a.id - b.id;
+
+      var optionsDisplays = displays.sort(function (a, b) {
+        return a.updated_at - b.updated_at;
       }).map(function (d) {
         return _react2.default.createElement(
           'label',
-          { key: d.id, className: 'custom-control custom-checkbox' },
+          { key: d._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this3.handleCheckDisplays, type: 'checkbox', defaultChecked: _this3.state.displays.find(function (c) {
               return c == d._id;
             }), name: d._id, defaultValue: d._id, className: 'custom-control-input' }),
@@ -36632,12 +36595,12 @@ var GroupForm = exports.GroupForm = function (_Component) {
           )
         );
       });
-      var optionsImages = this.props.images.sort(function (a, b) {
-        return a.id - b.id;
+      var optionsImages = images.sort(function (a, b) {
+        return a.updated_at - b.updated_at;
       }).map(function (i) {
         return _react2.default.createElement(
           'label',
-          { key: i.id, className: 'custom-control custom-checkbox' },
+          { key: i._id, className: 'custom-control custom-checkbox' },
           _react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
               return c == i._id;
             }), name: i._id, defaultValue: i._id, className: 'custom-control-input' }),
@@ -36666,7 +36629,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item mr-auto' },
-                this.props.group ? _react2.default.createElement(
+                group ? _react2.default.createElement(
                   'h2',
                   { className: 'detalles-titulo' },
                   _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
@@ -36681,7 +36644,7 @@ var GroupForm = exports.GroupForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item ml-2' },
-                this.props.group ? _react2.default.createElement(
+                group ? _react2.default.createElement(
                   'button',
                   { onClick: function onClick() {
                       return _this3.handleSubmit();
@@ -36707,29 +36670,14 @@ var GroupForm = exports.GroupForm = function (_Component) {
               { id: 'form' },
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-1' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'groupID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'groupID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  'label',
+                  { htmlFor: 'name' },
+                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+                  'Nombre'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-11' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'name' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', value: this.state.name, onChange: this.handleInputChange, placeholder: 'Nombre del grupo' })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', value: this.state.name, onChange: this.handleInputChange, placeholder: 'Nombre del grupo' })
               ),
               _react2.default.createElement(
                 'div',
@@ -36744,45 +36692,22 @@ var GroupForm = exports.GroupForm = function (_Component) {
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'active_image' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Seleccionar la imagen activa'
-                  ),
-                  _react2.default.createElement(
-                    'select',
-                    { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
-                    _react2.default.createElement(
-                      'option',
-                      { value: '', key: 0 },
-                      'Sin imagen activa'
-                    ),
-                    this.state.optionsActiveImage
-                  )
+                  'label',
+                  { htmlFor: 'active_image' },
+                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+                  'Seleccionar la imagen activa'
                 ),
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
+                  'select',
+                  { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
                   _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'resolucion' },
-                    _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
-                    'Resoluci\xF3n'
+                    'option',
+                    { value: '', key: 0 },
+                    'Sin imagen activa'
                   ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
-                      optionsResolution
-                    )
-                  )
+                  this.state.optionsActiveImage
                 )
               ),
               _react2.default.createElement(
@@ -36968,7 +36893,7 @@ var _initialiseProps = function _initialiseProps() {
       }).map(function (i) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i.id },
+          { value: i._id, key: i._id },
           i.name
         );
       }) });
@@ -36980,13 +36905,10 @@ var _initialiseProps = function _initialiseProps() {
     // define form values to send
 
     var form = {
-      id: _this4.state.id,
       name: _this4.state.name,
       description: _this4.state.description,
       updated_by: _this4.state.updated_by._id, // send user_id
-      resolution: _this4.state.resolution,
-      tags: _this4.state.tags,
-      userGroup: _this4.props.userGroup._id
+      tags: _this4.state.tags
     };
     // possible empty fields
     if (!_this4.props.group) form.created_by = _this4.props.user._id;
@@ -36998,11 +36920,12 @@ var _initialiseProps = function _initialiseProps() {
       method: group ? 'put' : 'post',
       url: group ? group.url : 'http://localhost:4000/groups',
       data: form,
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this4.props.token }
     }).then(function (res) {
       if (res.status == 201) {
         _this4.props.notify('Grupo configurada con éxito', 'notify-success', 'check', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        return _this4.props.update(_this4.props.user); // update dataset
+        var action = group ? 'edit' : 'add';
+        return _this4.props.update('groups', res.resourceId, action, res.data.resource); // update dataset
       }
     }).then(function (res) {
       _this4.setState({ redirect: true });
@@ -37079,12 +37002,10 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
       updated_by: user.name,
       created_at: gateway ? moment(gateway.created_at) : moment(),
       updated_at: moment(),
-      mac_address: gateway ? gateway.mac_address : '',
-      ip_address: gateway ? gateway.ip_address : '',
+      mac: gateway ? gateway.mac : '',
+      port: gateway ? gateway.port : '',
+      ip: gateway ? gateway.ip : '',
       location: gateway ? gateway.location._id : locations[0]._id,
-      devices: gateway ? gateway.devices ? gateway.devices.map(function (d) {
-        return d._id;
-      }) : [] : [],
 
       redirect: false,
       redirect_location: '/gateways',
@@ -37102,26 +37023,15 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
       var _props = this.props,
           gateways = _props.gateways,
           gateway = _props.gateway;
-      // if in post mode get first free id value
-
-      if (!gateway) {
-        var identificaciones = gateways.map(function (d) {
-          return d.id;
-        }); // get all ids
-        var id = 1; // start from 1
-        while (identificaciones.indexOf(id) != -1) {
-          id++;
-        } // stop at first free id value
-      }
       // set state with initial values
+
       this.setState({
-        id: gateway ? gateway.id : id,
-        redirect_location: gateway ? '/gateways/' + gateway.id : '/gateways/' + id // Redirect url
+        redirect_location: gateway ? '/gateways/' + gateway._id : '/gateways' // Redirect url
       });
     }
 
     /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
-    // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
+
 
     /* HANDLE SUMBIT (PUT OR POST) */
 
@@ -37131,7 +37041,6 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
 
     /* RENDER COMPONENT */
     value: function render() {
-      var _this2 = this;
 
       // Options
       var optionsLocation = this.props.locations.sort(function (a, b) {
@@ -37141,21 +37050,6 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
           'option',
           { value: l._id, key: i },
           l.name
-        );
-      });
-      var optionsDevices = this.props.devices.map(function (d) {
-        return _react2.default.createElement(
-          'label',
-          { key: d._id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this2.handleCheckDevices, type: 'checkbox', defaultChecked: _this2.state.devices.find(function (c) {
-              return c == d._id;
-            }), name: d._id, defaultValue: d._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            d.name
-          )
         );
       });
 
@@ -37212,29 +37106,14 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
               { id: 'form' },
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-1' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'gatewayID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'gatewayID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  'label',
+                  { htmlFor: 'nombre' },
+                  _react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
+                  'Nombre'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-11' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'nombre' },
-                    _react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la puerta de enlace', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la puerta de enlace', name: 'name', value: this.state.name, onChange: this.handleInputChange })
               ),
               _react2.default.createElement(
                 'div',
@@ -37255,27 +37134,38 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
                   { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'mac_address' },
+                    { htmlFor: 'mac' },
                     _react2.default.createElement('i', { className: 'fa fa-server mr-2' }),
                     'Direcci\xF3n MAC'
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac_address', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac_address', value: this.state.mac_address, onChange: this.handleInputChange })
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac', value: this.state.mac, onChange: this.handleInputChange })
                 ),
                 _react2.default.createElement(
                   'div',
                   { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'ip_address' },
+                    { htmlFor: 'ip' },
                     _react2.default.createElement('i', { className: 'fa fa-wifi mr-2' }),
                     'Direcci\xF3n IP'
                   ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'ip_address', placeholder: 'Direcci\xF3n IP de la puerta de enlace', name: 'ip_address', value: this.state.ip_address, onChange: this.handleInputChange })
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'ip', placeholder: 'Direcci\xF3n IP de la puerta de enlace', name: 'ip', value: this.state.ip, onChange: this.handleInputChange })
                 )
               ),
               _react2.default.createElement(
                 'div',
                 { className: 'form-row' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group col' },
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'port' },
+                    _react2.default.createElement('i', { className: 'fa fa-exchange mr-2' }),
+                    'Puerto'
+                  ),
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'port', placeholder: 'Puerto de la puerta de enlace', name: 'mac', value: this.state.port, onChange: this.handleInputChange })
+                ),
                 _react2.default.createElement(
                   'div',
                   { className: 'form-group col' },
@@ -37293,25 +37183,6 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
                       { className: 'custom-select', name: 'location', onChange: this.handleInputChange },
                       optionsLocation
                     )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'devices' },
-                    _react2.default.createElement('i', { className: 'fa fa-tablet mr-2' }),
-                    'Asociar uno o varios dispositivos'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'custom-controls-stacked shadow' },
-                    optionsDevices
                   )
                 )
               ),
@@ -37363,55 +37234,32 @@ var GatewayForm = exports.GatewayForm = function (_Component) {
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this3 = this;
+  var _this2 = this;
 
   this.handleInputChange = function (event) {
     var target = event.target;
     var name = target.name;
     var value = target.value;
 
-    _this3.setState(_defineProperty({}, name, value));
-  };
-
-  this.handleCheckDevices = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this3.state.devices.find(function (d) {
-      return d == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this3.state.devices;
-      prevState.push(value);
-      _this3.setState({ devices: prevState });
-      target.checked = true;
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState = _this3.state.devices;
-      _prevState.splice(_prevState.indexOf(value), 1);
-      _this3.setState({ devices: _prevState });
-      target.checked = false;
-    }
+    _this2.setState(_defineProperty({}, name, value));
   };
 
   this.handleSubmit = function () {
-    var gateway = _this3.props.gateway;
+    var gateway = _this2.props.gateway;
     // define form values to send
 
     var form = {
-      id: _this3.state.id,
-      name: _this3.state.name,
-      description: _this3.state.description,
-      updated_by: _this3.state.updated_by._id, // send user_id
-      mac_address: _this3.state.mac_address,
-      ip_address: _this3.state.ip_address,
-      location: _this3.state.location
+      id: _this2.state.id,
+      name: _this2.state.name,
+      description: _this2.state.description,
+      updated_by: _this2.state.updated_by._id, // send user_id
+      mac: _this2.state.mac,
+      ip: _this2.state.ip,
+      port: _this2.state.port,
+      location: _this2.state.location
     };
     // possible empty fields
-    if (!_this3.props.gateway) form.created_by = _this3.props.user._id;
-    if (_this3.state.devices.length > 0) form.devices = _this3.state.devices;
+    if (!_this2.props.gateway) form.created_by = _this2.props.user._id;
     // HTTP request
     (0, _axios2.default)({
       method: gateway ? 'put' : 'post',
@@ -37419,16 +37267,16 @@ var _initialiseProps = function _initialiseProps() {
       data: form,
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
     }).then(function (res) {
-      if (res.status == 201) {
-        _this3.props.notify('Puerta de enlace configurada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        return _this3.props.update(_this3.props.user); // update dataset
+      if (res.status == 201 || res.status == 200) {
+        _this2.props.notify('Puerta de enlace configurada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+        return _this2.props.update(_this2.props.user); // update dataset
       }
     }).then(function (res) {
-      _this3.setState({ redirect: true });
+      _this2.setState({ redirect: true });
       return res;
     }).catch(function (err) {
       console.log(err);
-      return _this3.props.notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+      return _this2.props.notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
     });
   };
 };
@@ -37493,18 +37341,14 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
         userGroups = _this$props.userGroups;
 
     _this.state = {
-      id: device ? device.id : '',
-      name: device ? device.name : '',
-      description: device ? device.description : '',
-      created_by: device ? device.created_by ? device.created_by.name : 'Usuario eliminado' : user.name,
+      name: device.name,
+      description: device.description,
       updated_by: user.name,
-      created_at: device ? moment(device.created_at) : moment(),
+      created_at: moment(device.created_at),
       updated_at: moment(),
-      resolution: device ? device.resolution._id : resolutions[0]._id,
-      mac_address: device ? device.mac_address : '',
-      bt_address: device ? device.bt_address : '',
-      gateway: device ? device.gateway ? device.gateway._id : gateways[0]._id : gateways[0]._id,
-      userGroup: device ? device.userGroup._id : userGroups[0]._id,
+      mac: device.mac,
+      pref_gateway: device.pref_gateway ? device.pref_gateway._id : gateways[0]._id,
+      userGroup: device.userGroup ? device.userGroup._id : '',
 
       redirect: false,
       redirect_location: '/devices',
@@ -37522,21 +37366,10 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
       var _props = this.props,
           devices = _props.devices,
           device = _props.device;
-      // if in post mode get first free id value
-
-      if (!device) {
-        var identificaciones = devices.map(function (d) {
-          return d.id;
-        }); // get all ids
-        var id = 1; // start from 1
-        while (identificaciones.indexOf(id) != -1) {
-          id++;
-        } // stop at first free id value
-      }
       // set state with initial values
+
       this.setState({
-        id: device ? device.id : id,
-        redirect_location: device ? '/devices/' + device.id : '/devices/' + id // Redirect url
+        redirect_location: '/devices/' + device._id // Redirect url
       });
     }
 
@@ -37560,13 +37393,6 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
           g.name
         );
       });
-      var optionsResolution = this.props.resolutions.map(function (r, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: r._id, key: i },
-          r.name
-        );
-      });
       var optionsUserGroup = this.props.userGroups.map(function (u, i) {
         return _react2.default.createElement(
           'option',
@@ -37574,6 +37400,15 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
           u.name
         );
       });
+
+      var _props2 = this.props,
+          screens = _props2.screens,
+          device = _props2.device;
+
+      var screen = screens.find(function (r) {
+        return r.screen_code == device.screen;
+      });
+      var screen_name = screen.name || "No se encuentra la pantalla (código: " + device.screen + " )";
 
       // Render return
       if (this.state.redirect) {
@@ -37591,31 +37426,21 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item mr-auto' },
-                this.props.device ? _react2.default.createElement(
+                _react2.default.createElement(
                   'h2',
                   { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-                  'Editar un dispositivo f\xEDsico'
-                ) : _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-                  'A\xF1adir un nuevo dispositivo f\xEDsico'
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-pencil mr-3', 'aria-hidden': 'true' }),
+                  'Configurar un dispositivo f\xEDsico'
                 )
               ),
               _react2.default.createElement(
                 'li',
                 { className: 'nav-item ml-2' },
-                this.props.device ? _react2.default.createElement(
+                _react2.default.createElement(
                   'button',
                   { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                  _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+                  _react2.default.createElement('i', { className: 'fa  fa-fw fa-floppy-o mr-2', 'aria-hidden': 'true' }),
                   'Guardar cambios'
-                ) : _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
-                  'A\xF1adir'
                 )
               )
             )
@@ -37628,29 +37453,14 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
               { id: 'form' },
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-1' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'deviceID' },
-                    _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2' }),
-                    'ID'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'deviceID', placeholder: 'ID', name: 'id', value: this.state.id, readOnly: true })
+                  'label',
+                  { htmlFor: 'nombre' },
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-tablet mr-2' }),
+                  'Nombre'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-11' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'nombre' },
-                    _react2.default.createElement('i', { className: 'fa fa-tablet mr-2' }),
-                    'Nombre'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del dispositivo f\xEDsico', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del dispositivo f\xEDsico', name: 'name', value: this.state.name, onChange: this.handleInputChange })
               ),
               _react2.default.createElement(
                 'div',
@@ -37658,36 +37468,21 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                 _react2.default.createElement(
                   'label',
                   { htmlFor: 'descripcion' },
-                  _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2' }),
                   'Descripcion'
                 ),
                 _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
               ),
               _react2.default.createElement(
                 'div',
-                { className: 'form-row' },
+                { className: 'form-group' },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'mac_address' },
-                    _react2.default.createElement('i', { className: 'fa fa-server mr-2' }),
-                    'Direcci\xF3n MAC'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac_address', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac_address', value: this.state.mac_address, onChange: this.handleInputChange })
+                  'label',
+                  { htmlFor: 'mac' },
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2' }),
+                  'Direcci\xF3n MAC'
                 ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'bt_address' },
-                    _react2.default.createElement('i', { className: 'fa fa-bluetooth-b mr-2' }),
-                    'Direcci\xF3n BT'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'bt_address', placeholder: 'Direcci\xF3n BT de la puerta de enlace', name: 'bt_address', value: this.state.bt_address, onChange: this.handleInputChange })
-                )
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac', value: this.state.mac, readOnly: true })
               ),
               _react2.default.createElement(
                 'div',
@@ -37697,19 +37492,11 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                   { className: 'form-group col' },
                   _react2.default.createElement(
                     'label',
-                    { htmlFor: 'resolution' },
-                    _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
-                    'Resoluci\xF3n'
+                    { htmlFor: 'screen' },
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-tint mr-2' }),
+                    'Pantalla'
                   ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'resolution', value: this.state.resolution, onChange: this.handleInputChange },
-                      optionsResolution
-                    )
-                  )
+                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'screen', name: 'screen', value: screen_name, readOnly: true })
                 ),
                 _react2.default.createElement(
                   'div',
@@ -37717,15 +37504,15 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                   _react2.default.createElement(
                     'label',
                     { htmlFor: 'gateway' },
-                    _react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
-                    'Puerta de enlace'
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-sitemap mr-2' }),
+                    'Puerta de enlace preferida'
                   ),
                   _react2.default.createElement(
                     'div',
                     null,
                     _react2.default.createElement(
                       'select',
-                      { className: 'custom-select', name: 'gateway', value: this.state.gateway, onChange: this.handleInputChange },
+                      { className: 'custom-select', name: 'gateway', value: this.state.pref_gateway, onChange: this.handleInputChange },
                       optionsGateway
                     )
                   )
@@ -37737,7 +37524,7 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                 _react2.default.createElement(
                   'label',
                   { htmlFor: 'userGroup' },
-                  _react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-users mr-2' }),
                   'Grupo de gesti\xF3n del dispositivo'
                 ),
                 _react2.default.createElement(
@@ -37746,6 +37533,11 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                   _react2.default.createElement(
                     'select',
                     { className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
+                    _react2.default.createElement(
+                      'option',
+                      { value: '', key: '0' },
+                      'Ninguno seleccionado'
+                    ),
                     optionsUserGroup
                   )
                 )
@@ -37755,11 +37547,11 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                 { className: 'form-group' },
                 _react2.default.createElement(
                   'label',
-                  { htmlFor: 'created_by' },
-                  _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-                  'Creador'
+                  { htmlFor: 'updated_by' },
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2' }),
+                  'Ultima modificaci\xF3n por'
                 ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'created_by', name: 'created_by', value: this.state.created_by, readOnly: true })
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'updated_by', name: 'updated_by', value: this.state.updated_by, readOnly: true })
               ),
               _react2.default.createElement(
                 'div',
@@ -37770,7 +37562,7 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                   _react2.default.createElement(
                     'label',
                     { htmlFor: 'fechaCreacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2' }),
                     'Fecha de creaci\xF3n'
                   ),
                   _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
@@ -37781,7 +37573,7 @@ var DeviceForm = exports.DeviceForm = function (_Component) {
                   _react2.default.createElement(
                     'label',
                     { htmlFor: 'fechaModificacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                    _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2' }),
                     'Fecha de modificaci\xF3n'
                   ),
                   _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
@@ -37813,26 +37605,21 @@ var _initialiseProps = function _initialiseProps() {
     // define form values to send
 
     var form = {
-      id: _this2.state.id,
       name: _this2.state.name,
       description: _this2.state.description,
       updated_by: _this2.state.updated_by._id, // send user_id
-      gateway: _this2.state.gateway,
-      resolution: _this2.state.resolution,
-      mac_address: _this2.state.mac_address,
-      bt_address: _this2.state.bt_address,
-      userGroup: _this2.state.userGroup
+      pref_gateway: _this2.state.pref_gateway,
+      mac: _this2.state.mac
     };
-    // possible empty fields
-    if (!_this2.props.device) form.created_by = _this2.props.user._id;
+    if (_this2.state.userGroup) form.userGroup = _this2.state.userGroup;
     // HTTP request
     (0, _axios2.default)({
-      method: device ? 'put' : 'post',
-      url: device ? device.url : 'http://localhost:4000/devices',
+      method: 'put',
+      url: device.url,
       data: form,
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
     }).then(function (res) {
-      if (res.status == 201) {
+      if (res.status == 201 || res.status == 200) {
         _this2.props.notify('Dispositivo configurado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
         return _this2.props.update(_this2.props.user); // update dataset
       }
@@ -37864,7 +37651,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _icon = __webpack_require__(23);
+var _icon = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37872,12 +37659,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /* IMPORT MODULES */
 var Notification = exports.Notification = function Notification(_ref) {
   var text = _ref.text,
-      icon = _ref.icon;
+      icon = _ref.icon,
+      spin = _ref.spin;
 
   return _react2.default.createElement(
     'div',
-    null,
-    _react2.default.createElement(_icon.Icon, { icon: icon, mr: '2', ml: '1' }),
+    { className: 'text-center' },
+    _react2.default.createElement(_icon.Icon, { icon: icon, mr: '1', spin: spin }),
     ' ',
     text
   );
@@ -40431,18 +40219,19 @@ var App = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.login = function (user, token) {
-      _this.setState({ isLoggedIn: true, user: user, token: token });
+    _this.login = function (user, token, data) {
+      _this.setState({ isLoggedIn: true, user: user, token: token, data: data });
     };
 
     _this.logout = function () {
-      _this.setState({ isLoggedIn: false, user: null, token: null });
+      _this.setState({ isLoggedIn: false, user: null, token: null, data: null });
     };
 
     _this.state = {
       // user data
       user: null,
       token: null,
+      data: null,
       // login flag
       isLoggedIn: false,
       // eror handling
@@ -40530,9 +40319,9 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var _assign = __webpack_require__(11);
-var invariant = __webpack_require__(18);
+var invariant = __webpack_require__(19);
 var emptyObject = __webpack_require__(26);
-var warning = __webpack_require__(15);
+var warning = __webpack_require__(16);
 var emptyFunction = __webpack_require__(13);
 var checkPropTypes = __webpack_require__(29);
 
@@ -42171,8 +41960,8 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var React = __webpack_require__(1);
-var invariant = __webpack_require__(18);
-var warning = __webpack_require__(15);
+var invariant = __webpack_require__(19);
+var warning = __webpack_require__(16);
 var ExecutionEnvironment = __webpack_require__(41);
 var _assign = __webpack_require__(11);
 var emptyFunction$1 = __webpack_require__(13);
@@ -57711,8 +57500,8 @@ BrowserRouter.propTypes = {
 
 
 var emptyFunction = __webpack_require__(13);
-var invariant = __webpack_require__(18);
-var warning = __webpack_require__(15);
+var invariant = __webpack_require__(19);
+var warning = __webpack_require__(16);
 var assign = __webpack_require__(11);
 
 var ReactPropTypesSecret = __webpack_require__(30);
@@ -58261,7 +58050,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 var emptyFunction = __webpack_require__(13);
-var invariant = __webpack_require__(18);
+var invariant = __webpack_require__(19);
 var ReactPropTypesSecret = __webpack_require__(30);
 
 module.exports = function() {
@@ -58334,7 +58123,7 @@ var _invariant2 = _interopRequireDefault(_invariant);
 
 var _LocationUtils = __webpack_require__(31);
 
-var _PathUtils = __webpack_require__(19);
+var _PathUtils = __webpack_require__(20);
 
 var _createTransitionManager = __webpack_require__(32);
 
@@ -58711,7 +58500,7 @@ var _invariant2 = _interopRequireDefault(_invariant);
 
 var _LocationUtils = __webpack_require__(31);
 
-var _PathUtils = __webpack_require__(19);
+var _PathUtils = __webpack_require__(20);
 
 var _createTransitionManager = __webpack_require__(32);
 
@@ -59115,7 +58904,7 @@ var _warning = __webpack_require__(7);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _PathUtils = __webpack_require__(19);
+var _PathUtils = __webpack_require__(20);
 
 var _LocationUtils = __webpack_require__(31);
 
@@ -60031,7 +59820,7 @@ Redirect.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(27);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(21);
 /* unused harmony reexport parsePath */
 /* unused harmony reexport createPath */
 
@@ -60054,7 +59843,7 @@ Redirect.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(55);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -60358,7 +60147,7 @@ var createBrowserHistory = function createBrowserHistory() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(55);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -60676,7 +60465,7 @@ var createHashHistory = function createHashHistory() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(36);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -60861,7 +60650,7 @@ var createMemoryHistory = function createMemoryHistory() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history_PathUtils__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history_PathUtils__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history_PathUtils___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_history_PathUtils__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Router__ = __webpack_require__(34);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -61301,17 +61090,23 @@ var _reactCookie = __webpack_require__(56);
 
 var _reactCookie2 = _interopRequireDefault(_reactCookie);
 
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _reactToastify = __webpack_require__(6);
 
-var _glamor = __webpack_require__(16);
+var _glamor = __webpack_require__(17);
 
 var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _navigation = __webpack_require__(285);
+var _enviroment = __webpack_require__(287);
 
-var _content = __webpack_require__(287);
+var _navigation = __webpack_require__(288);
+
+var _content = __webpack_require__(290);
 
 var _notification = __webpack_require__(189);
 
@@ -61325,11 +61120,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* CONFIGURE AXIOS */
-_axios2.default.defaults.baseURL = 'http://localhost:4000';
+_axios2.default.defaults.baseURL = _enviroment.env.API_URL;
 
 /* IMPORT COMPONENTS */
 
-/* COMPONENTS */
+/* COMPONENT */
 var Main = exports.Main = function (_Component) {
   _inherits(Main, _Component);
 
@@ -61338,46 +61133,61 @@ var Main = exports.Main = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-    _this.update = function (user, notify) {
-      // if admin get all the resources needed from the database
-      if (user.admin) {
-        return _axios2.default.all([(0, _axios2.default)('/users'), (0, _axios2.default)('/devices'), (0, _axios2.default)('/gateways'), (0, _axios2.default)('userGroups'), (0, _axios2.default)('/locations'), (0, _axios2.default)('/resolutions')]).then(_axios2.default.spread(function (users, devices, gateways, userGroups, locations, resolutions) {
-          _this.setState({
-            users: users.data,
-            devices: devices.data,
-            gateways: gateways.data,
-            userGroups: userGroups.data,
-            locations: locations.data,
-            resolutions: resolutions.data,
-            isLoaded: true
+    _this.update = function (resource, _id, action, data, devices) {
+      var stateData = _this.state.data;
+      switch (action) {
+        case 'remove':
+          var index = stateData[resource].findIndex(function (r) {
+            return r._id == _id;
           });
-        })).then(function () {
-          return notify && _this.notify('Datos cargados', 'notify-success', 'download', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        }).catch(function () {
-          return _this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        });
-        // else get resources within the userGroup
-      } else {
-        return _axios2.default.all([(0, _axios2.default)(user.userGroup.url), (0, _axios2.default)('/resolutions')]).then(_axios2.default.spread(function (res, resolutions) {
-          _this.setState({
-            userGroup: res.data,
-            displays: res.data.displays, // set displays that the user can manage
-            images: res.data.images, // set images that the user can manage
-            groups: res.data.groups, // set groups that the user can manage
-            devices: res.data.devices, // set devices that the user can manage
-            resolutions: resolutions.data,
-            isLoaded: true
+          stateData[resource].splice(index, 1);
+          devices && (stateData['devices'] = devices);
+          break;
+        case 'add':
+          stateData[resource].push(data);
+          devices && (stateData['devices'] = devices);
+          break;
+        case 'edit':
+          var index = stateData[resource].findIndex(function (r) {
+            return r._id == _id;
           });
-        })).then(function () {
-          return notify && _this.notify('Datos cargados', 'notify-success', 'download', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        }).catch(function () {
-          return _this.notify('Error al cargar datos', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        });
+          stateData[resource].splice(index, 1, data);
+          devices && (stateData['devices'] = devices);
+          break;
       }
+      _this.setState({ data: stateData });
+    };
+
+    _this.sync_api = function (token) {
+      _this.setState({ sync_status: 3, last_synced: (0, _moment2.default)() }); //syncing
+      _this.notify_sync('Buscando dispositivos...', 'notify-success', 'refresh');
+      _axios2.default.get('/update', { timeout: _enviroment.env.TIMEOUT, headers: { Authorization: 'Bearer ' + token } }).then(function (res) {
+        _this.update_sync('Pulse para sincronizar', 'notify-success', 'link', false);
+        _this.setState({ synced_devices: res.data, sync_status: 1, last_synced: (0, _moment2.default)() }); //synced_ready
+      }).catch(function (err) {
+        _this.update_sync('Error en la búsqueda', 'notify-error', 'times', true);
+        _this.setState({ syncing: false, sync_status: 0 }); //unsynced
+      });
+    };
+
+    _this.sync = function () {
+      var devices = _this.state.synced_devices;
+      var data = _this.state.data;
+      data.devices = devices;
+      _this.update_sync('Datos sincronizados', 'notify-success', 'check', true);
+      _this.setState({ data: data, sync_status: 2 }); //synced
     };
 
     _this.filterData = function (value) {
       _this.setState({ filterValue: value });
+    };
+
+    _this.filterFound = function () {
+      // get value from the checkbox
+      console.log('called');
+      var filterFoundValue = _this.state.filterFoundValue;
+
+      _this.setState({ filterFoundValue: !filterFoundValue });
     };
 
     _this.notify = function (text, style, icon, position) {
@@ -61387,30 +61197,49 @@ var Main = exports.Main = function (_Component) {
       });
     };
 
+    _this.notify_sync = function (text, style, icon) {
+      _this.toast_sync_id = (0, _reactToastify.toast)(_react2.default.createElement(_notification.Notification, { text: text, icon: icon, spin: true }), {
+        position: _reactToastify.toast.POSITION.TOP_CENTER,
+        autoClose: false,
+        className: style
+      });
+    };
+
+    _this.update_sync = function (text, style, icon, autoClose) {
+      _reactToastify.toast.update(_this.toast_sync_id, {
+        render: _react2.default.createElement(_notification.Notification, { text: text, icon: icon }),
+        position: _reactToastify.toast.POSITION.TOP_CENTER,
+        autoClose: autoClose,
+        className: style,
+        onClose: function onClose() {
+          _this.state.sync_status == 1 && _this.sync();
+        }
+      });
+    };
+
+    _this.dismiss = function () {
+      _this.toast_sync_id && _reactToastify.toast.dismiss(_this.toast_sync_id);
+    };
+
     _this.state = {
       // active user
       user: null,
-      // userGroup data
-      userGroup: null,
-      // admin data
-      resolutions: null,
-      locations: null,
-      gateways: null,
-      devices: null,
-      userGroups: null,
-      // user data
-      displays: null,
-      images: null,
-      groups: null,
+      token: null,
+      // data
+      data: [],
+      // sync
+      synced_devices: [],
+      sync_status: 0, // 0: unsynced; 1: sync_ready; 2: synced; 3: syncing
+      last_synced: null,
       // search value
       filterValue: '',
+      filterFoundValue: true,
       // others
       userID: _reactCookie2.default.load('userID'),
       isLoaded: false,
       isLoggedIn: false,
       error: null,
-      redirect: false,
-      location: ''
+      redirect: false
     };
     return _this;
   }
@@ -61421,18 +61250,35 @@ var Main = exports.Main = function (_Component) {
   _createClass(Main, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       // get user id and token
       var _props = this.props,
           user = _props.user,
-          token = _props.token;
+          token = _props.token,
+          data = _props.data;
       // set user id and token
 
-      this.setState({ user: user, token: token, isLoggedIn: true });
-      // get data
-      this.update(user, true);
+      this.setState({ user: user, token: token, data: data, isLoggedIn: true, isLoaded: true });
+      // sync
+      this.sync_api(token);
+      // check syncronization
+      this.check_sync_id = setInterval(function () {
+        if (_this2.state.last_synced && (0, _moment2.default)().diff(_this2.state.last_synced, 'seconds') > 20 && _this2.state.sync_status != 1) {
+          _this2.setState({ sync_status: 0 }); //unsynced
+        }
+      }, 1000);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearInterval(this.check_sync_id);
     }
 
     /* UPDATE DATA */
+
+
+    /* SYNC DATA */
 
 
     /* HANDLE SEARCH */
@@ -61450,8 +61296,8 @@ var Main = exports.Main = function (_Component) {
         'div',
         { className: 'row main' },
         _react2.default.createElement(_reactToastify.ToastContainer, { closeButton: false, hideProgressBar: true }),
-        _react2.default.createElement(_navigation.Navigation, _extends({ filterData: this.filterData, update: this.update }, this.state)),
-        _react2.default.createElement(_content.Content, _extends({ update: this.update, notify: this.notify }, this.state))
+        _react2.default.createElement(_navigation.Navigation, _extends({ filterData: this.filterData, update: this.update, sync: this.sync, sync_api: this.sync_api }, this.state)),
+        _react2.default.createElement(_content.Content, _extends({ filterFound: this.filterFound, update: this.update, notify: this.notify }, this.state))
       );
     }
   }]);
@@ -61677,6 +61523,292 @@ exports = module.exports = !!(typeof process !== 'undefined' && process.versions
 
 /***/ }),
 /* 233 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./af": 57,
+	"./af.js": 57,
+	"./ar": 58,
+	"./ar-dz": 59,
+	"./ar-dz.js": 59,
+	"./ar-kw": 60,
+	"./ar-kw.js": 60,
+	"./ar-ly": 61,
+	"./ar-ly.js": 61,
+	"./ar-ma": 62,
+	"./ar-ma.js": 62,
+	"./ar-sa": 63,
+	"./ar-sa.js": 63,
+	"./ar-tn": 64,
+	"./ar-tn.js": 64,
+	"./ar.js": 58,
+	"./az": 65,
+	"./az.js": 65,
+	"./be": 66,
+	"./be.js": 66,
+	"./bg": 67,
+	"./bg.js": 67,
+	"./bm": 68,
+	"./bm.js": 68,
+	"./bn": 69,
+	"./bn.js": 69,
+	"./bo": 70,
+	"./bo.js": 70,
+	"./br": 71,
+	"./br.js": 71,
+	"./bs": 72,
+	"./bs.js": 72,
+	"./ca": 73,
+	"./ca.js": 73,
+	"./cs": 74,
+	"./cs.js": 74,
+	"./cv": 75,
+	"./cv.js": 75,
+	"./cy": 76,
+	"./cy.js": 76,
+	"./da": 77,
+	"./da.js": 77,
+	"./de": 78,
+	"./de-at": 79,
+	"./de-at.js": 79,
+	"./de-ch": 80,
+	"./de-ch.js": 80,
+	"./de.js": 78,
+	"./dv": 81,
+	"./dv.js": 81,
+	"./el": 82,
+	"./el.js": 82,
+	"./en-au": 83,
+	"./en-au.js": 83,
+	"./en-ca": 84,
+	"./en-ca.js": 84,
+	"./en-gb": 85,
+	"./en-gb.js": 85,
+	"./en-ie": 86,
+	"./en-ie.js": 86,
+	"./en-nz": 87,
+	"./en-nz.js": 87,
+	"./eo": 88,
+	"./eo.js": 88,
+	"./es": 89,
+	"./es-do": 90,
+	"./es-do.js": 90,
+	"./es-us": 91,
+	"./es-us.js": 91,
+	"./es.js": 89,
+	"./et": 92,
+	"./et.js": 92,
+	"./eu": 93,
+	"./eu.js": 93,
+	"./fa": 94,
+	"./fa.js": 94,
+	"./fi": 95,
+	"./fi.js": 95,
+	"./fo": 96,
+	"./fo.js": 96,
+	"./fr": 97,
+	"./fr-ca": 98,
+	"./fr-ca.js": 98,
+	"./fr-ch": 99,
+	"./fr-ch.js": 99,
+	"./fr.js": 97,
+	"./fy": 100,
+	"./fy.js": 100,
+	"./gd": 101,
+	"./gd.js": 101,
+	"./gl": 102,
+	"./gl.js": 102,
+	"./gom-latn": 103,
+	"./gom-latn.js": 103,
+	"./gu": 104,
+	"./gu.js": 104,
+	"./he": 105,
+	"./he.js": 105,
+	"./hi": 106,
+	"./hi.js": 106,
+	"./hr": 107,
+	"./hr.js": 107,
+	"./hu": 108,
+	"./hu.js": 108,
+	"./hy-am": 109,
+	"./hy-am.js": 109,
+	"./id": 110,
+	"./id.js": 110,
+	"./is": 111,
+	"./is.js": 111,
+	"./it": 112,
+	"./it.js": 112,
+	"./ja": 113,
+	"./ja.js": 113,
+	"./jv": 114,
+	"./jv.js": 114,
+	"./ka": 115,
+	"./ka.js": 115,
+	"./kk": 116,
+	"./kk.js": 116,
+	"./km": 117,
+	"./km.js": 117,
+	"./kn": 118,
+	"./kn.js": 118,
+	"./ko": 119,
+	"./ko.js": 119,
+	"./ky": 120,
+	"./ky.js": 120,
+	"./lb": 121,
+	"./lb.js": 121,
+	"./lo": 122,
+	"./lo.js": 122,
+	"./lt": 123,
+	"./lt.js": 123,
+	"./lv": 124,
+	"./lv.js": 124,
+	"./me": 125,
+	"./me.js": 125,
+	"./mi": 126,
+	"./mi.js": 126,
+	"./mk": 127,
+	"./mk.js": 127,
+	"./ml": 128,
+	"./ml.js": 128,
+	"./mr": 129,
+	"./mr.js": 129,
+	"./ms": 130,
+	"./ms-my": 131,
+	"./ms-my.js": 131,
+	"./ms.js": 130,
+	"./my": 132,
+	"./my.js": 132,
+	"./nb": 133,
+	"./nb.js": 133,
+	"./ne": 134,
+	"./ne.js": 134,
+	"./nl": 135,
+	"./nl-be": 136,
+	"./nl-be.js": 136,
+	"./nl.js": 135,
+	"./nn": 137,
+	"./nn.js": 137,
+	"./pa-in": 138,
+	"./pa-in.js": 138,
+	"./pl": 139,
+	"./pl.js": 139,
+	"./pt": 140,
+	"./pt-br": 141,
+	"./pt-br.js": 141,
+	"./pt.js": 140,
+	"./ro": 142,
+	"./ro.js": 142,
+	"./ru": 143,
+	"./ru.js": 143,
+	"./sd": 144,
+	"./sd.js": 144,
+	"./se": 145,
+	"./se.js": 145,
+	"./si": 146,
+	"./si.js": 146,
+	"./sk": 147,
+	"./sk.js": 147,
+	"./sl": 148,
+	"./sl.js": 148,
+	"./sq": 149,
+	"./sq.js": 149,
+	"./sr": 150,
+	"./sr-cyrl": 151,
+	"./sr-cyrl.js": 151,
+	"./sr.js": 150,
+	"./ss": 152,
+	"./ss.js": 152,
+	"./sv": 153,
+	"./sv.js": 153,
+	"./sw": 154,
+	"./sw.js": 154,
+	"./ta": 155,
+	"./ta.js": 155,
+	"./te": 156,
+	"./te.js": 156,
+	"./tet": 157,
+	"./tet.js": 157,
+	"./th": 158,
+	"./th.js": 158,
+	"./tl-ph": 159,
+	"./tl-ph.js": 159,
+	"./tlh": 160,
+	"./tlh.js": 160,
+	"./tr": 161,
+	"./tr.js": 161,
+	"./tzl": 162,
+	"./tzl.js": 162,
+	"./tzm": 163,
+	"./tzm-latn": 164,
+	"./tzm-latn.js": 164,
+	"./tzm.js": 163,
+	"./uk": 165,
+	"./uk.js": 165,
+	"./ur": 166,
+	"./ur.js": 166,
+	"./uz": 167,
+	"./uz-latn": 168,
+	"./uz-latn.js": 168,
+	"./uz.js": 167,
+	"./vi": 169,
+	"./vi.js": 169,
+	"./x-pseudo": 170,
+	"./x-pseudo.js": 170,
+	"./yo": 171,
+	"./yo.js": 171,
+	"./zh-cn": 172,
+	"./zh-cn.js": 172,
+	"./zh-hk": 173,
+	"./zh-hk.js": 173,
+	"./zh-tw": 174,
+	"./zh-tw.js": 174
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 234;
+
+/***/ }),
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61700,35 +61832,35 @@ var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _glamor = __webpack_require__(16);
+var _glamor = __webpack_require__(17);
 
-var _TransitionGroup = __webpack_require__(257);
+var _TransitionGroup = __webpack_require__(259);
 
 var _TransitionGroup2 = _interopRequireDefault(_TransitionGroup);
 
-var _Toast = __webpack_require__(259);
+var _Toast = __webpack_require__(261);
 
 var _Toast2 = _interopRequireDefault(_Toast);
 
-var _DefaultCloseButton = __webpack_require__(261);
+var _DefaultCloseButton = __webpack_require__(263);
 
 var _DefaultCloseButton2 = _interopRequireDefault(_DefaultCloseButton);
 
-var _DefaultTransition = __webpack_require__(262);
+var _DefaultTransition = __webpack_require__(264);
 
 var _DefaultTransition2 = _interopRequireDefault(_DefaultTransition);
 
-var _constant = __webpack_require__(22);
+var _constant = __webpack_require__(23);
 
 var _style = __webpack_require__(28);
 
 var _style2 = _interopRequireDefault(_style);
 
-var _EventManager = __webpack_require__(60);
+var _EventManager = __webpack_require__(178);
 
 var _EventManager2 = _interopRequireDefault(_EventManager);
 
-var _propValidator = __webpack_require__(59);
+var _propValidator = __webpack_require__(177);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -62113,7 +62245,7 @@ ToastContainer.defaultProps = {
 exports.default = ToastContainer;
 
 /***/ }),
-/* 234 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62352,7 +62484,7 @@ function StyleSheet() {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 235 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62362,11 +62494,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _CSSProperty = __webpack_require__(236);
+var _CSSProperty = __webpack_require__(238);
 
 var _CSSProperty2 = _interopRequireDefault(_CSSProperty);
 
-var _warning = __webpack_require__(15);
+var _warning = __webpack_require__(16);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -62449,7 +62581,7 @@ exports.default = dangerousStyleValue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 236 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62609,7 +62741,7 @@ var CSSProperty = {
 exports.default = CSSProperty;
 
 /***/ }),
-/* 237 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62642,7 +62774,7 @@ function memoizeStringOnly(callback) {
 module.exports = memoizeStringOnly;
 
 /***/ }),
-/* 238 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62702,7 +62834,7 @@ function clean(input) {
 }
 
 /***/ }),
-/* 239 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62723,9 +62855,9 @@ var _objectAssign = __webpack_require__(11);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _CSSPropertyOperations = __webpack_require__(57);
+var _CSSPropertyOperations = __webpack_require__(175);
 
-var _prefixer = __webpack_require__(240);
+var _prefixer = __webpack_require__(242);
 
 var _prefixer2 = _interopRequireDefault(_prefixer);
 
@@ -62815,7 +62947,7 @@ function prefixes(node) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 240 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62826,55 +62958,55 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = prefixer;
 
-var _staticData = __webpack_require__(241);
+var _staticData = __webpack_require__(243);
 
 var _staticData2 = _interopRequireDefault(_staticData);
 
-var _prefixProperty = __webpack_require__(242);
+var _prefixProperty = __webpack_require__(244);
 
 var _prefixProperty2 = _interopRequireDefault(_prefixProperty);
 
-var _prefixValue = __webpack_require__(243);
+var _prefixValue = __webpack_require__(245);
 
 var _prefixValue2 = _interopRequireDefault(_prefixValue);
 
-var _cursor = __webpack_require__(244);
+var _cursor = __webpack_require__(246);
 
 var _cursor2 = _interopRequireDefault(_cursor);
 
-var _crossFade = __webpack_require__(245);
+var _crossFade = __webpack_require__(247);
 
 var _crossFade2 = _interopRequireDefault(_crossFade);
 
-var _filter = __webpack_require__(246);
+var _filter = __webpack_require__(248);
 
 var _filter2 = _interopRequireDefault(_filter);
 
-var _flex = __webpack_require__(247);
+var _flex = __webpack_require__(249);
 
 var _flex2 = _interopRequireDefault(_flex);
 
-var _flexboxOld = __webpack_require__(248);
+var _flexboxOld = __webpack_require__(250);
 
 var _flexboxOld2 = _interopRequireDefault(_flexboxOld);
 
-var _gradient = __webpack_require__(249);
+var _gradient = __webpack_require__(251);
 
 var _gradient2 = _interopRequireDefault(_gradient);
 
-var _imageSet = __webpack_require__(250);
+var _imageSet = __webpack_require__(252);
 
 var _imageSet2 = _interopRequireDefault(_imageSet);
 
-var _position = __webpack_require__(251);
+var _position = __webpack_require__(253);
 
 var _position2 = _interopRequireDefault(_position);
 
-var _sizing = __webpack_require__(252);
+var _sizing = __webpack_require__(254);
 
 var _sizing2 = _interopRequireDefault(_sizing);
 
-var _transition = __webpack_require__(253);
+var _transition = __webpack_require__(255);
 
 var _transition2 = _interopRequireDefault(_transition);
 
@@ -62902,7 +63034,7 @@ function prefixer(style) {
 }
 
 /***/ }),
-/* 241 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62926,7 +63058,7 @@ exports.default = {
 module.exports = exports["default"];
 
 /***/ }),
-/* 242 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62937,7 +63069,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = prefixProperty;
 
-var _capitalizeString = __webpack_require__(58);
+var _capitalizeString = __webpack_require__(176);
 
 var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
 
@@ -62954,7 +63086,7 @@ function prefixProperty(prefixProperties, property, style) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 243 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62978,7 +63110,7 @@ function prefixValue(plugins, property, value, style, metaData) {
 module.exports = exports["default"];
 
 /***/ }),
-/* 244 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63007,7 +63139,7 @@ function cursor(property, value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 245 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63018,7 +63150,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = crossFade;
 
-var _isPrefixedValue = __webpack_require__(21);
+var _isPrefixedValue = __webpack_require__(22);
 
 var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 
@@ -63036,7 +63168,7 @@ function crossFade(property, value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 246 */
+/* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63047,7 +63179,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = filter;
 
-var _isPrefixedValue = __webpack_require__(21);
+var _isPrefixedValue = __webpack_require__(22);
 
 var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 
@@ -63065,7 +63197,7 @@ function filter(property, value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 247 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63088,7 +63220,7 @@ function flex(property, value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 248 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63133,7 +63265,7 @@ function flexboxOld(property, value, style) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 249 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63144,7 +63276,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = gradient;
 
-var _isPrefixedValue = __webpack_require__(21);
+var _isPrefixedValue = __webpack_require__(22);
 
 var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 
@@ -63164,7 +63296,7 @@ function gradient(property, value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 250 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63175,7 +63307,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = imageSet;
 
-var _isPrefixedValue = __webpack_require__(21);
+var _isPrefixedValue = __webpack_require__(22);
 
 var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 
@@ -63193,7 +63325,7 @@ function imageSet(property, value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 251 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63211,7 +63343,7 @@ function position(property, value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 252 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63250,7 +63382,7 @@ function sizing(property, value) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 253 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63261,15 +63393,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = transition;
 
-var _hyphenateProperty = __webpack_require__(254);
+var _hyphenateProperty = __webpack_require__(256);
 
 var _hyphenateProperty2 = _interopRequireDefault(_hyphenateProperty);
 
-var _isPrefixedValue = __webpack_require__(21);
+var _isPrefixedValue = __webpack_require__(22);
 
 var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 
-var _capitalizeString = __webpack_require__(58);
+var _capitalizeString = __webpack_require__(176);
 
 var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
 
@@ -63349,7 +63481,7 @@ function transition(property, value, style, propertyPrefixMap) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 254 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63360,7 +63492,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = hyphenateProperty;
 
-var _hyphenateStyleName = __webpack_require__(255);
+var _hyphenateStyleName = __webpack_require__(257);
 
 var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
 
@@ -63372,7 +63504,7 @@ function hyphenateProperty(property) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 255 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63395,7 +63527,7 @@ module.exports = hyphenateStyleName;
 
 
 /***/ }),
-/* 256 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63471,7 +63603,7 @@ function Umul32(n, m) {
 }
 
 /***/ }),
-/* 257 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63489,7 +63621,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ChildMapping = __webpack_require__(258);
+var _ChildMapping = __webpack_require__(260);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63768,7 +63900,7 @@ module.exports = exports['default'];
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 258 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63863,7 +63995,7 @@ function mergeChildMappings(prev, next) {
 }
 
 /***/ }),
-/* 259 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63885,19 +64017,19 @@ var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _glamor = __webpack_require__(16);
+var _glamor = __webpack_require__(17);
 
-var _ProgressBar = __webpack_require__(260);
+var _ProgressBar = __webpack_require__(262);
 
 var _ProgressBar2 = _interopRequireDefault(_ProgressBar);
 
-var _constant = __webpack_require__(22);
+var _constant = __webpack_require__(23);
 
 var _style = __webpack_require__(28);
 
 var _style2 = _interopRequireDefault(_style);
 
-var _propValidator = __webpack_require__(59);
+var _propValidator = __webpack_require__(177);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64086,7 +64218,7 @@ Toast.defaultProps = {
 exports.default = Toast;
 
 /***/ }),
-/* 260 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64106,9 +64238,9 @@ var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _glamor = __webpack_require__(16);
+var _glamor = __webpack_require__(17);
 
-var _constant = __webpack_require__(22);
+var _constant = __webpack_require__(23);
 
 var _style = __webpack_require__(28);
 
@@ -64191,7 +64323,7 @@ ProgressBar.defaultProps = {
 exports.default = ProgressBar;
 
 /***/ }),
-/* 261 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64212,7 +64344,7 @@ var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _glamor = __webpack_require__(16);
+var _glamor = __webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64256,7 +64388,7 @@ DefaultCloseButton.propTypes = {
 exports.default = DefaultCloseButton;
 
 /***/ }),
-/* 262 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64272,13 +64404,13 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Transition = __webpack_require__(263);
+var _Transition = __webpack_require__(265);
 
 var _Transition2 = _interopRequireDefault(_Transition);
 
-var _glamor = __webpack_require__(16);
+var _glamor = __webpack_require__(17);
 
-var _animation2 = __webpack_require__(265);
+var _animation2 = __webpack_require__(267);
 
 var _animation3 = _interopRequireDefault(_animation2);
 
@@ -64339,7 +64471,7 @@ function DefaultTransition(_ref) {
 exports.default = DefaultTransition;
 
 /***/ }),
-/* 263 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64360,7 +64492,7 @@ var _reactDom = __webpack_require__(40);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _PropTypes = __webpack_require__(264);
+var _PropTypes = __webpack_require__(266);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64903,7 +65035,7 @@ exports.default = Transition;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 264 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64957,7 +65089,7 @@ var classNamesShape = exports.classNamesShape = _propTypes2.default.oneOfType([_
 })]);
 
 /***/ }),
-/* 265 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64968,7 +65100,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = getAnimation;
 
-var _constant = __webpack_require__(22);
+var _constant = __webpack_require__(23);
 
 function getAnimation(pos) {
   switch (pos) {
@@ -65113,7 +65245,7 @@ function getAnimation(pos) {
 }
 
 /***/ }),
-/* 266 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65125,11 +65257,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _EventManager = __webpack_require__(60);
+var _EventManager = __webpack_require__(178);
 
 var _EventManager2 = _interopRequireDefault(_EventManager);
 
-var _constant = __webpack_require__(22);
+var _constant = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65242,15 +65374,15 @@ _EventManager2.default.on(_constant.ACTION.MOUNTED, function (containerInstance)
 exports.default = toaster;
 
 /***/ }),
-/* 267 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(9);
-var bind = __webpack_require__(61);
-var Axios = __webpack_require__(269);
+var bind = __webpack_require__(179);
+var Axios = __webpack_require__(271);
 var defaults = __webpack_require__(37);
 
 /**
@@ -65284,15 +65416,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(65);
-axios.CancelToken = __webpack_require__(283);
-axios.isCancel = __webpack_require__(64);
+axios.Cancel = __webpack_require__(183);
+axios.CancelToken = __webpack_require__(285);
+axios.isCancel = __webpack_require__(182);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(284);
+axios.spread = __webpack_require__(286);
 
 module.exports = axios;
 
@@ -65301,7 +65433,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 268 */
+/* 270 */
 /***/ (function(module, exports) {
 
 /*!
@@ -65328,7 +65460,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 269 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65336,8 +65468,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(37);
 var utils = __webpack_require__(9);
-var InterceptorManager = __webpack_require__(278);
-var dispatchRequest = __webpack_require__(279);
+var InterceptorManager = __webpack_require__(280);
+var dispatchRequest = __webpack_require__(281);
 
 /**
  * Create a new instance of Axios
@@ -65414,7 +65546,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 270 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65433,13 +65565,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 271 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(63);
+var createError = __webpack_require__(181);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -65466,7 +65598,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 272 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65494,7 +65626,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 273 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65569,7 +65701,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 274 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65629,7 +65761,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 275 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65704,7 +65836,7 @@ module.exports = (
 
 
 /***/ }),
-/* 276 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65747,7 +65879,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 277 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65807,7 +65939,7 @@ module.exports = (
 
 
 /***/ }),
-/* 278 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65866,18 +65998,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 279 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(9);
-var transformData = __webpack_require__(280);
-var isCancel = __webpack_require__(64);
+var transformData = __webpack_require__(282);
+var isCancel = __webpack_require__(182);
 var defaults = __webpack_require__(37);
-var isAbsoluteURL = __webpack_require__(281);
-var combineURLs = __webpack_require__(282);
+var isAbsoluteURL = __webpack_require__(283);
+var combineURLs = __webpack_require__(284);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -65959,7 +66091,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 280 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65986,7 +66118,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 281 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66007,7 +66139,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 282 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66028,13 +66160,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 283 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(65);
+var Cancel = __webpack_require__(183);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -66092,7 +66224,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 284 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66126,7 +66258,22 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 285 */
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+var env = exports.env = {
+   API_URL: 'http://localhost:4000/', // api url for the requests
+   TIMEOUT: '30000' // timeout for sync request which can take up to 30 seconds
+};
+
+/***/ }),
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66145,7 +66292,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _navButton = __webpack_require__(286);
+var _navButton = __webpack_require__(289);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66192,12 +66339,15 @@ var Navigation = exports.Navigation = function (_Component) {
 
       // get
       var _props = this.props,
-          displays = _props.displays,
-          images = _props.images,
-          groups = _props.groups,
+          _props$data = _props.data,
+          displays = _props$data.displays,
+          images = _props$data.images,
+          groups = _props$data.groups,
+          devices = _props$data.devices,
+          gateways = _props$data.gateways,
           user = _props.user,
-          devices = _props.devices,
-          gateways = _props.gateways;
+          sync_status = _props.sync_status,
+          token = _props.token;
 
       var navigationUser = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "displays", text: "Displays", icon: "television", count: true, number: displays ? displays.length + '/' + devices.length : '...' }, { exact: false, linkTo: "images", text: "Imagenes", icon: "picture-o", count: true, number: images ? images.length : '...' }, { exact: false, linkTo: "groups", text: "Grupos", icon: "list", count: true, number: groups ? groups.length : '...' }];
 
@@ -66208,6 +66358,69 @@ var Navigation = exports.Navigation = function (_Component) {
       }) : navigationUser.map(function (nav, i) {
         return _react2.default.createElement(_navButton.NavButton, { key: i, exact: nav.exact, linkTo: nav.linkTo, text: nav.text, icon: nav.icon, count: nav.count, number: nav.number });
       });
+
+      switch (sync_status) {
+        case 0:
+          //unsynced
+          var sync_button = _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this2.props.sync_api(token);
+                }, type: 'button', className: 'btn btn-nav btn-block mb-1' },
+              _react2.default.createElement('i', { className: 'fa fa-refresh mr-2', 'aria-hidden': 'true' }),
+              ' Buscar dispositivos'
+            )
+          );
+          break;
+        case 1:
+          //sync_ready
+          var sync_button = _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this2.props.sync();
+                }, type: 'button', className: 'btn btn-nav btn-block mb-1' },
+              _react2.default.createElement('i', { className: 'fa fa-link mr-2', 'aria-hidden': 'true' }),
+              ' Sincronizar'
+            )
+          );
+          break;
+        case 2:
+          //synced
+          var sync_button = _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this2.props.sync();
+                }, type: 'button', className: 'btn btn-nav btn-block mb-1' },
+              _react2.default.createElement('i', { className: 'fa fa-check mr-2', 'aria-hidden': 'true' }),
+              ' Sincronizado'
+            )
+          );
+          break;
+        case 3:
+          //syncing
+          var sync_button = _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this2.props.sync_api(token);
+                }, type: 'button', className: 'btn btn-nav btn-block mb-1', disabled: true },
+              _react2.default.createElement('i', { className: 'fa fa-refresh fa-spin mr-2', 'aria-hidden': 'true' }),
+              ' Sincronizando'
+            )
+          );
+          break;
+      }
 
       return _react2.default.createElement(
         'div',
@@ -66263,20 +66476,6 @@ var Navigation = exports.Navigation = function (_Component) {
               _react2.default.createElement(
                 'ul',
                 { className: 'nav-list' },
-                user && !user.admin && _react2.default.createElement(
-                  _reactRouterDom.NavLink,
-                  { to: '' },
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn btn-nav btn-block mb-1', disabled: true },
-                      _react2.default.createElement('i', { className: 'fa fa-clock-o mr-2', 'aria-hidden': 'true' }),
-                      ' Temporizadores'
-                    )
-                  )
-                ),
                 _react2.default.createElement(
                   _reactRouterDom.NavLink,
                   { to: '/docs' },
@@ -66319,18 +66518,7 @@ var Navigation = exports.Navigation = function (_Component) {
                     )
                   )
                 ),
-                _react2.default.createElement(
-                  'li',
-                  null,
-                  _react2.default.createElement(
-                    'button',
-                    { onClick: function onClick() {
-                        return _this2.props.update(user, true);
-                      }, type: 'button', className: 'btn btn-nav btn-block mb-1' },
-                    _react2.default.createElement('i', { className: 'fa fa-refresh mr-2', 'aria-hidden': 'true' }),
-                    ' Actualizar'
-                  )
-                )
+                sync_button
               )
             )
           ),
@@ -66341,7 +66529,7 @@ var Navigation = exports.Navigation = function (_Component) {
             _react2.default.createElement(
               'span',
               null,
-              'v0.1.4'
+              'v0.1.5'
             ),
             _react2.default.createElement(
               'span',
@@ -66357,10 +66545,8 @@ var Navigation = exports.Navigation = function (_Component) {
   return Navigation;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 286 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66377,7 +66563,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _icon = __webpack_require__(23);
+var _icon = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66417,7 +66603,7 @@ var NavButton = exports.NavButton = function NavButton(_ref) {
 };
 
 /***/ }),
-/* 287 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66428,7 +66614,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Content = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
@@ -66436,7 +66622,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _contentDisplays = __webpack_require__(288);
+var _contentDisplays = __webpack_require__(291);
 
 var _contentImages = __webpack_require__(301);
 
@@ -66446,96 +66632,69 @@ var _contentAccount = __webpack_require__(315);
 
 var _contentSettings = __webpack_require__(316);
 
-var _contentDocs = __webpack_require__(326);
+var _contentDocs = __webpack_require__(325);
 
-var _contentGateways = __webpack_require__(327);
+var _contentGateways = __webpack_require__(326);
 
-var _contentDevices = __webpack_require__(332);
+var _contentDevices = __webpack_require__(331);
 
-var _overview = __webpack_require__(337);
+var _overview = __webpack_require__(336);
+
+var _protectedRoute = __webpack_require__(338);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /* IMPORT MODULES */
 
 
 /* IMPORT COMPONENTS */
 
 
-/* COMPONENTS */
-var Content = exports.Content = function (_Component) {
-  _inherits(Content, _Component);
+/* COMPONENT */
+var Content = function Content(_ref) {
+  var isLoaded = _ref.isLoaded,
+      rest = _objectWithoutProperties(_ref, ['isLoaded']);
 
-  function Content() {
-    _classCallCheck(this, Content);
-
-    return _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).apply(this, arguments));
+  if (isLoaded) {
+    return _react2.default.createElement(
+      'div',
+      { className: 'col content' },
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+          return _react2.default.createElement(_overview.Overview, rest);
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/displays', render: function render() {
+          return _react2.default.createElement(_contentDisplays.ContentDisplays, rest);
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/images', render: function render() {
+          return _react2.default.createElement(_contentImages.ContentImages, rest);
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/groups', render: function render() {
+          return _react2.default.createElement(_contentGroups.ContentGroups, rest);
+        } }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/docs', render: function render() {
+          return _react2.default.createElement(_contentDocs.ContentDocs, rest);
+        } }),
+      _react2.default.createElement(_protectedRoute.ProtectedRoute, _extends({}, rest, { path: '/settings', component: _contentSettings.ContentSettings })),
+      _react2.default.createElement(_protectedRoute.ProtectedRoute, _extends({}, rest, { path: '/devices', component: _contentDevices.ContentDevices })),
+      _react2.default.createElement(_protectedRoute.ProtectedRoute, _extends({}, rest, { path: '/gateways', component: _contentGateways.ContentGateways }))
+    );
+  } else {
+    return _react2.default.createElement(
+      'div',
+      { className: 'col text-center d-flex align-items-center justify-content-center' },
+      _react2.default.createElement(
+        'h1',
+        null,
+        _react2.default.createElement('i', { className: 'fa fa-circle-o-notch fa-spin fa-fw mr-4' }),
+        'Cargando'
+      )
+    );
   }
-
-  _createClass(Content, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      if (this.props.isLoaded) {
-        var content = _react2.default.createElement(
-          'div',
-          { className: 'col content' },
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-              return _react2.default.createElement(_overview.Overview, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/displays', render: function render() {
-              return _react2.default.createElement(_contentDisplays.ContentDisplays, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/images', render: function render() {
-              return _react2.default.createElement(_contentImages.ContentImages, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/groups', render: function render() {
-              return _react2.default.createElement(_contentGroups.ContentGroups, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/account', render: function render() {
-              return _react2.default.createElement(_contentAccount.ContentAccount, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/settings', render: function render() {
-              return _react2.default.createElement(_contentSettings.ContentSettings, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/docs', render: function render() {
-              return _react2.default.createElement(_contentDocs.ContentDocs, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways', render: function render() {
-              return _react2.default.createElement(_contentGateways.ContentGateways, _this2.props);
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/devices', render: function render() {
-              return _react2.default.createElement(_contentDevices.ContentDevices, _this2.props);
-            } })
-        );
-      } else {
-        var content = _react2.default.createElement(
-          'div',
-          { className: 'col text-center d-flex align-items-center justify-content-center' },
-          _react2.default.createElement(
-            'h1',
-            { className: 'text-secondary' },
-            _react2.default.createElement('i', { className: 'fa fa-circle-o-notch fa-spin fa-fw mr-4' }),
-            'Cargando'
-          )
-        );
-      }
-      return content;
-    }
-  }]);
-
-  return Content;
-}(_react.Component);
-
-;
+};
+exports.Content = Content;
 
 /***/ }),
-/* 288 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66554,13 +66713,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _list = __webpack_require__(17);
+var _list = __webpack_require__(18);
 
 var _title = __webpack_require__(12);
 
 var _displayForm = __webpack_require__(184);
 
-var _displayRouter = __webpack_require__(296);
+var _displayRouter = __webpack_require__(297);
 
 var _displayGeneric = __webpack_require__(300);
 
@@ -66574,9 +66733,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentDisplays = function ContentDisplays(_ref) {
-  var displays = _ref.displays,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['displays', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      props = _objectWithoutProperties(_ref, ['filterValue']);
+
+  var displays = props.data.displays;
+
 
   return _react2.default.createElement(
     'div',
@@ -66621,12 +66782,12 @@ var ContentDisplays = function ContentDisplays(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/add', render: function render() {
-                  return _react2.default.createElement(_displayForm.DisplayForm, _extends({}, other, { displays: displays }));
+                  return _react2.default.createElement(_displayForm.DisplayForm, _extends({}, props, { displays: displays }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_displayRouter.DisplayRouter, _extends({}, other, { display: displays.find(function (d) {
-                      return d.id == match.params.displayId;
+                  return _react2.default.createElement(_displayRouter.DisplayRouter, _extends({}, props, { display: displays.find(function (d) {
+                      return d._id == match.params.displayId;
                     }) }));
                 } })
             ),
@@ -66642,7 +66803,7 @@ var ContentDisplays = function ContentDisplays(_ref) {
 exports.ContentDisplays = ContentDisplays;
 
 /***/ }),
-/* 289 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66668,8 +66829,8 @@ var cx = __webpack_require__(8);
 /* COMPONENT */
 var Display = exports.Display = function Display(_ref) {
   var display = _ref.display;
-  var url = display.url,
-      id = display.id,
+  var _id = display._id,
+      url = display.url,
       name = display.name,
       description = display.description,
       tags_total = display.tags_total,
@@ -66679,7 +66840,7 @@ var Display = exports.Display = function Display(_ref) {
   var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
   var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   var location = {
-    pathname: '/displays/' + id
+    pathname: '/displays/' + _id
   };
   return _react2.default.createElement(
     'div',
@@ -66706,388 +66867,7 @@ var Display = exports.Display = function Display(_ref) {
             'small',
             null,
             _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
-            id
-          )
-        ),
-        _react2.default.createElement('hr', { className: 'element-division' }),
-        _react2.default.createElement(
-          'p',
-          { className: 'mb-3 mt-2' },
-          description
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'd-flex w-100 justify-content-between mt-3' },
-          _react2.default.createElement(
-            'small',
-            null,
-            _react2.default.createElement('i', { className: tagsClass, 'aria-hidden': 'true' }),
-            tags_total
-          ),
-          _react2.default.createElement(
-            'small',
-            null,
-            updated,
-            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
-          )
-        )
-      )
-    )
-  );
-};
-
-/***/ }),
-/* 290 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 291 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./af": 66,
-	"./af.js": 66,
-	"./ar": 67,
-	"./ar-dz": 68,
-	"./ar-dz.js": 68,
-	"./ar-kw": 69,
-	"./ar-kw.js": 69,
-	"./ar-ly": 70,
-	"./ar-ly.js": 70,
-	"./ar-ma": 71,
-	"./ar-ma.js": 71,
-	"./ar-sa": 72,
-	"./ar-sa.js": 72,
-	"./ar-tn": 73,
-	"./ar-tn.js": 73,
-	"./ar.js": 67,
-	"./az": 74,
-	"./az.js": 74,
-	"./be": 75,
-	"./be.js": 75,
-	"./bg": 76,
-	"./bg.js": 76,
-	"./bm": 77,
-	"./bm.js": 77,
-	"./bn": 78,
-	"./bn.js": 78,
-	"./bo": 79,
-	"./bo.js": 79,
-	"./br": 80,
-	"./br.js": 80,
-	"./bs": 81,
-	"./bs.js": 81,
-	"./ca": 82,
-	"./ca.js": 82,
-	"./cs": 83,
-	"./cs.js": 83,
-	"./cv": 84,
-	"./cv.js": 84,
-	"./cy": 85,
-	"./cy.js": 85,
-	"./da": 86,
-	"./da.js": 86,
-	"./de": 87,
-	"./de-at": 88,
-	"./de-at.js": 88,
-	"./de-ch": 89,
-	"./de-ch.js": 89,
-	"./de.js": 87,
-	"./dv": 90,
-	"./dv.js": 90,
-	"./el": 91,
-	"./el.js": 91,
-	"./en-au": 92,
-	"./en-au.js": 92,
-	"./en-ca": 93,
-	"./en-ca.js": 93,
-	"./en-gb": 94,
-	"./en-gb.js": 94,
-	"./en-ie": 95,
-	"./en-ie.js": 95,
-	"./en-nz": 96,
-	"./en-nz.js": 96,
-	"./eo": 97,
-	"./eo.js": 97,
-	"./es": 98,
-	"./es-do": 99,
-	"./es-do.js": 99,
-	"./es-us": 100,
-	"./es-us.js": 100,
-	"./es.js": 98,
-	"./et": 101,
-	"./et.js": 101,
-	"./eu": 102,
-	"./eu.js": 102,
-	"./fa": 103,
-	"./fa.js": 103,
-	"./fi": 104,
-	"./fi.js": 104,
-	"./fo": 105,
-	"./fo.js": 105,
-	"./fr": 106,
-	"./fr-ca": 107,
-	"./fr-ca.js": 107,
-	"./fr-ch": 108,
-	"./fr-ch.js": 108,
-	"./fr.js": 106,
-	"./fy": 109,
-	"./fy.js": 109,
-	"./gd": 110,
-	"./gd.js": 110,
-	"./gl": 111,
-	"./gl.js": 111,
-	"./gom-latn": 112,
-	"./gom-latn.js": 112,
-	"./gu": 113,
-	"./gu.js": 113,
-	"./he": 114,
-	"./he.js": 114,
-	"./hi": 115,
-	"./hi.js": 115,
-	"./hr": 116,
-	"./hr.js": 116,
-	"./hu": 117,
-	"./hu.js": 117,
-	"./hy-am": 118,
-	"./hy-am.js": 118,
-	"./id": 119,
-	"./id.js": 119,
-	"./is": 120,
-	"./is.js": 120,
-	"./it": 121,
-	"./it.js": 121,
-	"./ja": 122,
-	"./ja.js": 122,
-	"./jv": 123,
-	"./jv.js": 123,
-	"./ka": 124,
-	"./ka.js": 124,
-	"./kk": 125,
-	"./kk.js": 125,
-	"./km": 126,
-	"./km.js": 126,
-	"./kn": 127,
-	"./kn.js": 127,
-	"./ko": 128,
-	"./ko.js": 128,
-	"./ky": 129,
-	"./ky.js": 129,
-	"./lb": 130,
-	"./lb.js": 130,
-	"./lo": 131,
-	"./lo.js": 131,
-	"./lt": 132,
-	"./lt.js": 132,
-	"./lv": 133,
-	"./lv.js": 133,
-	"./me": 134,
-	"./me.js": 134,
-	"./mi": 135,
-	"./mi.js": 135,
-	"./mk": 136,
-	"./mk.js": 136,
-	"./ml": 137,
-	"./ml.js": 137,
-	"./mr": 138,
-	"./mr.js": 138,
-	"./ms": 139,
-	"./ms-my": 140,
-	"./ms-my.js": 140,
-	"./ms.js": 139,
-	"./my": 141,
-	"./my.js": 141,
-	"./nb": 142,
-	"./nb.js": 142,
-	"./ne": 143,
-	"./ne.js": 143,
-	"./nl": 144,
-	"./nl-be": 145,
-	"./nl-be.js": 145,
-	"./nl.js": 144,
-	"./nn": 146,
-	"./nn.js": 146,
-	"./pa-in": 147,
-	"./pa-in.js": 147,
-	"./pl": 148,
-	"./pl.js": 148,
-	"./pt": 149,
-	"./pt-br": 150,
-	"./pt-br.js": 150,
-	"./pt.js": 149,
-	"./ro": 151,
-	"./ro.js": 151,
-	"./ru": 152,
-	"./ru.js": 152,
-	"./sd": 153,
-	"./sd.js": 153,
-	"./se": 154,
-	"./se.js": 154,
-	"./si": 155,
-	"./si.js": 155,
-	"./sk": 156,
-	"./sk.js": 156,
-	"./sl": 157,
-	"./sl.js": 157,
-	"./sq": 158,
-	"./sq.js": 158,
-	"./sr": 159,
-	"./sr-cyrl": 160,
-	"./sr-cyrl.js": 160,
-	"./sr.js": 159,
-	"./ss": 161,
-	"./ss.js": 161,
-	"./sv": 162,
-	"./sv.js": 162,
-	"./sw": 163,
-	"./sw.js": 163,
-	"./ta": 164,
-	"./ta.js": 164,
-	"./te": 165,
-	"./te.js": 165,
-	"./tet": 166,
-	"./tet.js": 166,
-	"./th": 167,
-	"./th.js": 167,
-	"./tl-ph": 168,
-	"./tl-ph.js": 168,
-	"./tlh": 169,
-	"./tlh.js": 169,
-	"./tr": 170,
-	"./tr.js": 170,
-	"./tzl": 171,
-	"./tzl.js": 171,
-	"./tzm": 172,
-	"./tzm-latn": 173,
-	"./tzm-latn.js": 173,
-	"./tzm.js": 172,
-	"./uk": 174,
-	"./uk.js": 174,
-	"./ur": 175,
-	"./ur.js": 175,
-	"./uz": 176,
-	"./uz-latn": 177,
-	"./uz-latn.js": 177,
-	"./uz.js": 176,
-	"./vi": 178,
-	"./vi.js": 178,
-	"./x-pseudo": 179,
-	"./x-pseudo.js": 179,
-	"./yo": 180,
-	"./yo.js": 180,
-	"./zh-cn": 181,
-	"./zh-cn.js": 181,
-	"./zh-hk": 182,
-	"./zh-hk.js": 182,
-	"./zh-tw": 183,
-	"./zh-tw.js": 183
-};
-function webpackContext(req) {
-	return __webpack_require__(webpackContextResolve(req));
-};
-function webpackContextResolve(req) {
-	var id = map[req];
-	if(!(id + 1)) // check for number or string
-		throw new Error("Cannot find module '" + req + "'.");
-	return id;
-};
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 291;
-
-/***/ }),
-/* 292 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Image = undefined;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
-var cx = __webpack_require__(8);
-
-/* COMPONENT */
-var Image = exports.Image = function Image(_ref) {
-  var image = _ref.image;
-  var url = image.url,
-      id = image.id,
-      name = image.name,
-      description = image.description,
-      tags_total = image.tags_total,
-      updated_at = image.updated_at;
-
-  var updated = moment(updated_at).from(moment());
-  var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
-  var location = {
-    pathname: '/images/' + id
-  };
-  return _react2.default.createElement(
-    'div',
-    { className: elementClass },
-    _react2.default.createElement(
-      _reactRouterDom.NavLink,
-      { to: location },
-      _react2.default.createElement(
-        'div',
-        { className: 'elemento elemento-imagen' },
-        _react2.default.createElement(
-          'div',
-          { className: 'd-flex w-100 justify-content-between' },
-          _react2.default.createElement(
-            'h5',
-            { className: 'w-75' },
-            _react2.default.createElement(
-              'strong',
-              null,
-              name
-            )
-          ),
-          _react2.default.createElement(
-            'small',
-            null,
-            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
-            id
+            '?'
           )
         ),
         _react2.default.createElement('hr', { className: 'element-division' }),
@@ -67127,7 +66907,7 @@ var Image = exports.Image = function Image(_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Group = undefined;
+exports.Image = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -67142,20 +66922,20 @@ var moment = __webpack_require__(0);moment.locale('es');
 var cx = __webpack_require__(8);
 
 /* COMPONENT */
-var Group = exports.Group = function Group(_ref) {
-  var group = _ref.group;
-  var url = group.url,
-      id = group.id,
-      name = group.name,
-      description = group.description,
-      tags_total = group.tags_total,
-      updated_at = group.updated_at;
+var Image = exports.Image = function Image(_ref) {
+  var image = _ref.image;
+  var _id = image._id,
+      url = image.url,
+      name = image.name,
+      description = image.description,
+      tags_total = image.tags_total,
+      updated_at = image.updated_at;
 
   var updated = moment(updated_at).from(moment());
   var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
   var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   var location = {
-    pathname: '/groups/' + id
+    pathname: '/images/' + _id
   };
   return _react2.default.createElement(
     'div',
@@ -67165,7 +66945,7 @@ var Group = exports.Group = function Group(_ref) {
       { to: location },
       _react2.default.createElement(
         'div',
-        { className: 'elemento elemento-grupo' },
+        { className: 'elemento elemento-imagen' },
         _react2.default.createElement(
           'div',
           { className: 'd-flex w-100 justify-content-between' },
@@ -67182,7 +66962,7 @@ var Group = exports.Group = function Group(_ref) {
             'small',
             null,
             _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
-            id
+            '?'
           )
         ),
         _react2.default.createElement('hr', { className: 'element-division' }),
@@ -67222,7 +67002,7 @@ var Group = exports.Group = function Group(_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Device = undefined;
+exports.Group = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -67237,20 +67017,123 @@ var moment = __webpack_require__(0);moment.locale('es');
 var cx = __webpack_require__(8);
 
 /* COMPONENT */
-var Device = exports.Device = function Device(_ref) {
-  var device = _ref.device;
-  var url = device.url,
-      id = device.id,
-      name = device.name,
-      description = device.description,
-      bt_address = device.bt_address,
-      mac_address = device.mac_address,
-      created_at = device.created_at;
+var Group = exports.Group = function Group(_ref) {
+  var group = _ref.group;
+  var _id = group._id,
+      url = group.url,
+      name = group.name,
+      description = group.description,
+      tags_total = group.tags_total,
+      updated_at = group.updated_at;
 
-  var created = moment(device.created_at).from(moment());
+  var updated = moment(updated_at).from(moment());
+  var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
   var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   var location = {
-    pathname: '/devices/' + id
+    pathname: '/groups/' + _id
+  };
+  return _react2.default.createElement(
+    'div',
+    { className: elementClass },
+    _react2.default.createElement(
+      _reactRouterDom.NavLink,
+      { to: location },
+      _react2.default.createElement(
+        'div',
+        { className: 'elemento elemento-grupo' },
+        _react2.default.createElement(
+          'div',
+          { className: 'd-flex w-100 justify-content-between' },
+          _react2.default.createElement(
+            'h5',
+            { className: 'w-75' },
+            _react2.default.createElement(
+              'strong',
+              null,
+              name
+            )
+          ),
+          _react2.default.createElement(
+            'small',
+            null,
+            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
+            '?'
+          )
+        ),
+        _react2.default.createElement('hr', { className: 'element-division' }),
+        _react2.default.createElement(
+          'p',
+          { className: 'mb-3 mt-2' },
+          description
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'd-flex w-100 justify-content-between mt-3' },
+          _react2.default.createElement(
+            'small',
+            null,
+            _react2.default.createElement('i', { className: tagsClass, 'aria-hidden': 'true' }),
+            tags_total
+          ),
+          _react2.default.createElement(
+            'small',
+            null,
+            updated,
+            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
+          )
+        )
+      )
+    )
+  );
+};
+
+/***/ }),
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Device = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(2);
+
+var _icon = __webpack_require__(14);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* IMPORT MODULES */
+var moment = __webpack_require__(0);moment.locale('es');
+var cx = __webpack_require__(8);
+
+/* IMPORT COMPONENTS */
+
+
+/* COMPONENT */
+var Device = exports.Device = function Device(_ref) {
+  var device = _ref.device;
+  var _id = device._id,
+      url = device.url,
+      name = device.name,
+      description = device.description,
+      batt = device.batt,
+      rssi = device.rssi,
+      found = device.found,
+      mac = device.mac,
+      updated_at = device.updated_at,
+      created_at = device.created_at;
+
+  var updated = moment(updated_at).from(moment());
+  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
+  var location = {
+    pathname: '/devices/' + _id
   };
   return _react2.default.createElement(
     'div',
@@ -67276,8 +67159,8 @@ var Device = exports.Device = function Device(_ref) {
           _react2.default.createElement(
             'small',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-bluetooth-b mr-1', 'aria-hidden': 'true' }),
-            bt_address
+            found ? _react2.default.createElement(_icon.Icon, { icon: 'battery', fw: 'true', mr: '1', batt: batt }) : _react2.default.createElement(_icon.Icon, { icon: 'chain-broken', fw: 'true', mr: '1' }),
+            found ? batt : ""
           )
         ),
         _react2.default.createElement('hr', { className: 'element-division' }),
@@ -67293,12 +67176,12 @@ var Device = exports.Device = function Device(_ref) {
             'small',
             null,
             _react2.default.createElement('i', { className: 'fa fa-server mr-1', 'aria-hidden': 'true' }),
-            mac_address
+            mac
           ),
           _react2.default.createElement(
             'small',
             null,
-            created,
+            updated,
             _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
           )
         )
@@ -67308,7 +67191,7 @@ var Device = exports.Device = function Device(_ref) {
 };
 
 /***/ }),
-/* 295 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67334,18 +67217,18 @@ var cx = __webpack_require__(8);
 /* COMPONENT */
 var Gateway = exports.Gateway = function Gateway(_ref) {
   var gateway = _ref.gateway;
-  var url = gateway.url,
-      id = gateway.id,
+  var _id = gateway._id,
+      url = gateway.url,
       name = gateway.name,
       description = gateway.description,
-      ip_address = gateway.ip_address,
-      mac_address = gateway.mac_address,
+      ip = gateway.ip,
+      mac = gateway.mac,
       created_at = gateway.created_at;
 
   var created = moment(gateway.created_at).from(moment());
   var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   var location = {
-    pathname: '/gateways/' + id
+    pathname: '/gateways/' + _id
   };
   return _react2.default.createElement(
     'div',
@@ -67373,7 +67256,7 @@ var Gateway = exports.Gateway = function Gateway(_ref) {
             null,
             _react2.default.createElement('i', { className: 'fa fa-wifi mr-1', 'aria-hidden': 'true' }),
             ' ',
-            ip_address
+            ip
           )
         ),
         _react2.default.createElement('hr', { className: 'element-division' }),
@@ -67390,7 +67273,7 @@ var Gateway = exports.Gateway = function Gateway(_ref) {
             null,
             _react2.default.createElement('i', { className: 'fa fa-server mr-1', 'aria-hidden': 'true' }),
             ' ',
-            mac_address
+            mac
           ),
           _react2.default.createElement(
             'small',
@@ -67405,7 +67288,7 @@ var Gateway = exports.Gateway = function Gateway(_ref) {
 };
 
 /***/ }),
-/* 296 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67430,13 +67313,11 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _displayDetails = __webpack_require__(297);
+var _displayDetails = __webpack_require__(298);
 
 var _displayForm = __webpack_require__(184);
 
-var _displayDelete = __webpack_require__(298);
-
-var _displayLoading = __webpack_require__(299);
+var _displayDelete = __webpack_require__(299);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67450,7 +67331,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /* IMPORT COMPONENTS */
 
 
-/* COMPONENTS */
+/* COMPONENT */
 var DisplayRouter = exports.DisplayRouter = function (_Component) {
   _inherits(DisplayRouter, _Component);
 
@@ -67476,7 +67357,7 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.display) {
-        _axios2.default.get(this.props.display.url).then(function (display) {
+        _axios2.default.get(this.props.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
           // resolve callback
           _this2.setState({ display: display.data, isLoaded: true });
         }, function (error) {
@@ -67495,7 +67376,7 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
 
       if (nextProps.display && (nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.display.url).then(function (display) {
+        _axios2.default.get(nextProps.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
           // resolve callback
           _this3.setState({ display: display.data, isLoaded: true });
         }, function (error) {
@@ -67519,7 +67400,7 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
         // TODO: error handling
         return null;
       } else if (!isLoaded) {
-        return _react2.default.createElement(_displayLoading.DisplayLoading, null);
+        return null;
       } else {
         return _react2.default.createElement(
           _reactRouterDom.Switch,
@@ -67544,10 +67425,8 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
   return DisplayRouter;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 297 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67589,7 +67468,7 @@ var moment = __webpack_require__(0);moment.locale('es');
 
 /* IMPORT COMPONENTS*/
 
-/* COMPONENTS */
+/* COMPONENT */
 var DisplayDetails = exports.DisplayDetails = function (_Component) {
 	_inherits(DisplayDetails, _Component);
 
@@ -67669,32 +67548,32 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 		value: function render() {
 			// define constants from props for better readability
 			var _props$display = this.props.display,
-			    id = _props$display.id,
+			    _id = _props$display._id,
 			    name = _props$display.name,
 			    description = _props$display.description,
-			    updated_at = _props$display.updated_at,
-			    updated_by = _props$display.updated_by,
 			    groups = _props$display.groups,
 			    images = _props$display.images,
 			    active_image = _props$display.active_image,
 			    device = _props$display.device,
-			    tags = _props$display.tags;
+			    tags = _props$display.tags,
+			    updated_at = _props$display.updated_at,
+			    updated_by = _props$display.updated_by;
 			// refactor date constants with format
 
 			var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
 			// generate tag list
 			var tag_list = tags.map(function (tag, i) {
-				return _react2.default.createElement(_tag.Tag, { key: i, categoria: 'displays', etiqueta: tag });
+				return _react2.default.createElement(_tag.Tag, { key: i, category: 'displays', tag: tag });
 			});
 			// define routes for edit and delete based on the id
-			var linktoEdit = '/displays/' + id + '/edit';
-			var linktoDelete = '/displays/' + id + '/delete';
+			var linktoEdit = '/displays/' + _id + '/edit';
+			var linktoDelete = '/displays/' + _id + '/delete';
 			// check if active_image is set and if not set the undefined img
 			var src = this.state.src_url;
 			var imagesOptions = images.map(function (i) {
 				return _react2.default.createElement(
 					'option',
-					{ value: i._id, key: i.id },
+					{ value: i._id, key: i._id },
 					i.name
 				);
 			});
@@ -67761,12 +67640,6 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 								'p',
 								{ className: 'titulo' },
 								'DETALLES'
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
-								id
 							),
 							_react2.default.createElement(
 								'p',
@@ -67864,7 +67737,7 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 									images.length,
 									')'
 								),
-								_react2.default.createElement(_associated.Associated, { contenido: images, category: 'images', appearance: 'elemento-imagen', icon: 'picture-o', active: this.state.active_image })
+								_react2.default.createElement(_associated.Associated, { content: images, category: 'images', appearance: 'elemento-imagen', icon: 'picture-o', active: this.state.active_image })
 							)
 						),
 						_react2.default.createElement(
@@ -67880,7 +67753,7 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 									groups.length,
 									')'
 								),
-								_react2.default.createElement(_associated.Associated, { contenido: groups, category: 'groups', appearance: 'elemento-grupo', icon: 'list' })
+								_react2.default.createElement(_associated.Associated, { content: groups, category: 'groups', appearance: 'elemento-grupo', icon: 'list' })
 							)
 						)
 					)
@@ -67892,10 +67765,8 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 	return DisplayDetails;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 298 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67931,7 +67802,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var moment = __webpack_require__(0);moment.locale('es');
 
-/* COMPONENTS */
+/* COMPONENT */
 var DisplayDelete = exports.DisplayDelete = function (_Component) {
   _inherits(DisplayDelete, _Component);
 
@@ -67942,14 +67813,13 @@ var DisplayDelete = exports.DisplayDelete = function (_Component) {
 
     _this.handleDelete = function (event) {
       event.preventDefault();
-      _axios2.default.delete(_this.props.display.url).then(function (res) {
+      _axios2.default.delete(_this.props.display.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
         if (res.status == 200) {
           _this.props.notify('Display eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          return _this.props.update(_this.props.user); // update dataset
+          return _this.props.update('displays', res.resourceId, 'remove', res.data.resource, res.data.devices); // update dataset
         }
       }).then(function (res) {
-        _this.setState({ redirect: true });
-        return res;
+        return _this.setState({ redirect: true });
       }).catch(function (err) {
         console.log(err);
         return _this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
@@ -68026,210 +67896,6 @@ var DisplayDelete = exports.DisplayDelete = function (_Component) {
   return DisplayDelete;
 }(_react.Component);
 
-;
-
-/***/ }),
-/* 299 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.DisplayLoading = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
-
-
-/* COMPONENTS */
-var DisplayLoading = exports.DisplayLoading = function (_Component) {
-	_inherits(DisplayLoading, _Component);
-
-	function DisplayLoading() {
-		_classCallCheck(this, DisplayLoading);
-
-		return _possibleConstructorReturn(this, (DisplayLoading.__proto__ || Object.getPrototypeOf(DisplayLoading)).apply(this, arguments));
-	}
-
-	_createClass(DisplayLoading, [{
-		key: "render",
-		value: function render() {
-			return _react2.default.createElement(
-				"div",
-				{ className: "card detalles" },
-				_react2.default.createElement(
-					"div",
-					{ className: "card-header" },
-					_react2.default.createElement(
-						"ul",
-						{ className: "nav nav-pills card-header-pills justify-content-end mx-1" },
-						_react2.default.createElement(
-							"li",
-							{ className: "nav-item mr-auto" },
-							_react2.default.createElement(
-								"h2",
-								{ className: "detalles-titulo" },
-								_react2.default.createElement("i", { className: "fa fa-television mr-3", "aria-hidden": "true" }),
-								"Cargando..."
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							{ className: "nav-item mr-2" },
-							_react2.default.createElement(
-								"button",
-								{ type: "button", className: "btn btn-outline-warning" },
-								_react2.default.createElement("i", { className: "fa fa-pencil-square-o mr-1", "aria-hidden": "true" }),
-								"Editar"
-							)
-						),
-						_react2.default.createElement(
-							"li",
-							{ className: "nav-item ml-2" },
-							_react2.default.createElement(
-								"button",
-								{ type: "button", className: "btn btn-outline-danger" },
-								_react2.default.createElement("i", { className: "fa fa-trash-o", "aria-hidden": "true" }),
-								"Eliminar"
-							)
-						)
-					)
-				),
-				_react2.default.createElement(
-					"div",
-					null,
-					_react2.default.createElement(
-						"div",
-						{ className: "row" },
-						_react2.default.createElement(
-							"div",
-							{ className: "col" },
-							_react2.default.createElement(
-								"div",
-								{ className: "card-body" },
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo" },
-									"DETALLES"
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-hashtag mr-1", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-info-circle mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-map-marker mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-arrows-alt mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-calendar-o mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "card-text" },
-									_react2.default.createElement("i", { className: "fa fa-fw fa-user-o mr-2", "aria-hidden": "true" }),
-									"Cargando..."
-								),
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo" },
-									"ETIQUETAS"
-								),
-								"Cargando..."
-							)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "col" },
-							_react2.default.createElement(
-								"div",
-								{ className: "vista-previa" },
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo text-right" },
-									"IMAGEN ACTIVA"
-								),
-								_react2.default.createElement(
-									"div",
-									{ className: "vista-imagen-display" },
-									_react2.default.createElement("img", { className: "imagen" })
-								)
-							)
-						)
-					),
-					_react2.default.createElement("hr", { className: "card-division" }),
-					_react2.default.createElement(
-						"div",
-						{ className: "row" },
-						_react2.default.createElement(
-							"div",
-							{ className: "col" },
-							_react2.default.createElement(
-								"div",
-								{ className: "asociados" },
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo" },
-									"IMAGENES ASOCIADAS (...)"
-								)
-							)
-						),
-						_react2.default.createElement(
-							"div",
-							{ className: "col" },
-							_react2.default.createElement(
-								"div",
-								{ className: "asociados" },
-								_react2.default.createElement(
-									"p",
-									{ className: "titulo text-right" },
-									"GRUPOS (...)"
-								)
-							)
-						)
-					)
-				)
-			);
-		}
-	}]);
-
-	return DisplayLoading;
-}(_react.Component);
-
-;
-
 /***/ }),
 /* 300 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -68246,11 +67912,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _addButton = __webpack_require__(14);
+var _addButton = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* COMPONENTS */
+/* COMPONENT */
 /* IMPORT MODULES */
 var DisplayGeneric = exports.DisplayGeneric = function DisplayGeneric() {
   return _react2.default.createElement(
@@ -68326,7 +67992,7 @@ var _ImageRouter = __webpack_require__(302);
 
 var _ImageGeneric = __webpack_require__(309);
 
-var _list = __webpack_require__(17);
+var _list = __webpack_require__(18);
 
 var _title = __webpack_require__(12);
 
@@ -68340,9 +68006,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentImages = function ContentImages(_ref) {
-  var images = _ref.images,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['images', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      props = _objectWithoutProperties(_ref, ['filterValue']);
+
+  var images = props.data.images;
+
 
   return _react2.default.createElement(
     'div',
@@ -68387,12 +68055,12 @@ var ContentImages = function ContentImages(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/add', render: function render() {
-                  return _react2.default.createElement(_ImageForm.ImageForm, _extends({}, other, { images: images }));
+                  return _react2.default.createElement(_ImageForm.ImageForm, _extends({}, props, { images: images }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_ImageRouter.ImageRouter, _extends({}, other, { image: images.find(function (i) {
-                      return i.id == match.params.imageId;
+                  return _react2.default.createElement(_ImageRouter.ImageRouter, _extends({}, props, { image: images.find(function (i) {
+                      return i._id == match.params.imageId;
                     }) }));
                 } })
             ),
@@ -68477,7 +68145,7 @@ var ImageRouter = exports.ImageRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.image) {
-        _axios2.default.get(this.props.image.url).then(function (image) {
+        _axios2.default.get(this.props.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
           // resolve callback
           _this2.setState({ image: image.data, isLoaded: true });
         }, function (error) {
@@ -68496,7 +68164,7 @@ var ImageRouter = exports.ImageRouter = function (_Component) {
 
       if (nextProps.image && (nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.image.url).then(function (image) {
+        _axios2.default.get(nextProps.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
           // resolve callback
           _this3.setState({ image: image.data, isLoaded: true });
         }, function (error) {
@@ -68545,8 +68213,6 @@ var ImageRouter = exports.ImageRouter = function (_Component) {
 
   return ImageRouter;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 303 */
@@ -68678,7 +68344,7 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
     value: function render() {
       // define constants from props for better readability
       var _props$image2 = this.props.image,
-          id = _props$image2.id,
+          _id = _props$image2._id,
           name = _props$image2.name,
           description = _props$image2.description,
           src_url = _props$image2.src_url,
@@ -68701,8 +68367,8 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
         return _react2.default.createElement(_tag.Tag, { key: i, categoria: 'imagenes', etiqueta: tag });
       });
       // define routes for edit and delete based on the id
-      var linktoEdit = '/images/' + id + '/edit';
-      var linktoDelete = '/images/' + id + '/delete';
+      var linktoEdit = '/images/' + _id + '/edit';
+      var linktoDelete = '/images/' + _id + '/delete';
 
       return _react2.default.createElement(
         'div',
@@ -68766,12 +68432,6 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                 'p',
                 { className: 'titulo' },
                 'DETALLES'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-2', 'aria-hidden': 'true' }),
-                id
               ),
               _react2.default.createElement(
                 'p',
@@ -68875,7 +68535,7 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                   displays.length,
                   ')'
                 ),
-                _react2.default.createElement(_associated.Associated, { contenido: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
+                _react2.default.createElement(_associated.Associated, { content: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
               )
             ),
             _react2.default.createElement(
@@ -68891,7 +68551,7 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                   groups.length,
                   ')'
                 ),
-                _react2.default.createElement(_associated.Associated, { contenido: groups, category: 'groups', appearance: 'elemento-grupo', icon: 'list' })
+                _react2.default.createElement(_associated.Associated, { content: groups, category: 'groups', appearance: 'elemento-grupo', icon: 'list' })
               )
             )
           )
@@ -69679,7 +69339,7 @@ var ImageDelete = exports.ImageDelete = function (_Component) {
 
     _this.handleDelete = function (event) {
       event.preventDefault();
-      _axios2.default.delete(_this.props.image.url).then(function (res) {
+      _axios2.default.delete(_this.props.image.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
         if (res.status == 200) {
           _this.props.notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
           return _this.props.update(_this.props.user, false); // update dataset
@@ -69781,7 +69441,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _addButton = __webpack_require__(14);
+var _addButton = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69861,7 +69521,7 @@ var _groupForm = __webpack_require__(186);
 
 var _groupGeneric = __webpack_require__(314);
 
-var _list = __webpack_require__(17);
+var _list = __webpack_require__(18);
 
 var _title = __webpack_require__(12);
 
@@ -69875,9 +69535,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentGroups = function ContentGroups(_ref) {
-  var groups = _ref.groups,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['groups', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      props = _objectWithoutProperties(_ref, ['filterValue']);
+
+  var groups = props.data.groups;
+
 
   return _react2.default.createElement(
     'div',
@@ -69922,12 +69584,12 @@ var ContentGroups = function ContentGroups(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/add', render: function render() {
-                  return _react2.default.createElement(_groupForm.GroupForm, _extends({}, other, { groups: groups }));
+                  return _react2.default.createElement(_groupForm.GroupForm, _extends({}, props, { groups: groups }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_groupRouter.GroupRouter, _extends({}, other, { group: groups.find(function (g) {
-                      return g.id == match.params.groupId;
+                  return _react2.default.createElement(_groupRouter.GroupRouter, _extends({}, props, { group: groups.find(function (g) {
+                      return g._id == match.params.groupId;
                     }) }));
                 } })
             ),
@@ -70012,7 +69674,7 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.group) {
-        _axios2.default.get(this.props.group.url).then(function (group) {
+        _axios2.default.get(this.props.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
           // resolve callback
           _this2.setState({ group: group.data, isLoaded: true });
         }, function (error) {
@@ -70031,7 +69693,7 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
 
       if (nextProps.group && (nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.group.url).then(function (group) {
+        _axios2.default.get(nextProps.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
           // resolve callback
           _this3.setState({ group: group.data, isLoaded: true });
         }, function (error) {
@@ -70080,8 +69742,6 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
 
   return GroupRouter;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 312 */
@@ -70209,7 +69869,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
     value: function render() {
       // define constants from props for better readability
       var _props$group = this.props.group,
-          id = _props$group.id,
+          _id = _props$group._id,
           name = _props$group.name,
           description = _props$group.description,
           created_at = _props$group.created_at,
@@ -70218,7 +69878,6 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
           displays = _props$group.displays,
           images = _props$group.images,
           active_image = _props$group.active_image,
-          tags_total = _props$group.tags_total,
           tags = _props$group.tags;
       // refactor date constants with format
 
@@ -70226,17 +69885,17 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
       var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
       // generate tag list
       var tag_list = tags.map(function (tag, i) {
-        return _react2.default.createElement(_tag.Tag, { key: i, categoria: 'grupos', etiqueta: tag });
+        return _react2.default.createElement(_tag.Tag, { key: i, category: 'groups', tag: tag });
       });
       // check if active_image is set and if not set the undefined img
       var src = this.state.src_url;
       // define routes for edit and delete based on the id
-      var linktoEdit = '/groups/' + id + '/edit';
-      var linktoDelete = '/groups/' + id + '/delete';
+      var linktoEdit = '/groups/' + _id + '/edit';
+      var linktoDelete = '/groups/' + _id + '/delete';
       var imagesOptions = images.map(function (i) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i.id },
+          { value: i._id, key: i._id },
           i.name
         );
       });
@@ -70303,12 +69962,6 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
                 'p',
                 { className: 'titulo' },
                 'DETALLES'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-2', 'aria-hidden': 'true' }),
-                id
               ),
               _react2.default.createElement(
                 'p',
@@ -70395,7 +70048,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
                   displays.length,
                   ')'
                 ),
-                _react2.default.createElement(_associated.Associated, { contenido: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
+                _react2.default.createElement(_associated.Associated, { content: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
               )
             ),
             _react2.default.createElement(
@@ -70411,7 +70064,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
                   images.length,
                   ')'
                 ),
-                _react2.default.createElement(_associated.Associated, { contenido: images, category: 'images', appearance: 'elemento-imagen', icon: 'picture-o', active: this.state.active_image })
+                _react2.default.createElement(_associated.Associated, { content: images, category: 'images', appearance: 'elemento-imagen', icon: 'picture-o', active: this.state.active_image })
               )
             )
           )
@@ -70449,6 +70102,8 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactToastify = __webpack_require__(6);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70469,17 +70124,17 @@ var GroupDelete = exports.GroupDelete = function (_Component) {
 
     _this.handleDelete = function (event) {
       event.preventDefault();
-      _axios2.default.delete(_this.props.group.url).then(function (res) {
+      _axios2.default.delete(_this.props.group.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
         if (res.status == 200) {
-          _this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT);
-          return _this.props.update(_this.props.user, false); // update dataset
+          _this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+          return _this.props.update('groups', res.resourceId, 'remove'); // update dataset
         }
       }).then(function (res) {
         _this.setState({ redirect: true });
         return res;
       }).catch(function (err) {
         console.log(err);
-        return _this.props.notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+        return _this.props.notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
       });
     };
 
@@ -70571,7 +70226,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _addButton = __webpack_require__(14);
+var _addButton = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70763,11 +70418,9 @@ var _manageUserGroups = __webpack_require__(319);
 
 var _manageLocations = __webpack_require__(321);
 
-var _manageResolutions = __webpack_require__(323);
+var _manageScreens = __webpack_require__(323);
 
-var _settingsGeneric = __webpack_require__(325);
-
-var _icon = __webpack_require__(23);
+var _icon = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70796,7 +70449,7 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var menu_items = [{ exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings' }, { exact: false, text: 'Grupos de gestión', icon: 'users', location: '/settings/groups' }, { exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations' }, { exact: false, text: 'Resoluciones', icon: 'arrows-alt', location: '/settings/resolutions' }];
+      var menu_items = [{ exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings' }, { exact: false, text: 'Grupos de gestión', icon: 'users', location: '/settings/groups' }, { exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations' }, { exact: false, text: 'Pantallas', icon: 'window-maximize', location: '/settings/screens' }];
 
       var menu = menu_items.map(function (i, j) {
         return _react2.default.createElement(
@@ -70834,7 +70487,7 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
               _react2.default.createElement(
                 'h1',
                 null,
-                'CUENTA'
+                'SISTEMA'
               )
             ),
             _react2.default.createElement('hr', null)
@@ -70871,8 +70524,8 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
                 _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/locations', render: function render() {
                     return _react2.default.createElement(_manageLocations.ManageLocations, _this2.props);
                   } }),
-                _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/resolutions', render: function render() {
-                    return _react2.default.createElement(_manageResolutions.ManageResolutions, _this2.props);
+                _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/screens', render: function render() {
+                    return _react2.default.createElement(_manageScreens.ManageScreens, _this2.props);
                   } })
               )
             )
@@ -70995,38 +70648,27 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
         method: method,
         url: _this.state.edit ? 'http://localhost:4000/users/' + _this.state.element_id : 'http://localhost:4000/users/signup',
         data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
       }).then(function (res) {
-        // resolve callback
         if (res.status == 201 || res.status == 200) {
           switch (method) {
             case 'put':
               _this.props.notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
               break;
             case 'post':
               _this.props.notify('Usuario creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
+              _this.edit(res.data.resourceId);
               break;
             case 'delete':
               _this.props.notify('Usuario eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.cancel();
+              _this.props.update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
               break;
             default:
-              console.log('error');
+              console.log('Something went wrong');
           }
-          return _axios2.default.get('/users').then(function (res) {
-            _this.setState({
-              isLoaded: true,
-              users: res.data,
-              login: '',
-              name: '',
-              email: '',
-              password: '',
-              checkPassword: '',
-              userGroup: '',
-              admin: false,
-              edit: false,
-              element_id: ''
-            });
-          });
         } else {
           return _this.setState({
             isLoaded: true,
@@ -71060,15 +70702,12 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
   _createClass(ManageUsers, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get('/users').then(function (users) {
-        // resolve callback
-        _this2.setState({ isLoaded: true, users: users.data });
-      }, function (error) {
-        // reject callback
-        _this2.setState({ isLoaded: true, error: error });
-      });
+      this.setState({ isLoaded: true, users: this.props.data.users });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ isLoaded: true, users: nextProps.data.users });
     }
 
     /* HANDLE SUBMIT */
@@ -71076,14 +70715,14 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _state = this.state,
           users = _state.users,
           error = _state.error,
           isLoaded = _state.isLoaded;
 
-      var optionsUserGroup = this.props.userGroups.map(function (u, i) {
+      var optionsUserGroup = this.props.data.userGroups.map(function (u, i) {
         return _react2.default.createElement(
           'option',
           { value: u._id, key: i },
@@ -71097,10 +70736,10 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
         return null; // TODO: handle loading
       } else {
         var list = users.map(function (user) {
-          if (user._id == _this3.state.element_id) {
-            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this3.edit, active: true });
+          if (user._id == _this2.state.element_id) {
+            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: true });
           } else {
-            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this3.edit, active: false });
+            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: false });
           }
         });
         list.push(_react2.default.createElement(
@@ -71273,7 +70912,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                   !this.state.edit ? _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                        return _this3.handleSubmit('post');
+                        return _this2.handleSubmit('post');
                       }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
                     _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
                     'A\xF1adir'
@@ -71283,7 +70922,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('put');
+                          return _this2.handleSubmit('put');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
                       _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
                       'Actualizar'
@@ -71291,7 +70930,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('delete');
+                          return _this2.handleSubmit('delete');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
                       _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
                       'Eliminar'
@@ -71299,7 +70938,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.cancel();
+                          return _this2.cancel();
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
                       _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
                       'Cancelar'
@@ -71521,33 +71160,28 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
         method: method,
         url: _this.state.edit ? 'http://localhost:4000/userGroups/' + _this.state.element_id : 'http://localhost:4000/userGroups',
         data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
       }).then(function (res) {
         // resolve callback
         if (res.status == 201 || res.status == 200) {
           switch (method) {
             case 'put':
               _this.props.notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('userGroups', res.data.resourceId, 'edit', res.data.resource); // update dataset
               break;
             case 'post':
               _this.props.notify('Grupo creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('userGroups', res.data.resourceId, 'add', res.data.resource); // update dataset
+              _this.edit(res.data.resourceId);
               break;
             case 'delete':
               _this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.cancel();
+              _this.props.update('userGroups', res.data.resourceId, 'remove', res.data.resource); // update dataset
               break;
             default:
-              console.log('error');
+              console.log('Something went wrong');
           }
-          return _axios2.default.get('/userGroups').then(function (res) {
-            _this.setState({
-              isLoaded: true,
-              userGroups: res.data,
-              name: '',
-              description: '',
-              element_id: '',
-              edit: false
-            });
-          });
         } else {
           return _this.setState({
             isLoaded: true,
@@ -71576,15 +71210,12 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
   _createClass(ManageUserGroups, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get('/userGroups').then(function (userGroups) {
-        // resolve callback
-        _this2.setState({ isLoaded: true, userGroups: userGroups.data });
-      }, function (error) {
-        // reject callback
-        _this2.setState({ isLoaded: true, error: error });
-      });
+      this.setState({ isLoaded: true, userGroups: this.props.data.userGroups });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups });
     }
 
     /* HANDLE SUBMIT */
@@ -71592,7 +71223,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _state = this.state,
           userGroups = _state.userGroups,
@@ -71606,10 +71237,10 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
         return null; // TODO: handle loading
       } else {
         var list = userGroups.map(function (userGroup) {
-          if (userGroup._id == _this3.state.element_id) {
-            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this3.edit, active: true });
+          if (userGroup._id == _this2.state.element_id) {
+            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: true });
           } else {
-            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this3.edit, active: false });
+            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: false });
           }
         });
         list.push(_react2.default.createElement(
@@ -71707,7 +71338,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
                   !this.state.edit ? _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                        return _this3.handleSubmit('post');
+                        return _this2.handleSubmit('post');
                       }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
                     _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
                     'A\xF1adir'
@@ -71717,7 +71348,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('put');
+                          return _this2.handleSubmit('put');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
                       _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
                       'Actualizar'
@@ -71725,7 +71356,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('delete');
+                          return _this2.handleSubmit('delete');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
                       _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
                       'Eliminar'
@@ -71733,7 +71364,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.cancel();
+                          return _this2.cancel();
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
                       _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
                       'Cancelar'
@@ -71774,8 +71405,6 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
 
   return ManageUserGroups;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 320 */
@@ -71965,32 +71594,27 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
         method: method,
         url: _this.state.edit ? 'http://localhost:4000/locations/' + _this.state.element_id : 'http://localhost:4000/locations',
         data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
       }).then(function (res) {
         if (res.status == 201 || res.status == 200) {
           switch (method) {
             case 'put':
               _this.props.notify('Localización modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('locations', res.data.resourceId, 'edit', res.data.resource); // update dataset
               break;
             case 'post':
               _this.props.notify('Localización creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('locations', res.data.resourceId, 'add', res.data.resource); // update dataset
+              _this.edit(res.data.resource._id);
               break;
             case 'delete':
               _this.props.notify('Localización eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.cancel();
+              _this.props.update('locations', res.data.resourceId, 'remove', res.data.resource); // update dataset
               break;
             default:
-              console.log('error');
+              console.log('Something went wrong');
           }
-          return _axios2.default.get('/locations').then(function (res) {
-            _this.setState({
-              isLoaded: true,
-              locations: res.data,
-              name: '',
-              description: '',
-              element_id: '',
-              edit: false
-            });
-          });
         } else {
           return _this.setState({
             isLoaded: true,
@@ -72024,15 +71648,12 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
   _createClass(ManageLocations, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get('/locations').then(function (locations) {
-        // resolve callback
-        _this2.setState({ isLoaded: true, locations: locations.data });
-      }, function (error) {
-        // reject callback
-        _this2.setState({ isLoaded: true, error: error });
-      });
+      this.setState({ isLoaded: true, locations: this.props.data.locations });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ isLoaded: true, locations: nextProps.data.locations });
     }
 
     /* HANDLE SUBMIT */
@@ -72040,7 +71661,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _state = this.state,
           locations = _state.locations,
@@ -72054,10 +71675,10 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
         return null; // TODO: handle loading
       } else {
         var list = locations.map(function (location) {
-          if (location._id == _this3.state.element_id) {
-            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this3.edit, active: true });
+          if (location._id == _this2.state.element_id) {
+            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: true });
           } else {
-            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this3.edit, active: false });
+            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: false });
           }
         });
         list.push(_react2.default.createElement(
@@ -72155,7 +71776,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
                   !this.state.edit ? _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                        return _this3.handleSubmit('post');
+                        return _this2.handleSubmit('post');
                       }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
                     _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
                     'A\xF1adir'
@@ -72165,7 +71786,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('put');
+                          return _this2.handleSubmit('put');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
                       _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
                       'Actualizar'
@@ -72173,7 +71794,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('delete');
+                          return _this2.handleSubmit('delete');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
                       _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
                       'Eliminar'
@@ -72181,7 +71802,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.cancel();
+                          return _this2.cancel();
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
                       _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
                       'Cancelar'
@@ -72222,8 +71843,6 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
 
   return ManageLocations;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 322 */
@@ -72303,7 +71922,7 @@ var Location = exports.Location = function Location(_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ManageResolutions = undefined;
+exports.ManageScreens = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -72317,7 +71936,7 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactToastify = __webpack_require__(6);
 
-var _resolution = __webpack_require__(324);
+var _screen = __webpack_require__(324);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72334,23 +71953,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* COMPONENTS */
-var ManageResolutions = exports.ManageResolutions = function (_Component) {
-  _inherits(ManageResolutions, _Component);
+var ManageScreens = exports.ManageScreens = function (_Component) {
+  _inherits(ManageScreens, _Component);
 
-  function ManageResolutions(props) {
-    _classCallCheck(this, ManageResolutions);
+  function ManageScreens(props) {
+    _classCallCheck(this, ManageScreens);
 
-    var _this = _possibleConstructorReturn(this, (ManageResolutions.__proto__ || Object.getPrototypeOf(ManageResolutions)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ManageScreens.__proto__ || Object.getPrototypeOf(ManageScreens)).call(this, props));
 
     _this.edit = function (element_id) {
-      var resolution = _this.state.resolutions.find(function (r) {
+      var screen = _this.state.screens.find(function (r) {
         return r._id == element_id;
       });
       _this.setState({
-        name: resolution.name,
-        width: resolution.size.width,
-        height: resolution.size.height,
-        description: resolution.description,
+        name: screen.name,
+        width: screen.size.width,
+        height: screen.size.height,
+        description: screen.description,
+        screen_code: screen.screen_code,
+        color_profile: screen.color_profile,
         element_id: element_id,
         edit: true
       });
@@ -72362,6 +71983,8 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
         width: '',
         height: '',
         description: '',
+        screen_code: '',
+        color_profile: 'grayscale',
         element_id: '',
         edit: false
       });
@@ -72381,42 +72004,38 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
         'size': {
           'height': _this.state.height,
           'width': _this.state.width
-        }
+        },
+        'screen_code': _this.state.screen_code,
+        'color_profile': _this.state.color_profile
       };
       if (_this.state.description != '') {
         form.description = _this.state.description;
       }
       (0, _axios2.default)({
         method: method,
-        url: _this.state.edit ? 'http://localhost:4000/resolutions/' + _this.state.element_id : 'http://localhost:4000/resolutions',
+        url: _this.state.edit ? 'http://localhost:4000/screens/' + _this.state.element_id : 'http://localhost:4000/screens',
         data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
       }).then(function (res) {
-        // resolve callback
         if (res.status == 201 || res.status == 200) {
           switch (method) {
             case 'put':
-              _this.props.notify('Resolución modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('screens', res.data.resourceId, 'edit', res.data.resource); // update dataset
               break;
             case 'post':
-              _this.props.notify('Resolución creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.notify('Pantalla creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('screens', res.data.resourceId, 'add', res.data.resource); // update dataset
+              _this.edit(res.data.resourceId);
               break;
             case 'delete':
-              _this.props.notify('Resolución eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.notify('Pantalla eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.cancel();
+              _this.props.update('screens', res.data.resourceId, 'remove', res.data.resource); // update dataset
               break;
             default:
-              console.log('error');
+              console.log('Something went wrong');
           }
-          return _axios2.default.get('/resolutions').then(function (res) {
-            _this.setState({
-              isLoaded: true,
-              resolutions: res.data,
-              name: '',
-              description: '',
-              element_id: '',
-              edit: false
-            });
-          });
         } else {
           return _this.setState({
             isLoaded: true,
@@ -72425,7 +72044,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
         }
       }).catch(function (err) {
         console.log(err);
-        return _this.props.notify('Error al añadir/modificar resolución', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+        return _this.props.notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
       });
     };
 
@@ -72439,23 +72058,22 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
       name: '',
       height: 0,
       width: 0,
+      screen_code: '',
+      color_profile: 'grayscale',
       description: ''
     };
     return _this;
   }
 
-  _createClass(ManageResolutions, [{
+  _createClass(ManageScreens, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get('/resolutions').then(function (resolutions) {
-        // resolve callback
-        _this2.setState({ isLoaded: true, resolutions: resolutions.data });
-      }, function (error) {
-        // reject callback
-        _this2.setState({ isLoaded: true, error: error });
-      });
+      this.setState({ isLoaded: true, screens: this.props.data.screens });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ isLoaded: true, screens: nextProps.data.screens });
     }
 
     /* HANDLE SUBMIT */
@@ -72463,10 +72081,10 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _state = this.state,
-          resolutions = _state.resolutions,
+          screens = _state.screens,
           error = _state.error,
           isLoaded = _state.isLoaded;
 
@@ -72476,11 +72094,11 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
       } else if (!isLoaded) {
         return null; // TODO: handle loading
       } else {
-        var list = resolutions.map(function (resolution) {
-          if (resolution._id == _this3.state.element_id) {
-            return _react2.default.createElement(_resolution.Resolution, { resolution: resolution, key: resolution._id, edit: _this3.edit, active: true });
+        var list = screens.map(function (screen) {
+          if (screen._id == _this2.state.element_id) {
+            return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: true });
           } else {
-            return _react2.default.createElement(_resolution.Resolution, { resolution: resolution, key: resolution._id, edit: _this3.edit, active: false });
+            return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: false });
           }
         });
         list.push(_react2.default.createElement(
@@ -72493,15 +72111,15 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
               'h4',
               { className: 'mb-1' },
               'No se han encontrado ',
-              resolutions.length > 0 && 'más',
-              ' resoluciones'
+              screens.length > 0 && 'más',
+              ' pantallas'
             ),
             _react2.default.createElement('hr', { className: 'card-division' }),
             _react2.default.createElement(
               'small',
               null,
-              'N\xFAmero de resoluciones: ',
-              resolutions.length
+              'N\xFAmero de pantallas: ',
+              screens.length
             )
           )
         ));
@@ -72520,8 +72138,8 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                 _react2.default.createElement(
                   'h2',
                   { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-3', 'aria-hidden': 'true' }),
-                  'Resoluciones'
+                  _react2.default.createElement('i', { className: 'fa fa-window-maximize mr-3', 'aria-hidden': 'true' }),
+                  'Pantallas'
                 )
               )
             )
@@ -72538,7 +72156,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  this.state.edit ? 'Editar Resolución' : 'Añadir Resolución'
+                  this.state.edit ? 'Editar pantalla' : 'Añadir pantalla'
                 ),
                 _react2.default.createElement('hr', { className: 'card-division' }),
                 _react2.default.createElement(
@@ -72553,7 +72171,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                       _react2.default.createElement(
                         'label',
                         { htmlFor: 'name' },
-                        _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
+                        _react2.default.createElement('i', { className: 'fa fa-fw fa-window-maximize mr-2' }),
                         'Nombre'
                       ),
                       _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la resoluci\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
@@ -72564,7 +72182,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                       _react2.default.createElement(
                         'label',
                         { htmlFor: 'heigth' },
-                        _react2.default.createElement('i', { className: 'fa fa-arrows-v mr-2' }),
+                        _react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-v mr-2' }),
                         'Alto'
                       ),
                       _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'heigth', placeholder: 'Alto', name: 'height', value: this.state.height, onChange: this.handleInputChange })
@@ -72575,7 +72193,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                       _react2.default.createElement(
                         'label',
                         { htmlFor: 'width' },
-                        _react2.default.createElement('i', { className: 'fa fa-arrows-h mr-2' }),
+                        _react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-h mr-2' }),
                         'Ancho'
                       ),
                       _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'width', placeholder: 'Ancho', name: 'width', value: this.state.width, onChange: this.handleInputChange })
@@ -72587,15 +72205,58 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                     _react2.default.createElement(
                       'label',
                       { htmlFor: 'description' },
-                      _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+                      _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2' }),
                       'Descripci\xF3n'
                     ),
                     _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n de la resoluci\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
                   ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-row' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'form-group col' },
+                      _react2.default.createElement(
+                        'label',
+                        { htmlFor: 'color_profile' },
+                        _react2.default.createElement('i', { className: 'fa fa-adjust mr-2' }),
+                        'Color'
+                      ),
+                      _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                          'select',
+                          { className: 'custom-select', name: 'color_profile', value: this.state.color_profile, onChange: this.handleInputChange },
+                          _react2.default.createElement(
+                            'option',
+                            { value: 'color' },
+                            'Color'
+                          ),
+                          _react2.default.createElement(
+                            'option',
+                            { value: 'grayscale' },
+                            'Escala de grises'
+                          )
+                        )
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'form-group col' },
+                      _react2.default.createElement(
+                        'label',
+                        { htmlFor: 'screen_code' },
+                        _react2.default.createElement('i', { className: 'fa fa-fw fa-code mr-2' }),
+                        'C\xF3digo de pantalla'
+                      ),
+                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'screen_code', placeholder: 'C\xF3digo', name: 'screen_code', value: this.state.screen_code, onChange: this.handleInputChange })
+                    )
+                  ),
                   !this.state.edit ? _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                        return _this3.handleSubmit('post');
+                        return _this2.handleSubmit('post');
                       }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
                     _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
                     'A\xF1adir'
@@ -72605,7 +72266,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('put');
+                          return _this2.handleSubmit('put');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
                       _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
                       'Actualizar'
@@ -72613,7 +72274,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('delete');
+                          return _this2.handleSubmit('delete');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
                       _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
                       'Eliminar'
@@ -72621,7 +72282,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.cancel();
+                          return _this2.cancel();
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
                       _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
                       'Cancelar'
@@ -72635,11 +72296,11 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   { className: 'd-flex w-100 justify-content-between' },
-                  'Resoluciones',
+                  'Pantallas',
                   _react2.default.createElement(
                     'span',
                     null,
-                    this.state.resolutions.length
+                    this.state.screens.length
                   )
                 ),
                 _react2.default.createElement('hr', { className: 'card-division' }),
@@ -72660,7 +72321,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
     }
   }]);
 
-  return ManageResolutions;
+  return ManageScreens;
 }(_react.Component);
 
 ;
@@ -72675,7 +72336,7 @@ var ManageResolutions = exports.ManageResolutions = function (_Component) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Resolution = undefined;
+exports.Screen = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -72690,17 +72351,18 @@ var moment = __webpack_require__(0);moment.locale('es');
 var cx = __webpack_require__(8);
 
 /* COMPONENT */
-var Resolution = exports.Resolution = function Resolution(_ref) {
-  var resolution = _ref.resolution,
+var Screen = exports.Screen = function Screen(_ref) {
+  var screen = _ref.screen,
       edit = _ref.edit,
       active = _ref.active;
-  var url = resolution.url,
-      _id = resolution._id,
-      id = resolution.id,
-      name = resolution.name,
-      size = resolution.size,
-      created_at = resolution.created_at,
-      description = resolution.description;
+  var url = screen.url,
+      _id = screen._id,
+      name = screen.name,
+      size = screen.size,
+      description = screen.description,
+      screen_code = screen.screen_code,
+      color_profile = screen.color_profile,
+      created_at = screen.created_at;
 
   var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", { "active": active });
   return _react2.default.createElement(
@@ -72720,7 +72382,7 @@ var Resolution = exports.Resolution = function Resolution(_ref) {
           _react2.default.createElement(
             'strong',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2', 'aria-hidden': 'true' }),
+            _react2.default.createElement('i', { className: 'fa fa-window-maximize mr-2', 'aria-hidden': 'true' }),
             name
           )
         ),
@@ -72737,8 +72399,26 @@ var Resolution = exports.Resolution = function Resolution(_ref) {
         { className: 'd-flex w-100 align-content-right' },
         _react2.default.createElement(
           'p',
-          null,
+          { className: 'mb-0' },
           description
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'd-flex w-100 justify-content-between' },
+        _react2.default.createElement(
+          'small',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-code mr-1', 'aria-hidden': 'true' }),
+          screen_code,
+          _react2.default.createElement('i', { className: 'fa fa-adjust ml-3 mr-1', 'aria-hidden': 'true' }),
+          color_profile
+        ),
+        _react2.default.createElement(
+          'small',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2', 'aria-hidden': 'true' }),
+          moment(created_at).format("dddd, D [de] MMMM [de] YYYY")
         )
       )
     )
@@ -72747,69 +72427,6 @@ var Resolution = exports.Resolution = function Resolution(_ref) {
 
 /***/ }),
 /* 325 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.SettingsGeneric = undefined;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _addButton = __webpack_require__(14);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* COMPONENTS */
-/* IMPORT MODULES */
-var SettingsGeneric = exports.SettingsGeneric = function SettingsGeneric() {
-  return _react2.default.createElement(
-    'div',
-    { className: 'card detalles' },
-    _react2.default.createElement(
-      'div',
-      { className: 'card-header' },
-      _react2.default.createElement(
-        'ul',
-        { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-        _react2.default.createElement(
-          'li',
-          { className: 'nav-item mr-auto' },
-          _react2.default.createElement(
-            'h2',
-            { className: 'detalles-titulo text-center' },
-            _react2.default.createElement('i', { className: 'fa-map-marker', 'aria-hidden': 'true' }),
-            'Configuraci\xF3n'
-          )
-        )
-      )
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'card-body' },
-      _react2.default.createElement(
-        'div',
-        { className: 'text-center' },
-        _react2.default.createElement(
-          'h1',
-          null,
-          _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
-          'Seleccione qu\xE9 desea configurar'
-        )
-      )
-    )
-  );
-};
-
-/* IMPORT COMPONENTS */
-
-/***/ }),
-/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72902,7 +72519,7 @@ var ContentDocs = function ContentDocs(_ref) {
 exports.ContentDocs = ContentDocs;
 
 /***/ }),
-/* 327 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72921,13 +72538,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _list = __webpack_require__(17);
+var _list = __webpack_require__(18);
 
 var _title = __webpack_require__(12);
 
-var _gatewayGeneric = __webpack_require__(328);
+var _gatewayGeneric = __webpack_require__(327);
 
-var _gatewayRouter = __webpack_require__(329);
+var _gatewayRouter = __webpack_require__(328);
 
 var _gatewayForm = __webpack_require__(187);
 
@@ -72941,9 +72558,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentGateways = function ContentGateways(_ref) {
-  var gateways = _ref.gateways,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['gateways', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      props = _objectWithoutProperties(_ref, ['filterValue']);
+
+  var gateways = props.data.gateways;
+
 
   return _react2.default.createElement(
     'div',
@@ -72988,12 +72607,12 @@ var ContentGateways = function ContentGateways(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/add', render: function render() {
-                  return _react2.default.createElement(_gatewayForm.GatewayForm, _extends({}, other, { gateways: gateways }));
+                  return _react2.default.createElement(_gatewayForm.GatewayForm, _extends({}, props, { gateways: gateways }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_gatewayRouter.GatewayRouter, _extends({}, other, { gateway: gateways.find(function (g) {
-                      return g.id == match.params.gatewayId;
+                  return _react2.default.createElement(_gatewayRouter.GatewayRouter, _extends({}, props, { gateway: gateways.find(function (g) {
+                      return g._id == match.params.gatewayId;
                     }) }));
                 } })
             ),
@@ -73009,7 +72628,7 @@ var ContentGateways = function ContentGateways(_ref) {
 exports.ContentGateways = ContentGateways;
 
 /***/ }),
-/* 328 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73024,7 +72643,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _addButton = __webpack_require__(14);
+var _addButton = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73079,7 +72698,7 @@ var GatewayGeneric = exports.GatewayGeneric = function GatewayGeneric() {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 329 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73104,11 +72723,11 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _gatewayDetails = __webpack_require__(330);
+var _gatewayDetails = __webpack_require__(329);
 
 var _gatewayForm = __webpack_require__(187);
 
-var _gatewayDelete = __webpack_require__(331);
+var _gatewayDelete = __webpack_require__(330);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73148,7 +72767,7 @@ var GatewayRouter = exports.GatewayRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.gateway) {
-        _axios2.default.get(this.props.gateway.url).then(function (gateway) {
+        _axios2.default.get(this.props.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (gateway) {
           // resolve callback
           _this2.setState({ gateway: gateway.data, isLoaded: true });
         }, function (error) {
@@ -73167,7 +72786,7 @@ var GatewayRouter = exports.GatewayRouter = function (_Component) {
 
       if (nextProps.gateway && (nextProps.gateway._id != this.props.gateway._id || nextProps.gateway.updated_at != this.props.gateway.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.gateway.url).then(function (gateway) {
+        _axios2.default.get(nextProps.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (gateway) {
           // resolve callback
           _this3.setState({ gateway: gateway.data, isLoaded: true });
         }, function (error) {
@@ -73216,10 +72835,8 @@ var GatewayRouter = exports.GatewayRouter = function (_Component) {
   return GatewayRouter;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 330 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73251,7 +72868,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* IMPORT COMPONENTS*/
 
@@ -73270,23 +72888,25 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 		value: function render() {
 			// define constants from props for better readability
 			var _props$gateway = this.props.gateway,
-			    id = _props$gateway.id,
+			    _id = _props$gateway._id,
 			    name = _props$gateway.name,
 			    description = _props$gateway.description,
 			    location = _props$gateway.location,
 			    created_at = _props$gateway.created_at,
 			    updated_at = _props$gateway.updated_at,
 			    created_by = _props$gateway.created_by,
-			    mac_address = _props$gateway.mac_address,
-			    ip_address = _props$gateway.ip_address,
-			    devices = _props$gateway.devices;
-			// refactor date constants with format
+			    mac = _props$gateway.mac,
+			    ip = _props$gateway.ip;
 
+			var devices = this.props.data.devices.filter(function (d) {
+				return d.gateway._id == _id;
+			});
+			// refactor date constants with format
 			var created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
 			var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
 			// define routes for edit and delete based on the id
-			var linktoEdit = '/gateways/' + id + '/edit';
-			var linktoDelete = '/gateways/' + id + '/delete';
+			var linktoEdit = '/gateways/' + _id + '/edit';
+			var linktoDelete = '/gateways/' + _id + '/delete';
 
 			return _react2.default.createElement(
 				'div',
@@ -73354,12 +72974,6 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
-								id
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'card-text' },
 								_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
 								description
 							),
@@ -73367,13 +72981,13 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 								'p',
 								{ className: 'card-text' },
 								_react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2', 'aria-hidden': 'true' }),
-								mac_address
+								mac
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'card-text' },
 								_react2.default.createElement('i', { className: 'fa fa-fw fa-wifi mr-2', 'aria-hidden': 'true' }),
-								ip_address
+								ip
 							),
 							_react2.default.createElement(
 								'p',
@@ -73407,7 +73021,7 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 									devices.length,
 									')'
 								),
-								_react2.default.createElement(_associated.Associated, { contenido: devices, category: 'devices', appearance: 'elemento-dispositivo', icon: 'tablet' })
+								_react2.default.createElement(_associated.Associated, { content: devices, category: 'devices', appearance: 'elemento-dispositivo', icon: 'tablet' })
 							)
 						)
 					)
@@ -73419,10 +73033,8 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 	return GatewayDetails;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 331 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73556,7 +73168,7 @@ var GatewayDelete = exports.GatewayDelete = function (_Component) {
 ;
 
 /***/ }),
-/* 332 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73575,13 +73187,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _list = __webpack_require__(17);
+var _list = __webpack_require__(18);
 
 var _title = __webpack_require__(12);
 
-var _deviceGeneric = __webpack_require__(333);
+var _deviceGeneric = __webpack_require__(332);
 
-var _deviceRouter = __webpack_require__(334);
+var _deviceRouter = __webpack_require__(333);
 
 var _deviceForm = __webpack_require__(188);
 
@@ -73595,9 +73207,13 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentDevices = function ContentDevices(_ref) {
-  var devices = _ref.devices,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['devices', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      filterFoundValue = _ref.filterFoundValue,
+      filterFound = _ref.filterFound,
+      props = _objectWithoutProperties(_ref, ['filterValue', 'filterFoundValue', 'filterFound']);
+
+  var devices = props.data.devices;
+
 
   return _react2.default.createElement(
     'div',
@@ -73633,7 +73249,7 @@ var ContentDevices = function ContentDevices(_ref) {
           _react2.default.createElement(
             'div',
             { className: 'col-4' },
-            _react2.default.createElement(_list.List, { filterValue: filterValue, category: 'devices', content: devices })
+            _react2.default.createElement(_list.List, { filterValue: filterValue, filterFoundValue: filterFoundValue, filterFound: filterFound, category: 'devices', content: devices })
           ),
           _react2.default.createElement(
             'div',
@@ -73641,13 +73257,10 @@ var ContentDevices = function ContentDevices(_ref) {
             _react2.default.createElement(
               _reactRouterDom.Switch,
               null,
-              _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/add', render: function render() {
-                  return _react2.default.createElement(_deviceForm.DeviceForm, _extends({}, other, { devices: devices }));
-                } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_deviceRouter.DeviceRouter, _extends({}, other, { device: devices.find(function (d) {
-                      return d.id == match.params.deviceId;
+                  return _react2.default.createElement(_deviceRouter.DeviceRouter, _extends({}, props, { device: devices.find(function (d) {
+                      return d._id == match.params.deviceId;
                     }) }));
                 } })
             ),
@@ -73663,7 +73276,7 @@ var ContentDevices = function ContentDevices(_ref) {
 exports.ContentDevices = ContentDevices;
 
 /***/ }),
-/* 333 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73678,7 +73291,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _addButton = __webpack_require__(14);
+var _addButton = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73717,14 +73330,7 @@ var DeviceGeneric = exports.DeviceGeneric = function DeviceGeneric() {
           null,
           _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
           'Seleccione un dispositivo f\xEDsico'
-        ),
-        _react2.default.createElement('hr', { className: 'card-division' }),
-        _react2.default.createElement(
-          'p',
-          null,
-          'O a\xF1ada uno nuevo'
-        ),
-        _react2.default.createElement(_addButton.AddButton, { category: 'devices' })
+        )
       )
     )
   );
@@ -73733,7 +73339,7 @@ var DeviceGeneric = exports.DeviceGeneric = function DeviceGeneric() {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 334 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73758,11 +73364,11 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _deviceDetails = __webpack_require__(335);
+var _deviceDetails = __webpack_require__(334);
 
 var _deviceForm = __webpack_require__(188);
 
-var _deviceDelete = __webpack_require__(336);
+var _deviceDelete = __webpack_require__(335);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73802,7 +73408,7 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.device) {
-        _axios2.default.get(this.props.device.url).then(function (device) {
+        _axios2.default.get(this.props.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (device) {
           // resolve callback
           _this2.setState({ device: device.data, isLoaded: true });
         }, function (error) {
@@ -73812,7 +73418,7 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
       }
     }
 
-    /* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
+    /* FORCE UPDATE IF WE CHANGE TO ANOTHER DEVICE */
 
   }, {
     key: 'componentWillReceiveProps',
@@ -73821,7 +73427,7 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
 
       if (nextProps.device && (nextProps.device._id != this.props.device._id || nextProps.device.updated_at != this.props.device.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.device.url).then(function (device) {
+        _axios2.default.get(nextProps.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (device) {
           // resolve callback
           _this3.setState({ device: device.data, isLoaded: true });
         }, function (error) {
@@ -73853,15 +73459,15 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
           null,
           _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId/edit', render: function render(_ref) {
               var match = _ref.match;
-              return _react2.default.createElement(_deviceForm.DeviceForm, _extends({}, _this4.props, { device: _this4.state.device }));
+              return _react2.default.createElement(_deviceForm.DeviceForm, _extends({}, _this4.props, { device: device }));
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId/delete', render: function render(_ref2) {
               var match = _ref2.match;
-              return _react2.default.createElement(_deviceDelete.DeviceDelete, _extends({}, _this4.props, { device: _this4.state.device }));
+              return _react2.default.createElement(_deviceDelete.DeviceDelete, _extends({}, _this4.props, { device: device }));
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId', render: function render(_ref3) {
               var match = _ref3.match;
-              return _react2.default.createElement(_deviceDetails.DeviceDetails, _extends({}, _this4.props, { device: _this4.state.device }));
+              return _react2.default.createElement(_deviceDetails.DeviceDetails, _extends({}, _this4.props, { device: device }));
             } })
         );
       }
@@ -73871,10 +73477,8 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
   return DeviceRouter;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 335 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73897,6 +73501,8 @@ var _associated = __webpack_require__(24);
 
 var _tag = __webpack_require__(25);
 
+var _icon = __webpack_require__(14);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -73906,7 +73512,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* IMPORT COMPONENTS*/
 
@@ -73925,23 +73532,44 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 		value: function render() {
 			// define constants from props for better readability
 			var _props$device = this.props.device,
-			    id = _props$device.id,
+			    _id = _props$device._id,
 			    name = _props$device.name,
 			    description = _props$device.description,
-			    created_at = _props$device.created_at,
 			    updated_at = _props$device.updated_at,
-			    created_by = _props$device.created_by,
-			    mac_address = _props$device.mac_address,
-			    bt_address = _props$device.bt_address,
+			    updated_by = _props$device.updated_by,
+			    mac = _props$device.mac,
 			    gateway = _props$device.gateway,
+			    batt = _props$device.batt,
+			    rssi = _props$device.rssi,
+			    screen = _props$device.screen,
+			    initcode = _props$device.initcode,
+			    found = _props$device.found,
 			    userGroup = _props$device.userGroup;
+			var screens = this.props.data.screens;
 			// refactor date constants with format
 
-			var created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
 			var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
 			// define routes for edit and delete based on the id
-			var linktoEdit = '/devices/' + id + '/edit';
-			var linktoDelete = '/devices/' + id + '/delete';
+			var battery_icon = "fa fa-fw fa-battery-empty mr-2";
+			if (batt && batt < 25) {
+				battery_icon = "fa fa-fw fa-battery-quarter mr-2";
+			} else if (batt && batt < 50) {
+				battery_icon = "fa fa-fw fa-battery-half mr-2";
+			} else if (batt && batt < 75) {
+				battery_icon = "fa fa-fw fa-battery-three-quarters mr-2";
+			} else if (batt) {
+				battery_icon = "fa fa-fw fa-battery-full mr-2";
+			}
+
+			var screenObj = screens.find(function (r) {
+				return r.screen_code == screen;
+			});
+			var screenName = screenObj ? screenObj.name : "No se encuentra la pantalla (código: " + screen + " )";
+			var color = screenObj ? screenObj.color_profile : "No se encuentra la pantalla (código: " + screen + " )";
+			var size = screenObj ? screenObj.size.width + "x" + screenObj.size.height : "No se encuentra la pantalla (código: " + screen + " )";
+
+			var linktoEdit = '/devices/' + _id + '/edit';
+			var linktoDelete = '/devices/' + _id + '/delete';
 
 			return _react2.default.createElement(
 				'div',
@@ -74009,50 +73637,68 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 							_react2.default.createElement(
 								'p',
 								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-hashtag mr-1', 'aria-hidden': 'true' }),
-								id
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
+								_react2.default.createElement(_icon.Icon, { icon: 'info-circle', fw: 'true', mr: '2' }),
 								description
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2', 'aria-hidden': 'true' }),
-								mac_address
+								_react2.default.createElement(_icon.Icon, { icon: 'server', fw: 'true', mr: '2' }),
+								mac
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: found ? "card-text" : "card-text text-danger" },
+								_react2.default.createElement(_icon.Icon, { icon: 'battery', fw: 'true', mr: '2', batt: batt || 0 }),
+								found ? batt + '%' : "Información no disponible"
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: found ? "card-text" : "card-text text-danger" },
+								_react2.default.createElement(_icon.Icon, { icon: 'signal', fw: 'true', mr: '2' }),
+								found ? rssi : "Información no disponible"
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: found ? "card-text" : "card-text text-danger" },
+								_react2.default.createElement(_icon.Icon, { icon: 'tint', fw: 'true', mr: '2' }),
+								screenName
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: found ? "card-text" : "card-text text-danger" },
+								_react2.default.createElement(_icon.Icon, { icon: 'adjust', fw: 'true', mr: '2' }),
+								color
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: found ? "card-text" : "card-text text-danger" },
+								_react2.default.createElement(_icon.Icon, { icon: 'arrows-alt', fw: 'true', mr: '2' }),
+								size
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: gateway && found ? "card-text" : "card-text text-danger" },
+								_react2.default.createElement(_icon.Icon, { icon: 'sitemap', fw: 'true', mr: '2' }),
+								gateway && found ? gateway.name : 'Información no disponible'
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-bluetooth-b mr-2', 'aria-hidden': 'true' }),
-								bt_address
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: gateway ? "card-text" : "card-text text-danger" },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-sitemap mr-2', 'aria-hidden': 'true' }),
-								gateway ? gateway.name : 'Dispositivo sin asignar'
+								_react2.default.createElement(_icon.Icon, { icon: 'users', fw: 'true', mr: '2' }),
+								userGroup ? userGroup.name : 'Dispositivo sin configurar'
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-users mr-2', 'aria-hidden': 'true' }),
-								userGroup.name
-							),
-							_react2.default.createElement(
-								'p',
-								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
+								_react2.default.createElement(_icon.Icon, { icon: 'calendar-o', fw: 'true', mr: '2' }),
 								updated
 							),
 							_react2.default.createElement(
 								'p',
 								{ className: 'card-text' },
-								_react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
-								created_by ? created_by.name : 'Usuario eliminado'
+								_react2.default.createElement(_icon.Icon, { icon: 'user-o', fw: 'true', mr: '2' }),
+								updated_by ? updated_by.name : 'Usuario eliminado'
 							)
 						)
 					),
@@ -74065,10 +73711,8 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 	return DeviceDetails;
 }(_react.Component);
 
-;
-
 /***/ }),
-/* 336 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74202,7 +73846,7 @@ var DeviceDelete = exports.DeviceDelete = function (_Component) {
 ;
 
 /***/ }),
-/* 337 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74213,24 +73857,32 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Overview = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _panel = __webpack_require__(338);
+var _panel = __webpack_require__(337);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* COMPONENTS */
-/* IMPORT MODULES */
-var Overview = exports.Overview = function Overview(_ref) {
-  var displays = _ref.displays,
-      images = _ref.images,
-      groups = _ref.groups,
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /* IMPORT MODULES */
+
+
+/* IMPORT COMPONENTS */
+
+
+/* COMPONENT */
+var Overview = function Overview(_ref) {
+  var _ref$data = _ref.data,
+      displays = _ref$data.displays,
+      images = _ref$data.images,
+      groups = _ref$data.groups,
+      devices = _ref$data.devices,
+      gateways = _ref$data.gateways,
       user = _ref.user,
-      devices = _ref.devices,
-      gateways = _ref.gateways,
-      filterValue = _ref.filterValue;
+      rest = _objectWithoutProperties(_ref, ['data', 'user']);
 
   return _react2.default.createElement(
     'div',
@@ -74256,15 +73908,68 @@ var Overview = exports.Overview = function Overview(_ref) {
     !user.admin && _react2.default.createElement(
       'div',
       { className: 'row row-panel' },
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: displays, category: 'displays', appearance: 'card title-displays', icon: 'television', size: 'small' }),
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: images, category: 'images', appearance: 'card title-images', icon: 'picture-o', size: 'small' }),
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: groups, category: 'groups', appearance: 'card title-groups', icon: 'list', size: 'small' })
+      _react2.default.createElement(_panel.Panel, _extends({ content: displays }, rest, { category: 'displays', appearance: 'card title-displays', icon: 'television', size: 'small' })),
+      _react2.default.createElement(_panel.Panel, _extends({ content: images }, rest, { category: 'images', appearance: 'card title-images', icon: 'picture-o', size: 'small' })),
+      _react2.default.createElement(_panel.Panel, _extends({ content: groups }, rest, { category: 'groups', appearance: 'card title-groups', icon: 'list', size: 'small' }))
     ),
     user.admin && _react2.default.createElement(
       'div',
       { className: 'row row-panel' },
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: devices, category: 'devices', appearance: 'card title-devices', icon: 'tablet', size: 'big' }),
-      _react2.default.createElement(_panel.Panel, { filterValue: filterValue, content: gateways, category: 'gateways', appearance: 'card title-gateways', icon: 'sitemap', size: 'big' })
+      _react2.default.createElement(_panel.Panel, _extends({ content: devices }, rest, { category: 'devices', appearance: 'card title-devices', icon: 'tablet', size: 'big' })),
+      _react2.default.createElement(_panel.Panel, _extends({ content: gateways }, rest, { category: 'gateways', appearance: 'card title-gateways', icon: 'sitemap', size: 'big' }))
+    )
+  );
+};
+exports.Overview = Overview;
+
+/***/ }),
+/* 337 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Panel = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _list = __webpack_require__(18);
+
+var _title = __webpack_require__(12);
+
+var _addButton = __webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* COMPONENTS */
+/* IMPORT MODULES */
+var Panel = exports.Panel = function Panel(_ref) {
+  var category = _ref.category,
+      content = _ref.content,
+      size = _ref.size,
+      appearance = _ref.appearance,
+      icon = _ref.icon,
+      filterValue = _ref.filterValue,
+      filterFound = _ref.filterFound,
+      filterFoundValue = _ref.filterFoundValue;
+
+  return _react2.default.createElement(
+    'div',
+    { className: size == "small" ? "col-4 panel" : "col-6 panel" },
+    _react2.default.createElement(_title.Title, { total: content.length, appearance: appearance, icon: icon }),
+    _react2.default.createElement(
+      'div',
+      { className: 'row controls' },
+      _react2.default.createElement(
+        'div',
+        { className: 'col' },
+        _react2.default.createElement(_list.List, { filterValue: filterValue, filterFoundValue: filterFoundValue, filterFound: filterFound, category: category, content: content })
+      )
     )
   );
 };
@@ -74281,47 +73986,32 @@ var Overview = exports.Overview = function Overview(_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Panel = undefined;
+exports.ProtectedRoute = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _list = __webpack_require__(17);
-
-var _title = __webpack_require__(12);
-
-var _addButton = __webpack_require__(14);
+var _reactRouterDom = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* COMPONENTS */
-/* IMPORT MODULES */
-var Panel = exports.Panel = function Panel(_ref) {
-  var category = _ref.category,
-      content = _ref.content,
-      size = _ref.size,
-      appearance = _ref.appearance,
-      icon = _ref.icon,
-      filterValue = _ref.filterValue;
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; } /* IMPORT MODULES */
 
-  return _react2.default.createElement(
-    'div',
-    { className: size == "small" ? "col-4 panel" : "col-6 panel" },
-    _react2.default.createElement(_title.Title, { total: content.length, appearance: appearance, icon: icon }),
-    _react2.default.createElement(
-      'div',
-      { className: 'row controls' },
-      _react2.default.createElement(
-        'div',
-        { className: 'col' },
-        _react2.default.createElement(_list.List, { filterValue: filterValue, category: category, content: content })
-      )
-    )
-  );
+
+/* COMPONENT */
+var ProtectedRoute = function ProtectedRoute(_ref) {
+  var Component = _ref.component,
+      user = _ref.user,
+      rest = _objectWithoutProperties(_ref, ['component', 'user']);
+
+  return _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, { render: function render(props) {
+      return user.admin == true ? _react2.default.createElement(Component, _extends({ user: user }, rest)) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+    } }));
 };
-
-/* IMPORT COMPONENTS */
+exports.ProtectedRoute = ProtectedRoute;
 
 /***/ }),
 /* 339 */
@@ -74397,7 +74087,7 @@ var Login = exports.Login = function (_Component) {
         // resolve callback
         if (res.status == 200) {
           // if auth is successful
-          return _this.props.login(res.data.user, res.data.token); // login function
+          return _this.props.login(res.data.user, res.data.token, res.data.data); // login function
         }
       }, function (error) {
         // reject callback
@@ -74454,7 +74144,7 @@ var Login = exports.Login = function (_Component) {
               _react2.default.createElement(
                 'small',
                 { className: 'float-right' },
-                'v0.1.4'
+                'v0.1.5'
               ),
               _react2.default.createElement(
                 'form',
@@ -74558,7 +74248,7 @@ exports = module.exports = __webpack_require__(342)(undefined);
 
 
 // module
-exports.push([module.i, "/*!\n * Bootstrap v4.0.0-beta.2 (https://getbootstrap.com)\n * Copyright 2011-2017 The Bootstrap Authors\n * Copyright 2011-2017 Twitter, Inc.\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n */\n/**\n * React Select\n * ============\n * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/\n * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs\n * MIT License: https://github.com/JedWatson/react-select\n*/\n.Select {\n  position: relative;\n}\n.Select input::-webkit-contacts-auto-fill-button, .Select input::-webkit-credentials-auto-fill-button {\n  display: none !important;\n}\n.Select input::-ms-clear {\n  display: none !important;\n}\n.Select input::-ms-reveal {\n  display: none !important;\n}\n.Select, .Select div, .Select input, .Select span {\n  box-sizing: border-box;\n}\n.Select.is-disabled .Select-arrow-zone {\n  cursor: default;\n  pointer-events: none;\n  opacity: 0.35;\n}\n.Select.is-disabled > .Select-control {\n  background-color: #f9f9f9;\n}\n.Select.is-disabled > .Select-control:hover {\n  box-shadow: none;\n}\n.Select.is-open > .Select-control {\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n  background: #fff;\n  border-color: #b3b3b3 #ccc #d9d9d9;\n}\n.Select.is-open > .Select-control .Select-arrow {\n  top: -2px;\n  border-color: transparent transparent #999;\n  border-width: 0 5px 5px;\n}\n.Select.is-searchable.is-open > .Select-control {\n  cursor: text;\n}\n.Select.is-searchable.is-focused:not(.is-open) > .Select-control {\n  cursor: text;\n}\n.Select.is-focused > .Select-control {\n  background: #fff;\n}\n.Select.is-focused:not(.is-open) > .Select-control {\n  border-color: #007eff;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(0, 126, 255, 0.1);\n  background: #fff;\n}\n.Select.has-value.is-clearable.Select--single > .Select-control .Select-value {\n  padding-right: 42px;\n}\n.Select.has-value.Select--single > .Select-control .Select-value .Select-value-label, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {\n  color: #333;\n}\n.Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label {\n  cursor: pointer;\n  text-decoration: none;\n}\n.Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label:hover, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover, .Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus {\n  color: #007eff;\n  outline: none;\n  text-decoration: underline;\n}\n.Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus {\n  background: #fff;\n}\n.Select.has-value.is-pseudo-focused .Select-input {\n  opacity: 0;\n}\n.Select.is-open .Select-arrow, .Select .Select-arrow-zone:hover > .Select-arrow {\n  border-top-color: #666;\n}\n.Select.Select--rtl {\n  direction: rtl;\n  text-align: right;\n}\n.Select-control {\n  background-color: #fff;\n  border-color: #d9d9d9 #ccc #b3b3b3;\n  border-radius: 4px;\n  border: 1px solid #ccc;\n  color: #333;\n  cursor: default;\n  display: table;\n  border-spacing: 0;\n  border-collapse: separate;\n  height: 36px;\n  outline: none;\n  overflow: hidden;\n  position: relative;\n  width: 100%;\n}\n.Select-control:hover {\n  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);\n}\n.Select-control .Select-input:focus {\n  outline: none;\n  background: #fff;\n}\n.Select-placeholder, .Select--single > .Select-control .Select-value {\n  bottom: 0;\n  color: #aaa;\n  left: 0;\n  line-height: 34px;\n  padding-left: 10px;\n  padding-right: 10px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  max-width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.Select-input {\n  height: 34px;\n  padding-left: 10px;\n  padding-right: 10px;\n  vertical-align: middle;\n}\n.Select-input > input {\n  width: 100%;\n  background: none transparent;\n  border: 0 none;\n  box-shadow: none;\n  cursor: default;\n  display: inline-block;\n  font-family: inherit;\n  font-size: inherit;\n  margin: 0;\n  outline: none;\n  line-height: 17px;\n  /* For IE 8 compatibility */\n  padding: 8px 0 12px;\n  /* For IE 8 compatibility */\n  -webkit-appearance: none;\n}\n.is-focused .Select-input > input {\n  cursor: text;\n}\n.has-value.is-pseudo-focused .Select-input {\n  opacity: 0;\n}\n.Select-control:not(.is-searchable) > .Select-input {\n  outline: none;\n}\n.Select-loading-zone {\n  cursor: pointer;\n  display: table-cell;\n  position: relative;\n  text-align: center;\n  vertical-align: middle;\n  width: 16px;\n}\n.Select-loading {\n  -webkit-animation: Select-animation-spin 400ms infinite linear;\n  animation: Select-animation-spin 400ms infinite linear;\n  width: 16px;\n  height: 16px;\n  box-sizing: border-box;\n  border-radius: 50%;\n  border: 2px solid #ccc;\n  border-right-color: #333;\n  display: inline-block;\n  position: relative;\n  vertical-align: middle;\n}\n.Select-clear-zone {\n  -webkit-animation: Select-animation-fadeIn 200ms;\n  animation: Select-animation-fadeIn 200ms;\n  color: #999;\n  cursor: pointer;\n  display: table-cell;\n  position: relative;\n  text-align: center;\n  vertical-align: middle;\n  width: 17px;\n}\n.Select-clear-zone:hover {\n  color: #D0021B;\n}\n.Select-clear {\n  display: inline-block;\n  font-size: 18px;\n  line-height: 1;\n}\n.Select--multi .Select-clear-zone {\n  width: 17px;\n}\n.Select-arrow-zone {\n  cursor: pointer;\n  display: table-cell;\n  position: relative;\n  text-align: center;\n  vertical-align: middle;\n  width: 25px;\n  padding-right: 5px;\n}\n.Select--rtl .Select-arrow-zone {\n  padding-right: 0;\n  padding-left: 5px;\n}\n.Select-arrow {\n  border-color: #999 transparent transparent;\n  border-style: solid;\n  border-width: 5px 5px 2.5px;\n  display: inline-block;\n  height: 0;\n  width: 0;\n  position: relative;\n}\n.Select-control > *:last-child {\n  padding-right: 5px;\n}\n.Select--multi .Select-multi-value-wrapper {\n  display: inline-block;\n}\n.Select .Select-aria-only {\n  position: absolute;\n  display: inline-block;\n  height: 1px;\n  width: 1px;\n  margin: -1px;\n  clip: rect(0, 0, 0, 0);\n  overflow: hidden;\n  float: left;\n}\n@-webkit-keyframes Select-animation-fadeIn {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes Select-animation-fadeIn {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n.Select-menu-outer {\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  border-top-color: #e6e6e6;\n  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);\n  box-sizing: border-box;\n  margin-top: -1px;\n  max-height: 200px;\n  position: absolute;\n  top: 100%;\n  width: 100%;\n  z-index: 1;\n  -webkit-overflow-scrolling: touch;\n}\n.Select-menu {\n  max-height: 198px;\n  overflow-y: auto;\n}\n.Select-option {\n  box-sizing: border-box;\n  background-color: #fff;\n  color: #666666;\n  cursor: pointer;\n  display: block;\n  padding: 8px 10px;\n}\n.Select-option:last-child {\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n}\n.Select-option.is-selected {\n  background-color: #f5faff;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 126, 255, 0.04);\n  color: #333;\n}\n.Select-option.is-focused {\n  background-color: #ebf5ff;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 126, 255, 0.08);\n  color: #333;\n}\n.Select-option.is-disabled {\n  color: #cccccc;\n  cursor: default;\n}\n.Select-noresults {\n  box-sizing: border-box;\n  color: #999999;\n  cursor: default;\n  display: block;\n  padding: 8px 10px;\n}\n.Select--multi .Select-input {\n  vertical-align: middle;\n  margin-left: 10px;\n  padding: 0;\n}\n.Select--multi.Select--rtl .Select-input {\n  margin-left: 0;\n  margin-right: 10px;\n}\n.Select--multi.has-value .Select-input {\n  margin-left: 5px;\n}\n.Select--multi .Select-value {\n  background-color: #ebf5ff;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 126, 255, 0.08);\n  border-radius: 2px;\n  border: 1px solid #c2e0ff;\n  /* Fallback color for IE 8 */\n  border: 1px solid rgba(0, 126, 255, 0.24);\n  color: #007eff;\n  display: inline-block;\n  font-size: 0.9em;\n  line-height: 1.4;\n  margin-left: 5px;\n  margin-top: 5px;\n  vertical-align: top;\n}\n.Select--multi .Select-value-icon, .Select--multi .Select-value-label {\n  display: inline-block;\n  vertical-align: middle;\n}\n.Select--multi .Select-value-label {\n  border-bottom-right-radius: 2px;\n  border-top-right-radius: 2px;\n  cursor: default;\n  padding: 2px 5px;\n}\n.Select--multi a.Select-value-label {\n  color: #007eff;\n  cursor: pointer;\n  text-decoration: none;\n}\n.Select--multi a.Select-value-label:hover {\n  text-decoration: underline;\n}\n.Select--multi .Select-value-icon {\n  cursor: pointer;\n  border-bottom-left-radius: 2px;\n  border-top-left-radius: 2px;\n  border-right: 1px solid #c2e0ff;\n  /* Fallback color for IE 8 */\n  border-right: 1px solid rgba(0, 126, 255, 0.24);\n  padding: 1px 5px 3px;\n}\n.Select--multi .Select-value-icon:hover, .Select--multi .Select-value-icon:focus {\n  background-color: #d8eafd;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 113, 230, 0.08);\n  color: #0071e6;\n}\n.Select--multi .Select-value-icon:active {\n  background-color: #c2e0ff;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 126, 255, 0.24);\n}\n.Select--multi.Select--rtl .Select-value {\n  margin-left: 0;\n  margin-right: 5px;\n}\n.Select--multi.Select--rtl .Select-value-icon {\n  border-right: none;\n  border-left: 1px solid #c2e0ff;\n  /* Fallback color for IE 8 */\n  border-left: 1px solid rgba(0, 126, 255, 0.24);\n}\n.Select--multi.is-disabled .Select-value {\n  background-color: #fcfcfc;\n  border: 1px solid #e3e3e3;\n  color: #333;\n}\n.Select--multi.is-disabled .Select-value-icon {\n  cursor: not-allowed;\n  border-right: 1px solid #e3e3e3;\n}\n.Select--multi.is-disabled .Select-value-icon:hover, .Select--multi.is-disabled .Select-value-icon:focus, .Select--multi.is-disabled .Select-value-icon:active {\n  background-color: #fcfcfc;\n}\n@keyframes Select-animation-spin {\n  to {\n    -webkit-transform: rotate(1turn);\n            transform: rotate(1turn);\n  }\n}\n@-webkit-keyframes Select-animation-spin {\n  to {\n    -webkit-transform: rotate(1turn);\n  }\n}\n@media print {\n  *, *::before, *::after {\n    text-shadow: none !important;\n    box-shadow: none !important; }\n  a, a:visited {\n    text-decoration: underline; }\n  abbr[title]::after {\n    content: \" (\" attr(title) \")\"; }\n  pre {\n    white-space: pre-wrap !important; }\n  pre, blockquote {\n    border: 1px solid #999;\n    page-break-inside: avoid; }\n  thead {\n    display: table-header-group; }\n  tr, img {\n    page-break-inside: avoid; }\n  p, h2, h3 {\n    orphans: 3;\n    widows: 3; }\n  h2, h3 {\n    page-break-after: avoid; }\n  .navbar {\n    display: none; }\n  .badge {\n    border: 1px solid #000; }\n  .table {\n    border-collapse: collapse !important; }\n    .table td, .table th {\n      background-color: #fff !important; }\n  .table-bordered th, .table-bordered td {\n    border: 1px solid #ddd !important; } }\n*, *::before, *::after {\n  box-sizing: border-box; }\nhtml {\n  font-family: sans-serif;\n  line-height: 1.15;\n  -webkit-text-size-adjust: 100%;\n  -ms-text-size-adjust: 100%;\n  -ms-overflow-style: scrollbar;\n  -webkit-tap-highlight-color: transparent; }\n@-ms-viewport {\n  width: device-width; }\narticle, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {\n  display: block; }\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-size: 1rem;\n  font-weight: normal;\n  line-height: 1.5;\n  color: #1e2125;\n  text-align: left;\n  background-color: #f4f7f9; }\n[tabindex=\"-1\"]:focus {\n  outline: none !important; }\nhr {\n  box-sizing: content-box;\n  height: 0;\n  overflow: visible; }\nh1, h2, h3, h4, h5, h6 {\n  margin-top: 0;\n  margin-bottom: 0.5rem; }\np {\n  margin-top: 0;\n  margin-bottom: 1rem; }\nabbr[title], abbr[data-original-title] {\n  text-decoration: underline;\n  text-decoration: underline dotted;\n  cursor: help;\n  border-bottom: 0; }\naddress {\n  margin-bottom: 1rem;\n  font-style: normal;\n  line-height: inherit; }\nol, ul, dl {\n  margin-top: 0;\n  margin-bottom: 1rem; }\nol ol, ul ul, ol ul, ul ol {\n  margin-bottom: 0; }\ndt {\n  font-weight: bold; }\ndd {\n  margin-bottom: .5rem;\n  margin-left: 0; }\nblockquote {\n  margin: 0 0 1rem; }\ndfn {\n  font-style: italic; }\nb, strong {\n  font-weight: bolder; }\nsmall {\n  font-size: 80%; }\nsub, sup {\n  position: relative;\n  font-size: 75%;\n  line-height: 0;\n  vertical-align: baseline; }\nsub {\n  bottom: -.25em; }\nsup {\n  top: -.5em; }\na {\n  color: #20c997;\n  text-decoration: none;\n  background-color: transparent;\n  -webkit-text-decoration-skip: objects; }\na:hover {\n    color: #158765;\n    text-decoration: underline; }\na:not([href]):not([tabindex]) {\n  color: inherit;\n  text-decoration: none; }\na:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {\n    color: inherit;\n    text-decoration: none; }\na:not([href]):not([tabindex]):focus {\n    outline: 0; }\npre, code, kbd, samp {\n  font-family: monospace, monospace;\n  font-size: 1em; }\npre {\n  margin-top: 0;\n  margin-bottom: 1rem;\n  overflow: auto;\n  -ms-overflow-style: scrollbar; }\nfigure {\n  margin: 0 0 1rem; }\nimg {\n  vertical-align: middle;\n  border-style: none; }\nsvg:not(:root) {\n  overflow: hidden; }\na, area, button, [role=\"button\"], input:not([type=\"range\"]), label, select, summary, textarea {\n  -ms-touch-action: manipulation;\n      touch-action: manipulation; }\ntable {\n  border-collapse: collapse; }\ncaption {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n  color: #868e96;\n  text-align: left;\n  caption-side: bottom; }\nth {\n  text-align: inherit; }\nlabel {\n  display: inline-block;\n  margin-bottom: .5rem; }\nbutton {\n  border-radius: 0; }\nbutton:focus {\n  outline: 1px dotted;\n  outline: 5px auto -webkit-focus-ring-color; }\ninput, button, select, optgroup, textarea {\n  margin: 0;\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit; }\nbutton, input {\n  overflow: visible; }\nbutton, select {\n  text-transform: none; }\nbutton, html [type=\"button\"], [type=\"reset\"], [type=\"submit\"] {\n  -webkit-appearance: button; }\nbutton::-moz-focus-inner, [type=\"button\"]::-moz-focus-inner, [type=\"reset\"]::-moz-focus-inner, [type=\"submit\"]::-moz-focus-inner {\n  padding: 0;\n  border-style: none; }\ninput[type=\"radio\"], input[type=\"checkbox\"] {\n  box-sizing: border-box;\n  padding: 0; }\ninput[type=\"date\"], input[type=\"time\"], input[type=\"datetime-local\"], input[type=\"month\"] {\n  -webkit-appearance: listbox; }\ntextarea {\n  overflow: auto;\n  resize: vertical; }\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0; }\nlegend {\n  display: block;\n  width: 100%;\n  max-width: 100%;\n  padding: 0;\n  margin-bottom: .5rem;\n  font-size: 1.5rem;\n  line-height: inherit;\n  color: inherit;\n  white-space: normal; }\nprogress {\n  vertical-align: baseline; }\n[type=\"number\"]::-webkit-inner-spin-button, [type=\"number\"]::-webkit-outer-spin-button {\n  height: auto; }\n[type=\"search\"] {\n  outline-offset: -2px;\n  -webkit-appearance: none; }\n[type=\"search\"]::-webkit-search-cancel-button, [type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none; }\n::-webkit-file-upload-button {\n  font: inherit;\n  -webkit-appearance: button; }\noutput {\n  display: inline-block; }\nsummary {\n  display: list-item; }\ntemplate {\n  display: none; }\n[hidden] {\n  display: none !important; }\nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n  margin-bottom: 0.5rem;\n  font-family: inherit;\n  font-weight: 500;\n  line-height: 1.1;\n  color: inherit; }\nh1, .h1 {\n  font-size: 2.5rem; }\nh2, .h2 {\n  font-size: 2rem; }\nh3, .h3 {\n  font-size: 1.75rem; }\nh4, .h4 {\n  font-size: 1.5rem; }\nh5, .h5 {\n  font-size: 1.25rem; }\nh6, .h6 {\n  font-size: 1rem; }\n.lead {\n  font-size: 1.25rem;\n  font-weight: 300; }\n.display-1 {\n  font-size: 6rem;\n  font-weight: 300;\n  line-height: 1.1; }\n.display-2 {\n  font-size: 5.5rem;\n  font-weight: 300;\n  line-height: 1.1; }\n.display-3 {\n  font-size: 4.5rem;\n  font-weight: 300;\n  line-height: 1.1; }\n.display-4 {\n  font-size: 3.5rem;\n  font-weight: 300;\n  line-height: 1.1; }\nhr {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  border: 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1); }\nsmall, .small {\n  font-size: 80%;\n  font-weight: normal; }\nmark, .mark {\n  padding: 0.2em;\n  background-color: #fcf8e3; }\n.list-unstyled {\n  padding-left: 0;\n  list-style: none; }\n.list-inline {\n  padding-left: 0;\n  list-style: none; }\n.list-inline-item {\n  display: inline-block; }\n.list-inline-item:not(:last-child) {\n    margin-right: 5px; }\n.initialism {\n  font-size: 90%;\n  text-transform: uppercase; }\n.blockquote {\n  margin-bottom: 1rem;\n  font-size: 1.25rem; }\n.blockquote-footer {\n  display: block;\n  font-size: 80%;\n  color: #868e96; }\n.blockquote-footer::before {\n    content: \"\\2014   \\A0\"; }\n.img-fluid {\n  max-width: 100%;\n  height: auto; }\n.img-thumbnail {\n  padding: 0.25rem;\n  background-color: #f4f7f9;\n  border: 1px solid #ddd;\n  border-radius: 0.25rem;\n  transition: all 0.2s ease-in-out;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);\n  max-width: 100%;\n  height: auto; }\n.figure {\n  display: inline-block; }\n.figure-img {\n  margin-bottom: 0.5rem;\n  line-height: 1; }\n.figure-caption {\n  font-size: 90%;\n  color: #868e96; }\ncode, kbd, pre, samp {\n  font-family: \"SFMono-Regular\", Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; }\ncode {\n  padding: 0.2rem 0.4rem;\n  font-size: 90%;\n  color: #bd4147;\n  background-color: #f8f9fa;\n  border-radius: 0.25rem; }\na > code {\n    padding: 0;\n    color: inherit;\n    background-color: inherit; }\nkbd {\n  padding: 0.2rem 0.4rem;\n  font-size: 90%;\n  color: #fff;\n  background-color: #212529;\n  border-radius: 0.2rem;\n  box-shadow: inset 0 -0.1rem 0 rgba(0, 0, 0, 0.25); }\nkbd kbd {\n    padding: 0;\n    font-size: 100%;\n    font-weight: bold;\n    box-shadow: none; }\npre {\n  display: block;\n  margin-top: 0;\n  margin-bottom: 1rem;\n  font-size: 90%;\n  color: #212529; }\npre code {\n    padding: 0;\n    font-size: inherit;\n    color: inherit;\n    background-color: transparent;\n    border-radius: 0; }\n.pre-scrollable {\n  max-height: 340px;\n  overflow-y: scroll; }\n.container {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto; }\n@media (min-width: 576px) {\n    .container {\n      max-width: 540px; } }\n@media (min-width: 768px) {\n    .container {\n      max-width: 720px; } }\n@media (min-width: 992px) {\n    .container {\n      max-width: 960px; } }\n@media (min-width: 1200px) {\n    .container {\n      max-width: 1140px; } }\n.container-fluid {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto; }\n.row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  margin-right: -15px;\n  margin-left: -15px; }\n.no-gutters {\n  margin-right: 0;\n  margin-left: 0; }\n.no-gutters > .col, .no-gutters > [class*=\"col-\"] {\n    padding-right: 0;\n    padding-left: 0; }\n.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {\n  position: relative;\n  width: 100%;\n  min-height: 1px;\n  padding-right: 15px;\n  padding-left: 15px; }\n.col {\n  -ms-flex-preferred-size: 0;\n      flex-basis: 0;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  max-width: 100%; }\n.col-auto {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  width: auto;\n  max-width: none; }\n.col-1 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 8.33333%;\n          flex: 0 0 8.33333%;\n  max-width: 8.33333%; }\n.col-2 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 16.66667%;\n          flex: 0 0 16.66667%;\n  max-width: 16.66667%; }\n.col-3 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 25%;\n          flex: 0 0 25%;\n  max-width: 25%; }\n.col-4 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 33.33333%;\n          flex: 0 0 33.33333%;\n  max-width: 33.33333%; }\n.col-5 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 41.66667%;\n          flex: 0 0 41.66667%;\n  max-width: 41.66667%; }\n.col-6 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50%;\n          flex: 0 0 50%;\n  max-width: 50%; }\n.col-7 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 58.33333%;\n          flex: 0 0 58.33333%;\n  max-width: 58.33333%; }\n.col-8 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 66.66667%;\n          flex: 0 0 66.66667%;\n  max-width: 66.66667%; }\n.col-9 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 75%;\n          flex: 0 0 75%;\n  max-width: 75%; }\n.col-10 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 83.33333%;\n          flex: 0 0 83.33333%;\n  max-width: 83.33333%; }\n.col-11 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 91.66667%;\n          flex: 0 0 91.66667%;\n  max-width: 91.66667%; }\n.col-12 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 100%;\n          flex: 0 0 100%;\n  max-width: 100%; }\n.order-first {\n  -webkit-box-ordinal-group: 0;\n      -ms-flex-order: -1;\n          order: -1; }\n.order-1 {\n  -webkit-box-ordinal-group: 2;\n      -ms-flex-order: 1;\n          order: 1; }\n.order-2 {\n  -webkit-box-ordinal-group: 3;\n      -ms-flex-order: 2;\n          order: 2; }\n.order-3 {\n  -webkit-box-ordinal-group: 4;\n      -ms-flex-order: 3;\n          order: 3; }\n.order-4 {\n  -webkit-box-ordinal-group: 5;\n      -ms-flex-order: 4;\n          order: 4; }\n.order-5 {\n  -webkit-box-ordinal-group: 6;\n      -ms-flex-order: 5;\n          order: 5; }\n.order-6 {\n  -webkit-box-ordinal-group: 7;\n      -ms-flex-order: 6;\n          order: 6; }\n.order-7 {\n  -webkit-box-ordinal-group: 8;\n      -ms-flex-order: 7;\n          order: 7; }\n.order-8 {\n  -webkit-box-ordinal-group: 9;\n      -ms-flex-order: 8;\n          order: 8; }\n.order-9 {\n  -webkit-box-ordinal-group: 10;\n      -ms-flex-order: 9;\n          order: 9; }\n.order-10 {\n  -webkit-box-ordinal-group: 11;\n      -ms-flex-order: 10;\n          order: 10; }\n.order-11 {\n  -webkit-box-ordinal-group: 12;\n      -ms-flex-order: 11;\n          order: 11; }\n.order-12 {\n  -webkit-box-ordinal-group: 13;\n      -ms-flex-order: 12;\n          order: 12; }\n.offset-1 {\n  margin-left: 8.33333%; }\n.offset-2 {\n  margin-left: 16.66667%; }\n.offset-3 {\n  margin-left: 25%; }\n.offset-4 {\n  margin-left: 33.33333%; }\n.offset-5 {\n  margin-left: 41.66667%; }\n.offset-6 {\n  margin-left: 50%; }\n.offset-7 {\n  margin-left: 58.33333%; }\n.offset-8 {\n  margin-left: 66.66667%; }\n.offset-9 {\n  margin-left: 75%; }\n.offset-10 {\n  margin-left: 83.33333%; }\n.offset-11 {\n  margin-left: 91.66667%; }\n@media (min-width: 576px) {\n  .col-sm {\n    -ms-flex-preferred-size: 0;\n        flex-basis: 0;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    max-width: 100%; }\n  .col-sm-auto {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-sm-1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 8.33333%;\n            flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-sm-2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 16.66667%;\n            flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-sm-3 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 25%;\n            flex: 0 0 25%;\n    max-width: 25%; }\n  .col-sm-4 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 33.33333%;\n            flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-sm-5 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 41.66667%;\n            flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-sm-6 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 50%;\n            flex: 0 0 50%;\n    max-width: 50%; }\n  .col-sm-7 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 58.33333%;\n            flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-sm-8 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 66.66667%;\n            flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-sm-9 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 75%;\n            flex: 0 0 75%;\n    max-width: 75%; }\n  .col-sm-10 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 83.33333%;\n            flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-sm-11 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 91.66667%;\n            flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-sm-12 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    max-width: 100%; }\n  .order-sm-first {\n    -webkit-box-ordinal-group: 0;\n        -ms-flex-order: -1;\n            order: -1; }\n  .order-sm-1 {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1; }\n  .order-sm-2 {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2; }\n  .order-sm-3 {\n    -webkit-box-ordinal-group: 4;\n        -ms-flex-order: 3;\n            order: 3; }\n  .order-sm-4 {\n    -webkit-box-ordinal-group: 5;\n        -ms-flex-order: 4;\n            order: 4; }\n  .order-sm-5 {\n    -webkit-box-ordinal-group: 6;\n        -ms-flex-order: 5;\n            order: 5; }\n  .order-sm-6 {\n    -webkit-box-ordinal-group: 7;\n        -ms-flex-order: 6;\n            order: 6; }\n  .order-sm-7 {\n    -webkit-box-ordinal-group: 8;\n        -ms-flex-order: 7;\n            order: 7; }\n  .order-sm-8 {\n    -webkit-box-ordinal-group: 9;\n        -ms-flex-order: 8;\n            order: 8; }\n  .order-sm-9 {\n    -webkit-box-ordinal-group: 10;\n        -ms-flex-order: 9;\n            order: 9; }\n  .order-sm-10 {\n    -webkit-box-ordinal-group: 11;\n        -ms-flex-order: 10;\n            order: 10; }\n  .order-sm-11 {\n    -webkit-box-ordinal-group: 12;\n        -ms-flex-order: 11;\n            order: 11; }\n  .order-sm-12 {\n    -webkit-box-ordinal-group: 13;\n        -ms-flex-order: 12;\n            order: 12; }\n  .offset-sm-0 {\n    margin-left: 0; }\n  .offset-sm-1 {\n    margin-left: 8.33333%; }\n  .offset-sm-2 {\n    margin-left: 16.66667%; }\n  .offset-sm-3 {\n    margin-left: 25%; }\n  .offset-sm-4 {\n    margin-left: 33.33333%; }\n  .offset-sm-5 {\n    margin-left: 41.66667%; }\n  .offset-sm-6 {\n    margin-left: 50%; }\n  .offset-sm-7 {\n    margin-left: 58.33333%; }\n  .offset-sm-8 {\n    margin-left: 66.66667%; }\n  .offset-sm-9 {\n    margin-left: 75%; }\n  .offset-sm-10 {\n    margin-left: 83.33333%; }\n  .offset-sm-11 {\n    margin-left: 91.66667%; } }\n@media (min-width: 768px) {\n  .col-md {\n    -ms-flex-preferred-size: 0;\n        flex-basis: 0;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    max-width: 100%; }\n  .col-md-auto {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-md-1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 8.33333%;\n            flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-md-2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 16.66667%;\n            flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-md-3 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 25%;\n            flex: 0 0 25%;\n    max-width: 25%; }\n  .col-md-4 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 33.33333%;\n            flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-md-5 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 41.66667%;\n            flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-md-6 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 50%;\n            flex: 0 0 50%;\n    max-width: 50%; }\n  .col-md-7 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 58.33333%;\n            flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-md-8 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 66.66667%;\n            flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-md-9 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 75%;\n            flex: 0 0 75%;\n    max-width: 75%; }\n  .col-md-10 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 83.33333%;\n            flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-md-11 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 91.66667%;\n            flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-md-12 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    max-width: 100%; }\n  .order-md-first {\n    -webkit-box-ordinal-group: 0;\n        -ms-flex-order: -1;\n            order: -1; }\n  .order-md-1 {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1; }\n  .order-md-2 {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2; }\n  .order-md-3 {\n    -webkit-box-ordinal-group: 4;\n        -ms-flex-order: 3;\n            order: 3; }\n  .order-md-4 {\n    -webkit-box-ordinal-group: 5;\n        -ms-flex-order: 4;\n            order: 4; }\n  .order-md-5 {\n    -webkit-box-ordinal-group: 6;\n        -ms-flex-order: 5;\n            order: 5; }\n  .order-md-6 {\n    -webkit-box-ordinal-group: 7;\n        -ms-flex-order: 6;\n            order: 6; }\n  .order-md-7 {\n    -webkit-box-ordinal-group: 8;\n        -ms-flex-order: 7;\n            order: 7; }\n  .order-md-8 {\n    -webkit-box-ordinal-group: 9;\n        -ms-flex-order: 8;\n            order: 8; }\n  .order-md-9 {\n    -webkit-box-ordinal-group: 10;\n        -ms-flex-order: 9;\n            order: 9; }\n  .order-md-10 {\n    -webkit-box-ordinal-group: 11;\n        -ms-flex-order: 10;\n            order: 10; }\n  .order-md-11 {\n    -webkit-box-ordinal-group: 12;\n        -ms-flex-order: 11;\n            order: 11; }\n  .order-md-12 {\n    -webkit-box-ordinal-group: 13;\n        -ms-flex-order: 12;\n            order: 12; }\n  .offset-md-0 {\n    margin-left: 0; }\n  .offset-md-1 {\n    margin-left: 8.33333%; }\n  .offset-md-2 {\n    margin-left: 16.66667%; }\n  .offset-md-3 {\n    margin-left: 25%; }\n  .offset-md-4 {\n    margin-left: 33.33333%; }\n  .offset-md-5 {\n    margin-left: 41.66667%; }\n  .offset-md-6 {\n    margin-left: 50%; }\n  .offset-md-7 {\n    margin-left: 58.33333%; }\n  .offset-md-8 {\n    margin-left: 66.66667%; }\n  .offset-md-9 {\n    margin-left: 75%; }\n  .offset-md-10 {\n    margin-left: 83.33333%; }\n  .offset-md-11 {\n    margin-left: 91.66667%; } }\n@media (min-width: 992px) {\n  .col-lg {\n    -ms-flex-preferred-size: 0;\n        flex-basis: 0;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    max-width: 100%; }\n  .col-lg-auto {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-lg-1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 8.33333%;\n            flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-lg-2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 16.66667%;\n            flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-lg-3 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 25%;\n            flex: 0 0 25%;\n    max-width: 25%; }\n  .col-lg-4 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 33.33333%;\n            flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-lg-5 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 41.66667%;\n            flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-lg-6 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 50%;\n            flex: 0 0 50%;\n    max-width: 50%; }\n  .col-lg-7 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 58.33333%;\n            flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-lg-8 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 66.66667%;\n            flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-lg-9 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 75%;\n            flex: 0 0 75%;\n    max-width: 75%; }\n  .col-lg-10 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 83.33333%;\n            flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-lg-11 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 91.66667%;\n            flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-lg-12 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    max-width: 100%; }\n  .order-lg-first {\n    -webkit-box-ordinal-group: 0;\n        -ms-flex-order: -1;\n            order: -1; }\n  .order-lg-1 {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1; }\n  .order-lg-2 {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2; }\n  .order-lg-3 {\n    -webkit-box-ordinal-group: 4;\n        -ms-flex-order: 3;\n            order: 3; }\n  .order-lg-4 {\n    -webkit-box-ordinal-group: 5;\n        -ms-flex-order: 4;\n            order: 4; }\n  .order-lg-5 {\n    -webkit-box-ordinal-group: 6;\n        -ms-flex-order: 5;\n            order: 5; }\n  .order-lg-6 {\n    -webkit-box-ordinal-group: 7;\n        -ms-flex-order: 6;\n            order: 6; }\n  .order-lg-7 {\n    -webkit-box-ordinal-group: 8;\n        -ms-flex-order: 7;\n            order: 7; }\n  .order-lg-8 {\n    -webkit-box-ordinal-group: 9;\n        -ms-flex-order: 8;\n            order: 8; }\n  .order-lg-9 {\n    -webkit-box-ordinal-group: 10;\n        -ms-flex-order: 9;\n            order: 9; }\n  .order-lg-10 {\n    -webkit-box-ordinal-group: 11;\n        -ms-flex-order: 10;\n            order: 10; }\n  .order-lg-11 {\n    -webkit-box-ordinal-group: 12;\n        -ms-flex-order: 11;\n            order: 11; }\n  .order-lg-12 {\n    -webkit-box-ordinal-group: 13;\n        -ms-flex-order: 12;\n            order: 12; }\n  .offset-lg-0 {\n    margin-left: 0; }\n  .offset-lg-1 {\n    margin-left: 8.33333%; }\n  .offset-lg-2 {\n    margin-left: 16.66667%; }\n  .offset-lg-3 {\n    margin-left: 25%; }\n  .offset-lg-4 {\n    margin-left: 33.33333%; }\n  .offset-lg-5 {\n    margin-left: 41.66667%; }\n  .offset-lg-6 {\n    margin-left: 50%; }\n  .offset-lg-7 {\n    margin-left: 58.33333%; }\n  .offset-lg-8 {\n    margin-left: 66.66667%; }\n  .offset-lg-9 {\n    margin-left: 75%; }\n  .offset-lg-10 {\n    margin-left: 83.33333%; }\n  .offset-lg-11 {\n    margin-left: 91.66667%; } }\n@media (min-width: 1200px) {\n  .col-xl {\n    -ms-flex-preferred-size: 0;\n        flex-basis: 0;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    max-width: 100%; }\n  .col-xl-auto {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-xl-1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 8.33333%;\n            flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-xl-2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 16.66667%;\n            flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-xl-3 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 25%;\n            flex: 0 0 25%;\n    max-width: 25%; }\n  .col-xl-4 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 33.33333%;\n            flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-xl-5 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 41.66667%;\n            flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-xl-6 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 50%;\n            flex: 0 0 50%;\n    max-width: 50%; }\n  .col-xl-7 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 58.33333%;\n            flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-xl-8 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 66.66667%;\n            flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-xl-9 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 75%;\n            flex: 0 0 75%;\n    max-width: 75%; }\n  .col-xl-10 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 83.33333%;\n            flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-xl-11 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 91.66667%;\n            flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-xl-12 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    max-width: 100%; }\n  .order-xl-first {\n    -webkit-box-ordinal-group: 0;\n        -ms-flex-order: -1;\n            order: -1; }\n  .order-xl-1 {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1; }\n  .order-xl-2 {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2; }\n  .order-xl-3 {\n    -webkit-box-ordinal-group: 4;\n        -ms-flex-order: 3;\n            order: 3; }\n  .order-xl-4 {\n    -webkit-box-ordinal-group: 5;\n        -ms-flex-order: 4;\n            order: 4; }\n  .order-xl-5 {\n    -webkit-box-ordinal-group: 6;\n        -ms-flex-order: 5;\n            order: 5; }\n  .order-xl-6 {\n    -webkit-box-ordinal-group: 7;\n        -ms-flex-order: 6;\n            order: 6; }\n  .order-xl-7 {\n    -webkit-box-ordinal-group: 8;\n        -ms-flex-order: 7;\n            order: 7; }\n  .order-xl-8 {\n    -webkit-box-ordinal-group: 9;\n        -ms-flex-order: 8;\n            order: 8; }\n  .order-xl-9 {\n    -webkit-box-ordinal-group: 10;\n        -ms-flex-order: 9;\n            order: 9; }\n  .order-xl-10 {\n    -webkit-box-ordinal-group: 11;\n        -ms-flex-order: 10;\n            order: 10; }\n  .order-xl-11 {\n    -webkit-box-ordinal-group: 12;\n        -ms-flex-order: 11;\n            order: 11; }\n  .order-xl-12 {\n    -webkit-box-ordinal-group: 13;\n        -ms-flex-order: 12;\n            order: 12; }\n  .offset-xl-0 {\n    margin-left: 0; }\n  .offset-xl-1 {\n    margin-left: 8.33333%; }\n  .offset-xl-2 {\n    margin-left: 16.66667%; }\n  .offset-xl-3 {\n    margin-left: 25%; }\n  .offset-xl-4 {\n    margin-left: 33.33333%; }\n  .offset-xl-5 {\n    margin-left: 41.66667%; }\n  .offset-xl-6 {\n    margin-left: 50%; }\n  .offset-xl-7 {\n    margin-left: 58.33333%; }\n  .offset-xl-8 {\n    margin-left: 66.66667%; }\n  .offset-xl-9 {\n    margin-left: 75%; }\n  .offset-xl-10 {\n    margin-left: 83.33333%; }\n  .offset-xl-11 {\n    margin-left: 91.66667%; } }\n.table {\n  width: 100%;\n  max-width: 100%;\n  margin-bottom: 1rem;\n  background-color: transparent; }\n.table th, .table td {\n    padding: 0.75rem;\n    vertical-align: top;\n    border-top: 1px solid #e9ecef; }\n.table thead th {\n    vertical-align: bottom;\n    border-bottom: 2px solid #e9ecef; }\n.table tbody + tbody {\n    border-top: 2px solid #e9ecef; }\n.table .table {\n    background-color: #f4f7f9; }\n.table-sm th, .table-sm td {\n  padding: 0.3rem; }\n.table-bordered {\n  border: 1px solid #e9ecef; }\n.table-bordered th, .table-bordered td {\n    border: 1px solid #e9ecef; }\n.table-bordered thead th, .table-bordered thead td {\n    border-bottom-width: 2px; }\n.table-striped tbody tr:nth-of-type(odd) {\n  background-color: rgba(0, 0, 0, 0.05); }\n.table-hover tbody tr:hover {\n  background-color: rgba(0, 0, 0, 0.075); }\n.table-primary, .table-primary > th, .table-primary > td {\n  background-color: #c1f0e2; }\n.table-hover .table-primary:hover {\n  background-color: #acebd8; }\n.table-hover .table-primary:hover > td, .table-hover .table-primary:hover > th {\n    background-color: #acebd8; }\n.table-secondary, .table-secondary > th, .table-secondary > td {\n  background-color: #fdfdfe; }\n.table-hover .table-secondary:hover {\n  background-color: #ececf6; }\n.table-hover .table-secondary:hover > td, .table-hover .table-secondary:hover > th {\n    background-color: #ececf6; }\n.table-success, .table-success > th, .table-success > td {\n  background-color: #c1f0e2; }\n.table-hover .table-success:hover {\n  background-color: #acebd8; }\n.table-hover .table-success:hover > td, .table-hover .table-success:hover > th {\n    background-color: #acebd8; }\n.table-info, .table-info > th, .table-info > td {\n  background-color: #bee5eb; }\n.table-hover .table-info:hover {\n  background-color: #abdde5; }\n.table-hover .table-info:hover > td, .table-hover .table-info:hover > th {\n    background-color: #abdde5; }\n.table-warning, .table-warning > th, .table-warning > td {\n  background-color: #ffeeba; }\n.table-hover .table-warning:hover {\n  background-color: #ffe8a1; }\n.table-hover .table-warning:hover > td, .table-hover .table-warning:hover > th {\n    background-color: #ffe8a1; }\n.table-danger, .table-danger > th, .table-danger > td {\n  background-color: #f5c6cb; }\n.table-hover .table-danger:hover {\n  background-color: #f1b0b7; }\n.table-hover .table-danger:hover > td, .table-hover .table-danger:hover > th {\n    background-color: #f1b0b7; }\n.table-light, .table-light > th, .table-light > td {\n  background-color: #fdfdfe; }\n.table-hover .table-light:hover {\n  background-color: #ececf6; }\n.table-hover .table-light:hover > td, .table-hover .table-light:hover > th {\n    background-color: #ececf6; }\n.table-dark, .table-dark > th, .table-dark > td {\n  background-color: #c6c8ca; }\n.table-hover .table-dark:hover {\n  background-color: #b9bbbe; }\n.table-hover .table-dark:hover > td, .table-hover .table-dark:hover > th {\n    background-color: #b9bbbe; }\n.table-active, .table-active > th, .table-active > td {\n  background-color: rgba(0, 0, 0, 0.075); }\n.table-hover .table-active:hover {\n  background-color: rgba(0, 0, 0, 0.075); }\n.table-hover .table-active:hover > td, .table-hover .table-active:hover > th {\n    background-color: rgba(0, 0, 0, 0.075); }\n.table .thead-dark th {\n  color: #f4f7f9;\n  background-color: #212529;\n  border-color: #32383e; }\n.table .thead-light th {\n  color: #495057;\n  background-color: #e9ecef;\n  border-color: #e9ecef; }\n.table-dark {\n  color: #f4f7f9;\n  background-color: #212529; }\n.table-dark th, .table-dark td, .table-dark thead th {\n    border-color: #32383e; }\n.table-dark.table-bordered {\n    border: 0; }\n.table-dark.table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(255, 255, 255, 0.05); }\n.table-dark.table-hover tbody tr:hover {\n    background-color: rgba(255, 255, 255, 0.075); }\n@media (max-width: 575px) {\n  .table-responsive-sm {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-sm.table-bordered {\n      border: 0; } }\n@media (max-width: 767px) {\n  .table-responsive-md {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-md.table-bordered {\n      border: 0; } }\n@media (max-width: 991px) {\n  .table-responsive-lg {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-lg.table-bordered {\n      border: 0; } }\n@media (max-width: 1199px) {\n  .table-responsive-xl {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-xl.table-bordered {\n      border: 0; } }\n.table-responsive {\n  display: block;\n  width: 100%;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  -ms-overflow-style: -ms-autohiding-scrollbar; }\n.table-responsive.table-bordered {\n    border: 0; }\n.form-control {\n  display: block;\n  width: 100%;\n  padding: 0.5rem 0.75rem;\n  font-size: 1rem;\n  line-height: 1.25;\n  color: #1e2125;\n  background-color: transparent;\n  background-image: none;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }\n.form-control::-ms-expand {\n    background-color: transparent;\n    border: 0; }\n.form-control:focus {\n    color: #1e2125;\n    background-color: transparent;\n    border-color: #7eeaca;\n    outline: none;\n    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(32, 201, 151, 0.25); }\n.form-control::-webkit-input-placeholder {\n    color: #868e96;\n    opacity: 1; }\n.form-control:-ms-input-placeholder {\n    color: #868e96;\n    opacity: 1; }\n.form-control::placeholder {\n    color: #868e96;\n    opacity: 1; }\n.form-control:disabled, .form-control[readonly] {\n    background-color: #e9ecef;\n    opacity: 1; }\nselect.form-control:not([size]):not([multiple]) {\n  height: calc(2.25rem + 2px); }\nselect.form-control:focus::-ms-value {\n  color: #1e2125;\n  background-color: transparent; }\n.form-control-file, .form-control-range {\n  display: block; }\n.col-form-label {\n  padding-top: calc(0.5rem + 1px);\n  padding-bottom: calc(0.5rem + 1px);\n  margin-bottom: 0;\n  line-height: 1.25; }\n.col-form-label-lg {\n  padding-top: calc(0.5rem + 1px);\n  padding-bottom: calc(0.5rem + 1px);\n  font-size: 1.25rem;\n  line-height: 1.5; }\n.col-form-label-sm {\n  padding-top: calc(0.25rem + 1px);\n  padding-bottom: calc(0.25rem + 1px);\n  font-size: 0.875rem;\n  line-height: 1.5; }\n.col-form-legend {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  margin-bottom: 0;\n  font-size: 1rem; }\n.form-control-plaintext {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  margin-bottom: 0;\n  line-height: 1.25;\n  background-color: transparent;\n  border: solid transparent;\n  border-width: 1px 0; }\n.form-control-plaintext.form-control-sm, .input-group-sm > .form-control-plaintext.form-control, .input-group-sm > .form-control-plaintext.input-group-addon, .input-group-sm > .input-group-btn > .form-control-plaintext.btn, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control, .input-group-lg > .form-control-plaintext.input-group-addon, .input-group-lg > .input-group-btn > .form-control-plaintext.btn {\n    padding-right: 0;\n    padding-left: 0; }\n.form-control-sm, .input-group-sm > .form-control, .input-group-sm > .input-group-addon, .input-group-sm > .input-group-btn > .btn {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5;\n  border-radius: 0.2rem; }\nselect.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.form-control:not([size]):not([multiple]), .input-group-sm > select.input-group-addon:not([size]):not([multiple]), .input-group-sm > .input-group-btn > select.btn:not([size]):not([multiple]) {\n  height: calc(1.8125rem + 2px); }\n.form-control-lg, .input-group-lg > .form-control, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .btn {\n  padding: 0.5rem 1rem;\n  font-size: 1.25rem;\n  line-height: 1.5;\n  border-radius: 0.3rem; }\nselect.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.form-control:not([size]):not([multiple]), .input-group-lg > select.input-group-addon:not([size]):not([multiple]), .input-group-lg > .input-group-btn > select.btn:not([size]):not([multiple]) {\n  height: calc(2.875rem + 2px); }\n.form-group {\n  margin-bottom: 1rem; }\n.form-text {\n  display: block;\n  margin-top: 0.25rem; }\n.form-row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  margin-right: -5px;\n  margin-left: -5px; }\n.form-row > .col, .form-row > [class*=\"col-\"] {\n    padding-right: 5px;\n    padding-left: 5px; }\n.form-check {\n  position: relative;\n  display: block;\n  margin-bottom: 0.5rem; }\n.form-check.disabled .form-check-label {\n    color: #868e96; }\n.form-check-label {\n  padding-left: 1.25rem;\n  margin-bottom: 0; }\n.form-check-input {\n  position: absolute;\n  margin-top: 0.25rem;\n  margin-left: -1.25rem; }\n.form-check-inline {\n  display: inline-block;\n  margin-right: 0.75rem; }\n.form-check-inline .form-check-label {\n    vertical-align: middle; }\n.valid-feedback {\n  display: none;\n  margin-top: .25rem;\n  font-size: .875rem;\n  color: #20c997; }\n.valid-tooltip {\n  position: absolute;\n  top: 100%;\n  z-index: 5;\n  display: none;\n  width: 250px;\n  padding: .5rem;\n  margin-top: .1rem;\n  font-size: .875rem;\n  line-height: 1;\n  color: #fff;\n  background-color: rgba(32, 201, 151, 0.8);\n  border-radius: .2rem; }\n.was-validated .form-control:valid, .form-control.is-valid, .was-validated\n.custom-select:valid, .custom-select.is-valid {\n  border-color: #20c997; }\n.was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated\n  .custom-select:valid:focus, .custom-select.is-valid:focus {\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25); }\n.was-validated .form-control:valid ~ .valid-feedback, .was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback, .form-control.is-valid ~ .valid-tooltip, .was-validated\n  .custom-select:valid ~ .valid-feedback, .was-validated\n  .custom-select:valid ~ .valid-tooltip, .custom-select.is-valid ~ .valid-feedback, .custom-select.is-valid ~ .valid-tooltip {\n    display: block; }\n.was-validated .form-check-input:valid + .form-check-label, .form-check-input.is-valid + .form-check-label {\n  color: #20c997; }\n.was-validated .custom-control-input:valid ~ .custom-control-indicator, .custom-control-input.is-valid ~ .custom-control-indicator {\n  background-color: rgba(32, 201, 151, 0.25); }\n.was-validated .custom-control-input:valid ~ .custom-control-description, .custom-control-input.is-valid ~ .custom-control-description {\n  color: #20c997; }\n.was-validated .custom-file-input:valid ~ .custom-file-control, .custom-file-input.is-valid ~ .custom-file-control {\n  border-color: #20c997; }\n.was-validated .custom-file-input:valid ~ .custom-file-control::before, .custom-file-input.is-valid ~ .custom-file-control::before {\n    border-color: inherit; }\n.was-validated .custom-file-input:valid:focus, .custom-file-input.is-valid:focus {\n  box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25); }\n.invalid-feedback {\n  display: none;\n  margin-top: .25rem;\n  font-size: .875rem;\n  color: #dc3545; }\n.invalid-tooltip {\n  position: absolute;\n  top: 100%;\n  z-index: 5;\n  display: none;\n  width: 250px;\n  padding: .5rem;\n  margin-top: .1rem;\n  font-size: .875rem;\n  line-height: 1;\n  color: #fff;\n  background-color: rgba(220, 53, 69, 0.8);\n  border-radius: .2rem; }\n.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated\n.custom-select:invalid, .custom-select.is-invalid {\n  border-color: #dc3545; }\n.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus, .was-validated\n  .custom-select:invalid:focus, .custom-select.is-invalid:focus {\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n.was-validated .form-control:invalid ~ .invalid-feedback, .was-validated .form-control:invalid ~ .invalid-tooltip, .form-control.is-invalid ~ .invalid-feedback, .form-control.is-invalid ~ .invalid-tooltip, .was-validated\n  .custom-select:invalid ~ .invalid-feedback, .was-validated\n  .custom-select:invalid ~ .invalid-tooltip, .custom-select.is-invalid ~ .invalid-feedback, .custom-select.is-invalid ~ .invalid-tooltip {\n    display: block; }\n.was-validated .form-check-input:invalid + .form-check-label, .form-check-input.is-invalid + .form-check-label {\n  color: #dc3545; }\n.was-validated .custom-control-input:invalid ~ .custom-control-indicator, .custom-control-input.is-invalid ~ .custom-control-indicator {\n  background-color: rgba(220, 53, 69, 0.25); }\n.was-validated .custom-control-input:invalid ~ .custom-control-description, .custom-control-input.is-invalid ~ .custom-control-description {\n  color: #dc3545; }\n.was-validated .custom-file-input:invalid ~ .custom-file-control, .custom-file-input.is-invalid ~ .custom-file-control {\n  border-color: #dc3545; }\n.was-validated .custom-file-input:invalid ~ .custom-file-control::before, .custom-file-input.is-invalid ~ .custom-file-control::before {\n    border-color: inherit; }\n.was-validated .custom-file-input:invalid:focus, .custom-file-input.is-invalid:focus {\n  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n.form-inline {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n.form-inline .form-check {\n    width: 100%; }\n@media (min-width: 576px) {\n    .form-inline label {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      margin-bottom: 0; }\n    .form-inline .form-group {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-flex: 0;\n          -ms-flex: 0 0 auto;\n              flex: 0 0 auto;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row wrap;\n              flex-flow: row wrap;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      margin-bottom: 0; }\n    .form-inline .form-control {\n      display: inline-block;\n      width: auto;\n      vertical-align: middle; }\n    .form-inline .form-control-plaintext {\n      display: inline-block; }\n    .form-inline .input-group {\n      width: auto; }\n    .form-inline .form-check {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      width: auto;\n      margin-top: 0;\n      margin-bottom: 0; }\n    .form-inline .form-check-label {\n      padding-left: 0; }\n    .form-inline .form-check-input {\n      position: relative;\n      margin-top: 0;\n      margin-right: 0.25rem;\n      margin-left: 0; }\n    .form-inline .custom-control {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      padding-left: 0; }\n    .form-inline .custom-control-indicator {\n      position: static;\n      display: inline-block;\n      margin-right: 0.25rem;\n      vertical-align: text-bottom; }\n    .form-inline .has-feedback .form-control-feedback {\n      top: 0; } }\n.btn {\n  display: inline-block;\n  font-weight: normal;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: middle;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border: 1px solid transparent;\n  padding: 0.5rem 0.75rem;\n  font-size: 1rem;\n  line-height: 1.25;\n  border-radius: 0.25rem;\n  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }\n.btn:focus, .btn:hover {\n    text-decoration: none; }\n.btn:focus, .btn.focus {\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25); }\n.btn.disabled, .btn:disabled {\n    opacity: .65;\n    box-shadow: none; }\n.btn:not([disabled]):not(.disabled):active, .btn:not([disabled]):not(.disabled).active {\n    background-image: none;\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25), inset 0 3px 5px rgba(0, 0, 0, 0.125); }\na.btn.disabled, fieldset[disabled] a.btn {\n  pointer-events: none; }\n.btn-primary {\n  color: #fff;\n  background-color: #20c997;\n  border-color: #20c997;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-primary:hover {\n    color: #fff;\n    background-color: #1ba87e;\n    border-color: #199d76; }\n.btn-primary:focus, .btn-primary.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-primary.disabled, .btn-primary:disabled {\n    background-color: #20c997;\n    border-color: #20c997; }\n.btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, .show > .btn-primary.dropdown-toggle {\n    color: #fff;\n    background-color: #199d76;\n    border-color: #17926e;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-secondary {\n  color: #111;\n  background-color: #f8f9fa;\n  border-color: #f8f9fa;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-secondary:hover {\n    color: #111;\n    background-color: #e2e6ea;\n    border-color: #dae0e5; }\n.btn-secondary:focus, .btn-secondary.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-secondary.disabled, .btn-secondary:disabled {\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n.btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:not([disabled]):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {\n    color: #111;\n    background-color: #dae0e5;\n    border-color: #d3d9df;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-success {\n  color: #fff;\n  background-color: #20c997;\n  border-color: #20c997;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-success:hover {\n    color: #fff;\n    background-color: #1ba87e;\n    border-color: #199d76; }\n.btn-success:focus, .btn-success.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-success.disabled, .btn-success:disabled {\n    background-color: #20c997;\n    border-color: #20c997; }\n.btn-success:not([disabled]):not(.disabled):active, .btn-success:not([disabled]):not(.disabled).active, .show > .btn-success.dropdown-toggle {\n    color: #fff;\n    background-color: #199d76;\n    border-color: #17926e;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-info {\n  color: #fff;\n  background-color: #17a2b8;\n  border-color: #17a2b8;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-info:hover {\n    color: #fff;\n    background-color: #138496;\n    border-color: #117a8b; }\n.btn-info:focus, .btn-info.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n.btn-info.disabled, .btn-info:disabled {\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n.btn-info:not([disabled]):not(.disabled):active, .btn-info:not([disabled]):not(.disabled).active, .show > .btn-info.dropdown-toggle {\n    color: #fff;\n    background-color: #117a8b;\n    border-color: #10707f;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n.btn-warning {\n  color: #111;\n  background-color: #ffc107;\n  border-color: #ffc107;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-warning:hover {\n    color: #111;\n    background-color: #e0a800;\n    border-color: #d39e00; }\n.btn-warning:focus, .btn-warning.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n.btn-warning.disabled, .btn-warning:disabled {\n    background-color: #ffc107;\n    border-color: #ffc107; }\n.btn-warning:not([disabled]):not(.disabled):active, .btn-warning:not([disabled]):not(.disabled).active, .show > .btn-warning.dropdown-toggle {\n    color: #111;\n    background-color: #d39e00;\n    border-color: #c69500;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n.btn-danger {\n  color: #fff;\n  background-color: #dc3545;\n  border-color: #dc3545;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-danger:hover {\n    color: #fff;\n    background-color: #c82333;\n    border-color: #bd2130; }\n.btn-danger:focus, .btn-danger.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n.btn-danger.disabled, .btn-danger:disabled {\n    background-color: #dc3545;\n    border-color: #dc3545; }\n.btn-danger:not([disabled]):not(.disabled):active, .btn-danger:not([disabled]):not(.disabled).active, .show > .btn-danger.dropdown-toggle {\n    color: #fff;\n    background-color: #bd2130;\n    border-color: #b21f2d;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n.btn-light {\n  color: #111;\n  background-color: #f8f9fa;\n  border-color: #f8f9fa;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-light:hover {\n    color: #111;\n    background-color: #e2e6ea;\n    border-color: #dae0e5; }\n.btn-light:focus, .btn-light.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-light.disabled, .btn-light:disabled {\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n.btn-light:not([disabled]):not(.disabled):active, .btn-light:not([disabled]):not(.disabled).active, .show > .btn-light.dropdown-toggle {\n    color: #111;\n    background-color: #dae0e5;\n    border-color: #d3d9df;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-dark {\n  color: #fff;\n  background-color: #343a40;\n  border-color: #343a40;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-dark:hover {\n    color: #fff;\n    background-color: #23272b;\n    border-color: #1d2124; }\n.btn-dark:focus, .btn-dark.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n.btn-dark.disabled, .btn-dark:disabled {\n    background-color: #343a40;\n    border-color: #343a40; }\n.btn-dark:not([disabled]):not(.disabled):active, .btn-dark:not([disabled]):not(.disabled).active, .show > .btn-dark.dropdown-toggle {\n    color: #fff;\n    background-color: #1d2124;\n    border-color: #171a1d;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n.btn-outline-primary {\n  color: #20c997;\n  background-color: transparent;\n  background-image: none;\n  border-color: #20c997; }\n.btn-outline-primary:hover {\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997; }\n.btn-outline-primary:focus, .btn-outline-primary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-outline-primary.disabled, .btn-outline-primary:disabled {\n    color: #20c997;\n    background-color: transparent; }\n.btn-outline-primary:not([disabled]):not(.disabled):active, .btn-outline-primary:not([disabled]):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle {\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997;\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-outline-secondary {\n  color: #f8f9fa;\n  background-color: transparent;\n  background-image: none;\n  border-color: #f8f9fa; }\n.btn-outline-secondary:hover {\n    color: #fff;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n.btn-outline-secondary:focus, .btn-outline-secondary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-outline-secondary.disabled, .btn-outline-secondary:disabled {\n    color: #f8f9fa;\n    background-color: transparent; }\n.btn-outline-secondary:not([disabled]):not(.disabled):active, .btn-outline-secondary:not([disabled]):not(.disabled).active, .show > .btn-outline-secondary.dropdown-toggle {\n    color: #fff;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa;\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-outline-success {\n  color: #20c997;\n  background-color: transparent;\n  background-image: none;\n  border-color: #20c997; }\n.btn-outline-success:hover {\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997; }\n.btn-outline-success:focus, .btn-outline-success.focus {\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-outline-success.disabled, .btn-outline-success:disabled {\n    color: #20c997;\n    background-color: transparent; }\n.btn-outline-success:not([disabled]):not(.disabled):active, .btn-outline-success:not([disabled]):not(.disabled).active, .show > .btn-outline-success.dropdown-toggle {\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997;\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-outline-info {\n  color: #17a2b8;\n  background-color: transparent;\n  background-image: none;\n  border-color: #17a2b8; }\n.btn-outline-info:hover {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n.btn-outline-info:focus, .btn-outline-info.focus {\n    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n.btn-outline-info.disabled, .btn-outline-info:disabled {\n    color: #17a2b8;\n    background-color: transparent; }\n.btn-outline-info:not([disabled]):not(.disabled):active, .btn-outline-info:not([disabled]):not(.disabled).active, .show > .btn-outline-info.dropdown-toggle {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8;\n    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n.btn-outline-warning {\n  color: #ffc107;\n  background-color: transparent;\n  background-image: none;\n  border-color: #ffc107; }\n.btn-outline-warning:hover {\n    color: #fff;\n    background-color: #ffc107;\n    border-color: #ffc107; }\n.btn-outline-warning:focus, .btn-outline-warning.focus {\n    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n.btn-outline-warning.disabled, .btn-outline-warning:disabled {\n    color: #ffc107;\n    background-color: transparent; }\n.btn-outline-warning:not([disabled]):not(.disabled):active, .btn-outline-warning:not([disabled]):not(.disabled).active, .show > .btn-outline-warning.dropdown-toggle {\n    color: #fff;\n    background-color: #ffc107;\n    border-color: #ffc107;\n    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n.btn-outline-danger {\n  color: #dc3545;\n  background-color: transparent;\n  background-image: none;\n  border-color: #dc3545; }\n.btn-outline-danger:hover {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545; }\n.btn-outline-danger:focus, .btn-outline-danger.focus {\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n.btn-outline-danger.disabled, .btn-outline-danger:disabled {\n    color: #dc3545;\n    background-color: transparent; }\n.btn-outline-danger:not([disabled]):not(.disabled):active, .btn-outline-danger:not([disabled]):not(.disabled).active, .show > .btn-outline-danger.dropdown-toggle {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n.btn-outline-light {\n  color: #f8f9fa;\n  background-color: transparent;\n  background-image: none;\n  border-color: #f8f9fa; }\n.btn-outline-light:hover {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n.btn-outline-light:focus, .btn-outline-light.focus {\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-outline-light.disabled, .btn-outline-light:disabled {\n    color: #f8f9fa;\n    background-color: transparent; }\n.btn-outline-light:not([disabled]):not(.disabled):active, .btn-outline-light:not([disabled]):not(.disabled).active, .show > .btn-outline-light.dropdown-toggle {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa;\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-outline-dark {\n  color: #343a40;\n  background-color: transparent;\n  background-image: none;\n  border-color: #343a40; }\n.btn-outline-dark:hover {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40; }\n.btn-outline-dark:focus, .btn-outline-dark.focus {\n    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n.btn-outline-dark.disabled, .btn-outline-dark:disabled {\n    color: #343a40;\n    background-color: transparent; }\n.btn-outline-dark:not([disabled]):not(.disabled):active, .btn-outline-dark:not([disabled]):not(.disabled).active, .show > .btn-outline-dark.dropdown-toggle {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40;\n    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n.btn-link {\n  font-weight: normal;\n  color: #20c997;\n  background-color: transparent; }\n.btn-link:hover {\n    color: #158765;\n    text-decoration: underline;\n    background-color: transparent;\n    border-color: transparent; }\n.btn-link:focus, .btn-link.focus {\n    border-color: transparent;\n    box-shadow: none; }\n.btn-link:disabled, .btn-link.disabled {\n    color: #868e96; }\n.btn-lg, .btn-group-lg > .btn {\n  padding: 0.5rem 1rem;\n  font-size: 1.25rem;\n  line-height: 1.5;\n  border-radius: 0.3rem; }\n.btn-sm, .btn-group-sm > .btn {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5;\n  border-radius: 0.2rem; }\n.btn-block {\n  display: block;\n  width: 100%; }\n.btn-block + .btn-block {\n  margin-top: 0.5rem; }\ninput[type=\"submit\"].btn-block, input[type=\"reset\"].btn-block, input[type=\"button\"].btn-block {\n  width: 100%; }\n.fade {\n  opacity: 0;\n  transition: opacity 0.15s linear; }\n.fade.show {\n    opacity: 1; }\n.collapse {\n  display: none; }\n.collapse.show {\n    display: block; }\ntr.collapse.show {\n  display: table-row; }\ntbody.collapse.show {\n  display: table-row-group; }\n.collapsing {\n  position: relative;\n  height: 0;\n  overflow: hidden;\n  transition: height 0.35s ease; }\n.dropup, .dropdown {\n  position: relative; }\n.dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0.3em solid;\n  border-right: 0.3em solid transparent;\n  border-bottom: 0;\n  border-left: 0.3em solid transparent; }\n.dropdown-toggle:empty::after {\n  margin-left: 0; }\n.dropdown-menu {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  z-index: 1000;\n  display: none;\n  float: left;\n  min-width: 10rem;\n  padding: 0.5rem 0;\n  margin: 0.125rem 0 0;\n  font-size: 1rem;\n  color: #1e2125;\n  text-align: left;\n  list-style: none;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  border-radius: 0.25rem;\n  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175); }\n.dropup .dropdown-menu {\n  margin-top: 0;\n  margin-bottom: 0.125rem; }\n.dropup .dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0;\n  border-right: 0.3em solid transparent;\n  border-bottom: 0.3em solid;\n  border-left: 0.3em solid transparent; }\n.dropup .dropdown-toggle:empty::after {\n  margin-left: 0; }\n.dropdown-divider {\n  height: 0;\n  margin: 0.5rem 0;\n  overflow: hidden;\n  border-top: 1px solid #e9ecef; }\n.dropdown-item {\n  display: block;\n  width: 100%;\n  padding: 0.25rem 1.5rem;\n  clear: both;\n  font-weight: normal;\n  color: #212529;\n  text-align: inherit;\n  white-space: nowrap;\n  background: none;\n  border: 0; }\n.dropdown-item:focus, .dropdown-item:hover {\n    color: #16181b;\n    text-decoration: none;\n    background-color: #f8f9fa; }\n.dropdown-item.active, .dropdown-item:active {\n    color: #fff;\n    text-decoration: none;\n    background-color: #20c997; }\n.dropdown-item.disabled, .dropdown-item:disabled {\n    color: #868e96;\n    background-color: transparent; }\n.dropdown-menu.show {\n  display: block; }\n.dropdown-header {\n  display: block;\n  padding: 0.5rem 1.5rem;\n  margin-bottom: 0;\n  font-size: 0.875rem;\n  color: #868e96;\n  white-space: nowrap; }\n.btn-group, .btn-group-vertical {\n  position: relative;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  vertical-align: middle; }\n.btn-group > .btn, .btn-group-vertical > .btn {\n    position: relative;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n.btn-group > .btn:hover, .btn-group-vertical > .btn:hover {\n      z-index: 2; }\n.btn-group > .btn:focus, .btn-group > .btn:active, .btn-group > .btn.active, .btn-group-vertical > .btn:focus, .btn-group-vertical > .btn:active, .btn-group-vertical > .btn.active {\n      z-index: 2; }\n.btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group, .btn-group-vertical .btn + .btn, .btn-group-vertical .btn + .btn-group, .btn-group-vertical .btn-group + .btn, .btn-group-vertical .btn-group + .btn-group {\n    margin-left: -1px; }\n.btn-toolbar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start; }\n.btn-toolbar .input-group {\n    width: auto; }\n.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n  border-radius: 0; }\n.btn-group > .btn:first-child {\n  margin-left: 0; }\n.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n.btn-group > .btn:last-child:not(:first-child), .btn-group > .dropdown-toggle:not(:first-child) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n.btn-group > .btn-group {\n  float: left; }\n.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n  border-radius: 0; }\n.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n.btn + .dropdown-toggle-split {\n  padding-right: 0.5625rem;\n  padding-left: 0.5625rem; }\n.btn + .dropdown-toggle-split::after {\n    margin-left: 0; }\n.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split {\n  padding-right: 0.375rem;\n  padding-left: 0.375rem; }\n.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split {\n  padding-right: 0.75rem;\n  padding-left: 0.75rem; }\n.btn-group.show .dropdown-toggle {\n  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }\n.btn-group.show .dropdown-toggle.btn-link {\n    box-shadow: none; }\n.btn-group-vertical {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center; }\n.btn-group-vertical .btn, .btn-group-vertical .btn-group {\n    width: 100%; }\n.btn-group-vertical > .btn + .btn, .btn-group-vertical > .btn + .btn-group, .btn-group-vertical > .btn-group + .btn, .btn-group-vertical > .btn-group + .btn-group {\n    margin-top: -1px;\n    margin-left: 0; }\n.btn-group-vertical > .btn:not(:first-child):not(:last-child) {\n    border-radius: 0; }\n.btn-group-vertical > .btn:first-child:not(:last-child) {\n    border-bottom-right-radius: 0;\n    border-bottom-left-radius: 0; }\n.btn-group-vertical > .btn:last-child:not(:first-child) {\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n    border-radius: 0; }\n.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {\n    border-bottom-right-radius: 0;\n    border-bottom-left-radius: 0; }\n.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n[data-toggle=\"buttons\"] > .btn input[type=\"radio\"], [data-toggle=\"buttons\"] > .btn input[type=\"checkbox\"], [data-toggle=\"buttons\"] > .btn-group > .btn input[type=\"radio\"], [data-toggle=\"buttons\"] > .btn-group > .btn input[type=\"checkbox\"] {\n  position: absolute;\n  clip: rect(0, 0, 0, 0);\n  pointer-events: none; }\n.input-group {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  width: 100%; }\n.input-group .form-control {\n    position: relative;\n    z-index: 2;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto;\n    width: 1%;\n    margin-bottom: 0; }\n.input-group .form-control:focus, .input-group .form-control:active, .input-group .form-control:hover {\n      z-index: 3; }\n.input-group-addon, .input-group-btn, .input-group .form-control {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {\n    border-radius: 0; }\n.input-group-addon, .input-group-btn {\n  white-space: nowrap; }\n.input-group-addon {\n  padding: 0.5rem 0.75rem;\n  margin-bottom: 0;\n  font-size: 1rem;\n  font-weight: normal;\n  line-height: 1.25;\n  color: #868e96;\n  text-align: center;\n  background-color: transparent;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem; }\n.input-group-addon.form-control-sm, .input-group-sm > .input-group-addon, .input-group-sm > .input-group-btn > .input-group-addon.btn {\n    padding: 0.25rem 0.5rem;\n    font-size: 0.875rem;\n    border-radius: 0.2rem; }\n.input-group-addon.form-control-lg, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .input-group-addon.btn {\n    padding: 0.5rem 1rem;\n    font-size: 1.25rem;\n    border-radius: 0.3rem; }\n.input-group-addon input[type=\"radio\"], .input-group-addon input[type=\"checkbox\"] {\n    margin-top: 0; }\n.input-group .form-control:not(:last-child), .input-group-addon:not(:last-child), .input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-group > .btn, .input-group-btn:not(:last-child) > .dropdown-toggle, .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n.input-group-addon:not(:last-child) {\n  border-right: 0; }\n.input-group .form-control:not(:first-child), .input-group-addon:not(:first-child), .input-group-btn:not(:first-child) > .btn, .input-group-btn:not(:first-child) > .btn-group > .btn, .input-group-btn:not(:first-child) > .dropdown-toggle, .input-group-btn:not(:last-child) > .btn:not(:first-child), .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n.form-control + .input-group-addon:not(:first-child) {\n  border-left: 0; }\n.input-group-btn {\n  position: relative;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  font-size: 0;\n  white-space: nowrap; }\n.input-group-btn > .btn {\n    position: relative; }\n.input-group-btn > .btn + .btn {\n      margin-left: -1px; }\n.input-group-btn > .btn:focus, .input-group-btn > .btn:active, .input-group-btn > .btn:hover {\n      z-index: 3; }\n.input-group-btn:first-child > .btn + .btn {\n    margin-left: 0; }\n.input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-group {\n    margin-right: -1px; }\n.input-group-btn:not(:first-child) > .btn, .input-group-btn:not(:first-child) > .btn-group {\n    z-index: 2;\n    margin-left: 0; }\n.input-group-btn:not(:first-child) > .btn:first-child, .input-group-btn:not(:first-child) > .btn-group:first-child {\n      margin-left: -1px; }\n.input-group-btn:not(:first-child) > .btn:focus, .input-group-btn:not(:first-child) > .btn:active, .input-group-btn:not(:first-child) > .btn:hover, .input-group-btn:not(:first-child) > .btn-group:focus, .input-group-btn:not(:first-child) > .btn-group:active, .input-group-btn:not(:first-child) > .btn-group:hover {\n      z-index: 3; }\n.custom-control {\n  position: relative;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  min-height: 1.5rem;\n  padding-left: 1.5rem;\n  margin-right: 1rem; }\n.custom-control-input {\n  position: absolute;\n  z-index: -1;\n  opacity: 0; }\n.custom-control-input:checked ~ .custom-control-indicator {\n    color: #fff;\n    background-color: #20c997;\n    box-shadow: none; }\n.custom-control-input:focus ~ .custom-control-indicator {\n    box-shadow: 0 0 0 1px #f4f7f9, 0 0 0 3px #20c997; }\n.custom-control-input:active ~ .custom-control-indicator {\n    color: #fff;\n    background-color: #aaf1dc;\n    box-shadow: none; }\n.custom-control-input:disabled ~ .custom-control-indicator {\n    background-color: #e9ecef; }\n.custom-control-input:disabled ~ .custom-control-description {\n    color: #868e96; }\n.custom-control-indicator {\n  position: absolute;\n  top: 0.25rem;\n  left: 0;\n  display: block;\n  width: 1rem;\n  height: 1rem;\n  pointer-events: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  background-color: #ddd;\n  background-repeat: no-repeat;\n  background-position: center center;\n  background-size: 50% 50%;\n  box-shadow: inset 0 0.25rem 0.25rem rgba(0, 0, 0, 0.1); }\n.custom-checkbox .custom-control-indicator {\n  border-radius: 0.25rem; }\n.custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E\"); }\n.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-indicator {\n  background-color: #20c997;\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E\");\n  box-shadow: none; }\n.custom-radio .custom-control-indicator {\n  border-radius: 50%; }\n.custom-radio .custom-control-input:checked ~ .custom-control-indicator {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E\"); }\n.custom-controls-stacked {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n.custom-controls-stacked .custom-control {\n    margin-bottom: 0.25rem; }\n.custom-controls-stacked .custom-control + .custom-control {\n      margin-left: 0; }\n.custom-select {\n  display: inline-block;\n  max-width: 100%;\n  height: calc(2.25rem + 2px);\n  padding: 0.375rem 1.75rem 0.375rem 0.75rem;\n  line-height: 1.25;\n  color: #1e2125;\n  vertical-align: middle;\n  background: transparent url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23868e96' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E\") no-repeat right 0.75rem center;\n  background-size: 8px 10px;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none; }\n.custom-select:focus {\n    border-color: #7eeaca;\n    outline: none;\n    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(126, 234, 202, 0.5); }\n.custom-select:focus::-ms-value {\n      color: #1e2125;\n      background-color: transparent; }\n.custom-select[multiple] {\n    height: auto;\n    background-image: none; }\n.custom-select:disabled {\n    color: #868e96;\n    background-color: #e9ecef; }\n.custom-select::-ms-expand {\n    opacity: 0; }\n.custom-select-sm {\n  height: calc(1.8125rem + 2px);\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n  font-size: 75%; }\n.custom-file {\n  position: relative;\n  display: inline-block;\n  max-width: 100%;\n  height: calc(2.25rem + 2px);\n  margin-bottom: 0; }\n.custom-file-input {\n  min-width: 14rem;\n  max-width: 100%;\n  height: calc(2.25rem + 2px);\n  margin: 0;\n  opacity: 0; }\n.custom-file-input:focus ~ .custom-file-control {\n    box-shadow: 0 0 0 0.075rem #fff, 0 0 0 0.2rem #20c997; }\n.custom-file-control {\n  position: absolute;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 5;\n  height: calc(2.25rem + 2px);\n  padding: 0.5rem 0.75rem;\n  line-height: 1.25;\n  color: #868e96;\n  pointer-events: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  background-color: transparent;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }\n.custom-file-control:lang(en):empty::after {\n    content: \"Choose file...\"; }\n.custom-file-control:lang(es):empty::after {\n    content: \"Elegir archivo...\"; }\n.custom-file-control::before {\n    position: absolute;\n    top: -1px;\n    right: -1px;\n    bottom: -1px;\n    z-index: 6;\n    display: block;\n    height: calc(2.25rem + 2px);\n    padding: 0.5rem 0.75rem;\n    line-height: 1.25;\n    color: #868e96;\n    background-color: transparent;\n    border: 1px solid rgba(0, 0, 0, 0.125);\n    border-radius: 0 0.25rem 0.25rem 0; }\n.custom-file-control:lang(en)::before {\n    content: \"Browse\"; }\n.custom-file-control:lang(es)::before {\n    content: \"Buscar\"; }\n.nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  padding-left: 0;\n  margin-bottom: 0;\n  list-style: none; }\n.nav-link {\n  display: block;\n  padding: 0.5rem 1rem; }\n.nav-link:focus, .nav-link:hover {\n    text-decoration: none; }\n.nav-link.disabled {\n    color: #868e96; }\n.nav-tabs {\n  border-bottom: 1px solid #ddd; }\n.nav-tabs .nav-item {\n    margin-bottom: -1px; }\n.nav-tabs .nav-link {\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {\n      border-color: #e9ecef #e9ecef #ddd; }\n.nav-tabs .nav-link.disabled {\n      color: #868e96;\n      background-color: transparent;\n      border-color: transparent; }\n.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {\n    color: #495057;\n    background-color: #f4f7f9;\n    border-color: #ddd #ddd #f4f7f9; }\n.nav-tabs .dropdown-menu {\n    margin-top: -1px;\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n.nav-pills .nav-link {\n  border-radius: 0.25rem; }\n.nav-pills .nav-link.active, .nav-pills .show > .nav-link {\n  color: #fff;\n  background-color: #20c997; }\n.nav-fill .nav-item {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  text-align: center; }\n.nav-justified .nav-item {\n  -ms-flex-preferred-size: 0;\n      flex-basis: 0;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: center; }\n.tab-content > .tab-pane {\n  display: none; }\n.tab-content > .active {\n  display: block; }\n.navbar {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0.5rem 1rem; }\n.navbar > .container, .navbar > .container-fluid {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n.navbar-brand {\n  display: inline-block;\n  padding-top: 0.3125rem;\n  padding-bottom: 0.3125rem;\n  margin-right: 1rem;\n  font-size: 1.25rem;\n  line-height: inherit;\n  white-space: nowrap; }\n.navbar-brand:focus, .navbar-brand:hover {\n    text-decoration: none; }\n.navbar-nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding-left: 0;\n  margin-bottom: 0;\n  list-style: none; }\n.navbar-nav .nav-link {\n    padding-right: 0;\n    padding-left: 0; }\n.navbar-nav .dropdown-menu {\n    position: static;\n    float: none; }\n.navbar-text {\n  display: inline-block;\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem; }\n.navbar-collapse {\n  -ms-flex-preferred-size: 100%;\n      flex-basis: 100%;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n.navbar-toggler {\n  padding: 0.25rem 0.75rem;\n  font-size: 1.25rem;\n  line-height: 1;\n  background: transparent;\n  border: 1px solid transparent;\n  border-radius: 0.25rem; }\n.navbar-toggler:focus, .navbar-toggler:hover {\n    text-decoration: none; }\n.navbar-toggler-icon {\n  display: inline-block;\n  width: 1.5em;\n  height: 1.5em;\n  vertical-align: middle;\n  content: \"\";\n  background: no-repeat center center;\n  background-size: 100% 100%; }\n@media (max-width: 575px) {\n  .navbar-expand-sm > .container, .navbar-expand-sm > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n@media (min-width: 576px) {\n  .navbar-expand-sm {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row nowrap;\n            flex-flow: row nowrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start; }\n    .navbar-expand-sm .navbar-nav {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row; }\n      .navbar-expand-sm .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-sm .navbar-nav .dropdown-menu-right {\n        right: 0;\n        left: auto; }\n      .navbar-expand-sm .navbar-nav .nav-link {\n        padding-right: .5rem;\n        padding-left: .5rem; }\n    .navbar-expand-sm > .container, .navbar-expand-sm > .container-fluid {\n      -ms-flex-wrap: nowrap;\n          flex-wrap: nowrap; }\n    .navbar-expand-sm .navbar-collapse {\n      display: -webkit-box !important;\n      display: -ms-flexbox !important;\n      display: flex !important;\n      -ms-flex-preferred-size: auto;\n          flex-basis: auto; }\n    .navbar-expand-sm .navbar-toggler {\n      display: none; }\n    .navbar-expand-sm .dropup .dropdown-menu {\n      top: auto;\n      bottom: 100%; } }\n@media (max-width: 767px) {\n  .navbar-expand-md > .container, .navbar-expand-md > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n@media (min-width: 768px) {\n  .navbar-expand-md {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row nowrap;\n            flex-flow: row nowrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start; }\n    .navbar-expand-md .navbar-nav {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row; }\n      .navbar-expand-md .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-md .navbar-nav .dropdown-menu-right {\n        right: 0;\n        left: auto; }\n      .navbar-expand-md .navbar-nav .nav-link {\n        padding-right: .5rem;\n        padding-left: .5rem; }\n    .navbar-expand-md > .container, .navbar-expand-md > .container-fluid {\n      -ms-flex-wrap: nowrap;\n          flex-wrap: nowrap; }\n    .navbar-expand-md .navbar-collapse {\n      display: -webkit-box !important;\n      display: -ms-flexbox !important;\n      display: flex !important;\n      -ms-flex-preferred-size: auto;\n          flex-basis: auto; }\n    .navbar-expand-md .navbar-toggler {\n      display: none; }\n    .navbar-expand-md .dropup .dropdown-menu {\n      top: auto;\n      bottom: 100%; } }\n@media (max-width: 991px) {\n  .navbar-expand-lg > .container, .navbar-expand-lg > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n@media (min-width: 992px) {\n  .navbar-expand-lg {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row nowrap;\n            flex-flow: row nowrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start; }\n    .navbar-expand-lg .navbar-nav {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row; }\n      .navbar-expand-lg .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-lg .navbar-nav .dropdown-menu-right {\n        right: 0;\n        left: auto; }\n      .navbar-expand-lg .navbar-nav .nav-link {\n        padding-right: .5rem;\n        padding-left: .5rem; }\n    .navbar-expand-lg > .container, .navbar-expand-lg > .container-fluid {\n      -ms-flex-wrap: nowrap;\n          flex-wrap: nowrap; }\n    .navbar-expand-lg .navbar-collapse {\n      display: -webkit-box !important;\n      display: -ms-flexbox !important;\n      display: flex !important;\n      -ms-flex-preferred-size: auto;\n          flex-basis: auto; }\n    .navbar-expand-lg .navbar-toggler {\n      display: none; }\n    .navbar-expand-lg .dropup .dropdown-menu {\n      top: auto;\n      bottom: 100%; } }\n@media (max-width: 1199px) {\n  .navbar-expand-xl > .container, .navbar-expand-xl > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n@media (min-width: 1200px) {\n  .navbar-expand-xl {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row nowrap;\n            flex-flow: row nowrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start; }\n    .navbar-expand-xl .navbar-nav {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row; }\n      .navbar-expand-xl .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-xl .navbar-nav .dropdown-menu-right {\n        right: 0;\n        left: auto; }\n      .navbar-expand-xl .navbar-nav .nav-link {\n        padding-right: .5rem;\n        padding-left: .5rem; }\n    .navbar-expand-xl > .container, .navbar-expand-xl > .container-fluid {\n      -ms-flex-wrap: nowrap;\n          flex-wrap: nowrap; }\n    .navbar-expand-xl .navbar-collapse {\n      display: -webkit-box !important;\n      display: -ms-flexbox !important;\n      display: flex !important;\n      -ms-flex-preferred-size: auto;\n          flex-basis: auto; }\n    .navbar-expand-xl .navbar-toggler {\n      display: none; }\n    .navbar-expand-xl .dropup .dropdown-menu {\n      top: auto;\n      bottom: 100%; } }\n.navbar-expand {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row nowrap;\n          flex-flow: row nowrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start; }\n.navbar-expand > .container, .navbar-expand > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; }\n.navbar-expand .navbar-nav {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row; }\n.navbar-expand .navbar-nav .dropdown-menu {\n      position: absolute; }\n.navbar-expand .navbar-nav .dropdown-menu-right {\n      right: 0;\n      left: auto; }\n.navbar-expand .navbar-nav .nav-link {\n      padding-right: .5rem;\n      padding-left: .5rem; }\n.navbar-expand > .container, .navbar-expand > .container-fluid {\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap; }\n.navbar-expand .navbar-collapse {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important;\n    -ms-flex-preferred-size: auto;\n        flex-basis: auto; }\n.navbar-expand .navbar-toggler {\n    display: none; }\n.navbar-expand .dropup .dropdown-menu {\n    top: auto;\n    bottom: 100%; }\n.navbar-light .navbar-brand {\n  color: rgba(0, 0, 0, 0.9); }\n.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {\n    color: rgba(0, 0, 0, 0.9); }\n.navbar-light .navbar-nav .nav-link {\n  color: rgba(0, 0, 0, 0.5); }\n.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {\n    color: rgba(0, 0, 0, 0.7); }\n.navbar-light .navbar-nav .nav-link.disabled {\n    color: rgba(0, 0, 0, 0.3); }\n.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {\n  color: rgba(0, 0, 0, 0.9); }\n.navbar-light .navbar-toggler {\n  color: rgba(0, 0, 0, 0.5);\n  border-color: rgba(0, 0, 0, 0.1); }\n.navbar-light .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E\"); }\n.navbar-light .navbar-text {\n  color: rgba(0, 0, 0, 0.5); }\n.navbar-light .navbar-text a {\n    color: rgba(0, 0, 0, 0.9); }\n.navbar-light .navbar-text a:focus, .navbar-light .navbar-text a:hover {\n      color: rgba(0, 0, 0, 0.9); }\n.navbar-dark .navbar-brand {\n  color: white; }\n.navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover {\n    color: white; }\n.navbar-dark .navbar-nav .nav-link {\n  color: rgba(255, 255, 255, 0.5); }\n.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {\n    color: rgba(255, 255, 255, 0.75); }\n.navbar-dark .navbar-nav .nav-link.disabled {\n    color: rgba(255, 255, 255, 0.25); }\n.navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {\n  color: white; }\n.navbar-dark .navbar-toggler {\n  color: rgba(255, 255, 255, 0.5);\n  border-color: rgba(255, 255, 255, 0.1); }\n.navbar-dark .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E\"); }\n.navbar-dark .navbar-text {\n  color: rgba(255, 255, 255, 0.5); }\n.navbar-dark .navbar-text a {\n    color: white; }\n.navbar-dark .navbar-text a:focus, .navbar-dark .navbar-text a:hover {\n      color: white; }\n.card {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #ffffff;\n  background-clip: border-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem; }\n.card > hr {\n    margin-right: 0;\n    margin-left: 0; }\n.card > .list-group:first-child .list-group-item:first-child {\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n.card > .list-group:last-child .list-group-item:last-child {\n    border-bottom-right-radius: 0.25rem;\n    border-bottom-left-radius: 0.25rem; }\n.card-body {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  padding: 1.25rem; }\n.card-title {\n  margin-bottom: 0.75rem; }\n.card-subtitle {\n  margin-top: -0.375rem;\n  margin-bottom: 0; }\n.card-text:last-child {\n  margin-bottom: 0; }\n.card-link:hover {\n  text-decoration: none; }\n.card-link + .card-link {\n  margin-left: 1.25rem; }\n.card-header {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: rgba(0, 0, 0, 0.03);\n  border-bottom: 1px solid rgba(0, 0, 0, 0.125); }\n.card-header:first-child {\n    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0; }\n.card-header + .list-group .list-group-item:first-child {\n    border-top: 0; }\n.card-footer {\n  padding: 0.75rem 1.25rem;\n  background-color: rgba(0, 0, 0, 0.03);\n  border-top: 1px solid rgba(0, 0, 0, 0.125); }\n.card-footer:last-child {\n    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px); }\n.card-header-tabs {\n  margin-right: -0.625rem;\n  margin-bottom: -0.75rem;\n  margin-left: -0.625rem;\n  border-bottom: 0; }\n.card-header-pills {\n  margin-right: -0.625rem;\n  margin-left: -0.625rem; }\n.card-img-overlay {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding: 1.25rem; }\n.card-img {\n  width: 100%;\n  border-radius: calc(0.25rem - 1px); }\n.card-img-top {\n  width: 100%;\n  border-top-left-radius: calc(0.25rem - 1px);\n  border-top-right-radius: calc(0.25rem - 1px); }\n.card-img-bottom {\n  width: 100%;\n  border-bottom-right-radius: calc(0.25rem - 1px);\n  border-bottom-left-radius: calc(0.25rem - 1px); }\n.card-deck {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n.card-deck .card {\n    margin-bottom: 15px; }\n@media (min-width: 576px) {\n    .card-deck {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row wrap;\n              flex-flow: row wrap;\n      margin-right: -15px;\n      margin-left: -15px; }\n      .card-deck .card {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-flex: 1;\n            -ms-flex: 1 0 0%;\n                flex: 1 0 0%;\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: column;\n                flex-direction: column;\n        margin-right: 15px;\n        margin-bottom: 0;\n        margin-left: 15px; } }\n.card-group {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n.card-group .card {\n    margin-bottom: 15px; }\n@media (min-width: 576px) {\n    .card-group {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row wrap;\n              flex-flow: row wrap; }\n      .card-group .card {\n        -webkit-box-flex: 1;\n            -ms-flex: 1 0 0%;\n                flex: 1 0 0%;\n        margin-bottom: 0; }\n        .card-group .card + .card {\n          margin-left: 0;\n          border-left: 0; }\n        .card-group .card:first-child {\n          border-top-right-radius: 0;\n          border-bottom-right-radius: 0; }\n          .card-group .card:first-child .card-img-top {\n            border-top-right-radius: 0; }\n          .card-group .card:first-child .card-img-bottom {\n            border-bottom-right-radius: 0; }\n        .card-group .card:last-child {\n          border-top-left-radius: 0;\n          border-bottom-left-radius: 0; }\n          .card-group .card:last-child .card-img-top {\n            border-top-left-radius: 0; }\n          .card-group .card:last-child .card-img-bottom {\n            border-bottom-left-radius: 0; }\n        .card-group .card:only-child {\n          border-radius: 0.25rem; }\n          .card-group .card:only-child .card-img-top {\n            border-top-left-radius: 0.25rem;\n            border-top-right-radius: 0.25rem; }\n          .card-group .card:only-child .card-img-bottom {\n            border-bottom-right-radius: 0.25rem;\n            border-bottom-left-radius: 0.25rem; }\n        .card-group .card:not(:first-child):not(:last-child):not(:only-child) {\n          border-radius: 0; }\n          .card-group .card:not(:first-child):not(:last-child):not(:only-child) .card-img-top, .card-group .card:not(:first-child):not(:last-child):not(:only-child) .card-img-bottom {\n            border-radius: 0; } }\n.card-columns .card {\n  margin-bottom: 0.75rem; }\n@media (min-width: 576px) {\n  .card-columns {\n    -webkit-column-count: 3;\n            column-count: 3;\n    -webkit-column-gap: 1.25rem;\n            column-gap: 1.25rem; }\n    .card-columns .card {\n      display: inline-block;\n      width: 100%; } }\n.breadcrumb {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  padding: 0.75rem 1rem;\n  margin-bottom: 1rem;\n  list-style: none;\n  background-color: #e9ecef;\n  border-radius: 0.25rem; }\n.breadcrumb-item + .breadcrumb-item::before {\n  display: inline-block;\n  padding-right: 0.5rem;\n  padding-left: 0.5rem;\n  color: #868e96;\n  content: \"/\"; }\n.breadcrumb-item + .breadcrumb-item:hover::before {\n  text-decoration: underline; }\n.breadcrumb-item + .breadcrumb-item:hover::before {\n  text-decoration: none; }\n.breadcrumb-item.active {\n  color: #868e96; }\n.pagination {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding-left: 0;\n  list-style: none;\n  border-radius: 0.25rem; }\n.page-item:first-child .page-link {\n  margin-left: 0;\n  border-top-left-radius: 0.25rem;\n  border-bottom-left-radius: 0.25rem; }\n.page-item:last-child .page-link {\n  border-top-right-radius: 0.25rem;\n  border-bottom-right-radius: 0.25rem; }\n.page-item.active .page-link {\n  z-index: 2;\n  color: #fff;\n  background-color: #20c997;\n  border-color: #20c997; }\n.page-item.disabled .page-link {\n  color: #868e96;\n  pointer-events: none;\n  background-color: #fff;\n  border-color: #ddd; }\n.page-link {\n  position: relative;\n  display: block;\n  padding: 0.5rem 0.75rem;\n  margin-left: -1px;\n  line-height: 1.25;\n  color: #20c997;\n  background-color: #fff;\n  border: 1px solid #ddd; }\n.page-link:focus, .page-link:hover {\n    color: #158765;\n    text-decoration: none;\n    background-color: #e9ecef;\n    border-color: #ddd; }\n.pagination-lg .page-link {\n  padding: 0.75rem 1.5rem;\n  font-size: 1.25rem;\n  line-height: 1.5; }\n.pagination-lg .page-item:first-child .page-link {\n  border-top-left-radius: 0.3rem;\n  border-bottom-left-radius: 0.3rem; }\n.pagination-lg .page-item:last-child .page-link {\n  border-top-right-radius: 0.3rem;\n  border-bottom-right-radius: 0.3rem; }\n.pagination-sm .page-link {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5; }\n.pagination-sm .page-item:first-child .page-link {\n  border-top-left-radius: 0.2rem;\n  border-bottom-left-radius: 0.2rem; }\n.pagination-sm .page-item:last-child .page-link {\n  border-top-right-radius: 0.2rem;\n  border-bottom-right-radius: 0.2rem; }\n.badge {\n  display: inline-block;\n  padding: 0.25em 0.4em;\n  font-size: 75%;\n  font-weight: bold;\n  line-height: 1;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: baseline;\n  border-radius: 0.25rem; }\n.badge:empty {\n    display: none; }\n.btn .badge {\n  position: relative;\n  top: -1px; }\n.badge-pill {\n  padding-right: 0.6em;\n  padding-left: 0.6em;\n  border-radius: 10rem; }\n.badge-primary {\n  color: #fff;\n  background-color: #20c997; }\n.badge-primary[href]:focus, .badge-primary[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #199d76; }\n.badge-secondary {\n  color: #111;\n  background-color: #f8f9fa; }\n.badge-secondary[href]:focus, .badge-secondary[href]:hover {\n    color: #111;\n    text-decoration: none;\n    background-color: #dae0e5; }\n.badge-success {\n  color: #fff;\n  background-color: #20c997; }\n.badge-success[href]:focus, .badge-success[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #199d76; }\n.badge-info {\n  color: #fff;\n  background-color: #17a2b8; }\n.badge-info[href]:focus, .badge-info[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #117a8b; }\n.badge-warning {\n  color: #111;\n  background-color: #ffc107; }\n.badge-warning[href]:focus, .badge-warning[href]:hover {\n    color: #111;\n    text-decoration: none;\n    background-color: #d39e00; }\n.badge-danger {\n  color: #fff;\n  background-color: #dc3545; }\n.badge-danger[href]:focus, .badge-danger[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #bd2130; }\n.badge-light {\n  color: #111;\n  background-color: #f8f9fa; }\n.badge-light[href]:focus, .badge-light[href]:hover {\n    color: #111;\n    text-decoration: none;\n    background-color: #dae0e5; }\n.badge-dark {\n  color: #fff;\n  background-color: #343a40; }\n.badge-dark[href]:focus, .badge-dark[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #1d2124; }\n.jumbotron {\n  padding: 2rem 1rem;\n  margin-bottom: 2rem;\n  background-color: #e9ecef;\n  border-radius: 0.3rem; }\n@media (min-width: 576px) {\n    .jumbotron {\n      padding: 4rem 2rem; } }\n.jumbotron-fluid {\n  padding-right: 0;\n  padding-left: 0;\n  border-radius: 0; }\n.alert {\n  position: relative;\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 1rem;\n  border: 1px solid transparent;\n  border-radius: 0.25rem; }\n.alert-heading {\n  color: inherit; }\n.alert-link {\n  font-weight: bold; }\n.alert-dismissible .close {\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding: 0.75rem 1.25rem;\n  color: inherit; }\n.alert-primary {\n  color: #11694f;\n  background-color: #d2f4ea;\n  border-color: #c1f0e2; }\n.alert-primary hr {\n    border-top-color: #acebd8; }\n.alert-primary .alert-link {\n    color: #0a3d2e; }\n.alert-secondary {\n  color: #818182;\n  background-color: #fefefe;\n  border-color: #fdfdfe; }\n.alert-secondary hr {\n    border-top-color: #ececf6; }\n.alert-secondary .alert-link {\n    color: #686868; }\n.alert-success {\n  color: #11694f;\n  background-color: #d2f4ea;\n  border-color: #c1f0e2; }\n.alert-success hr {\n    border-top-color: #acebd8; }\n.alert-success .alert-link {\n    color: #0a3d2e; }\n.alert-info {\n  color: #0c5460;\n  background-color: #d1ecf1;\n  border-color: #bee5eb; }\n.alert-info hr {\n    border-top-color: #abdde5; }\n.alert-info .alert-link {\n    color: #062c33; }\n.alert-warning {\n  color: #856404;\n  background-color: #fff3cd;\n  border-color: #ffeeba; }\n.alert-warning hr {\n    border-top-color: #ffe8a1; }\n.alert-warning .alert-link {\n    color: #533f03; }\n.alert-danger {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-color: #f5c6cb; }\n.alert-danger hr {\n    border-top-color: #f1b0b7; }\n.alert-danger .alert-link {\n    color: #491217; }\n.alert-light {\n  color: #818182;\n  background-color: #fefefe;\n  border-color: #fdfdfe; }\n.alert-light hr {\n    border-top-color: #ececf6; }\n.alert-light .alert-link {\n    color: #686868; }\n.alert-dark {\n  color: #1b1e21;\n  background-color: #d6d8d9;\n  border-color: #c6c8ca; }\n.alert-dark hr {\n    border-top-color: #b9bbbe; }\n.alert-dark .alert-link {\n    color: #040505; }\n@-webkit-keyframes progress-bar-stripes {\n  from {\n    background-position: 1rem 0; }\n  to {\n    background-position: 0 0; } }\n@keyframes progress-bar-stripes {\n  from {\n    background-position: 1rem 0; }\n  to {\n    background-position: 0 0; } }\n.progress {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 1rem;\n  overflow: hidden;\n  font-size: 0.75rem;\n  background-color: #e9ecef;\n  border-radius: 0.25rem; }\n.progress-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  color: #fff;\n  background-color: #20c997; }\n.progress-bar-striped {\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-size: 1rem 1rem; }\n.progress-bar-animated {\n  -webkit-animation: progress-bar-stripes 1s linear infinite;\n          animation: progress-bar-stripes 1s linear infinite; }\n.media {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start; }\n.media-body {\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1; }\n.list-group {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding-left: 0;\n  margin-bottom: 0; }\n.list-group-item-action {\n  width: 100%;\n  color: #495057;\n  text-align: inherit; }\n.list-group-item-action:focus, .list-group-item-action:hover {\n    color: #495057;\n    text-decoration: none;\n    background-color: #f8f9fa; }\n.list-group-item-action:active {\n    color: #1e2125;\n    background-color: #e9ecef; }\n.list-group-item {\n  position: relative;\n  display: block;\n  padding: 0.75rem 1.25rem;\n  margin-bottom: -1px;\n  background-color: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.125); }\n.list-group-item:first-child {\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n.list-group-item:last-child {\n    margin-bottom: 0;\n    border-bottom-right-radius: 0.25rem;\n    border-bottom-left-radius: 0.25rem; }\n.list-group-item:focus, .list-group-item:hover {\n    text-decoration: none; }\n.list-group-item.disabled, .list-group-item:disabled {\n    color: #868e96;\n    background-color: #fff; }\n.list-group-item.active {\n    z-index: 2;\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997; }\n.list-group-flush .list-group-item {\n  border-right: 0;\n  border-left: 0;\n  border-radius: 0; }\n.list-group-flush:first-child .list-group-item:first-child {\n  border-top: 0; }\n.list-group-flush:last-child .list-group-item:last-child {\n  border-bottom: 0; }\n.list-group-item-primary {\n  color: #11694f;\n  background-color: #c1f0e2; }\na.list-group-item-primary, button.list-group-item-primary {\n  color: #11694f; }\na.list-group-item-primary:focus, a.list-group-item-primary:hover, button.list-group-item-primary:focus, button.list-group-item-primary:hover {\n    color: #11694f;\n    background-color: #acebd8; }\na.list-group-item-primary.active, button.list-group-item-primary.active {\n    color: #fff;\n    background-color: #11694f;\n    border-color: #11694f; }\n.list-group-item-secondary {\n  color: #818182;\n  background-color: #fdfdfe; }\na.list-group-item-secondary, button.list-group-item-secondary {\n  color: #818182; }\na.list-group-item-secondary:focus, a.list-group-item-secondary:hover, button.list-group-item-secondary:focus, button.list-group-item-secondary:hover {\n    color: #818182;\n    background-color: #ececf6; }\na.list-group-item-secondary.active, button.list-group-item-secondary.active {\n    color: #fff;\n    background-color: #818182;\n    border-color: #818182; }\n.list-group-item-success {\n  color: #11694f;\n  background-color: #c1f0e2; }\na.list-group-item-success, button.list-group-item-success {\n  color: #11694f; }\na.list-group-item-success:focus, a.list-group-item-success:hover, button.list-group-item-success:focus, button.list-group-item-success:hover {\n    color: #11694f;\n    background-color: #acebd8; }\na.list-group-item-success.active, button.list-group-item-success.active {\n    color: #fff;\n    background-color: #11694f;\n    border-color: #11694f; }\n.list-group-item-info {\n  color: #0c5460;\n  background-color: #bee5eb; }\na.list-group-item-info, button.list-group-item-info {\n  color: #0c5460; }\na.list-group-item-info:focus, a.list-group-item-info:hover, button.list-group-item-info:focus, button.list-group-item-info:hover {\n    color: #0c5460;\n    background-color: #abdde5; }\na.list-group-item-info.active, button.list-group-item-info.active {\n    color: #fff;\n    background-color: #0c5460;\n    border-color: #0c5460; }\n.list-group-item-warning {\n  color: #856404;\n  background-color: #ffeeba; }\na.list-group-item-warning, button.list-group-item-warning {\n  color: #856404; }\na.list-group-item-warning:focus, a.list-group-item-warning:hover, button.list-group-item-warning:focus, button.list-group-item-warning:hover {\n    color: #856404;\n    background-color: #ffe8a1; }\na.list-group-item-warning.active, button.list-group-item-warning.active {\n    color: #fff;\n    background-color: #856404;\n    border-color: #856404; }\n.list-group-item-danger {\n  color: #721c24;\n  background-color: #f5c6cb; }\na.list-group-item-danger, button.list-group-item-danger {\n  color: #721c24; }\na.list-group-item-danger:focus, a.list-group-item-danger:hover, button.list-group-item-danger:focus, button.list-group-item-danger:hover {\n    color: #721c24;\n    background-color: #f1b0b7; }\na.list-group-item-danger.active, button.list-group-item-danger.active {\n    color: #fff;\n    background-color: #721c24;\n    border-color: #721c24; }\n.list-group-item-light {\n  color: #818182;\n  background-color: #fdfdfe; }\na.list-group-item-light, button.list-group-item-light {\n  color: #818182; }\na.list-group-item-light:focus, a.list-group-item-light:hover, button.list-group-item-light:focus, button.list-group-item-light:hover {\n    color: #818182;\n    background-color: #ececf6; }\na.list-group-item-light.active, button.list-group-item-light.active {\n    color: #fff;\n    background-color: #818182;\n    border-color: #818182; }\n.list-group-item-dark {\n  color: #1b1e21;\n  background-color: #c6c8ca; }\na.list-group-item-dark, button.list-group-item-dark {\n  color: #1b1e21; }\na.list-group-item-dark:focus, a.list-group-item-dark:hover, button.list-group-item-dark:focus, button.list-group-item-dark:hover {\n    color: #1b1e21;\n    background-color: #b9bbbe; }\na.list-group-item-dark.active, button.list-group-item-dark.active {\n    color: #fff;\n    background-color: #1b1e21;\n    border-color: #1b1e21; }\n.close {\n  float: right;\n  font-size: 1.5rem;\n  font-weight: bold;\n  line-height: 1;\n  color: #000;\n  text-shadow: 0 1px 0 #fff;\n  opacity: .5; }\n.close:focus, .close:hover {\n    color: #000;\n    text-decoration: none;\n    opacity: .75; }\nbutton.close {\n  padding: 0;\n  background: transparent;\n  border: 0;\n  -webkit-appearance: none; }\n.modal-open {\n  overflow: hidden; }\n.modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1050;\n  display: none;\n  overflow: hidden;\n  outline: 0; }\n.modal.fade .modal-dialog {\n    transition: -webkit-transform 0.3s ease-out;\n    transition: transform 0.3s ease-out;\n    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;\n    -webkit-transform: translate(0, -25%);\n            transform: translate(0, -25%); }\n.modal.show .modal-dialog {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0); }\n.modal-open .modal {\n  overflow-x: hidden;\n  overflow-y: auto; }\n.modal-dialog {\n  position: relative;\n  width: auto;\n  margin: 10px;\n  pointer-events: none; }\n.modal-content {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  pointer-events: auto;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0.3rem;\n  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);\n  outline: 0; }\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1040;\n  background-color: #000; }\n.modal-backdrop.fade {\n    opacity: 0; }\n.modal-backdrop.show {\n    opacity: 0.5; }\n.modal-header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 15px;\n  border-bottom: 1px solid #e9ecef;\n  border-top-left-radius: 0.3rem;\n  border-top-right-radius: 0.3rem; }\n.modal-header .close {\n    padding: 15px;\n    margin: -15px -15px -15px auto; }\n.modal-title {\n  margin-bottom: 0;\n  line-height: 1.5; }\n.modal-body {\n  position: relative;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  padding: 15px; }\n.modal-footer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  padding: 15px;\n  border-top: 1px solid #e9ecef; }\n.modal-footer > :not(:first-child) {\n    margin-left: .25rem; }\n.modal-footer > :not(:last-child) {\n    margin-right: .25rem; }\n.modal-scrollbar-measure {\n  position: absolute;\n  top: -9999px;\n  width: 50px;\n  height: 50px;\n  overflow: scroll; }\n@media (min-width: 576px) {\n  .modal-dialog {\n    max-width: 500px;\n    margin: 30px auto; }\n  .modal-content {\n    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }\n  .modal-sm {\n    max-width: 300px; } }\n@media (min-width: 992px) {\n  .modal-lg {\n    max-width: 800px; } }\n.tooltip {\n  position: absolute;\n  z-index: 1070;\n  display: block;\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-style: normal;\n  font-weight: normal;\n  line-height: 1.5;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  letter-spacing: normal;\n  word-break: normal;\n  word-spacing: normal;\n  white-space: normal;\n  line-break: auto;\n  font-size: 0.875rem;\n  word-wrap: break-word;\n  opacity: 0; }\n.tooltip.show {\n    opacity: 0.9; }\n.tooltip .arrow {\n    position: absolute;\n    display: block;\n    width: 5px;\n    height: 5px; }\n.tooltip .arrow::before {\n    position: absolute;\n    border-color: transparent;\n    border-style: solid; }\n.tooltip.bs-tooltip-top, .tooltip.bs-tooltip-auto[x-placement^=\"top\"] {\n    padding: 5px 0; }\n.tooltip.bs-tooltip-top .arrow, .tooltip.bs-tooltip-auto[x-placement^=\"top\"] .arrow {\n      bottom: 0; }\n.tooltip.bs-tooltip-top .arrow::before, .tooltip.bs-tooltip-auto[x-placement^=\"top\"] .arrow::before {\n      margin-left: -3px;\n      content: \"\";\n      border-width: 5px 5px 0;\n      border-top-color: #000; }\n.tooltip.bs-tooltip-right, .tooltip.bs-tooltip-auto[x-placement^=\"right\"] {\n    padding: 0 5px; }\n.tooltip.bs-tooltip-right .arrow, .tooltip.bs-tooltip-auto[x-placement^=\"right\"] .arrow {\n      left: 0; }\n.tooltip.bs-tooltip-right .arrow::before, .tooltip.bs-tooltip-auto[x-placement^=\"right\"] .arrow::before {\n      margin-top: -3px;\n      content: \"\";\n      border-width: 5px 5px 5px 0;\n      border-right-color: #000; }\n.tooltip.bs-tooltip-bottom, .tooltip.bs-tooltip-auto[x-placement^=\"bottom\"] {\n    padding: 5px 0; }\n.tooltip.bs-tooltip-bottom .arrow, .tooltip.bs-tooltip-auto[x-placement^=\"bottom\"] .arrow {\n      top: 0; }\n.tooltip.bs-tooltip-bottom .arrow::before, .tooltip.bs-tooltip-auto[x-placement^=\"bottom\"] .arrow::before {\n      margin-left: -3px;\n      content: \"\";\n      border-width: 0 5px 5px;\n      border-bottom-color: #000; }\n.tooltip.bs-tooltip-left, .tooltip.bs-tooltip-auto[x-placement^=\"left\"] {\n    padding: 0 5px; }\n.tooltip.bs-tooltip-left .arrow, .tooltip.bs-tooltip-auto[x-placement^=\"left\"] .arrow {\n      right: 0; }\n.tooltip.bs-tooltip-left .arrow::before, .tooltip.bs-tooltip-auto[x-placement^=\"left\"] .arrow::before {\n      right: 0;\n      margin-top: -3px;\n      content: \"\";\n      border-width: 5px 0 5px 5px;\n      border-left-color: #000; }\n.tooltip-inner {\n  max-width: 200px;\n  padding: 3px 8px;\n  color: #fff;\n  text-align: center;\n  background-color: #000;\n  border-radius: 0.25rem; }\n.popover {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 1060;\n  display: block;\n  max-width: 276px;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-style: normal;\n  font-weight: normal;\n  line-height: 1.5;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  letter-spacing: normal;\n  word-break: normal;\n  word-spacing: normal;\n  white-space: normal;\n  line-break: auto;\n  font-size: 0.875rem;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0.3rem;\n  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }\n.popover .arrow {\n    position: absolute;\n    display: block;\n    width: 10px;\n    height: 5px; }\n.popover .arrow::before, .popover .arrow::after {\n    position: absolute;\n    display: block;\n    border-color: transparent;\n    border-style: solid; }\n.popover .arrow::before {\n    content: \"\";\n    border-width: 10px; }\n.popover .arrow::after {\n    content: \"\";\n    border-width: 10px; }\n.popover.bs-popover-top, .popover.bs-popover-auto[x-placement^=\"top\"] {\n    margin-bottom: 10px; }\n.popover.bs-popover-top .arrow, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow {\n      bottom: 0; }\n.popover.bs-popover-top .arrow::before, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow::before, .popover.bs-popover-top .arrow::after, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow::after {\n      border-bottom-width: 0; }\n.popover.bs-popover-top .arrow::before, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow::before {\n      bottom: -10px;\n      margin-left: -10px;\n      border-top-color: rgba(0, 0, 0, 0.25); }\n.popover.bs-popover-top .arrow::after, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow::after {\n      bottom: calc((10px - 1px) * -1);\n      margin-left: -10px;\n      border-top-color: #fff; }\n.popover.bs-popover-right, .popover.bs-popover-auto[x-placement^=\"right\"] {\n    margin-left: 10px; }\n.popover.bs-popover-right .arrow, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow {\n      left: 0; }\n.popover.bs-popover-right .arrow::before, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow::before, .popover.bs-popover-right .arrow::after, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow::after {\n      margin-top: -10px;\n      border-left-width: 0; }\n.popover.bs-popover-right .arrow::before, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow::before {\n      left: -10px;\n      border-right-color: rgba(0, 0, 0, 0.25); }\n.popover.bs-popover-right .arrow::after, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow::after {\n      left: calc((10px - 1px) * -1);\n      border-right-color: #fff; }\n.popover.bs-popover-bottom, .popover.bs-popover-auto[x-placement^=\"bottom\"] {\n    margin-top: 10px; }\n.popover.bs-popover-bottom .arrow, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow {\n      top: 0; }\n.popover.bs-popover-bottom .arrow::before, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow::before, .popover.bs-popover-bottom .arrow::after, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow::after {\n      margin-left: -10px;\n      border-top-width: 0; }\n.popover.bs-popover-bottom .arrow::before, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow::before {\n      top: -10px;\n      border-bottom-color: rgba(0, 0, 0, 0.25); }\n.popover.bs-popover-bottom .arrow::after, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow::after {\n      top: calc((10px - 1px) * -1);\n      border-bottom-color: #fff; }\n.popover.bs-popover-bottom .popover-header::before, .popover.bs-popover-auto[x-placement^=\"bottom\"] .popover-header::before {\n      position: absolute;\n      top: 0;\n      left: 50%;\n      display: block;\n      width: 20px;\n      margin-left: -10px;\n      content: \"\";\n      border-bottom: 1px solid #f7f7f7; }\n.popover.bs-popover-left, .popover.bs-popover-auto[x-placement^=\"left\"] {\n    margin-right: 10px; }\n.popover.bs-popover-left .arrow, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow {\n      right: 0; }\n.popover.bs-popover-left .arrow::before, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow::before, .popover.bs-popover-left .arrow::after, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow::after {\n      margin-top: -10px;\n      border-right-width: 0; }\n.popover.bs-popover-left .arrow::before, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow::before {\n      right: -10px;\n      border-left-color: rgba(0, 0, 0, 0.25); }\n.popover.bs-popover-left .arrow::after, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow::after {\n      right: calc((10px - 1px) * -1);\n      border-left-color: #fff; }\n.popover-header {\n  padding: 8px 14px;\n  margin-bottom: 0;\n  font-size: 1rem;\n  color: inherit;\n  background-color: #f7f7f7;\n  border-bottom: 1px solid #ebebeb;\n  border-top-left-radius: calc(0.3rem - 1px);\n  border-top-right-radius: calc(0.3rem - 1px); }\n.popover-header:empty {\n    display: none; }\n.popover-body {\n  padding: 9px 14px;\n  color: #1e2125; }\n.carousel {\n  position: relative; }\n.carousel-inner {\n  position: relative;\n  width: 100%;\n  overflow: hidden; }\n.carousel-item {\n  position: relative;\n  display: none;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  width: 100%;\n  transition: -webkit-transform 0.6s ease;\n  transition: transform 0.6s ease;\n  transition: transform 0.6s ease, -webkit-transform 0.6s ease;\n  -webkit-backface-visibility: hidden;\n          backface-visibility: hidden;\n  -webkit-perspective: 1000px;\n          perspective: 1000px; }\n.carousel-item.active, .carousel-item-next, .carousel-item-prev {\n  display: block; }\n.carousel-item-next, .carousel-item-prev {\n  position: absolute;\n  top: 0; }\n.carousel-item-next.carousel-item-left, .carousel-item-prev.carousel-item-right {\n  -webkit-transform: translateX(0);\n          transform: translateX(0); }\n@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {\n    .carousel-item-next.carousel-item-left, .carousel-item-prev.carousel-item-right {\n      -webkit-transform: translate3d(0, 0, 0);\n              transform: translate3d(0, 0, 0); } }\n.carousel-item-next, .active.carousel-item-right {\n  -webkit-transform: translateX(100%);\n          transform: translateX(100%); }\n@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {\n    .carousel-item-next, .active.carousel-item-right {\n      -webkit-transform: translate3d(100%, 0, 0);\n              transform: translate3d(100%, 0, 0); } }\n.carousel-item-prev, .active.carousel-item-left {\n  -webkit-transform: translateX(-100%);\n          transform: translateX(-100%); }\n@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {\n    .carousel-item-prev, .active.carousel-item-left {\n      -webkit-transform: translate3d(-100%, 0, 0);\n              transform: translate3d(-100%, 0, 0); } }\n.carousel-control-prev, .carousel-control-next {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 15%;\n  color: #fff;\n  text-align: center;\n  opacity: 0.5; }\n.carousel-control-prev:focus, .carousel-control-prev:hover, .carousel-control-next:focus, .carousel-control-next:hover {\n    color: #fff;\n    text-decoration: none;\n    outline: 0;\n    opacity: .9; }\n.carousel-control-prev {\n  left: 0; }\n.carousel-control-next {\n  right: 0; }\n.carousel-control-prev-icon, .carousel-control-next-icon {\n  display: inline-block;\n  width: 20px;\n  height: 20px;\n  background: transparent no-repeat center center;\n  background-size: 100% 100%; }\n.carousel-control-prev-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E\"); }\n.carousel-control-next-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E\"); }\n.carousel-indicators {\n  position: absolute;\n  right: 0;\n  bottom: 10px;\n  left: 0;\n  z-index: 15;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding-left: 0;\n  margin-right: 15%;\n  margin-left: 15%;\n  list-style: none; }\n.carousel-indicators li {\n    position: relative;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto;\n    width: 30px;\n    height: 3px;\n    margin-right: 3px;\n    margin-left: 3px;\n    text-indent: -999px;\n    background-color: rgba(255, 255, 255, 0.5); }\n.carousel-indicators li::before {\n      position: absolute;\n      top: -10px;\n      left: 0;\n      display: inline-block;\n      width: 100%;\n      height: 10px;\n      content: \"\"; }\n.carousel-indicators li::after {\n      position: absolute;\n      bottom: -10px;\n      left: 0;\n      display: inline-block;\n      width: 100%;\n      height: 10px;\n      content: \"\"; }\n.carousel-indicators .active {\n    background-color: #fff; }\n.carousel-caption {\n  position: absolute;\n  right: 15%;\n  bottom: 20px;\n  left: 15%;\n  z-index: 10;\n  padding-top: 20px;\n  padding-bottom: 20px;\n  color: #fff;\n  text-align: center; }\n.align-baseline {\n  vertical-align: baseline !important; }\n.align-top {\n  vertical-align: top !important; }\n.align-middle {\n  vertical-align: middle !important; }\n.align-bottom {\n  vertical-align: bottom !important; }\n.align-text-bottom {\n  vertical-align: text-bottom !important; }\n.align-text-top {\n  vertical-align: text-top !important; }\n.bg-primary {\n  background-color: #20c997 !important; }\na.bg-primary:focus, a.bg-primary:hover {\n  background-color: #199d76 !important; }\n.bg-secondary {\n  background-color: #f8f9fa !important; }\na.bg-secondary:focus, a.bg-secondary:hover {\n  background-color: #dae0e5 !important; }\n.bg-success {\n  background-color: #20c997 !important; }\na.bg-success:focus, a.bg-success:hover {\n  background-color: #199d76 !important; }\n.bg-info {\n  background-color: #17a2b8 !important; }\na.bg-info:focus, a.bg-info:hover {\n  background-color: #117a8b !important; }\n.bg-warning {\n  background-color: #ffc107 !important; }\na.bg-warning:focus, a.bg-warning:hover {\n  background-color: #d39e00 !important; }\n.bg-danger {\n  background-color: #dc3545 !important; }\na.bg-danger:focus, a.bg-danger:hover {\n  background-color: #bd2130 !important; }\n.bg-light {\n  background-color: #f8f9fa !important; }\na.bg-light:focus, a.bg-light:hover {\n  background-color: #dae0e5 !important; }\n.bg-dark {\n  background-color: #343a40 !important; }\na.bg-dark:focus, a.bg-dark:hover {\n  background-color: #1d2124 !important; }\n.bg-white {\n  background-color: #fff !important; }\n.bg-transparent {\n  background-color: transparent !important; }\n.border {\n  border: 1px solid rgba(0, 0, 0, 0.125) !important; }\n.border-0 {\n  border: 0 !important; }\n.border-top-0 {\n  border-top: 0 !important; }\n.border-right-0 {\n  border-right: 0 !important; }\n.border-bottom-0 {\n  border-bottom: 0 !important; }\n.border-left-0 {\n  border-left: 0 !important; }\n.border-primary {\n  border-color: #20c997 !important; }\n.border-secondary {\n  border-color: #f8f9fa !important; }\n.border-success {\n  border-color: #20c997 !important; }\n.border-info {\n  border-color: #17a2b8 !important; }\n.border-warning {\n  border-color: #ffc107 !important; }\n.border-danger {\n  border-color: #dc3545 !important; }\n.border-light {\n  border-color: #f8f9fa !important; }\n.border-dark {\n  border-color: #343a40 !important; }\n.border-white {\n  border-color: #fff !important; }\n.rounded {\n  border-radius: 0.25rem !important; }\n.rounded-top {\n  border-top-left-radius: 0.25rem !important;\n  border-top-right-radius: 0.25rem !important; }\n.rounded-right {\n  border-top-right-radius: 0.25rem !important;\n  border-bottom-right-radius: 0.25rem !important; }\n.rounded-bottom {\n  border-bottom-right-radius: 0.25rem !important;\n  border-bottom-left-radius: 0.25rem !important; }\n.rounded-left {\n  border-top-left-radius: 0.25rem !important;\n  border-bottom-left-radius: 0.25rem !important; }\n.rounded-circle {\n  border-radius: 50% !important; }\n.rounded-0 {\n  border-radius: 0 !important; }\n.clearfix::after {\n  display: block;\n  clear: both;\n  content: \"\"; }\n.d-none {\n  display: none !important; }\n.d-inline {\n  display: inline !important; }\n.d-inline-block {\n  display: inline-block !important; }\n.d-block {\n  display: block !important; }\n.d-table {\n  display: table !important; }\n.d-table-row {\n  display: table-row !important; }\n.d-table-cell {\n  display: table-cell !important; }\n.d-flex {\n  display: -webkit-box !important;\n  display: -ms-flexbox !important;\n  display: flex !important; }\n.d-inline-flex {\n  display: -webkit-inline-box !important;\n  display: -ms-inline-flexbox !important;\n  display: inline-flex !important; }\n@media (min-width: 576px) {\n  .d-sm-none {\n    display: none !important; }\n  .d-sm-inline {\n    display: inline !important; }\n  .d-sm-inline-block {\n    display: inline-block !important; }\n  .d-sm-block {\n    display: block !important; }\n  .d-sm-table {\n    display: table !important; }\n  .d-sm-table-row {\n    display: table-row !important; }\n  .d-sm-table-cell {\n    display: table-cell !important; }\n  .d-sm-flex {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important; }\n  .d-sm-inline-flex {\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important; } }\n@media (min-width: 768px) {\n  .d-md-none {\n    display: none !important; }\n  .d-md-inline {\n    display: inline !important; }\n  .d-md-inline-block {\n    display: inline-block !important; }\n  .d-md-block {\n    display: block !important; }\n  .d-md-table {\n    display: table !important; }\n  .d-md-table-row {\n    display: table-row !important; }\n  .d-md-table-cell {\n    display: table-cell !important; }\n  .d-md-flex {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important; }\n  .d-md-inline-flex {\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important; } }\n@media (min-width: 992px) {\n  .d-lg-none {\n    display: none !important; }\n  .d-lg-inline {\n    display: inline !important; }\n  .d-lg-inline-block {\n    display: inline-block !important; }\n  .d-lg-block {\n    display: block !important; }\n  .d-lg-table {\n    display: table !important; }\n  .d-lg-table-row {\n    display: table-row !important; }\n  .d-lg-table-cell {\n    display: table-cell !important; }\n  .d-lg-flex {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important; }\n  .d-lg-inline-flex {\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important; } }\n@media (min-width: 1200px) {\n  .d-xl-none {\n    display: none !important; }\n  .d-xl-inline {\n    display: inline !important; }\n  .d-xl-inline-block {\n    display: inline-block !important; }\n  .d-xl-block {\n    display: block !important; }\n  .d-xl-table {\n    display: table !important; }\n  .d-xl-table-row {\n    display: table-row !important; }\n  .d-xl-table-cell {\n    display: table-cell !important; }\n  .d-xl-flex {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important; }\n  .d-xl-inline-flex {\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important; } }\n.d-print-block {\n  display: none !important; }\n@media print {\n    .d-print-block {\n      display: block !important; } }\n.d-print-inline {\n  display: none !important; }\n@media print {\n    .d-print-inline {\n      display: inline !important; } }\n.d-print-inline-block {\n  display: none !important; }\n@media print {\n    .d-print-inline-block {\n      display: inline-block !important; } }\n@media print {\n  .d-print-none {\n    display: none !important; } }\n.embed-responsive {\n  position: relative;\n  display: block;\n  width: 100%;\n  padding: 0;\n  overflow: hidden; }\n.embed-responsive::before {\n    display: block;\n    content: \"\"; }\n.embed-responsive .embed-responsive-item, .embed-responsive iframe, .embed-responsive embed, .embed-responsive object, .embed-responsive video {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border: 0; }\n.embed-responsive-21by9::before {\n  padding-top: 42.85714%; }\n.embed-responsive-16by9::before {\n  padding-top: 56.25%; }\n.embed-responsive-4by3::before {\n  padding-top: 75%; }\n.embed-responsive-1by1::before {\n  padding-top: 100%; }\n.flex-row {\n  -webkit-box-orient: horizontal !important;\n  -webkit-box-direction: normal !important;\n      -ms-flex-direction: row !important;\n          flex-direction: row !important; }\n.flex-column {\n  -webkit-box-orient: vertical !important;\n  -webkit-box-direction: normal !important;\n      -ms-flex-direction: column !important;\n          flex-direction: column !important; }\n.flex-row-reverse {\n  -webkit-box-orient: horizontal !important;\n  -webkit-box-direction: reverse !important;\n      -ms-flex-direction: row-reverse !important;\n          flex-direction: row-reverse !important; }\n.flex-column-reverse {\n  -webkit-box-orient: vertical !important;\n  -webkit-box-direction: reverse !important;\n      -ms-flex-direction: column-reverse !important;\n          flex-direction: column-reverse !important; }\n.flex-wrap {\n  -ms-flex-wrap: wrap !important;\n      flex-wrap: wrap !important; }\n.flex-nowrap {\n  -ms-flex-wrap: nowrap !important;\n      flex-wrap: nowrap !important; }\n.flex-wrap-reverse {\n  -ms-flex-wrap: wrap-reverse !important;\n      flex-wrap: wrap-reverse !important; }\n.justify-content-start {\n  -webkit-box-pack: start !important;\n      -ms-flex-pack: start !important;\n          justify-content: flex-start !important; }\n.justify-content-end {\n  -webkit-box-pack: end !important;\n      -ms-flex-pack: end !important;\n          justify-content: flex-end !important; }\n.justify-content-center {\n  -webkit-box-pack: center !important;\n      -ms-flex-pack: center !important;\n          justify-content: center !important; }\n.justify-content-between {\n  -webkit-box-pack: justify !important;\n      -ms-flex-pack: justify !important;\n          justify-content: space-between !important; }\n.justify-content-around {\n  -ms-flex-pack: distribute !important;\n      justify-content: space-around !important; }\n.align-items-start {\n  -webkit-box-align: start !important;\n      -ms-flex-align: start !important;\n          align-items: flex-start !important; }\n.align-items-end {\n  -webkit-box-align: end !important;\n      -ms-flex-align: end !important;\n          align-items: flex-end !important; }\n.align-items-center {\n  -webkit-box-align: center !important;\n      -ms-flex-align: center !important;\n          align-items: center !important; }\n.align-items-baseline {\n  -webkit-box-align: baseline !important;\n      -ms-flex-align: baseline !important;\n          align-items: baseline !important; }\n.align-items-stretch {\n  -webkit-box-align: stretch !important;\n      -ms-flex-align: stretch !important;\n          align-items: stretch !important; }\n.align-content-start {\n  -ms-flex-line-pack: start !important;\n      align-content: flex-start !important; }\n.align-content-end {\n  -ms-flex-line-pack: end !important;\n      align-content: flex-end !important; }\n.align-content-center {\n  -ms-flex-line-pack: center !important;\n      align-content: center !important; }\n.align-content-between {\n  -ms-flex-line-pack: justify !important;\n      align-content: space-between !important; }\n.align-content-around {\n  -ms-flex-line-pack: distribute !important;\n      align-content: space-around !important; }\n.align-content-stretch {\n  -ms-flex-line-pack: stretch !important;\n      align-content: stretch !important; }\n.align-self-auto {\n  -ms-flex-item-align: auto !important;\n      -ms-grid-row-align: auto !important;\n      align-self: auto !important; }\n.align-self-start {\n  -ms-flex-item-align: start !important;\n      align-self: flex-start !important; }\n.align-self-end {\n  -ms-flex-item-align: end !important;\n      align-self: flex-end !important; }\n.align-self-center {\n  -ms-flex-item-align: center !important;\n      -ms-grid-row-align: center !important;\n      align-self: center !important; }\n.align-self-baseline {\n  -ms-flex-item-align: baseline !important;\n      align-self: baseline !important; }\n.align-self-stretch {\n  -ms-flex-item-align: stretch !important;\n      -ms-grid-row-align: stretch !important;\n      align-self: stretch !important; }\n@media (min-width: 576px) {\n  .flex-sm-row {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: row !important;\n            flex-direction: row !important; }\n  .flex-sm-column {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: column !important;\n            flex-direction: column !important; }\n  .flex-sm-row-reverse {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: row-reverse !important;\n            flex-direction: row-reverse !important; }\n  .flex-sm-column-reverse {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: column-reverse !important;\n            flex-direction: column-reverse !important; }\n  .flex-sm-wrap {\n    -ms-flex-wrap: wrap !important;\n        flex-wrap: wrap !important; }\n  .flex-sm-nowrap {\n    -ms-flex-wrap: nowrap !important;\n        flex-wrap: nowrap !important; }\n  .flex-sm-wrap-reverse {\n    -ms-flex-wrap: wrap-reverse !important;\n        flex-wrap: wrap-reverse !important; }\n  .justify-content-sm-start {\n    -webkit-box-pack: start !important;\n        -ms-flex-pack: start !important;\n            justify-content: flex-start !important; }\n  .justify-content-sm-end {\n    -webkit-box-pack: end !important;\n        -ms-flex-pack: end !important;\n            justify-content: flex-end !important; }\n  .justify-content-sm-center {\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important; }\n  .justify-content-sm-between {\n    -webkit-box-pack: justify !important;\n        -ms-flex-pack: justify !important;\n            justify-content: space-between !important; }\n  .justify-content-sm-around {\n    -ms-flex-pack: distribute !important;\n        justify-content: space-around !important; }\n  .align-items-sm-start {\n    -webkit-box-align: start !important;\n        -ms-flex-align: start !important;\n            align-items: flex-start !important; }\n  .align-items-sm-end {\n    -webkit-box-align: end !important;\n        -ms-flex-align: end !important;\n            align-items: flex-end !important; }\n  .align-items-sm-center {\n    -webkit-box-align: center !important;\n        -ms-flex-align: center !important;\n            align-items: center !important; }\n  .align-items-sm-baseline {\n    -webkit-box-align: baseline !important;\n        -ms-flex-align: baseline !important;\n            align-items: baseline !important; }\n  .align-items-sm-stretch {\n    -webkit-box-align: stretch !important;\n        -ms-flex-align: stretch !important;\n            align-items: stretch !important; }\n  .align-content-sm-start {\n    -ms-flex-line-pack: start !important;\n        align-content: flex-start !important; }\n  .align-content-sm-end {\n    -ms-flex-line-pack: end !important;\n        align-content: flex-end !important; }\n  .align-content-sm-center {\n    -ms-flex-line-pack: center !important;\n        align-content: center !important; }\n  .align-content-sm-between {\n    -ms-flex-line-pack: justify !important;\n        align-content: space-between !important; }\n  .align-content-sm-around {\n    -ms-flex-line-pack: distribute !important;\n        align-content: space-around !important; }\n  .align-content-sm-stretch {\n    -ms-flex-line-pack: stretch !important;\n        align-content: stretch !important; }\n  .align-self-sm-auto {\n    -ms-flex-item-align: auto !important;\n        -ms-grid-row-align: auto !important;\n        align-self: auto !important; }\n  .align-self-sm-start {\n    -ms-flex-item-align: start !important;\n        align-self: flex-start !important; }\n  .align-self-sm-end {\n    -ms-flex-item-align: end !important;\n        align-self: flex-end !important; }\n  .align-self-sm-center {\n    -ms-flex-item-align: center !important;\n        -ms-grid-row-align: center !important;\n        align-self: center !important; }\n  .align-self-sm-baseline {\n    -ms-flex-item-align: baseline !important;\n        align-self: baseline !important; }\n  .align-self-sm-stretch {\n    -ms-flex-item-align: stretch !important;\n        -ms-grid-row-align: stretch !important;\n        align-self: stretch !important; } }\n@media (min-width: 768px) {\n  .flex-md-row {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: row !important;\n            flex-direction: row !important; }\n  .flex-md-column {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: column !important;\n            flex-direction: column !important; }\n  .flex-md-row-reverse {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: row-reverse !important;\n            flex-direction: row-reverse !important; }\n  .flex-md-column-reverse {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: column-reverse !important;\n            flex-direction: column-reverse !important; }\n  .flex-md-wrap {\n    -ms-flex-wrap: wrap !important;\n        flex-wrap: wrap !important; }\n  .flex-md-nowrap {\n    -ms-flex-wrap: nowrap !important;\n        flex-wrap: nowrap !important; }\n  .flex-md-wrap-reverse {\n    -ms-flex-wrap: wrap-reverse !important;\n        flex-wrap: wrap-reverse !important; }\n  .justify-content-md-start {\n    -webkit-box-pack: start !important;\n        -ms-flex-pack: start !important;\n            justify-content: flex-start !important; }\n  .justify-content-md-end {\n    -webkit-box-pack: end !important;\n        -ms-flex-pack: end !important;\n            justify-content: flex-end !important; }\n  .justify-content-md-center {\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important; }\n  .justify-content-md-between {\n    -webkit-box-pack: justify !important;\n        -ms-flex-pack: justify !important;\n            justify-content: space-between !important; }\n  .justify-content-md-around {\n    -ms-flex-pack: distribute !important;\n        justify-content: space-around !important; }\n  .align-items-md-start {\n    -webkit-box-align: start !important;\n        -ms-flex-align: start !important;\n            align-items: flex-start !important; }\n  .align-items-md-end {\n    -webkit-box-align: end !important;\n        -ms-flex-align: end !important;\n            align-items: flex-end !important; }\n  .align-items-md-center {\n    -webkit-box-align: center !important;\n        -ms-flex-align: center !important;\n            align-items: center !important; }\n  .align-items-md-baseline {\n    -webkit-box-align: baseline !important;\n        -ms-flex-align: baseline !important;\n            align-items: baseline !important; }\n  .align-items-md-stretch {\n    -webkit-box-align: stretch !important;\n        -ms-flex-align: stretch !important;\n            align-items: stretch !important; }\n  .align-content-md-start {\n    -ms-flex-line-pack: start !important;\n        align-content: flex-start !important; }\n  .align-content-md-end {\n    -ms-flex-line-pack: end !important;\n        align-content: flex-end !important; }\n  .align-content-md-center {\n    -ms-flex-line-pack: center !important;\n        align-content: center !important; }\n  .align-content-md-between {\n    -ms-flex-line-pack: justify !important;\n        align-content: space-between !important; }\n  .align-content-md-around {\n    -ms-flex-line-pack: distribute !important;\n        align-content: space-around !important; }\n  .align-content-md-stretch {\n    -ms-flex-line-pack: stretch !important;\n        align-content: stretch !important; }\n  .align-self-md-auto {\n    -ms-flex-item-align: auto !important;\n        -ms-grid-row-align: auto !important;\n        align-self: auto !important; }\n  .align-self-md-start {\n    -ms-flex-item-align: start !important;\n        align-self: flex-start !important; }\n  .align-self-md-end {\n    -ms-flex-item-align: end !important;\n        align-self: flex-end !important; }\n  .align-self-md-center {\n    -ms-flex-item-align: center !important;\n        -ms-grid-row-align: center !important;\n        align-self: center !important; }\n  .align-self-md-baseline {\n    -ms-flex-item-align: baseline !important;\n        align-self: baseline !important; }\n  .align-self-md-stretch {\n    -ms-flex-item-align: stretch !important;\n        -ms-grid-row-align: stretch !important;\n        align-self: stretch !important; } }\n@media (min-width: 992px) {\n  .flex-lg-row {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: row !important;\n            flex-direction: row !important; }\n  .flex-lg-column {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: column !important;\n            flex-direction: column !important; }\n  .flex-lg-row-reverse {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: row-reverse !important;\n            flex-direction: row-reverse !important; }\n  .flex-lg-column-reverse {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: column-reverse !important;\n            flex-direction: column-reverse !important; }\n  .flex-lg-wrap {\n    -ms-flex-wrap: wrap !important;\n        flex-wrap: wrap !important; }\n  .flex-lg-nowrap {\n    -ms-flex-wrap: nowrap !important;\n        flex-wrap: nowrap !important; }\n  .flex-lg-wrap-reverse {\n    -ms-flex-wrap: wrap-reverse !important;\n        flex-wrap: wrap-reverse !important; }\n  .justify-content-lg-start {\n    -webkit-box-pack: start !important;\n        -ms-flex-pack: start !important;\n            justify-content: flex-start !important; }\n  .justify-content-lg-end {\n    -webkit-box-pack: end !important;\n        -ms-flex-pack: end !important;\n            justify-content: flex-end !important; }\n  .justify-content-lg-center {\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important; }\n  .justify-content-lg-between {\n    -webkit-box-pack: justify !important;\n        -ms-flex-pack: justify !important;\n            justify-content: space-between !important; }\n  .justify-content-lg-around {\n    -ms-flex-pack: distribute !important;\n        justify-content: space-around !important; }\n  .align-items-lg-start {\n    -webkit-box-align: start !important;\n        -ms-flex-align: start !important;\n            align-items: flex-start !important; }\n  .align-items-lg-end {\n    -webkit-box-align: end !important;\n        -ms-flex-align: end !important;\n            align-items: flex-end !important; }\n  .align-items-lg-center {\n    -webkit-box-align: center !important;\n        -ms-flex-align: center !important;\n            align-items: center !important; }\n  .align-items-lg-baseline {\n    -webkit-box-align: baseline !important;\n        -ms-flex-align: baseline !important;\n            align-items: baseline !important; }\n  .align-items-lg-stretch {\n    -webkit-box-align: stretch !important;\n        -ms-flex-align: stretch !important;\n            align-items: stretch !important; }\n  .align-content-lg-start {\n    -ms-flex-line-pack: start !important;\n        align-content: flex-start !important; }\n  .align-content-lg-end {\n    -ms-flex-line-pack: end !important;\n        align-content: flex-end !important; }\n  .align-content-lg-center {\n    -ms-flex-line-pack: center !important;\n        align-content: center !important; }\n  .align-content-lg-between {\n    -ms-flex-line-pack: justify !important;\n        align-content: space-between !important; }\n  .align-content-lg-around {\n    -ms-flex-line-pack: distribute !important;\n        align-content: space-around !important; }\n  .align-content-lg-stretch {\n    -ms-flex-line-pack: stretch !important;\n        align-content: stretch !important; }\n  .align-self-lg-auto {\n    -ms-flex-item-align: auto !important;\n        -ms-grid-row-align: auto !important;\n        align-self: auto !important; }\n  .align-self-lg-start {\n    -ms-flex-item-align: start !important;\n        align-self: flex-start !important; }\n  .align-self-lg-end {\n    -ms-flex-item-align: end !important;\n        align-self: flex-end !important; }\n  .align-self-lg-center {\n    -ms-flex-item-align: center !important;\n        -ms-grid-row-align: center !important;\n        align-self: center !important; }\n  .align-self-lg-baseline {\n    -ms-flex-item-align: baseline !important;\n        align-self: baseline !important; }\n  .align-self-lg-stretch {\n    -ms-flex-item-align: stretch !important;\n        -ms-grid-row-align: stretch !important;\n        align-self: stretch !important; } }\n@media (min-width: 1200px) {\n  .flex-xl-row {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: row !important;\n            flex-direction: row !important; }\n  .flex-xl-column {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: column !important;\n            flex-direction: column !important; }\n  .flex-xl-row-reverse {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: row-reverse !important;\n            flex-direction: row-reverse !important; }\n  .flex-xl-column-reverse {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: column-reverse !important;\n            flex-direction: column-reverse !important; }\n  .flex-xl-wrap {\n    -ms-flex-wrap: wrap !important;\n        flex-wrap: wrap !important; }\n  .flex-xl-nowrap {\n    -ms-flex-wrap: nowrap !important;\n        flex-wrap: nowrap !important; }\n  .flex-xl-wrap-reverse {\n    -ms-flex-wrap: wrap-reverse !important;\n        flex-wrap: wrap-reverse !important; }\n  .justify-content-xl-start {\n    -webkit-box-pack: start !important;\n        -ms-flex-pack: start !important;\n            justify-content: flex-start !important; }\n  .justify-content-xl-end {\n    -webkit-box-pack: end !important;\n        -ms-flex-pack: end !important;\n            justify-content: flex-end !important; }\n  .justify-content-xl-center {\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important; }\n  .justify-content-xl-between {\n    -webkit-box-pack: justify !important;\n        -ms-flex-pack: justify !important;\n            justify-content: space-between !important; }\n  .justify-content-xl-around {\n    -ms-flex-pack: distribute !important;\n        justify-content: space-around !important; }\n  .align-items-xl-start {\n    -webkit-box-align: start !important;\n        -ms-flex-align: start !important;\n            align-items: flex-start !important; }\n  .align-items-xl-end {\n    -webkit-box-align: end !important;\n        -ms-flex-align: end !important;\n            align-items: flex-end !important; }\n  .align-items-xl-center {\n    -webkit-box-align: center !important;\n        -ms-flex-align: center !important;\n            align-items: center !important; }\n  .align-items-xl-baseline {\n    -webkit-box-align: baseline !important;\n        -ms-flex-align: baseline !important;\n            align-items: baseline !important; }\n  .align-items-xl-stretch {\n    -webkit-box-align: stretch !important;\n        -ms-flex-align: stretch !important;\n            align-items: stretch !important; }\n  .align-content-xl-start {\n    -ms-flex-line-pack: start !important;\n        align-content: flex-start !important; }\n  .align-content-xl-end {\n    -ms-flex-line-pack: end !important;\n        align-content: flex-end !important; }\n  .align-content-xl-center {\n    -ms-flex-line-pack: center !important;\n        align-content: center !important; }\n  .align-content-xl-between {\n    -ms-flex-line-pack: justify !important;\n        align-content: space-between !important; }\n  .align-content-xl-around {\n    -ms-flex-line-pack: distribute !important;\n        align-content: space-around !important; }\n  .align-content-xl-stretch {\n    -ms-flex-line-pack: stretch !important;\n        align-content: stretch !important; }\n  .align-self-xl-auto {\n    -ms-flex-item-align: auto !important;\n        -ms-grid-row-align: auto !important;\n        align-self: auto !important; }\n  .align-self-xl-start {\n    -ms-flex-item-align: start !important;\n        align-self: flex-start !important; }\n  .align-self-xl-end {\n    -ms-flex-item-align: end !important;\n        align-self: flex-end !important; }\n  .align-self-xl-center {\n    -ms-flex-item-align: center !important;\n        -ms-grid-row-align: center !important;\n        align-self: center !important; }\n  .align-self-xl-baseline {\n    -ms-flex-item-align: baseline !important;\n        align-self: baseline !important; }\n  .align-self-xl-stretch {\n    -ms-flex-item-align: stretch !important;\n        -ms-grid-row-align: stretch !important;\n        align-self: stretch !important; } }\n.float-left {\n  float: left !important; }\n.float-right {\n  float: right !important; }\n.float-none {\n  float: none !important; }\n@media (min-width: 576px) {\n  .float-sm-left {\n    float: left !important; }\n  .float-sm-right {\n    float: right !important; }\n  .float-sm-none {\n    float: none !important; } }\n@media (min-width: 768px) {\n  .float-md-left {\n    float: left !important; }\n  .float-md-right {\n    float: right !important; }\n  .float-md-none {\n    float: none !important; } }\n@media (min-width: 992px) {\n  .float-lg-left {\n    float: left !important; }\n  .float-lg-right {\n    float: right !important; }\n  .float-lg-none {\n    float: none !important; } }\n@media (min-width: 1200px) {\n  .float-xl-left {\n    float: left !important; }\n  .float-xl-right {\n    float: right !important; }\n  .float-xl-none {\n    float: none !important; } }\n.position-static {\n  position: static !important; }\n.position-relative {\n  position: relative !important; }\n.position-absolute {\n  position: absolute !important; }\n.position-fixed {\n  position: fixed !important; }\n.position-sticky {\n  position: -webkit-sticky !important;\n  position: sticky !important; }\n.fixed-top {\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 1030; }\n.fixed-bottom {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1030; }\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n  .sticky-top {\n    position: -webkit-sticky;\n    position: sticky;\n    top: 0;\n    z-index: 1020; } }\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  -webkit-clip-path: inset(50%);\n          clip-path: inset(50%);\n  border: 0; }\n.sr-only-focusable:active, .sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  overflow: visible;\n  clip: auto;\n  white-space: normal;\n  -webkit-clip-path: none;\n          clip-path: none; }\n.w-25 {\n  width: 25% !important; }\n.w-50 {\n  width: 50% !important; }\n.w-60 {\n  width: 60% !important; }\n.w-75 {\n  width: 75% !important; }\n.w-100 {\n  width: 100% !important; }\n.h-25 {\n  height: 25% !important; }\n.h-50 {\n  height: 50% !important; }\n.h-60 {\n  height: 60% !important; }\n.h-75 {\n  height: 75% !important; }\n.h-100 {\n  height: 100% !important; }\n.mw-100 {\n  max-width: 100% !important; }\n.mh-100 {\n  max-height: 100% !important; }\n.m-0 {\n  margin: 0 !important; }\n.mt-0, .my-0 {\n  margin-top: 0 !important; }\n.mr-0, .mx-0 {\n  margin-right: 0 !important; }\n.mb-0, .my-0 {\n  margin-bottom: 0 !important; }\n.ml-0, .mx-0 {\n  margin-left: 0 !important; }\n.m-1 {\n  margin: 0.25rem !important; }\n.mt-1, .my-1 {\n  margin-top: 0.25rem !important; }\n.mr-1, .mx-1 {\n  margin-right: 0.25rem !important; }\n.mb-1, .my-1 {\n  margin-bottom: 0.25rem !important; }\n.ml-1, .mx-1 {\n  margin-left: 0.25rem !important; }\n.m-2 {\n  margin: 0.5rem !important; }\n.mt-2, .my-2 {\n  margin-top: 0.5rem !important; }\n.mr-2, .mx-2 {\n  margin-right: 0.5rem !important; }\n.mb-2, .my-2 {\n  margin-bottom: 0.5rem !important; }\n.ml-2, .mx-2 {\n  margin-left: 0.5rem !important; }\n.m-3 {\n  margin: 1rem !important; }\n.mt-3, .my-3 {\n  margin-top: 1rem !important; }\n.mr-3, .mx-3 {\n  margin-right: 1rem !important; }\n.mb-3, .my-3 {\n  margin-bottom: 1rem !important; }\n.ml-3, .mx-3 {\n  margin-left: 1rem !important; }\n.m-4 {\n  margin: 1.5rem !important; }\n.mt-4, .my-4 {\n  margin-top: 1.5rem !important; }\n.mr-4, .mx-4 {\n  margin-right: 1.5rem !important; }\n.mb-4, .my-4 {\n  margin-bottom: 1.5rem !important; }\n.ml-4, .mx-4 {\n  margin-left: 1.5rem !important; }\n.m-5 {\n  margin: 3rem !important; }\n.mt-5, .my-5 {\n  margin-top: 3rem !important; }\n.mr-5, .mx-5 {\n  margin-right: 3rem !important; }\n.mb-5, .my-5 {\n  margin-bottom: 3rem !important; }\n.ml-5, .mx-5 {\n  margin-left: 3rem !important; }\n.p-0 {\n  padding: 0 !important; }\n.pt-0, .py-0 {\n  padding-top: 0 !important; }\n.pr-0, .px-0 {\n  padding-right: 0 !important; }\n.pb-0, .py-0 {\n  padding-bottom: 0 !important; }\n.pl-0, .px-0 {\n  padding-left: 0 !important; }\n.p-1 {\n  padding: 0.25rem !important; }\n.pt-1, .py-1 {\n  padding-top: 0.25rem !important; }\n.pr-1, .px-1 {\n  padding-right: 0.25rem !important; }\n.pb-1, .py-1 {\n  padding-bottom: 0.25rem !important; }\n.pl-1, .px-1 {\n  padding-left: 0.25rem !important; }\n.p-2 {\n  padding: 0.5rem !important; }\n.pt-2, .py-2 {\n  padding-top: 0.5rem !important; }\n.pr-2, .px-2 {\n  padding-right: 0.5rem !important; }\n.pb-2, .py-2 {\n  padding-bottom: 0.5rem !important; }\n.pl-2, .px-2 {\n  padding-left: 0.5rem !important; }\n.p-3 {\n  padding: 1rem !important; }\n.pt-3, .py-3 {\n  padding-top: 1rem !important; }\n.pr-3, .px-3 {\n  padding-right: 1rem !important; }\n.pb-3, .py-3 {\n  padding-bottom: 1rem !important; }\n.pl-3, .px-3 {\n  padding-left: 1rem !important; }\n.p-4 {\n  padding: 1.5rem !important; }\n.pt-4, .py-4 {\n  padding-top: 1.5rem !important; }\n.pr-4, .px-4 {\n  padding-right: 1.5rem !important; }\n.pb-4, .py-4 {\n  padding-bottom: 1.5rem !important; }\n.pl-4, .px-4 {\n  padding-left: 1.5rem !important; }\n.p-5 {\n  padding: 3rem !important; }\n.pt-5, .py-5 {\n  padding-top: 3rem !important; }\n.pr-5, .px-5 {\n  padding-right: 3rem !important; }\n.pb-5, .py-5 {\n  padding-bottom: 3rem !important; }\n.pl-5, .px-5 {\n  padding-left: 3rem !important; }\n.m-auto {\n  margin: auto !important; }\n.mt-auto, .my-auto {\n  margin-top: auto !important; }\n.mr-auto, .mx-auto {\n  margin-right: auto !important; }\n.mb-auto, .my-auto {\n  margin-bottom: auto !important; }\n.ml-auto, .mx-auto {\n  margin-left: auto !important; }\n@media (min-width: 576px) {\n  .m-sm-0 {\n    margin: 0 !important; }\n  .mt-sm-0, .my-sm-0 {\n    margin-top: 0 !important; }\n  .mr-sm-0, .mx-sm-0 {\n    margin-right: 0 !important; }\n  .mb-sm-0, .my-sm-0 {\n    margin-bottom: 0 !important; }\n  .ml-sm-0, .mx-sm-0 {\n    margin-left: 0 !important; }\n  .m-sm-1 {\n    margin: 0.25rem !important; }\n  .mt-sm-1, .my-sm-1 {\n    margin-top: 0.25rem !important; }\n  .mr-sm-1, .mx-sm-1 {\n    margin-right: 0.25rem !important; }\n  .mb-sm-1, .my-sm-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-sm-1, .mx-sm-1 {\n    margin-left: 0.25rem !important; }\n  .m-sm-2 {\n    margin: 0.5rem !important; }\n  .mt-sm-2, .my-sm-2 {\n    margin-top: 0.5rem !important; }\n  .mr-sm-2, .mx-sm-2 {\n    margin-right: 0.5rem !important; }\n  .mb-sm-2, .my-sm-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-sm-2, .mx-sm-2 {\n    margin-left: 0.5rem !important; }\n  .m-sm-3 {\n    margin: 1rem !important; }\n  .mt-sm-3, .my-sm-3 {\n    margin-top: 1rem !important; }\n  .mr-sm-3, .mx-sm-3 {\n    margin-right: 1rem !important; }\n  .mb-sm-3, .my-sm-3 {\n    margin-bottom: 1rem !important; }\n  .ml-sm-3, .mx-sm-3 {\n    margin-left: 1rem !important; }\n  .m-sm-4 {\n    margin: 1.5rem !important; }\n  .mt-sm-4, .my-sm-4 {\n    margin-top: 1.5rem !important; }\n  .mr-sm-4, .mx-sm-4 {\n    margin-right: 1.5rem !important; }\n  .mb-sm-4, .my-sm-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-sm-4, .mx-sm-4 {\n    margin-left: 1.5rem !important; }\n  .m-sm-5 {\n    margin: 3rem !important; }\n  .mt-sm-5, .my-sm-5 {\n    margin-top: 3rem !important; }\n  .mr-sm-5, .mx-sm-5 {\n    margin-right: 3rem !important; }\n  .mb-sm-5, .my-sm-5 {\n    margin-bottom: 3rem !important; }\n  .ml-sm-5, .mx-sm-5 {\n    margin-left: 3rem !important; }\n  .p-sm-0 {\n    padding: 0 !important; }\n  .pt-sm-0, .py-sm-0 {\n    padding-top: 0 !important; }\n  .pr-sm-0, .px-sm-0 {\n    padding-right: 0 !important; }\n  .pb-sm-0, .py-sm-0 {\n    padding-bottom: 0 !important; }\n  .pl-sm-0, .px-sm-0 {\n    padding-left: 0 !important; }\n  .p-sm-1 {\n    padding: 0.25rem !important; }\n  .pt-sm-1, .py-sm-1 {\n    padding-top: 0.25rem !important; }\n  .pr-sm-1, .px-sm-1 {\n    padding-right: 0.25rem !important; }\n  .pb-sm-1, .py-sm-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-sm-1, .px-sm-1 {\n    padding-left: 0.25rem !important; }\n  .p-sm-2 {\n    padding: 0.5rem !important; }\n  .pt-sm-2, .py-sm-2 {\n    padding-top: 0.5rem !important; }\n  .pr-sm-2, .px-sm-2 {\n    padding-right: 0.5rem !important; }\n  .pb-sm-2, .py-sm-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-sm-2, .px-sm-2 {\n    padding-left: 0.5rem !important; }\n  .p-sm-3 {\n    padding: 1rem !important; }\n  .pt-sm-3, .py-sm-3 {\n    padding-top: 1rem !important; }\n  .pr-sm-3, .px-sm-3 {\n    padding-right: 1rem !important; }\n  .pb-sm-3, .py-sm-3 {\n    padding-bottom: 1rem !important; }\n  .pl-sm-3, .px-sm-3 {\n    padding-left: 1rem !important; }\n  .p-sm-4 {\n    padding: 1.5rem !important; }\n  .pt-sm-4, .py-sm-4 {\n    padding-top: 1.5rem !important; }\n  .pr-sm-4, .px-sm-4 {\n    padding-right: 1.5rem !important; }\n  .pb-sm-4, .py-sm-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-sm-4, .px-sm-4 {\n    padding-left: 1.5rem !important; }\n  .p-sm-5 {\n    padding: 3rem !important; }\n  .pt-sm-5, .py-sm-5 {\n    padding-top: 3rem !important; }\n  .pr-sm-5, .px-sm-5 {\n    padding-right: 3rem !important; }\n  .pb-sm-5, .py-sm-5 {\n    padding-bottom: 3rem !important; }\n  .pl-sm-5, .px-sm-5 {\n    padding-left: 3rem !important; }\n  .m-sm-auto {\n    margin: auto !important; }\n  .mt-sm-auto, .my-sm-auto {\n    margin-top: auto !important; }\n  .mr-sm-auto, .mx-sm-auto {\n    margin-right: auto !important; }\n  .mb-sm-auto, .my-sm-auto {\n    margin-bottom: auto !important; }\n  .ml-sm-auto, .mx-sm-auto {\n    margin-left: auto !important; } }\n@media (min-width: 768px) {\n  .m-md-0 {\n    margin: 0 !important; }\n  .mt-md-0, .my-md-0 {\n    margin-top: 0 !important; }\n  .mr-md-0, .mx-md-0 {\n    margin-right: 0 !important; }\n  .mb-md-0, .my-md-0 {\n    margin-bottom: 0 !important; }\n  .ml-md-0, .mx-md-0 {\n    margin-left: 0 !important; }\n  .m-md-1 {\n    margin: 0.25rem !important; }\n  .mt-md-1, .my-md-1 {\n    margin-top: 0.25rem !important; }\n  .mr-md-1, .mx-md-1 {\n    margin-right: 0.25rem !important; }\n  .mb-md-1, .my-md-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-md-1, .mx-md-1 {\n    margin-left: 0.25rem !important; }\n  .m-md-2 {\n    margin: 0.5rem !important; }\n  .mt-md-2, .my-md-2 {\n    margin-top: 0.5rem !important; }\n  .mr-md-2, .mx-md-2 {\n    margin-right: 0.5rem !important; }\n  .mb-md-2, .my-md-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-md-2, .mx-md-2 {\n    margin-left: 0.5rem !important; }\n  .m-md-3 {\n    margin: 1rem !important; }\n  .mt-md-3, .my-md-3 {\n    margin-top: 1rem !important; }\n  .mr-md-3, .mx-md-3 {\n    margin-right: 1rem !important; }\n  .mb-md-3, .my-md-3 {\n    margin-bottom: 1rem !important; }\n  .ml-md-3, .mx-md-3 {\n    margin-left: 1rem !important; }\n  .m-md-4 {\n    margin: 1.5rem !important; }\n  .mt-md-4, .my-md-4 {\n    margin-top: 1.5rem !important; }\n  .mr-md-4, .mx-md-4 {\n    margin-right: 1.5rem !important; }\n  .mb-md-4, .my-md-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-md-4, .mx-md-4 {\n    margin-left: 1.5rem !important; }\n  .m-md-5 {\n    margin: 3rem !important; }\n  .mt-md-5, .my-md-5 {\n    margin-top: 3rem !important; }\n  .mr-md-5, .mx-md-5 {\n    margin-right: 3rem !important; }\n  .mb-md-5, .my-md-5 {\n    margin-bottom: 3rem !important; }\n  .ml-md-5, .mx-md-5 {\n    margin-left: 3rem !important; }\n  .p-md-0 {\n    padding: 0 !important; }\n  .pt-md-0, .py-md-0 {\n    padding-top: 0 !important; }\n  .pr-md-0, .px-md-0 {\n    padding-right: 0 !important; }\n  .pb-md-0, .py-md-0 {\n    padding-bottom: 0 !important; }\n  .pl-md-0, .px-md-0 {\n    padding-left: 0 !important; }\n  .p-md-1 {\n    padding: 0.25rem !important; }\n  .pt-md-1, .py-md-1 {\n    padding-top: 0.25rem !important; }\n  .pr-md-1, .px-md-1 {\n    padding-right: 0.25rem !important; }\n  .pb-md-1, .py-md-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-md-1, .px-md-1 {\n    padding-left: 0.25rem !important; }\n  .p-md-2 {\n    padding: 0.5rem !important; }\n  .pt-md-2, .py-md-2 {\n    padding-top: 0.5rem !important; }\n  .pr-md-2, .px-md-2 {\n    padding-right: 0.5rem !important; }\n  .pb-md-2, .py-md-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-md-2, .px-md-2 {\n    padding-left: 0.5rem !important; }\n  .p-md-3 {\n    padding: 1rem !important; }\n  .pt-md-3, .py-md-3 {\n    padding-top: 1rem !important; }\n  .pr-md-3, .px-md-3 {\n    padding-right: 1rem !important; }\n  .pb-md-3, .py-md-3 {\n    padding-bottom: 1rem !important; }\n  .pl-md-3, .px-md-3 {\n    padding-left: 1rem !important; }\n  .p-md-4 {\n    padding: 1.5rem !important; }\n  .pt-md-4, .py-md-4 {\n    padding-top: 1.5rem !important; }\n  .pr-md-4, .px-md-4 {\n    padding-right: 1.5rem !important; }\n  .pb-md-4, .py-md-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-md-4, .px-md-4 {\n    padding-left: 1.5rem !important; }\n  .p-md-5 {\n    padding: 3rem !important; }\n  .pt-md-5, .py-md-5 {\n    padding-top: 3rem !important; }\n  .pr-md-5, .px-md-5 {\n    padding-right: 3rem !important; }\n  .pb-md-5, .py-md-5 {\n    padding-bottom: 3rem !important; }\n  .pl-md-5, .px-md-5 {\n    padding-left: 3rem !important; }\n  .m-md-auto {\n    margin: auto !important; }\n  .mt-md-auto, .my-md-auto {\n    margin-top: auto !important; }\n  .mr-md-auto, .mx-md-auto {\n    margin-right: auto !important; }\n  .mb-md-auto, .my-md-auto {\n    margin-bottom: auto !important; }\n  .ml-md-auto, .mx-md-auto {\n    margin-left: auto !important; } }\n@media (min-width: 992px) {\n  .m-lg-0 {\n    margin: 0 !important; }\n  .mt-lg-0, .my-lg-0 {\n    margin-top: 0 !important; }\n  .mr-lg-0, .mx-lg-0 {\n    margin-right: 0 !important; }\n  .mb-lg-0, .my-lg-0 {\n    margin-bottom: 0 !important; }\n  .ml-lg-0, .mx-lg-0 {\n    margin-left: 0 !important; }\n  .m-lg-1 {\n    margin: 0.25rem !important; }\n  .mt-lg-1, .my-lg-1 {\n    margin-top: 0.25rem !important; }\n  .mr-lg-1, .mx-lg-1 {\n    margin-right: 0.25rem !important; }\n  .mb-lg-1, .my-lg-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-lg-1, .mx-lg-1 {\n    margin-left: 0.25rem !important; }\n  .m-lg-2 {\n    margin: 0.5rem !important; }\n  .mt-lg-2, .my-lg-2 {\n    margin-top: 0.5rem !important; }\n  .mr-lg-2, .mx-lg-2 {\n    margin-right: 0.5rem !important; }\n  .mb-lg-2, .my-lg-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-lg-2, .mx-lg-2 {\n    margin-left: 0.5rem !important; }\n  .m-lg-3 {\n    margin: 1rem !important; }\n  .mt-lg-3, .my-lg-3 {\n    margin-top: 1rem !important; }\n  .mr-lg-3, .mx-lg-3 {\n    margin-right: 1rem !important; }\n  .mb-lg-3, .my-lg-3 {\n    margin-bottom: 1rem !important; }\n  .ml-lg-3, .mx-lg-3 {\n    margin-left: 1rem !important; }\n  .m-lg-4 {\n    margin: 1.5rem !important; }\n  .mt-lg-4, .my-lg-4 {\n    margin-top: 1.5rem !important; }\n  .mr-lg-4, .mx-lg-4 {\n    margin-right: 1.5rem !important; }\n  .mb-lg-4, .my-lg-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-lg-4, .mx-lg-4 {\n    margin-left: 1.5rem !important; }\n  .m-lg-5 {\n    margin: 3rem !important; }\n  .mt-lg-5, .my-lg-5 {\n    margin-top: 3rem !important; }\n  .mr-lg-5, .mx-lg-5 {\n    margin-right: 3rem !important; }\n  .mb-lg-5, .my-lg-5 {\n    margin-bottom: 3rem !important; }\n  .ml-lg-5, .mx-lg-5 {\n    margin-left: 3rem !important; }\n  .p-lg-0 {\n    padding: 0 !important; }\n  .pt-lg-0, .py-lg-0 {\n    padding-top: 0 !important; }\n  .pr-lg-0, .px-lg-0 {\n    padding-right: 0 !important; }\n  .pb-lg-0, .py-lg-0 {\n    padding-bottom: 0 !important; }\n  .pl-lg-0, .px-lg-0 {\n    padding-left: 0 !important; }\n  .p-lg-1 {\n    padding: 0.25rem !important; }\n  .pt-lg-1, .py-lg-1 {\n    padding-top: 0.25rem !important; }\n  .pr-lg-1, .px-lg-1 {\n    padding-right: 0.25rem !important; }\n  .pb-lg-1, .py-lg-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-lg-1, .px-lg-1 {\n    padding-left: 0.25rem !important; }\n  .p-lg-2 {\n    padding: 0.5rem !important; }\n  .pt-lg-2, .py-lg-2 {\n    padding-top: 0.5rem !important; }\n  .pr-lg-2, .px-lg-2 {\n    padding-right: 0.5rem !important; }\n  .pb-lg-2, .py-lg-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-lg-2, .px-lg-2 {\n    padding-left: 0.5rem !important; }\n  .p-lg-3 {\n    padding: 1rem !important; }\n  .pt-lg-3, .py-lg-3 {\n    padding-top: 1rem !important; }\n  .pr-lg-3, .px-lg-3 {\n    padding-right: 1rem !important; }\n  .pb-lg-3, .py-lg-3 {\n    padding-bottom: 1rem !important; }\n  .pl-lg-3, .px-lg-3 {\n    padding-left: 1rem !important; }\n  .p-lg-4 {\n    padding: 1.5rem !important; }\n  .pt-lg-4, .py-lg-4 {\n    padding-top: 1.5rem !important; }\n  .pr-lg-4, .px-lg-4 {\n    padding-right: 1.5rem !important; }\n  .pb-lg-4, .py-lg-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-lg-4, .px-lg-4 {\n    padding-left: 1.5rem !important; }\n  .p-lg-5 {\n    padding: 3rem !important; }\n  .pt-lg-5, .py-lg-5 {\n    padding-top: 3rem !important; }\n  .pr-lg-5, .px-lg-5 {\n    padding-right: 3rem !important; }\n  .pb-lg-5, .py-lg-5 {\n    padding-bottom: 3rem !important; }\n  .pl-lg-5, .px-lg-5 {\n    padding-left: 3rem !important; }\n  .m-lg-auto {\n    margin: auto !important; }\n  .mt-lg-auto, .my-lg-auto {\n    margin-top: auto !important; }\n  .mr-lg-auto, .mx-lg-auto {\n    margin-right: auto !important; }\n  .mb-lg-auto, .my-lg-auto {\n    margin-bottom: auto !important; }\n  .ml-lg-auto, .mx-lg-auto {\n    margin-left: auto !important; } }\n@media (min-width: 1200px) {\n  .m-xl-0 {\n    margin: 0 !important; }\n  .mt-xl-0, .my-xl-0 {\n    margin-top: 0 !important; }\n  .mr-xl-0, .mx-xl-0 {\n    margin-right: 0 !important; }\n  .mb-xl-0, .my-xl-0 {\n    margin-bottom: 0 !important; }\n  .ml-xl-0, .mx-xl-0 {\n    margin-left: 0 !important; }\n  .m-xl-1 {\n    margin: 0.25rem !important; }\n  .mt-xl-1, .my-xl-1 {\n    margin-top: 0.25rem !important; }\n  .mr-xl-1, .mx-xl-1 {\n    margin-right: 0.25rem !important; }\n  .mb-xl-1, .my-xl-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-xl-1, .mx-xl-1 {\n    margin-left: 0.25rem !important; }\n  .m-xl-2 {\n    margin: 0.5rem !important; }\n  .mt-xl-2, .my-xl-2 {\n    margin-top: 0.5rem !important; }\n  .mr-xl-2, .mx-xl-2 {\n    margin-right: 0.5rem !important; }\n  .mb-xl-2, .my-xl-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-xl-2, .mx-xl-2 {\n    margin-left: 0.5rem !important; }\n  .m-xl-3 {\n    margin: 1rem !important; }\n  .mt-xl-3, .my-xl-3 {\n    margin-top: 1rem !important; }\n  .mr-xl-3, .mx-xl-3 {\n    margin-right: 1rem !important; }\n  .mb-xl-3, .my-xl-3 {\n    margin-bottom: 1rem !important; }\n  .ml-xl-3, .mx-xl-3 {\n    margin-left: 1rem !important; }\n  .m-xl-4 {\n    margin: 1.5rem !important; }\n  .mt-xl-4, .my-xl-4 {\n    margin-top: 1.5rem !important; }\n  .mr-xl-4, .mx-xl-4 {\n    margin-right: 1.5rem !important; }\n  .mb-xl-4, .my-xl-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-xl-4, .mx-xl-4 {\n    margin-left: 1.5rem !important; }\n  .m-xl-5 {\n    margin: 3rem !important; }\n  .mt-xl-5, .my-xl-5 {\n    margin-top: 3rem !important; }\n  .mr-xl-5, .mx-xl-5 {\n    margin-right: 3rem !important; }\n  .mb-xl-5, .my-xl-5 {\n    margin-bottom: 3rem !important; }\n  .ml-xl-5, .mx-xl-5 {\n    margin-left: 3rem !important; }\n  .p-xl-0 {\n    padding: 0 !important; }\n  .pt-xl-0, .py-xl-0 {\n    padding-top: 0 !important; }\n  .pr-xl-0, .px-xl-0 {\n    padding-right: 0 !important; }\n  .pb-xl-0, .py-xl-0 {\n    padding-bottom: 0 !important; }\n  .pl-xl-0, .px-xl-0 {\n    padding-left: 0 !important; }\n  .p-xl-1 {\n    padding: 0.25rem !important; }\n  .pt-xl-1, .py-xl-1 {\n    padding-top: 0.25rem !important; }\n  .pr-xl-1, .px-xl-1 {\n    padding-right: 0.25rem !important; }\n  .pb-xl-1, .py-xl-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-xl-1, .px-xl-1 {\n    padding-left: 0.25rem !important; }\n  .p-xl-2 {\n    padding: 0.5rem !important; }\n  .pt-xl-2, .py-xl-2 {\n    padding-top: 0.5rem !important; }\n  .pr-xl-2, .px-xl-2 {\n    padding-right: 0.5rem !important; }\n  .pb-xl-2, .py-xl-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-xl-2, .px-xl-2 {\n    padding-left: 0.5rem !important; }\n  .p-xl-3 {\n    padding: 1rem !important; }\n  .pt-xl-3, .py-xl-3 {\n    padding-top: 1rem !important; }\n  .pr-xl-3, .px-xl-3 {\n    padding-right: 1rem !important; }\n  .pb-xl-3, .py-xl-3 {\n    padding-bottom: 1rem !important; }\n  .pl-xl-3, .px-xl-3 {\n    padding-left: 1rem !important; }\n  .p-xl-4 {\n    padding: 1.5rem !important; }\n  .pt-xl-4, .py-xl-4 {\n    padding-top: 1.5rem !important; }\n  .pr-xl-4, .px-xl-4 {\n    padding-right: 1.5rem !important; }\n  .pb-xl-4, .py-xl-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-xl-4, .px-xl-4 {\n    padding-left: 1.5rem !important; }\n  .p-xl-5 {\n    padding: 3rem !important; }\n  .pt-xl-5, .py-xl-5 {\n    padding-top: 3rem !important; }\n  .pr-xl-5, .px-xl-5 {\n    padding-right: 3rem !important; }\n  .pb-xl-5, .py-xl-5 {\n    padding-bottom: 3rem !important; }\n  .pl-xl-5, .px-xl-5 {\n    padding-left: 3rem !important; }\n  .m-xl-auto {\n    margin: auto !important; }\n  .mt-xl-auto, .my-xl-auto {\n    margin-top: auto !important; }\n  .mr-xl-auto, .mx-xl-auto {\n    margin-right: auto !important; }\n  .mb-xl-auto, .my-xl-auto {\n    margin-bottom: auto !important; }\n  .ml-xl-auto, .mx-xl-auto {\n    margin-left: auto !important; } }\n.text-justify {\n  text-align: justify !important; }\n.text-nowrap {\n  white-space: nowrap !important; }\n.text-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap; }\n.text-left {\n  text-align: left !important; }\n.text-right {\n  text-align: right !important; }\n.text-center {\n  text-align: center !important; }\n@media (min-width: 576px) {\n  .text-sm-left {\n    text-align: left !important; }\n  .text-sm-right {\n    text-align: right !important; }\n  .text-sm-center {\n    text-align: center !important; } }\n@media (min-width: 768px) {\n  .text-md-left {\n    text-align: left !important; }\n  .text-md-right {\n    text-align: right !important; }\n  .text-md-center {\n    text-align: center !important; } }\n@media (min-width: 992px) {\n  .text-lg-left {\n    text-align: left !important; }\n  .text-lg-right {\n    text-align: right !important; }\n  .text-lg-center {\n    text-align: center !important; } }\n@media (min-width: 1200px) {\n  .text-xl-left {\n    text-align: left !important; }\n  .text-xl-right {\n    text-align: right !important; }\n  .text-xl-center {\n    text-align: center !important; } }\n.text-lowercase {\n  text-transform: lowercase !important; }\n.text-uppercase {\n  text-transform: uppercase !important; }\n.text-capitalize {\n  text-transform: capitalize !important; }\n.font-weight-light {\n  font-weight: 300 !important; }\n.font-weight-normal {\n  font-weight: normal !important; }\n.font-weight-bold {\n  font-weight: bold !important; }\n.font-italic {\n  font-style: italic !important; }\n.text-white {\n  color: #fff !important; }\n.text-primary {\n  color: #20c997 !important; }\na.text-primary:focus, a.text-primary:hover {\n  color: #199d76 !important; }\n.text-secondary {\n  color: #f8f9fa !important; }\na.text-secondary:focus, a.text-secondary:hover {\n  color: #dae0e5 !important; }\n.text-success {\n  color: #20c997 !important; }\na.text-success:focus, a.text-success:hover {\n  color: #199d76 !important; }\n.text-info {\n  color: #17a2b8 !important; }\na.text-info:focus, a.text-info:hover {\n  color: #117a8b !important; }\n.text-warning {\n  color: #ffc107 !important; }\na.text-warning:focus, a.text-warning:hover {\n  color: #d39e00 !important; }\n.text-danger {\n  color: #dc3545 !important; }\na.text-danger:focus, a.text-danger:hover {\n  color: #bd2130 !important; }\n.text-light {\n  color: #f8f9fa !important; }\na.text-light:focus, a.text-light:hover {\n  color: #dae0e5 !important; }\n.text-dark {\n  color: #343a40 !important; }\na.text-dark:focus, a.text-dark:hover {\n  color: #1d2124 !important; }\n.text-muted {\n  color: #868e96 !important; }\n.text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0; }\n.visible {\n  visibility: visible !important; }\n.invisible {\n  visibility: hidden !important; }\n.custom-select {\n  min-width: 100%; }\n.form-control {\n  color: #1e2125; }\n.form-control[readonly] {\n  color: #1e2125; }\n.form-control:focus {\n  color: #1e2125; }\n.search {\n  background-color: #f4f7f9; }\n.custom-controls-stacked {\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-color: rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  padding: 10px;\n  height: 200px;\n  overflow-y: scroll; }\n.text-secondary {\n  color: #868e96; }\n.text-display {\n  color: #20c997; }\n.text-image {\n  color: #17a2b8; }\n.text-group {\n  color: #ffc107; }\nhr {\n  border-color: #495057; }\nsmall {\n  color: #868e96; }\nlabel > i, .card-text > i {\n  color: #868e96; }\nlabel, .form-group, .disable-select {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none; }\n.btn-block + .btn-block {\n  margin-top: 0; }\n.btn-nav {\n  background-color: transparent;\n  text-align: left;\n  color: #868e96; }\n.btn-nav:hover {\n  text-decoration: none;\n  color: #1e2125; }\n.active .btn {\n  background-color: #20c997;\n  color: white; }\n.nav-list {\n  margin-left: 0px;\n  padding-left: 0px; }\n.menu {\n  padding: 30px 20px 30px 20px;\n  max-height: 80%; }\n.button-menu {\n  max-height: 100%;\n  overflow-y: scroll; }\n.navigation {\n  padding: 0 0 0 0;\n  margin-right: 15px;\n  max-height: 100%; }\n.css-ym4q3b, [data-css-ym4q3b] {\n  width: 320px;\n  left: 0; }\n.notify-success {\n  background-color: #ffffff;\n  border: 1px solid #20c997;\n  color: #20c997;\n  border-radius: 0.25rem;\n  margin-left: 3%;\n  margin-bottom: 30px; }\n.notify-error {\n  background-color: #ffffff;\n  border: 1px solid #dc3545;\n  color: #dc3545;\n  border-radius: 0.25rem;\n  margin-left: 3%;\n  margin-bottom: 30px; }\n.title {\n  background-color: #ffffff; }\n.title-displays {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-images {\n  color: #17a2b8;\n  border-width: 1px;\n  border-color: #17a2b8;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-groups {\n  color: #ffc107;\n  border-width: 1px;\n  border-color: #ffc107;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-devices {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-gateways {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-docs {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-settings {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.card-division {\n  border-color: rgba(0, 0, 0, 0.125); }\n.element-division {\n  border-color: rgba(0, 0, 0, 0.125);\n  margin-top: 0;\n  margin-bottom: 15px; }\n.list {\n  height: 100%;\n  max-height: 100%;\n  margin-bottom: 15px; }\n.settings-list {\n  max-height: 400px;\n  overflow-y: scroll; }\n.list-group {\n  background-color: #f4f7f9;\n  color: #1e2125;\n  max-height: 100%;\n  overflow-y: scroll;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem; }\n.list-group-small {\n  max-height: 30vh; }\n.list-group-item {\n  padding: 0px; }\n.list-group-item.active {\n  border-color: rgba(0, 0, 0, 0.125);\n  background-color: #ffffff;\n  color: #1e2125; }\n.active .settings-menu-item {\n  background-color: #20c997;\n  color: white; }\n.elemento {\n  padding: 0.75rem 1.25rem; }\n.list-group-item {\n  border-color: rgba(0, 0, 0, 0.125);\n  border-left: 0px;\n  border-right: 0px;\n  border-radius: 0px; }\n.list-group-item:first-child {\n  border-top: 0px;\n  border-radius: 0px; }\n.list-group-item:last-child {\n  border-bottom: 0px;\n  border-radius: 0px; }\n.list-group-item {\n  color: #1e2125; }\n.elemento-inactivo {\n  margin-right: 2px; }\n.elemento-activo {\n  margin-right: 0px; }\n.elemento-display:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.active .elemento-display {\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.elemento-dispositivo:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.active .elemento-dispositivo {\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.elemento-gateway:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.active .elemento-gateway {\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.elemento-imagen:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #17a2b8;\n  padding-right: 1rem; }\n.active .elemento-imagen {\n  border-right: 0.25rem solid #17a2b8;\n  padding-right: 1rem; }\n.elemento-grupo:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #ffc107;\n  padding-right: 1rem; }\n.active .elemento-grupo {\n  border-right: 0.25rem solid #ffc107;\n  padding-right: 1rem; }\n.elemento-asociado:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #ffc107;\n  padding-right: 1rem; }\n.active .elemento-asociado {\n  border-right: 0.25rem solid #ffc107;\n  padding-right: 1rem; }\n.elemento-configuracion:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.active .elemento-configuracion {\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.detalles-titulo {\n  margin-bottom: 0;\n  line-height: 1.3; }\n.btn-tiny {\n  padding: 0.2rem;\n  font-size: 0.75rem; }\n.btn-outline-display {\n  color: #20c997;\n  background-color: transparent;\n  background-image: none;\n  border-color: #20c997; }\n.btn-outline-imagen {\n  color: #17a2b8;\n  background-color: transparent;\n  background-image: none;\n  border-color: #17a2b8; }\n.btn-outline-grupo {\n  color: #ffc107;\n  background-color: transparent;\n  background-image: none;\n  border-color: #ffc107; }\nhtml {\n  height: 100%; }\nbody {\n  height: 100vh;\n  max-height: 100vh;\n  font-family: \"etica-display\"; }\n.frame {\n  height: 100%;\n  max-height: 100%;\n  padding-top: 3rem;\n  padding-right: 3%;\n  padding-bottom: 3rem;\n  padding-left: 3%; }\n.login {\n  height: 100%; }\n.main {\n  height: 100%;\n  max-height: 100%;\n  padding-left: 15px; }\n.content {\n  height: 100%;\n  margin-right: 0; }\n.overview {\n  height: 100%;\n  max-height: 100%; }\n.row-panel {\n  height: 80%;\n  max-height: 80%; }\n.panel {\n  height: 100%;\n  max-height: 100%; }\n.controls {\n  height: 80%;\n  max-height: 80%;\n  margin-bottom: 15px; }\n.detalles {\n  max-height: 100%; }\n.detalles .card-body {\n  max-height: 90%;\n  padding-bottom: 15px;\n  overflow-y: scroll; }\n::-webkit-scrollbar {\n  display: none; }\n.ventana {\n  max-width: 100%; }\n.doc-body {\n  height: 500px; }\n.detalles {\n  max-width: 100%; }\n.vista-previa {\n  padding: 0; }\n.vista-imagen {\n  max-width: 100%;\n  height: 100%;\n  overflow: hidden;\n  text-align: center;\n  padding: 30 0 30 0; }\n.vista-imagen-grupo {\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  max-width: 100%;\n  height: 300px;\n  overflow: hidden;\n  text-align: center;\n  padding: 30 0 30 0; }\n.vista-imagen-display {\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  max-width: 100%;\n  height: 300px;\n  overflow: hidden;\n  text-align: center;\n  padding: 30 0 30 0; }\n.imagen {\n  width: 100%; }\n.dropzone-accepted {\n  width: 100%;\n  border-radius: 0.25rem;\n  border: 1px solid #20c997 !important;\n  text-align: center;\n  margin-bottom: 20px; }\n.dropzone {\n  width: 100%;\n  height: 300px;\n  border-radius: 0.25rem;\n  border: 1px dashed rgba(0, 0, 0, 0.125);\n  text-align: center;\n  margin-bottom: 20px; }\n.etiquetas {\n  overflow-x: scroll; }\na {\n  color: #1e2125;\n  text-decoration: none; }\na:hover {\n  color: #1e2125;\n  text-decoration: none; }\n.disponible {\n  color: #495057; }\n", ""]);
+exports.push([module.i, "/*!\n * Bootstrap v4.0.0-beta.2 (https://getbootstrap.com)\n * Copyright 2011-2017 The Bootstrap Authors\n * Copyright 2011-2017 Twitter, Inc.\n * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)\n */\n/**\n * React Select\n * ============\n * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/\n * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs\n * MIT License: https://github.com/JedWatson/react-select\n*/\n.Select {\n  position: relative;\n}\n.Select input::-webkit-contacts-auto-fill-button, .Select input::-webkit-credentials-auto-fill-button {\n  display: none !important;\n}\n.Select input::-ms-clear {\n  display: none !important;\n}\n.Select input::-ms-reveal {\n  display: none !important;\n}\n.Select, .Select div, .Select input, .Select span {\n  box-sizing: border-box;\n}\n.Select.is-disabled .Select-arrow-zone {\n  cursor: default;\n  pointer-events: none;\n  opacity: 0.35;\n}\n.Select.is-disabled > .Select-control {\n  background-color: #f9f9f9;\n}\n.Select.is-disabled > .Select-control:hover {\n  box-shadow: none;\n}\n.Select.is-open > .Select-control {\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n  background: #fff;\n  border-color: #b3b3b3 #ccc #d9d9d9;\n}\n.Select.is-open > .Select-control .Select-arrow {\n  top: -2px;\n  border-color: transparent transparent #999;\n  border-width: 0 5px 5px;\n}\n.Select.is-searchable.is-open > .Select-control {\n  cursor: text;\n}\n.Select.is-searchable.is-focused:not(.is-open) > .Select-control {\n  cursor: text;\n}\n.Select.is-focused > .Select-control {\n  background: #fff;\n}\n.Select.is-focused:not(.is-open) > .Select-control {\n  border-color: #007eff;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(0, 126, 255, 0.1);\n  background: #fff;\n}\n.Select.has-value.is-clearable.Select--single > .Select-control .Select-value {\n  padding-right: 42px;\n}\n.Select.has-value.Select--single > .Select-control .Select-value .Select-value-label, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {\n  color: #333;\n}\n.Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label {\n  cursor: pointer;\n  text-decoration: none;\n}\n.Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label:hover, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover, .Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus {\n  color: #007eff;\n  outline: none;\n  text-decoration: underline;\n}\n.Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus {\n  background: #fff;\n}\n.Select.has-value.is-pseudo-focused .Select-input {\n  opacity: 0;\n}\n.Select.is-open .Select-arrow, .Select .Select-arrow-zone:hover > .Select-arrow {\n  border-top-color: #666;\n}\n.Select.Select--rtl {\n  direction: rtl;\n  text-align: right;\n}\n.Select-control {\n  background-color: #fff;\n  border-color: #d9d9d9 #ccc #b3b3b3;\n  border-radius: 4px;\n  border: 1px solid #ccc;\n  color: #333;\n  cursor: default;\n  display: table;\n  border-spacing: 0;\n  border-collapse: separate;\n  height: 36px;\n  outline: none;\n  overflow: hidden;\n  position: relative;\n  width: 100%;\n}\n.Select-control:hover {\n  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);\n}\n.Select-control .Select-input:focus {\n  outline: none;\n  background: #fff;\n}\n.Select-placeholder, .Select--single > .Select-control .Select-value {\n  bottom: 0;\n  color: #aaa;\n  left: 0;\n  line-height: 34px;\n  padding-left: 10px;\n  padding-right: 10px;\n  position: absolute;\n  right: 0;\n  top: 0;\n  max-width: 100%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.Select-input {\n  height: 34px;\n  padding-left: 10px;\n  padding-right: 10px;\n  vertical-align: middle;\n}\n.Select-input > input {\n  width: 100%;\n  background: none transparent;\n  border: 0 none;\n  box-shadow: none;\n  cursor: default;\n  display: inline-block;\n  font-family: inherit;\n  font-size: inherit;\n  margin: 0;\n  outline: none;\n  line-height: 17px;\n  /* For IE 8 compatibility */\n  padding: 8px 0 12px;\n  /* For IE 8 compatibility */\n  -webkit-appearance: none;\n}\n.is-focused .Select-input > input {\n  cursor: text;\n}\n.has-value.is-pseudo-focused .Select-input {\n  opacity: 0;\n}\n.Select-control:not(.is-searchable) > .Select-input {\n  outline: none;\n}\n.Select-loading-zone {\n  cursor: pointer;\n  display: table-cell;\n  position: relative;\n  text-align: center;\n  vertical-align: middle;\n  width: 16px;\n}\n.Select-loading {\n  -webkit-animation: Select-animation-spin 400ms infinite linear;\n  animation: Select-animation-spin 400ms infinite linear;\n  width: 16px;\n  height: 16px;\n  box-sizing: border-box;\n  border-radius: 50%;\n  border: 2px solid #ccc;\n  border-right-color: #333;\n  display: inline-block;\n  position: relative;\n  vertical-align: middle;\n}\n.Select-clear-zone {\n  -webkit-animation: Select-animation-fadeIn 200ms;\n  animation: Select-animation-fadeIn 200ms;\n  color: #999;\n  cursor: pointer;\n  display: table-cell;\n  position: relative;\n  text-align: center;\n  vertical-align: middle;\n  width: 17px;\n}\n.Select-clear-zone:hover {\n  color: #D0021B;\n}\n.Select-clear {\n  display: inline-block;\n  font-size: 18px;\n  line-height: 1;\n}\n.Select--multi .Select-clear-zone {\n  width: 17px;\n}\n.Select-arrow-zone {\n  cursor: pointer;\n  display: table-cell;\n  position: relative;\n  text-align: center;\n  vertical-align: middle;\n  width: 25px;\n  padding-right: 5px;\n}\n.Select--rtl .Select-arrow-zone {\n  padding-right: 0;\n  padding-left: 5px;\n}\n.Select-arrow {\n  border-color: #999 transparent transparent;\n  border-style: solid;\n  border-width: 5px 5px 2.5px;\n  display: inline-block;\n  height: 0;\n  width: 0;\n  position: relative;\n}\n.Select-control > *:last-child {\n  padding-right: 5px;\n}\n.Select--multi .Select-multi-value-wrapper {\n  display: inline-block;\n}\n.Select .Select-aria-only {\n  position: absolute;\n  display: inline-block;\n  height: 1px;\n  width: 1px;\n  margin: -1px;\n  clip: rect(0, 0, 0, 0);\n  overflow: hidden;\n  float: left;\n}\n@-webkit-keyframes Select-animation-fadeIn {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@keyframes Select-animation-fadeIn {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n.Select-menu-outer {\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  border-top-color: #e6e6e6;\n  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);\n  box-sizing: border-box;\n  margin-top: -1px;\n  max-height: 200px;\n  position: absolute;\n  top: 100%;\n  width: 100%;\n  z-index: 1;\n  -webkit-overflow-scrolling: touch;\n}\n.Select-menu {\n  max-height: 198px;\n  overflow-y: auto;\n}\n.Select-option {\n  box-sizing: border-box;\n  background-color: #fff;\n  color: #666666;\n  cursor: pointer;\n  display: block;\n  padding: 8px 10px;\n}\n.Select-option:last-child {\n  border-bottom-right-radius: 4px;\n  border-bottom-left-radius: 4px;\n}\n.Select-option.is-selected {\n  background-color: #f5faff;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 126, 255, 0.04);\n  color: #333;\n}\n.Select-option.is-focused {\n  background-color: #ebf5ff;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 126, 255, 0.08);\n  color: #333;\n}\n.Select-option.is-disabled {\n  color: #cccccc;\n  cursor: default;\n}\n.Select-noresults {\n  box-sizing: border-box;\n  color: #999999;\n  cursor: default;\n  display: block;\n  padding: 8px 10px;\n}\n.Select--multi .Select-input {\n  vertical-align: middle;\n  margin-left: 10px;\n  padding: 0;\n}\n.Select--multi.Select--rtl .Select-input {\n  margin-left: 0;\n  margin-right: 10px;\n}\n.Select--multi.has-value .Select-input {\n  margin-left: 5px;\n}\n.Select--multi .Select-value {\n  background-color: #ebf5ff;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 126, 255, 0.08);\n  border-radius: 2px;\n  border: 1px solid #c2e0ff;\n  /* Fallback color for IE 8 */\n  border: 1px solid rgba(0, 126, 255, 0.24);\n  color: #007eff;\n  display: inline-block;\n  font-size: 0.9em;\n  line-height: 1.4;\n  margin-left: 5px;\n  margin-top: 5px;\n  vertical-align: top;\n}\n.Select--multi .Select-value-icon, .Select--multi .Select-value-label {\n  display: inline-block;\n  vertical-align: middle;\n}\n.Select--multi .Select-value-label {\n  border-bottom-right-radius: 2px;\n  border-top-right-radius: 2px;\n  cursor: default;\n  padding: 2px 5px;\n}\n.Select--multi a.Select-value-label {\n  color: #007eff;\n  cursor: pointer;\n  text-decoration: none;\n}\n.Select--multi a.Select-value-label:hover {\n  text-decoration: underline;\n}\n.Select--multi .Select-value-icon {\n  cursor: pointer;\n  border-bottom-left-radius: 2px;\n  border-top-left-radius: 2px;\n  border-right: 1px solid #c2e0ff;\n  /* Fallback color for IE 8 */\n  border-right: 1px solid rgba(0, 126, 255, 0.24);\n  padding: 1px 5px 3px;\n}\n.Select--multi .Select-value-icon:hover, .Select--multi .Select-value-icon:focus {\n  background-color: #d8eafd;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 113, 230, 0.08);\n  color: #0071e6;\n}\n.Select--multi .Select-value-icon:active {\n  background-color: #c2e0ff;\n  /* Fallback color for IE 8 */\n  background-color: rgba(0, 126, 255, 0.24);\n}\n.Select--multi.Select--rtl .Select-value {\n  margin-left: 0;\n  margin-right: 5px;\n}\n.Select--multi.Select--rtl .Select-value-icon {\n  border-right: none;\n  border-left: 1px solid #c2e0ff;\n  /* Fallback color for IE 8 */\n  border-left: 1px solid rgba(0, 126, 255, 0.24);\n}\n.Select--multi.is-disabled .Select-value {\n  background-color: #fcfcfc;\n  border: 1px solid #e3e3e3;\n  color: #333;\n}\n.Select--multi.is-disabled .Select-value-icon {\n  cursor: not-allowed;\n  border-right: 1px solid #e3e3e3;\n}\n.Select--multi.is-disabled .Select-value-icon:hover, .Select--multi.is-disabled .Select-value-icon:focus, .Select--multi.is-disabled .Select-value-icon:active {\n  background-color: #fcfcfc;\n}\n@keyframes Select-animation-spin {\n  to {\n    -webkit-transform: rotate(1turn);\n            transform: rotate(1turn);\n  }\n}\n@-webkit-keyframes Select-animation-spin {\n  to {\n    -webkit-transform: rotate(1turn);\n  }\n}\n@media print {\n  *, *::before, *::after {\n    text-shadow: none !important;\n    box-shadow: none !important; }\n  a, a:visited {\n    text-decoration: underline; }\n  abbr[title]::after {\n    content: \" (\" attr(title) \")\"; }\n  pre {\n    white-space: pre-wrap !important; }\n  pre, blockquote {\n    border: 1px solid #999;\n    page-break-inside: avoid; }\n  thead {\n    display: table-header-group; }\n  tr, img {\n    page-break-inside: avoid; }\n  p, h2, h3 {\n    orphans: 3;\n    widows: 3; }\n  h2, h3 {\n    page-break-after: avoid; }\n  .navbar {\n    display: none; }\n  .badge {\n    border: 1px solid #000; }\n  .table {\n    border-collapse: collapse !important; }\n    .table td, .table th {\n      background-color: #fff !important; }\n  .table-bordered th, .table-bordered td {\n    border: 1px solid #ddd !important; } }\n*, *::before, *::after {\n  box-sizing: border-box; }\nhtml {\n  font-family: sans-serif;\n  line-height: 1.15;\n  -webkit-text-size-adjust: 100%;\n  -ms-text-size-adjust: 100%;\n  -ms-overflow-style: scrollbar;\n  -webkit-tap-highlight-color: transparent; }\n@-ms-viewport {\n  width: device-width; }\narticle, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {\n  display: block; }\nbody {\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-size: 1rem;\n  font-weight: normal;\n  line-height: 1.5;\n  color: #1e2125;\n  text-align: left;\n  background-color: #f4f7f9; }\n[tabindex=\"-1\"]:focus {\n  outline: none !important; }\nhr {\n  box-sizing: content-box;\n  height: 0;\n  overflow: visible; }\nh1, h2, h3, h4, h5, h6 {\n  margin-top: 0;\n  margin-bottom: 0.5rem; }\np {\n  margin-top: 0;\n  margin-bottom: 1rem; }\nabbr[title], abbr[data-original-title] {\n  text-decoration: underline;\n  text-decoration: underline dotted;\n  cursor: help;\n  border-bottom: 0; }\naddress {\n  margin-bottom: 1rem;\n  font-style: normal;\n  line-height: inherit; }\nol, ul, dl {\n  margin-top: 0;\n  margin-bottom: 1rem; }\nol ol, ul ul, ol ul, ul ol {\n  margin-bottom: 0; }\ndt {\n  font-weight: bold; }\ndd {\n  margin-bottom: .5rem;\n  margin-left: 0; }\nblockquote {\n  margin: 0 0 1rem; }\ndfn {\n  font-style: italic; }\nb, strong {\n  font-weight: bolder; }\nsmall {\n  font-size: 80%; }\nsub, sup {\n  position: relative;\n  font-size: 75%;\n  line-height: 0;\n  vertical-align: baseline; }\nsub {\n  bottom: -.25em; }\nsup {\n  top: -.5em; }\na {\n  color: #20c997;\n  text-decoration: none;\n  background-color: transparent;\n  -webkit-text-decoration-skip: objects; }\na:hover {\n    color: #158765;\n    text-decoration: underline; }\na:not([href]):not([tabindex]) {\n  color: inherit;\n  text-decoration: none; }\na:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {\n    color: inherit;\n    text-decoration: none; }\na:not([href]):not([tabindex]):focus {\n    outline: 0; }\npre, code, kbd, samp {\n  font-family: monospace, monospace;\n  font-size: 1em; }\npre {\n  margin-top: 0;\n  margin-bottom: 1rem;\n  overflow: auto;\n  -ms-overflow-style: scrollbar; }\nfigure {\n  margin: 0 0 1rem; }\nimg {\n  vertical-align: middle;\n  border-style: none; }\nsvg:not(:root) {\n  overflow: hidden; }\na, area, button, [role=\"button\"], input:not([type=\"range\"]), label, select, summary, textarea {\n  -ms-touch-action: manipulation;\n      touch-action: manipulation; }\ntable {\n  border-collapse: collapse; }\ncaption {\n  padding-top: 0.75rem;\n  padding-bottom: 0.75rem;\n  color: #868e96;\n  text-align: left;\n  caption-side: bottom; }\nth {\n  text-align: inherit; }\nlabel {\n  display: inline-block;\n  margin-bottom: .5rem; }\nbutton {\n  border-radius: 0; }\nbutton:focus {\n  outline: 1px dotted;\n  outline: 5px auto -webkit-focus-ring-color; }\ninput, button, select, optgroup, textarea {\n  margin: 0;\n  font-family: inherit;\n  font-size: inherit;\n  line-height: inherit; }\nbutton, input {\n  overflow: visible; }\nbutton, select {\n  text-transform: none; }\nbutton, html [type=\"button\"], [type=\"reset\"], [type=\"submit\"] {\n  -webkit-appearance: button; }\nbutton::-moz-focus-inner, [type=\"button\"]::-moz-focus-inner, [type=\"reset\"]::-moz-focus-inner, [type=\"submit\"]::-moz-focus-inner {\n  padding: 0;\n  border-style: none; }\ninput[type=\"radio\"], input[type=\"checkbox\"] {\n  box-sizing: border-box;\n  padding: 0; }\ninput[type=\"date\"], input[type=\"time\"], input[type=\"datetime-local\"], input[type=\"month\"] {\n  -webkit-appearance: listbox; }\ntextarea {\n  overflow: auto;\n  resize: vertical; }\nfieldset {\n  min-width: 0;\n  padding: 0;\n  margin: 0;\n  border: 0; }\nlegend {\n  display: block;\n  width: 100%;\n  max-width: 100%;\n  padding: 0;\n  margin-bottom: .5rem;\n  font-size: 1.5rem;\n  line-height: inherit;\n  color: inherit;\n  white-space: normal; }\nprogress {\n  vertical-align: baseline; }\n[type=\"number\"]::-webkit-inner-spin-button, [type=\"number\"]::-webkit-outer-spin-button {\n  height: auto; }\n[type=\"search\"] {\n  outline-offset: -2px;\n  -webkit-appearance: none; }\n[type=\"search\"]::-webkit-search-cancel-button, [type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none; }\n::-webkit-file-upload-button {\n  font: inherit;\n  -webkit-appearance: button; }\noutput {\n  display: inline-block; }\nsummary {\n  display: list-item; }\ntemplate {\n  display: none; }\n[hidden] {\n  display: none !important; }\nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n  margin-bottom: 0.5rem;\n  font-family: inherit;\n  font-weight: 500;\n  line-height: 1.1;\n  color: inherit; }\nh1, .h1 {\n  font-size: 2.5rem; }\nh2, .h2 {\n  font-size: 2rem; }\nh3, .h3 {\n  font-size: 1.75rem; }\nh4, .h4 {\n  font-size: 1.5rem; }\nh5, .h5 {\n  font-size: 1.25rem; }\nh6, .h6 {\n  font-size: 1rem; }\n.lead {\n  font-size: 1.25rem;\n  font-weight: 300; }\n.display-1 {\n  font-size: 6rem;\n  font-weight: 300;\n  line-height: 1.1; }\n.display-2 {\n  font-size: 5.5rem;\n  font-weight: 300;\n  line-height: 1.1; }\n.display-3 {\n  font-size: 4.5rem;\n  font-weight: 300;\n  line-height: 1.1; }\n.display-4 {\n  font-size: 3.5rem;\n  font-weight: 300;\n  line-height: 1.1; }\nhr {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  border: 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1); }\nsmall, .small {\n  font-size: 80%;\n  font-weight: normal; }\nmark, .mark {\n  padding: 0.2em;\n  background-color: #fcf8e3; }\n.list-unstyled {\n  padding-left: 0;\n  list-style: none; }\n.list-inline {\n  padding-left: 0;\n  list-style: none; }\n.list-inline-item {\n  display: inline-block; }\n.list-inline-item:not(:last-child) {\n    margin-right: 5px; }\n.initialism {\n  font-size: 90%;\n  text-transform: uppercase; }\n.blockquote {\n  margin-bottom: 1rem;\n  font-size: 1.25rem; }\n.blockquote-footer {\n  display: block;\n  font-size: 80%;\n  color: #868e96; }\n.blockquote-footer::before {\n    content: \"\\2014   \\A0\"; }\n.img-fluid {\n  max-width: 100%;\n  height: auto; }\n.img-thumbnail {\n  padding: 0.25rem;\n  background-color: #f4f7f9;\n  border: 1px solid #ddd;\n  border-radius: 0.25rem;\n  transition: all 0.2s ease-in-out;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);\n  max-width: 100%;\n  height: auto; }\n.figure {\n  display: inline-block; }\n.figure-img {\n  margin-bottom: 0.5rem;\n  line-height: 1; }\n.figure-caption {\n  font-size: 90%;\n  color: #868e96; }\ncode, kbd, pre, samp {\n  font-family: \"SFMono-Regular\", Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; }\ncode {\n  padding: 0.2rem 0.4rem;\n  font-size: 90%;\n  color: #bd4147;\n  background-color: #f8f9fa;\n  border-radius: 0.25rem; }\na > code {\n    padding: 0;\n    color: inherit;\n    background-color: inherit; }\nkbd {\n  padding: 0.2rem 0.4rem;\n  font-size: 90%;\n  color: #fff;\n  background-color: #212529;\n  border-radius: 0.2rem;\n  box-shadow: inset 0 -0.1rem 0 rgba(0, 0, 0, 0.25); }\nkbd kbd {\n    padding: 0;\n    font-size: 100%;\n    font-weight: bold;\n    box-shadow: none; }\npre {\n  display: block;\n  margin-top: 0;\n  margin-bottom: 1rem;\n  font-size: 90%;\n  color: #212529; }\npre code {\n    padding: 0;\n    font-size: inherit;\n    color: inherit;\n    background-color: transparent;\n    border-radius: 0; }\n.pre-scrollable {\n  max-height: 340px;\n  overflow-y: scroll; }\n.container {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto; }\n@media (min-width: 576px) {\n    .container {\n      max-width: 540px; } }\n@media (min-width: 768px) {\n    .container {\n      max-width: 720px; } }\n@media (min-width: 992px) {\n    .container {\n      max-width: 960px; } }\n@media (min-width: 1200px) {\n    .container {\n      max-width: 1140px; } }\n.container-fluid {\n  width: 100%;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto; }\n.row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  margin-right: -15px;\n  margin-left: -15px; }\n.no-gutters {\n  margin-right: 0;\n  margin-left: 0; }\n.no-gutters > .col, .no-gutters > [class*=\"col-\"] {\n    padding-right: 0;\n    padding-left: 0; }\n.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {\n  position: relative;\n  width: 100%;\n  min-height: 1px;\n  padding-right: 15px;\n  padding-left: 15px; }\n.col {\n  -ms-flex-preferred-size: 0;\n      flex-basis: 0;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  max-width: 100%; }\n.col-auto {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n  width: auto;\n  max-width: none; }\n.col-1 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 8.33333%;\n          flex: 0 0 8.33333%;\n  max-width: 8.33333%; }\n.col-2 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 16.66667%;\n          flex: 0 0 16.66667%;\n  max-width: 16.66667%; }\n.col-3 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 25%;\n          flex: 0 0 25%;\n  max-width: 25%; }\n.col-4 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 33.33333%;\n          flex: 0 0 33.33333%;\n  max-width: 33.33333%; }\n.col-5 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 41.66667%;\n          flex: 0 0 41.66667%;\n  max-width: 41.66667%; }\n.col-6 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 50%;\n          flex: 0 0 50%;\n  max-width: 50%; }\n.col-7 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 58.33333%;\n          flex: 0 0 58.33333%;\n  max-width: 58.33333%; }\n.col-8 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 66.66667%;\n          flex: 0 0 66.66667%;\n  max-width: 66.66667%; }\n.col-9 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 75%;\n          flex: 0 0 75%;\n  max-width: 75%; }\n.col-10 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 83.33333%;\n          flex: 0 0 83.33333%;\n  max-width: 83.33333%; }\n.col-11 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 91.66667%;\n          flex: 0 0 91.66667%;\n  max-width: 91.66667%; }\n.col-12 {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 100%;\n          flex: 0 0 100%;\n  max-width: 100%; }\n.order-first {\n  -webkit-box-ordinal-group: 0;\n      -ms-flex-order: -1;\n          order: -1; }\n.order-1 {\n  -webkit-box-ordinal-group: 2;\n      -ms-flex-order: 1;\n          order: 1; }\n.order-2 {\n  -webkit-box-ordinal-group: 3;\n      -ms-flex-order: 2;\n          order: 2; }\n.order-3 {\n  -webkit-box-ordinal-group: 4;\n      -ms-flex-order: 3;\n          order: 3; }\n.order-4 {\n  -webkit-box-ordinal-group: 5;\n      -ms-flex-order: 4;\n          order: 4; }\n.order-5 {\n  -webkit-box-ordinal-group: 6;\n      -ms-flex-order: 5;\n          order: 5; }\n.order-6 {\n  -webkit-box-ordinal-group: 7;\n      -ms-flex-order: 6;\n          order: 6; }\n.order-7 {\n  -webkit-box-ordinal-group: 8;\n      -ms-flex-order: 7;\n          order: 7; }\n.order-8 {\n  -webkit-box-ordinal-group: 9;\n      -ms-flex-order: 8;\n          order: 8; }\n.order-9 {\n  -webkit-box-ordinal-group: 10;\n      -ms-flex-order: 9;\n          order: 9; }\n.order-10 {\n  -webkit-box-ordinal-group: 11;\n      -ms-flex-order: 10;\n          order: 10; }\n.order-11 {\n  -webkit-box-ordinal-group: 12;\n      -ms-flex-order: 11;\n          order: 11; }\n.order-12 {\n  -webkit-box-ordinal-group: 13;\n      -ms-flex-order: 12;\n          order: 12; }\n.offset-1 {\n  margin-left: 8.33333%; }\n.offset-2 {\n  margin-left: 16.66667%; }\n.offset-3 {\n  margin-left: 25%; }\n.offset-4 {\n  margin-left: 33.33333%; }\n.offset-5 {\n  margin-left: 41.66667%; }\n.offset-6 {\n  margin-left: 50%; }\n.offset-7 {\n  margin-left: 58.33333%; }\n.offset-8 {\n  margin-left: 66.66667%; }\n.offset-9 {\n  margin-left: 75%; }\n.offset-10 {\n  margin-left: 83.33333%; }\n.offset-11 {\n  margin-left: 91.66667%; }\n@media (min-width: 576px) {\n  .col-sm {\n    -ms-flex-preferred-size: 0;\n        flex-basis: 0;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    max-width: 100%; }\n  .col-sm-auto {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-sm-1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 8.33333%;\n            flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-sm-2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 16.66667%;\n            flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-sm-3 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 25%;\n            flex: 0 0 25%;\n    max-width: 25%; }\n  .col-sm-4 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 33.33333%;\n            flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-sm-5 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 41.66667%;\n            flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-sm-6 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 50%;\n            flex: 0 0 50%;\n    max-width: 50%; }\n  .col-sm-7 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 58.33333%;\n            flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-sm-8 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 66.66667%;\n            flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-sm-9 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 75%;\n            flex: 0 0 75%;\n    max-width: 75%; }\n  .col-sm-10 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 83.33333%;\n            flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-sm-11 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 91.66667%;\n            flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-sm-12 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    max-width: 100%; }\n  .order-sm-first {\n    -webkit-box-ordinal-group: 0;\n        -ms-flex-order: -1;\n            order: -1; }\n  .order-sm-1 {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1; }\n  .order-sm-2 {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2; }\n  .order-sm-3 {\n    -webkit-box-ordinal-group: 4;\n        -ms-flex-order: 3;\n            order: 3; }\n  .order-sm-4 {\n    -webkit-box-ordinal-group: 5;\n        -ms-flex-order: 4;\n            order: 4; }\n  .order-sm-5 {\n    -webkit-box-ordinal-group: 6;\n        -ms-flex-order: 5;\n            order: 5; }\n  .order-sm-6 {\n    -webkit-box-ordinal-group: 7;\n        -ms-flex-order: 6;\n            order: 6; }\n  .order-sm-7 {\n    -webkit-box-ordinal-group: 8;\n        -ms-flex-order: 7;\n            order: 7; }\n  .order-sm-8 {\n    -webkit-box-ordinal-group: 9;\n        -ms-flex-order: 8;\n            order: 8; }\n  .order-sm-9 {\n    -webkit-box-ordinal-group: 10;\n        -ms-flex-order: 9;\n            order: 9; }\n  .order-sm-10 {\n    -webkit-box-ordinal-group: 11;\n        -ms-flex-order: 10;\n            order: 10; }\n  .order-sm-11 {\n    -webkit-box-ordinal-group: 12;\n        -ms-flex-order: 11;\n            order: 11; }\n  .order-sm-12 {\n    -webkit-box-ordinal-group: 13;\n        -ms-flex-order: 12;\n            order: 12; }\n  .offset-sm-0 {\n    margin-left: 0; }\n  .offset-sm-1 {\n    margin-left: 8.33333%; }\n  .offset-sm-2 {\n    margin-left: 16.66667%; }\n  .offset-sm-3 {\n    margin-left: 25%; }\n  .offset-sm-4 {\n    margin-left: 33.33333%; }\n  .offset-sm-5 {\n    margin-left: 41.66667%; }\n  .offset-sm-6 {\n    margin-left: 50%; }\n  .offset-sm-7 {\n    margin-left: 58.33333%; }\n  .offset-sm-8 {\n    margin-left: 66.66667%; }\n  .offset-sm-9 {\n    margin-left: 75%; }\n  .offset-sm-10 {\n    margin-left: 83.33333%; }\n  .offset-sm-11 {\n    margin-left: 91.66667%; } }\n@media (min-width: 768px) {\n  .col-md {\n    -ms-flex-preferred-size: 0;\n        flex-basis: 0;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    max-width: 100%; }\n  .col-md-auto {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-md-1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 8.33333%;\n            flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-md-2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 16.66667%;\n            flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-md-3 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 25%;\n            flex: 0 0 25%;\n    max-width: 25%; }\n  .col-md-4 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 33.33333%;\n            flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-md-5 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 41.66667%;\n            flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-md-6 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 50%;\n            flex: 0 0 50%;\n    max-width: 50%; }\n  .col-md-7 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 58.33333%;\n            flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-md-8 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 66.66667%;\n            flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-md-9 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 75%;\n            flex: 0 0 75%;\n    max-width: 75%; }\n  .col-md-10 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 83.33333%;\n            flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-md-11 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 91.66667%;\n            flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-md-12 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    max-width: 100%; }\n  .order-md-first {\n    -webkit-box-ordinal-group: 0;\n        -ms-flex-order: -1;\n            order: -1; }\n  .order-md-1 {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1; }\n  .order-md-2 {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2; }\n  .order-md-3 {\n    -webkit-box-ordinal-group: 4;\n        -ms-flex-order: 3;\n            order: 3; }\n  .order-md-4 {\n    -webkit-box-ordinal-group: 5;\n        -ms-flex-order: 4;\n            order: 4; }\n  .order-md-5 {\n    -webkit-box-ordinal-group: 6;\n        -ms-flex-order: 5;\n            order: 5; }\n  .order-md-6 {\n    -webkit-box-ordinal-group: 7;\n        -ms-flex-order: 6;\n            order: 6; }\n  .order-md-7 {\n    -webkit-box-ordinal-group: 8;\n        -ms-flex-order: 7;\n            order: 7; }\n  .order-md-8 {\n    -webkit-box-ordinal-group: 9;\n        -ms-flex-order: 8;\n            order: 8; }\n  .order-md-9 {\n    -webkit-box-ordinal-group: 10;\n        -ms-flex-order: 9;\n            order: 9; }\n  .order-md-10 {\n    -webkit-box-ordinal-group: 11;\n        -ms-flex-order: 10;\n            order: 10; }\n  .order-md-11 {\n    -webkit-box-ordinal-group: 12;\n        -ms-flex-order: 11;\n            order: 11; }\n  .order-md-12 {\n    -webkit-box-ordinal-group: 13;\n        -ms-flex-order: 12;\n            order: 12; }\n  .offset-md-0 {\n    margin-left: 0; }\n  .offset-md-1 {\n    margin-left: 8.33333%; }\n  .offset-md-2 {\n    margin-left: 16.66667%; }\n  .offset-md-3 {\n    margin-left: 25%; }\n  .offset-md-4 {\n    margin-left: 33.33333%; }\n  .offset-md-5 {\n    margin-left: 41.66667%; }\n  .offset-md-6 {\n    margin-left: 50%; }\n  .offset-md-7 {\n    margin-left: 58.33333%; }\n  .offset-md-8 {\n    margin-left: 66.66667%; }\n  .offset-md-9 {\n    margin-left: 75%; }\n  .offset-md-10 {\n    margin-left: 83.33333%; }\n  .offset-md-11 {\n    margin-left: 91.66667%; } }\n@media (min-width: 992px) {\n  .col-lg {\n    -ms-flex-preferred-size: 0;\n        flex-basis: 0;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    max-width: 100%; }\n  .col-lg-auto {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-lg-1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 8.33333%;\n            flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-lg-2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 16.66667%;\n            flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-lg-3 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 25%;\n            flex: 0 0 25%;\n    max-width: 25%; }\n  .col-lg-4 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 33.33333%;\n            flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-lg-5 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 41.66667%;\n            flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-lg-6 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 50%;\n            flex: 0 0 50%;\n    max-width: 50%; }\n  .col-lg-7 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 58.33333%;\n            flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-lg-8 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 66.66667%;\n            flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-lg-9 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 75%;\n            flex: 0 0 75%;\n    max-width: 75%; }\n  .col-lg-10 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 83.33333%;\n            flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-lg-11 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 91.66667%;\n            flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-lg-12 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    max-width: 100%; }\n  .order-lg-first {\n    -webkit-box-ordinal-group: 0;\n        -ms-flex-order: -1;\n            order: -1; }\n  .order-lg-1 {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1; }\n  .order-lg-2 {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2; }\n  .order-lg-3 {\n    -webkit-box-ordinal-group: 4;\n        -ms-flex-order: 3;\n            order: 3; }\n  .order-lg-4 {\n    -webkit-box-ordinal-group: 5;\n        -ms-flex-order: 4;\n            order: 4; }\n  .order-lg-5 {\n    -webkit-box-ordinal-group: 6;\n        -ms-flex-order: 5;\n            order: 5; }\n  .order-lg-6 {\n    -webkit-box-ordinal-group: 7;\n        -ms-flex-order: 6;\n            order: 6; }\n  .order-lg-7 {\n    -webkit-box-ordinal-group: 8;\n        -ms-flex-order: 7;\n            order: 7; }\n  .order-lg-8 {\n    -webkit-box-ordinal-group: 9;\n        -ms-flex-order: 8;\n            order: 8; }\n  .order-lg-9 {\n    -webkit-box-ordinal-group: 10;\n        -ms-flex-order: 9;\n            order: 9; }\n  .order-lg-10 {\n    -webkit-box-ordinal-group: 11;\n        -ms-flex-order: 10;\n            order: 10; }\n  .order-lg-11 {\n    -webkit-box-ordinal-group: 12;\n        -ms-flex-order: 11;\n            order: 11; }\n  .order-lg-12 {\n    -webkit-box-ordinal-group: 13;\n        -ms-flex-order: 12;\n            order: 12; }\n  .offset-lg-0 {\n    margin-left: 0; }\n  .offset-lg-1 {\n    margin-left: 8.33333%; }\n  .offset-lg-2 {\n    margin-left: 16.66667%; }\n  .offset-lg-3 {\n    margin-left: 25%; }\n  .offset-lg-4 {\n    margin-left: 33.33333%; }\n  .offset-lg-5 {\n    margin-left: 41.66667%; }\n  .offset-lg-6 {\n    margin-left: 50%; }\n  .offset-lg-7 {\n    margin-left: 58.33333%; }\n  .offset-lg-8 {\n    margin-left: 66.66667%; }\n  .offset-lg-9 {\n    margin-left: 75%; }\n  .offset-lg-10 {\n    margin-left: 83.33333%; }\n  .offset-lg-11 {\n    margin-left: 91.66667%; } }\n@media (min-width: 1200px) {\n  .col-xl {\n    -ms-flex-preferred-size: 0;\n        flex-basis: 0;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    max-width: 100%; }\n  .col-xl-auto {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 auto;\n            flex: 0 0 auto;\n    width: auto;\n    max-width: none; }\n  .col-xl-1 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 8.33333%;\n            flex: 0 0 8.33333%;\n    max-width: 8.33333%; }\n  .col-xl-2 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 16.66667%;\n            flex: 0 0 16.66667%;\n    max-width: 16.66667%; }\n  .col-xl-3 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 25%;\n            flex: 0 0 25%;\n    max-width: 25%; }\n  .col-xl-4 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 33.33333%;\n            flex: 0 0 33.33333%;\n    max-width: 33.33333%; }\n  .col-xl-5 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 41.66667%;\n            flex: 0 0 41.66667%;\n    max-width: 41.66667%; }\n  .col-xl-6 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 50%;\n            flex: 0 0 50%;\n    max-width: 50%; }\n  .col-xl-7 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 58.33333%;\n            flex: 0 0 58.33333%;\n    max-width: 58.33333%; }\n  .col-xl-8 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 66.66667%;\n            flex: 0 0 66.66667%;\n    max-width: 66.66667%; }\n  .col-xl-9 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 75%;\n            flex: 0 0 75%;\n    max-width: 75%; }\n  .col-xl-10 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 83.33333%;\n            flex: 0 0 83.33333%;\n    max-width: 83.33333%; }\n  .col-xl-11 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 91.66667%;\n            flex: 0 0 91.66667%;\n    max-width: 91.66667%; }\n  .col-xl-12 {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 0 100%;\n            flex: 0 0 100%;\n    max-width: 100%; }\n  .order-xl-first {\n    -webkit-box-ordinal-group: 0;\n        -ms-flex-order: -1;\n            order: -1; }\n  .order-xl-1 {\n    -webkit-box-ordinal-group: 2;\n        -ms-flex-order: 1;\n            order: 1; }\n  .order-xl-2 {\n    -webkit-box-ordinal-group: 3;\n        -ms-flex-order: 2;\n            order: 2; }\n  .order-xl-3 {\n    -webkit-box-ordinal-group: 4;\n        -ms-flex-order: 3;\n            order: 3; }\n  .order-xl-4 {\n    -webkit-box-ordinal-group: 5;\n        -ms-flex-order: 4;\n            order: 4; }\n  .order-xl-5 {\n    -webkit-box-ordinal-group: 6;\n        -ms-flex-order: 5;\n            order: 5; }\n  .order-xl-6 {\n    -webkit-box-ordinal-group: 7;\n        -ms-flex-order: 6;\n            order: 6; }\n  .order-xl-7 {\n    -webkit-box-ordinal-group: 8;\n        -ms-flex-order: 7;\n            order: 7; }\n  .order-xl-8 {\n    -webkit-box-ordinal-group: 9;\n        -ms-flex-order: 8;\n            order: 8; }\n  .order-xl-9 {\n    -webkit-box-ordinal-group: 10;\n        -ms-flex-order: 9;\n            order: 9; }\n  .order-xl-10 {\n    -webkit-box-ordinal-group: 11;\n        -ms-flex-order: 10;\n            order: 10; }\n  .order-xl-11 {\n    -webkit-box-ordinal-group: 12;\n        -ms-flex-order: 11;\n            order: 11; }\n  .order-xl-12 {\n    -webkit-box-ordinal-group: 13;\n        -ms-flex-order: 12;\n            order: 12; }\n  .offset-xl-0 {\n    margin-left: 0; }\n  .offset-xl-1 {\n    margin-left: 8.33333%; }\n  .offset-xl-2 {\n    margin-left: 16.66667%; }\n  .offset-xl-3 {\n    margin-left: 25%; }\n  .offset-xl-4 {\n    margin-left: 33.33333%; }\n  .offset-xl-5 {\n    margin-left: 41.66667%; }\n  .offset-xl-6 {\n    margin-left: 50%; }\n  .offset-xl-7 {\n    margin-left: 58.33333%; }\n  .offset-xl-8 {\n    margin-left: 66.66667%; }\n  .offset-xl-9 {\n    margin-left: 75%; }\n  .offset-xl-10 {\n    margin-left: 83.33333%; }\n  .offset-xl-11 {\n    margin-left: 91.66667%; } }\n.table {\n  width: 100%;\n  max-width: 100%;\n  margin-bottom: 1rem;\n  background-color: transparent; }\n.table th, .table td {\n    padding: 0.75rem;\n    vertical-align: top;\n    border-top: 1px solid #e9ecef; }\n.table thead th {\n    vertical-align: bottom;\n    border-bottom: 2px solid #e9ecef; }\n.table tbody + tbody {\n    border-top: 2px solid #e9ecef; }\n.table .table {\n    background-color: #f4f7f9; }\n.table-sm th, .table-sm td {\n  padding: 0.3rem; }\n.table-bordered {\n  border: 1px solid #e9ecef; }\n.table-bordered th, .table-bordered td {\n    border: 1px solid #e9ecef; }\n.table-bordered thead th, .table-bordered thead td {\n    border-bottom-width: 2px; }\n.table-striped tbody tr:nth-of-type(odd) {\n  background-color: rgba(0, 0, 0, 0.05); }\n.table-hover tbody tr:hover {\n  background-color: rgba(0, 0, 0, 0.075); }\n.table-primary, .table-primary > th, .table-primary > td {\n  background-color: #c1f0e2; }\n.table-hover .table-primary:hover {\n  background-color: #acebd8; }\n.table-hover .table-primary:hover > td, .table-hover .table-primary:hover > th {\n    background-color: #acebd8; }\n.table-secondary, .table-secondary > th, .table-secondary > td {\n  background-color: #fdfdfe; }\n.table-hover .table-secondary:hover {\n  background-color: #ececf6; }\n.table-hover .table-secondary:hover > td, .table-hover .table-secondary:hover > th {\n    background-color: #ececf6; }\n.table-success, .table-success > th, .table-success > td {\n  background-color: #c1f0e2; }\n.table-hover .table-success:hover {\n  background-color: #acebd8; }\n.table-hover .table-success:hover > td, .table-hover .table-success:hover > th {\n    background-color: #acebd8; }\n.table-info, .table-info > th, .table-info > td {\n  background-color: #bee5eb; }\n.table-hover .table-info:hover {\n  background-color: #abdde5; }\n.table-hover .table-info:hover > td, .table-hover .table-info:hover > th {\n    background-color: #abdde5; }\n.table-warning, .table-warning > th, .table-warning > td {\n  background-color: #ffeeba; }\n.table-hover .table-warning:hover {\n  background-color: #ffe8a1; }\n.table-hover .table-warning:hover > td, .table-hover .table-warning:hover > th {\n    background-color: #ffe8a1; }\n.table-danger, .table-danger > th, .table-danger > td {\n  background-color: #f5c6cb; }\n.table-hover .table-danger:hover {\n  background-color: #f1b0b7; }\n.table-hover .table-danger:hover > td, .table-hover .table-danger:hover > th {\n    background-color: #f1b0b7; }\n.table-light, .table-light > th, .table-light > td {\n  background-color: #fdfdfe; }\n.table-hover .table-light:hover {\n  background-color: #ececf6; }\n.table-hover .table-light:hover > td, .table-hover .table-light:hover > th {\n    background-color: #ececf6; }\n.table-dark, .table-dark > th, .table-dark > td {\n  background-color: #c6c8ca; }\n.table-hover .table-dark:hover {\n  background-color: #b9bbbe; }\n.table-hover .table-dark:hover > td, .table-hover .table-dark:hover > th {\n    background-color: #b9bbbe; }\n.table-active, .table-active > th, .table-active > td {\n  background-color: rgba(0, 0, 0, 0.075); }\n.table-hover .table-active:hover {\n  background-color: rgba(0, 0, 0, 0.075); }\n.table-hover .table-active:hover > td, .table-hover .table-active:hover > th {\n    background-color: rgba(0, 0, 0, 0.075); }\n.table .thead-dark th {\n  color: #f4f7f9;\n  background-color: #212529;\n  border-color: #32383e; }\n.table .thead-light th {\n  color: #495057;\n  background-color: #e9ecef;\n  border-color: #e9ecef; }\n.table-dark {\n  color: #f4f7f9;\n  background-color: #212529; }\n.table-dark th, .table-dark td, .table-dark thead th {\n    border-color: #32383e; }\n.table-dark.table-bordered {\n    border: 0; }\n.table-dark.table-striped tbody tr:nth-of-type(odd) {\n    background-color: rgba(255, 255, 255, 0.05); }\n.table-dark.table-hover tbody tr:hover {\n    background-color: rgba(255, 255, 255, 0.075); }\n@media (max-width: 575px) {\n  .table-responsive-sm {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-sm.table-bordered {\n      border: 0; } }\n@media (max-width: 767px) {\n  .table-responsive-md {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-md.table-bordered {\n      border: 0; } }\n@media (max-width: 991px) {\n  .table-responsive-lg {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-lg.table-bordered {\n      border: 0; } }\n@media (max-width: 1199px) {\n  .table-responsive-xl {\n    display: block;\n    width: 100%;\n    overflow-x: auto;\n    -webkit-overflow-scrolling: touch;\n    -ms-overflow-style: -ms-autohiding-scrollbar; }\n    .table-responsive-xl.table-bordered {\n      border: 0; } }\n.table-responsive {\n  display: block;\n  width: 100%;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  -ms-overflow-style: -ms-autohiding-scrollbar; }\n.table-responsive.table-bordered {\n    border: 0; }\n.form-control {\n  display: block;\n  width: 100%;\n  padding: 0.5rem 0.75rem;\n  font-size: 1rem;\n  line-height: 1.25;\n  color: #1e2125;\n  background-color: transparent;\n  background-image: none;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);\n  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }\n.form-control::-ms-expand {\n    background-color: transparent;\n    border: 0; }\n.form-control:focus {\n    color: #1e2125;\n    background-color: transparent;\n    border-color: #7eeaca;\n    outline: none;\n    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(32, 201, 151, 0.25); }\n.form-control::-webkit-input-placeholder {\n    color: #868e96;\n    opacity: 1; }\n.form-control:-ms-input-placeholder {\n    color: #868e96;\n    opacity: 1; }\n.form-control::placeholder {\n    color: #868e96;\n    opacity: 1; }\n.form-control:disabled, .form-control[readonly] {\n    background-color: #e9ecef;\n    opacity: 1; }\nselect.form-control:not([size]):not([multiple]) {\n  height: calc(2.25rem + 2px); }\nselect.form-control:focus::-ms-value {\n  color: #1e2125;\n  background-color: transparent; }\n.form-control-file, .form-control-range {\n  display: block; }\n.col-form-label {\n  padding-top: calc(0.5rem + 1px);\n  padding-bottom: calc(0.5rem + 1px);\n  margin-bottom: 0;\n  line-height: 1.25; }\n.col-form-label-lg {\n  padding-top: calc(0.5rem + 1px);\n  padding-bottom: calc(0.5rem + 1px);\n  font-size: 1.25rem;\n  line-height: 1.5; }\n.col-form-label-sm {\n  padding-top: calc(0.25rem + 1px);\n  padding-bottom: calc(0.25rem + 1px);\n  font-size: 0.875rem;\n  line-height: 1.5; }\n.col-form-legend {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  margin-bottom: 0;\n  font-size: 1rem; }\n.form-control-plaintext {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  margin-bottom: 0;\n  line-height: 1.25;\n  background-color: transparent;\n  border: solid transparent;\n  border-width: 1px 0; }\n.form-control-plaintext.form-control-sm, .input-group-sm > .form-control-plaintext.form-control, .input-group-sm > .form-control-plaintext.input-group-addon, .input-group-sm > .input-group-btn > .form-control-plaintext.btn, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control, .input-group-lg > .form-control-plaintext.input-group-addon, .input-group-lg > .input-group-btn > .form-control-plaintext.btn {\n    padding-right: 0;\n    padding-left: 0; }\n.form-control-sm, .input-group-sm > .form-control, .input-group-sm > .input-group-addon, .input-group-sm > .input-group-btn > .btn {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5;\n  border-radius: 0.2rem; }\nselect.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.form-control:not([size]):not([multiple]), .input-group-sm > select.input-group-addon:not([size]):not([multiple]), .input-group-sm > .input-group-btn > select.btn:not([size]):not([multiple]) {\n  height: calc(1.8125rem + 2px); }\n.form-control-lg, .input-group-lg > .form-control, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .btn {\n  padding: 0.5rem 1rem;\n  font-size: 1.25rem;\n  line-height: 1.5;\n  border-radius: 0.3rem; }\nselect.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.form-control:not([size]):not([multiple]), .input-group-lg > select.input-group-addon:not([size]):not([multiple]), .input-group-lg > .input-group-btn > select.btn:not([size]):not([multiple]) {\n  height: calc(2.875rem + 2px); }\n.form-group {\n  margin-bottom: 1rem; }\n.form-text {\n  display: block;\n  margin-top: 0.25rem; }\n.form-row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  margin-right: -5px;\n  margin-left: -5px; }\n.form-row > .col, .form-row > [class*=\"col-\"] {\n    padding-right: 5px;\n    padding-left: 5px; }\n.form-check {\n  position: relative;\n  display: block;\n  margin-bottom: 0.5rem; }\n.form-check.disabled .form-check-label {\n    color: #868e96; }\n.form-check-label {\n  padding-left: 1.25rem;\n  margin-bottom: 0; }\n.form-check-input {\n  position: absolute;\n  margin-top: 0.25rem;\n  margin-left: -1.25rem; }\n.form-check-inline {\n  display: inline-block;\n  margin-right: 0.75rem; }\n.form-check-inline .form-check-label {\n    vertical-align: middle; }\n.valid-feedback {\n  display: none;\n  margin-top: .25rem;\n  font-size: .875rem;\n  color: #20c997; }\n.valid-tooltip {\n  position: absolute;\n  top: 100%;\n  z-index: 5;\n  display: none;\n  width: 250px;\n  padding: .5rem;\n  margin-top: .1rem;\n  font-size: .875rem;\n  line-height: 1;\n  color: #fff;\n  background-color: rgba(32, 201, 151, 0.8);\n  border-radius: .2rem; }\n.was-validated .form-control:valid, .form-control.is-valid, .was-validated\n.custom-select:valid, .custom-select.is-valid {\n  border-color: #20c997; }\n.was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated\n  .custom-select:valid:focus, .custom-select.is-valid:focus {\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25); }\n.was-validated .form-control:valid ~ .valid-feedback, .was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback, .form-control.is-valid ~ .valid-tooltip, .was-validated\n  .custom-select:valid ~ .valid-feedback, .was-validated\n  .custom-select:valid ~ .valid-tooltip, .custom-select.is-valid ~ .valid-feedback, .custom-select.is-valid ~ .valid-tooltip {\n    display: block; }\n.was-validated .form-check-input:valid + .form-check-label, .form-check-input.is-valid + .form-check-label {\n  color: #20c997; }\n.was-validated .custom-control-input:valid ~ .custom-control-indicator, .custom-control-input.is-valid ~ .custom-control-indicator {\n  background-color: rgba(32, 201, 151, 0.25); }\n.was-validated .custom-control-input:valid ~ .custom-control-description, .custom-control-input.is-valid ~ .custom-control-description {\n  color: #20c997; }\n.was-validated .custom-file-input:valid ~ .custom-file-control, .custom-file-input.is-valid ~ .custom-file-control {\n  border-color: #20c997; }\n.was-validated .custom-file-input:valid ~ .custom-file-control::before, .custom-file-input.is-valid ~ .custom-file-control::before {\n    border-color: inherit; }\n.was-validated .custom-file-input:valid:focus, .custom-file-input.is-valid:focus {\n  box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25); }\n.invalid-feedback {\n  display: none;\n  margin-top: .25rem;\n  font-size: .875rem;\n  color: #dc3545; }\n.invalid-tooltip {\n  position: absolute;\n  top: 100%;\n  z-index: 5;\n  display: none;\n  width: 250px;\n  padding: .5rem;\n  margin-top: .1rem;\n  font-size: .875rem;\n  line-height: 1;\n  color: #fff;\n  background-color: rgba(220, 53, 69, 0.8);\n  border-radius: .2rem; }\n.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated\n.custom-select:invalid, .custom-select.is-invalid {\n  border-color: #dc3545; }\n.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus, .was-validated\n  .custom-select:invalid:focus, .custom-select.is-invalid:focus {\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n.was-validated .form-control:invalid ~ .invalid-feedback, .was-validated .form-control:invalid ~ .invalid-tooltip, .form-control.is-invalid ~ .invalid-feedback, .form-control.is-invalid ~ .invalid-tooltip, .was-validated\n  .custom-select:invalid ~ .invalid-feedback, .was-validated\n  .custom-select:invalid ~ .invalid-tooltip, .custom-select.is-invalid ~ .invalid-feedback, .custom-select.is-invalid ~ .invalid-tooltip {\n    display: block; }\n.was-validated .form-check-input:invalid + .form-check-label, .form-check-input.is-invalid + .form-check-label {\n  color: #dc3545; }\n.was-validated .custom-control-input:invalid ~ .custom-control-indicator, .custom-control-input.is-invalid ~ .custom-control-indicator {\n  background-color: rgba(220, 53, 69, 0.25); }\n.was-validated .custom-control-input:invalid ~ .custom-control-description, .custom-control-input.is-invalid ~ .custom-control-description {\n  color: #dc3545; }\n.was-validated .custom-file-input:invalid ~ .custom-file-control, .custom-file-input.is-invalid ~ .custom-file-control {\n  border-color: #dc3545; }\n.was-validated .custom-file-input:invalid ~ .custom-file-control::before, .custom-file-input.is-invalid ~ .custom-file-control::before {\n    border-color: inherit; }\n.was-validated .custom-file-input:invalid:focus, .custom-file-input.is-invalid:focus {\n  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }\n.form-inline {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n.form-inline .form-check {\n    width: 100%; }\n@media (min-width: 576px) {\n    .form-inline label {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      margin-bottom: 0; }\n    .form-inline .form-group {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-flex: 0;\n          -ms-flex: 0 0 auto;\n              flex: 0 0 auto;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row wrap;\n              flex-flow: row wrap;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      margin-bottom: 0; }\n    .form-inline .form-control {\n      display: inline-block;\n      width: auto;\n      vertical-align: middle; }\n    .form-inline .form-control-plaintext {\n      display: inline-block; }\n    .form-inline .input-group {\n      width: auto; }\n    .form-inline .form-check {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      width: auto;\n      margin-top: 0;\n      margin-bottom: 0; }\n    .form-inline .form-check-label {\n      padding-left: 0; }\n    .form-inline .form-check-input {\n      position: relative;\n      margin-top: 0;\n      margin-right: 0.25rem;\n      margin-left: 0; }\n    .form-inline .custom-control {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      padding-left: 0; }\n    .form-inline .custom-control-indicator {\n      position: static;\n      display: inline-block;\n      margin-right: 0.25rem;\n      vertical-align: text-bottom; }\n    .form-inline .has-feedback .form-control-feedback {\n      top: 0; } }\n.btn {\n  display: inline-block;\n  font-weight: normal;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: middle;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  border: 1px solid transparent;\n  padding: 0.5rem 0.75rem;\n  font-size: 1rem;\n  line-height: 1.25;\n  border-radius: 0.25rem;\n  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }\n.btn:focus, .btn:hover {\n    text-decoration: none; }\n.btn:focus, .btn.focus {\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25); }\n.btn.disabled, .btn:disabled {\n    opacity: .65;\n    box-shadow: none; }\n.btn:not([disabled]):not(.disabled):active, .btn:not([disabled]):not(.disabled).active {\n    background-image: none;\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25), inset 0 3px 5px rgba(0, 0, 0, 0.125); }\na.btn.disabled, fieldset[disabled] a.btn {\n  pointer-events: none; }\n.btn-primary {\n  color: #fff;\n  background-color: #20c997;\n  border-color: #20c997;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-primary:hover {\n    color: #fff;\n    background-color: #1ba87e;\n    border-color: #199d76; }\n.btn-primary:focus, .btn-primary.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-primary.disabled, .btn-primary:disabled {\n    background-color: #20c997;\n    border-color: #20c997; }\n.btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, .show > .btn-primary.dropdown-toggle {\n    color: #fff;\n    background-color: #199d76;\n    border-color: #17926e;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-secondary {\n  color: #111;\n  background-color: #f8f9fa;\n  border-color: #f8f9fa;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-secondary:hover {\n    color: #111;\n    background-color: #e2e6ea;\n    border-color: #dae0e5; }\n.btn-secondary:focus, .btn-secondary.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-secondary.disabled, .btn-secondary:disabled {\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n.btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:not([disabled]):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {\n    color: #111;\n    background-color: #dae0e5;\n    border-color: #d3d9df;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-success {\n  color: #fff;\n  background-color: #20c997;\n  border-color: #20c997;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-success:hover {\n    color: #fff;\n    background-color: #1ba87e;\n    border-color: #199d76; }\n.btn-success:focus, .btn-success.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-success.disabled, .btn-success:disabled {\n    background-color: #20c997;\n    border-color: #20c997; }\n.btn-success:not([disabled]):not(.disabled):active, .btn-success:not([disabled]):not(.disabled).active, .show > .btn-success.dropdown-toggle {\n    color: #fff;\n    background-color: #199d76;\n    border-color: #17926e;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-info {\n  color: #fff;\n  background-color: #17a2b8;\n  border-color: #17a2b8;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-info:hover {\n    color: #fff;\n    background-color: #138496;\n    border-color: #117a8b; }\n.btn-info:focus, .btn-info.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n.btn-info.disabled, .btn-info:disabled {\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n.btn-info:not([disabled]):not(.disabled):active, .btn-info:not([disabled]):not(.disabled).active, .show > .btn-info.dropdown-toggle {\n    color: #fff;\n    background-color: #117a8b;\n    border-color: #10707f;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n.btn-warning {\n  color: #111;\n  background-color: #ffc107;\n  border-color: #ffc107;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-warning:hover {\n    color: #111;\n    background-color: #e0a800;\n    border-color: #d39e00; }\n.btn-warning:focus, .btn-warning.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n.btn-warning.disabled, .btn-warning:disabled {\n    background-color: #ffc107;\n    border-color: #ffc107; }\n.btn-warning:not([disabled]):not(.disabled):active, .btn-warning:not([disabled]):not(.disabled).active, .show > .btn-warning.dropdown-toggle {\n    color: #111;\n    background-color: #d39e00;\n    border-color: #c69500;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n.btn-danger {\n  color: #fff;\n  background-color: #dc3545;\n  border-color: #dc3545;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-danger:hover {\n    color: #fff;\n    background-color: #c82333;\n    border-color: #bd2130; }\n.btn-danger:focus, .btn-danger.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n.btn-danger.disabled, .btn-danger:disabled {\n    background-color: #dc3545;\n    border-color: #dc3545; }\n.btn-danger:not([disabled]):not(.disabled):active, .btn-danger:not([disabled]):not(.disabled).active, .show > .btn-danger.dropdown-toggle {\n    color: #fff;\n    background-color: #bd2130;\n    border-color: #b21f2d;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n.btn-light {\n  color: #111;\n  background-color: #f8f9fa;\n  border-color: #f8f9fa;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-light:hover {\n    color: #111;\n    background-color: #e2e6ea;\n    border-color: #dae0e5; }\n.btn-light:focus, .btn-light.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-light.disabled, .btn-light:disabled {\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n.btn-light:not([disabled]):not(.disabled):active, .btn-light:not([disabled]):not(.disabled).active, .show > .btn-light.dropdown-toggle {\n    color: #111;\n    background-color: #dae0e5;\n    border-color: #d3d9df;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-dark {\n  color: #fff;\n  background-color: #343a40;\n  border-color: #343a40;\n  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }\n.btn-dark:hover {\n    color: #fff;\n    background-color: #23272b;\n    border-color: #1d2124; }\n.btn-dark:focus, .btn-dark.focus {\n    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n.btn-dark.disabled, .btn-dark:disabled {\n    background-color: #343a40;\n    border-color: #343a40; }\n.btn-dark:not([disabled]):not(.disabled):active, .btn-dark:not([disabled]):not(.disabled).active, .show > .btn-dark.dropdown-toggle {\n    color: #fff;\n    background-color: #1d2124;\n    border-color: #171a1d;\n    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n.btn-outline-primary {\n  color: #20c997;\n  background-color: transparent;\n  background-image: none;\n  border-color: #20c997; }\n.btn-outline-primary:hover {\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997; }\n.btn-outline-primary:focus, .btn-outline-primary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-outline-primary.disabled, .btn-outline-primary:disabled {\n    color: #20c997;\n    background-color: transparent; }\n.btn-outline-primary:not([disabled]):not(.disabled):active, .btn-outline-primary:not([disabled]):not(.disabled).active, .show > .btn-outline-primary.dropdown-toggle {\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997;\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-outline-secondary {\n  color: #f8f9fa;\n  background-color: transparent;\n  background-image: none;\n  border-color: #f8f9fa; }\n.btn-outline-secondary:hover {\n    color: #fff;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n.btn-outline-secondary:focus, .btn-outline-secondary.focus {\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-outline-secondary.disabled, .btn-outline-secondary:disabled {\n    color: #f8f9fa;\n    background-color: transparent; }\n.btn-outline-secondary:not([disabled]):not(.disabled):active, .btn-outline-secondary:not([disabled]):not(.disabled).active, .show > .btn-outline-secondary.dropdown-toggle {\n    color: #fff;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa;\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-outline-success {\n  color: #20c997;\n  background-color: transparent;\n  background-image: none;\n  border-color: #20c997; }\n.btn-outline-success:hover {\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997; }\n.btn-outline-success:focus, .btn-outline-success.focus {\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-outline-success.disabled, .btn-outline-success:disabled {\n    color: #20c997;\n    background-color: transparent; }\n.btn-outline-success:not([disabled]):not(.disabled):active, .btn-outline-success:not([disabled]):not(.disabled).active, .show > .btn-outline-success.dropdown-toggle {\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997;\n    box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.5); }\n.btn-outline-info {\n  color: #17a2b8;\n  background-color: transparent;\n  background-image: none;\n  border-color: #17a2b8; }\n.btn-outline-info:hover {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8; }\n.btn-outline-info:focus, .btn-outline-info.focus {\n    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n.btn-outline-info.disabled, .btn-outline-info:disabled {\n    color: #17a2b8;\n    background-color: transparent; }\n.btn-outline-info:not([disabled]):not(.disabled):active, .btn-outline-info:not([disabled]):not(.disabled).active, .show > .btn-outline-info.dropdown-toggle {\n    color: #fff;\n    background-color: #17a2b8;\n    border-color: #17a2b8;\n    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }\n.btn-outline-warning {\n  color: #ffc107;\n  background-color: transparent;\n  background-image: none;\n  border-color: #ffc107; }\n.btn-outline-warning:hover {\n    color: #fff;\n    background-color: #ffc107;\n    border-color: #ffc107; }\n.btn-outline-warning:focus, .btn-outline-warning.focus {\n    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n.btn-outline-warning.disabled, .btn-outline-warning:disabled {\n    color: #ffc107;\n    background-color: transparent; }\n.btn-outline-warning:not([disabled]):not(.disabled):active, .btn-outline-warning:not([disabled]):not(.disabled).active, .show > .btn-outline-warning.dropdown-toggle {\n    color: #fff;\n    background-color: #ffc107;\n    border-color: #ffc107;\n    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5); }\n.btn-outline-danger {\n  color: #dc3545;\n  background-color: transparent;\n  background-image: none;\n  border-color: #dc3545; }\n.btn-outline-danger:hover {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545; }\n.btn-outline-danger:focus, .btn-outline-danger.focus {\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n.btn-outline-danger.disabled, .btn-outline-danger:disabled {\n    color: #dc3545;\n    background-color: transparent; }\n.btn-outline-danger:not([disabled]):not(.disabled):active, .btn-outline-danger:not([disabled]):not(.disabled).active, .show > .btn-outline-danger.dropdown-toggle {\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5); }\n.btn-outline-light {\n  color: #f8f9fa;\n  background-color: transparent;\n  background-image: none;\n  border-color: #f8f9fa; }\n.btn-outline-light:hover {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa; }\n.btn-outline-light:focus, .btn-outline-light.focus {\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-outline-light.disabled, .btn-outline-light:disabled {\n    color: #f8f9fa;\n    background-color: transparent; }\n.btn-outline-light:not([disabled]):not(.disabled):active, .btn-outline-light:not([disabled]):not(.disabled).active, .show > .btn-outline-light.dropdown-toggle {\n    color: #212529;\n    background-color: #f8f9fa;\n    border-color: #f8f9fa;\n    box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5); }\n.btn-outline-dark {\n  color: #343a40;\n  background-color: transparent;\n  background-image: none;\n  border-color: #343a40; }\n.btn-outline-dark:hover {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40; }\n.btn-outline-dark:focus, .btn-outline-dark.focus {\n    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n.btn-outline-dark.disabled, .btn-outline-dark:disabled {\n    color: #343a40;\n    background-color: transparent; }\n.btn-outline-dark:not([disabled]):not(.disabled):active, .btn-outline-dark:not([disabled]):not(.disabled).active, .show > .btn-outline-dark.dropdown-toggle {\n    color: #fff;\n    background-color: #343a40;\n    border-color: #343a40;\n    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5); }\n.btn-link {\n  font-weight: normal;\n  color: #20c997;\n  background-color: transparent; }\n.btn-link:hover {\n    color: #158765;\n    text-decoration: underline;\n    background-color: transparent;\n    border-color: transparent; }\n.btn-link:focus, .btn-link.focus {\n    border-color: transparent;\n    box-shadow: none; }\n.btn-link:disabled, .btn-link.disabled {\n    color: #868e96; }\n.btn-lg, .btn-group-lg > .btn {\n  padding: 0.5rem 1rem;\n  font-size: 1.25rem;\n  line-height: 1.5;\n  border-radius: 0.3rem; }\n.btn-sm, .btn-group-sm > .btn {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5;\n  border-radius: 0.2rem; }\n.btn-block {\n  display: block;\n  width: 100%; }\n.btn-block + .btn-block {\n  margin-top: 0.5rem; }\ninput[type=\"submit\"].btn-block, input[type=\"reset\"].btn-block, input[type=\"button\"].btn-block {\n  width: 100%; }\n.fade {\n  opacity: 0;\n  transition: opacity 0.15s linear; }\n.fade.show {\n    opacity: 1; }\n.collapse {\n  display: none; }\n.collapse.show {\n    display: block; }\ntr.collapse.show {\n  display: table-row; }\ntbody.collapse.show {\n  display: table-row-group; }\n.collapsing {\n  position: relative;\n  height: 0;\n  overflow: hidden;\n  transition: height 0.35s ease; }\n.dropup, .dropdown {\n  position: relative; }\n.dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0.3em solid;\n  border-right: 0.3em solid transparent;\n  border-bottom: 0;\n  border-left: 0.3em solid transparent; }\n.dropdown-toggle:empty::after {\n  margin-left: 0; }\n.dropdown-menu {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  z-index: 1000;\n  display: none;\n  float: left;\n  min-width: 10rem;\n  padding: 0.5rem 0;\n  margin: 0.125rem 0 0;\n  font-size: 1rem;\n  color: #1e2125;\n  text-align: left;\n  list-style: none;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  border-radius: 0.25rem;\n  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175); }\n.dropup .dropdown-menu {\n  margin-top: 0;\n  margin-bottom: 0.125rem; }\n.dropup .dropdown-toggle::after {\n  display: inline-block;\n  width: 0;\n  height: 0;\n  margin-left: 0.255em;\n  vertical-align: 0.255em;\n  content: \"\";\n  border-top: 0;\n  border-right: 0.3em solid transparent;\n  border-bottom: 0.3em solid;\n  border-left: 0.3em solid transparent; }\n.dropup .dropdown-toggle:empty::after {\n  margin-left: 0; }\n.dropdown-divider {\n  height: 0;\n  margin: 0.5rem 0;\n  overflow: hidden;\n  border-top: 1px solid #e9ecef; }\n.dropdown-item {\n  display: block;\n  width: 100%;\n  padding: 0.25rem 1.5rem;\n  clear: both;\n  font-weight: normal;\n  color: #212529;\n  text-align: inherit;\n  white-space: nowrap;\n  background: none;\n  border: 0; }\n.dropdown-item:focus, .dropdown-item:hover {\n    color: #16181b;\n    text-decoration: none;\n    background-color: #f8f9fa; }\n.dropdown-item.active, .dropdown-item:active {\n    color: #fff;\n    text-decoration: none;\n    background-color: #20c997; }\n.dropdown-item.disabled, .dropdown-item:disabled {\n    color: #868e96;\n    background-color: transparent; }\n.dropdown-menu.show {\n  display: block; }\n.dropdown-header {\n  display: block;\n  padding: 0.5rem 1.5rem;\n  margin-bottom: 0;\n  font-size: 0.875rem;\n  color: #868e96;\n  white-space: nowrap; }\n.btn-group, .btn-group-vertical {\n  position: relative;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  vertical-align: middle; }\n.btn-group > .btn, .btn-group-vertical > .btn {\n    position: relative;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n.btn-group > .btn:hover, .btn-group-vertical > .btn:hover {\n      z-index: 2; }\n.btn-group > .btn:focus, .btn-group > .btn:active, .btn-group > .btn.active, .btn-group-vertical > .btn:focus, .btn-group-vertical > .btn:active, .btn-group-vertical > .btn.active {\n      z-index: 2; }\n.btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group, .btn-group-vertical .btn + .btn, .btn-group-vertical .btn + .btn-group, .btn-group-vertical .btn-group + .btn, .btn-group-vertical .btn-group + .btn-group {\n    margin-left: -1px; }\n.btn-toolbar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start; }\n.btn-toolbar .input-group {\n    width: auto; }\n.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {\n  border-radius: 0; }\n.btn-group > .btn:first-child {\n  margin-left: 0; }\n.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0; }\n.btn-group > .btn:last-child:not(:first-child), .btn-group > .dropdown-toggle:not(:first-child) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n.btn-group > .btn-group {\n  float: left; }\n.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {\n  border-radius: 0; }\n.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n.btn + .dropdown-toggle-split {\n  padding-right: 0.5625rem;\n  padding-left: 0.5625rem; }\n.btn + .dropdown-toggle-split::after {\n    margin-left: 0; }\n.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split {\n  padding-right: 0.375rem;\n  padding-left: 0.375rem; }\n.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split {\n  padding-right: 0.75rem;\n  padding-left: 0.75rem; }\n.btn-group.show .dropdown-toggle {\n  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }\n.btn-group.show .dropdown-toggle.btn-link {\n    box-shadow: none; }\n.btn-group-vertical {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center; }\n.btn-group-vertical .btn, .btn-group-vertical .btn-group {\n    width: 100%; }\n.btn-group-vertical > .btn + .btn, .btn-group-vertical > .btn + .btn-group, .btn-group-vertical > .btn-group + .btn, .btn-group-vertical > .btn-group + .btn-group {\n    margin-top: -1px;\n    margin-left: 0; }\n.btn-group-vertical > .btn:not(:first-child):not(:last-child) {\n    border-radius: 0; }\n.btn-group-vertical > .btn:first-child:not(:last-child) {\n    border-bottom-right-radius: 0;\n    border-bottom-left-radius: 0; }\n.btn-group-vertical > .btn:last-child:not(:first-child) {\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {\n    border-radius: 0; }\n.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {\n    border-bottom-right-radius: 0;\n    border-bottom-left-radius: 0; }\n.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n[data-toggle=\"buttons\"] > .btn input[type=\"radio\"], [data-toggle=\"buttons\"] > .btn input[type=\"checkbox\"], [data-toggle=\"buttons\"] > .btn-group > .btn input[type=\"radio\"], [data-toggle=\"buttons\"] > .btn-group > .btn input[type=\"checkbox\"] {\n  position: absolute;\n  clip: rect(0, 0, 0, 0);\n  pointer-events: none; }\n.input-group {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  width: 100%; }\n.input-group .form-control {\n    position: relative;\n    z-index: 2;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto;\n    width: 1%;\n    margin-bottom: 0; }\n.input-group .form-control:focus, .input-group .form-control:active, .input-group .form-control:hover {\n      z-index: 3; }\n.input-group-addon, .input-group-btn, .input-group .form-control {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {\n    border-radius: 0; }\n.input-group-addon, .input-group-btn {\n  white-space: nowrap; }\n.input-group-addon {\n  padding: 0.5rem 0.75rem;\n  margin-bottom: 0;\n  font-size: 1rem;\n  font-weight: normal;\n  line-height: 1.25;\n  color: #868e96;\n  text-align: center;\n  background-color: transparent;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem; }\n.input-group-addon.form-control-sm, .input-group-sm > .input-group-addon, .input-group-sm > .input-group-btn > .input-group-addon.btn {\n    padding: 0.25rem 0.5rem;\n    font-size: 0.875rem;\n    border-radius: 0.2rem; }\n.input-group-addon.form-control-lg, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .input-group-addon.btn {\n    padding: 0.5rem 1rem;\n    font-size: 1.25rem;\n    border-radius: 0.3rem; }\n.input-group-addon input[type=\"radio\"], .input-group-addon input[type=\"checkbox\"] {\n    margin-top: 0; }\n.input-group .form-control:not(:last-child), .input-group-addon:not(:last-child), .input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-group > .btn, .input-group-btn:not(:last-child) > .dropdown-toggle, .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0; }\n.input-group-addon:not(:last-child) {\n  border-right: 0; }\n.input-group .form-control:not(:first-child), .input-group-addon:not(:first-child), .input-group-btn:not(:first-child) > .btn, .input-group-btn:not(:first-child) > .btn-group > .btn, .input-group-btn:not(:first-child) > .dropdown-toggle, .input-group-btn:not(:last-child) > .btn:not(:first-child), .input-group-btn:not(:last-child) > .btn-group:not(:first-child) > .btn {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0; }\n.form-control + .input-group-addon:not(:first-child) {\n  border-left: 0; }\n.input-group-btn {\n  position: relative;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  font-size: 0;\n  white-space: nowrap; }\n.input-group-btn > .btn {\n    position: relative; }\n.input-group-btn > .btn + .btn {\n      margin-left: -1px; }\n.input-group-btn > .btn:focus, .input-group-btn > .btn:active, .input-group-btn > .btn:hover {\n      z-index: 3; }\n.input-group-btn:first-child > .btn + .btn {\n    margin-left: 0; }\n.input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-group {\n    margin-right: -1px; }\n.input-group-btn:not(:first-child) > .btn, .input-group-btn:not(:first-child) > .btn-group {\n    z-index: 2;\n    margin-left: 0; }\n.input-group-btn:not(:first-child) > .btn:first-child, .input-group-btn:not(:first-child) > .btn-group:first-child {\n      margin-left: -1px; }\n.input-group-btn:not(:first-child) > .btn:focus, .input-group-btn:not(:first-child) > .btn:active, .input-group-btn:not(:first-child) > .btn:hover, .input-group-btn:not(:first-child) > .btn-group:focus, .input-group-btn:not(:first-child) > .btn-group:active, .input-group-btn:not(:first-child) > .btn-group:hover {\n      z-index: 3; }\n.custom-control {\n  position: relative;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  min-height: 1.5rem;\n  padding-left: 1.5rem;\n  margin-right: 1rem; }\n.custom-control-input {\n  position: absolute;\n  z-index: -1;\n  opacity: 0; }\n.custom-control-input:checked ~ .custom-control-indicator {\n    color: #fff;\n    background-color: #20c997;\n    box-shadow: none; }\n.custom-control-input:focus ~ .custom-control-indicator {\n    box-shadow: 0 0 0 1px #f4f7f9, 0 0 0 3px #20c997; }\n.custom-control-input:active ~ .custom-control-indicator {\n    color: #fff;\n    background-color: #aaf1dc;\n    box-shadow: none; }\n.custom-control-input:disabled ~ .custom-control-indicator {\n    background-color: #e9ecef; }\n.custom-control-input:disabled ~ .custom-control-description {\n    color: #868e96; }\n.custom-control-indicator {\n  position: absolute;\n  top: 0.25rem;\n  left: 0;\n  display: block;\n  width: 1rem;\n  height: 1rem;\n  pointer-events: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  background-color: #ddd;\n  background-repeat: no-repeat;\n  background-position: center center;\n  background-size: 50% 50%;\n  box-shadow: inset 0 0.25rem 0.25rem rgba(0, 0, 0, 0.1); }\n.custom-checkbox .custom-control-indicator {\n  border-radius: 0.25rem; }\n.custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E\"); }\n.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-indicator {\n  background-color: #20c997;\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E\");\n  box-shadow: none; }\n.custom-radio .custom-control-indicator {\n  border-radius: 50%; }\n.custom-radio .custom-control-input:checked ~ .custom-control-indicator {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E\"); }\n.custom-controls-stacked {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n.custom-controls-stacked .custom-control {\n    margin-bottom: 0.25rem; }\n.custom-controls-stacked .custom-control + .custom-control {\n      margin-left: 0; }\n.custom-select {\n  display: inline-block;\n  max-width: 100%;\n  height: calc(2.25rem + 2px);\n  padding: 0.375rem 1.75rem 0.375rem 0.75rem;\n  line-height: 1.25;\n  color: #1e2125;\n  vertical-align: middle;\n  background: transparent url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23868e96' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E\") no-repeat right 0.75rem center;\n  background-size: 8px 10px;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none; }\n.custom-select:focus {\n    border-color: #7eeaca;\n    outline: none;\n    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 5px rgba(126, 234, 202, 0.5); }\n.custom-select:focus::-ms-value {\n      color: #1e2125;\n      background-color: transparent; }\n.custom-select[multiple] {\n    height: auto;\n    background-image: none; }\n.custom-select:disabled {\n    color: #868e96;\n    background-color: #e9ecef; }\n.custom-select::-ms-expand {\n    opacity: 0; }\n.custom-select-sm {\n  height: calc(1.8125rem + 2px);\n  padding-top: 0.375rem;\n  padding-bottom: 0.375rem;\n  font-size: 75%; }\n.custom-file {\n  position: relative;\n  display: inline-block;\n  max-width: 100%;\n  height: calc(2.25rem + 2px);\n  margin-bottom: 0; }\n.custom-file-input {\n  min-width: 14rem;\n  max-width: 100%;\n  height: calc(2.25rem + 2px);\n  margin: 0;\n  opacity: 0; }\n.custom-file-input:focus ~ .custom-file-control {\n    box-shadow: 0 0 0 0.075rem #fff, 0 0 0 0.2rem #20c997; }\n.custom-file-control {\n  position: absolute;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 5;\n  height: calc(2.25rem + 2px);\n  padding: 0.5rem 0.75rem;\n  line-height: 1.25;\n  color: #868e96;\n  pointer-events: none;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  background-color: transparent;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }\n.custom-file-control:lang(en):empty::after {\n    content: \"Choose file...\"; }\n.custom-file-control::before {\n    position: absolute;\n    top: -1px;\n    right: -1px;\n    bottom: -1px;\n    z-index: 6;\n    display: block;\n    height: calc(2.25rem + 2px);\n    padding: 0.5rem 0.75rem;\n    line-height: 1.25;\n    color: #868e96;\n    background-color: transparent;\n    border: 1px solid rgba(0, 0, 0, 0.125);\n    border-radius: 0 0.25rem 0.25rem 0; }\n.custom-file-control:lang(en)::before {\n    content: \"Browse\"; }\n.nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  padding-left: 0;\n  margin-bottom: 0;\n  list-style: none; }\n.nav-link {\n  display: block;\n  padding: 0.5rem 1rem; }\n.nav-link:focus, .nav-link:hover {\n    text-decoration: none; }\n.nav-link.disabled {\n    color: #868e96; }\n.nav-tabs {\n  border-bottom: 1px solid #ddd; }\n.nav-tabs .nav-item {\n    margin-bottom: -1px; }\n.nav-tabs .nav-link {\n    border: 1px solid transparent;\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {\n      border-color: #e9ecef #e9ecef #ddd; }\n.nav-tabs .nav-link.disabled {\n      color: #868e96;\n      background-color: transparent;\n      border-color: transparent; }\n.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {\n    color: #495057;\n    background-color: #f4f7f9;\n    border-color: #ddd #ddd #f4f7f9; }\n.nav-tabs .dropdown-menu {\n    margin-top: -1px;\n    border-top-left-radius: 0;\n    border-top-right-radius: 0; }\n.nav-pills .nav-link {\n  border-radius: 0.25rem; }\n.nav-pills .nav-link.active, .nav-pills .show > .nav-link {\n  color: #fff;\n  background-color: #20c997; }\n.nav-fill .nav-item {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  text-align: center; }\n.nav-justified .nav-item {\n  -ms-flex-preferred-size: 0;\n      flex-basis: 0;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  text-align: center; }\n.tab-content > .tab-pane {\n  display: none; }\n.tab-content > .active {\n  display: block; }\n.navbar {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 0.5rem 1rem; }\n.navbar > .container, .navbar > .container-fluid {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n.navbar-brand {\n  display: inline-block;\n  padding-top: 0.3125rem;\n  padding-bottom: 0.3125rem;\n  margin-right: 1rem;\n  font-size: 1.25rem;\n  line-height: inherit;\n  white-space: nowrap; }\n.navbar-brand:focus, .navbar-brand:hover {\n    text-decoration: none; }\n.navbar-nav {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding-left: 0;\n  margin-bottom: 0;\n  list-style: none; }\n.navbar-nav .nav-link {\n    padding-right: 0;\n    padding-left: 0; }\n.navbar-nav .dropdown-menu {\n    position: static;\n    float: none; }\n.navbar-text {\n  display: inline-block;\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem; }\n.navbar-collapse {\n  -ms-flex-preferred-size: 100%;\n      flex-basis: 100%;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n.navbar-toggler {\n  padding: 0.25rem 0.75rem;\n  font-size: 1.25rem;\n  line-height: 1;\n  background: transparent;\n  border: 1px solid transparent;\n  border-radius: 0.25rem; }\n.navbar-toggler:focus, .navbar-toggler:hover {\n    text-decoration: none; }\n.navbar-toggler-icon {\n  display: inline-block;\n  width: 1.5em;\n  height: 1.5em;\n  vertical-align: middle;\n  content: \"\";\n  background: no-repeat center center;\n  background-size: 100% 100%; }\n@media (max-width: 575px) {\n  .navbar-expand-sm > .container, .navbar-expand-sm > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n@media (min-width: 576px) {\n  .navbar-expand-sm {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row nowrap;\n            flex-flow: row nowrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start; }\n    .navbar-expand-sm .navbar-nav {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row; }\n      .navbar-expand-sm .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-sm .navbar-nav .dropdown-menu-right {\n        right: 0;\n        left: auto; }\n      .navbar-expand-sm .navbar-nav .nav-link {\n        padding-right: .5rem;\n        padding-left: .5rem; }\n    .navbar-expand-sm > .container, .navbar-expand-sm > .container-fluid {\n      -ms-flex-wrap: nowrap;\n          flex-wrap: nowrap; }\n    .navbar-expand-sm .navbar-collapse {\n      display: -webkit-box !important;\n      display: -ms-flexbox !important;\n      display: flex !important;\n      -ms-flex-preferred-size: auto;\n          flex-basis: auto; }\n    .navbar-expand-sm .navbar-toggler {\n      display: none; }\n    .navbar-expand-sm .dropup .dropdown-menu {\n      top: auto;\n      bottom: 100%; } }\n@media (max-width: 767px) {\n  .navbar-expand-md > .container, .navbar-expand-md > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n@media (min-width: 768px) {\n  .navbar-expand-md {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row nowrap;\n            flex-flow: row nowrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start; }\n    .navbar-expand-md .navbar-nav {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row; }\n      .navbar-expand-md .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-md .navbar-nav .dropdown-menu-right {\n        right: 0;\n        left: auto; }\n      .navbar-expand-md .navbar-nav .nav-link {\n        padding-right: .5rem;\n        padding-left: .5rem; }\n    .navbar-expand-md > .container, .navbar-expand-md > .container-fluid {\n      -ms-flex-wrap: nowrap;\n          flex-wrap: nowrap; }\n    .navbar-expand-md .navbar-collapse {\n      display: -webkit-box !important;\n      display: -ms-flexbox !important;\n      display: flex !important;\n      -ms-flex-preferred-size: auto;\n          flex-basis: auto; }\n    .navbar-expand-md .navbar-toggler {\n      display: none; }\n    .navbar-expand-md .dropup .dropdown-menu {\n      top: auto;\n      bottom: 100%; } }\n@media (max-width: 991px) {\n  .navbar-expand-lg > .container, .navbar-expand-lg > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n@media (min-width: 992px) {\n  .navbar-expand-lg {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row nowrap;\n            flex-flow: row nowrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start; }\n    .navbar-expand-lg .navbar-nav {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row; }\n      .navbar-expand-lg .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-lg .navbar-nav .dropdown-menu-right {\n        right: 0;\n        left: auto; }\n      .navbar-expand-lg .navbar-nav .nav-link {\n        padding-right: .5rem;\n        padding-left: .5rem; }\n    .navbar-expand-lg > .container, .navbar-expand-lg > .container-fluid {\n      -ms-flex-wrap: nowrap;\n          flex-wrap: nowrap; }\n    .navbar-expand-lg .navbar-collapse {\n      display: -webkit-box !important;\n      display: -ms-flexbox !important;\n      display: flex !important;\n      -ms-flex-preferred-size: auto;\n          flex-basis: auto; }\n    .navbar-expand-lg .navbar-toggler {\n      display: none; }\n    .navbar-expand-lg .dropup .dropdown-menu {\n      top: auto;\n      bottom: 100%; } }\n@media (max-width: 1199px) {\n  .navbar-expand-xl > .container, .navbar-expand-xl > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; } }\n@media (min-width: 1200px) {\n  .navbar-expand-xl {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-flow: row nowrap;\n            flex-flow: row nowrap;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start; }\n    .navbar-expand-xl .navbar-nav {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row; }\n      .navbar-expand-xl .navbar-nav .dropdown-menu {\n        position: absolute; }\n      .navbar-expand-xl .navbar-nav .dropdown-menu-right {\n        right: 0;\n        left: auto; }\n      .navbar-expand-xl .navbar-nav .nav-link {\n        padding-right: .5rem;\n        padding-left: .5rem; }\n    .navbar-expand-xl > .container, .navbar-expand-xl > .container-fluid {\n      -ms-flex-wrap: nowrap;\n          flex-wrap: nowrap; }\n    .navbar-expand-xl .navbar-collapse {\n      display: -webkit-box !important;\n      display: -ms-flexbox !important;\n      display: flex !important;\n      -ms-flex-preferred-size: auto;\n          flex-basis: auto; }\n    .navbar-expand-xl .navbar-toggler {\n      display: none; }\n    .navbar-expand-xl .dropup .dropdown-menu {\n      top: auto;\n      bottom: 100%; } }\n.navbar-expand {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row nowrap;\n          flex-flow: row nowrap;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start; }\n.navbar-expand > .container, .navbar-expand > .container-fluid {\n    padding-right: 0;\n    padding-left: 0; }\n.navbar-expand .navbar-nav {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row; }\n.navbar-expand .navbar-nav .dropdown-menu {\n      position: absolute; }\n.navbar-expand .navbar-nav .dropdown-menu-right {\n      right: 0;\n      left: auto; }\n.navbar-expand .navbar-nav .nav-link {\n      padding-right: .5rem;\n      padding-left: .5rem; }\n.navbar-expand > .container, .navbar-expand > .container-fluid {\n    -ms-flex-wrap: nowrap;\n        flex-wrap: nowrap; }\n.navbar-expand .navbar-collapse {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important;\n    -ms-flex-preferred-size: auto;\n        flex-basis: auto; }\n.navbar-expand .navbar-toggler {\n    display: none; }\n.navbar-expand .dropup .dropdown-menu {\n    top: auto;\n    bottom: 100%; }\n.navbar-light .navbar-brand {\n  color: rgba(0, 0, 0, 0.9); }\n.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {\n    color: rgba(0, 0, 0, 0.9); }\n.navbar-light .navbar-nav .nav-link {\n  color: rgba(0, 0, 0, 0.5); }\n.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {\n    color: rgba(0, 0, 0, 0.7); }\n.navbar-light .navbar-nav .nav-link.disabled {\n    color: rgba(0, 0, 0, 0.3); }\n.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {\n  color: rgba(0, 0, 0, 0.9); }\n.navbar-light .navbar-toggler {\n  color: rgba(0, 0, 0, 0.5);\n  border-color: rgba(0, 0, 0, 0.1); }\n.navbar-light .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E\"); }\n.navbar-light .navbar-text {\n  color: rgba(0, 0, 0, 0.5); }\n.navbar-light .navbar-text a {\n    color: rgba(0, 0, 0, 0.9); }\n.navbar-light .navbar-text a:focus, .navbar-light .navbar-text a:hover {\n      color: rgba(0, 0, 0, 0.9); }\n.navbar-dark .navbar-brand {\n  color: white; }\n.navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover {\n    color: white; }\n.navbar-dark .navbar-nav .nav-link {\n  color: rgba(255, 255, 255, 0.5); }\n.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {\n    color: rgba(255, 255, 255, 0.75); }\n.navbar-dark .navbar-nav .nav-link.disabled {\n    color: rgba(255, 255, 255, 0.25); }\n.navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {\n  color: white; }\n.navbar-dark .navbar-toggler {\n  color: rgba(255, 255, 255, 0.5);\n  border-color: rgba(255, 255, 255, 0.1); }\n.navbar-dark .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E\"); }\n.navbar-dark .navbar-text {\n  color: rgba(255, 255, 255, 0.5); }\n.navbar-dark .navbar-text a {\n    color: white; }\n.navbar-dark .navbar-text a:focus, .navbar-dark .navbar-text a:hover {\n      color: white; }\n.card {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  min-width: 0;\n  word-wrap: break-word;\n  background-color: #ffffff;\n  background-clip: border-box;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem; }\n.card > hr {\n    margin-right: 0;\n    margin-left: 0; }\n.card > .list-group:first-child .list-group-item:first-child {\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n.card > .list-group:last-child .list-group-item:last-child {\n    border-bottom-right-radius: 0.25rem;\n    border-bottom-left-radius: 0.25rem; }\n.card-body {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  padding: 1.25rem; }\n.card-title {\n  margin-bottom: 0.75rem; }\n.card-subtitle {\n  margin-top: -0.375rem;\n  margin-bottom: 0; }\n.card-text:last-child {\n  margin-bottom: 0; }\n.card-link:hover {\n  text-decoration: none; }\n.card-link + .card-link {\n  margin-left: 1.25rem; }\n.card-header {\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 0;\n  background-color: rgba(0, 0, 0, 0.03);\n  border-bottom: 1px solid rgba(0, 0, 0, 0.125); }\n.card-header:first-child {\n    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0; }\n.card-header + .list-group .list-group-item:first-child {\n    border-top: 0; }\n.card-footer {\n  padding: 0.75rem 1.25rem;\n  background-color: rgba(0, 0, 0, 0.03);\n  border-top: 1px solid rgba(0, 0, 0, 0.125); }\n.card-footer:last-child {\n    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px); }\n.card-header-tabs {\n  margin-right: -0.625rem;\n  margin-bottom: -0.75rem;\n  margin-left: -0.625rem;\n  border-bottom: 0; }\n.card-header-pills {\n  margin-right: -0.625rem;\n  margin-left: -0.625rem; }\n.card-img-overlay {\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding: 1.25rem; }\n.card-img {\n  width: 100%;\n  border-radius: calc(0.25rem - 1px); }\n.card-img-top {\n  width: 100%;\n  border-top-left-radius: calc(0.25rem - 1px);\n  border-top-right-radius: calc(0.25rem - 1px); }\n.card-img-bottom {\n  width: 100%;\n  border-bottom-right-radius: calc(0.25rem - 1px);\n  border-bottom-left-radius: calc(0.25rem - 1px); }\n.card-deck {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n.card-deck .card {\n    margin-bottom: 15px; }\n@media (min-width: 576px) {\n    .card-deck {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row wrap;\n              flex-flow: row wrap;\n      margin-right: -15px;\n      margin-left: -15px; }\n      .card-deck .card {\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-flex: 1;\n            -ms-flex: 1 0 0%;\n                flex: 1 0 0%;\n        -webkit-box-orient: vertical;\n        -webkit-box-direction: normal;\n            -ms-flex-direction: column;\n                flex-direction: column;\n        margin-right: 15px;\n        margin-bottom: 0;\n        margin-left: 15px; } }\n.card-group {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column; }\n.card-group .card {\n    margin-bottom: 15px; }\n@media (min-width: 576px) {\n    .card-group {\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-flow: row wrap;\n              flex-flow: row wrap; }\n      .card-group .card {\n        -webkit-box-flex: 1;\n            -ms-flex: 1 0 0%;\n                flex: 1 0 0%;\n        margin-bottom: 0; }\n        .card-group .card + .card {\n          margin-left: 0;\n          border-left: 0; }\n        .card-group .card:first-child {\n          border-top-right-radius: 0;\n          border-bottom-right-radius: 0; }\n          .card-group .card:first-child .card-img-top {\n            border-top-right-radius: 0; }\n          .card-group .card:first-child .card-img-bottom {\n            border-bottom-right-radius: 0; }\n        .card-group .card:last-child {\n          border-top-left-radius: 0;\n          border-bottom-left-radius: 0; }\n          .card-group .card:last-child .card-img-top {\n            border-top-left-radius: 0; }\n          .card-group .card:last-child .card-img-bottom {\n            border-bottom-left-radius: 0; }\n        .card-group .card:only-child {\n          border-radius: 0.25rem; }\n          .card-group .card:only-child .card-img-top {\n            border-top-left-radius: 0.25rem;\n            border-top-right-radius: 0.25rem; }\n          .card-group .card:only-child .card-img-bottom {\n            border-bottom-right-radius: 0.25rem;\n            border-bottom-left-radius: 0.25rem; }\n        .card-group .card:not(:first-child):not(:last-child):not(:only-child) {\n          border-radius: 0; }\n          .card-group .card:not(:first-child):not(:last-child):not(:only-child) .card-img-top, .card-group .card:not(:first-child):not(:last-child):not(:only-child) .card-img-bottom {\n            border-radius: 0; } }\n.card-columns .card {\n  margin-bottom: 0.75rem; }\n@media (min-width: 576px) {\n  .card-columns {\n    -webkit-column-count: 3;\n            column-count: 3;\n    -webkit-column-gap: 1.25rem;\n            column-gap: 1.25rem; }\n    .card-columns .card {\n      display: inline-block;\n      width: 100%; } }\n.breadcrumb {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  padding: 0.75rem 1rem;\n  margin-bottom: 1rem;\n  list-style: none;\n  background-color: #e9ecef;\n  border-radius: 0.25rem; }\n.breadcrumb-item + .breadcrumb-item::before {\n  display: inline-block;\n  padding-right: 0.5rem;\n  padding-left: 0.5rem;\n  color: #868e96;\n  content: \"/\"; }\n.breadcrumb-item + .breadcrumb-item:hover::before {\n  text-decoration: underline; }\n.breadcrumb-item + .breadcrumb-item:hover::before {\n  text-decoration: none; }\n.breadcrumb-item.active {\n  color: #868e96; }\n.pagination {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding-left: 0;\n  list-style: none;\n  border-radius: 0.25rem; }\n.page-item:first-child .page-link {\n  margin-left: 0;\n  border-top-left-radius: 0.25rem;\n  border-bottom-left-radius: 0.25rem; }\n.page-item:last-child .page-link {\n  border-top-right-radius: 0.25rem;\n  border-bottom-right-radius: 0.25rem; }\n.page-item.active .page-link {\n  z-index: 2;\n  color: #fff;\n  background-color: #20c997;\n  border-color: #20c997; }\n.page-item.disabled .page-link {\n  color: #868e96;\n  pointer-events: none;\n  background-color: #fff;\n  border-color: #ddd; }\n.page-link {\n  position: relative;\n  display: block;\n  padding: 0.5rem 0.75rem;\n  margin-left: -1px;\n  line-height: 1.25;\n  color: #20c997;\n  background-color: #fff;\n  border: 1px solid #ddd; }\n.page-link:focus, .page-link:hover {\n    color: #158765;\n    text-decoration: none;\n    background-color: #e9ecef;\n    border-color: #ddd; }\n.pagination-lg .page-link {\n  padding: 0.75rem 1.5rem;\n  font-size: 1.25rem;\n  line-height: 1.5; }\n.pagination-lg .page-item:first-child .page-link {\n  border-top-left-radius: 0.3rem;\n  border-bottom-left-radius: 0.3rem; }\n.pagination-lg .page-item:last-child .page-link {\n  border-top-right-radius: 0.3rem;\n  border-bottom-right-radius: 0.3rem; }\n.pagination-sm .page-link {\n  padding: 0.25rem 0.5rem;\n  font-size: 0.875rem;\n  line-height: 1.5; }\n.pagination-sm .page-item:first-child .page-link {\n  border-top-left-radius: 0.2rem;\n  border-bottom-left-radius: 0.2rem; }\n.pagination-sm .page-item:last-child .page-link {\n  border-top-right-radius: 0.2rem;\n  border-bottom-right-radius: 0.2rem; }\n.badge {\n  display: inline-block;\n  padding: 0.25em 0.4em;\n  font-size: 75%;\n  font-weight: bold;\n  line-height: 1;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: baseline;\n  border-radius: 0.25rem; }\n.badge:empty {\n    display: none; }\n.btn .badge {\n  position: relative;\n  top: -1px; }\n.badge-pill {\n  padding-right: 0.6em;\n  padding-left: 0.6em;\n  border-radius: 10rem; }\n.badge-primary {\n  color: #fff;\n  background-color: #20c997; }\n.badge-primary[href]:focus, .badge-primary[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #199d76; }\n.badge-secondary {\n  color: #111;\n  background-color: #f8f9fa; }\n.badge-secondary[href]:focus, .badge-secondary[href]:hover {\n    color: #111;\n    text-decoration: none;\n    background-color: #dae0e5; }\n.badge-success {\n  color: #fff;\n  background-color: #20c997; }\n.badge-success[href]:focus, .badge-success[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #199d76; }\n.badge-info {\n  color: #fff;\n  background-color: #17a2b8; }\n.badge-info[href]:focus, .badge-info[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #117a8b; }\n.badge-warning {\n  color: #111;\n  background-color: #ffc107; }\n.badge-warning[href]:focus, .badge-warning[href]:hover {\n    color: #111;\n    text-decoration: none;\n    background-color: #d39e00; }\n.badge-danger {\n  color: #fff;\n  background-color: #dc3545; }\n.badge-danger[href]:focus, .badge-danger[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #bd2130; }\n.badge-light {\n  color: #111;\n  background-color: #f8f9fa; }\n.badge-light[href]:focus, .badge-light[href]:hover {\n    color: #111;\n    text-decoration: none;\n    background-color: #dae0e5; }\n.badge-dark {\n  color: #fff;\n  background-color: #343a40; }\n.badge-dark[href]:focus, .badge-dark[href]:hover {\n    color: #fff;\n    text-decoration: none;\n    background-color: #1d2124; }\n.jumbotron {\n  padding: 2rem 1rem;\n  margin-bottom: 2rem;\n  background-color: #e9ecef;\n  border-radius: 0.3rem; }\n@media (min-width: 576px) {\n    .jumbotron {\n      padding: 4rem 2rem; } }\n.jumbotron-fluid {\n  padding-right: 0;\n  padding-left: 0;\n  border-radius: 0; }\n.alert {\n  position: relative;\n  padding: 0.75rem 1.25rem;\n  margin-bottom: 1rem;\n  border: 1px solid transparent;\n  border-radius: 0.25rem; }\n.alert-heading {\n  color: inherit; }\n.alert-link {\n  font-weight: bold; }\n.alert-dismissible .close {\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding: 0.75rem 1.25rem;\n  color: inherit; }\n.alert-primary {\n  color: #11694f;\n  background-color: #d2f4ea;\n  border-color: #c1f0e2; }\n.alert-primary hr {\n    border-top-color: #acebd8; }\n.alert-primary .alert-link {\n    color: #0a3d2e; }\n.alert-secondary {\n  color: #818182;\n  background-color: #fefefe;\n  border-color: #fdfdfe; }\n.alert-secondary hr {\n    border-top-color: #ececf6; }\n.alert-secondary .alert-link {\n    color: #686868; }\n.alert-success {\n  color: #11694f;\n  background-color: #d2f4ea;\n  border-color: #c1f0e2; }\n.alert-success hr {\n    border-top-color: #acebd8; }\n.alert-success .alert-link {\n    color: #0a3d2e; }\n.alert-info {\n  color: #0c5460;\n  background-color: #d1ecf1;\n  border-color: #bee5eb; }\n.alert-info hr {\n    border-top-color: #abdde5; }\n.alert-info .alert-link {\n    color: #062c33; }\n.alert-warning {\n  color: #856404;\n  background-color: #fff3cd;\n  border-color: #ffeeba; }\n.alert-warning hr {\n    border-top-color: #ffe8a1; }\n.alert-warning .alert-link {\n    color: #533f03; }\n.alert-danger {\n  color: #721c24;\n  background-color: #f8d7da;\n  border-color: #f5c6cb; }\n.alert-danger hr {\n    border-top-color: #f1b0b7; }\n.alert-danger .alert-link {\n    color: #491217; }\n.alert-light {\n  color: #818182;\n  background-color: #fefefe;\n  border-color: #fdfdfe; }\n.alert-light hr {\n    border-top-color: #ececf6; }\n.alert-light .alert-link {\n    color: #686868; }\n.alert-dark {\n  color: #1b1e21;\n  background-color: #d6d8d9;\n  border-color: #c6c8ca; }\n.alert-dark hr {\n    border-top-color: #b9bbbe; }\n.alert-dark .alert-link {\n    color: #040505; }\n@-webkit-keyframes progress-bar-stripes {\n  from {\n    background-position: 1rem 0; }\n  to {\n    background-position: 0 0; } }\n@keyframes progress-bar-stripes {\n  from {\n    background-position: 1rem 0; }\n  to {\n    background-position: 0 0; } }\n.progress {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 1rem;\n  overflow: hidden;\n  font-size: 0.75rem;\n  background-color: #e9ecef;\n  border-radius: 0.25rem; }\n.progress-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  color: #fff;\n  background-color: #20c997; }\n.progress-bar-striped {\n  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);\n  background-size: 1rem 1rem; }\n.progress-bar-animated {\n  -webkit-animation: progress-bar-stripes 1s linear infinite;\n          animation: progress-bar-stripes 1s linear infinite; }\n.media {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start; }\n.media-body {\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1; }\n.list-group {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  padding-left: 0;\n  margin-bottom: 0; }\n.list-group-item-action {\n  width: 100%;\n  color: #495057;\n  text-align: inherit; }\n.list-group-item-action:focus, .list-group-item-action:hover {\n    color: #495057;\n    text-decoration: none;\n    background-color: #f8f9fa; }\n.list-group-item-action:active {\n    color: #1e2125;\n    background-color: #e9ecef; }\n.list-group-item {\n  position: relative;\n  display: block;\n  padding: 0.75rem 1.25rem;\n  margin-bottom: -1px;\n  background-color: #fff;\n  border: 1px solid rgba(0, 0, 0, 0.125); }\n.list-group-item:first-child {\n    border-top-left-radius: 0.25rem;\n    border-top-right-radius: 0.25rem; }\n.list-group-item:last-child {\n    margin-bottom: 0;\n    border-bottom-right-radius: 0.25rem;\n    border-bottom-left-radius: 0.25rem; }\n.list-group-item:focus, .list-group-item:hover {\n    text-decoration: none; }\n.list-group-item.disabled, .list-group-item:disabled {\n    color: #868e96;\n    background-color: #fff; }\n.list-group-item.active {\n    z-index: 2;\n    color: #fff;\n    background-color: #20c997;\n    border-color: #20c997; }\n.list-group-flush .list-group-item {\n  border-right: 0;\n  border-left: 0;\n  border-radius: 0; }\n.list-group-flush:first-child .list-group-item:first-child {\n  border-top: 0; }\n.list-group-flush:last-child .list-group-item:last-child {\n  border-bottom: 0; }\n.list-group-item-primary {\n  color: #11694f;\n  background-color: #c1f0e2; }\na.list-group-item-primary, button.list-group-item-primary {\n  color: #11694f; }\na.list-group-item-primary:focus, a.list-group-item-primary:hover, button.list-group-item-primary:focus, button.list-group-item-primary:hover {\n    color: #11694f;\n    background-color: #acebd8; }\na.list-group-item-primary.active, button.list-group-item-primary.active {\n    color: #fff;\n    background-color: #11694f;\n    border-color: #11694f; }\n.list-group-item-secondary {\n  color: #818182;\n  background-color: #fdfdfe; }\na.list-group-item-secondary, button.list-group-item-secondary {\n  color: #818182; }\na.list-group-item-secondary:focus, a.list-group-item-secondary:hover, button.list-group-item-secondary:focus, button.list-group-item-secondary:hover {\n    color: #818182;\n    background-color: #ececf6; }\na.list-group-item-secondary.active, button.list-group-item-secondary.active {\n    color: #fff;\n    background-color: #818182;\n    border-color: #818182; }\n.list-group-item-success {\n  color: #11694f;\n  background-color: #c1f0e2; }\na.list-group-item-success, button.list-group-item-success {\n  color: #11694f; }\na.list-group-item-success:focus, a.list-group-item-success:hover, button.list-group-item-success:focus, button.list-group-item-success:hover {\n    color: #11694f;\n    background-color: #acebd8; }\na.list-group-item-success.active, button.list-group-item-success.active {\n    color: #fff;\n    background-color: #11694f;\n    border-color: #11694f; }\n.list-group-item-info {\n  color: #0c5460;\n  background-color: #bee5eb; }\na.list-group-item-info, button.list-group-item-info {\n  color: #0c5460; }\na.list-group-item-info:focus, a.list-group-item-info:hover, button.list-group-item-info:focus, button.list-group-item-info:hover {\n    color: #0c5460;\n    background-color: #abdde5; }\na.list-group-item-info.active, button.list-group-item-info.active {\n    color: #fff;\n    background-color: #0c5460;\n    border-color: #0c5460; }\n.list-group-item-warning {\n  color: #856404;\n  background-color: #ffeeba; }\na.list-group-item-warning, button.list-group-item-warning {\n  color: #856404; }\na.list-group-item-warning:focus, a.list-group-item-warning:hover, button.list-group-item-warning:focus, button.list-group-item-warning:hover {\n    color: #856404;\n    background-color: #ffe8a1; }\na.list-group-item-warning.active, button.list-group-item-warning.active {\n    color: #fff;\n    background-color: #856404;\n    border-color: #856404; }\n.list-group-item-danger {\n  color: #721c24;\n  background-color: #f5c6cb; }\na.list-group-item-danger, button.list-group-item-danger {\n  color: #721c24; }\na.list-group-item-danger:focus, a.list-group-item-danger:hover, button.list-group-item-danger:focus, button.list-group-item-danger:hover {\n    color: #721c24;\n    background-color: #f1b0b7; }\na.list-group-item-danger.active, button.list-group-item-danger.active {\n    color: #fff;\n    background-color: #721c24;\n    border-color: #721c24; }\n.list-group-item-light {\n  color: #818182;\n  background-color: #fdfdfe; }\na.list-group-item-light, button.list-group-item-light {\n  color: #818182; }\na.list-group-item-light:focus, a.list-group-item-light:hover, button.list-group-item-light:focus, button.list-group-item-light:hover {\n    color: #818182;\n    background-color: #ececf6; }\na.list-group-item-light.active, button.list-group-item-light.active {\n    color: #fff;\n    background-color: #818182;\n    border-color: #818182; }\n.list-group-item-dark {\n  color: #1b1e21;\n  background-color: #c6c8ca; }\na.list-group-item-dark, button.list-group-item-dark {\n  color: #1b1e21; }\na.list-group-item-dark:focus, a.list-group-item-dark:hover, button.list-group-item-dark:focus, button.list-group-item-dark:hover {\n    color: #1b1e21;\n    background-color: #b9bbbe; }\na.list-group-item-dark.active, button.list-group-item-dark.active {\n    color: #fff;\n    background-color: #1b1e21;\n    border-color: #1b1e21; }\n.close {\n  float: right;\n  font-size: 1.5rem;\n  font-weight: bold;\n  line-height: 1;\n  color: #000;\n  text-shadow: 0 1px 0 #fff;\n  opacity: .5; }\n.close:focus, .close:hover {\n    color: #000;\n    text-decoration: none;\n    opacity: .75; }\nbutton.close {\n  padding: 0;\n  background: transparent;\n  border: 0;\n  -webkit-appearance: none; }\n.modal-open {\n  overflow: hidden; }\n.modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1050;\n  display: none;\n  overflow: hidden;\n  outline: 0; }\n.modal.fade .modal-dialog {\n    transition: -webkit-transform 0.3s ease-out;\n    transition: transform 0.3s ease-out;\n    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;\n    -webkit-transform: translate(0, -25%);\n            transform: translate(0, -25%); }\n.modal.show .modal-dialog {\n    -webkit-transform: translate(0, 0);\n            transform: translate(0, 0); }\n.modal-open .modal {\n  overflow-x: hidden;\n  overflow-y: auto; }\n.modal-dialog {\n  position: relative;\n  width: auto;\n  margin: 10px;\n  pointer-events: none; }\n.modal-content {\n  position: relative;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  pointer-events: auto;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0.3rem;\n  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);\n  outline: 0; }\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1040;\n  background-color: #000; }\n.modal-backdrop.fade {\n    opacity: 0; }\n.modal-backdrop.show {\n    opacity: 0.5; }\n.modal-header {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  padding: 15px;\n  border-bottom: 1px solid #e9ecef;\n  border-top-left-radius: 0.3rem;\n  border-top-right-radius: 0.3rem; }\n.modal-header .close {\n    padding: 15px;\n    margin: -15px -15px -15px auto; }\n.modal-title {\n  margin-bottom: 0;\n  line-height: 1.5; }\n.modal-body {\n  position: relative;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  padding: 15px; }\n.modal-footer {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  padding: 15px;\n  border-top: 1px solid #e9ecef; }\n.modal-footer > :not(:first-child) {\n    margin-left: .25rem; }\n.modal-footer > :not(:last-child) {\n    margin-right: .25rem; }\n.modal-scrollbar-measure {\n  position: absolute;\n  top: -9999px;\n  width: 50px;\n  height: 50px;\n  overflow: scroll; }\n@media (min-width: 576px) {\n  .modal-dialog {\n    max-width: 500px;\n    margin: 30px auto; }\n  .modal-content {\n    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }\n  .modal-sm {\n    max-width: 300px; } }\n@media (min-width: 992px) {\n  .modal-lg {\n    max-width: 800px; } }\n.tooltip {\n  position: absolute;\n  z-index: 1070;\n  display: block;\n  margin: 0;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-style: normal;\n  font-weight: normal;\n  line-height: 1.5;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  letter-spacing: normal;\n  word-break: normal;\n  word-spacing: normal;\n  white-space: normal;\n  line-break: auto;\n  font-size: 0.875rem;\n  word-wrap: break-word;\n  opacity: 0; }\n.tooltip.show {\n    opacity: 0.9; }\n.tooltip .arrow {\n    position: absolute;\n    display: block;\n    width: 5px;\n    height: 5px; }\n.tooltip .arrow::before {\n    position: absolute;\n    border-color: transparent;\n    border-style: solid; }\n.tooltip.bs-tooltip-top, .tooltip.bs-tooltip-auto[x-placement^=\"top\"] {\n    padding: 5px 0; }\n.tooltip.bs-tooltip-top .arrow, .tooltip.bs-tooltip-auto[x-placement^=\"top\"] .arrow {\n      bottom: 0; }\n.tooltip.bs-tooltip-top .arrow::before, .tooltip.bs-tooltip-auto[x-placement^=\"top\"] .arrow::before {\n      margin-left: -3px;\n      content: \"\";\n      border-width: 5px 5px 0;\n      border-top-color: #000; }\n.tooltip.bs-tooltip-right, .tooltip.bs-tooltip-auto[x-placement^=\"right\"] {\n    padding: 0 5px; }\n.tooltip.bs-tooltip-right .arrow, .tooltip.bs-tooltip-auto[x-placement^=\"right\"] .arrow {\n      left: 0; }\n.tooltip.bs-tooltip-right .arrow::before, .tooltip.bs-tooltip-auto[x-placement^=\"right\"] .arrow::before {\n      margin-top: -3px;\n      content: \"\";\n      border-width: 5px 5px 5px 0;\n      border-right-color: #000; }\n.tooltip.bs-tooltip-bottom, .tooltip.bs-tooltip-auto[x-placement^=\"bottom\"] {\n    padding: 5px 0; }\n.tooltip.bs-tooltip-bottom .arrow, .tooltip.bs-tooltip-auto[x-placement^=\"bottom\"] .arrow {\n      top: 0; }\n.tooltip.bs-tooltip-bottom .arrow::before, .tooltip.bs-tooltip-auto[x-placement^=\"bottom\"] .arrow::before {\n      margin-left: -3px;\n      content: \"\";\n      border-width: 0 5px 5px;\n      border-bottom-color: #000; }\n.tooltip.bs-tooltip-left, .tooltip.bs-tooltip-auto[x-placement^=\"left\"] {\n    padding: 0 5px; }\n.tooltip.bs-tooltip-left .arrow, .tooltip.bs-tooltip-auto[x-placement^=\"left\"] .arrow {\n      right: 0; }\n.tooltip.bs-tooltip-left .arrow::before, .tooltip.bs-tooltip-auto[x-placement^=\"left\"] .arrow::before {\n      right: 0;\n      margin-top: -3px;\n      content: \"\";\n      border-width: 5px 0 5px 5px;\n      border-left-color: #000; }\n.tooltip-inner {\n  max-width: 200px;\n  padding: 3px 8px;\n  color: #fff;\n  text-align: center;\n  background-color: #000;\n  border-radius: 0.25rem; }\n.popover {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 1060;\n  display: block;\n  max-width: 276px;\n  font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\n  font-style: normal;\n  font-weight: normal;\n  line-height: 1.5;\n  text-align: left;\n  text-align: start;\n  text-decoration: none;\n  text-shadow: none;\n  text-transform: none;\n  letter-spacing: normal;\n  word-break: normal;\n  word-spacing: normal;\n  white-space: normal;\n  line-break: auto;\n  font-size: 0.875rem;\n  word-wrap: break-word;\n  background-color: #fff;\n  background-clip: padding-box;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0.3rem;\n  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }\n.popover .arrow {\n    position: absolute;\n    display: block;\n    width: 10px;\n    height: 5px; }\n.popover .arrow::before, .popover .arrow::after {\n    position: absolute;\n    display: block;\n    border-color: transparent;\n    border-style: solid; }\n.popover .arrow::before {\n    content: \"\";\n    border-width: 10px; }\n.popover .arrow::after {\n    content: \"\";\n    border-width: 10px; }\n.popover.bs-popover-top, .popover.bs-popover-auto[x-placement^=\"top\"] {\n    margin-bottom: 10px; }\n.popover.bs-popover-top .arrow, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow {\n      bottom: 0; }\n.popover.bs-popover-top .arrow::before, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow::before, .popover.bs-popover-top .arrow::after, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow::after {\n      border-bottom-width: 0; }\n.popover.bs-popover-top .arrow::before, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow::before {\n      bottom: -10px;\n      margin-left: -10px;\n      border-top-color: rgba(0, 0, 0, 0.25); }\n.popover.bs-popover-top .arrow::after, .popover.bs-popover-auto[x-placement^=\"top\"] .arrow::after {\n      bottom: calc((10px - 1px) * -1);\n      margin-left: -10px;\n      border-top-color: #fff; }\n.popover.bs-popover-right, .popover.bs-popover-auto[x-placement^=\"right\"] {\n    margin-left: 10px; }\n.popover.bs-popover-right .arrow, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow {\n      left: 0; }\n.popover.bs-popover-right .arrow::before, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow::before, .popover.bs-popover-right .arrow::after, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow::after {\n      margin-top: -10px;\n      border-left-width: 0; }\n.popover.bs-popover-right .arrow::before, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow::before {\n      left: -10px;\n      border-right-color: rgba(0, 0, 0, 0.25); }\n.popover.bs-popover-right .arrow::after, .popover.bs-popover-auto[x-placement^=\"right\"] .arrow::after {\n      left: calc((10px - 1px) * -1);\n      border-right-color: #fff; }\n.popover.bs-popover-bottom, .popover.bs-popover-auto[x-placement^=\"bottom\"] {\n    margin-top: 10px; }\n.popover.bs-popover-bottom .arrow, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow {\n      top: 0; }\n.popover.bs-popover-bottom .arrow::before, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow::before, .popover.bs-popover-bottom .arrow::after, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow::after {\n      margin-left: -10px;\n      border-top-width: 0; }\n.popover.bs-popover-bottom .arrow::before, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow::before {\n      top: -10px;\n      border-bottom-color: rgba(0, 0, 0, 0.25); }\n.popover.bs-popover-bottom .arrow::after, .popover.bs-popover-auto[x-placement^=\"bottom\"] .arrow::after {\n      top: calc((10px - 1px) * -1);\n      border-bottom-color: #fff; }\n.popover.bs-popover-bottom .popover-header::before, .popover.bs-popover-auto[x-placement^=\"bottom\"] .popover-header::before {\n      position: absolute;\n      top: 0;\n      left: 50%;\n      display: block;\n      width: 20px;\n      margin-left: -10px;\n      content: \"\";\n      border-bottom: 1px solid #f7f7f7; }\n.popover.bs-popover-left, .popover.bs-popover-auto[x-placement^=\"left\"] {\n    margin-right: 10px; }\n.popover.bs-popover-left .arrow, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow {\n      right: 0; }\n.popover.bs-popover-left .arrow::before, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow::before, .popover.bs-popover-left .arrow::after, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow::after {\n      margin-top: -10px;\n      border-right-width: 0; }\n.popover.bs-popover-left .arrow::before, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow::before {\n      right: -10px;\n      border-left-color: rgba(0, 0, 0, 0.25); }\n.popover.bs-popover-left .arrow::after, .popover.bs-popover-auto[x-placement^=\"left\"] .arrow::after {\n      right: calc((10px - 1px) * -1);\n      border-left-color: #fff; }\n.popover-header {\n  padding: 8px 14px;\n  margin-bottom: 0;\n  font-size: 1rem;\n  color: inherit;\n  background-color: #f7f7f7;\n  border-bottom: 1px solid #ebebeb;\n  border-top-left-radius: calc(0.3rem - 1px);\n  border-top-right-radius: calc(0.3rem - 1px); }\n.popover-header:empty {\n    display: none; }\n.popover-body {\n  padding: 9px 14px;\n  color: #1e2125; }\n.carousel {\n  position: relative; }\n.carousel-inner {\n  position: relative;\n  width: 100%;\n  overflow: hidden; }\n.carousel-item {\n  position: relative;\n  display: none;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  width: 100%;\n  transition: -webkit-transform 0.6s ease;\n  transition: transform 0.6s ease;\n  transition: transform 0.6s ease, -webkit-transform 0.6s ease;\n  -webkit-backface-visibility: hidden;\n          backface-visibility: hidden;\n  -webkit-perspective: 1000px;\n          perspective: 1000px; }\n.carousel-item.active, .carousel-item-next, .carousel-item-prev {\n  display: block; }\n.carousel-item-next, .carousel-item-prev {\n  position: absolute;\n  top: 0; }\n.carousel-item-next.carousel-item-left, .carousel-item-prev.carousel-item-right {\n  -webkit-transform: translateX(0);\n          transform: translateX(0); }\n@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {\n    .carousel-item-next.carousel-item-left, .carousel-item-prev.carousel-item-right {\n      -webkit-transform: translate3d(0, 0, 0);\n              transform: translate3d(0, 0, 0); } }\n.carousel-item-next, .active.carousel-item-right {\n  -webkit-transform: translateX(100%);\n          transform: translateX(100%); }\n@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {\n    .carousel-item-next, .active.carousel-item-right {\n      -webkit-transform: translate3d(100%, 0, 0);\n              transform: translate3d(100%, 0, 0); } }\n.carousel-item-prev, .active.carousel-item-left {\n  -webkit-transform: translateX(-100%);\n          transform: translateX(-100%); }\n@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {\n    .carousel-item-prev, .active.carousel-item-left {\n      -webkit-transform: translate3d(-100%, 0, 0);\n              transform: translate3d(-100%, 0, 0); } }\n.carousel-control-prev, .carousel-control-next {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  width: 15%;\n  color: #fff;\n  text-align: center;\n  opacity: 0.5; }\n.carousel-control-prev:focus, .carousel-control-prev:hover, .carousel-control-next:focus, .carousel-control-next:hover {\n    color: #fff;\n    text-decoration: none;\n    outline: 0;\n    opacity: .9; }\n.carousel-control-prev {\n  left: 0; }\n.carousel-control-next {\n  right: 0; }\n.carousel-control-prev-icon, .carousel-control-next-icon {\n  display: inline-block;\n  width: 20px;\n  height: 20px;\n  background: transparent no-repeat center center;\n  background-size: 100% 100%; }\n.carousel-control-prev-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E\"); }\n.carousel-control-next-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E\"); }\n.carousel-indicators {\n  position: absolute;\n  right: 0;\n  bottom: 10px;\n  left: 0;\n  z-index: 15;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  padding-left: 0;\n  margin-right: 15%;\n  margin-left: 15%;\n  list-style: none; }\n.carousel-indicators li {\n    position: relative;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto;\n    width: 30px;\n    height: 3px;\n    margin-right: 3px;\n    margin-left: 3px;\n    text-indent: -999px;\n    background-color: rgba(255, 255, 255, 0.5); }\n.carousel-indicators li::before {\n      position: absolute;\n      top: -10px;\n      left: 0;\n      display: inline-block;\n      width: 100%;\n      height: 10px;\n      content: \"\"; }\n.carousel-indicators li::after {\n      position: absolute;\n      bottom: -10px;\n      left: 0;\n      display: inline-block;\n      width: 100%;\n      height: 10px;\n      content: \"\"; }\n.carousel-indicators .active {\n    background-color: #fff; }\n.carousel-caption {\n  position: absolute;\n  right: 15%;\n  bottom: 20px;\n  left: 15%;\n  z-index: 10;\n  padding-top: 20px;\n  padding-bottom: 20px;\n  color: #fff;\n  text-align: center; }\n.align-baseline {\n  vertical-align: baseline !important; }\n.align-top {\n  vertical-align: top !important; }\n.align-middle {\n  vertical-align: middle !important; }\n.align-bottom {\n  vertical-align: bottom !important; }\n.align-text-bottom {\n  vertical-align: text-bottom !important; }\n.align-text-top {\n  vertical-align: text-top !important; }\n.bg-primary {\n  background-color: #20c997 !important; }\na.bg-primary:focus, a.bg-primary:hover {\n  background-color: #199d76 !important; }\n.bg-secondary {\n  background-color: #f8f9fa !important; }\na.bg-secondary:focus, a.bg-secondary:hover {\n  background-color: #dae0e5 !important; }\n.bg-success {\n  background-color: #20c997 !important; }\na.bg-success:focus, a.bg-success:hover {\n  background-color: #199d76 !important; }\n.bg-info {\n  background-color: #17a2b8 !important; }\na.bg-info:focus, a.bg-info:hover {\n  background-color: #117a8b !important; }\n.bg-warning {\n  background-color: #ffc107 !important; }\na.bg-warning:focus, a.bg-warning:hover {\n  background-color: #d39e00 !important; }\n.bg-danger {\n  background-color: #dc3545 !important; }\na.bg-danger:focus, a.bg-danger:hover {\n  background-color: #bd2130 !important; }\n.bg-light {\n  background-color: #f8f9fa !important; }\na.bg-light:focus, a.bg-light:hover {\n  background-color: #dae0e5 !important; }\n.bg-dark {\n  background-color: #343a40 !important; }\na.bg-dark:focus, a.bg-dark:hover {\n  background-color: #1d2124 !important; }\n.bg-white {\n  background-color: #fff !important; }\n.bg-transparent {\n  background-color: transparent !important; }\n.border {\n  border: 1px solid rgba(0, 0, 0, 0.125) !important; }\n.border-0 {\n  border: 0 !important; }\n.border-top-0 {\n  border-top: 0 !important; }\n.border-right-0 {\n  border-right: 0 !important; }\n.border-bottom-0 {\n  border-bottom: 0 !important; }\n.border-left-0 {\n  border-left: 0 !important; }\n.border-primary {\n  border-color: #20c997 !important; }\n.border-secondary {\n  border-color: #f8f9fa !important; }\n.border-success {\n  border-color: #20c997 !important; }\n.border-info {\n  border-color: #17a2b8 !important; }\n.border-warning {\n  border-color: #ffc107 !important; }\n.border-danger {\n  border-color: #dc3545 !important; }\n.border-light {\n  border-color: #f8f9fa !important; }\n.border-dark {\n  border-color: #343a40 !important; }\n.border-white {\n  border-color: #fff !important; }\n.rounded {\n  border-radius: 0.25rem !important; }\n.rounded-top {\n  border-top-left-radius: 0.25rem !important;\n  border-top-right-radius: 0.25rem !important; }\n.rounded-right {\n  border-top-right-radius: 0.25rem !important;\n  border-bottom-right-radius: 0.25rem !important; }\n.rounded-bottom {\n  border-bottom-right-radius: 0.25rem !important;\n  border-bottom-left-radius: 0.25rem !important; }\n.rounded-left {\n  border-top-left-radius: 0.25rem !important;\n  border-bottom-left-radius: 0.25rem !important; }\n.rounded-circle {\n  border-radius: 50% !important; }\n.rounded-0 {\n  border-radius: 0 !important; }\n.clearfix::after {\n  display: block;\n  clear: both;\n  content: \"\"; }\n.d-none {\n  display: none !important; }\n.d-inline {\n  display: inline !important; }\n.d-inline-block {\n  display: inline-block !important; }\n.d-block {\n  display: block !important; }\n.d-table {\n  display: table !important; }\n.d-table-row {\n  display: table-row !important; }\n.d-table-cell {\n  display: table-cell !important; }\n.d-flex {\n  display: -webkit-box !important;\n  display: -ms-flexbox !important;\n  display: flex !important; }\n.d-inline-flex {\n  display: -webkit-inline-box !important;\n  display: -ms-inline-flexbox !important;\n  display: inline-flex !important; }\n@media (min-width: 576px) {\n  .d-sm-none {\n    display: none !important; }\n  .d-sm-inline {\n    display: inline !important; }\n  .d-sm-inline-block {\n    display: inline-block !important; }\n  .d-sm-block {\n    display: block !important; }\n  .d-sm-table {\n    display: table !important; }\n  .d-sm-table-row {\n    display: table-row !important; }\n  .d-sm-table-cell {\n    display: table-cell !important; }\n  .d-sm-flex {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important; }\n  .d-sm-inline-flex {\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important; } }\n@media (min-width: 768px) {\n  .d-md-none {\n    display: none !important; }\n  .d-md-inline {\n    display: inline !important; }\n  .d-md-inline-block {\n    display: inline-block !important; }\n  .d-md-block {\n    display: block !important; }\n  .d-md-table {\n    display: table !important; }\n  .d-md-table-row {\n    display: table-row !important; }\n  .d-md-table-cell {\n    display: table-cell !important; }\n  .d-md-flex {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important; }\n  .d-md-inline-flex {\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important; } }\n@media (min-width: 992px) {\n  .d-lg-none {\n    display: none !important; }\n  .d-lg-inline {\n    display: inline !important; }\n  .d-lg-inline-block {\n    display: inline-block !important; }\n  .d-lg-block {\n    display: block !important; }\n  .d-lg-table {\n    display: table !important; }\n  .d-lg-table-row {\n    display: table-row !important; }\n  .d-lg-table-cell {\n    display: table-cell !important; }\n  .d-lg-flex {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important; }\n  .d-lg-inline-flex {\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important; } }\n@media (min-width: 1200px) {\n  .d-xl-none {\n    display: none !important; }\n  .d-xl-inline {\n    display: inline !important; }\n  .d-xl-inline-block {\n    display: inline-block !important; }\n  .d-xl-block {\n    display: block !important; }\n  .d-xl-table {\n    display: table !important; }\n  .d-xl-table-row {\n    display: table-row !important; }\n  .d-xl-table-cell {\n    display: table-cell !important; }\n  .d-xl-flex {\n    display: -webkit-box !important;\n    display: -ms-flexbox !important;\n    display: flex !important; }\n  .d-xl-inline-flex {\n    display: -webkit-inline-box !important;\n    display: -ms-inline-flexbox !important;\n    display: inline-flex !important; } }\n.d-print-block {\n  display: none !important; }\n@media print {\n    .d-print-block {\n      display: block !important; } }\n.d-print-inline {\n  display: none !important; }\n@media print {\n    .d-print-inline {\n      display: inline !important; } }\n.d-print-inline-block {\n  display: none !important; }\n@media print {\n    .d-print-inline-block {\n      display: inline-block !important; } }\n@media print {\n  .d-print-none {\n    display: none !important; } }\n.embed-responsive {\n  position: relative;\n  display: block;\n  width: 100%;\n  padding: 0;\n  overflow: hidden; }\n.embed-responsive::before {\n    display: block;\n    content: \"\"; }\n.embed-responsive .embed-responsive-item, .embed-responsive iframe, .embed-responsive embed, .embed-responsive object, .embed-responsive video {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    border: 0; }\n.embed-responsive-21by9::before {\n  padding-top: 42.85714%; }\n.embed-responsive-16by9::before {\n  padding-top: 56.25%; }\n.embed-responsive-4by3::before {\n  padding-top: 75%; }\n.embed-responsive-1by1::before {\n  padding-top: 100%; }\n.flex-row {\n  -webkit-box-orient: horizontal !important;\n  -webkit-box-direction: normal !important;\n      -ms-flex-direction: row !important;\n          flex-direction: row !important; }\n.flex-column {\n  -webkit-box-orient: vertical !important;\n  -webkit-box-direction: normal !important;\n      -ms-flex-direction: column !important;\n          flex-direction: column !important; }\n.flex-row-reverse {\n  -webkit-box-orient: horizontal !important;\n  -webkit-box-direction: reverse !important;\n      -ms-flex-direction: row-reverse !important;\n          flex-direction: row-reverse !important; }\n.flex-column-reverse {\n  -webkit-box-orient: vertical !important;\n  -webkit-box-direction: reverse !important;\n      -ms-flex-direction: column-reverse !important;\n          flex-direction: column-reverse !important; }\n.flex-wrap {\n  -ms-flex-wrap: wrap !important;\n      flex-wrap: wrap !important; }\n.flex-nowrap {\n  -ms-flex-wrap: nowrap !important;\n      flex-wrap: nowrap !important; }\n.flex-wrap-reverse {\n  -ms-flex-wrap: wrap-reverse !important;\n      flex-wrap: wrap-reverse !important; }\n.justify-content-start {\n  -webkit-box-pack: start !important;\n      -ms-flex-pack: start !important;\n          justify-content: flex-start !important; }\n.justify-content-end {\n  -webkit-box-pack: end !important;\n      -ms-flex-pack: end !important;\n          justify-content: flex-end !important; }\n.justify-content-center {\n  -webkit-box-pack: center !important;\n      -ms-flex-pack: center !important;\n          justify-content: center !important; }\n.justify-content-between {\n  -webkit-box-pack: justify !important;\n      -ms-flex-pack: justify !important;\n          justify-content: space-between !important; }\n.justify-content-around {\n  -ms-flex-pack: distribute !important;\n      justify-content: space-around !important; }\n.align-items-start {\n  -webkit-box-align: start !important;\n      -ms-flex-align: start !important;\n          align-items: flex-start !important; }\n.align-items-end {\n  -webkit-box-align: end !important;\n      -ms-flex-align: end !important;\n          align-items: flex-end !important; }\n.align-items-center {\n  -webkit-box-align: center !important;\n      -ms-flex-align: center !important;\n          align-items: center !important; }\n.align-items-baseline {\n  -webkit-box-align: baseline !important;\n      -ms-flex-align: baseline !important;\n          align-items: baseline !important; }\n.align-items-stretch {\n  -webkit-box-align: stretch !important;\n      -ms-flex-align: stretch !important;\n          align-items: stretch !important; }\n.align-content-start {\n  -ms-flex-line-pack: start !important;\n      align-content: flex-start !important; }\n.align-content-end {\n  -ms-flex-line-pack: end !important;\n      align-content: flex-end !important; }\n.align-content-center {\n  -ms-flex-line-pack: center !important;\n      align-content: center !important; }\n.align-content-between {\n  -ms-flex-line-pack: justify !important;\n      align-content: space-between !important; }\n.align-content-around {\n  -ms-flex-line-pack: distribute !important;\n      align-content: space-around !important; }\n.align-content-stretch {\n  -ms-flex-line-pack: stretch !important;\n      align-content: stretch !important; }\n.align-self-auto {\n  -ms-flex-item-align: auto !important;\n      -ms-grid-row-align: auto !important;\n      align-self: auto !important; }\n.align-self-start {\n  -ms-flex-item-align: start !important;\n      align-self: flex-start !important; }\n.align-self-end {\n  -ms-flex-item-align: end !important;\n      align-self: flex-end !important; }\n.align-self-center {\n  -ms-flex-item-align: center !important;\n      -ms-grid-row-align: center !important;\n      align-self: center !important; }\n.align-self-baseline {\n  -ms-flex-item-align: baseline !important;\n      align-self: baseline !important; }\n.align-self-stretch {\n  -ms-flex-item-align: stretch !important;\n      -ms-grid-row-align: stretch !important;\n      align-self: stretch !important; }\n@media (min-width: 576px) {\n  .flex-sm-row {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: row !important;\n            flex-direction: row !important; }\n  .flex-sm-column {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: column !important;\n            flex-direction: column !important; }\n  .flex-sm-row-reverse {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: row-reverse !important;\n            flex-direction: row-reverse !important; }\n  .flex-sm-column-reverse {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: column-reverse !important;\n            flex-direction: column-reverse !important; }\n  .flex-sm-wrap {\n    -ms-flex-wrap: wrap !important;\n        flex-wrap: wrap !important; }\n  .flex-sm-nowrap {\n    -ms-flex-wrap: nowrap !important;\n        flex-wrap: nowrap !important; }\n  .flex-sm-wrap-reverse {\n    -ms-flex-wrap: wrap-reverse !important;\n        flex-wrap: wrap-reverse !important; }\n  .justify-content-sm-start {\n    -webkit-box-pack: start !important;\n        -ms-flex-pack: start !important;\n            justify-content: flex-start !important; }\n  .justify-content-sm-end {\n    -webkit-box-pack: end !important;\n        -ms-flex-pack: end !important;\n            justify-content: flex-end !important; }\n  .justify-content-sm-center {\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important; }\n  .justify-content-sm-between {\n    -webkit-box-pack: justify !important;\n        -ms-flex-pack: justify !important;\n            justify-content: space-between !important; }\n  .justify-content-sm-around {\n    -ms-flex-pack: distribute !important;\n        justify-content: space-around !important; }\n  .align-items-sm-start {\n    -webkit-box-align: start !important;\n        -ms-flex-align: start !important;\n            align-items: flex-start !important; }\n  .align-items-sm-end {\n    -webkit-box-align: end !important;\n        -ms-flex-align: end !important;\n            align-items: flex-end !important; }\n  .align-items-sm-center {\n    -webkit-box-align: center !important;\n        -ms-flex-align: center !important;\n            align-items: center !important; }\n  .align-items-sm-baseline {\n    -webkit-box-align: baseline !important;\n        -ms-flex-align: baseline !important;\n            align-items: baseline !important; }\n  .align-items-sm-stretch {\n    -webkit-box-align: stretch !important;\n        -ms-flex-align: stretch !important;\n            align-items: stretch !important; }\n  .align-content-sm-start {\n    -ms-flex-line-pack: start !important;\n        align-content: flex-start !important; }\n  .align-content-sm-end {\n    -ms-flex-line-pack: end !important;\n        align-content: flex-end !important; }\n  .align-content-sm-center {\n    -ms-flex-line-pack: center !important;\n        align-content: center !important; }\n  .align-content-sm-between {\n    -ms-flex-line-pack: justify !important;\n        align-content: space-between !important; }\n  .align-content-sm-around {\n    -ms-flex-line-pack: distribute !important;\n        align-content: space-around !important; }\n  .align-content-sm-stretch {\n    -ms-flex-line-pack: stretch !important;\n        align-content: stretch !important; }\n  .align-self-sm-auto {\n    -ms-flex-item-align: auto !important;\n        -ms-grid-row-align: auto !important;\n        align-self: auto !important; }\n  .align-self-sm-start {\n    -ms-flex-item-align: start !important;\n        align-self: flex-start !important; }\n  .align-self-sm-end {\n    -ms-flex-item-align: end !important;\n        align-self: flex-end !important; }\n  .align-self-sm-center {\n    -ms-flex-item-align: center !important;\n        -ms-grid-row-align: center !important;\n        align-self: center !important; }\n  .align-self-sm-baseline {\n    -ms-flex-item-align: baseline !important;\n        align-self: baseline !important; }\n  .align-self-sm-stretch {\n    -ms-flex-item-align: stretch !important;\n        -ms-grid-row-align: stretch !important;\n        align-self: stretch !important; } }\n@media (min-width: 768px) {\n  .flex-md-row {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: row !important;\n            flex-direction: row !important; }\n  .flex-md-column {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: column !important;\n            flex-direction: column !important; }\n  .flex-md-row-reverse {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: row-reverse !important;\n            flex-direction: row-reverse !important; }\n  .flex-md-column-reverse {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: column-reverse !important;\n            flex-direction: column-reverse !important; }\n  .flex-md-wrap {\n    -ms-flex-wrap: wrap !important;\n        flex-wrap: wrap !important; }\n  .flex-md-nowrap {\n    -ms-flex-wrap: nowrap !important;\n        flex-wrap: nowrap !important; }\n  .flex-md-wrap-reverse {\n    -ms-flex-wrap: wrap-reverse !important;\n        flex-wrap: wrap-reverse !important; }\n  .justify-content-md-start {\n    -webkit-box-pack: start !important;\n        -ms-flex-pack: start !important;\n            justify-content: flex-start !important; }\n  .justify-content-md-end {\n    -webkit-box-pack: end !important;\n        -ms-flex-pack: end !important;\n            justify-content: flex-end !important; }\n  .justify-content-md-center {\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important; }\n  .justify-content-md-between {\n    -webkit-box-pack: justify !important;\n        -ms-flex-pack: justify !important;\n            justify-content: space-between !important; }\n  .justify-content-md-around {\n    -ms-flex-pack: distribute !important;\n        justify-content: space-around !important; }\n  .align-items-md-start {\n    -webkit-box-align: start !important;\n        -ms-flex-align: start !important;\n            align-items: flex-start !important; }\n  .align-items-md-end {\n    -webkit-box-align: end !important;\n        -ms-flex-align: end !important;\n            align-items: flex-end !important; }\n  .align-items-md-center {\n    -webkit-box-align: center !important;\n        -ms-flex-align: center !important;\n            align-items: center !important; }\n  .align-items-md-baseline {\n    -webkit-box-align: baseline !important;\n        -ms-flex-align: baseline !important;\n            align-items: baseline !important; }\n  .align-items-md-stretch {\n    -webkit-box-align: stretch !important;\n        -ms-flex-align: stretch !important;\n            align-items: stretch !important; }\n  .align-content-md-start {\n    -ms-flex-line-pack: start !important;\n        align-content: flex-start !important; }\n  .align-content-md-end {\n    -ms-flex-line-pack: end !important;\n        align-content: flex-end !important; }\n  .align-content-md-center {\n    -ms-flex-line-pack: center !important;\n        align-content: center !important; }\n  .align-content-md-between {\n    -ms-flex-line-pack: justify !important;\n        align-content: space-between !important; }\n  .align-content-md-around {\n    -ms-flex-line-pack: distribute !important;\n        align-content: space-around !important; }\n  .align-content-md-stretch {\n    -ms-flex-line-pack: stretch !important;\n        align-content: stretch !important; }\n  .align-self-md-auto {\n    -ms-flex-item-align: auto !important;\n        -ms-grid-row-align: auto !important;\n        align-self: auto !important; }\n  .align-self-md-start {\n    -ms-flex-item-align: start !important;\n        align-self: flex-start !important; }\n  .align-self-md-end {\n    -ms-flex-item-align: end !important;\n        align-self: flex-end !important; }\n  .align-self-md-center {\n    -ms-flex-item-align: center !important;\n        -ms-grid-row-align: center !important;\n        align-self: center !important; }\n  .align-self-md-baseline {\n    -ms-flex-item-align: baseline !important;\n        align-self: baseline !important; }\n  .align-self-md-stretch {\n    -ms-flex-item-align: stretch !important;\n        -ms-grid-row-align: stretch !important;\n        align-self: stretch !important; } }\n@media (min-width: 992px) {\n  .flex-lg-row {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: row !important;\n            flex-direction: row !important; }\n  .flex-lg-column {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: column !important;\n            flex-direction: column !important; }\n  .flex-lg-row-reverse {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: row-reverse !important;\n            flex-direction: row-reverse !important; }\n  .flex-lg-column-reverse {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: column-reverse !important;\n            flex-direction: column-reverse !important; }\n  .flex-lg-wrap {\n    -ms-flex-wrap: wrap !important;\n        flex-wrap: wrap !important; }\n  .flex-lg-nowrap {\n    -ms-flex-wrap: nowrap !important;\n        flex-wrap: nowrap !important; }\n  .flex-lg-wrap-reverse {\n    -ms-flex-wrap: wrap-reverse !important;\n        flex-wrap: wrap-reverse !important; }\n  .justify-content-lg-start {\n    -webkit-box-pack: start !important;\n        -ms-flex-pack: start !important;\n            justify-content: flex-start !important; }\n  .justify-content-lg-end {\n    -webkit-box-pack: end !important;\n        -ms-flex-pack: end !important;\n            justify-content: flex-end !important; }\n  .justify-content-lg-center {\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important; }\n  .justify-content-lg-between {\n    -webkit-box-pack: justify !important;\n        -ms-flex-pack: justify !important;\n            justify-content: space-between !important; }\n  .justify-content-lg-around {\n    -ms-flex-pack: distribute !important;\n        justify-content: space-around !important; }\n  .align-items-lg-start {\n    -webkit-box-align: start !important;\n        -ms-flex-align: start !important;\n            align-items: flex-start !important; }\n  .align-items-lg-end {\n    -webkit-box-align: end !important;\n        -ms-flex-align: end !important;\n            align-items: flex-end !important; }\n  .align-items-lg-center {\n    -webkit-box-align: center !important;\n        -ms-flex-align: center !important;\n            align-items: center !important; }\n  .align-items-lg-baseline {\n    -webkit-box-align: baseline !important;\n        -ms-flex-align: baseline !important;\n            align-items: baseline !important; }\n  .align-items-lg-stretch {\n    -webkit-box-align: stretch !important;\n        -ms-flex-align: stretch !important;\n            align-items: stretch !important; }\n  .align-content-lg-start {\n    -ms-flex-line-pack: start !important;\n        align-content: flex-start !important; }\n  .align-content-lg-end {\n    -ms-flex-line-pack: end !important;\n        align-content: flex-end !important; }\n  .align-content-lg-center {\n    -ms-flex-line-pack: center !important;\n        align-content: center !important; }\n  .align-content-lg-between {\n    -ms-flex-line-pack: justify !important;\n        align-content: space-between !important; }\n  .align-content-lg-around {\n    -ms-flex-line-pack: distribute !important;\n        align-content: space-around !important; }\n  .align-content-lg-stretch {\n    -ms-flex-line-pack: stretch !important;\n        align-content: stretch !important; }\n  .align-self-lg-auto {\n    -ms-flex-item-align: auto !important;\n        -ms-grid-row-align: auto !important;\n        align-self: auto !important; }\n  .align-self-lg-start {\n    -ms-flex-item-align: start !important;\n        align-self: flex-start !important; }\n  .align-self-lg-end {\n    -ms-flex-item-align: end !important;\n        align-self: flex-end !important; }\n  .align-self-lg-center {\n    -ms-flex-item-align: center !important;\n        -ms-grid-row-align: center !important;\n        align-self: center !important; }\n  .align-self-lg-baseline {\n    -ms-flex-item-align: baseline !important;\n        align-self: baseline !important; }\n  .align-self-lg-stretch {\n    -ms-flex-item-align: stretch !important;\n        -ms-grid-row-align: stretch !important;\n        align-self: stretch !important; } }\n@media (min-width: 1200px) {\n  .flex-xl-row {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: row !important;\n            flex-direction: row !important; }\n  .flex-xl-column {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: normal !important;\n        -ms-flex-direction: column !important;\n            flex-direction: column !important; }\n  .flex-xl-row-reverse {\n    -webkit-box-orient: horizontal !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: row-reverse !important;\n            flex-direction: row-reverse !important; }\n  .flex-xl-column-reverse {\n    -webkit-box-orient: vertical !important;\n    -webkit-box-direction: reverse !important;\n        -ms-flex-direction: column-reverse !important;\n            flex-direction: column-reverse !important; }\n  .flex-xl-wrap {\n    -ms-flex-wrap: wrap !important;\n        flex-wrap: wrap !important; }\n  .flex-xl-nowrap {\n    -ms-flex-wrap: nowrap !important;\n        flex-wrap: nowrap !important; }\n  .flex-xl-wrap-reverse {\n    -ms-flex-wrap: wrap-reverse !important;\n        flex-wrap: wrap-reverse !important; }\n  .justify-content-xl-start {\n    -webkit-box-pack: start !important;\n        -ms-flex-pack: start !important;\n            justify-content: flex-start !important; }\n  .justify-content-xl-end {\n    -webkit-box-pack: end !important;\n        -ms-flex-pack: end !important;\n            justify-content: flex-end !important; }\n  .justify-content-xl-center {\n    -webkit-box-pack: center !important;\n        -ms-flex-pack: center !important;\n            justify-content: center !important; }\n  .justify-content-xl-between {\n    -webkit-box-pack: justify !important;\n        -ms-flex-pack: justify !important;\n            justify-content: space-between !important; }\n  .justify-content-xl-around {\n    -ms-flex-pack: distribute !important;\n        justify-content: space-around !important; }\n  .align-items-xl-start {\n    -webkit-box-align: start !important;\n        -ms-flex-align: start !important;\n            align-items: flex-start !important; }\n  .align-items-xl-end {\n    -webkit-box-align: end !important;\n        -ms-flex-align: end !important;\n            align-items: flex-end !important; }\n  .align-items-xl-center {\n    -webkit-box-align: center !important;\n        -ms-flex-align: center !important;\n            align-items: center !important; }\n  .align-items-xl-baseline {\n    -webkit-box-align: baseline !important;\n        -ms-flex-align: baseline !important;\n            align-items: baseline !important; }\n  .align-items-xl-stretch {\n    -webkit-box-align: stretch !important;\n        -ms-flex-align: stretch !important;\n            align-items: stretch !important; }\n  .align-content-xl-start {\n    -ms-flex-line-pack: start !important;\n        align-content: flex-start !important; }\n  .align-content-xl-end {\n    -ms-flex-line-pack: end !important;\n        align-content: flex-end !important; }\n  .align-content-xl-center {\n    -ms-flex-line-pack: center !important;\n        align-content: center !important; }\n  .align-content-xl-between {\n    -ms-flex-line-pack: justify !important;\n        align-content: space-between !important; }\n  .align-content-xl-around {\n    -ms-flex-line-pack: distribute !important;\n        align-content: space-around !important; }\n  .align-content-xl-stretch {\n    -ms-flex-line-pack: stretch !important;\n        align-content: stretch !important; }\n  .align-self-xl-auto {\n    -ms-flex-item-align: auto !important;\n        -ms-grid-row-align: auto !important;\n        align-self: auto !important; }\n  .align-self-xl-start {\n    -ms-flex-item-align: start !important;\n        align-self: flex-start !important; }\n  .align-self-xl-end {\n    -ms-flex-item-align: end !important;\n        align-self: flex-end !important; }\n  .align-self-xl-center {\n    -ms-flex-item-align: center !important;\n        -ms-grid-row-align: center !important;\n        align-self: center !important; }\n  .align-self-xl-baseline {\n    -ms-flex-item-align: baseline !important;\n        align-self: baseline !important; }\n  .align-self-xl-stretch {\n    -ms-flex-item-align: stretch !important;\n        -ms-grid-row-align: stretch !important;\n        align-self: stretch !important; } }\n.float-left {\n  float: left !important; }\n.float-right {\n  float: right !important; }\n.float-none {\n  float: none !important; }\n@media (min-width: 576px) {\n  .float-sm-left {\n    float: left !important; }\n  .float-sm-right {\n    float: right !important; }\n  .float-sm-none {\n    float: none !important; } }\n@media (min-width: 768px) {\n  .float-md-left {\n    float: left !important; }\n  .float-md-right {\n    float: right !important; }\n  .float-md-none {\n    float: none !important; } }\n@media (min-width: 992px) {\n  .float-lg-left {\n    float: left !important; }\n  .float-lg-right {\n    float: right !important; }\n  .float-lg-none {\n    float: none !important; } }\n@media (min-width: 1200px) {\n  .float-xl-left {\n    float: left !important; }\n  .float-xl-right {\n    float: right !important; }\n  .float-xl-none {\n    float: none !important; } }\n.position-static {\n  position: static !important; }\n.position-relative {\n  position: relative !important; }\n.position-absolute {\n  position: absolute !important; }\n.position-fixed {\n  position: fixed !important; }\n.position-sticky {\n  position: -webkit-sticky !important;\n  position: sticky !important; }\n.fixed-top {\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  z-index: 1030; }\n.fixed-bottom {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1030; }\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n  .sticky-top {\n    position: -webkit-sticky;\n    position: sticky;\n    top: 0;\n    z-index: 1020; } }\n.sr-only {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  overflow: hidden;\n  clip: rect(0, 0, 0, 0);\n  white-space: nowrap;\n  -webkit-clip-path: inset(50%);\n          clip-path: inset(50%);\n  border: 0; }\n.sr-only-focusable:active, .sr-only-focusable:focus {\n  position: static;\n  width: auto;\n  height: auto;\n  overflow: visible;\n  clip: auto;\n  white-space: normal;\n  -webkit-clip-path: none;\n          clip-path: none; }\n.w-25 {\n  width: 25% !important; }\n.w-50 {\n  width: 50% !important; }\n.w-60 {\n  width: 60% !important; }\n.w-75 {\n  width: 75% !important; }\n.w-100 {\n  width: 100% !important; }\n.h-25 {\n  height: 25% !important; }\n.h-50 {\n  height: 50% !important; }\n.h-60 {\n  height: 60% !important; }\n.h-75 {\n  height: 75% !important; }\n.h-100 {\n  height: 100% !important; }\n.mw-100 {\n  max-width: 100% !important; }\n.mh-100 {\n  max-height: 100% !important; }\n.m-0 {\n  margin: 0 !important; }\n.mt-0, .my-0 {\n  margin-top: 0 !important; }\n.mr-0, .mx-0 {\n  margin-right: 0 !important; }\n.mb-0, .my-0 {\n  margin-bottom: 0 !important; }\n.ml-0, .mx-0 {\n  margin-left: 0 !important; }\n.m-1 {\n  margin: 0.25rem !important; }\n.mt-1, .my-1 {\n  margin-top: 0.25rem !important; }\n.mr-1, .mx-1 {\n  margin-right: 0.25rem !important; }\n.mb-1, .my-1 {\n  margin-bottom: 0.25rem !important; }\n.ml-1, .mx-1 {\n  margin-left: 0.25rem !important; }\n.m-2 {\n  margin: 0.5rem !important; }\n.mt-2, .my-2 {\n  margin-top: 0.5rem !important; }\n.mr-2, .mx-2 {\n  margin-right: 0.5rem !important; }\n.mb-2, .my-2 {\n  margin-bottom: 0.5rem !important; }\n.ml-2, .mx-2 {\n  margin-left: 0.5rem !important; }\n.m-3 {\n  margin: 1rem !important; }\n.mt-3, .my-3 {\n  margin-top: 1rem !important; }\n.mr-3, .mx-3 {\n  margin-right: 1rem !important; }\n.mb-3, .my-3 {\n  margin-bottom: 1rem !important; }\n.ml-3, .mx-3 {\n  margin-left: 1rem !important; }\n.m-4 {\n  margin: 1.5rem !important; }\n.mt-4, .my-4 {\n  margin-top: 1.5rem !important; }\n.mr-4, .mx-4 {\n  margin-right: 1.5rem !important; }\n.mb-4, .my-4 {\n  margin-bottom: 1.5rem !important; }\n.ml-4, .mx-4 {\n  margin-left: 1.5rem !important; }\n.m-5 {\n  margin: 3rem !important; }\n.mt-5, .my-5 {\n  margin-top: 3rem !important; }\n.mr-5, .mx-5 {\n  margin-right: 3rem !important; }\n.mb-5, .my-5 {\n  margin-bottom: 3rem !important; }\n.ml-5, .mx-5 {\n  margin-left: 3rem !important; }\n.p-0 {\n  padding: 0 !important; }\n.pt-0, .py-0 {\n  padding-top: 0 !important; }\n.pr-0, .px-0 {\n  padding-right: 0 !important; }\n.pb-0, .py-0 {\n  padding-bottom: 0 !important; }\n.pl-0, .px-0 {\n  padding-left: 0 !important; }\n.p-1 {\n  padding: 0.25rem !important; }\n.pt-1, .py-1 {\n  padding-top: 0.25rem !important; }\n.pr-1, .px-1 {\n  padding-right: 0.25rem !important; }\n.pb-1, .py-1 {\n  padding-bottom: 0.25rem !important; }\n.pl-1, .px-1 {\n  padding-left: 0.25rem !important; }\n.p-2 {\n  padding: 0.5rem !important; }\n.pt-2, .py-2 {\n  padding-top: 0.5rem !important; }\n.pr-2, .px-2 {\n  padding-right: 0.5rem !important; }\n.pb-2, .py-2 {\n  padding-bottom: 0.5rem !important; }\n.pl-2, .px-2 {\n  padding-left: 0.5rem !important; }\n.p-3 {\n  padding: 1rem !important; }\n.pt-3, .py-3 {\n  padding-top: 1rem !important; }\n.pr-3, .px-3 {\n  padding-right: 1rem !important; }\n.pb-3, .py-3 {\n  padding-bottom: 1rem !important; }\n.pl-3, .px-3 {\n  padding-left: 1rem !important; }\n.p-4 {\n  padding: 1.5rem !important; }\n.pt-4, .py-4 {\n  padding-top: 1.5rem !important; }\n.pr-4, .px-4 {\n  padding-right: 1.5rem !important; }\n.pb-4, .py-4 {\n  padding-bottom: 1.5rem !important; }\n.pl-4, .px-4 {\n  padding-left: 1.5rem !important; }\n.p-5 {\n  padding: 3rem !important; }\n.pt-5, .py-5 {\n  padding-top: 3rem !important; }\n.pr-5, .px-5 {\n  padding-right: 3rem !important; }\n.pb-5, .py-5 {\n  padding-bottom: 3rem !important; }\n.pl-5, .px-5 {\n  padding-left: 3rem !important; }\n.m-auto {\n  margin: auto !important; }\n.mt-auto, .my-auto {\n  margin-top: auto !important; }\n.mr-auto, .mx-auto {\n  margin-right: auto !important; }\n.mb-auto, .my-auto {\n  margin-bottom: auto !important; }\n.ml-auto, .mx-auto {\n  margin-left: auto !important; }\n@media (min-width: 576px) {\n  .m-sm-0 {\n    margin: 0 !important; }\n  .mt-sm-0, .my-sm-0 {\n    margin-top: 0 !important; }\n  .mr-sm-0, .mx-sm-0 {\n    margin-right: 0 !important; }\n  .mb-sm-0, .my-sm-0 {\n    margin-bottom: 0 !important; }\n  .ml-sm-0, .mx-sm-0 {\n    margin-left: 0 !important; }\n  .m-sm-1 {\n    margin: 0.25rem !important; }\n  .mt-sm-1, .my-sm-1 {\n    margin-top: 0.25rem !important; }\n  .mr-sm-1, .mx-sm-1 {\n    margin-right: 0.25rem !important; }\n  .mb-sm-1, .my-sm-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-sm-1, .mx-sm-1 {\n    margin-left: 0.25rem !important; }\n  .m-sm-2 {\n    margin: 0.5rem !important; }\n  .mt-sm-2, .my-sm-2 {\n    margin-top: 0.5rem !important; }\n  .mr-sm-2, .mx-sm-2 {\n    margin-right: 0.5rem !important; }\n  .mb-sm-2, .my-sm-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-sm-2, .mx-sm-2 {\n    margin-left: 0.5rem !important; }\n  .m-sm-3 {\n    margin: 1rem !important; }\n  .mt-sm-3, .my-sm-3 {\n    margin-top: 1rem !important; }\n  .mr-sm-3, .mx-sm-3 {\n    margin-right: 1rem !important; }\n  .mb-sm-3, .my-sm-3 {\n    margin-bottom: 1rem !important; }\n  .ml-sm-3, .mx-sm-3 {\n    margin-left: 1rem !important; }\n  .m-sm-4 {\n    margin: 1.5rem !important; }\n  .mt-sm-4, .my-sm-4 {\n    margin-top: 1.5rem !important; }\n  .mr-sm-4, .mx-sm-4 {\n    margin-right: 1.5rem !important; }\n  .mb-sm-4, .my-sm-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-sm-4, .mx-sm-4 {\n    margin-left: 1.5rem !important; }\n  .m-sm-5 {\n    margin: 3rem !important; }\n  .mt-sm-5, .my-sm-5 {\n    margin-top: 3rem !important; }\n  .mr-sm-5, .mx-sm-5 {\n    margin-right: 3rem !important; }\n  .mb-sm-5, .my-sm-5 {\n    margin-bottom: 3rem !important; }\n  .ml-sm-5, .mx-sm-5 {\n    margin-left: 3rem !important; }\n  .p-sm-0 {\n    padding: 0 !important; }\n  .pt-sm-0, .py-sm-0 {\n    padding-top: 0 !important; }\n  .pr-sm-0, .px-sm-0 {\n    padding-right: 0 !important; }\n  .pb-sm-0, .py-sm-0 {\n    padding-bottom: 0 !important; }\n  .pl-sm-0, .px-sm-0 {\n    padding-left: 0 !important; }\n  .p-sm-1 {\n    padding: 0.25rem !important; }\n  .pt-sm-1, .py-sm-1 {\n    padding-top: 0.25rem !important; }\n  .pr-sm-1, .px-sm-1 {\n    padding-right: 0.25rem !important; }\n  .pb-sm-1, .py-sm-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-sm-1, .px-sm-1 {\n    padding-left: 0.25rem !important; }\n  .p-sm-2 {\n    padding: 0.5rem !important; }\n  .pt-sm-2, .py-sm-2 {\n    padding-top: 0.5rem !important; }\n  .pr-sm-2, .px-sm-2 {\n    padding-right: 0.5rem !important; }\n  .pb-sm-2, .py-sm-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-sm-2, .px-sm-2 {\n    padding-left: 0.5rem !important; }\n  .p-sm-3 {\n    padding: 1rem !important; }\n  .pt-sm-3, .py-sm-3 {\n    padding-top: 1rem !important; }\n  .pr-sm-3, .px-sm-3 {\n    padding-right: 1rem !important; }\n  .pb-sm-3, .py-sm-3 {\n    padding-bottom: 1rem !important; }\n  .pl-sm-3, .px-sm-3 {\n    padding-left: 1rem !important; }\n  .p-sm-4 {\n    padding: 1.5rem !important; }\n  .pt-sm-4, .py-sm-4 {\n    padding-top: 1.5rem !important; }\n  .pr-sm-4, .px-sm-4 {\n    padding-right: 1.5rem !important; }\n  .pb-sm-4, .py-sm-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-sm-4, .px-sm-4 {\n    padding-left: 1.5rem !important; }\n  .p-sm-5 {\n    padding: 3rem !important; }\n  .pt-sm-5, .py-sm-5 {\n    padding-top: 3rem !important; }\n  .pr-sm-5, .px-sm-5 {\n    padding-right: 3rem !important; }\n  .pb-sm-5, .py-sm-5 {\n    padding-bottom: 3rem !important; }\n  .pl-sm-5, .px-sm-5 {\n    padding-left: 3rem !important; }\n  .m-sm-auto {\n    margin: auto !important; }\n  .mt-sm-auto, .my-sm-auto {\n    margin-top: auto !important; }\n  .mr-sm-auto, .mx-sm-auto {\n    margin-right: auto !important; }\n  .mb-sm-auto, .my-sm-auto {\n    margin-bottom: auto !important; }\n  .ml-sm-auto, .mx-sm-auto {\n    margin-left: auto !important; } }\n@media (min-width: 768px) {\n  .m-md-0 {\n    margin: 0 !important; }\n  .mt-md-0, .my-md-0 {\n    margin-top: 0 !important; }\n  .mr-md-0, .mx-md-0 {\n    margin-right: 0 !important; }\n  .mb-md-0, .my-md-0 {\n    margin-bottom: 0 !important; }\n  .ml-md-0, .mx-md-0 {\n    margin-left: 0 !important; }\n  .m-md-1 {\n    margin: 0.25rem !important; }\n  .mt-md-1, .my-md-1 {\n    margin-top: 0.25rem !important; }\n  .mr-md-1, .mx-md-1 {\n    margin-right: 0.25rem !important; }\n  .mb-md-1, .my-md-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-md-1, .mx-md-1 {\n    margin-left: 0.25rem !important; }\n  .m-md-2 {\n    margin: 0.5rem !important; }\n  .mt-md-2, .my-md-2 {\n    margin-top: 0.5rem !important; }\n  .mr-md-2, .mx-md-2 {\n    margin-right: 0.5rem !important; }\n  .mb-md-2, .my-md-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-md-2, .mx-md-2 {\n    margin-left: 0.5rem !important; }\n  .m-md-3 {\n    margin: 1rem !important; }\n  .mt-md-3, .my-md-3 {\n    margin-top: 1rem !important; }\n  .mr-md-3, .mx-md-3 {\n    margin-right: 1rem !important; }\n  .mb-md-3, .my-md-3 {\n    margin-bottom: 1rem !important; }\n  .ml-md-3, .mx-md-3 {\n    margin-left: 1rem !important; }\n  .m-md-4 {\n    margin: 1.5rem !important; }\n  .mt-md-4, .my-md-4 {\n    margin-top: 1.5rem !important; }\n  .mr-md-4, .mx-md-4 {\n    margin-right: 1.5rem !important; }\n  .mb-md-4, .my-md-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-md-4, .mx-md-4 {\n    margin-left: 1.5rem !important; }\n  .m-md-5 {\n    margin: 3rem !important; }\n  .mt-md-5, .my-md-5 {\n    margin-top: 3rem !important; }\n  .mr-md-5, .mx-md-5 {\n    margin-right: 3rem !important; }\n  .mb-md-5, .my-md-5 {\n    margin-bottom: 3rem !important; }\n  .ml-md-5, .mx-md-5 {\n    margin-left: 3rem !important; }\n  .p-md-0 {\n    padding: 0 !important; }\n  .pt-md-0, .py-md-0 {\n    padding-top: 0 !important; }\n  .pr-md-0, .px-md-0 {\n    padding-right: 0 !important; }\n  .pb-md-0, .py-md-0 {\n    padding-bottom: 0 !important; }\n  .pl-md-0, .px-md-0 {\n    padding-left: 0 !important; }\n  .p-md-1 {\n    padding: 0.25rem !important; }\n  .pt-md-1, .py-md-1 {\n    padding-top: 0.25rem !important; }\n  .pr-md-1, .px-md-1 {\n    padding-right: 0.25rem !important; }\n  .pb-md-1, .py-md-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-md-1, .px-md-1 {\n    padding-left: 0.25rem !important; }\n  .p-md-2 {\n    padding: 0.5rem !important; }\n  .pt-md-2, .py-md-2 {\n    padding-top: 0.5rem !important; }\n  .pr-md-2, .px-md-2 {\n    padding-right: 0.5rem !important; }\n  .pb-md-2, .py-md-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-md-2, .px-md-2 {\n    padding-left: 0.5rem !important; }\n  .p-md-3 {\n    padding: 1rem !important; }\n  .pt-md-3, .py-md-3 {\n    padding-top: 1rem !important; }\n  .pr-md-3, .px-md-3 {\n    padding-right: 1rem !important; }\n  .pb-md-3, .py-md-3 {\n    padding-bottom: 1rem !important; }\n  .pl-md-3, .px-md-3 {\n    padding-left: 1rem !important; }\n  .p-md-4 {\n    padding: 1.5rem !important; }\n  .pt-md-4, .py-md-4 {\n    padding-top: 1.5rem !important; }\n  .pr-md-4, .px-md-4 {\n    padding-right: 1.5rem !important; }\n  .pb-md-4, .py-md-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-md-4, .px-md-4 {\n    padding-left: 1.5rem !important; }\n  .p-md-5 {\n    padding: 3rem !important; }\n  .pt-md-5, .py-md-5 {\n    padding-top: 3rem !important; }\n  .pr-md-5, .px-md-5 {\n    padding-right: 3rem !important; }\n  .pb-md-5, .py-md-5 {\n    padding-bottom: 3rem !important; }\n  .pl-md-5, .px-md-5 {\n    padding-left: 3rem !important; }\n  .m-md-auto {\n    margin: auto !important; }\n  .mt-md-auto, .my-md-auto {\n    margin-top: auto !important; }\n  .mr-md-auto, .mx-md-auto {\n    margin-right: auto !important; }\n  .mb-md-auto, .my-md-auto {\n    margin-bottom: auto !important; }\n  .ml-md-auto, .mx-md-auto {\n    margin-left: auto !important; } }\n@media (min-width: 992px) {\n  .m-lg-0 {\n    margin: 0 !important; }\n  .mt-lg-0, .my-lg-0 {\n    margin-top: 0 !important; }\n  .mr-lg-0, .mx-lg-0 {\n    margin-right: 0 !important; }\n  .mb-lg-0, .my-lg-0 {\n    margin-bottom: 0 !important; }\n  .ml-lg-0, .mx-lg-0 {\n    margin-left: 0 !important; }\n  .m-lg-1 {\n    margin: 0.25rem !important; }\n  .mt-lg-1, .my-lg-1 {\n    margin-top: 0.25rem !important; }\n  .mr-lg-1, .mx-lg-1 {\n    margin-right: 0.25rem !important; }\n  .mb-lg-1, .my-lg-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-lg-1, .mx-lg-1 {\n    margin-left: 0.25rem !important; }\n  .m-lg-2 {\n    margin: 0.5rem !important; }\n  .mt-lg-2, .my-lg-2 {\n    margin-top: 0.5rem !important; }\n  .mr-lg-2, .mx-lg-2 {\n    margin-right: 0.5rem !important; }\n  .mb-lg-2, .my-lg-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-lg-2, .mx-lg-2 {\n    margin-left: 0.5rem !important; }\n  .m-lg-3 {\n    margin: 1rem !important; }\n  .mt-lg-3, .my-lg-3 {\n    margin-top: 1rem !important; }\n  .mr-lg-3, .mx-lg-3 {\n    margin-right: 1rem !important; }\n  .mb-lg-3, .my-lg-3 {\n    margin-bottom: 1rem !important; }\n  .ml-lg-3, .mx-lg-3 {\n    margin-left: 1rem !important; }\n  .m-lg-4 {\n    margin: 1.5rem !important; }\n  .mt-lg-4, .my-lg-4 {\n    margin-top: 1.5rem !important; }\n  .mr-lg-4, .mx-lg-4 {\n    margin-right: 1.5rem !important; }\n  .mb-lg-4, .my-lg-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-lg-4, .mx-lg-4 {\n    margin-left: 1.5rem !important; }\n  .m-lg-5 {\n    margin: 3rem !important; }\n  .mt-lg-5, .my-lg-5 {\n    margin-top: 3rem !important; }\n  .mr-lg-5, .mx-lg-5 {\n    margin-right: 3rem !important; }\n  .mb-lg-5, .my-lg-5 {\n    margin-bottom: 3rem !important; }\n  .ml-lg-5, .mx-lg-5 {\n    margin-left: 3rem !important; }\n  .p-lg-0 {\n    padding: 0 !important; }\n  .pt-lg-0, .py-lg-0 {\n    padding-top: 0 !important; }\n  .pr-lg-0, .px-lg-0 {\n    padding-right: 0 !important; }\n  .pb-lg-0, .py-lg-0 {\n    padding-bottom: 0 !important; }\n  .pl-lg-0, .px-lg-0 {\n    padding-left: 0 !important; }\n  .p-lg-1 {\n    padding: 0.25rem !important; }\n  .pt-lg-1, .py-lg-1 {\n    padding-top: 0.25rem !important; }\n  .pr-lg-1, .px-lg-1 {\n    padding-right: 0.25rem !important; }\n  .pb-lg-1, .py-lg-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-lg-1, .px-lg-1 {\n    padding-left: 0.25rem !important; }\n  .p-lg-2 {\n    padding: 0.5rem !important; }\n  .pt-lg-2, .py-lg-2 {\n    padding-top: 0.5rem !important; }\n  .pr-lg-2, .px-lg-2 {\n    padding-right: 0.5rem !important; }\n  .pb-lg-2, .py-lg-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-lg-2, .px-lg-2 {\n    padding-left: 0.5rem !important; }\n  .p-lg-3 {\n    padding: 1rem !important; }\n  .pt-lg-3, .py-lg-3 {\n    padding-top: 1rem !important; }\n  .pr-lg-3, .px-lg-3 {\n    padding-right: 1rem !important; }\n  .pb-lg-3, .py-lg-3 {\n    padding-bottom: 1rem !important; }\n  .pl-lg-3, .px-lg-3 {\n    padding-left: 1rem !important; }\n  .p-lg-4 {\n    padding: 1.5rem !important; }\n  .pt-lg-4, .py-lg-4 {\n    padding-top: 1.5rem !important; }\n  .pr-lg-4, .px-lg-4 {\n    padding-right: 1.5rem !important; }\n  .pb-lg-4, .py-lg-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-lg-4, .px-lg-4 {\n    padding-left: 1.5rem !important; }\n  .p-lg-5 {\n    padding: 3rem !important; }\n  .pt-lg-5, .py-lg-5 {\n    padding-top: 3rem !important; }\n  .pr-lg-5, .px-lg-5 {\n    padding-right: 3rem !important; }\n  .pb-lg-5, .py-lg-5 {\n    padding-bottom: 3rem !important; }\n  .pl-lg-5, .px-lg-5 {\n    padding-left: 3rem !important; }\n  .m-lg-auto {\n    margin: auto !important; }\n  .mt-lg-auto, .my-lg-auto {\n    margin-top: auto !important; }\n  .mr-lg-auto, .mx-lg-auto {\n    margin-right: auto !important; }\n  .mb-lg-auto, .my-lg-auto {\n    margin-bottom: auto !important; }\n  .ml-lg-auto, .mx-lg-auto {\n    margin-left: auto !important; } }\n@media (min-width: 1200px) {\n  .m-xl-0 {\n    margin: 0 !important; }\n  .mt-xl-0, .my-xl-0 {\n    margin-top: 0 !important; }\n  .mr-xl-0, .mx-xl-0 {\n    margin-right: 0 !important; }\n  .mb-xl-0, .my-xl-0 {\n    margin-bottom: 0 !important; }\n  .ml-xl-0, .mx-xl-0 {\n    margin-left: 0 !important; }\n  .m-xl-1 {\n    margin: 0.25rem !important; }\n  .mt-xl-1, .my-xl-1 {\n    margin-top: 0.25rem !important; }\n  .mr-xl-1, .mx-xl-1 {\n    margin-right: 0.25rem !important; }\n  .mb-xl-1, .my-xl-1 {\n    margin-bottom: 0.25rem !important; }\n  .ml-xl-1, .mx-xl-1 {\n    margin-left: 0.25rem !important; }\n  .m-xl-2 {\n    margin: 0.5rem !important; }\n  .mt-xl-2, .my-xl-2 {\n    margin-top: 0.5rem !important; }\n  .mr-xl-2, .mx-xl-2 {\n    margin-right: 0.5rem !important; }\n  .mb-xl-2, .my-xl-2 {\n    margin-bottom: 0.5rem !important; }\n  .ml-xl-2, .mx-xl-2 {\n    margin-left: 0.5rem !important; }\n  .m-xl-3 {\n    margin: 1rem !important; }\n  .mt-xl-3, .my-xl-3 {\n    margin-top: 1rem !important; }\n  .mr-xl-3, .mx-xl-3 {\n    margin-right: 1rem !important; }\n  .mb-xl-3, .my-xl-3 {\n    margin-bottom: 1rem !important; }\n  .ml-xl-3, .mx-xl-3 {\n    margin-left: 1rem !important; }\n  .m-xl-4 {\n    margin: 1.5rem !important; }\n  .mt-xl-4, .my-xl-4 {\n    margin-top: 1.5rem !important; }\n  .mr-xl-4, .mx-xl-4 {\n    margin-right: 1.5rem !important; }\n  .mb-xl-4, .my-xl-4 {\n    margin-bottom: 1.5rem !important; }\n  .ml-xl-4, .mx-xl-4 {\n    margin-left: 1.5rem !important; }\n  .m-xl-5 {\n    margin: 3rem !important; }\n  .mt-xl-5, .my-xl-5 {\n    margin-top: 3rem !important; }\n  .mr-xl-5, .mx-xl-5 {\n    margin-right: 3rem !important; }\n  .mb-xl-5, .my-xl-5 {\n    margin-bottom: 3rem !important; }\n  .ml-xl-5, .mx-xl-5 {\n    margin-left: 3rem !important; }\n  .p-xl-0 {\n    padding: 0 !important; }\n  .pt-xl-0, .py-xl-0 {\n    padding-top: 0 !important; }\n  .pr-xl-0, .px-xl-0 {\n    padding-right: 0 !important; }\n  .pb-xl-0, .py-xl-0 {\n    padding-bottom: 0 !important; }\n  .pl-xl-0, .px-xl-0 {\n    padding-left: 0 !important; }\n  .p-xl-1 {\n    padding: 0.25rem !important; }\n  .pt-xl-1, .py-xl-1 {\n    padding-top: 0.25rem !important; }\n  .pr-xl-1, .px-xl-1 {\n    padding-right: 0.25rem !important; }\n  .pb-xl-1, .py-xl-1 {\n    padding-bottom: 0.25rem !important; }\n  .pl-xl-1, .px-xl-1 {\n    padding-left: 0.25rem !important; }\n  .p-xl-2 {\n    padding: 0.5rem !important; }\n  .pt-xl-2, .py-xl-2 {\n    padding-top: 0.5rem !important; }\n  .pr-xl-2, .px-xl-2 {\n    padding-right: 0.5rem !important; }\n  .pb-xl-2, .py-xl-2 {\n    padding-bottom: 0.5rem !important; }\n  .pl-xl-2, .px-xl-2 {\n    padding-left: 0.5rem !important; }\n  .p-xl-3 {\n    padding: 1rem !important; }\n  .pt-xl-3, .py-xl-3 {\n    padding-top: 1rem !important; }\n  .pr-xl-3, .px-xl-3 {\n    padding-right: 1rem !important; }\n  .pb-xl-3, .py-xl-3 {\n    padding-bottom: 1rem !important; }\n  .pl-xl-3, .px-xl-3 {\n    padding-left: 1rem !important; }\n  .p-xl-4 {\n    padding: 1.5rem !important; }\n  .pt-xl-4, .py-xl-4 {\n    padding-top: 1.5rem !important; }\n  .pr-xl-4, .px-xl-4 {\n    padding-right: 1.5rem !important; }\n  .pb-xl-4, .py-xl-4 {\n    padding-bottom: 1.5rem !important; }\n  .pl-xl-4, .px-xl-4 {\n    padding-left: 1.5rem !important; }\n  .p-xl-5 {\n    padding: 3rem !important; }\n  .pt-xl-5, .py-xl-5 {\n    padding-top: 3rem !important; }\n  .pr-xl-5, .px-xl-5 {\n    padding-right: 3rem !important; }\n  .pb-xl-5, .py-xl-5 {\n    padding-bottom: 3rem !important; }\n  .pl-xl-5, .px-xl-5 {\n    padding-left: 3rem !important; }\n  .m-xl-auto {\n    margin: auto !important; }\n  .mt-xl-auto, .my-xl-auto {\n    margin-top: auto !important; }\n  .mr-xl-auto, .mx-xl-auto {\n    margin-right: auto !important; }\n  .mb-xl-auto, .my-xl-auto {\n    margin-bottom: auto !important; }\n  .ml-xl-auto, .mx-xl-auto {\n    margin-left: auto !important; } }\n.text-justify {\n  text-align: justify !important; }\n.text-nowrap {\n  white-space: nowrap !important; }\n.text-truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap; }\n.text-left {\n  text-align: left !important; }\n.text-right {\n  text-align: right !important; }\n.text-center {\n  text-align: center !important; }\n@media (min-width: 576px) {\n  .text-sm-left {\n    text-align: left !important; }\n  .text-sm-right {\n    text-align: right !important; }\n  .text-sm-center {\n    text-align: center !important; } }\n@media (min-width: 768px) {\n  .text-md-left {\n    text-align: left !important; }\n  .text-md-right {\n    text-align: right !important; }\n  .text-md-center {\n    text-align: center !important; } }\n@media (min-width: 992px) {\n  .text-lg-left {\n    text-align: left !important; }\n  .text-lg-right {\n    text-align: right !important; }\n  .text-lg-center {\n    text-align: center !important; } }\n@media (min-width: 1200px) {\n  .text-xl-left {\n    text-align: left !important; }\n  .text-xl-right {\n    text-align: right !important; }\n  .text-xl-center {\n    text-align: center !important; } }\n.text-lowercase {\n  text-transform: lowercase !important; }\n.text-uppercase {\n  text-transform: uppercase !important; }\n.text-capitalize {\n  text-transform: capitalize !important; }\n.font-weight-light {\n  font-weight: 300 !important; }\n.font-weight-normal {\n  font-weight: normal !important; }\n.font-weight-bold {\n  font-weight: bold !important; }\n.font-italic {\n  font-style: italic !important; }\n.text-white {\n  color: #fff !important; }\n.text-primary {\n  color: #20c997 !important; }\na.text-primary:focus, a.text-primary:hover {\n  color: #199d76 !important; }\n.text-secondary {\n  color: #f8f9fa !important; }\na.text-secondary:focus, a.text-secondary:hover {\n  color: #dae0e5 !important; }\n.text-success {\n  color: #20c997 !important; }\na.text-success:focus, a.text-success:hover {\n  color: #199d76 !important; }\n.text-info {\n  color: #17a2b8 !important; }\na.text-info:focus, a.text-info:hover {\n  color: #117a8b !important; }\n.text-warning {\n  color: #ffc107 !important; }\na.text-warning:focus, a.text-warning:hover {\n  color: #d39e00 !important; }\n.text-danger {\n  color: #dc3545 !important; }\na.text-danger:focus, a.text-danger:hover {\n  color: #bd2130 !important; }\n.text-light {\n  color: #f8f9fa !important; }\na.text-light:focus, a.text-light:hover {\n  color: #dae0e5 !important; }\n.text-dark {\n  color: #343a40 !important; }\na.text-dark:focus, a.text-dark:hover {\n  color: #1d2124 !important; }\n.text-muted {\n  color: #868e96 !important; }\n.text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0; }\n.visible {\n  visibility: visible !important; }\n.invisible {\n  visibility: hidden !important; }\n.custom-select {\n  min-width: 100%; }\n.form-control {\n  color: #1e2125; }\n.form-control[readonly] {\n  color: #1e2125; }\n.form-control:focus {\n  color: #1e2125; }\n.search {\n  background-color: #f4f7f9; }\n.custom-controls-stacked {\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-color: rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  padding: 10px;\n  height: 200px;\n  overflow-y: scroll; }\n.text-secondary {\n  color: #868e96; }\n.text-display {\n  color: #20c997; }\n.text-image {\n  color: #17a2b8; }\n.text-group {\n  color: #ffc107; }\nhr {\n  border-color: #495057; }\nsmall {\n  color: #868e96; }\nlabel > i, .card-text > i {\n  color: #868e96; }\nlabel, .form-group, .disable-select {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none; }\n.btn-block + .btn-block {\n  margin-top: 0; }\n.btn-nav {\n  background-color: transparent;\n  text-align: left;\n  color: #868e96; }\n.btn-nav:hover {\n  text-decoration: none;\n  color: #1e2125; }\n.active .btn {\n  background-color: #20c997;\n  color: white; }\n.nav-list {\n  margin-left: 0px;\n  padding-left: 0px; }\n.menu {\n  padding: 30px 20px 30px 20px;\n  max-height: 80%; }\n.button-menu {\n  max-height: 100%;\n  overflow-y: scroll; }\n.navigation {\n  padding: 0 0 0 0;\n  margin-right: 15px;\n  max-height: 100%; }\n.css-ym4q3b, [data-css-ym4q3b] {\n  width: 320px;\n  left: 0; }\n.notify-success {\n  background-color: #ffffff;\n  border: 1px solid #20c997;\n  color: #20c997;\n  border-radius: 0.25rem;\n  margin-left: 3%;\n  margin-bottom: 30px; }\n.notify-error {\n  background-color: #ffffff;\n  border: 1px solid #dc3545;\n  color: #dc3545;\n  border-radius: 0.25rem;\n  margin-left: 3%;\n  margin-bottom: 30px; }\n.title {\n  background-color: #ffffff; }\n.title-displays {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-images {\n  color: #17a2b8;\n  border-width: 1px;\n  border-color: #17a2b8;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-groups {\n  color: #ffc107;\n  border-width: 1px;\n  border-color: #ffc107;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-devices {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-gateways {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-docs {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.title-settings {\n  color: #20c997;\n  border-width: 1px;\n  border-color: #20c997;\n  border-radius: 0.25rem;\n  margin-bottom: 20px; }\n.card-division {\n  border-color: rgba(0, 0, 0, 0.125); }\n.element-division {\n  border-color: rgba(0, 0, 0, 0.125);\n  margin-top: 0;\n  margin-bottom: 15px; }\n.list {\n  height: 100%;\n  max-height: 100%;\n  margin-bottom: 15px; }\n.settings-list {\n  max-height: 400px;\n  overflow-y: scroll; }\n.list-group {\n  background-color: #f4f7f9;\n  color: #1e2125;\n  max-height: 100%;\n  overflow-y: scroll;\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem; }\n.list-group-small {\n  max-height: 30vh; }\n.list-group-item {\n  padding: 0px; }\n.list-group-item.active {\n  border-color: rgba(0, 0, 0, 0.125);\n  background-color: #ffffff;\n  color: #1e2125; }\n.active .settings-menu-item {\n  background-color: #20c997;\n  color: white; }\n.elemento {\n  padding: 0.75rem 1.25rem; }\n.list-group-item {\n  border-color: rgba(0, 0, 0, 0.125);\n  border-left: 0px;\n  border-right: 0px;\n  border-radius: 0px; }\n.list-group-item:first-child {\n  border-top: 0px;\n  border-radius: 0px; }\n.list-group-item:last-child {\n  border-bottom: 0px;\n  border-radius: 0px; }\n.list-group-item {\n  color: #1e2125; }\n.elemento-inactivo {\n  margin-right: 2px; }\n.elemento-activo {\n  margin-right: 0px; }\n.elemento-display:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.active .elemento-display {\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.elemento-dispositivo:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.active .elemento-dispositivo {\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.elemento-gateway:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.active .elemento-gateway {\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.elemento-imagen:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #17a2b8;\n  padding-right: 1rem; }\n.active .elemento-imagen {\n  border-right: 0.25rem solid #17a2b8;\n  padding-right: 1rem; }\n.elemento-grupo:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #ffc107;\n  padding-right: 1rem; }\n.active .elemento-grupo {\n  border-right: 0.25rem solid #ffc107;\n  padding-right: 1rem; }\n.elemento-asociado:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #ffc107;\n  padding-right: 1rem; }\n.active .elemento-asociado {\n  border-right: 0.25rem solid #ffc107;\n  padding-right: 1rem; }\n.elemento-configuracion:hover {\n  margin-right: 0px;\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.active .elemento-configuracion {\n  border-right: 0.25rem solid #20c997;\n  padding-right: 1rem; }\n.detalles-titulo {\n  margin-bottom: 0;\n  line-height: 1.3; }\n.btn-tiny {\n  padding: 0.2rem;\n  font-size: 0.75rem; }\n.btn-outline-display {\n  color: #20c997;\n  background-color: transparent;\n  background-image: none;\n  border-color: #20c997; }\n.btn-outline-imagen {\n  color: #17a2b8;\n  background-color: transparent;\n  background-image: none;\n  border-color: #17a2b8; }\n.btn-outline-grupo {\n  color: #ffc107;\n  background-color: transparent;\n  background-image: none;\n  border-color: #ffc107; }\nhtml {\n  height: 100%; }\nbody {\n  height: 100vh;\n  max-height: 100vh;\n  font-family: \"etica-display\"; }\n.frame {\n  height: 100%;\n  max-height: 100%;\n  padding-top: 3rem;\n  padding-right: 3%;\n  padding-bottom: 3rem;\n  padding-left: 3%; }\n.login {\n  height: 100%; }\n.main {\n  height: 100%;\n  max-height: 100%;\n  padding-left: 15px; }\n.content {\n  height: 100%;\n  margin-right: 0; }\n.overview {\n  height: 100%;\n  max-height: 100%; }\n.row-panel {\n  height: 80%;\n  max-height: 80%; }\n.panel {\n  height: 100%;\n  max-height: 100%; }\n.controls {\n  height: 80%;\n  max-height: 80%;\n  margin-bottom: 15px; }\n.detalles {\n  max-height: 100%; }\n.detalles .card-body {\n  max-height: 90%;\n  padding-bottom: 15px;\n  overflow-y: scroll; }\n::-webkit-scrollbar {\n  display: none; }\n.ventana {\n  max-width: 100%; }\n.doc-body {\n  height: 500px; }\n.detalles {\n  max-width: 100%; }\n.vista-previa {\n  padding: 0; }\n.vista-imagen {\n  max-width: 100%;\n  height: 100%;\n  overflow: hidden;\n  text-align: center;\n  padding: 30 0 30 0; }\n.vista-imagen-grupo {\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  max-width: 100%;\n  height: 300px;\n  overflow: hidden;\n  text-align: center;\n  padding: 30 0 30 0; }\n.vista-imagen-display {\n  border: 1px solid rgba(0, 0, 0, 0.125);\n  border-radius: 0.25rem;\n  max-width: 100%;\n  height: 300px;\n  overflow: hidden;\n  text-align: center;\n  padding: 30 0 30 0; }\n.imagen {\n  width: 100%; }\n.dropzone-accepted {\n  width: 100%;\n  border-radius: 0.25rem;\n  border: 1px solid #20c997 !important;\n  text-align: center;\n  margin-bottom: 20px; }\n.dropzone {\n  width: 100%;\n  height: 300px;\n  border-radius: 0.25rem;\n  border: 1px dashed rgba(0, 0, 0, 0.125);\n  text-align: center;\n  margin-bottom: 20px; }\n.etiquetas {\n  overflow-x: scroll; }\na {\n  color: #1e2125;\n  text-decoration: none; }\na:hover {\n  color: #1e2125;\n  text-decoration: none; }\n.disponible {\n  color: #495057; }\n", ""]);
 
 // exports
 

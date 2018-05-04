@@ -1,16 +1,19 @@
 /* IMPORT MODULES */
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 /* IMPORT COMPONENTS */
-import { GroupRouter } from './viewGroups-components/groupRouter.jsx';
-import { GroupForm } from './viewGroups-components/groupForm.jsx';
-import { GroupGeneric } from './viewGroups-components/groupGeneric.jsx';
-import { List } from '../../lists/list.jsx';
-import { Title } from '../../tags/title.jsx';
+import { GroupRouter } from './viewGroups-components/groupRouter.jsx'
+import { GroupForm } from './viewGroups-components/groupForm.jsx'
+import { GroupGeneric } from './viewGroups-components/groupGeneric.jsx'
+import { List } from '../../lists/list.jsx'
+import { Title } from '../../tags/title.jsx'
 
 /* COMPONENTS */
-export const ContentGroups = ({ groups, filterValue, ...other }) => {
+export const ContentGroups = ({ filterValue, ...props }) => {
+
+  const { data: { groups } } = props
+
   return(
     <div className="overview">
       <div className="row">
@@ -31,9 +34,9 @@ export const ContentGroups = ({ groups, filterValue, ...other }) => {
             <div className="col-8">
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
-                <Route path="/groups/add" render={() => <GroupForm {...other} groups={groups}/>}/>
+                <Route path="/groups/add" render={() => <GroupForm {...props} groups={groups}/>}/>
                 {/* For route /groupId we select the image based on the id and pass it separately */}
-                <Route path="/groups/:groupId" render={({ match }) => (<GroupRouter {...other} group={groups.find(g => g.id == match.params.groupId)}/>)}/>
+                <Route path="/groups/:groupId" render={({ match }) => (<GroupRouter {...props} group={groups.find(g => g._id == match.params.groupId)}/>)}/>
               </Switch>
               <Route exact path="/groups" render={() => (<GroupGeneric/>)}/>
             </div>
@@ -41,5 +44,5 @@ export const ContentGroups = ({ groups, filterValue, ...other }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

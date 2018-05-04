@@ -19,10 +19,10 @@ export class GatewayForm extends Component{
       updated_by: user.name,
       created_at: gateway ? moment(gateway.created_at) : moment(),
       updated_at: moment(),
-      mac_address: gateway ? gateway.mac_address : '',
-      ip_address: gateway ? gateway.ip_address : '',
+      mac: gateway ? gateway.mac : '',
+      port: gateway ? gateway.port : '',
+      ip: gateway ? gateway.ip : '',
       location: gateway ? gateway.location._id : locations[0]._id,
-      devices: gateway ? ( gateway.devices ? gateway.devices.map((d) => d._id) : [] ) : [],
 
       redirect: false,
       redirect_location: '/gateways',
@@ -33,16 +33,9 @@ export class GatewayForm extends Component{
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount(){
     const { gateways, gateway } = this.props;
-    // if in post mode get first free id value
-    if (!gateway) {
-      const identificaciones = gateways.map((d) => d.id); // get all ids
-      var id = 1; // start from 1
-      while (identificaciones.indexOf(id) != -1){id++} // stop at first free id value
-    }
     // set state with initial values
     this.setState({
-      id: gateway ? gateway.id : id,
-      redirect_location: gateway ? '/gateways/' + gateway.id : '/gateways/' + id // Redirect url
+      redirect_location: gateway ? '/gateways/' + gateway._id : '/gateways' // Redirect url
     });
   }
 
@@ -57,26 +50,6 @@ export class GatewayForm extends Component{
     });
   }
 
-  handleCheckDevices = (event) => {
-    // get value from the checkbox
-    const target = event.target;
-    const value = target.value;
-    // check if the checkbox has been selected
-    if (!this.state.devices.find((d) => d == value)){ // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      const prevState = this.state.devices;
-      prevState.push(value);
-      this.setState({devices: prevState});
-      target.checked = true;
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      const prevState = this.state.devices;
-      prevState.splice(prevState.indexOf(value), 1);
-      this.setState({devices: prevState});
-      target.checked = false;
-    }
-  } // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
-
   /* HANDLE SUMBIT (PUT OR POST) */
   handleSubmit = () => {
     const { gateway } = this.props;
@@ -86,13 +59,13 @@ export class GatewayForm extends Component{
       name: this.state.name,
       description: this.state.description,
       updated_by: this.state.updated_by._id, // send user_id
-      mac_address: this.state.mac_address,
-      ip_address: this.state.ip_address,
+      mac: this.state.mac,
+      ip: this.state.ip,
+      port: this.state.port,
       location: this.state.location,
     };
     // possible empty fields
     if (!this.props.gateway) form.created_by = this.props.user._id;
-    if (this.state.devices.length > 0) form.devices = this.state.devices;
     // HTTP request
     axios({
       method: gateway ? 'put' : 'post',
@@ -101,7 +74,7 @@ export class GatewayForm extends Component{
       headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
     })
     .then((res) => {
-      if (res.status == 201){
+      if (res.status == 201 || res.status == 200){
         this.props.notify('Puerta de enlace configurada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
         return this.props.update(this.props.user); // update dataset
       }
@@ -121,13 +94,6 @@ export class GatewayForm extends Component{
 
     // Options
     const optionsLocation = this.props.locations.sort((a, b) => a.id - b.id).map((l, i) => <option value={l._id} key={i}>{l.name}</option>);
-    const optionsDevices = this.props.devices.map((d) =>
-      <label key={d._id} className="custom-control custom-checkbox">
-        <input onChange={this.handleCheckDevices} type="checkbox" defaultChecked={this.state.devices.find((c) => c == d._id)} name={d._id} defaultValue={d._id} className="custom-control-input"></input>
-        <span className="custom-control-indicator"></span>
-        <span className="custom-control-description">{d.name}</span>
-      </label>
-    );
 
     // Render return
     if (this.state.redirect) {
@@ -153,15 +119,9 @@ export class GatewayForm extends Component{
           </div>
           <div className="card-body">
             <form id="form">
-              <div className="form-row">
-                <div className="form-group col-md-1">
-                  <label htmlFor="gatewayID"><i className="fa fa-hashtag mr-2"></i>ID</label>
-                  <input type="text" className="form-control" id="gatewayID" placeholder="ID" name='id' value={this.state.id} readOnly></input>
-                </div>
-                <div className="form-group col-md-11">
-                  <label htmlFor="nombre"><i className="fa fa-sitemap mr-2"></i>Nombre</label>
-                  <input type="text" className="form-control" id="nombre" placeholder="Nombre de la puerta de enlace" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
-                </div>
+              <div className="form-group">
+                <label htmlFor="nombre"><i className="fa fa-sitemap mr-2"></i>Nombre</label>
+                <input type="text" className="form-control" id="nombre" placeholder="Nombre de la puerta de enlace" name='name' value={this.state.name} onChange={this.handleInputChange}></input>
               </div>
               <div className="form-group">
                 <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2"></i>Descripcion</label>
@@ -169,29 +129,25 @@ export class GatewayForm extends Component{
               </div>
               <div className="form-row">
                 <div className="form-group col">
-                  <label htmlFor="mac_address"><i className="fa fa-server mr-2"></i>Dirección MAC</label>
-                  <input type="text" className="form-control" id="mac_address" placeholder="Dirección MAC de la puerta de enlace" name="mac_address" value={this.state.mac_address} onChange={this.handleInputChange}></input>
+                  <label htmlFor="mac"><i className="fa fa-server mr-2"></i>Dirección MAC</label>
+                  <input type="text" className="form-control" id="mac" placeholder="Dirección MAC de la puerta de enlace" name="mac" value={this.state.mac} onChange={this.handleInputChange}></input>
                 </div>
                 <div className="form-group col">
-                  <label htmlFor="ip_address"><i className="fa fa-wifi mr-2"></i>Dirección IP</label>
-                  <input type="text" className="form-control" id="ip_address" placeholder="Dirección IP de la puerta de enlace" name="ip_address" value={this.state.ip_address} onChange={this.handleInputChange}></input>
+                  <label htmlFor="ip"><i className="fa fa-wifi mr-2"></i>Dirección IP</label>
+                  <input type="text" className="form-control" id="ip" placeholder="Dirección IP de la puerta de enlace" name="ip" value={this.state.ip} onChange={this.handleInputChange}></input>
                 </div>
               </div>
               <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="port"><i className="fa fa-exchange mr-2"></i>Puerto</label>
+                  <input type="text" className="form-control" id="port" placeholder="Puerto de la puerta de enlace" name="mac" value={this.state.port} onChange={this.handleInputChange}></input>
+                </div>
                 <div className="form-group col">
                   <label htmlFor="location"><i className="fa fa-map-marker mr-2"></i>Location</label>
                   <div>
                     <select className="custom-select" name='location' onChange={this.handleInputChange}>
                       {optionsLocation}
                     </select>
-                  </div>
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-group col">
-                  <label htmlFor="devices"><i className="fa fa-tablet mr-2"></i>Asociar uno o varios dispositivos</label>
-                  <div className="custom-controls-stacked shadow">
-                    {optionsDevices}
                   </div>
                 </div>
               </div>

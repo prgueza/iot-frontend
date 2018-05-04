@@ -6,7 +6,7 @@ const cx = require('classnames');
 
 /* COMPONENT */
 export const Image = ({ image }) => {
-  const { url, id, name, description, tags_total, updated_at } = image;
+  const { _id, url, name, description, tags_total, updated_at } = image;
   const updated = moment(updated_at).from(moment());
   const tagsClass = cx(
     {"fa fa-tags fa-flip-horizontal mr-1": tags_total > 1},
@@ -14,7 +14,7 @@ export const Image = ({ image }) => {
   );
   const elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   const location = {
-    pathname: '/images/' + id
+    pathname: '/images/' + _id
   }
   return(
     <div className={elementClass}>
@@ -22,7 +22,7 @@ export const Image = ({ image }) => {
         <div className="elemento elemento-imagen">
           <div className="d-flex w-100 justify-content-between">
             <h5 className="w-75"><strong>{name}</strong></h5>
-            <small><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>{id}</small>
+            <small><i className="fa fa-hashtag mr-1" aria-hidden="true"></i>?</small>
           </div>
           <hr className="element-division"></hr>
           <p className="mb-3 mt-2">{description}</p>

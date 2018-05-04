@@ -72,18 +72,18 @@ export class GroupDetails extends Component {
 
   render(){
     // define constants from props for better readability
-    const { id, name, description, created_at, updated_at, created_by, displays, images, active_image, tags_total, tags } = this.props.group;
+    const { _id, name, description, created_at, updated_at, created_by, displays, images, active_image, tags } = this.props.group;
     // refactor date constants with format
     const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
     const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
     // generate tag list
-    const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='grupos' etiqueta={tag}/>);
+    const tag_list = tags.map(( tag, i ) => <Tag key={i} category='groups' tag={tag}/>);
     // check if active_image is set and if not set the undefined img
     const src = this.state.src_url;
     // define routes for edit and delete based on the id
-    const linktoEdit = '/groups/' + id + '/edit';
-    const linktoDelete = '/groups/' + id + '/delete';
-    const imagesOptions = images.map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+    const linktoEdit = '/groups/' + _id + '/edit';
+    const linktoDelete = '/groups/' + _id + '/delete';
+    const imagesOptions = images.map((i) => <option value={i._id} key={i._id}>{i.name}</option>);
 
 
     return(
@@ -109,7 +109,6 @@ export class GroupDetails extends Component {
         <div className="row">
           <div className="col">
             <p className="titulo">DETALLES</p>
-            <p className="card-text"><i className="fa fa-fw fa-hashtag mr-2" aria-hidden="true"></i>{id}</p>
             <p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
             <p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true"></i>{created}</p>
             <p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true"></i> {created_by ? created_by.name : 'Usuario eliminado'}</p>
@@ -140,13 +139,13 @@ export class GroupDetails extends Component {
           <div className="col">
             <div className="asociados">
               <p className="titulo">DISPLAYS ({displays.length})</p>
-              <Associated contenido={displays} category="displays" appearance="elemento-display" icon="television"/>
+              <Associated content={displays} category="displays" appearance="elemento-display" icon="television"/>
             </div>
           </div>
           <div className="col">
             <div className="asociados">
               <p className="titulo text-right">IMAGENES ASOCIADAS ({images.length})</p>
-              <Associated contenido={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
+              <Associated content={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
             </div>
           </div>
         </div>

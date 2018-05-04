@@ -5,10 +5,10 @@ import React, { Component } from 'react';
 import { Icon } from '../icons/icon.jsx';
 
 /* COMPONENTS */
-export const Notification = ({ text, icon }) => {
+export const Notification = ({ text, icon, spin }) => {
   return(
-    <div>
-      <Icon icon={icon} mr="2" ml="1"/> {text}
+    <div className="text-center">
+      <Icon icon={icon} mr="1" spin={spin}/> {text}
     </div>
   );
 };

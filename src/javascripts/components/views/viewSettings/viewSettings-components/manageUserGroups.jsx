@@ -1,16 +1,16 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { Component } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 /* IMPORT COMPONENTS */
-import { UserGroup } from '../../../lists/lists-components/userGroup.jsx';
+import { UserGroup } from '../../../lists/lists-components/userGroup.jsx'
 
 /* COMPONENTS */
 export class ManageUserGroups extends Component {
 
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       userGroups: null,
       isLoaded: false,
@@ -20,30 +20,26 @@ export class ManageUserGroups extends Component {
       // form
       name: '',
       description: '',
-    };
+    }
   }
 
   handleInputChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    this.setState({[name]:value});
+    const target = event.target
+    const name = target.name
+    const value = target.value
+    this.setState({[name]:value})
   }
 
   componentDidMount(){
-    axios.get('/userGroups')
-      .then(
-        (userGroups) => { // resolve callback
-          this.setState({ isLoaded: true, userGroups: userGroups.data });
-        },
-        (error) => { // reject callback
-          this.setState({ isLoaded: true, error });
-        }
-      )
+    this.setState({ isLoaded: true, userGroups: this.props.data.userGroups })
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups })
   }
 
   edit = (element_id) => {
-    const userGroup = this.state.userGroups.find(u => u._id == element_id);
+    const userGroup = this.state.userGroups.find(u => u._id == element_id)
     this.setState({
       name: userGroup.name,
       description: userGroup.description,
@@ -67,39 +63,33 @@ export class ManageUserGroups extends Component {
     const form = {
       'name': this.state.name,
       'description': this.state.description,
-    };
+    }
     axios({
       method: method,
       url: this.state.edit ? 'http://localhost:4000/userGroups/' + this.state.element_id : 'http://localhost:4000/userGroups',
       data: form,
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.props.token },
     })
     .then((res) => { // resolve callback
       if(res.status == 201 || res.status == 200){
         switch (method) {
           case 'put':
-            this.props.notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('userGroups', res.data.resourceId, 'edit', res.data.resource) // update dataset
+            break
           case 'post':
-            this.props.notify('Grupo creado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Grupo creado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('userGroups', res.data.resourceId, 'add', res.data.resource) // update dataset
+            this.edit(res.data.resourceId)
+            break
           case 'delete':
-            this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT)
+            this.cancel()
+            this.props.update('userGroups', res.data.resourceId, 'remove', res.data.resource) // update dataset
+            break
           default:
-            console.log('error');
+            console.log('Something went wrong')
         }
-        return axios.get('/userGroups')
-        .then((res) => {
-          this.setState({
-            isLoaded: true,
-            userGroups: res.data,
-            name: '',
-            description: '',
-            element_id: '',
-            edit: false
-          })
-        })
       } else {
         return this.setState({
           isLoaded: true,
@@ -108,13 +98,13 @@ export class ManageUserGroups extends Component {
       }
     })
     .catch((err) => {
-      console.log(err);
-      return this.props.notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
-    });
+      console.log(err)
+      return this.props.notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT)
+    })
   }
 
   render(){
-    const { userGroups, error, isLoaded } = this.state;
+    const { userGroups, error, isLoaded } = this.state
 
     if (error) {
       return null // TODO: handle error
@@ -127,7 +117,7 @@ export class ManageUserGroups extends Component {
         } else {
           return <UserGroup userGroup={userGroup} key={userGroup._id} edit={this.edit} active={false}/>
         }
-      });
+      })
       list.push(
         <div key="0" className="list-group-item-action list-group-item flex-column align-items-start">
           <div className="text-center elemento">
@@ -136,7 +126,7 @@ export class ManageUserGroups extends Component {
             <small>Número de grupos de gestión: {userGroups.length}</small>
           </div>
         </div>
-      );
+      )
 
       return(
         <div className="card settings">
@@ -187,7 +177,7 @@ export class ManageUserGroups extends Component {
             </div>
           </div>
         </div>
-      );
+      )
     }
   }
-};
+}

@@ -1,21 +1,22 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 /* IMPORT COMPONENTS */
-import { Main } from './components/main.jsx';
+import { Main } from './components/main.jsx'
 import { Login } from './components/login/login.jsx'
 
 /* COMPONENTS */
 class App extends Component {
 
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       // user data
       user: null,
       token: null,
+      data: null,
       // login flag
       isLoggedIn: false,
       // eror handling
@@ -23,17 +24,17 @@ class App extends Component {
     }
   }
 
-  login = (user, token) => {
-    this.setState({ isLoggedIn: true, user, token });
+  login = (user, token, data) => {
+    this.setState({ isLoggedIn: true, user, token, data })
   }
 
   logout = () => {
-    this.setState({ isLoggedIn: false, user: null, token: null})
+    this.setState({ isLoggedIn: false, user: null, token: null, data: null })
   }
 
   render(){
     // get state
-    const { isLoggedIn, error } = this.state;
+    const { isLoggedIn, error } = this.state
     // return for rendering
     if (error) {
       // TODO: error handling

@@ -74,15 +74,15 @@ export class ImageDetails extends Component { // TODO: transform to component
 
   render(){
     // define constants from props for better readability
-    const { id, name, description, src_url, created_at, updated_at, created_by, color_profile, resolution, category, groups, displays, tags_total, tags } = this.props.image;
+    const { _id, name, description, src_url, created_at, updated_at, created_by, color_profile, resolution, category, groups, displays, tags_total, tags } = this.props.image;
     // refactor date constants with format
     const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
     const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
     // generate tag list
     const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='imagenes' etiqueta={tag}/>);
     // define routes for edit and delete based on the id
-    const linktoEdit = '/images/' + id + '/edit';
-    const linktoDelete = '/images/' + id + '/delete';
+    const linktoEdit = '/images/' + _id + '/edit';
+    const linktoDelete = '/images/' + _id + '/delete';
 
     return(
     <div className="card detalles">
@@ -107,7 +107,6 @@ export class ImageDetails extends Component { // TODO: transform to component
         <div className="row">
           <div className="col">
             <p className="titulo">DETALLES</p>
-            <p className="card-text"><i className="fa fa-fw fa-hashtag mr-2" aria-hidden="true"></i>{id}</p>
             <p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
             <p className="card-text"><i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true"></i>{resolution ? resolution.name : 'Resolución no especificada'}</p>
             <p className="card-text"><i className="fa fa-fw fa-file-image-o mr-2" aria-hidden="true"></i>{this.state.extension}</p>
@@ -140,13 +139,13 @@ export class ImageDetails extends Component { // TODO: transform to component
           <div className="col">
             <div className="asociados">
               <p className="titulo">DISPLAYS ASOCIADOS ({displays.length})</p>
-              <Associated contenido={displays} category="displays" appearance="elemento-display" icon="television"/>
+              <Associated content={displays} category="displays" appearance="elemento-display" icon="television"/>
             </div>
           </div>
           <div className="col">
             <div className="asociados">
               <p className="titulo">GRUPOS ASOCIADOS ({groups.length})</p>
-              <Associated contenido={groups} category="groups" appearance="elemento-grupo" icon="list"/>
+              <Associated content={groups} category="groups" appearance="elemento-grupo" icon="list"/>
             </div>
           </div>
         </div>

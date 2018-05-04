@@ -1,16 +1,19 @@
 /* IMPORT MODULES */
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 /* IMPORT COMPONENTS */
-import { List } from '../../lists/list.jsx';
-import { Title } from '../../tags/title.jsx';
-import { DeviceGeneric } from './viewDevices-components/deviceGeneric.jsx';
-import { DeviceRouter } from './viewDevices-components/deviceRouter.jsx';
-import { DeviceForm } from './viewDevices-components/deviceForm.jsx';
+import { List } from '../../lists/list.jsx'
+import { Title } from '../../tags/title.jsx'
+import { DeviceGeneric } from './viewDevices-components/deviceGeneric.jsx'
+import { DeviceRouter } from './viewDevices-components/deviceRouter.jsx'
+import { DeviceForm } from './viewDevices-components/deviceForm.jsx'
 
 /* COMPONENTS */
-export const ContentDevices = ({ devices, filterValue, ...other }) => {
+export const ContentDevices = ({ filterValue, filterFoundValue, filterFound, ...props }) => {
+
+  const { data: { devices } } = props
+
   return(
     <div className="overview">
       <div className="row">
@@ -26,14 +29,12 @@ export const ContentDevices = ({ devices, filterValue, ...other }) => {
           <Title total={devices.length} appearance="card title-devices" icon="tablet"/>
           <div className="row controls">
             <div className="col-4">
-              <List filterValue={filterValue} category='devices' content={devices}/>
+              <List filterValue={filterValue} filterFoundValue={filterFoundValue} filterFound={filterFound} category='devices' content={devices}/>
             </div>
             <div className="col-8">
               <Switch>
-                {/* For route /add we pass all props incluldying displays, groups, images and functions */}
-                <Route path="/devices/add" render={() => <DeviceForm {...other} devices={devices}/>}/>
                 {/* For route /deviceId we select the device based on the id and pass it separately */}
-                <Route path="/devices/:deviceId" render={({ match }) => (<DeviceRouter {...other} device={devices.find(d => d.id == match.params.deviceId)}/>)}/>
+                <Route path="/devices/:deviceId" render={({ match }) => (<DeviceRouter {...props} device={devices.find(d => d._id == match.params.deviceId)}/>)}/>
               </Switch>
               <Route exact path="/devices" render={() => (<DeviceGeneric/>)}/>
             </div>
@@ -41,5 +42,5 @@ export const ContentDevices = ({ devices, filterValue, ...other }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

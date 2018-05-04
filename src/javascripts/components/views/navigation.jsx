@@ -1,28 +1,28 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom'
 
 /* IMPORT COMPONENTS */
-import { NavButton } from '../buttons/navButton.jsx';
+import { NavButton } from '../buttons/navButton.jsx'
 
 /* COMPONENT */
 export class Navigation extends Component{
 
   /* HANDLE SEARCH */
   handleSearch = (event) => {
-    this.props.filterData(event.target.value);
+    this.props.filterData(event.target.value)
   }
 
   /* RENDER COMPONENT */
   render(){
     // get
-    const { displays, images, groups, user, devices, gateways } = this.props;
+    const { data: { displays, images, groups, devices, gateways }, user, sync_status, token } = this.props
     const navigationUser = [
       {exact: true, linkTo: "", text:"Vista general", icon:"eye", count:false, number:''},
       {exact: false, linkTo: "displays", text:"Displays", icon:"television", count:true, number: displays ? displays.length + '/' + devices.length : '...'},
       {exact: false, linkTo: "images", text:"Imagenes", icon:"picture-o", count:true, number: images ? images.length : '...'},
       {exact: false, linkTo: "groups", text:"Grupos", icon:"list", count:true, number: groups ? groups.length : '...'}
-    ];
+    ]
 
     const navigationAdmin = [
       {exact: true, linkTo: "", text:"Vista general", icon:"eye", count: false, number:''},
@@ -32,7 +32,22 @@ export class Navigation extends Component{
 
     const nav = user && user.admin ?
       navigationAdmin.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> ) :
-      navigationUser.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> );
+      navigationUser.map((nav, i) => <NavButton key={i} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number}/> )
+
+    switch (sync_status) {
+      case 0: //unsynced
+        var sync_button = <li><button onClick={() => this.props.sync_api(token)} type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Buscar dispositivos</button></li>
+        break
+      case 1: //sync_ready
+        var sync_button = <li><button onClick={() => this.props.sync()} type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-link mr-2" aria-hidden="true"></i> Sincronizar</button></li>
+        break
+      case 2: //synced
+        var sync_button = <li><button onClick={() => this.props.sync()} type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-check mr-2" aria-hidden="true"></i> Sincronizado</button></li>
+        break
+      case 3: //syncing
+        var sync_button = <li><button onClick={() => this.props.sync_api(token)} type="button" className="btn btn-nav btn-block mb-1" disabled><i className="fa fa-refresh fa-spin mr-2" aria-hidden="true"></i> Sincronizando</button></li>
+        break
+    }
 
     return(
       <div className="col-2 navigation">
@@ -55,11 +70,6 @@ export class Navigation extends Component{
             <div className="mb-3">
               <p>AJUSTES</p>
               <ul className="nav-list">
-              { user && !user.admin &&
-                <NavLink to={''}>
-                  <li><button type="button" className="btn btn-nav btn-block mb-1" disabled><i className="fa fa-clock-o mr-2" aria-hidden="true"></i> Temporizadores</button></li>
-                </NavLink>
-              }
                 <NavLink to={'/docs'}>
                   <li><button type="button" className="btn btn-nav btn-block mb-1"><i className="fa fa-book mr-2" aria-hidden="true"></i> Documentación</button></li>
                 </NavLink>
@@ -69,7 +79,7 @@ export class Navigation extends Component{
                 </NavLink>
               }
                   <li><a href="/disconect"><button type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-sign-out mr-2" aria-hidden="true"></i> Desconectar</button></a></li>
-                  <li><button onClick={() => this.props.update(user, true)} type="button" className="btn btn-nav btn-block mb-1" ><i className="fa fa-refresh mr-2" aria-hidden="true"></i> Actualizar</button></li>
+              { sync_button }
               </ul>
             </div>
           </div>
@@ -80,6 +90,6 @@ export class Navigation extends Component{
           </p>
         </div>
       </div>
-    );
+    )
   }
-};
+}

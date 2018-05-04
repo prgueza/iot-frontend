@@ -51,7 +51,7 @@ export class Login extends Component{
       .then(
         (res) => { // resolve callback
           if (res.status == 200){ // if auth is successful
-            return this.props.login(res.data.user, res.data.token); // login function
+            return this.props.login(res.data.user, res.data.token, res.data.data); // login function
           }
         },
         (error) => { // reject callback

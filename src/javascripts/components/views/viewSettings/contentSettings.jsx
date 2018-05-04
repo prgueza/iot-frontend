@@ -7,8 +7,7 @@ import { Title } from '../../tags/title.jsx';
 import { ManageUsers } from './viewSettings-components/manageUsers.jsx';
 import { ManageUserGroups } from './viewSettings-components/manageUserGroups.jsx';
 import { ManageLocations } from './viewSettings-components/manageLocations.jsx';
-import { ManageResolutions } from './viewSettings-components/manageResolutions.jsx';
-import { SettingsGeneric } from './viewSettings-components/settingsGeneric.jsx';
+import { ManageScreens } from './viewSettings-components/manageScreens.jsx';
 import { Icon } from '../../icons/icon.jsx';
 
 
@@ -21,7 +20,7 @@ export class ContentSettings extends Component{
         {exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings'},
         {exact: false, text: 'Grupos de gestión', icon: 'users', location: '/settings/groups'},
         {exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations'},
-        {exact: false, text: 'Resoluciones', icon: 'arrows-alt', location: '/settings/resolutions'}
+        {exact: false, text: 'Pantallas', icon: 'window-maximize', location: '/settings/screens'}
       ];
 
       const menu = menu_items.map((i, j) => {
@@ -40,7 +39,7 @@ export class ContentSettings extends Component{
           <div className="row">
             <div className="col">
               <div className="titulo mb-4 text-right">
-                <h1>CUENTA</h1>
+                <h1>SISTEMA</h1>
               </div>
               <hr></hr>
             </div>
@@ -58,7 +57,7 @@ export class ContentSettings extends Component{
                   <Route exact path="/settings" render={() => (<ManageUsers { ...this.props }/>)}/>
                   <Route path="/settings/groups" render={() => (<ManageUserGroups { ...this.props }/>)}/>
                   <Route path="/settings/locations" render={() => (<ManageLocations { ...this.props }/>)}/>
-                  <Route path="/settings/resolutions" render={() => (<ManageResolutions { ...this.props }/>)}/>
+                  <Route path="/settings/screens" render={() => (<ManageScreens { ...this.props }/>)}/>
                 </div>
               </div>
             </div>

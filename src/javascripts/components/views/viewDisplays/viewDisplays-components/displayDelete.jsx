@@ -1,15 +1,15 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { Redirect } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import React, { Component } from 'react'
+const moment = require('moment'); moment.locale('es')
+import { Redirect } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
-/* COMPONENTS */
+/* COMPONENT */
 export class DisplayDelete extends Component{
 
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       // for redirect after deletion
       redirect: false
@@ -18,27 +18,24 @@ export class DisplayDelete extends Component{
 
   /* HANDLE DELETE EVENT */
   handleDelete = (event) =>{
-    event.preventDefault();
-    axios.delete(this.props.display.url)
+    event.preventDefault()
+    axios.delete(this.props.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } })
     .then((res) => {
       if (res.status == 200){
-        this.props.notify('Display eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT);
-        return this.props.update(this.props.user); // update dataset
+        this.props.notify('Display eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT)
+        return this.props.update('displays', res.resourceId, 'remove', res.data.resource, res.data.devices) // update dataset
       }
     })
-    .then((res) => {
-      this.setState({ redirect : true });
-      return res;
-    })
+    .then((res) => this.setState({ redirect : true }))
     .catch((err) => {
-      console.log(err);
-      return this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+      console.log(err)
+      return this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT)
     });
   }
 
   render(){
     if (this.state.redirect) {
-      return(<Redirect to="/displays"/>);
+      return(<Redirect to="/displays"/>)
     } else {
       return(
         <div className="card detalles">
@@ -58,7 +55,7 @@ export class DisplayDelete extends Component{
             </div>
           </div>
         </div>
-      );
+      )
     }
   }
-};
+}

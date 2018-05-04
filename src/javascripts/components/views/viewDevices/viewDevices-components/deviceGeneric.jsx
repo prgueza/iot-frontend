@@ -18,9 +18,6 @@ export const DeviceGeneric = () => {
     <div className="card-body">
       <div className="text-center">
         <h1><i className="fa fa-arrow-left mr-3"></i>Seleccione un dispositivo físico</h1>
-        <hr className="card-division"></hr>
-        <p>O añada uno nuevo</p>
-        <AddButton category='devices'/>
       </div>
     </div>
   </div>

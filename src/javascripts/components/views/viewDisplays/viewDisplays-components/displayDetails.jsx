@@ -1,19 +1,19 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import React, { Component } from 'react'
+const moment = require('moment'); moment.locale('es')
+import { BrowserRouter as Router, Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 /* IMPORT COMPONENTS*/
-import { Associated } from '../../associated.jsx';
-import { Tag } from '../../../tags/tag.jsx';
+import { Associated } from '../../associated.jsx'
+import { Tag } from '../../../tags/tag.jsx'
 
-/* COMPONENTS */
+/* COMPONENT */
 export class DisplayDetails extends Component {
 
 	constructor(props){
-    super(props);
+    super(props)
     const { group, user } = this.props;
     this.state = {
       // form data stored in state
@@ -21,12 +21,12 @@ export class DisplayDetails extends Component {
       active_image: '',
       images: '',
       error: null
-    };
+    }
   }
 
 	componentDidMount(){
     // get data
-    const { active_image } = this.props.display;
+    const { active_image } = this.props.display
     // state
     this.setState({
       display: this.props.display,
@@ -36,7 +36,7 @@ export class DisplayDetails extends Component {
   }
 
 	componentWillReceiveProps(nextProps){
-		const { active_image } = nextProps.display;
+		const { active_image } = nextProps.display
 		// state
 		this.setState({
 			display: nextProps.display,
@@ -47,9 +47,9 @@ export class DisplayDetails extends Component {
 
 	/* HANDLE INPUT CHANGE */
 	handleInputChange = (event) => {
-    const value = event.target.value;
-    const image = this.props.images.find((i) => value == i._id);
-    const form = { active_image: image ? image._id : null, userGroup: this.props.userGroup._id };
+    const value = event.target.value
+    const image = this.props.images.find((i) => value == i._id)
+    const form = { active_image: image ? image._id : null, userGroup: this.props.userGroup._id }
     axios({
         method: 'put',
         url: this.state.display.url,
@@ -61,27 +61,27 @@ export class DisplayDetails extends Component {
           // const new_image = this.props.display.images.find((i) => value == i._id);
           // const src_url = new_image ? new_image.src_url : null;
           // this.setState({ active_image: value, src_url: src_url });
-					this.props.notify('Imagen cambiada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
-          return this.props.update(this.props.user); // update dataset
+					this.props.notify('Imagen cambiada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT)
+          return this.props.update(this.props.user) // update dataset
         } else {
-          return this.setState({ error: res.data }); // set error
+          return this.setState({ error: res.data }) // set error
         }
-      });
+      })
   }
 
 	render() {
 		// define constants from props for better readability
-		const { id, name, description, updated_at, updated_by, groups, images, active_image, device, tags } = this.props.display;
+		const { _id, name, description, groups, images, active_image, device, tags, updated_at, updated_by } = this.props.display
 		// refactor date constants with format
-		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
+		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY")
 		// generate tag list
-		const tag_list = tags.map(( tag, i ) => <Tag key={i} categoria='displays' etiqueta={tag}/>);
+		const tag_list = tags.map(( tag, i ) => <Tag key={i} category='displays' tag={tag}/>)
 		// define routes for edit and delete based on the id
-		const linktoEdit = '/displays/' + id + '/edit';
-		const linktoDelete = '/displays/' + id + '/delete';
+		const linktoEdit = '/displays/' + _id + '/edit'
+		const linktoDelete = '/displays/' + _id + '/delete'
 		// check if active_image is set and if not set the undefined img
     const src = this.state.src_url;
-    const imagesOptions = images.map((i) => <option value={i._id} key={i.id}>{i.name}</option>);
+    const imagesOptions = images.map((i) => <option value={i._id} key={i._id}>{i.name}</option>)
 
 		return(
 		<div className="card detalles">
@@ -106,7 +106,6 @@ export class DisplayDetails extends Component {
 				<div className="row">
 					<div className="col">
 						<p className="titulo">DETALLES</p>
-						<p className="card-text"><i className="fa fa-fw fa-hashtag mr-1" aria-hidden="true"></i>{id}</p>
 						<p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true"></i>{description}</p>
 						<p className="card-text"><i className="fa fa-fw fa-map-marker mr-2" aria-hidden="true"></i>{device.gateway ? (device.gateway.location ? device.gateway.location.name : 'Localización no especificada') : 'Localización no especificada'}</p>
 						<p className="card-text"><i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true"></i>{device.resolution ? (device.resolution.size.width + 'x' + device.resolution.size.height) : 'Resolución no especificada'}</p>
@@ -139,18 +138,18 @@ export class DisplayDetails extends Component {
 					<div className="col">
 						<div className="asociados">
 							<p className="titulo">IMAGENES ASOCIADAS ({images.length})</p>
-							<Associated contenido={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
+							<Associated content={images} category="images" appearance="elemento-imagen" icon="picture-o" active={this.state.active_image}/>
 						</div>
 					</div>
 					<div className="col">
 						<div className="asociados">
 							<p className="titulo text-right">GRUPOS ({groups.length})</p>
-							<Associated contenido={groups} category="groups" appearance="elemento-grupo" icon="list"/>
+							<Associated content={groups} category="groups" appearance="elemento-grupo" icon="list"/>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		);
+		)
 	}
-};
+}

@@ -4,10 +4,10 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 /* IMPORT COMPONENTS */
-import { Resolution } from '../../../lists/lists-components/resolution.jsx';
+import { Screen } from '../../../lists/lists-components/screen.jsx';
 
 /* COMPONENTS */
-export class ManageResolutions extends Component {
+export class ManageScreens extends Component {
 
   constructor(props){
     super(props);
@@ -21,17 +21,21 @@ export class ManageResolutions extends Component {
       name: '',
       height: 0,
       width: 0,
+      screen_code: '',
+      color_profile: 'grayscale',
       description: '',
     };
   }
 
   edit = (element_id) => {
-    const resolution = this.state.resolutions.find(r => r._id == element_id);
+    const screen = this.state.screens.find(r => r._id == element_id);
     this.setState({
-      name: resolution.name,
-      width: resolution.size.width,
-      height: resolution.size.height,
-      description: resolution.description,
+      name: screen.name,
+      width: screen.size.width,
+      height: screen.size.height,
+      description: screen.description,
+      screen_code: screen.screen_code,
+      color_profile: screen.color_profile,
       element_id: element_id,
       edit: true
     })
@@ -43,6 +47,8 @@ export class ManageResolutions extends Component {
       width: '',
       height: '',
       description: '',
+      screen_code: '',
+      color_profile: 'grayscale',
       element_id: '',
       edit: false
     })
@@ -56,15 +62,11 @@ export class ManageResolutions extends Component {
   }
 
   componentDidMount(){
-    axios.get('/resolutions')
-      .then(
-        (resolutions) => { // resolve callback
-          this.setState({ isLoaded: true, resolutions: resolutions.data });
-        },
-        (error) => { // reject callback
-          this.setState({ isLoaded: true, error });
-        }
-      )
+    this.setState({ isLoaded: true, screens: this.props.data.screens });
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({ isLoaded: true, screens: nextProps.data.screens });
   }
 
   /* HANDLE SUBMIT */
@@ -76,40 +78,36 @@ export class ManageResolutions extends Component {
         'height': this.state.height,
         'width': this.state.width
       },
+      'screen_code': this.state.screen_code,
+      'color_profile': this.state.color_profile,
     };
     if(this.state.description != ''){form.description = this.state.description}
     axios({
       method: method,
-      url: this.state.edit ? 'http://localhost:4000/resolutions/' + this.state.element_id : 'http://localhost:4000/resolutions',
+      url: this.state.edit ? 'http://localhost:4000/screens/' + this.state.element_id : 'http://localhost:4000/screens',
       data: form,
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization' : 'Bearer ' + this.props.token },
     })
-    .then((res) => { // resolve callback
+    .then((res) => {
       if(res.status == 201 || res.status == 200){
         switch (method) {
           case 'put':
-            this.props.notify('Resolución modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('screens', res.data.resourceId, 'edit', res.data.resource) // update dataset
+            break
           case 'post':
-            this.props.notify('Resolución creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Pantalla creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('screens', res.data.resourceId, 'add', res.data.resource) // update dataset
+            this.edit(res.data.resourceId)
+            break
           case 'delete':
-            this.props.notify('Resolución eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Pantalla eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT)
+            this.cancel()
+            this.props.update('screens', res.data.resourceId, 'remove', res.data.resource) // update dataset
+            break
           default:
-            console.log('error');
+            console.log('Something went wrong')
         }
-        return axios.get('/resolutions')
-        .then((res) => {
-          this.setState({
-            isLoaded: true,
-            resolutions: res.data,
-            name: '',
-            description: '',
-            element_id: '',
-            edit: false
-          })
-        })
       } else {
         return this.setState({
           isLoaded: true,
@@ -119,31 +117,31 @@ export class ManageResolutions extends Component {
     })
     .catch((err) => {
       console.log(err);
-      return this.props.notify('Error al añadir/modificar resolución', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
+      return this.props.notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
     });
   }
 
   render(){
-    const { resolutions, error, isLoaded } = this.state;
+    const { screens, error, isLoaded } = this.state;
 
     if (error) {
       return null // TODO: handle error
     } else if (!isLoaded) {
       return null // TODO: handle loading
     } else {
-      const list = resolutions.map(resolution => {
-        if (resolution._id == this.state.element_id){
-          return <Resolution resolution={resolution} key={resolution._id} edit={this.edit} active={true}/>
+      const list = screens.map(screen => {
+        if (screen._id == this.state.element_id){
+          return <Screen screen={screen} key={screen._id} edit={this.edit} active={true}/>
         } else {
-          return <Resolution resolution={resolution} key={resolution._id} edit={this.edit} active={false}/>
+          return <Screen screen={screen} key={screen._id} edit={this.edit} active={false}/>
         }
       });
       list.push(
         <div key="0" className="list-group-item-action list-group-item flex-column align-items-start">
           <div className="text-center elemento">
-            <h4 className="mb-1">No se han encontrado {resolutions.length > 0 && 'más'} resoluciones</h4>
+            <h4 className="mb-1">No se han encontrado {screens.length > 0 && 'más'} pantallas</h4>
             <hr className="card-division"></hr>
-            <small>Número de resoluciones: {resolutions.length}</small>
+            <small>Número de pantallas: {screens.length}</small>
           </div>
         </div>
       );
@@ -152,33 +150,48 @@ export class ManageResolutions extends Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
-                <h2 className="detalles-titulo"><i className='fa fa-arrows-alt mr-3' aria-hidden="true"></i>Resoluciones</h2>
+                <h2 className="detalles-titulo"><i className='fa fa-window-maximize mr-3' aria-hidden="true"></i>Pantallas</h2>
               </li>
             </ul>
           </div>
           <div className="card-body">
             <div className="row">
               <div className="col-6">
-                <h3>{ this.state.edit ? 'Editar Resolución' : 'Añadir Resolución'}</h3>
+                <h3>{ this.state.edit ? 'Editar pantalla' : 'Añadir pantalla'}</h3>
                 <hr className="card-division"></hr>
                 <form>
                   <div className="form-row">
                     <div className="form-group col-6">
-                      <label htmlFor="name"><i className="fa fa-arrows-alt mr-2"></i>Nombre</label>
+                      <label htmlFor="name"><i className="fa fa-fw fa-window-maximize mr-2"></i>Nombre</label>
                       <input type="text" className="form-control" id="name" placeholder="Nombre de la resolución" name="name" value={this.state.name} onChange={this.handleInputChange}></input>
                     </div>
                     <div className="form-group col-3">
-                      <label htmlFor="heigth"><i className="fa fa-arrows-v mr-2"></i>Alto</label>
+                      <label htmlFor="heigth"><i className="fa fa-fw fa-arrows-v mr-2"></i>Alto</label>
                       <input type="text" className="form-control" id="heigth" placeholder="Alto" name="height" value={this.state.height} onChange={this.handleInputChange}></input>
                     </div>
                     <div className="form-group col-3">
-                      <label htmlFor="width"><i className="fa fa-arrows-h mr-2"></i>Ancho</label>
+                      <label htmlFor="width"><i className="fa fa-fw fa-arrows-h mr-2"></i>Ancho</label>
                       <input type="text" className="form-control" id="width" placeholder="Ancho" name="width" value={this.state.width} onChange={this.handleInputChange}></input>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="description"><i className="fa fa-info-circle mr-2"></i>Descripción</label>
+                    <label htmlFor="description"><i className="fa fa-fw fa-info-circle mr-2"></i>Descripción</label>
                     <input type="text" className="form-control" id="description" placeholder="Descripción de la resolución" name="description" value={this.state.description} onChange={this.handleInputChange}></input>
+                  </div>
+                  <div className="form-row">
+                    <div className="form-group col">
+                      <label htmlFor="color_profile"><i className="fa fa-adjust mr-2"></i>Color</label>
+                      <div>
+                        <select className="custom-select" name='color_profile' value={this.state.color_profile} onChange={this.handleInputChange}>
+                          <option value="color">Color</option>
+                          <option value="grayscale">Escala de grises</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group col">
+                      <label htmlFor="screen_code"><i className="fa fa-fw fa-code mr-2"></i>Código de pantalla</label>
+                      <input type="text" className="form-control" id="screen_code" placeholder="Código" name="screen_code" value={this.state.screen_code} onChange={this.handleInputChange}></input>
+                    </div>
                   </div>
                   { !this.state.edit ?
                     <button onClick={() => this.handleSubmit('post')} type="button" className="btn btn-block btn-small btn-outline-success"><i className="fa fa-plus-circle mr-1" aria-hidden="true"></i>Añadir</button> :
@@ -191,7 +204,7 @@ export class ManageResolutions extends Component {
                 </form>
               </div>
               <div className="col-6">
-                <h3 className="d-flex w-100 justify-content-between">Resoluciones<span>{this.state.resolutions.length}</span></h3>
+                <h3 className="d-flex w-100 justify-content-between">Pantallas<span>{this.state.screens.length}</span></h3>
                 <hr className="card-division"></hr>
                 <div className="list settings-list">
                   <div className="list-group mb-3">
