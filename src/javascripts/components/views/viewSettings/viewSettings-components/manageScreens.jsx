@@ -62,15 +62,11 @@ export class ManageScreens extends Component {
   }
 
   componentDidMount(){
-    axios.get('/resolutions')
-      .then(
-        (screens) => { // resolve callback
-          this.setState({ isLoaded: true, screens: screens.data });
-        },
-        (error) => { // reject callback
-          this.setState({ isLoaded: true, error });
-        }
-      )
+    this.setState({ isLoaded: true, screens: this.props.data.screens });
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({ isLoaded: true, screens: nextProps.data.screens });
   }
 
   /* HANDLE SUBMIT */
@@ -88,38 +84,30 @@ export class ManageScreens extends Component {
     if(this.state.description != ''){form.description = this.state.description}
     axios({
       method: method,
-      url: this.state.edit ? 'http://localhost:4000/resolutions/' + this.state.element_id : 'http://localhost:4000/resolutions',
+      url: this.state.edit ? 'http://localhost:4000/screens/' + this.state.element_id : 'http://localhost:4000/screens',
       data: form,
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization' : 'Bearer ' + this.props.token },
     })
-    .then((res) => { // resolve callback
+    .then((res) => {
       if(res.status == 201 || res.status == 200){
         switch (method) {
           case 'put':
-            this.props.notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('screens', res.data.resourceId, 'edit', res.data.resource) // update dataset
+            break
           case 'post':
-            this.props.notify('Pantalla creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Pantalla creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('screens', res.data.resourceId, 'add', res.data.resource) // update dataset
+            this.edit(res.data.resourceId)
+            break
           case 'delete':
-            this.props.notify('Pantalla eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Pantalla eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT)
+            this.cancel()
+            this.props.update('screens', res.data.resourceId, 'remove', res.data.resource) // update dataset
+            break
           default:
-            console.log('error');
+            console.log('Something went wrong')
         }
-        return axios.get('/resolutions')
-        .then((res) => {
-          this.setState({
-            isLoaded: true,
-            screens: res.data,
-            name: '',
-            description: '',
-            element_id: '',
-            screen_code: '',
-            color_profile: '',
-            edit: false
-          })
-        })
       } else {
         return this.setState({
           isLoaded: true,

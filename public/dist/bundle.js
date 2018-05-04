@@ -61141,20 +61141,19 @@ var Main = exports.Main = function (_Component) {
             return r._id == _id;
           });
           stateData[resource].splice(index, 1);
-          stateData['devices'] = devices;
+          devices && (stateData['devices'] = devices);
           break;
         case 'add':
           stateData[resource].push(data);
-          stateData['devices'] = devices;
+          devices && (stateData['devices'] = devices);
           break;
         case 'edit':
           var index = stateData[resource].findIndex(function (r) {
             return r._id == _id;
           });
           stateData[resource].splice(index, 1, data);
-          stateData['devices'] = devices;
+          devices && (stateData['devices'] = devices);
           break;
-        default:
       }
       _this.setState({ data: stateData });
     };
@@ -61265,7 +61264,7 @@ var Main = exports.Main = function (_Component) {
       this.sync_api(token);
       // check syncronization
       this.check_sync_id = setInterval(function () {
-        if (_this2.state.last_synced && (0, _moment2.default)().diff(_this2.state.last_synced, 'seconds') > 20) {
+        if (_this2.state.last_synced && (0, _moment2.default)().diff(_this2.state.last_synced, 'seconds') > 20 && _this2.state.sync_status != 1) {
           _this2.setState({ sync_status: 0 }); //unsynced
         }
       }, 1000);
@@ -70649,38 +70648,27 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
         method: method,
         url: _this.state.edit ? 'http://localhost:4000/users/' + _this.state.element_id : 'http://localhost:4000/users/signup',
         data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
       }).then(function (res) {
-        // resolve callback
         if (res.status == 201 || res.status == 200) {
           switch (method) {
             case 'put':
               _this.props.notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
               break;
             case 'post':
               _this.props.notify('Usuario creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
+              _this.edit(res.data.resourceId);
               break;
             case 'delete':
               _this.props.notify('Usuario eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.cancel();
+              _this.props.update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
               break;
             default:
-              console.log('error');
+              console.log('Something went wrong');
           }
-          return _axios2.default.get('/users').then(function (res) {
-            _this.setState({
-              isLoaded: true,
-              users: res.data,
-              login: '',
-              name: '',
-              email: '',
-              password: '',
-              checkPassword: '',
-              userGroup: '',
-              admin: false,
-              edit: false,
-              element_id: ''
-            });
-          });
         } else {
           return _this.setState({
             isLoaded: true,
@@ -70714,15 +70702,12 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
   _createClass(ManageUsers, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get('/users').then(function (users) {
-        // resolve callback
-        _this2.setState({ isLoaded: true, users: users.data });
-      }, function (error) {
-        // reject callback
-        _this2.setState({ isLoaded: true, error: error });
-      });
+      this.setState({ isLoaded: true, users: this.props.data.users });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ isLoaded: true, users: nextProps.data.users });
     }
 
     /* HANDLE SUBMIT */
@@ -70730,14 +70715,14 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _state = this.state,
           users = _state.users,
           error = _state.error,
           isLoaded = _state.isLoaded;
 
-      var optionsUserGroup = this.props.userGroups.map(function (u, i) {
+      var optionsUserGroup = this.props.data.userGroups.map(function (u, i) {
         return _react2.default.createElement(
           'option',
           { value: u._id, key: i },
@@ -70751,10 +70736,10 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
         return null; // TODO: handle loading
       } else {
         var list = users.map(function (user) {
-          if (user._id == _this3.state.element_id) {
-            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this3.edit, active: true });
+          if (user._id == _this2.state.element_id) {
+            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: true });
           } else {
-            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this3.edit, active: false });
+            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: false });
           }
         });
         list.push(_react2.default.createElement(
@@ -70927,7 +70912,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                   !this.state.edit ? _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                        return _this3.handleSubmit('post');
+                        return _this2.handleSubmit('post');
                       }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
                     _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
                     'A\xF1adir'
@@ -70937,7 +70922,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('put');
+                          return _this2.handleSubmit('put');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
                       _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
                       'Actualizar'
@@ -70945,7 +70930,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('delete');
+                          return _this2.handleSubmit('delete');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
                       _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
                       'Eliminar'
@@ -70953,7 +70938,7 @@ var ManageUsers = exports.ManageUsers = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.cancel();
+                          return _this2.cancel();
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
                       _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
                       'Cancelar'
@@ -71175,33 +71160,28 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
         method: method,
         url: _this.state.edit ? 'http://localhost:4000/userGroups/' + _this.state.element_id : 'http://localhost:4000/userGroups',
         data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
       }).then(function (res) {
         // resolve callback
         if (res.status == 201 || res.status == 200) {
           switch (method) {
             case 'put':
               _this.props.notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('userGroups', res.data.resourceId, 'edit', res.data.resource); // update dataset
               break;
             case 'post':
               _this.props.notify('Grupo creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('userGroups', res.data.resourceId, 'add', res.data.resource); // update dataset
+              _this.edit(res.data.resourceId);
               break;
             case 'delete':
               _this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.cancel();
+              _this.props.update('userGroups', res.data.resourceId, 'remove', res.data.resource); // update dataset
               break;
             default:
-              console.log('error');
+              console.log('Something went wrong');
           }
-          return _axios2.default.get('/userGroups').then(function (res) {
-            _this.setState({
-              isLoaded: true,
-              userGroups: res.data,
-              name: '',
-              description: '',
-              element_id: '',
-              edit: false
-            });
-          });
         } else {
           return _this.setState({
             isLoaded: true,
@@ -71230,15 +71210,12 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
   _createClass(ManageUserGroups, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get('/userGroups').then(function (userGroups) {
-        // resolve callback
-        _this2.setState({ isLoaded: true, userGroups: userGroups.data });
-      }, function (error) {
-        // reject callback
-        _this2.setState({ isLoaded: true, error: error });
-      });
+      this.setState({ isLoaded: true, userGroups: this.props.data.userGroups });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups });
     }
 
     /* HANDLE SUBMIT */
@@ -71246,7 +71223,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _state = this.state,
           userGroups = _state.userGroups,
@@ -71260,10 +71237,10 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
         return null; // TODO: handle loading
       } else {
         var list = userGroups.map(function (userGroup) {
-          if (userGroup._id == _this3.state.element_id) {
-            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this3.edit, active: true });
+          if (userGroup._id == _this2.state.element_id) {
+            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: true });
           } else {
-            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this3.edit, active: false });
+            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: false });
           }
         });
         list.push(_react2.default.createElement(
@@ -71361,7 +71338,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
                   !this.state.edit ? _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                        return _this3.handleSubmit('post');
+                        return _this2.handleSubmit('post');
                       }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
                     _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
                     'A\xF1adir'
@@ -71371,7 +71348,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('put');
+                          return _this2.handleSubmit('put');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
                       _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
                       'Actualizar'
@@ -71379,7 +71356,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('delete');
+                          return _this2.handleSubmit('delete');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
                       _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
                       'Eliminar'
@@ -71387,7 +71364,7 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.cancel();
+                          return _this2.cancel();
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
                       _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
                       'Cancelar'
@@ -71428,8 +71405,6 @@ var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
 
   return ManageUserGroups;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 320 */
@@ -71619,32 +71594,27 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
         method: method,
         url: _this.state.edit ? 'http://localhost:4000/locations/' + _this.state.element_id : 'http://localhost:4000/locations',
         data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
       }).then(function (res) {
         if (res.status == 201 || res.status == 200) {
           switch (method) {
             case 'put':
               _this.props.notify('Localización modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('locations', res.data.resourceId, 'edit', res.data.resource); // update dataset
               break;
             case 'post':
               _this.props.notify('Localización creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('locations', res.data.resourceId, 'add', res.data.resource); // update dataset
+              _this.edit(res.data.resource._id);
               break;
             case 'delete':
               _this.props.notify('Localización eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.cancel();
+              _this.props.update('locations', res.data.resourceId, 'remove', res.data.resource); // update dataset
               break;
             default:
-              console.log('error');
+              console.log('Something went wrong');
           }
-          return _axios2.default.get('/locations').then(function (res) {
-            _this.setState({
-              isLoaded: true,
-              locations: res.data,
-              name: '',
-              description: '',
-              element_id: '',
-              edit: false
-            });
-          });
         } else {
           return _this.setState({
             isLoaded: true,
@@ -71678,15 +71648,12 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
   _createClass(ManageLocations, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get('/locations').then(function (locations) {
-        // resolve callback
-        _this2.setState({ isLoaded: true, locations: locations.data });
-      }, function (error) {
-        // reject callback
-        _this2.setState({ isLoaded: true, error: error });
-      });
+      this.setState({ isLoaded: true, locations: this.props.data.locations });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ isLoaded: true, locations: nextProps.data.locations });
     }
 
     /* HANDLE SUBMIT */
@@ -71694,7 +71661,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _state = this.state,
           locations = _state.locations,
@@ -71708,10 +71675,10 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
         return null; // TODO: handle loading
       } else {
         var list = locations.map(function (location) {
-          if (location._id == _this3.state.element_id) {
-            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this3.edit, active: true });
+          if (location._id == _this2.state.element_id) {
+            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: true });
           } else {
-            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this3.edit, active: false });
+            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: false });
           }
         });
         list.push(_react2.default.createElement(
@@ -71809,7 +71776,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
                   !this.state.edit ? _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                        return _this3.handleSubmit('post');
+                        return _this2.handleSubmit('post');
                       }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
                     _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
                     'A\xF1adir'
@@ -71819,7 +71786,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('put');
+                          return _this2.handleSubmit('put');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
                       _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
                       'Actualizar'
@@ -71827,7 +71794,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('delete');
+                          return _this2.handleSubmit('delete');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
                       _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
                       'Eliminar'
@@ -71835,7 +71802,7 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.cancel();
+                          return _this2.cancel();
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
                       _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
                       'Cancelar'
@@ -71876,8 +71843,6 @@ var ManageLocations = exports.ManageLocations = function (_Component) {
 
   return ManageLocations;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 322 */
@@ -72048,37 +72013,29 @@ var ManageScreens = exports.ManageScreens = function (_Component) {
       }
       (0, _axios2.default)({
         method: method,
-        url: _this.state.edit ? 'http://localhost:4000/resolutions/' + _this.state.element_id : 'http://localhost:4000/resolutions',
+        url: _this.state.edit ? 'http://localhost:4000/screens/' + _this.state.element_id : 'http://localhost:4000/screens',
         data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
       }).then(function (res) {
-        // resolve callback
         if (res.status == 201 || res.status == 200) {
           switch (method) {
             case 'put':
               _this.props.notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('screens', res.data.resourceId, 'edit', res.data.resource); // update dataset
               break;
             case 'post':
               _this.props.notify('Pantalla creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.props.update('screens', res.data.resourceId, 'add', res.data.resource); // update dataset
+              _this.edit(res.data.resourceId);
               break;
             case 'delete':
               _this.props.notify('Pantalla eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+              _this.cancel();
+              _this.props.update('screens', res.data.resourceId, 'remove', res.data.resource); // update dataset
               break;
             default:
-              console.log('error');
+              console.log('Something went wrong');
           }
-          return _axios2.default.get('/resolutions').then(function (res) {
-            _this.setState({
-              isLoaded: true,
-              screens: res.data,
-              name: '',
-              description: '',
-              element_id: '',
-              screen_code: '',
-              color_profile: '',
-              edit: false
-            });
-          });
         } else {
           return _this.setState({
             isLoaded: true,
@@ -72111,15 +72068,12 @@ var ManageScreens = exports.ManageScreens = function (_Component) {
   _createClass(ManageScreens, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios2.default.get('/resolutions').then(function (screens) {
-        // resolve callback
-        _this2.setState({ isLoaded: true, screens: screens.data });
-      }, function (error) {
-        // reject callback
-        _this2.setState({ isLoaded: true, error: error });
-      });
+      this.setState({ isLoaded: true, screens: this.props.data.screens });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({ isLoaded: true, screens: nextProps.data.screens });
     }
 
     /* HANDLE SUBMIT */
@@ -72127,7 +72081,7 @@ var ManageScreens = exports.ManageScreens = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _state = this.state,
           screens = _state.screens,
@@ -72141,10 +72095,10 @@ var ManageScreens = exports.ManageScreens = function (_Component) {
         return null; // TODO: handle loading
       } else {
         var list = screens.map(function (screen) {
-          if (screen._id == _this3.state.element_id) {
-            return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this3.edit, active: true });
+          if (screen._id == _this2.state.element_id) {
+            return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: true });
           } else {
-            return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this3.edit, active: false });
+            return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: false });
           }
         });
         list.push(_react2.default.createElement(
@@ -72302,7 +72256,7 @@ var ManageScreens = exports.ManageScreens = function (_Component) {
                   !this.state.edit ? _react2.default.createElement(
                     'button',
                     { onClick: function onClick() {
-                        return _this3.handleSubmit('post');
+                        return _this2.handleSubmit('post');
                       }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
                     _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
                     'A\xF1adir'
@@ -72312,7 +72266,7 @@ var ManageScreens = exports.ManageScreens = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('put');
+                          return _this2.handleSubmit('put');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
                       _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
                       'Actualizar'
@@ -72320,7 +72274,7 @@ var ManageScreens = exports.ManageScreens = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.handleSubmit('delete');
+                          return _this2.handleSubmit('delete');
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
                       _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
                       'Eliminar'
@@ -72328,7 +72282,7 @@ var ManageScreens = exports.ManageScreens = function (_Component) {
                     _react2.default.createElement(
                       'button',
                       { onClick: function onClick() {
-                          return _this3.cancel();
+                          return _this2.cancel();
                         }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
                       _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
                       'Cancelar'
@@ -72604,9 +72558,11 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentGateways = function ContentGateways(_ref) {
-  var gateways = _ref.gateways,
-      filterValue = _ref.filterValue,
-      other = _objectWithoutProperties(_ref, ['gateways', 'filterValue']);
+  var filterValue = _ref.filterValue,
+      props = _objectWithoutProperties(_ref, ['filterValue']);
+
+  var gateways = props.data.gateways;
+
 
   return _react2.default.createElement(
     'div',
@@ -72651,11 +72607,11 @@ var ContentGateways = function ContentGateways(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/add', render: function render() {
-                  return _react2.default.createElement(_gatewayForm.GatewayForm, _extends({}, other, { gateways: gateways }));
+                  return _react2.default.createElement(_gatewayForm.GatewayForm, _extends({}, props, { gateways: gateways }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_gatewayRouter.GatewayRouter, _extends({}, other, { gateway: gateways.find(function (g) {
+                  return _react2.default.createElement(_gatewayRouter.GatewayRouter, _extends({}, props, { gateway: gateways.find(function (g) {
                       return g._id == match.params.gatewayId;
                     }) }));
                 } })
@@ -72811,7 +72767,7 @@ var GatewayRouter = exports.GatewayRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.gateway) {
-        _axios2.default.get(this.props.gateway.url).then(function (gateway) {
+        _axios2.default.get(this.props.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (gateway) {
           // resolve callback
           _this2.setState({ gateway: gateway.data, isLoaded: true });
         }, function (error) {
@@ -72830,7 +72786,7 @@ var GatewayRouter = exports.GatewayRouter = function (_Component) {
 
       if (nextProps.gateway && (nextProps.gateway._id != this.props.gateway._id || nextProps.gateway.updated_at != this.props.gateway.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.gateway.url).then(function (gateway) {
+        _axios2.default.get(nextProps.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (gateway) {
           // resolve callback
           _this3.setState({ gateway: gateway.data, isLoaded: true });
         }, function (error) {
@@ -72879,8 +72835,6 @@ var GatewayRouter = exports.GatewayRouter = function (_Component) {
   return GatewayRouter;
 }(_react.Component);
 
-;
-
 /***/ }),
 /* 329 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -72914,7 +72868,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* IMPORT COMPONENTS*/
 
@@ -72943,7 +72898,7 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 			    mac = _props$gateway.mac,
 			    ip = _props$gateway.ip;
 
-			var devices = this.props.devices.filter(function (d) {
+			var devices = this.props.data.devices.filter(function (d) {
 				return d.gateway._id == _id;
 			});
 			// refactor date constants with format
@@ -73077,8 +73032,6 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 
 	return GatewayDetails;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 330 */
@@ -73254,11 +73207,13 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 /* COMPONENTS */
 var ContentDevices = function ContentDevices(_ref) {
-  var devices = _ref.devices,
-      filterValue = _ref.filterValue,
-      filterFound = _ref.filterFound,
+  var filterValue = _ref.filterValue,
       filterFoundValue = _ref.filterFoundValue,
-      other = _objectWithoutProperties(_ref, ['devices', 'filterValue', 'filterFound', 'filterFoundValue']);
+      filterFound = _ref.filterFound,
+      props = _objectWithoutProperties(_ref, ['filterValue', 'filterFoundValue', 'filterFound']);
+
+  var devices = props.data.devices;
+
 
   return _react2.default.createElement(
     'div',
@@ -73294,7 +73249,7 @@ var ContentDevices = function ContentDevices(_ref) {
           _react2.default.createElement(
             'div',
             { className: 'col-4' },
-            _react2.default.createElement(_list.List, { filterValue: filterValue, filterFound: filterFound, filterFoundValue: filterFoundValue, category: 'devices', content: devices })
+            _react2.default.createElement(_list.List, { filterValue: filterValue, filterFoundValue: filterFoundValue, filterFound: filterFound, category: 'devices', content: devices })
           ),
           _react2.default.createElement(
             'div',
@@ -73304,7 +73259,7 @@ var ContentDevices = function ContentDevices(_ref) {
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_deviceRouter.DeviceRouter, _extends({}, other, { device: devices.find(function (d) {
+                  return _react2.default.createElement(_deviceRouter.DeviceRouter, _extends({}, props, { device: devices.find(function (d) {
                       return d._id == match.params.deviceId;
                     }) }));
                 } })
@@ -73453,7 +73408,7 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
       var _this2 = this;
 
       if (this.props.device) {
-        _axios2.default.get(this.props.device.url).then(function (device) {
+        _axios2.default.get(this.props.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (device) {
           // resolve callback
           _this2.setState({ device: device.data, isLoaded: true });
         }, function (error) {
@@ -73463,7 +73418,7 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
       }
     }
 
-    /* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
+    /* FORCE UPDATE IF WE CHANGE TO ANOTHER DEVICE */
 
   }, {
     key: 'componentWillReceiveProps',
@@ -73472,7 +73427,7 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
 
       if (nextProps.device && (nextProps.device._id != this.props.device._id || nextProps.device.updated_at != this.props.device.updated_at)) {
         // if props actually changed
-        _axios2.default.get(nextProps.device.url).then(function (device) {
+        _axios2.default.get(nextProps.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (device) {
           // resolve callback
           _this3.setState({ device: device.data, isLoaded: true });
         }, function (error) {
@@ -73504,15 +73459,15 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
           null,
           _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId/edit', render: function render(_ref) {
               var match = _ref.match;
-              return _react2.default.createElement(_deviceForm.DeviceForm, _extends({}, _this4.props, { device: _this4.state.device }));
+              return _react2.default.createElement(_deviceForm.DeviceForm, _extends({}, _this4.props, { device: device }));
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId/delete', render: function render(_ref2) {
               var match = _ref2.match;
-              return _react2.default.createElement(_deviceDelete.DeviceDelete, _extends({}, _this4.props, { device: _this4.state.device }));
+              return _react2.default.createElement(_deviceDelete.DeviceDelete, _extends({}, _this4.props, { device: device }));
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId', render: function render(_ref3) {
               var match = _ref3.match;
-              return _react2.default.createElement(_deviceDetails.DeviceDetails, _extends({}, _this4.props, { device: _this4.state.device }));
+              return _react2.default.createElement(_deviceDetails.DeviceDetails, _extends({}, _this4.props, { device: device }));
             } })
         );
       }
@@ -73521,8 +73476,6 @@ var DeviceRouter = exports.DeviceRouter = function (_Component) {
 
   return DeviceRouter;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 334 */
@@ -73559,7 +73512,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* IMPORT COMPONENTS*/
 
@@ -73591,7 +73545,7 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 			    initcode = _props$device.initcode,
 			    found = _props$device.found,
 			    userGroup = _props$device.userGroup;
-			var screens = this.props.screens;
+			var screens = this.props.data.screens;
 			// refactor date constants with format
 
 			var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
@@ -73756,8 +73710,6 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 
 	return DeviceDetails;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 335 */

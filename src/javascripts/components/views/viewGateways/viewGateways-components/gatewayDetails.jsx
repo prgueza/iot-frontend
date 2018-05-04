@@ -1,25 +1,26 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import React, { Component } from 'react'
+const moment = require('moment')
+moment.locale('es')
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 /* IMPORT COMPONENTS*/
-import { Associated } from '../../associated.jsx';
-import { Tag } from '../../../tags/tag.jsx';
+import { Associated } from '../../associated.jsx'
+import { Tag } from '../../../tags/tag.jsx'
 
 /* COMPONENTS */
 export class GatewayDetails extends Component {
 
 	render() {
 		// define constants from props for better readability
-		const { _id, name, description, location, created_at, updated_at, created_by, mac, ip } = this.props.gateway;
-		const devices = this.props.devices.filter((d) => d.gateway._id == _id);
+		const { _id, name, description, location, created_at, updated_at, created_by, mac, ip } = this.props.gateway
+		const devices = this.props.data.devices.filter((d) => d.gateway._id == _id)
 		// refactor date constants with format
-		const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
-		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
+		const created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY")
+		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY")
 		// define routes for edit and delete based on the id
-		const linktoEdit = '/gateways/' + _id + '/edit';
-		const linktoDelete = '/gateways/' + _id + '/delete';
+		const linktoEdit = '/gateways/' + _id + '/edit'
+		const linktoDelete = '/gateways/' + _id + '/delete'
 
 		return(
 		<div className="card detalles">
@@ -60,6 +61,6 @@ export class GatewayDetails extends Component {
 				</div>
 			</div>
 		</div>
-		);
+		)
 	}
-};
+}

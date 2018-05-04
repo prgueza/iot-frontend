@@ -36,15 +36,11 @@ export class ManageUsers extends Component {
   }
 
   componentDidMount(){
-    axios.get('/users')
-      .then(
-        (users) => { // resolve callback
-          this.setState({ isLoaded: true, users: users.data });
-        },
-        (error) => { // reject callback
-          this.setState({ isLoaded: true, error });
-        }
-      )
+    this.setState({ isLoaded: true, users: this.props.data.users });
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({ isLoaded: true, users: nextProps.data.users });
   }
 
   edit = (element_id) => {
@@ -92,39 +88,28 @@ export class ManageUsers extends Component {
       method: method,
       url: this.state.edit ? 'http://localhost:4000/users/' + this.state.element_id : 'http://localhost:4000/users/signup',
       data: form,
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.props.token },
     })
-    .then((res) => { // resolve callback
+    .then((res) => {
       if(res.status == 201 || res.status == 200){
         switch (method) {
           case 'put':
-            this.props.notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('users', res.data.resourceId, 'edit', res.data.resource) // update dataset
+            break
           case 'post':
-            this.props.notify('Usuario creado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Usuario creado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('users', res.data.resourceId, 'add', res.data.resource) // update dataset
+            this.edit(res.data.resourceId)
+            break
           case 'delete':
-            this.props.notify('Usuario eliminado con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Usuario eliminado con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT)
+            this.cancel()
+            this.props.update('users', res.data.resourceId, 'remove', res.data.resource) // update dataset
+            break
           default:
-            console.log('error');
+            console.log('Something went wrong')
         }
-        return axios.get('/users')
-        .then((res) => {
-          this.setState({
-            isLoaded: true,
-            users: res.data,
-            login: '',
-            name: '',
-            email: '',
-            password: '',
-            checkPassword: '',
-            userGroup: '',
-            admin: false,
-            edit: false,
-            element_id: '',
-          })
-        })
       } else {
         return this.setState({
           isLoaded: true,
@@ -140,7 +125,7 @@ export class ManageUsers extends Component {
 
   render(){
     const { users, error, isLoaded } = this.state;
-    const optionsUserGroup = this.props.userGroups.map((u, i) => <option value={u._id} key={i}>{u.name}</option>);
+    const optionsUserGroup = this.props.data.userGroups.map((u, i) => <option value={u._id} key={i}>{u.name}</option>);
 
     if (error) {
       return null // TODO: handle error

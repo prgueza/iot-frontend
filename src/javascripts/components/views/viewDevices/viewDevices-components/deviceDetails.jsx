@@ -1,22 +1,23 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-const moment = require('moment'); moment.locale('es');
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import React, { Component } from 'react'
+const moment = require('moment')
+moment.locale('es')
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 /* IMPORT COMPONENTS*/
-import { Associated } from '../../associated.jsx';
-import { Tag } from '../../../tags/tag.jsx';
-import { Icon } from '../../../icons/icon.jsx';
+import { Associated } from '../../associated.jsx'
+import { Tag } from '../../../tags/tag.jsx'
+import { Icon } from '../../../icons/icon.jsx'
 
 /* COMPONENTS */
 export class DeviceDetails extends Component {
 
 	render() {
 		// define constants from props for better readability
-		const { _id, name, description, updated_at, updated_by, mac, gateway, batt, rssi, screen, initcode, found, userGroup } = this.props.device;
-		const { screens } = this.props;
+		const { _id, name, description, updated_at, updated_by, mac, gateway, batt, rssi, screen, initcode, found, userGroup } = this.props.device
+		const { data: { screens } } = this.props
 		// refactor date constants with format
-		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
+		const updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY")
 		// define routes for edit and delete based on the id
 		var battery_icon = "fa fa-fw fa-battery-empty mr-2"
 		if( batt && batt < 25 ){ battery_icon = "fa fa-fw fa-battery-quarter mr-2" }
@@ -24,13 +25,13 @@ export class DeviceDetails extends Component {
 		else if ( batt && batt < 75){ battery_icon = "fa fa-fw fa-battery-three-quarters mr-2" }
 		else if ( batt ){ battery_icon = "fa fa-fw fa-battery-full mr-2" }
 
-		const screenObj = screens.find((r) => r.screen_code == screen);
-		const screenName = screenObj ? screenObj.name : "No se encuentra la pantalla (código: " + screen + " )";
-		const color = screenObj ? screenObj.color_profile : "No se encuentra la pantalla (código: " + screen + " )";
-		const size = screenObj ? screenObj.size.width + "x" + screenObj.size.height : "No se encuentra la pantalla (código: " + screen + " )";
+		const screenObj = screens.find((r) => r.screen_code == screen)
+		const screenName = screenObj ? screenObj.name : "No se encuentra la pantalla (código: " + screen + " )"
+		const color = screenObj ? screenObj.color_profile : "No se encuentra la pantalla (código: " + screen + " )"
+		const size = screenObj ? screenObj.size.width + "x" + screenObj.size.height : "No se encuentra la pantalla (código: " + screen + " )"
 
-		const linktoEdit = '/devices/' + _id + '/edit';
-		const linktoDelete = '/devices/' + _id + '/delete';
+		const linktoEdit = '/devices/' + _id + '/edit'
+		const linktoDelete = '/devices/' + _id + '/delete'
 
 		return(
 		<div className="card detalles">
@@ -72,6 +73,6 @@ export class DeviceDetails extends Component {
 				</div>
 			</div>
 		</div>
-		);
+		)
 	}
-};
+}

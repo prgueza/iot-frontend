@@ -1,16 +1,19 @@
 /* IMPORT MODULES */
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 /* IMPORT COMPONENTS */
-import { List } from '../../lists/list.jsx';
-import { Title } from '../../tags/title.jsx';
-import { GatewayGeneric } from './viewGateways-components/gatewayGeneric.jsx';
-import { GatewayRouter } from './viewGateways-components/gatewayRouter.jsx';
-import { GatewayForm } from './viewGateways-components/gatewayForm.jsx';
+import { List } from '../../lists/list.jsx'
+import { Title } from '../../tags/title.jsx'
+import { GatewayGeneric } from './viewGateways-components/gatewayGeneric.jsx'
+import { GatewayRouter } from './viewGateways-components/gatewayRouter.jsx'
+import { GatewayForm } from './viewGateways-components/gatewayForm.jsx'
 
 /* COMPONENTS */
-export const ContentGateways = ({ gateways, filterValue, ...other }) => {
+export const ContentGateways = ({ filterValue, ...props }) => {
+
+  const { data: { gateways } } = props
+
   return(
     <div className="overview">
       <div className="row">
@@ -31,9 +34,9 @@ export const ContentGateways = ({ gateways, filterValue, ...other }) => {
             <div className="col-8">
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
-                <Route path="/gateways/add" render={() => <GatewayForm {...other} gateways={gateways}/>}/>
+                <Route path="/gateways/add" render={() => <GatewayForm {...props} gateways={gateways}/>}/>
                 {/* For route /gatewayId we select the gateway based on the id and pass it separately */}
-                <Route path="/gateways/:gatewayId" render={({ match }) => (<GatewayRouter {...other} gateway={gateways.find(g => g._id == match.params.gatewayId)}/>)}/>
+                <Route path="/gateways/:gatewayId" render={({ match }) => (<GatewayRouter {...props} gateway={gateways.find(g => g._id == match.params.gatewayId)}/>)}/>
               </Switch>
               <Route exact path="/gateways" render={() => (<GatewayGeneric/>)}/>
             </div>
@@ -41,5 +44,5 @@ export const ContentGateways = ({ gateways, filterValue, ...other }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

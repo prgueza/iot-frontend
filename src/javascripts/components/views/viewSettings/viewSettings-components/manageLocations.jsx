@@ -1,17 +1,17 @@
 /* IMPORT MODULES */
-import React, { Component } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { Component } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 /* IMPORT COMPONENTS */
-import { Location } from '../../../lists/lists-components/location.jsx';
+import { Location } from '../../../lists/lists-components/location.jsx'
 
 /* COMPONENTS */
 export class ManageLocations extends Component {
 
   constructor(props){
-    super(props);
-    const { user } = this.props;
+    super(props)
+    const { user } = this.props
     this.state = {
       locations: false,
       isLoaded: false,
@@ -21,31 +21,28 @@ export class ManageLocations extends Component {
       // form
       name: '',
       description: ''
-    };
+    }
   }
 
   // Handle changes
   handleInputChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    this.setState({[name]:value});
+    const target = event.target
+    const name = target.name
+    const value = target.value
+    this.setState({[name]:value})
   }
 
   componentDidMount(){
-    axios.get('/locations')
-      .then(
-        (locations) => { // resolve callback
-          this.setState({ isLoaded: true, locations: locations.data });
-        },
-        (error) => { // reject callback
-          this.setState({ isLoaded: true, error });
-        }
-      )
+    this.setState({ isLoaded: true, locations: this.props.data.locations })
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({ isLoaded: true, locations: nextProps.data.locations })
+  }
+
+
   edit = (element_id) => {
-    const location = this.state.locations.find(l => l._id == element_id);
+    const location = this.state.locations.find(l => l._id == element_id)
     this.setState({
       name: location.name,
       description: location.description,
@@ -66,41 +63,35 @@ export class ManageLocations extends Component {
   /* HANDLE SUBMIT */
   handleSubmit = (method) => {
     // FORM DATA
-    const form = { 'name': this.state.name };
+    const form = { 'name': this.state.name }
     if(this.state.description != ''){ form.description = this.state.description }
     // HTTP request
     axios({
       method: method,
       url: this.state.edit ? 'http://localhost:4000/locations/' + this.state.element_id : 'http://localhost:4000/locations',
       data: form,
-      headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+      headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization' : 'Bearer ' + this.props.token },
     })
     .then((res) => {
       if(res.status == 201 || res.status == 200){
         switch (method) {
           case 'put':
-            this.props.notify('Localización modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Localización modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('locations', res.data.resourceId, 'edit', res.data.resource) // update dataset
+            break
           case 'post':
-            this.props.notify('Localización creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Localización creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT)
+            this.props.update('locations', res.data.resourceId, 'add', res.data.resource) // update dataset
+            this.edit(res.data.resource._id)
+            break
           case 'delete':
-            this.props.notify('Localización eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT);
-            break;
+            this.props.notify('Localización eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT)
+            this.cancel()
+            this.props.update('locations', res.data.resourceId, 'remove', res.data.resource) // update dataset
+            break
           default:
-            console.log('error');
+            console.log('Something went wrong')
         }
-        return axios.get('/locations')
-        .then((res) => {
-          this.setState({
-            isLoaded: true,
-            locations: res.data,
-            name: '',
-            description: '',
-            element_id: '',
-            edit: false
-          })
-        })
       } else {
         return this.setState({
           isLoaded: true,
@@ -109,13 +100,13 @@ export class ManageLocations extends Component {
       }
     })
     .catch((err) => {
-      console.log(err);
-      return this.props.notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT);
-    });
+      console.log(err)
+      return this.props.notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT)
+    })
   }
 
   render(){
-    const { locations, error, isLoaded } = this.state;
+    const { locations, error, isLoaded } = this.state
 
     if (error) {
       return null // TODO: handle error
@@ -128,7 +119,7 @@ export class ManageLocations extends Component {
         } else {
           return <Location location={location} key={location._id} edit={this.edit} active={false}/>
         }
-      });
+      })
       list.push(
         <div key="0" className="list-group-item-action list-group-item flex-column align-items-start">
           <div className="text-center elemento">
@@ -137,7 +128,7 @@ export class ManageLocations extends Component {
             <small>Número de localizaciones: {locations.length}</small>
           </div>
         </div>
-      );
+      )
 
       return(
         <div className="card settings">
@@ -188,7 +179,7 @@ export class ManageLocations extends Component {
             </div>
           </div>
         </div>
-      );
+      )
     }
   }
-};
+}

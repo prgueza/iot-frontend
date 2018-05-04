@@ -53,7 +53,7 @@ export class Main extends Component {
     this.sync_api(token);
     // check syncronization
     this.check_sync_id = setInterval(() => {
-      if(this.state.last_synced && moment().diff(this.state.last_synced, 'seconds') > 20){
+      if(this.state.last_synced && moment().diff(this.state.last_synced, 'seconds') > 20 && this.state.sync_status != 1){
         this.setState({ sync_status: 0 }) //unsynced
       }
     }, 1000)
@@ -70,18 +70,17 @@ export class Main extends Component {
       case 'remove':
         var index = stateData[resource].findIndex((r) => r._id == _id)
           stateData[resource].splice(index, 1)
-          stateData['devices'] = devices
+          devices && (stateData['devices'] = devices)
         break
       case 'add':
           stateData[resource].push(data)
-          stateData['devices'] = devices
+          devices && (stateData['devices'] = devices)
         break
       case 'edit':
         var index = stateData[resource].findIndex((r) => r._id == _id)
           stateData[resource].splice(index, 1, data)
-          stateData['devices'] = devices
+          devices && (stateData['devices'] = devices)
         break
-      default:
     }
     this.setState({data: stateData});
   }
