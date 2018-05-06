@@ -6,12 +6,15 @@ import moment from 'moment';
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 import axios from 'axios';
+
 /* CONFIGURE AXIOS */
 axios.defaults.baseURL = process.env.API_URL;
+
 /* IMPORT COMPONENTS */
 import { Navigation } from './views/navigation.jsx';
 import { Content } from './views/content.jsx';
 import { Notification } from './tags/notification.jsx';
+
 /* COMPONENT */
 export class Main extends Component {
   constructor( props ) {
@@ -37,6 +40,7 @@ export class Main extends Component {
       redirect: false
     }
   }
+
   /* COMPONENT MOUNT */
   componentDidMount() {
     // get user id and token
@@ -53,9 +57,11 @@ export class Main extends Component {
       }
     }, 1000 )
   }
+
   componentWillUnmount() {
     clearInterval( this.check_sync_id )
   }
+
   /* UPDATE DATA */
   update = ( resource, _id, action, data, devices ) => {
     const stateData = this.state.data
@@ -74,6 +80,7 @@ export class Main extends Component {
     }
     this.setState( { data: stateData } );
   }
+
   /* SYNC DATA */
   sync_api = ( token ) => {
     this.setState( { sync_status: 3, last_synced: moment() } ); //syncing
@@ -93,6 +100,7 @@ export class Main extends Component {
         this.setState( { syncing: false, sync_status: 0 } ) //unsynced
       } )
   }
+
   sync = () => {
     const devices = this.state.synced_devices;
     const data = this.state.data;
@@ -100,10 +108,12 @@ export class Main extends Component {
     this.update_sync( 'Datos sincronizados', 'notify-success', 'check', true );
     this.setState( { data, sync_status: 2 } ); //synced
   }
+
   /* HANDLE SEARCH */
   filterData = ( value ) => {
     this.setState( { filterValue: value } );
   }
+
   filterFound = () => {
     // get value from the checkbox
     console.log( 'called' );
@@ -112,6 +122,7 @@ export class Main extends Component {
       filterFoundValue: !filterFoundValue
     } );
   }
+
   /* ALERTS */
   notify = ( text, style, icon, position ) => {
     toast( <Notification text={text} icon={icon}/>, {
@@ -119,6 +130,7 @@ export class Main extends Component {
       className: style
     } );
   }
+
   notify_sync = ( text, style, icon ) => {
     this.toast_sync_id = toast( <Notification text={text} icon={icon} spin={true}/>, {
       position: toast.POSITION.TOP_CENTER,
@@ -126,6 +138,7 @@ export class Main extends Component {
       className: style
     } );
   }
+
   update_sync = ( text, style, icon, autoClose ) => {
     toast.update( this.toast_sync_id, {
       render: <Notification text={text} icon={icon}/>,
@@ -137,9 +150,11 @@ export class Main extends Component {
       }
     } )
   }
+
   dismiss = () => {
     this.toast_sync_id && toast.dismiss( this.toast_sync_id )
   }
+
   /* RENDER COMPONENT */
   render() {
     return ( <div className="row main">

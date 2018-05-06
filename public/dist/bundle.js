@@ -61150,27 +61150,6 @@ var Main = exports.Main = function (_Component) {
       _this.setState({ data: stateData });
     };
 
-    _this.sync_device_image = function (image_id, device_id, display_id) {
-      var url = "http://localhost:4000/" + 'update/' + device_id; // set url for the request
-      var body = { // set body containing the image to be uploaded to the device
-        image_id: image_id
-      };
-      _axios2.default.put(url, body, { // send request
-        timeout: 10000,
-        headers: {
-          Authorization: 'Bearer ' + _this.state.token
-        }
-      }).then(function (res) {
-        if (res.status == 201) {
-          // with success
-          _this.update('devices', res.data.resourceId, 'edit', res.data.resource); // update the device info with new active_image
-          _this.notify('Imagen sincronizada con éxito', 'notify-success', 'check', _reactToastify.toast.POSITION.BOTTOM_LEFT); // notify success
-        } else {
-          _this.notify('Error al sincronizar la imagen', 'notify-error', 'times', _reactToastify.toast.POSITION.BOTTOM_LEFT); // notify error
-        }
-      });
-    };
-
     _this.sync_api = function (token) {
       _this.setState({ sync_status: 3, last_synced: (0, _moment2.default)() }); //syncing
       _this.notify_sync('Buscando dispositivos...', 'notify-success', 'refresh');
@@ -61294,8 +61273,6 @@ var Main = exports.Main = function (_Component) {
       clearInterval(this.check_sync_id);
     }
     /* UPDATE DATA */
-
-    /* UPDATE DEVICE IMAGE */
 
     /* SYNC DATA */
 
@@ -67367,8 +67344,6 @@ var DisplayRouter = exports.DisplayRouter = function (_Component) {
     value: function componentWillReceiveProps(nextProps) {
       var _this3 = this;
 
-      console.log(nextProps.display);
-      console.log(nextProps.data.devices != this.props.data.devices);
       if (nextProps.display && (nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at)) {
         // if props actually changed
         _axios2.default.get(nextProps.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
@@ -67450,6 +67425,8 @@ var _associated = __webpack_require__(23);
 
 var _tag = __webpack_require__(24);
 
+var _icon = __webpack_require__(13);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -67472,11 +67449,17 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (DisplayDetails.__proto__ || Object.getPrototypeOf(DisplayDetails)).call(this, props));
 
-    _this.sync = function () {
-      //this.props.sync_device_image( this.state.active_image, this.state.display.device._id )
-      var url = "http://localhost:4000/" + 'update/' + _this.state.display.device._id; // set url for the request
+    _this.sync = function () {};
+
+    _this.handleInputChange = function (event) {
+      var value = event.target.value;
+      var image = _this.props.data.images.find(function (i) {
+        return value == i._id;
+      });
+      _this.setState({ syncing: true, syncing_to: image._id });
+      var url = "http://localhost:4000/" + 'update/' + _this.state.display._id; // set url for the request
       var body = { // set body containing the image to be uploaded to the device
-        image_id: _this.state.active_image
+        image_id: image._id
       };
       _axios2.default.put(url, body, { // send request
         timeout: 10000,
@@ -67486,51 +67469,24 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
       }).then(function (res) {
         if (res.status == 201) {
           // with success
-          _this.props.update('devices', res.data.resourceId, 'edit', res.data.resource); // update the device info with new active_image
+          _this.props.update('displays', res.data.resourceId, 'edit', res.data.resource); // update the device info with new active_image
           _this.props.notify('Imagen sincronizada con éxito', 'notify-success', 'check', _reactToastify.toast.POSITION.BOTTOM_LEFT); // notify success
-          _this.setState({ device_synced: true });
         } else {
           _this.props.notify('Error al sincronizar la imagen', 'notify-error', 'times', _reactToastify.toast.POSITION.BOTTOM_LEFT); // notify error
-        }
-      });
-    };
-
-    _this.handleInputChange = function (event) {
-      var value = event.target.value;
-      var image = _this.props.data.images.find(function (i) {
-        return value == i._id;
-      });
-      var form = {
-        active_image: image ? image._id : null
-      };
-      (0, _axios2.default)({
-        method: 'put',
-        url: "http://localhost:4000/" + 'displays/' + _this.state.display._id,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + _this.props.token
-        },
-        data: form
-      }).then(function (res) {
-        if (res.status >= 200 && res.status < 300) {
-          _this.props.notify('Imagen cambiada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          _this.props.update('displays', res.data.resourceId, 'edit', res.data.resource); // update dataset
-        } else {
-          _this.props.notify('Error al cambiar la imagen', 'notify-error', 'times', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          _this.setState({ error: res.data }); // set error
+          _this.setState({ syncing: false, syncing_to: '' });
         }
       }).catch(function (err) {
-        _this.props.notify('Error al cambiar la imagen', 'notify-error', 'times', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        console.log('Something went wrong');
+        _this.props.notify('Error al sincronizar la imagen', 'notify-error', 'times', _reactToastify.toast.POSITION.BOTTOM_LEFT); // notify error
+        _this.setState({ syncing: false, syncing_to: '' });
       });
     };
 
     _this.state = {
       // form data stored in state
       display: _this.props.display,
-      device_synced: false,
       active_image: '',
+      syncing: false,
+      syncing_to: '',
       error: null
     };
     return _this;
@@ -67539,29 +67495,23 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
   _createClass(DisplayDetails, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _props$display = this.props.display,
-          active_image = _props$display.active_image,
-          device = _props$display.device;
+      var active_image = this.props.display.active_image;
 
-      var device_synced = !active_image || active_image._id == device.active_image;
       this.setState({
-        active_image: active_image ? active_image._id : '',
-        device_synced: device_synced
+        active_image: active_image ? active_image._id : ''
       });
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (nextProps != this.props) {
-        var _nextProps$display = nextProps.display,
-            active_image = _nextProps$display.active_image,
-            device = _nextProps$display.device;
+        var active_image = nextProps.display.active_image;
 
-        var device_synced = !active_image || active_image._id == device.active_image;
         this.setState({
           display: nextProps.display,
           active_image: active_image ? active_image._id : '',
-          device_synced: device_synced
+          syncing: false,
+          syncing_to: ''
         });
       }
     }
@@ -67584,7 +67534,7 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
           updated_by = _state$display.updated_by;
       // refactor date constants with format
 
-      var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
+      var updated = moment(updated_at).format('dddd, D [de] MMMM [de] YYYY');
       // generate tag list
       var tag_list = tags.map(function (tag, i) {
         return _react2.default.createElement(_tag.Tag, { key: i, category: 'displays', tag: tag });
@@ -67711,7 +67661,12 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'vista-previa' },
-                _react2.default.createElement(
+                this.state.syncing ? _react2.default.createElement(
+                  'p',
+                  { className: 'titulo text-right' },
+                  _react2.default.createElement('i', { className: 'fa fa-fw fa-refresh fa-spin mr-2', 'aria-hidden': 'true' }),
+                  'SINCRONIZANDO IMAGEN'
+                ) : _react2.default.createElement(
                   'p',
                   { className: 'titulo text-right' },
                   'IMAGEN ACTIVA'
@@ -67734,16 +67689,20 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
                     )
                   )
                 ),
-                !this.state.device_synced ? _react2.default.createElement(
-                  'button',
-                  { onClick: this.sync, type: 'submit', className: 'btn btn-block btn-outline-primary mb-3' },
-                  'Sincronizar imagen en dispositivo'
+                this.state.syncing ? _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'select',
+                    { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.syncing_to, disabled: true },
+                    _react2.default.createElement(
+                      'option',
+                      { value: '', key: 0 },
+                      'Sin imagen activa'
+                    ),
+                    imagesOptions
+                  )
                 ) : _react2.default.createElement(
-                  'button',
-                  { type: 'submit', className: 'btn btn-block btn-outline-primary mb-3', disabled: true },
-                  'Imagen sincronizada'
-                ),
-                _react2.default.createElement(
                   'select',
                   { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
                   _react2.default.createElement(
