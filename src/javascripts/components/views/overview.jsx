@@ -5,9 +5,9 @@ import React from 'react'
 import { Panel } from '../lists/panel.jsx'
 
 /* COMPONENT */
-export const Overview = ({ data: { displays, images, groups, devices, gateways }, user, ...rest }) => {
-  return(
-    <div className="overview">
+export const Overview = ( { data: { displays, images, groups, devices, gateways }, user, ...rest } ) => {
+	return (
+		<div className="overview">
       <div className="row">
         <div className="col">
           <div className="mb-4 text-right">
@@ -30,5 +30,5 @@ export const Overview = ({ data: { displays, images, groups, devices, gateways }
         </div>
       }
     </div>
-  )
+	)
 }

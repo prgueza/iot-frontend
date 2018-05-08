@@ -10,45 +10,42 @@ import { Login } from './components/login/login.jsx'
 /* COMPONENTS */
 class App extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      // user data
-      user: null,
-      token: null,
-      data: null,
-      // login flag
-      isLoggedIn: false,
-      // eror handling
-      error: null
-    }
-  }
+	constructor( props ) {
+		super( props )
+		this.state = {
+			user: null,
+			token: null,
+			data: null,
+			isLoggedIn: false,
+			error: null
+		}
+	}
 
-  login = (user, token, data) => {
-    this.setState({ isLoggedIn: true, user, token, data })
-  }
+	login = ( user, token, data ) => {
+		this.setState( { isLoggedIn: true, user, token, data } )
+	}
 
-  logout = () => {
-    this.setState({ isLoggedIn: false, user: null, token: null, data: null })
-  }
+	logout = () => {
+		this.setState( { isLoggedIn: false, user: null, token: null, data: null } )
+	}
 
-  render(){
-    // get state
-    const { isLoggedIn, error } = this.state
-    // return for rendering
-    if (error) {
-      // TODO: error handling
-      return null;
-    } else if (!isLoggedIn) {
-      return ( <Login login={this.login}/> )
-    } else {
-      return (
-        <Router basename="/">
+	render() {
+		// get state
+		const { isLoggedIn, error } = this.state
+		// return for rendering
+		if ( error ) {
+			// TODO: error handling
+			return null
+		} else if ( !isLoggedIn ) {
+			return <Login login={this.login}/>
+		} else {
+			return (
+				<Router basename='/'>
           <Main logout={this.logout} {...this.state}/>
         </Router>
-      )
-    }
-  }
+			)
+		}
+	}
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render( <App/>, document.getElementById( 'root' ) )

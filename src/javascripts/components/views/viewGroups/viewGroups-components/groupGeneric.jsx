@@ -1,13 +1,13 @@
 /* IMPORT MODULES */
-import React from 'react';
+import React from 'react'
 
 /* IMPORT COMPONENTS */
-import { AddButton } from '../../../buttons/addButton.jsx';
+import { AddButton } from '../../../buttons/addButton.jsx'
 
 /* COMPONENTS */
 export const GroupGeneric = () => {
-  return(
-  <div className="card detalles">
+	return (
+		<div className="card detalles">
     <div className="card-header">
       <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
         <li className="nav-item mr-auto">
@@ -24,5 +24,5 @@ export const GroupGeneric = () => {
       </div>
     </div>
   </div>
-  );
-};
+	)
+}

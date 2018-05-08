@@ -1,103 +1,109 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react'
-const moment = require( 'moment' );
+const moment = require( 'moment' )
 moment.locale( 'es' )
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+
 /* IMPORT COMPONENTS */
 import { Associated } from '../../associated.jsx'
 import { Tag } from '../../../tags/tag.jsx'
 import { Icon } from '../../../icons/icon.jsx'
+
 /* COMPONENT */
 export class DisplayDetails extends Component {
-  constructor( props ) {
-    super( props )
-    this.state = {
-      // form data stored in state
-      display: this.props.display,
-      active_image: '',
-      syncing: false,
-      syncing_to: '',
-      error: null
-    }
-  }
-  componentDidMount() {
-    const { active_image } = this.props.display
-    this.setState( {
-      active_image: active_image ? active_image._id : '',
-    } )
-  }
-  componentWillReceiveProps( nextProps ) {
-    if ( nextProps != this.props ) {
-      const { active_image } = nextProps.display
-      this.setState( {
-        display: nextProps.display,
-        active_image: active_image ? active_image._id : '',
-        syncing: false,
-        syncing_to: ''
-      } )
-    }
-  }
-  sync = () => {}
-  /* HANDLE INPUT CHANGE */
-  handleInputChange = ( event ) => {
-    const value = event.target.value
-    const image = this.props.data.images.find( ( i ) => value == i._id )
-    this.setState( { syncing: true, syncing_to: image._id } )
-    const url = process.env.API_URL + 'update/' + this.state.display._id // set url for the request
-    const body = { // set body containing the image to be uploaded to the device
-      image_id: image._id
-    }
-    axios.put( url, body, { // send request
-        timeout: process.env.TIMEOUT,
-        headers: {
-          Authorization: 'Bearer ' + this.props.token
-        }
-      } )
-      .then( res => {
-        if ( res.status == 201 ) { // with success
-          this.props.update( 'displays', res.data.resourceId, 'edit', res.data.resource ) // update the device info with new active_image
-          this.props.notify( 'Imagen sincronizada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT ) // notify success
-        } else {
-          this.props.notify( 'Error al sincronizar la imagen', 'notify-error', 'times', toast.POSITION.BOTTOM_LEFT ) // notify error
-          this.setState( { syncing: false, syncing_to: '' } )
-        }
-      } )
-      .catch( err => {
-        this.props.notify( 'Error al sincronizar la imagen', 'notify-error', 'times', toast.POSITION.BOTTOM_LEFT ) // notify error
-        this.setState( { syncing: false, syncing_to: '' } )
-      } )
-  }
-  render() {
-    // define constants from state for better readability
-    const {
-      _id,
-      name,
-      description,
-      groups,
-      images,
-      active_image,
-      device,
-      tags,
-      updated_at,
-      updated_by
-    } = this.state.display
-    // refactor date constants with format
-    const updated = moment( updated_at )
-      .format( 'dddd, D [de] MMMM [de] YYYY' )
-    // generate tag list
-    const tag_list = tags.map( ( tag, i ) => <Tag key={i} category='displays' tag={tag}/> )
-    // define routes for edit and delete based on the id
-    const linktoEdit = '/displays/' + _id + '/edit'
-    const linktoDelete = '/displays/' + _id + '/delete'
-    // check if active_image is set and if not set the undefined img
-    const src = active_image && active_image.src_url
-    const imagesOptions = images.map( ( i ) => <option value={i._id} key={i._id}>{i.name}</option> )
-    // get screen info
-    const screen = this.props.data.screens.find(
-      ( s ) => s.screen_code == device.screen )
-    return ( <div className='card detalles'>
+
+	constructor( props ) {
+		super( props )
+		this.state = {
+			display: this.props.display,
+			active_image: '',
+			syncing: false,
+			syncing_to: '',
+			error: null
+		}
+	}
+
+	componentDidMount() {
+		const { active_image } = this.props.display
+		this.setState( {
+			active_image: active_image ? active_image._id : '',
+		} )
+	}
+
+	componentWillReceiveProps( nextProps ) {
+		if ( nextProps != this.props ) {
+			const { active_image } = nextProps.display
+			this.setState( {
+				display: nextProps.display,
+				active_image: active_image ? active_image._id : '',
+				syncing: false,
+				syncing_to: ''
+			} )
+		}
+	}
+	sync = () => {}
+
+	/* HANDLE INPUT CHANGE */
+	handleInputChange = ( event ) => {
+		const value = event.target.value
+		const image = this.props.data.images.find( image => value == image._id )
+		this.setState( { syncing: true, syncing_to: image._id } )
+		const url = process.env.API_URL + 'update/' + this.state.display._id // set url for the request
+		const body = { // set body containing the image to be uploaded to the device
+			image_id: image._id
+		}
+		axios.put( url, body, { // send request
+				timeout: process.env.TIMEOUT,
+				headers: {
+					Authorization: 'Bearer ' + this.props.token
+				}
+			} )
+			.then( res => {
+				if ( res.status == 201 ) { // with success
+					this.props.update( 'displays', res.data.resourceId, 'edit', res.data.resource ) // update the device info with new active_image
+					this.props.notify( 'Imagen sincronizada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT ) // notify success
+				} else {
+					this.props.notify( 'Error al sincronizar la imagen', 'notify-error', 'times', toast.POSITION.BOTTOM_LEFT ) // notify error
+					this.setState( { syncing: false, syncing_to: '' } )
+				}
+			} )
+			.catch( err => {
+				this.props.notify( 'Error al sincronizar la imagen', 'notify-error', 'times', toast.POSITION.BOTTOM_LEFT ) // notify error
+				this.setState( { syncing: false, syncing_to: '' } )
+			} )
+	}
+
+	render() {
+		// define constants from state for better readability
+		const {
+			_id,
+			name,
+			description,
+			groups,
+			images,
+			active_image,
+			device,
+			tags,
+			updated_at,
+			updated_by
+		} = this.state.display
+		// refactor date constants with format
+		const updated = moment( updated_at )
+			.format( 'dddd, D [de] MMMM [de] YYYY' )
+		// generate tag list
+		const tag_list = tags.map( ( tag, index ) => <Tag key={index} category='displays' tag={tag}/> )
+		// define routes for edit and delete based on the id
+		const linktoEdit = '/displays/' + _id + '/edit'
+		const linktoDelete = '/displays/' + _id + '/delete'
+		// check if active_image is set and if not set the undefined img
+		const src = active_image && active_image.src_url
+		const imagesOptions = images.map( image => <option value={image._id} key={image._id}>{image.name}</option> )
+		// get screen info
+		const screen = this.props.data.screens.find( screen => screen.screen_code == device.screen )
+
+		return ( <div className='card detalles'>
       <div className='card-header'>
         <ul className='nav nav-pills card-header-pills justify-content-end mx-1'>
           <li className='nav-item mr-auto'>
@@ -200,5 +206,5 @@ export class DisplayDetails extends Component {
         </div>
       </div>
     </div> )
-  }
+	}
 }

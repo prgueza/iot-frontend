@@ -5320,6 +5320,49 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.Icon = undefined;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var cx = __webpack_require__(7);
+
+/* COMPONENT */
+/* IMPORT MODULES */
+var Icon = exports.Icon = function Icon(_ref) {
+	var icon = _ref.icon,
+	    mr = _ref.mr,
+	    ml = _ref.ml,
+	    fw = _ref.fw,
+	    size = _ref.size,
+	    batt = _ref.batt,
+	    spin = _ref.spin;
+
+	var iconName = 'fa-' + icon;
+	if (batt >= 0) iconName = iconName + '-' + Math.ceil(batt / 25);
+	var iconSpin = spin ? 'fa-spin' : '';
+	var iconSize = size ? 'fa-' + size + 'x' : '';
+	var marginLeft = ml ? 'ml-' + ml : '';
+	var marginRight = mr ? 'mr-' + mr : '';
+	var fullWidth = fw ? 'fa-fw' : '';
+	var className = cx('fa fa-fw', iconName, iconSize, marginLeft, marginRight, fullWidth, iconSpin);
+
+	return _react2.default.createElement('i', { className: className, 'aria-hidden': 'true' });
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Title = undefined;
@@ -5328,7 +5371,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _icon = __webpack_require__(13);
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5370,7 +5413,7 @@ var Title = exports.Title = function Title(_ref) {
 /* IMPORT COMPONENTS */
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5412,46 +5455,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Icon = undefined;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var cx = __webpack_require__(7); // Importacion de librerias
-var Icon = exports.Icon = function Icon(_ref) {
-  var icon = _ref.icon,
-      mr = _ref.mr,
-      ml = _ref.ml,
-      fw = _ref.fw,
-      size = _ref.size,
-      batt = _ref.batt,
-      spin = _ref.spin;
-
-  var iconName = "fa-" + icon;
-  if (batt >= 0) iconName = iconName + "-" + Math.ceil(batt / 25);
-  var iconSpin = spin ? "fa-spin" : '';
-  var iconSize = size ? "fa-" + size + "x" : '';
-  var marginLeft = ml ? "ml-" + ml : '';
-  var marginRight = mr ? "mr-" + mr : '';
-  var fullWidth = fw ? "fa-fw" : '';
-  var className = cx("fa fa-fw", iconName, iconSize, marginLeft, marginRight, fullWidth, iconSpin);
-
-  return _react2.default.createElement('i', { className: className, 'aria-hidden': 'true' });
-};
-
-/***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5459,7 +5462,7 @@ var Icon = exports.Icon = function Icon(_ref) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.AddButton = undefined;
 
@@ -5471,31 +5474,32 @@ var _reactRouterDom = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Importacion de librerias
+/* IMPORT MODULES */
 var cx = __webpack_require__(7);
 
+/* COMPONENT */
 var AddButton = exports.AddButton = function AddButton(_ref) {
-  var category = _ref.category;
+	var category = _ref.category;
 
-  var claseBoton = cx("btn btn-block btn-small", { "btn-outline-success": category === 'displays' }, { "btn-outline-info": category === 'images' }, { "btn-outline-warning": category === 'groups' }, { "btn-outline-primary": category === 'devices' }, { "btn-outline-primary": category === 'gateways' });
-  var location = {
-    pathname: '/' + category + '/add'
-  };
-  return _react2.default.createElement(
-    _reactRouterDom.Link,
-    { to: location },
-    category != "displays" ? _react2.default.createElement(
-      'button',
-      { type: 'button', className: claseBoton },
-      _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-      'A\xF1adir'
-    ) : _react2.default.createElement(
-      'button',
-      { type: 'button', className: claseBoton },
-      _react2.default.createElement('i', { className: 'fa fa-wrench mr-1', 'aria-hidden': 'true' }),
-      'Configurar'
-    )
-  );
+	var claseBoton = cx('btn btn-block btn-small', { 'btn-outline-success': category === 'displays' }, { 'btn-outline-info': category === 'images' }, { 'btn-outline-warning': category === 'groups' }, { 'btn-outline-primary': category === 'devices' }, { 'btn-outline-primary': category === 'gateways' });
+	var location = {
+		pathname: '/' + category + '/add'
+	};
+	return _react2.default.createElement(
+		_reactRouterDom.Link,
+		{ to: location },
+		category != 'displays' ? _react2.default.createElement(
+			'button',
+			{ type: 'button', className: claseBoton },
+			_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+			'A\xF1adir'
+		) : _react2.default.createElement(
+			'button',
+			{ type: 'button', className: claseBoton },
+			_react2.default.createElement('i', { className: 'fa fa-wrench mr-1', 'aria-hidden': 'true' }),
+			'Configurar'
+		)
+	);
 };
 
 /***/ }),
@@ -5513,7 +5517,7 @@ var AddButton = exports.AddButton = function AddButton(_ref) {
 
 
 
-var emptyFunction = __webpack_require__(12);
+var emptyFunction = __webpack_require__(13);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -6592,7 +6596,7 @@ function attribsFor() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.List = undefined;
 
@@ -6628,125 +6632,125 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENT */
 var List = exports.List = function (_Component) {
-  _inherits(List, _Component);
+	_inherits(List, _Component);
 
-  function List() {
-    var _ref;
+	function List() {
+		var _ref;
 
-    var _temp, _this, _ret;
+		var _temp, _this, _ret;
 
-    _classCallCheck(this, List);
+		_classCallCheck(this, List);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = List.__proto__ || Object.getPrototypeOf(List)).call.apply(_ref, [this].concat(args))), _this), _this.filter = function (data, filterValue) {
-      var filteredData = data.filter(function (element) {
-        var a = element.name && element.name.indexOf(filterValue) > -1;
-        var b = element.description && element.description.indexOf(filterValue) > -1;
-        var c = element.category && element.category.indexOf(filterValue) > -1;
-        var d = element.screen && element.screen.indexOf(filterValue) > -1;
-        var e = element.location && element.location.name.indexOf(filterValue) > -1;
-        var f = element.mac && element.mac.indexOf(filterValue) > -1;
-        return a || b || c || d || e || f;
-      });
-      return filteredData;
-    }, _this.handleFilter = function () {
-      _this.props.filterFound();
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = List.__proto__ || Object.getPrototypeOf(List)).call.apply(_ref, [this].concat(args))), _this), _this.filterSearch = function (data, filterValue) {
+			var filteredData = data.filter(function (element) {
+				var a = element.name && element.name.indexOf(filterValue) > -1;
+				var b = element.description && element.description.indexOf(filterValue) > -1;
+				var c = element.category && element.category.indexOf(filterValue) > -1;
+				var d = element.screen && element.screen.indexOf(filterValue) > -1;
+				var e = element.location && element.location.name.indexOf(filterValue) > -1;
+				var f = element.mac && element.mac.indexOf(filterValue) > -1;
+				return a || b || c || d || e || f;
+			});
+			return filteredData;
+		}, _this.handleFilter = function () {
+			_this.props.filterFound();
+		}, _temp), _possibleConstructorReturn(_this, _ret);
+	}
 
-  _createClass(List, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          category = _props.category,
-          filterValue = _props.filterValue,
-          filterFoundValue = _props.filterFoundValue;
+	_createClass(List, [{
+		key: 'render',
+		value: function render() {
+			var _props = this.props,
+			    category = _props.category,
+			    filterValue = _props.filterValue,
+			    filterFoundValue = _props.filterFoundValue;
+			var content = this.props.content;
 
-      var content = this.props.content;
-      if (category == 'devices') content = this.props.content.filter(function (c) {
-        return !filterFoundValue || c.found;
-      });
-      content = this.filter(content, filterValue).sort(function (a, b) {
-        return b.found - a.found;
-      });
-      if (category === "displays") {
-        var elementos = content.map(function (elemento) {
-          return _react2.default.createElement(_display.Display, { display: elemento, key: elemento._id });
-        });
-        var elementName = "displays";
-      } else if (category === "images") {
-        var elementos = content.map(function (elemento) {
-          return _react2.default.createElement(_image.Image, { image: elemento, key: elemento._id });
-        });
-        var elementName = "imágenes";
-      } else if (category === "groups") {
-        var elementos = content.map(function (elemento) {
-          return _react2.default.createElement(_group.Group, { group: elemento, key: elemento._id });
-        });
-        var elementName = "grupos";
-      } else if (category === "devices") {
-        var elementos = content.map(function (elemento) {
-          return _react2.default.createElement(_device.Device, { device: elemento, key: elemento._id });
-        });
-        var elementName = "dispositivos";
-      } else if (category === "gateways") {
-        var elementos = content.map(function (elemento) {
-          return _react2.default.createElement(_gateway.Gateway, { gateway: elemento, key: elemento._id });
-        });
-        var elementName = "puertas de enlace";
-      }
-      return _react2.default.createElement(
-        'div',
-        { className: 'list' },
-        _react2.default.createElement(
-          'div',
-          { className: 'list-group mb-3' },
-          elementos,
-          _react2.default.createElement(
-            'div',
-            { className: 'list-group-item-action list-group-item flex-column align-items-start' },
-            _react2.default.createElement(
-              'div',
-              { className: 'text-center elemento' },
-              _react2.default.createElement(
-                'h4',
-                { className: 'mb-1' },
-                'No se han encontrado ',
-                content.length > 0 && 'más',
-                ' ',
-                elementName
-              ),
-              _react2.default.createElement('hr', { className: 'element-division' }),
-              _react2.default.createElement(
-                'small',
-                null,
-                'N\xFAmero de ',
-                elementName,
-                ': ',
-                content.length
-              )
-            )
-          )
-        ),
-        category != "devices" ? _react2.default.createElement(_addButton.AddButton, { category: category }) : _react2.default.createElement(
-          'label',
-          { className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: this.handleFilter, type: 'checkbox', defaultChecked: this.props.filterFoundValue, value: this.props.filterFoundValue, name: 'found', className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            ' Mostrar \xFAnicamente dispositivos localizados'
-          )
-        )
-      );
-    }
-  }]);
+			if (category == 'devices') content = this.props.content.filter(function (element) {
+				return !filterFoundValue || element.found;
+			});
+			content = this.filterSearch(content, filterValue).sort(function (a, b) {
+				return b.found - a.found;
+			});
+			if (category === 'displays') {
+				var elements = content.map(function (element) {
+					return _react2.default.createElement(_display.Display, { display: element, key: element._id });
+				});
+				var elementName = 'displays';
+			} else if (category === 'images') {
+				var elements = content.map(function (element) {
+					return _react2.default.createElement(_image.Image, { image: element, key: element._id });
+				});
+				var elementName = 'imágenes';
+			} else if (category === 'groups') {
+				var elements = content.map(function (element) {
+					return _react2.default.createElement(_group.Group, { group: element, key: element._id });
+				});
+				var elementName = 'grupos';
+			} else if (category === 'devices') {
+				var elements = content.map(function (element) {
+					return _react2.default.createElement(_device.Device, { device: element, key: element._id });
+				});
+				var elementName = 'dispositivos';
+			} else if (category === 'gateways') {
+				var elements = content.map(function (element) {
+					return _react2.default.createElement(_gateway.Gateway, { gateway: element, key: element._id });
+				});
+				var elementName = 'puertas de enlace';
+			}
+			return _react2.default.createElement(
+				'div',
+				{ className: 'list' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'list-group mb-3' },
+					elements,
+					_react2.default.createElement(
+						'div',
+						{ className: 'list-group-item-action list-group-item flex-column align-items-start' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'text-center elemento' },
+							_react2.default.createElement(
+								'h4',
+								{ className: 'mb-1' },
+								'No se han encontrado ',
+								content.length > 0 && 'más',
+								' ',
+								elementName
+							),
+							_react2.default.createElement('hr', { className: 'element-division' }),
+							_react2.default.createElement(
+								'small',
+								null,
+								'N\xFAmero de ',
+								elementName,
+								': ',
+								content.length
+							)
+						)
+					)
+				),
+				category != 'devices' ? _react2.default.createElement(_addButton.AddButton, { category: category }) : _react2.default.createElement(
+					'label',
+					{ className: 'custom-control custom-checkbox' },
+					_react2.default.createElement('input', { onChange: this.handleFilter, type: 'checkbox', defaultChecked: this.props.filterFoundValue, value: this.props.filterFoundValue, name: 'found', className: 'custom-control-input' }),
+					_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+					_react2.default.createElement(
+						'span',
+						{ className: 'custom-control-description' },
+						' Mostrar \xFAnicamente dispositivos localizados'
+					)
+				)
+			);
+		}
+	}]);
 
-  return List;
+	return List;
 }(_react.Component);
 
 /***/ }),
@@ -7018,7 +7022,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _icon = __webpack_require__(13);
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -7040,17 +7044,17 @@ var Associated = exports.Associated = function Associated(_ref) {
     return _react2.default.createElement(
       'div',
       { className: 'list-group list-group-small mb-3' },
-      content.map(function (e, i) {
+      content.map(function (element, index) {
         var className = "d-flex elemento" + ' ' + appearance;
         var location = {
-          pathname: '/' + category + '/' + e._id
+          pathname: '/' + category + '/' + element._id
         };
         return _react2.default.createElement(
           'div',
-          { key: i, className: 'list-group-item flex-column align-items-start' },
+          { key: index, className: 'list-group-item flex-column align-items-start' },
           _react2.default.createElement(
             'div',
-            { className: active && active == e._id ? 'active' : '' },
+            { className: active && active == element._id ? 'active' : '' },
             _react2.default.createElement(
               _reactRouterDom.Link,
               { to: location },
@@ -7061,18 +7065,18 @@ var Associated = exports.Associated = function Associated(_ref) {
                   'div',
                   { className: 'mb-0' },
                   _react2.default.createElement(_icon.Icon, { icon: icon, mr: 3 }),
-                  e.name
+                  element.name
                 ),
-                e.found ? _react2.default.createElement(
+                element.found ? _react2.default.createElement(
                   'span',
                   null,
                   _react2.default.createElement(
                     'small',
                     { className: 'mb-0' },
                     _react2.default.createElement(_icon.Icon, { icon: 'battery', mr: '1' }),
-                    e.batt,
+                    element.batt,
                     _react2.default.createElement(_icon.Icon, { icon: 'signal', mr: '1', ml: '2' }),
-                    e.rssi
+                    element.rssi
                   )
                 ) : _react2.default.createElement(
                   'span',
@@ -7090,7 +7094,7 @@ var Associated = exports.Associated = function Associated(_ref) {
                   'p',
                   { className: 'mb-0' },
                   _react2.default.createElement(_icon.Icon, { icon: icon, mr: 3 }),
-                  e.name
+                  element.name
                 )
               )
             )
@@ -7113,7 +7117,7 @@ var Associated = exports.Associated = function Associated(_ref) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.Tag = undefined;
 
@@ -7128,15 +7132,15 @@ var cx = __webpack_require__(7);
 /* COMPONENT */
 /* IMPORT MODULES */
 var Tag = exports.Tag = function Tag(_ref) {
-  var category = _ref.category,
-      tag = _ref.tag;
+	var category = _ref.category,
+	    tag = _ref.tag;
 
-  var tagClass = cx("btn mr-1", { "btn-outline-success": category === "displays" }, { "btn-outline-info": category === "images" }, { "btn-outline-warning": category === "groups" }, "btn-tiny");
-  return _react2.default.createElement(
-    'button',
-    { type: 'button', className: tagClass },
-    tag
-  );
+	var tagClass = cx('btn mr-1', { 'btn-outline-success': category === 'displays' }, { 'btn-outline-info': category === 'images' }, { 'btn-outline-warning': category === 'groups' }, 'btn-tiny');
+	return _react2.default.createElement(
+		'button',
+		{ type: 'button', className: tagClass },
+		tag
+	);
 };
 
 /***/ }),
@@ -22141,7 +22145,7 @@ module.exports = ExecutionEnvironment;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(12);
+var emptyFunction = __webpack_require__(13);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -35336,7 +35340,7 @@ module.exports = Cancel;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+		value: true
 });
 exports.DisplayForm = undefined;
 
@@ -35370,590 +35374,588 @@ moment.locale('es');
 
 /* COMPONENTS */
 var DisplayForm = exports.DisplayForm = function (_Component) {
-  _inherits(DisplayForm, _Component);
+		_inherits(DisplayForm, _Component);
 
-  function DisplayForm(props) {
-    _classCallCheck(this, DisplayForm);
+		function DisplayForm(props) {
+				_classCallCheck(this, DisplayForm);
 
-    var _this = _possibleConstructorReturn(this, (DisplayForm.__proto__ || Object.getPrototypeOf(DisplayForm)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (DisplayForm.__proto__ || Object.getPrototypeOf(DisplayForm)).call(this, props));
 
-    _initialiseProps.call(_this);
+				_initialiseProps.call(_this);
 
-    var _this$props = _this.props,
-        display = _this$props.display,
-        user = _this$props.user;
+				var _this$props = _this.props,
+				    display = _this$props.display,
+				    user = _this$props.user;
 
-    _this.state = {
-      name: display ? display.name : '',
-      description: display ? display.description : '',
-      created_by: display ? display.created_by || {
-        name: 'Usuario eliminado'
-      } : user,
-      updated_by: user,
-      tags: display ? display.tags : [],
-      category: display ? display.category : '',
-      created_at: display ? moment(display.created_at) : moment(),
-      updated_at: moment(),
-      active_image: display ? display.active_image ? display.active_image._id : '' : '',
-      images: display ? display.images.map(function (i) {
-        return i._id;
-      }) : [],
-      groups: display ? display.groups.map(function (g) {
-        return g._id;
-      }) : [],
-      device: '',
-      deviceDescription: '',
-      // form options stored in state
-      optionsActiveImage: [],
-      // redirect variables
-      redirect: false,
-      location: '/displays',
-      // error handling
-      error: null
-    };
-    return _this;
-  }
+				_this.state = {
+						name: display ? display.name : '',
+						description: display ? display.description : '',
+						created_by: display ? display.created_by || { name: 'Usuario eliminado' } : user,
+						updated_by: user,
+						tags: display ? display.tags : [],
+						category: display ? display.category : '',
+						created_at: display ? moment(display.created_at) : moment(),
+						updated_at: moment(),
+						active_image: display ? display.active_image ? display.active_image._id : '' : '',
+						images: display ? display.images.map(function (image) {
+								return image._id;
+						}) : [],
+						groups: display ? display.groups.map(function (group) {
+								return group._id;
+						}) : [],
+						device: '',
+						deviceDescription: '',
+						// form options stored in state
+						optionsActiveImage: [],
+						// redirect variables
+						redirect: false,
+						location: '/displays',
+						// error handling
+						error: null
+				};
+				return _this;
+		}
 
-  /* INITIAL VALUES FOR FORM INPUTS */
+		/* INITIAL VALUES FOR FORM INPUTS */
 
 
-  _createClass(DisplayForm, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+		_createClass(DisplayForm, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var _this2 = this;
 
-      var _props = this.props,
-          _props$data = _props.data,
-          displays = _props$data.displays,
-          devices = _props$data.devices,
-          images = _props$data.images,
-          display = _props.display;
-      // get options for active image
+						var _props = this.props,
+						    display = _props.display,
+						    _props$data = _props.data,
+						    displays = _props$data.displays,
+						    devices = _props$data.devices,
+						    images = _props$data.images;
+						// get options for active image
 
-      var optionsActiveImage = images.filter(function (i) {
-        return _this2.state.images.find(function (c) {
-          return c == i._id;
-        });
-      }).map(function (i) {
-        return _react2.default.createElement(
-          'option',
-          { value: i._id, key: i._id },
-          i.name
-        );
-      });
-      // get a list of unused devices
-      var unusedDevices = devices.filter(function (d) {
-        return !d.display;
-      });
-      // set state with initial values
-      if (unusedDevices.length > 0 || display) {
-        this.setState({
-          location: display ? '/displays/' + display._id : '/displays', // Redirect url
-          device: display ? display.device ? display.device._id : unusedDevices[0]._id : unusedDevices[0]._id,
-          deviceDescription: display ? display.device.description : unusedDevices[0].description,
-          optionsActiveImage: optionsActiveImage
-        });
-      } else {
-        this.setState({ device: null });
-      }
-    }
+						var optionsActiveImage = images.filter(function (image) {
+								return _this2.state.images.find(function (c) {
+										return c == image._id;
+								});
+						}).map(function (image) {
+								return _react2.default.createElement(
+										'option',
+										{ value: image._id, key: image._id },
+										image.name
+								);
+						});
+						// get a list of unused devices
+						var unusedDevices = devices.filter(function (device) {
+								return !device.display;
+						});
+						// set state with initial values
+						if (unusedDevices.length > 0 || display) {
+								this.setState({
+										location: display ? '/displays/' + display._id : '/displays', // Redirect url
+										device: display ? display.device ? display.device._id : unusedDevices[0]._id : unusedDevices[0]._id,
+										deviceDescription: display ? display.device.description : unusedDevices[0].description,
+										optionsActiveImage: optionsActiveImage
+								});
+						} else {
+								this.setState({ device: null });
+						}
+				}
 
-    /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
-
-
-    /* HANDLE MULTIPLE CHECKBOX */
-    // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
-
-    /* HANDLE SUMBIT (PUT OR POST) */
-
-  }, {
-    key: 'render',
+				/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 
 
-    /* RENDER COMPONENT */
-    value: function render() {
-      var _this3 = this;
+				/* HANDLE MULTIPLE CHECKBOX */
+				// TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
-      var _props2 = this.props,
-          _props2$data = _props2.data,
-          devices = _props2$data.devices,
-          images = _props2$data.images,
-          groups = _props2$data.groups,
-          displays = _props2$data.displays,
-          display = _props2.display;
+				/* HANDLE SUMBIT (PUT OR POST) */
 
-      // Options
+		}, {
+				key: 'render',
 
-      var optionsDevices = devices.filter(function (d) {
-        return !d.display || d.display._id == (display && display._id);
-      }).map(function (d, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: d._id, key: i },
-          d.name
-        );
-      });
-      var optionsGroups = groups.map(function (g) {
-        return _react2.default.createElement(
-          'label',
-          { key: g._id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this3.handleCheckGroups, type: 'checkbox', defaultChecked: _this3.state.groups.find(function (c) {
-              return c == g._id;
-            }), name: g._id, defaultValue: g._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            g.name
-          )
-        );
-      });
-      var optionsImages = images.sort(function (a, b) {
-        return a.updated_at - b.updated_at;
-      }).map(function (i) {
-        return _react2.default.createElement(
-          'label',
-          { key: i._id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
-              return c == i._id;
-            }), name: i._id, defaultValue: i._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            i.name
-          )
-        );
-      });
 
-      // Render return
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
-      } else if (this.state.device == null) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo text-center' },
-                  _react2.default.createElement('i', { className: 'fa-picture-o', 'aria-hidden': 'true' }),
-                  'Configurar dispositivo'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'text-center' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                'No hay dispositivos sin configurar'
-              ),
-              _react2.default.createElement('hr', { className: 'card-division' }),
-              _react2.default.createElement(
-                'small',
-                null,
-                'Pida al administrador del sistema que de de alta un nuevo dispositivo para configurarlo.'
-              )
-            )
-          )
-        );
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                display ? _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-                  'Editar un display'
-                ) : _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-                  'Configurar un nuevo display'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item ml-2' },
-                display ? _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-success' },
-                  _react2.default.createElement('i', { className: 'fa fa-save mr-3', 'aria-hidden': 'true' }),
-                  'Guardar cambios'
-                ) : _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-success' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-                  'Guardar configuraci\xF3n'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'form',
-              { id: 'form' },
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'device' },
-                    _react2.default.createElement('i', { className: 'fa fa-tablet mr-2' }),
-                    'Dispositivo f\xEDsico asociado'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'device', onChange: this.handleInputChange },
-                      optionsDevices
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'bt' },
-                    _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                    'Descripci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control text-truncate', id: 'bt', name: 'bt', value: this.state.deviceDescription, readOnly: 'readOnly' })
-                )
-              ),
-              _react2.default.createElement('hr', { className: 'card-division' }),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'nombre' },
-                  _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-                  'Nombre'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'descripcion' },
-                  _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                  'Descripcion'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion del display', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'category' },
-                    _react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
-                    'Categor\xEDa'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', placeholder: 'Categor\xEDa', name: 'category', value: this.state.category, onChange: this.handleInputChange })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'active_image' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Seleccionar la imagen activa'
-                  ),
-                  _react2.default.createElement(
-                    'select',
-                    { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
-                    _react2.default.createElement(
-                      'option',
-                      { value: '', key: 0 },
-                      'Sin imagen activa'
-                    ),
-                    this.state.optionsActiveImage
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'displays' },
-                    _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-                    'Asociar una o varias imagenes'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'custom-controls-stacked' },
-                    optionsImages
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'groups' },
-                    _react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
-                    'Asociar a uno o varios grupos'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'custom-controls-stacked' },
-                    optionsGroups
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'etiquetas' },
-                    _react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
-                    'Etiquetas'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  this.state.tags.map(function (t, i) {
-                    return t.length > 1 ? _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn mr-1 btn-outline-display btn-tiny', key: i },
-                      t
-                    ) : '';
-                  })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaCreacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                    'Fecha de creaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaModificacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                    'Fecha de modificaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'creador' },
-                  _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-                  'Creador'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.created_by.name, readOnly: 'readOnly' })
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+				/* RENDER COMPONENT */
+				value: function render() {
+						var _this3 = this;
 
-  return DisplayForm;
+						var _props2 = this.props,
+						    display = _props2.display,
+						    _props2$data = _props2.data,
+						    devices = _props2$data.devices,
+						    images = _props2$data.images,
+						    groups = _props2$data.groups,
+						    displays = _props2$data.displays;
+
+						// Options
+
+						var optionsDevices = devices.filter(function (device) {
+								return !device.display || device.display._id == (display && display._id);
+						}).map(function (device, index) {
+								return _react2.default.createElement(
+										'option',
+										{ value: device._id, key: index },
+										device.name
+								);
+						});
+						var optionsGroups = groups.map(function (group) {
+								return _react2.default.createElement(
+										'label',
+										{ key: group._id, className: 'custom-control custom-checkbox' },
+										_react2.default.createElement('input', { onChange: _this3.handleCheckGroups, type: 'checkbox', defaultChecked: _this3.state.groups.find(function (c) {
+														return c == group._id;
+												}), name: group._id, defaultValue: group._id, className: 'custom-control-input' }),
+										_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+										_react2.default.createElement(
+												'span',
+												{ className: 'custom-control-description' },
+												group.name
+										)
+								);
+						});
+						var optionsImages = images.sort(function (a, b) {
+								return a.updated_at - b.updated_at;
+						}).map(function (image) {
+								return _react2.default.createElement(
+										'label',
+										{ key: image._id, className: 'custom-control custom-checkbox' },
+										_react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
+														return c == image._id;
+												}), name: image._id, defaultValue: image._id, className: 'custom-control-input' }),
+										_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+										_react2.default.createElement(
+												'span',
+												{ className: 'custom-control-description' },
+												image.name
+										)
+								);
+						});
+
+						// Render return
+						if (this.state.redirect) {
+								return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
+						} else if (this.state.device == null) {
+								return _react2.default.createElement(
+										'div',
+										{ className: 'card detalles' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-header' },
+												_react2.default.createElement(
+														'ul',
+														{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item mr-auto' },
+																_react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo text-center' },
+																		_react2.default.createElement('i', { className: 'fa-picture-o', 'aria-hidden': 'true' }),
+																		'Configurar dispositivo'
+																)
+														)
+												)
+										),
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-body' },
+												_react2.default.createElement(
+														'div',
+														{ className: 'text-center' },
+														_react2.default.createElement(
+																'h1',
+																null,
+																'No hay dispositivos sin configurar'
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'small',
+																null,
+																'Pida al administrador del sistema que de de alta un nuevo dispositivo para configurarlo.'
+														)
+												)
+										)
+								);
+						} else {
+								return _react2.default.createElement(
+										'div',
+										{ className: 'card detalles' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-header' },
+												_react2.default.createElement(
+														'ul',
+														{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item mr-auto' },
+																display ? _react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+																		'Editar un display'
+																) : _react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+																		'Configurar un nuevo display'
+																)
+														),
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item ml-2' },
+																display ? _react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-success' },
+																		_react2.default.createElement('i', { className: 'fa fa-save mr-3', 'aria-hidden': 'true' }),
+																		'Guardar cambios'
+																) : _react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-success' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+																		'Guardar configuraci\xF3n'
+																)
+														)
+												)
+										),
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-body' },
+												_react2.default.createElement(
+														'form',
+														{ id: 'form' },
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'device' },
+																				_react2.default.createElement('i', { className: 'fa fa-tablet mr-2' }),
+																				'Dispositivo f\xEDsico asociado'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				null,
+																				_react2.default.createElement(
+																						'select',
+																						{ className: 'custom-select', name: 'device', onChange: this.handleInputChange },
+																						optionsDevices
+																				)
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'bt' },
+																				_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+																				'Descripci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control text-truncate', id: 'bt', name: 'bt', value: this.state.deviceDescription, readOnly: 'readOnly' })
+																)
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'nombre' },
+																		_react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+																		'Nombre'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'descripcion' },
+																		_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+																		'Descripcion'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion del display', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'category' },
+																				_react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
+																				'Categor\xEDa'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', placeholder: 'Categor\xEDa', name: 'category', value: this.state.category, onChange: this.handleInputChange })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'active_image' },
+																				_react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+																				'Seleccionar la imagen activa'
+																		),
+																		_react2.default.createElement(
+																				'select',
+																				{ className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
+																				_react2.default.createElement(
+																						'option',
+																						{ value: '', key: 0 },
+																						'Sin imagen activa'
+																				),
+																				this.state.optionsActiveImage
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'displays' },
+																				_react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+																				'Asociar una o varias imagenes'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'custom-controls-stacked' },
+																				optionsImages
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'groups' },
+																				_react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
+																				'Asociar a uno o varios grupos'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'custom-controls-stacked' },
+																				optionsGroups
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'etiquetas' },
+																				_react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
+																				'Etiquetas'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		this.state.tags.map(function (tag, index) {
+																				return tag.length > 1 ? _react2.default.createElement(
+																						'button',
+																						{ type: 'button', className: 'btn mr-1 btn-outline-display btn-tiny', key: index },
+																						tag
+																				) : '';
+																		})
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaCreacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+																				'Fecha de creaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaModificacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+																				'Fecha de modificaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'creador' },
+																		_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+																		'Creador'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.created_by.name, readOnly: 'readOnly' })
+														)
+												)
+										)
+								);
+						}
+				}
+		}]);
+
+		return DisplayForm;
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this4 = this;
+		var _this4 = this;
 
-  this.handleInputChange = function (event) {
-    var target = event.target;
-    var name = target.name;
-    if (name === 'tags') {
-      var value = target.value.split(','); // TODO: better string to array conversion
-    } else {
-      var value = target.value;
-    }
+		this.handleInputChange = function (event) {
+				var target = event.target;
+				var name = target.name;
+				if (name === 'tags') {
+						var value = target.value.split(','); // TODO: better string to array conversion
+				} else {
+						var value = target.value;
+				}
 
-    if (name === 'device') {
-      var unusedDevices = _this4.props.data.devices.filter(function (d) {
-        return !d.display;
-      });
-      _this4.setState({
-        deviceDescription: unusedDevices.find(function (d) {
-          return d._id == value;
-        }).description
-      });
-    }
+				if (name === 'device') {
+						var unusedDevices = _this4.props.data.devices.filter(function (device) {
+								return !device.display;
+						});
+						var device = unusedDevices.find(function (device) {
+								return device._id == value;
+						});
+						_this4.setState({
+								deviceDescription: device.description
+						});
+				}
 
-    _this4.setState(_defineProperty({}, name, value));
-  };
+				_this4.setState(_defineProperty({}, name, value));
+		};
 
-  this.handleCheckImages = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this4.state.images.find(function (c) {
-      return c == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this4.state.images;
-      prevState.push(value);
-      _this4.setState({ images: prevState });
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState = _this4.state.images;
-      _prevState.splice(_prevState.indexOf(value), 1);
-      _this4.setState({ images: _prevState });
-    }
-    if (_this4.state.images.length == 1) {
-      // set when first image is selected
-      _this4.setState({ active_image: _this4.state.images[0] });
-    } else if (_this4.state.images.length == 0) {
-      // if there are no images deselect
-      _this4.setState({ active_image: '' });
-    }
-    _this4.setState({
-      optionsActiveImage: _this4.props.data.images.filter(function (i) {
-        return _this4.state.images.find(function (c) {
-          return c == i._id;
-        });
-      }).map(function (i) {
-        return _react2.default.createElement(
-          'option',
-          { value: i._id, key: i._id },
-          i.name
-        );
-      })
-    });
-  };
+		this.handleCheckImages = function (event) {
+				// get value from the checkbox
+				var target = event.target;
+				var value = target.value;
+				// check if the checkbox has been selected
+				if (!_this4.state.images.find(function (c) {
+						return c == value;
+				})) {
+						// check if value is stored in state
+						// if it is NOT stored, save the state, push the new value and save back the new state
+						var prevState = _this4.state.images;
+						prevState.push(value);
+						_this4.setState({ images: prevState });
+				} else {
+						// if it IS stored, save the state, splice the old value and save back the new state
+						var _prevState = _this4.state.images;
+						_prevState.splice(_prevState.indexOf(value), 1);
+						_this4.setState({ images: _prevState });
+				}
+				if (_this4.state.images.length == 1) {
+						// set when first image is selected
+						_this4.setState({ active_image: _this4.state.images[0] });
+				} else if (_this4.state.images.length == 0) {
+						// if there are no images deselect
+						_this4.setState({ active_image: '' });
+				}
+				_this4.setState({
+						optionsActiveImage: _this4.props.data.images.filter(function (i) {
+								return _this4.state.images.find(function (c) {
+										return c == i._id;
+								});
+						}).map(function (i) {
+								return _react2.default.createElement(
+										'option',
+										{ value: i._id, key: i._id },
+										i.name
+								);
+						})
+				});
+		};
 
-  this.handleCheckGroups = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this4.state.groups.find(function (c) {
-      return c == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this4.state.groups;
-      prevState.push(value);
-      _this4.setState({ groups: prevState });
-      target.checked = true;
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState2 = _this4.state.groups;
-      _prevState2.splice(_prevState2.indexOf(value), 1);
-      _this4.setState({ groups: _prevState2 });
-      target.checked = false;
-    }
-  };
+		this.handleCheckGroups = function (event) {
+				// get value from the checkbox
+				var target = event.target;
+				var value = target.value;
+				// check if the checkbox has been selected
+				if (!_this4.state.groups.find(function (c) {
+						return c == value;
+				})) {
+						// check if value is stored in state
+						// if it is NOT stored, save the state, push the new value and save back the new state
+						var prevState = _this4.state.groups;
+						prevState.push(value);
+						_this4.setState({ groups: prevState });
+						target.checked = true;
+				} else {
+						// if it IS stored, save the state, splice the old value and save back the new state
+						var _prevState2 = _this4.state.groups;
+						_prevState2.splice(_prevState2.indexOf(value), 1);
+						_this4.setState({ groups: _prevState2 });
+						target.checked = false;
+				}
+		};
 
-  this.handleSubmit = function () {
-    // get display if any
-    var display = _this4.props.display;
-    // define form values to send
+		this.handleSubmit = function () {
+				// FIXME: handleSubmit (method) specify method beforehand from the buttom
+				// get display if any
+				var display = _this4.props.display;
+				// define form values to send
 
-    var form = {
-      name: _this4.state.name,
-      description: _this4.state.description,
-      category: _this4.state.category,
-      updated_by: _this4.props.user._id, // send user_id
-      tags: _this4.state.tags,
-      device: _this4.state.device
-    };
-    // possible empty fields
-    if (!_this4.props.display) form.created_by = _this4.props.user._id;
-    _this4.state.active_image != '' ? form.active_image = _this4.state.active_image : form.active_image = null;
-    _this4.state.images.length > 0 ? form.images = _this4.state.images : form.images = [];
-    _this4.state.groups.length > 0 ? form.groups = _this4.state.groups : form.groups = [];
-    // HTTP request
-    (0, _axios2.default)({
-      method: display ? 'put' : 'post',
-      url: display ? display.url : 'http://localhost:4000/displays',
-      data: form,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + _this4.props.token
-      }
-    }).then(function (res) {
-      if (res.status == 201) {
-        _this4.props.notify('Display configurado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        var action = display ? 'edit' : 'add';
-        return _this4.props.update('displays', res.data.resourceId, action, res.data.resource, res.data.devices); // update dataset
-      }
-    }).then(function (res) {
-      _this4.setState({ redirect: true });
-      return res;
-    }).catch(function (err) {
-      console.log(err);
-      return _this4.props.notify('Error al configurar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-    });
-  };
+				var form = {
+						name: _this4.state.name,
+						description: _this4.state.description,
+						category: _this4.state.category,
+						updated_by: _this4.props.user._id, // send user_id
+						tags: _this4.state.tags,
+						device: _this4.state.device
+				};
+				// possible empty fields
+				if (!_this4.props.display) form.created_by = _this4.props.user._id;
+				_this4.state.active_image != '' ? form.active_image = _this4.state.active_image : form.active_image = null;
+				_this4.state.images.length > 0 ? form.images = _this4.state.images : form.images = [];
+				_this4.state.groups.length > 0 ? form.groups = _this4.state.groups : form.groups = [];
+				// HTTP request
+				(0, _axios2.default)({
+						method: display ? 'put' : 'post',
+						url: display ? display.url : "http://localhost:4000/" + 'displays',
+						data: form,
+						headers: {
+								'Accept': 'application/json',
+								'Content-Type': 'application/json',
+								'Authorization': 'Bearer ' + _this4.props.token
+						}
+				}).then(function (res) {
+						if (res.status == 201) {
+								_this4.props.notify('Display configurado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+								var action = display ? 'edit' : 'add';
+								return _this4.props.update('displays', res.data.resourceId, action, res.data.resource, res.data.devices); // update dataset
+						}
+				}).then(function (res) {
+						return _this4.setState({ redirect: true });
+				}).catch(function (err) {
+						return _this4.props.notify('Error al configurar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+				});
+		};
 };
 
 /***/ }),
@@ -35964,7 +35966,7 @@ var _initialiseProps = function _initialiseProps() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+		value: true
 });
 exports.ImageForm = undefined;
 
@@ -35998,450 +36000,443 @@ moment.locale('es');
 
 /* COMPONENTS */
 var ImageForm = exports.ImageForm = function (_Component) {
-  _inherits(ImageForm, _Component);
+		_inherits(ImageForm, _Component);
 
-  /* STATE */
-  function ImageForm(props) {
-    _classCallCheck(this, ImageForm);
+		/* STATE */
+		function ImageForm(props) {
+				_classCallCheck(this, ImageForm);
 
-    var _this = _possibleConstructorReturn(this, (ImageForm.__proto__ || Object.getPrototypeOf(ImageForm)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (ImageForm.__proto__ || Object.getPrototypeOf(ImageForm)).call(this, props));
 
-    _initialiseProps.call(_this);
+				_initialiseProps.call(_this);
 
-    var _this$props = _this.props,
-        image = _this$props.image,
-        user = _this$props.user;
+				var _this$props = _this.props,
+				    image = _this$props.image,
+				    user = _this$props.user;
 
-    _this.state = {
-      name: image ? image.name : '',
-      description: image ? image.description : '',
-      created_by: image ? image.created_by || {
-        name: 'Usuario eliminado'
-      } : user,
-      updated_by: user.name,
-      category: image ? image.category ? image.category : '' : '',
-      tags: image ? image.tags : [],
-      created_at: image ? moment(image.created_at) : moment(),
-      updated_at: moment(),
-      displays: image ? image.displays.map(function (d) {
-        return d._id;
-      }) : [],
-      groups: image ? image.groups.map(function (g) {
-        return g._id;
-      }) : [],
-      color: image ? image.color_profile : 'color',
+				_this.state = {
+						name: image ? image.name : '',
+						description: image ? image.description : '',
+						created_by: image ? image.created_by || { name: 'Usuario eliminado' } : user,
+						updated_by: user.name,
+						category: image ? image.category ? image.category : '' : '',
+						tags: image ? image.tags : [],
+						created_at: image ? moment(image.created_at) : moment(),
+						updated_at: moment(),
+						displays: image ? image.displays.map(function (display) {
+								return display._id;
+						}) : [],
+						groups: image ? image.groups.map(function (group) {
+								return group._id;
+						}) : [],
+						color: image ? image.color_profile : 'color',
 
-      redirect: false,
-      location: '/images',
-      error: null
-    };
-    return _this;
-  }
+						redirect: false,
+						location: '/images',
+						error: null
+				};
+				return _this;
+		}
 
-  /* INITIAL VALUES FOR FORM INPUTS */
+		/* INITIAL VALUES FOR FORM INPUTS */
 
 
-  _createClass(ImageForm, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _props = this.props,
-          images = _props.images,
-          image = _props.image;
-      // set state with initial values
+		_createClass(ImageForm, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var _props = this.props,
+						    images = _props.images,
+						    image = _props.image;
+						// set state with initial values
 
-      this.setState({
-        location: image ? '/images/' + image._id : '/images' // Redirect url
-      });
-    }
+						this.setState({
+								location: image ? '/images/' + image._id : '/images' // Redirect url
+						});
+				}
 
-    /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
-
-
-    /* HANDLE MULTIPLE CHECKBOX */
-    // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
-
-    /* HANDLE SUMBIT (PUT OR POST) */
-
-  }, {
-    key: 'render',
+				/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 
 
-    /* RENDER COMPONENT */
-    value: function render() {
-      var _this2 = this;
+				/* HANDLE MULTIPLE CHECKBOX */
+				// TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
-      var _props2 = this.props,
-          _props2$data = _props2.data,
-          devices = _props2$data.devices,
-          images = _props2$data.images,
-          groups = _props2$data.groups,
-          displays = _props2$data.displays,
-          image = _props2.image;
+				/* HANDLE SUMBIT (PUT OR POST) */
 
-      // Options
+		}, {
+				key: 'render',
 
-      var optionsGroups = groups.map(function (g) {
-        return _react2.default.createElement(
-          'label',
-          { key: g._id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this2.handleCheckGroups, type: 'checkbox', defaultChecked: _this2.state.groups.find(function (c) {
-              return c == g._id;
-            }), name: g._id, defaultValue: g._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            g.name
-          )
-        );
-      });
-      var optionsDisplays = displays.sort(function (a, b) {
-        return a.updated_at - b.updated_at;
-      }).map(function (d) {
-        return _react2.default.createElement(
-          'label',
-          { key: d._id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, type: 'checkbox', defaultChecked: _this2.state.displays.find(function (c) {
-              return c == d._id;
-            }), name: d._id, defaultValue: d._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            d.name
-          )
-        );
-      });
 
-      // Render return
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                image ? _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-                  'Editar una imagen'
-                ) : _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-                  'A\xF1adir una nueva imagen'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item ml-2' },
-                image ? _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-info' },
-                  _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
-                  'Guardar cambios'
-                ) : _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-info' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
-                  'A\xF1adir'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'form',
-              { id: 'form' },
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'nombre' },
-                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                  'Nombre'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'descripcion' },
-                  _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                  'Descripcion'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la imagen', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'category' },
-                    _react2.default.createElement('i', { className: 'fa fa-th-large mr-2' }),
-                    'Categor\xEDa'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: this.state.category, onChange: this.handleInputChange })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'color' },
-                    _react2.default.createElement('i', { className: 'fa fa-tint mr-2' }),
-                    'Color'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'color', value: this.state.color, onChange: this.handleInputChange },
-                      _react2.default.createElement(
-                        'option',
-                        { value: 'color' },
-                        'Color'
-                      ),
-                      _react2.default.createElement(
-                        'option',
-                        { value: 'escala de grises' },
-                        'Escala de grises'
-                      )
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'displays' },
-                    _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-                    'Asociar uno o varios displays'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'custom-controls-stacked shadow' },
-                    optionsDisplays
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'groups' },
-                    _react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
-                    'Asociar uno o varios grupos'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'custom-controls-stacked shadow' },
-                    optionsGroups
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'etiquetas' },
-                    _react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
-                    'Etiquetas'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  this.state.tags.map(function (t, i) {
-                    return t.length > 1 ? _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn mr-1 btn-outline-imagen btn-tiny', key: i },
-                      t
-                    ) : '';
-                  })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'creador' },
-                  _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-                  'Creador'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.created_by.name, readOnly: 'readOnly' })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaCreacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                    'Fecha de creaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaModificacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                    'Fecha de modificaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
-                )
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+				/* RENDER COMPONENT */
+				value: function render() {
+						var _this2 = this;
 
-  return ImageForm;
+						var _props2 = this.props,
+						    _props2$data = _props2.data,
+						    devices = _props2$data.devices,
+						    images = _props2$data.images,
+						    groups = _props2$data.groups,
+						    displays = _props2$data.displays,
+						    image = _props2.image;
+
+						// Options
+
+						var optionsGroups = groups.map(function (group) {
+								return _react2.default.createElement(
+										'label',
+										{ key: group._id, className: 'custom-control custom-checkbox' },
+										_react2.default.createElement('input', { onChange: _this2.handleCheckGroups, type: 'checkbox', defaultChecked: _this2.state.groups.find(function (c) {
+														return c == group._id;
+												}), name: group._id, defaultValue: group._id, className: 'custom-control-input' }),
+										_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+										_react2.default.createElement(
+												'span',
+												{ className: 'custom-control-description' },
+												group.name
+										)
+								);
+						});
+						var optionsDisplays = displays.sort(function (a, b) {
+								return a.updated_at - b.updated_at;
+						}).map(function (display) {
+								return _react2.default.createElement(
+										'label',
+										{ key: display._id, className: 'custom-control custom-checkbox' },
+										_react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, type: 'checkbox', defaultChecked: _this2.state.displays.find(function (c) {
+														return c == display._id;
+												}), name: display._id, defaultValue: display._id, className: 'custom-control-input' }),
+										_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+										_react2.default.createElement(
+												'span',
+												{ className: 'custom-control-description' },
+												display.name
+										)
+								);
+						});
+
+						// Render return
+						if (this.state.redirect) {
+								return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
+						} else {
+								return _react2.default.createElement(
+										'div',
+										{ className: 'card detalles' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-header' },
+												_react2.default.createElement(
+														'ul',
+														{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item mr-auto' },
+																image ? _react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+																		'Editar una imagen'
+																) : _react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+																		'A\xF1adir una nueva imagen'
+																)
+														),
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item ml-2' },
+																image ? _react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-info' },
+																		_react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+																		'Guardar cambios'
+																) : _react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-info' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
+																		'A\xF1adir'
+																)
+														)
+												)
+										),
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-body' },
+												_react2.default.createElement(
+														'form',
+														{ id: 'form' },
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'nombre' },
+																		_react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+																		'Nombre'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'descripcion' },
+																		_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+																		'Descripcion'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la imagen', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'category' },
+																				_react2.default.createElement('i', { className: 'fa fa-th-large mr-2' }),
+																				'Categor\xEDa'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: this.state.category, onChange: this.handleInputChange })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'color' },
+																				_react2.default.createElement('i', { className: 'fa fa-tint mr-2' }),
+																				'Color'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				null,
+																				_react2.default.createElement(
+																						'select',
+																						{ className: 'custom-select', name: 'color', value: this.state.color, onChange: this.handleInputChange },
+																						_react2.default.createElement(
+																								'option',
+																								{ value: 'color' },
+																								'Color'
+																						),
+																						_react2.default.createElement(
+																								'option',
+																								{ value: 'escala de grises' },
+																								'Escala de grises'
+																						)
+																				)
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'displays' },
+																				_react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+																				'Asociar uno o varios displays'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'custom-controls-stacked shadow' },
+																				optionsDisplays
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'groups' },
+																				_react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
+																				'Asociar uno o varios grupos'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'custom-controls-stacked shadow' },
+																				optionsGroups
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'etiquetas' },
+																				_react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
+																				'Etiquetas'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		this.state.tags.map(function (tag, index) {
+																				return tag.length > 1 ? _react2.default.createElement(
+																						'button',
+																						{ type: 'button', className: 'btn mr-1 btn-outline-imagen btn-tiny', key: index },
+																						tag
+																				) : '';
+																		})
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'creador' },
+																		_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+																		'Creador'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.created_by.name, readOnly: 'readOnly' })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaCreacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+																				'Fecha de creaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaModificacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+																				'Fecha de modificaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+																)
+														)
+												)
+										)
+								);
+						}
+				}
+		}]);
+
+		return ImageForm;
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this3 = this;
+		var _this3 = this;
 
-  this.handleInputChange = function (event) {
-    var target = event.target;
-    var name = target.name;
-    if (name === 'tags') {
-      var value = target.value.split(','); // TODO: better string to array conversion
-    } else {
-      var value = target.value;
-    }
+		this.handleInputChange = function (event) {
+				var target = event.target;
+				var name = target.name;
+				if (name === 'tags') {
+						var value = target.value.split(','); // TODO: better string to array conversion
+				} else {
+						var value = target.value;
+				}
 
-    _this3.setState(_defineProperty({}, name, value));
-  };
+				_this3.setState(_defineProperty({}, name, value));
+		};
 
-  this.handleCheckDisplays = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this3.state.displays.find(function (c) {
-      return c == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this3.state.displays;
-      prevState.push(value);
-      _this3.setState({ displays: prevState });
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState = _this3.state.displays;
-      _prevState.splice(_prevState.indexOf(value), 1);
-      _this3.setState({ displays: _prevState });
-    }
-  };
+		this.handleCheckDisplays = function (event) {
+				// get value from the checkbox
+				var target = event.target;
+				var value = target.value;
+				// check if the checkbox has been selected
+				if (!_this3.state.displays.find(function (c) {
+						return c == value;
+				})) {
+						// check if value is stored in state
+						// if it is NOT stored, save the state, push the new value and save back the new state
+						var prevState = _this3.state.displays;
+						prevState.push(value);
+						_this3.setState({ displays: prevState });
+				} else {
+						// if it IS stored, save the state, splice the old value and save back the new state
+						var _prevState = _this3.state.displays;
+						_prevState.splice(_prevState.indexOf(value), 1);
+						_this3.setState({ displays: _prevState });
+				}
+		};
 
-  this.handleCheckGroups = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this3.state.groups.find(function (c) {
-      return c == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this3.state.groups;
-      prevState.push(value);
-      _this3.setState({ groups: prevState });
-      target.checked = true;
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState2 = _this3.state.groups;
-      _prevState2.splice(_prevState2.indexOf(value), 1);
-      _this3.setState({ groups: _prevState2 });
-      target.checked = false;
-    }
-  };
+		this.handleCheckGroups = function (event) {
+				// get value from the checkbox
+				var target = event.target;
+				var value = target.value;
+				// check if the checkbox has been selected
+				if (!_this3.state.groups.find(function (c) {
+						return c == value;
+				})) {
+						// check if value is stored in state
+						// if it is NOT stored, save the state, push the new value and save back the new state
+						var prevState = _this3.state.groups;
+						prevState.push(value);
+						_this3.setState({ groups: prevState });
+						target.checked = true;
+				} else {
+						// if it IS stored, save the state, splice the old value and save back the new state
+						var _prevState2 = _this3.state.groups;
+						_prevState2.splice(_prevState2.indexOf(value), 1);
+						_this3.setState({ groups: _prevState2 });
+						target.checked = false;
+				}
+		};
 
-  this.handleSubmit = function () {
-    // get image if any
-    var image = _this3.props.image;
-    // define form values to send
+		this.handleSubmit = function () {
+				// get image if any
+				var image = _this3.props.image;
+				// define form values to send
 
-    var form = {
-      name: _this3.state.name,
-      description: _this3.state.description,
-      updated_by: _this3.state.updated_by._id, // send user_id
-      category: _this3.state.category,
-      tags: _this3.state.tags,
-      color_profile: _this3.state.color
-    };
-    // possible empty fields
-    if (!_this3.props.image) form.created_by = _this3.props.user._id;
-    _this3.state.displays.length > 0 ? form.displays = _this3.state.displays : form.displays = [];
-    _this3.state.groups.length > 0 ? form.groups = _this3.state.groups : form.groups = [];
-    // HTTP request
-    (0, _axios2.default)({
-      method: image ? 'put' : 'post',
-      url: image ? image.url : 'http://localhost:4000/images',
-      data: form,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + _this3.props.token
-      }
-    }).then(function (res) {
-      if (res.status == 201 || res.status == 200) {
-        _this3.props.notify('Imagen configurada con éxito', 'notify-success', 'check', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        return _this3.props.update(_this3.props.user); // update dataset
-      }
-    }).then(function (res) {
-      _this3.setState({ redirect: true });
-      return res;
-    }).catch(function (err) {
-      console.log(err);
-      return _this3.props.notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-    });
-  };
+				var form = {
+						name: _this3.state.name,
+						description: _this3.state.description,
+						updated_by: _this3.state.updated_by._id, // send user_id
+						category: _this3.state.category,
+						tags: _this3.state.tags,
+						color_profile: _this3.state.color
+						// possible empty fields
+				};if (!_this3.props.image) form.created_by = _this3.props.user._id;
+				_this3.state.displays.length > 0 ? form.displays = _this3.state.displays : form.displays = [];
+				_this3.state.groups.length > 0 ? form.groups = _this3.state.groups : form.groups = [];
+				// HTTP request
+				(0, _axios2.default)({
+						method: image ? 'put' : 'post',
+						url: image ? image.url : 'http://localhost:4000/images',
+						data: form,
+						headers: {
+								'Accept': 'application/json',
+								'Content-Type': 'application/json',
+								'Authorization': 'Bearer ' + _this3.props.token
+						}
+				}).then(function (res) {
+						if (res.status == 201 || res.status == 200) {
+								_this3.props.notify('Imagen configurada con éxito', 'notify-success', 'check', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+								_this3.props.update(_this3.props.user);
+						}
+				}).then(function (res) {
+						return _this3.setState({ redirect: true });
+				}).catch(function (err) {
+						return _this3.props.notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+				});
+		};
 };
-
-;
 
 /***/ }),
 /* 186 */
@@ -36451,7 +36446,7 @@ var _initialiseProps = function _initialiseProps() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.GroupForm = undefined;
 
@@ -36480,465 +36475,463 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* COMPONENTS */
 var GroupForm = exports.GroupForm = function (_Component) {
-  _inherits(GroupForm, _Component);
+	_inherits(GroupForm, _Component);
 
-  function GroupForm(props) {
-    _classCallCheck(this, GroupForm);
+	function GroupForm(props) {
+		_classCallCheck(this, GroupForm);
 
-    var _this = _possibleConstructorReturn(this, (GroupForm.__proto__ || Object.getPrototypeOf(GroupForm)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (GroupForm.__proto__ || Object.getPrototypeOf(GroupForm)).call(this, props));
 
-    _initialiseProps.call(_this);
+		_initialiseProps.call(_this);
 
-    var _this$props = _this.props,
-        group = _this$props.group,
-        user = _this$props.user;
+		var _this$props = _this.props,
+		    group = _this$props.group,
+		    user = _this$props.user;
 
-    _this.state = {
-      // form data stored in state
-      name: group ? group.name : '',
-      description: group ? group.description : '',
-      created_by: group ? group.created_by ? group.created_by : 'Usuario eliminado' : user,
-      updated_by: user.name,
-      tags: group ? group.tags : [],
-      active_image: group ? group.active_image ? group.active_image._id : '' : '',
-      images: group ? group.images.map(function (i) {
-        return i._id;
-      }) : [],
-      displays: group ? group.displays.map(function (d) {
-        return d._id;
-      }) : [],
-      // form options stored in state
-      optionsActiveImage: [],
-      // redirect variables
-      redirect: false,
-      location: '', // Redirect url
-      // error handling
-      error: null
-    };
-    return _this;
-  }
+		_this.state = {
+			// form data stored in state
+			name: group ? group.name : '',
+			description: group ? group.description : '',
+			created_by: group ? group.created_by ? group.created_by : 'Usuario eliminado' : user,
+			updated_by: user.name,
+			tags: group ? group.tags : [],
+			active_image: group ? group.active_image ? group.active_image._id : '' : '',
+			images: group ? group.images.map(function (image) {
+				return image._id;
+			}) : [],
+			displays: group ? group.displays.map(function (display) {
+				return display._id;
+			}) : [],
+			// form options stored in state
+			optionsActiveImage: [],
+			// redirect variables
+			redirect: false,
+			location: '', // Redirect url
+			// error handling
+			error: null
+		};
+		return _this;
+	}
 
-  /* INITIAL VALUES FOR FORM INPUTS */
-
-
-  _createClass(GroupForm, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var _props = this.props,
-          _props$data = _props.data,
-          displays = _props$data.displays,
-          devices = _props$data.devices,
-          images = _props$data.images,
-          group = _props.group;
-      // options for select inputs
-
-      var optionsActiveImage = images.filter(function (i) {
-        return _this2.state.images.find(function (c) {
-          return c == i._id;
-        });
-      }).map(function (i) {
-        return _react2.default.createElement(
-          'option',
-          { value: i._id, key: i._id },
-          i.name
-        );
-      });
-      // set state with initial values
-      this.setState({
-        optionsActiveImage: optionsActiveImage,
-        location: group ? '/groups/' + group._id : '/groups/'
-      });
-    }
-
-    /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
+	/* INITIAL VALUES FOR FORM INPUTS */
 
 
-    /* HANDLE MULTIPLE CHECKBOX */
-    // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
+	_createClass(GroupForm, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-    /* HANDLE SUBMIT */
+			var _props = this.props,
+			    _props$data = _props.data,
+			    displays = _props$data.displays,
+			    devices = _props$data.devices,
+			    images = _props$data.images,
+			    group = _props.group;
+			// options for select inputs
 
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
+			var optionsActiveImage = images.filter(function (image) {
+				return _this2.state.images.find(function (c) {
+					return c == image._id;
+				});
+			}).map(function (image) {
+				return _react2.default.createElement(
+					'option',
+					{ value: image._id, key: image._id },
+					image.name
+				);
+			});
+			// set state with initial values
+			this.setState({
+				optionsActiveImage: optionsActiveImage,
+				location: group ? '/groups/' + group._id : '/groups/'
+			});
+		}
 
-      var _props2 = this.props,
-          _props2$data = _props2.data,
-          devices = _props2$data.devices,
-          images = _props2$data.images,
-          groups = _props2$data.groups,
-          displays = _props2$data.displays,
-          group = _props2.group;
+		/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 
-      // Options
 
-      var optionsDisplays = displays.sort(function (a, b) {
-        return a.updated_at - b.updated_at;
-      }).map(function (d) {
-        return _react2.default.createElement(
-          'label',
-          { key: d._id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this3.handleCheckDisplays, type: 'checkbox', defaultChecked: _this3.state.displays.find(function (c) {
-              return c == d._id;
-            }), name: d._id, defaultValue: d._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            d.name
-          )
-        );
-      });
-      var optionsImages = images.sort(function (a, b) {
-        return a.updated_at - b.updated_at;
-      }).map(function (i) {
-        return _react2.default.createElement(
-          'label',
-          { key: i._id, className: 'custom-control custom-checkbox' },
-          _react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
-              return c == i._id;
-            }), name: i._id, defaultValue: i._id, className: 'custom-control-input' }),
-          _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-          _react2.default.createElement(
-            'span',
-            { className: 'custom-control-description' },
-            i.name
-          )
-        );
-      });
+		/* HANDLE MULTIPLE CHECKBOX */
+		// TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
-      // Render return
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                group ? _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-                  'Editar un grupo'
-                ) : _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-                  'A\xF1adir un nuevo Grupo'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item ml-2' },
-                group ? _react2.default.createElement(
-                  'button',
-                  { onClick: function onClick() {
-                      return _this3.handleSubmit();
-                    }, type: 'button', className: 'btn btn-outline-success' },
-                  _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
-                  'Guardar cambios'
-                ) : _react2.default.createElement(
-                  'button',
-                  { onClick: function onClick() {
-                      return _this3.handleSubmit();
-                    }, type: 'button', className: 'btn btn-outline-success' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
-                  'A\xF1adir'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'form',
-              { id: 'form' },
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'name' },
-                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                  'Nombre'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', value: this.state.name, onChange: this.handleInputChange, placeholder: 'Nombre del grupo' })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'description' },
-                  _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                  'Descripcion'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', name: 'description', value: this.state.description, onChange: this.handleInputChange, placeholder: 'Descripcion del Grupo' })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'active_image' },
-                  _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                  'Seleccionar la imagen activa'
-                ),
-                _react2.default.createElement(
-                  'select',
-                  { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
-                  _react2.default.createElement(
-                    'option',
-                    { value: '', key: 0 },
-                    'Sin imagen activa'
-                  ),
-                  this.state.optionsActiveImage
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'images' },
-                    _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-                    'Asociar una o varias im\xE1genes'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'custom-controls-stacked shadow' },
-                    optionsImages
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'displays' },
-                    _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-                    'Asociar uno o varios displays'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'custom-controls-stacked shadow' },
-                    optionsDisplays
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'tags' },
-                    _react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
-                    'Etiquetas'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'tags', value: this.state.tags, onChange: this.handleInputChange })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  this.state.tags.map(function (t, i) {
-                    return t.length > 1 ? _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn mr-1 btn-outline-group btn-tiny', key: i },
-                      t
-                    ) : '';
-                  })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaCreacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                    'Fecha de creaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaModificacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                    'Fecha de modificaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'creador' },
-                  _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-                  'Creador'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.created_by.name, readOnly: true })
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+		/* HANDLE SUBMIT */
 
-  return GroupForm;
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this3 = this;
+
+			var _props2 = this.props,
+			    _props2$data = _props2.data,
+			    devices = _props2$data.devices,
+			    images = _props2$data.images,
+			    groups = _props2$data.groups,
+			    displays = _props2$data.displays,
+			    group = _props2.group;
+
+			// Options
+
+			var optionsDisplays = displays.sort(function (a, b) {
+				return a.updated_at - b.updated_at;
+			}).map(function (display) {
+				return _react2.default.createElement(
+					'label',
+					{ key: display._id, className: 'custom-control custom-checkbox' },
+					_react2.default.createElement('input', { onChange: _this3.handleCheckDisplays, type: 'checkbox', defaultChecked: _this3.state.displays.find(function (c) {
+							return c == display._id;
+						}), name: display._id, defaultValue: display._id, className: 'custom-control-input' }),
+					_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+					_react2.default.createElement(
+						'span',
+						{ className: 'custom-control-description' },
+						display.name
+					)
+				);
+			});
+			var optionsImages = images.sort(function (a, b) {
+				return a.updated_at - b.updated_at;
+			}).map(function (image) {
+				return _react2.default.createElement(
+					'label',
+					{ key: image._id, className: 'custom-control custom-checkbox' },
+					_react2.default.createElement('input', { onChange: _this3.handleCheckImages, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
+							return c == image._id;
+						}), name: image._id, defaultValue: image._id, className: 'custom-control-input' }),
+					_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+					_react2.default.createElement(
+						'span',
+						{ className: 'custom-control-description' },
+						image.name
+					)
+				);
+			});
+
+			// Render return
+			if (this.state.redirect) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
+			} else {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card detalles' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								group ? _react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+									'Editar un grupo'
+								) : _react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+									'A\xF1adir un nuevo Grupo'
+								)
+							),
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item ml-2' },
+								group ? _react2.default.createElement(
+									'button',
+									{ onClick: function onClick() {
+											return _this3.handleSubmit();
+										}, type: 'button', className: 'btn btn-outline-success' },
+									_react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+									'Guardar cambios'
+								) : _react2.default.createElement(
+									'button',
+									{ onClick: function onClick() {
+											return _this3.handleSubmit();
+										}, type: 'button', className: 'btn btn-outline-success' },
+									_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
+									'A\xF1adir'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'form',
+							{ id: 'form' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-group' },
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'name' },
+									_react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+									'Nombre'
+								),
+								_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', value: this.state.name, onChange: this.handleInputChange, placeholder: 'Nombre del grupo' })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-group' },
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'description' },
+									_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+									'Descripcion'
+								),
+								_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', name: 'description', value: this.state.description, onChange: this.handleInputChange, placeholder: 'Descripcion del Grupo' })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-group' },
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'active_image' },
+									_react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+									'Seleccionar la imagen activa'
+								),
+								_react2.default.createElement(
+									'select',
+									{ className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
+									_react2.default.createElement(
+										'option',
+										{ value: '', key: 0 },
+										'Sin imagen activa'
+									),
+									this.state.optionsActiveImage
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-row' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group col' },
+									_react2.default.createElement(
+										'label',
+										{ htmlFor: 'images' },
+										_react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+										'Asociar una o varias im\xE1genes'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'custom-controls-stacked shadow' },
+										optionsImages
+									)
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group col' },
+									_react2.default.createElement(
+										'label',
+										{ htmlFor: 'displays' },
+										_react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+										'Asociar uno o varios displays'
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'custom-controls-stacked shadow' },
+										optionsDisplays
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-row' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group col' },
+									_react2.default.createElement(
+										'label',
+										{ htmlFor: 'tags' },
+										_react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
+										'Etiquetas'
+									),
+									_react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'tags', value: this.state.tags, onChange: this.handleInputChange })
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-row' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group col' },
+									this.state.tags.map(function (t, i) {
+										return t.length > 1 ? _react2.default.createElement(
+											'button',
+											{ type: 'button', className: 'btn mr-1 btn-outline-group btn-tiny', key: i },
+											t
+										) : '';
+									})
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-row' },
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group col-md-6' },
+									_react2.default.createElement(
+										'label',
+										{ htmlFor: 'fechaCreacion' },
+										_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+										'Fecha de creaci\xF3n'
+									),
+									_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group col-md-6' },
+									_react2.default.createElement(
+										'label',
+										{ htmlFor: 'fechaModificacion' },
+										_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+										'Fecha de modificaci\xF3n'
+									),
+									_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'form-group' },
+								_react2.default.createElement(
+									'label',
+									{ htmlFor: 'creador' },
+									_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+									'Creador'
+								),
+								_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.created_by.name, readOnly: true })
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
+
+	return GroupForm;
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this4 = this;
+	var _this4 = this;
 
-  this.handleInputChange = function (event) {
-    var target = event.target;
-    var name = target.name;
+	this.handleInputChange = function (event) {
+		var target = event.target;
+		var name = target.name;
 
-    if (name === 'tags') {
-      var value = target.value.split(','); // TODO: better string to array conversion
-    } else {
-      var value = target.value;
-    }
+		if (name === 'tags') {
+			var value = target.value.split(','); // TODO: better string to array conversion
+		} else {
+			var value = target.value;
+		}
 
-    _this4.setState(_defineProperty({}, name, value));
-  };
+		_this4.setState(_defineProperty({}, name, value));
+	};
 
-  this.handleCheckDisplays = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this4.state.displays.find(function (c) {
-      return c == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this4.state.displays;
-      prevState.push(value);
-      _this4.setState({ displays: prevState });
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState = _this4.state.displays;
-      _prevState.splice(_prevState.indexOf(value), 1);
-      _this4.setState({ displays: _prevState });
-    }
-  };
+	this.handleCheckDisplays = function (event) {
+		// get value from the checkbox
+		var target = event.target;
+		var value = target.value;
+		// check if the checkbox has been selected
+		if (!_this4.state.displays.find(function (c) {
+			return c == value;
+		})) {
+			// check if value is stored in state
+			// if it is NOT stored, save the state, push the new value and save back the new state
+			var prevState = _this4.state.displays;
+			prevState.push(value);
+			_this4.setState({ displays: prevState });
+		} else {
+			// if it IS stored, save the state, splice the old value and save back the new state
+			var _prevState = _this4.state.displays;
+			_prevState.splice(_prevState.indexOf(value), 1);
+			_this4.setState({ displays: _prevState });
+		}
+	};
 
-  this.handleCheckImages = function (event) {
-    // get value from the checkbox
-    var target = event.target;
-    var value = target.value;
-    // check if the checkbox has been selected
-    if (!_this4.state.images.find(function (c) {
-      return c == value;
-    })) {
-      // check if value is stored in state
-      // if it is NOT stored, save the state, push the new value and save back the new state
-      var prevState = _this4.state.images;
-      prevState.push(value);
-      _this4.setState({ images: prevState });
-      target.checked = true;
-    } else {
-      // if it IS stored, save the state, splice the old value and save back the new state
-      var _prevState2 = _this4.state.images;
-      _prevState2.splice(_prevState2.indexOf(value), 1);
-      _this4.setState({ images: _prevState2 });
-      target.checked = false;
-    }
-    if (_this4.state.images.length == 1) {
-      // set when first image is selected
-      _this4.setState({ active_image: _this4.state.images[0] });
-    } else if (_this4.state.images.length == 0) {
-      // if there are no images deselect
-      _this4.setState({ active_image: '' });
-    }
-    _this4.setState({ optionsActiveImage: _this4.props.images.filter(function (i) {
-        return _this4.state.images.find(function (c) {
-          return c == i._id;
-        });
-      }).map(function (i) {
-        return _react2.default.createElement(
-          'option',
-          { value: i._id, key: i._id },
-          i.name
-        );
-      }) });
-  };
+	this.handleCheckImages = function (event) {
+		// get value from the checkbox
+		var target = event.target;
+		var value = target.value;
+		// check if the checkbox has been selected
+		if (!_this4.state.images.find(function (c) {
+			return c == value;
+		})) {
+			// check if value is stored in state
+			// if it is NOT stored, save the state, push the new value and save back the new state
+			var prevState = _this4.state.images;
+			prevState.push(value);
+			_this4.setState({ images: prevState });
+			target.checked = true;
+		} else {
+			// if it IS stored, save the state, splice the old value and save back the new state
+			var _prevState2 = _this4.state.images;
+			_prevState2.splice(_prevState2.indexOf(value), 1);
+			_this4.setState({ images: _prevState2 });
+			target.checked = false;
+		}
+		if (_this4.state.images.length == 1) {
+			// set when first image is selected
+			_this4.setState({ active_image: _this4.state.images[0] });
+		} else if (_this4.state.images.length == 0) {
+			// if there are no images deselect
+			_this4.setState({ active_image: '' });
+		}
+		_this4.setState({
+			optionsActiveImage: _this4.props.images.filter(function (image) {
+				return _this4.state.images.find(function (c) {
+					return c == image._id;
+				});
+			}).map(function (image) {
+				return _react2.default.createElement(
+					'option',
+					{ value: image._id, key: image._id },
+					image.name
+				);
+			})
+		});
+	};
 
-  this.handleSubmit = function () {
-    // get image if any
-    var group = _this4.props.group;
-    // define form values to send
+	this.handleSubmit = function () {
+		// get image if any
+		var group = _this4.props.group;
+		// define form values to send
 
-    var form = {
-      name: _this4.state.name,
-      description: _this4.state.description,
-      updated_by: _this4.state.updated_by._id, // send user_id
-      tags: _this4.state.tags
-    };
-    // possible empty fields
-    if (!_this4.props.group) form.created_by = _this4.props.user._id;
-    _this4.state.active_image != '' ? form.active_image = _this4.state.active_image : form.active_image = null;
-    _this4.state.displays.length > 0 ? form.displays = _this4.state.displays : form.displays = [];
-    _this4.state.images.length > 0 ? form.images = _this4.state.images : form.images = [];
-    // HTTP request
-    (0, _axios2.default)({
-      method: group ? 'put' : 'post',
-      url: group ? group.url : 'http://localhost:4000/groups',
-      data: form,
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this4.props.token }
-    }).then(function (res) {
-      if (res.status == 201) {
-        _this4.props.notify('Grupo configurada con éxito', 'notify-success', 'check', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        var action = group ? 'edit' : 'add';
-        return _this4.props.update('groups', res.resourceId, action, res.data.resource); // update dataset
-      }
-    }).then(function (res) {
-      _this4.setState({ redirect: true });
-      return res;
-    }).catch(function (err) {
-      console.log(err);
-      return _this4.props.notify('Error al configurar el grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-    });
-  };
+		var form = {
+			name: _this4.state.name,
+			description: _this4.state.description,
+			updated_by: _this4.state.updated_by._id, // send user_id
+			tags: _this4.state.tags
+			// possible empty fields
+		};if (!group) form.created_by = _this4.props.user._id;
+		_this4.state.active_image != '' ? form.active_image = _this4.state.active_image : form.active_image = null;
+		_this4.state.displays.length > 0 ? form.displays = _this4.state.displays : form.displays = [];
+		_this4.state.images.length > 0 ? form.images = _this4.state.images : form.images = [];
+		// HTTP request
+		(0, _axios2.default)({
+			method: group ? 'put' : 'post',
+			url: group ? group.url : 'http://localhost:4000/groups',
+			data: form,
+			headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this4.props.token }
+		}).then(function (res) {
+			if (res.status == 201) {
+				_this4.props.notify('Grupo configurada con éxito', 'notify-success', 'check', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+				var action = group ? 'edit' : 'add';
+				_this4.props.update('groups', res.resourceId, action, res.data.resource); // update dataset
+			}
+		}).then(function (res) {
+			return _this4.setState({ redirect: true });
+		}).catch(function (err) {
+			return _this4.props.notify('Error al configurar el grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+		});
+	};
 };
-
-;
 
 /***/ }),
 /* 187 */
@@ -36948,7 +36941,7 @@ var _initialiseProps = function _initialiseProps() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+		value: true
 });
 exports.GatewayForm = undefined;
 
@@ -36977,312 +36970,308 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* COMPONENTS */
 var GatewayForm = exports.GatewayForm = function (_Component) {
-  _inherits(GatewayForm, _Component);
+		_inherits(GatewayForm, _Component);
 
-  function GatewayForm(props) {
-    _classCallCheck(this, GatewayForm);
+		function GatewayForm(props) {
+				_classCallCheck(this, GatewayForm);
 
-    var _this = _possibleConstructorReturn(this, (GatewayForm.__proto__ || Object.getPrototypeOf(GatewayForm)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (GatewayForm.__proto__ || Object.getPrototypeOf(GatewayForm)).call(this, props));
 
-    _initialiseProps.call(_this);
+				_initialiseProps.call(_this);
 
-    var _this$props = _this.props,
-        gateway = _this$props.gateway,
-        user = _this$props.user,
-        locations = _this$props.locations;
+				var _this$props = _this.props,
+				    gateway = _this$props.gateway,
+				    user = _this$props.user,
+				    locations = _this$props.locations;
 
-    _this.state = {
-      id: gateway ? gateway.id : '',
-      name: gateway ? gateway.name : '',
-      description: gateway ? gateway.description : '',
-      created_by: gateway ? gateway.created_by ? gateway.created_by.name : 'Usuario eliminado' : user.name,
-      updated_by: user.name,
-      created_at: gateway ? moment(gateway.created_at) : moment(),
-      updated_at: moment(),
-      mac: gateway ? gateway.mac : '',
-      port: gateway ? gateway.port : '',
-      ip: gateway ? gateway.ip : '',
-      location: gateway ? gateway.location._id : locations[0]._id,
+				_this.state = {
+						id: gateway ? gateway.id : '',
+						name: gateway ? gateway.name : '',
+						description: gateway ? gateway.description : '',
+						created_by: gateway ? gateway.created_by ? gateway.created_by.name : 'Usuario eliminado' : user.name,
+						updated_by: user.name,
+						created_at: gateway ? moment(gateway.created_at) : moment(),
+						updated_at: moment(),
+						mac: gateway ? gateway.mac : '',
+						port: gateway ? gateway.port : '',
+						ip: gateway ? gateway.ip : '',
+						location: gateway ? gateway.location._id : locations[0]._id,
 
-      redirect: false,
-      redirect_location: '/gateways',
-      error: null
-    };
-    return _this;
-  }
+						redirect: false,
+						redirect_location: '/gateways',
+						error: null
+				};
+				return _this;
+		}
 
-  /* INITIAL VALUES FOR FORM INPUTS */
-
-
-  _createClass(GatewayForm, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _props = this.props,
-          gateways = _props.gateways,
-          gateway = _props.gateway;
-      // set state with initial values
-
-      this.setState({
-        redirect_location: gateway ? '/gateways/' + gateway._id : '/gateways' // Redirect url
-      });
-    }
-
-    /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
+		/* INITIAL VALUES FOR FORM INPUTS */
 
 
-    /* HANDLE SUMBIT (PUT OR POST) */
+		_createClass(GatewayForm, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var _props = this.props,
+						    gateways = _props.gateways,
+						    gateway = _props.gateway;
+						// set state with initial values
 
-  }, {
-    key: 'render',
+						this.setState({
+								redirect_location: gateway ? '/gateways/' + gateway._id : '/gateways' // Redirect url
+						});
+				}
+
+				/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 
 
-    /* RENDER COMPONENT */
-    value: function render() {
+				/* HANDLE SUMBIT (PUT OR POST) */
 
-      // Options
-      var optionsLocation = this.props.locations.sort(function (a, b) {
-        return a.id - b.id;
-      }).map(function (l, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: l._id, key: i },
-          l.name
-        );
-      });
+		}, {
+				key: 'render',
 
-      // Render return
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.redirect_location });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                this.props.gateway ? _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-                  'Editar una puerta de enlace'
-                ) : _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-                  'A\xF1adir una nueva puerta de enlace'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item ml-2' },
-                this.props.gateway ? _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                  _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
-                  'Guardar cambios'
-                ) : _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                  _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
-                  'A\xF1adir'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'form',
-              { id: 'form' },
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'nombre' },
-                  _react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
-                  'Nombre'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la puerta de enlace', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'descripcion' },
-                  _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                  'Descripcion'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'mac' },
-                    _react2.default.createElement('i', { className: 'fa fa-server mr-2' }),
-                    'Direcci\xF3n MAC'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac', value: this.state.mac, onChange: this.handleInputChange })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'ip' },
-                    _react2.default.createElement('i', { className: 'fa fa-wifi mr-2' }),
-                    'Direcci\xF3n IP'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'ip', placeholder: 'Direcci\xF3n IP de la puerta de enlace', name: 'ip', value: this.state.ip, onChange: this.handleInputChange })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'port' },
-                    _react2.default.createElement('i', { className: 'fa fa-exchange mr-2' }),
-                    'Puerto'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'port', placeholder: 'Puerto de la puerta de enlace', name: 'mac', value: this.state.port, onChange: this.handleInputChange })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'location' },
-                    _react2.default.createElement('i', { className: 'fa fa-map-marker mr-2' }),
-                    'Location'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'location', onChange: this.handleInputChange },
-                      optionsLocation
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'created_by' },
-                  _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-                  'Creador'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'created_by', name: 'created_by', value: this.state.created_by, readOnly: true })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaCreacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                    'Fecha de creaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaModificacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-                    'Fecha de modificaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
-                )
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
 
-  return GatewayForm;
+				/* RENDER COMPONENT */
+				value: function render() {
+
+						// Options
+						var optionsLocation = this.props.data.locations.sort(function (a, b) {
+								return a.name - b.name;
+						}).map(function (location, index) {
+								return _react2.default.createElement(
+										'option',
+										{ value: location._id, key: index },
+										location.name
+								);
+						});
+
+						// Render return
+						if (this.state.redirect) {
+								return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.redirect_location });
+						} else {
+								return _react2.default.createElement(
+										'div',
+										{ className: 'card detalles' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-header' },
+												_react2.default.createElement(
+														'ul',
+														{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item mr-auto' },
+																this.props.gateway ? _react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+																		'Editar una puerta de enlace'
+																) : _react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+																		'A\xF1adir una nueva puerta de enlace'
+																)
+														),
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item ml-2' },
+																this.props.gateway ? _react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
+																		_react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+																		'Guardar cambios'
+																) : _react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
+																		'A\xF1adir'
+																)
+														)
+												)
+										),
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-body' },
+												_react2.default.createElement(
+														'form',
+														{ id: 'form' },
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'nombre' },
+																		_react2.default.createElement('i', { className: 'fa fa-sitemap mr-2' }),
+																		'Nombre'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la puerta de enlace', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'descripcion' },
+																		_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+																		'Descripcion'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'mac' },
+																				_react2.default.createElement('i', { className: 'fa fa-server mr-2' }),
+																				'Direcci\xF3n MAC'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac', value: this.state.mac, onChange: this.handleInputChange })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'ip' },
+																				_react2.default.createElement('i', { className: 'fa fa-wifi mr-2' }),
+																				'Direcci\xF3n IP'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'ip', placeholder: 'Direcci\xF3n IP de la puerta de enlace', name: 'ip', value: this.state.ip, onChange: this.handleInputChange })
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'port' },
+																				_react2.default.createElement('i', { className: 'fa fa-exchange mr-2' }),
+																				'Puerto'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'port', placeholder: 'Puerto de la puerta de enlace', name: 'mac', value: this.state.port, onChange: this.handleInputChange })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'location' },
+																				_react2.default.createElement('i', { className: 'fa fa-map-marker mr-2' }),
+																				'Location'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				null,
+																				_react2.default.createElement(
+																						'select',
+																						{ className: 'custom-select', name: 'location', onChange: this.handleInputChange },
+																						optionsLocation
+																				)
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'created_by' },
+																		_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+																		'Creador'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'created_by', name: 'created_by', value: this.state.created_by, readOnly: true })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaCreacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+																				'Fecha de creaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaModificacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+																				'Fecha de modificaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+																)
+														)
+												)
+										)
+								);
+						}
+				}
+		}]);
+
+		return GatewayForm;
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
+		var _this2 = this;
 
-  this.handleInputChange = function (event) {
-    var target = event.target;
-    var name = target.name;
-    var value = target.value;
+		this.handleInputChange = function (event) {
+				var target = event.target;
+				var name = target.name;
+				var value = target.value;
 
-    _this2.setState(_defineProperty({}, name, value));
-  };
+				_this2.setState(_defineProperty({}, name, value));
+		};
 
-  this.handleSubmit = function () {
-    var gateway = _this2.props.gateway;
-    // define form values to send
+		this.handleSubmit = function () {
+				var gateway = _this2.props.gateway;
+				// define form values to send
 
-    var form = {
-      id: _this2.state.id,
-      name: _this2.state.name,
-      description: _this2.state.description,
-      updated_by: _this2.state.updated_by._id, // send user_id
-      mac: _this2.state.mac,
-      ip: _this2.state.ip,
-      port: _this2.state.port,
-      location: _this2.state.location
-    };
-    // possible empty fields
-    if (!_this2.props.gateway) form.created_by = _this2.props.user._id;
-    // HTTP request
-    (0, _axios2.default)({
-      method: gateway ? 'put' : 'post',
-      url: gateway ? gateway.url : 'http://localhost:4000/gateways',
-      data: form,
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-    }).then(function (res) {
-      if (res.status == 201 || res.status == 200) {
-        _this2.props.notify('Puerta de enlace configurada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        return _this2.props.update(_this2.props.user); // update dataset
-      }
-    }).then(function (res) {
-      _this2.setState({ redirect: true });
-      return res;
-    }).catch(function (err) {
-      console.log(err);
-      return _this2.props.notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-    });
-  };
+				var form = {
+						id: _this2.state.id,
+						name: _this2.state.name,
+						description: _this2.state.description,
+						updated_by: _this2.state.updated_by._id, // send user_id
+						mac: _this2.state.mac,
+						ip: _this2.state.ip,
+						port: _this2.state.port,
+						location: _this2.state.location
+						// possible empty fields
+				};if (!_this2.props.gateway) form.created_by = _this2.props.user._id;
+				// HTTP request
+				(0, _axios2.default)({
+						method: gateway ? 'put' : 'post',
+						url: gateway ? gateway.url : 'http://localhost:4000/gateways',
+						data: form,
+						headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+				}).then(function (res) {
+						if (res.status == 201 || res.status == 200) {
+								_this2.props.notify('Puerta de enlace configurada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+								return _this2.props.update(_this2.props.user); // update dataset
+						}
+				}).then(function (res) {
+						return _this2.setState({ redirect: true });
+				}).catch(function (err) {
+						return _this2.props.notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+				});
+		};
 };
-
-;
 
 /***/ }),
 /* 188 */
@@ -37292,7 +37281,7 @@ var _initialiseProps = function _initialiseProps() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+		value: true
 });
 exports.DeviceForm = undefined;
 
@@ -37321,320 +37310,321 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* COMPONENTS */
 var DeviceForm = exports.DeviceForm = function (_Component) {
-  _inherits(DeviceForm, _Component);
+		_inherits(DeviceForm, _Component);
 
-  function DeviceForm(props) {
-    _classCallCheck(this, DeviceForm);
+		function DeviceForm(props) {
+				_classCallCheck(this, DeviceForm);
 
-    var _this = _possibleConstructorReturn(this, (DeviceForm.__proto__ || Object.getPrototypeOf(DeviceForm)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (DeviceForm.__proto__ || Object.getPrototypeOf(DeviceForm)).call(this, props));
 
-    _initialiseProps.call(_this);
+				_initialiseProps.call(_this);
 
-    var _this$props = _this.props,
-        device = _this$props.device,
-        user = _this$props.user,
-        resolutions = _this$props.resolutions,
-        gateways = _this$props.gateways,
-        userGroups = _this$props.userGroups;
+				var _this$props = _this.props,
+				    device = _this$props.device,
+				    user = _this$props.user,
+				    _this$props$data = _this$props.data,
+				    screens = _this$props$data.screens,
+				    gateways = _this$props$data.gateways,
+				    userGroups = _this$props$data.userGroups;
 
-    _this.state = {
-      name: device.name,
-      description: device.description,
-      updated_by: user.name,
-      created_at: moment(device.created_at),
-      updated_at: moment(),
-      mac: device.mac,
-      pref_gateway: device.pref_gateway ? device.pref_gateway._id : gateways[0]._id,
-      userGroup: device.userGroup ? device.userGroup._id : '',
+				_this.state = {
+						name: device.name,
+						description: device.description,
+						updatedBy: user.name,
+						createdAt: moment(device.created_at),
+						updatedAt: moment(),
+						mac: device.mac,
+						prefGateway: device.pref_gateway ? device.pref_gateway._id : gateways[0]._id,
+						userGroup: device.userGroup ? device.userGroup._id : '',
 
-      redirect: false,
-      redirect_location: '/devices',
-      error: null
-    };
-    return _this;
-  }
+						redirect: false,
+						redirectLocation: '/devices',
+						error: null
+				};
+				return _this;
+		}
 
-  /* INITIAL VALUES FOR FORM INPUTS */
-
-
-  _createClass(DeviceForm, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _props = this.props,
-          devices = _props.devices,
-          device = _props.device;
-      // set state with initial values
-
-      this.setState({
-        redirect_location: '/devices/' + device._id // Redirect url
-      });
-    }
-
-    /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
+		/* INITIAL VALUES FOR FORM INPUTS */
 
 
-    /* HANDLE SUBMIT (PUT OR POST) */
+		_createClass(DeviceForm, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var device = this.props.device;
+						// set state with initial values
 
-  }, {
-    key: 'render',
+						this.setState({
+								redirectLocation: '/devices/' + device._id
+						});
+				}
+
+				/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 
 
-    /* RENDER COMPONENT */
-    value: function render() {
+				/* HANDLE SUBMIT (PUT OR POST) */
 
-      // Options
-      var optionsGateway = this.props.gateways.map(function (g, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: g._id, key: i },
-          g.name
-        );
-      });
-      var optionsUserGroup = this.props.userGroups.map(function (u, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: u._id, key: i },
-          u.name
-        );
-      });
+		}, {
+				key: 'render',
 
-      var _props2 = this.props,
-          screens = _props2.screens,
-          device = _props2.device;
 
-      var screen = screens.find(function (r) {
-        return r.screen_code == device.screen;
-      });
-      var screen_name = screen.name || "No se encuentra la pantalla (código: " + device.screen + " )";
+				/* RENDER COMPONENT */
+				value: function render() {
+						var _props = this.props,
+						    device = _props.device,
+						    _props$data = _props.data,
+						    gateways = _props$data.gateways,
+						    screens = _props$data.screens,
+						    userGroups = _props$data.userGroups;
 
-      // Render return
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.redirect_location });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-fw fa-pencil mr-3', 'aria-hidden': 'true' }),
-                  'Configurar un dispositivo f\xEDsico'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item ml-2' },
-                _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
-                  _react2.default.createElement('i', { className: 'fa  fa-fw fa-floppy-o mr-2', 'aria-hidden': 'true' }),
-                  'Guardar cambios'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'form',
-              { id: 'form' },
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'nombre' },
-                  _react2.default.createElement('i', { className: 'fa fa-fw fa-tablet mr-2' }),
-                  'Nombre'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del dispositivo f\xEDsico', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'descripcion' },
-                  _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2' }),
-                  'Descripcion'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'mac' },
-                  _react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2' }),
-                  'Direcci\xF3n MAC'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac', value: this.state.mac, readOnly: true })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'screen' },
-                    _react2.default.createElement('i', { className: 'fa fa-fw fa-tint mr-2' }),
-                    'Pantalla'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'screen', name: 'screen', value: screen_name, readOnly: true })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'gateway' },
-                    _react2.default.createElement('i', { className: 'fa fa-fw fa-sitemap mr-2' }),
-                    'Puerta de enlace preferida'
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                      'select',
-                      { className: 'custom-select', name: 'gateway', value: this.state.pref_gateway, onChange: this.handleInputChange },
-                      optionsGateway
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'userGroup' },
-                  _react2.default.createElement('i', { className: 'fa fa-fw fa-users mr-2' }),
-                  'Grupo de gesti\xF3n del dispositivo'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  null,
-                  _react2.default.createElement(
-                    'select',
-                    { className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
-                    _react2.default.createElement(
-                      'option',
-                      { value: '', key: '0' },
-                      'Ninguno seleccionado'
-                    ),
-                    optionsUserGroup
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'updated_by' },
-                  _react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2' }),
-                  'Ultima modificaci\xF3n por'
-                ),
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'updated_by', name: 'updated_by', value: this.state.updated_by, readOnly: true })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-row' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaCreacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2' }),
-                    'Fecha de creaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group col-md-6' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'fechaModificacion' },
-                    _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2' }),
-                    'Fecha de modificaci\xF3n'
-                  ),
-                  _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
-                )
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+						// Options
 
-  return DeviceForm;
+						var optionsGateway = gateways.map(function (gateway, index) {
+								return _react2.default.createElement(
+										'option',
+										{ value: gateway._id, key: index },
+										gateway.name
+								);
+						});
+						var optionsUserGroup = userGroups.map(function (userGroup, index) {
+								return _react2.default.createElement(
+										'option',
+										{ value: userGroup._id, key: index },
+										userGroup.name
+								);
+						});
+
+						var screen = screens.find(function (screen) {
+								return screen.screen_code == device.screen;
+						});
+						var screenName = screen ? screen.name : 'No se encuentra la pantalla (código: ' + device.screen + ' )';
+
+						// Render return
+						if (this.state.redirect) {
+								return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.redirectLocation });
+						} else {
+								return _react2.default.createElement(
+										'div',
+										{ className: 'card detalles' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-header' },
+												_react2.default.createElement(
+														'ul',
+														{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item mr-auto' },
+																_react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-fw fa-pencil mr-3', 'aria-hidden': 'true' }),
+																		'Configurar un dispositivo f\xEDsico'
+																)
+														),
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item ml-2' },
+																_react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-outline-primary' },
+																		_react2.default.createElement('i', { className: 'fa  fa-fw fa-floppy-o mr-2', 'aria-hidden': 'true' }),
+																		'Guardar cambios'
+																)
+														)
+												)
+										),
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-body' },
+												_react2.default.createElement(
+														'form',
+														{ id: 'form' },
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'nombre' },
+																		_react2.default.createElement('i', { className: 'fa fa-fw fa-tablet mr-2' }),
+																		'Nombre'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del dispositivo f\xEDsico', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'descripcion' },
+																		_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2' }),
+																		'Descripcion'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la puerta de enlace', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'mac' },
+																		_react2.default.createElement('i', { className: 'fa fa-fw fa-server mr-2' }),
+																		'Direcci\xF3n MAC'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'mac', placeholder: 'Direcci\xF3n MAC de la puerta de enlace', name: 'mac', value: this.state.mac, readOnly: true })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'screen' },
+																				_react2.default.createElement('i', { className: 'fa fa-fw fa-tint mr-2' }),
+																				'Pantalla'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'screen', name: 'screen', value: screenName, readOnly: true })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'gateway' },
+																				_react2.default.createElement('i', { className: 'fa fa-fw fa-sitemap mr-2' }),
+																				'Puerta de enlace preferida'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				null,
+																				_react2.default.createElement(
+																						'select',
+																						{ className: 'custom-select', name: 'gateway', value: this.state.prefGateway, onChange: this.handleInputChange },
+																						optionsGateway
+																				)
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'userGroup' },
+																		_react2.default.createElement('i', { className: 'fa fa-fw fa-users mr-2' }),
+																		'Grupo de gesti\xF3n del dispositivo'
+																),
+																_react2.default.createElement(
+																		'div',
+																		null,
+																		_react2.default.createElement(
+																				'select',
+																				{ className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
+																				_react2.default.createElement(
+																						'option',
+																						{ value: '', key: '0' },
+																						'Ninguno seleccionado'
+																				),
+																				optionsUserGroup
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'updated_by' },
+																		_react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2' }),
+																		'Ultima modificaci\xF3n por'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'updated_by', name: 'updated_by', value: this.state.updatedBy, readOnly: true })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaCreacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2' }),
+																				'Fecha de creaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'created_at ', value: moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaModificacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2' }),
+																				'Fecha de modificaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updated_at', value: moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: true })
+																)
+														)
+												)
+										)
+								);
+						}
+				}
+		}]);
+
+		return DeviceForm;
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this2 = this;
+		var _this2 = this;
 
-  this.handleInputChange = function (event) {
-    var target = event.target;
-    var name = target.name;
-    var value = target.value;
+		this.handleInputChange = function (event) {
+				var target = event.target;
+				var name = target.name;
+				var value = target.value;
 
-    _this2.setState(_defineProperty({}, name, value));
-  };
+				_this2.setState(_defineProperty({}, name, value));
+		};
 
-  this.handleSubmit = function () {
-    var device = _this2.props.device;
-    // define form values to send
+		this.handleSubmit = function () {
+				var device = _this2.props.device;
+				// define form values to send
 
-    var form = {
-      name: _this2.state.name,
-      description: _this2.state.description,
-      updated_by: _this2.state.updated_by._id, // send user_id
-      pref_gateway: _this2.state.pref_gateway,
-      mac: _this2.state.mac
-    };
-    if (_this2.state.userGroup) form.userGroup = _this2.state.userGroup;
-    // HTTP request
-    (0, _axios2.default)({
-      method: 'put',
-      url: device.url,
-      data: form,
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
-    }).then(function (res) {
-      if (res.status == 201 || res.status == 200) {
-        _this2.props.notify('Dispositivo configurado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-        return _this2.props.update(_this2.props.user); // update dataset
-      }
-    }).then(function (res) {
-      _this2.setState({ redirect: true });
-      return res;
-    }).catch(function (err) {
-      console.log(err);
-      return _this2.props.notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-    });
-  };
+				var form = {
+						name: _this2.state.name,
+						description: _this2.state.description,
+						updated_by: _this2.state.updated_by._id, // send user_id
+						pref_gateway: _this2.state.prefGateway,
+						mac: _this2.state.mac
+				};
+				if (_this2.state.userGroup) form.userGroup = _this2.state.userGroup; // FIXME: include it within the declaration of form somehow
+				// HTTP request
+				(0, _axios2.default)({
+						method: 'put',
+						url: device.url,
+						data: form,
+						headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+				}).then(function (res) {
+						if (res.status == 201 || res.status == 200) {
+								_this2.props.notify('Dispositivo configurado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+								return _this2.props.update(_this2.props.user); // update dataset
+						}
+				}).then(function (res) {
+						_this2.setState({ redirect: true });
+						return res;
+				}).catch(function (err) {
+						console.log(err);
+						return _this2.props.notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+				});
+		};
 };
-
-;
 
 /***/ }),
 /* 189 */
@@ -37644,7 +37634,7 @@ var _initialiseProps = function _initialiseProps() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.Notification = undefined;
 
@@ -37652,24 +37642,24 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _icon = __webpack_require__(13);
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* COMPONENTS */
 /* IMPORT MODULES */
 var Notification = exports.Notification = function Notification(_ref) {
-  var text = _ref.text,
-      icon = _ref.icon,
-      spin = _ref.spin;
+	var text = _ref.text,
+	    icon = _ref.icon,
+	    spin = _ref.spin;
 
-  return _react2.default.createElement(
-    'div',
-    { className: 'text-center' },
-    _react2.default.createElement(_icon.Icon, { icon: icon, mr: '1', spin: spin }),
-    ' ',
-    text
-  );
+	return _react2.default.createElement(
+		'div',
+		{ className: 'text-center' },
+		_react2.default.createElement(_icon.Icon, { icon: icon, mr: '1', spin: spin }),
+		' ',
+		text
+	);
 };
 
 /* IMPORT COMPONENTS */
@@ -40213,59 +40203,56 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var App = function (_Component) {
-  _inherits(App, _Component);
+	_inherits(App, _Component);
 
-  function App(props) {
-    _classCallCheck(this, App);
+	function App(props) {
+		_classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.login = function (user, token, data) {
-      _this.setState({ isLoggedIn: true, user: user, token: token, data: data });
-    };
+		_this.login = function (user, token, data) {
+			_this.setState({ isLoggedIn: true, user: user, token: token, data: data });
+		};
 
-    _this.logout = function () {
-      _this.setState({ isLoggedIn: false, user: null, token: null, data: null });
-    };
+		_this.logout = function () {
+			_this.setState({ isLoggedIn: false, user: null, token: null, data: null });
+		};
 
-    _this.state = {
-      // user data
-      user: null,
-      token: null,
-      data: null,
-      // login flag
-      isLoggedIn: false,
-      // eror handling
-      error: null
-    };
-    return _this;
-  }
+		_this.state = {
+			user: null,
+			token: null,
+			data: null,
+			isLoggedIn: false,
+			error: null
+		};
+		return _this;
+	}
 
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      // get state
-      var _state = this.state,
-          isLoggedIn = _state.isLoggedIn,
-          error = _state.error;
-      // return for rendering
+	_createClass(App, [{
+		key: 'render',
+		value: function render() {
+			// get state
+			var _state = this.state,
+			    isLoggedIn = _state.isLoggedIn,
+			    error = _state.error;
+			// return for rendering
 
-      if (error) {
-        // TODO: error handling
-        return null;
-      } else if (!isLoggedIn) {
-        return _react2.default.createElement(_login.Login, { login: this.login });
-      } else {
-        return _react2.default.createElement(
-          _reactRouterDom.BrowserRouter,
-          { basename: '/' },
-          _react2.default.createElement(_main.Main, _extends({ logout: this.logout }, this.state))
-        );
-      }
-    }
-  }]);
+			if (error) {
+				// TODO: error handling
+				return null;
+			} else if (!isLoggedIn) {
+				return _react2.default.createElement(_login.Login, { login: this.login });
+			} else {
+				return _react2.default.createElement(
+					_reactRouterDom.BrowserRouter,
+					{ basename: '/' },
+					_react2.default.createElement(_main.Main, _extends({ logout: this.logout }, this.state))
+				);
+			}
+		}
+	}]);
 
-  return App;
+	return App;
 }(_react.Component);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
@@ -40283,7 +40270,7 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var m=__webpack_require__(10),n=__webpack_require__(25),p=__webpack_require__(12);
+var m=__webpack_require__(10),n=__webpack_require__(25),p=__webpack_require__(13);
 function q(a){for(var b=arguments.length-1,e="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)e+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(e+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var r={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function t(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}t.prototype.isReactComponent={};t.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?q("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};t.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function u(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}function v(){}v.prototype=t.prototype;var w=u.prototype=new v;w.constructor=u;m(w,t.prototype);w.isPureReactComponent=!0;function x(a,b,e){this.props=a;this.context=b;this.refs=n;this.updater=e||r}var y=x.prototype=new v;y.constructor=x;m(y,t.prototype);y.unstable_isAsyncReactComponent=!0;y.render=function(){return this.props.children};
@@ -40323,7 +40310,7 @@ var _assign = __webpack_require__(10);
 var invariant = __webpack_require__(18);
 var emptyObject = __webpack_require__(25);
 var warning = __webpack_require__(15);
-var emptyFunction = __webpack_require__(12);
+var emptyFunction = __webpack_require__(13);
 var checkPropTypes = __webpack_require__(28);
 
 // TODO: this is special because it gets imported during build.
@@ -41665,7 +41652,7 @@ module.exports = react;
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(1),m=__webpack_require__(40),A=__webpack_require__(10),B=__webpack_require__(12),ca=__webpack_require__(41),da=__webpack_require__(42),ea=__webpack_require__(43),ha=__webpack_require__(44),ia=__webpack_require__(45),C=__webpack_require__(25);
+var aa=__webpack_require__(1),m=__webpack_require__(40),A=__webpack_require__(10),B=__webpack_require__(13),ca=__webpack_require__(41),da=__webpack_require__(42),ea=__webpack_require__(43),ha=__webpack_require__(44),ia=__webpack_require__(45),C=__webpack_require__(25);
 function D(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:D("227");
 var la={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function qa(a,b){return(a&b)===b}
 var ra={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ra,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){sa.hasOwnProperty(f)?D("48",f):void 0;var g=f.toLowerCase(),k=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:qa(k,b.MUST_USE_PROPERTY),
@@ -41964,7 +41951,7 @@ var invariant = __webpack_require__(18);
 var warning = __webpack_require__(15);
 var ExecutionEnvironment = __webpack_require__(40);
 var _assign = __webpack_require__(10);
-var emptyFunction$1 = __webpack_require__(12);
+var emptyFunction$1 = __webpack_require__(13);
 var EventListener = __webpack_require__(41);
 var getActiveElement = __webpack_require__(42);
 var shallowEqual = __webpack_require__(43);
@@ -57498,7 +57485,7 @@ BrowserRouter.propTypes = {
 
 
 
-var emptyFunction = __webpack_require__(12);
+var emptyFunction = __webpack_require__(13);
 var invariant = __webpack_require__(18);
 var warning = __webpack_require__(15);
 var assign = __webpack_require__(10);
@@ -58047,7 +58034,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var emptyFunction = __webpack_require__(12);
+var emptyFunction = __webpack_require__(13);
 var invariant = __webpack_require__(18);
 var ReactPropTypesSecret = __webpack_require__(29);
 
@@ -61070,7 +61057,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.Main = undefined;
 
@@ -61117,185 +61104,215 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* CONFIGURE AXIOS */
 _axios2.default.defaults.baseURL = "http://localhost:4000/";
+
 /* IMPORT COMPONENTS */
 
 /* COMPONENT */
 var Main = exports.Main = function (_Component) {
-  _inherits(Main, _Component);
+	_inherits(Main, _Component);
 
-  function Main(props) {
-    _classCallCheck(this, Main);
+	function Main(props) {
+		_classCallCheck(this, Main);
 
-    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-    _this.update = function (resource, _id, action, data, devices) {
-      var stateData = _this.state.data;
-      switch (action) {
-        case 'remove':
-          var index = stateData[resource].findIndex(function (resource) {
-            return resource._id == _id;
-          });
-          stateData[resource].splice(index, 1);
-          devices && (stateData['devices'] = devices);
-        case 'add':
-          stateData[resource].push(data);
-          devices && (stateData['devices'] = devices);
-        case 'edit':
-          var index = stateData[resource].findIndex(function (resource) {
-            return resource._id == _id;
-          });
-          stateData[resource].splice(index, 1, data);
-          devices && (stateData['devices'] = devices);
-      }
-      _this.setState({ data: stateData });
-    };
+		_this.update = function (resourceType, _id, action, data, devices) {
+			var stateData = _this.state.data;
+			switch (action) {
+				case 'remove':
+					{
+						var index = stateData[resourceType].findIndex(function (resource) {
+							return resource._id == _id;
+						});
+						stateData[resourceType].splice(index, 1);
+						devices && (stateData['devices'] = devices);
+						break;
+					}
+				case 'add':
+					{
+						stateData[resourceType].push(data);
+						devices && (stateData['devices'] = devices);
+						break;
+					}
+				case 'edit':
+					{
+						var _index = stateData[resourceType].findIndex(function (resource) {
+							return resource._id == _id;
+						});
+						stateData[resourceType].splice(_index, 1, data);
+						devices && (stateData['devices'] = devices);
+						break;
+					}
+			}
+			_this.setState({ data: stateData });
+		};
 
-    _this.sync_api = function (token) {
-      _this.setState({ sync_status: 3, last_synced: (0, _moment2.default)() }); //syncing
-      _this.notify_sync('Buscando dispositivos...', 'notify-success', 'refresh');
-      _axios2.default.get('/update', {
-        timeout: 10000,
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      }).then(function (res) {
-        _this.update_sync('Pulse para sincronizar', 'notify-success', 'link', false);
-        _this.setState({ synced_devices: res.data, sync_status: 1, last_synced: (0, _moment2.default)() }); //synced_ready
-      }).catch(function (err) {
-        _this.update_sync('Error en la búsqueda', 'notify-error', 'times', true);
-        _this.setState({ syncing: false, sync_status: 0 }); //unsynced
-      });
-    };
+		_this.syncApi = function (token) {
+			// set state to syncing
+			_this.setState({ syncStatus: 3, lastSynced: (0, _moment2.default)() });
+			_this.notify_sync('Buscando dispositivos...', 'notify-success', 'refresh');
 
-    _this.sync = function () {
-      var devices = _this.state.synced_devices;
-      var data = _this.state.data;
-      data.devices = devices;
-      _this.update_sync('Datos sincronizados', 'notify-success', 'check', true);
-      _this.setState({ data: data, sync_status: 2 }); //synced
-    };
+			// request the update
+			_axios2.default.get('/update', {
+				timeout: 10000,
+				headers: {
+					Authorization: 'Bearer ' + token
+				}
+			}).then(function (res) {
+				// set state to syncReady
+				_this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false);
+				_this.setState({ syncedDevices: res.data, syncStatus: 1, lastSynced: (0, _moment2.default)() });
+			}).catch(function (err) {
+				// set state to UnSynced
+				_this.updateSync('Error en la búsqueda', 'notify-error', 'times', true);
+				_this.setState({ syncing: false, syncStatus: 0 });
+			});
+		};
 
-    _this.filterData = function (value) {
-      _this.setState({ filterValue: value });
-    };
+		_this.sync = function () {
+			var devices = _this.state.syncedDevices;
+			var data = _this.state.data;
+			data.devices = devices;
+			_this.updateSync('Datos sincronizados', 'notify-success', 'check', true);
+			_this.setState({ data: data, syncStatus: 2 }); //synced
+		};
 
-    _this.filterFound = function () {
-      // get value from the checkbox
-      console.log('called');
-      var filterFoundValue = _this.state.filterFoundValue;
+		_this.filterData = function (value) {
+			_this.setState({ filterValue: value });
+		};
 
-      _this.setState({
-        filterFoundValue: !filterFoundValue
-      });
-    };
+		_this.filterFound = function () {
+			// get value from the checkbox
+			var filterFoundValue = _this.state.filterFoundValue;
 
-    _this.notify = function (text, style, icon, position) {
-      (0, _reactToastify.toast)(_react2.default.createElement(_notification.Notification, { text: text, icon: icon }), {
-        position: position,
-        className: style
-      });
-    };
+			_this.setState({
+				filterFoundValue: !filterFoundValue
+			});
+		};
 
-    _this.notify_sync = function (text, style, icon) {
-      _this.toast_sync_id = (0, _reactToastify.toast)(_react2.default.createElement(_notification.Notification, { text: text, icon: icon, spin: true }), {
-        position: _reactToastify.toast.POSITION.TOP_CENTER,
-        autoClose: false,
-        className: style
-      });
-    };
+		_this.notify = function (text, style, icon, position) {
+			(0, _reactToastify.toast)(_react2.default.createElement(_notification.Notification, { text: text, icon: icon }), {
+				position: position,
+				className: style
+			});
+		};
 
-    _this.update_sync = function (text, style, icon, autoClose) {
-      _reactToastify.toast.update(_this.toast_sync_id, {
-        render: _react2.default.createElement(_notification.Notification, { text: text, icon: icon }),
-        position: _reactToastify.toast.POSITION.TOP_CENTER,
-        autoClose: autoClose,
-        className: style,
-        onClose: function onClose() {
-          _this.state.sync_status == 1 && _this.sync();
-        }
-      });
-    };
+		_this.notify_sync = function (text, style, icon) {
+			_this.toastSyncId = (0, _reactToastify.toast)(_react2.default.createElement(_notification.Notification, { text: text, icon: icon, spin: true }), {
+				position: _reactToastify.toast.POSITION.TOP_CENTER,
+				autoClose: false,
+				className: style
+			});
+		};
 
-    _this.dismiss = function () {
-      _this.toast_sync_id && _reactToastify.toast.dismiss(_this.toast_sync_id);
-    };
+		_this.updateSync = function (text, style, icon, autoClose) {
+			_reactToastify.toast.update(_this.toastSyncId, {
+				render: _react2.default.createElement(_notification.Notification, { text: text, icon: icon }),
+				position: _reactToastify.toast.POSITION.TOP_CENTER,
+				autoClose: autoClose,
+				className: style,
+				onClose: function onClose() {
+					_this.state.syncStatus == 1 && _this.sync();
+				}
+			});
+		};
 
-    _this.state = {
-      // active user
-      user: null,
-      token: null,
-      // data
-      data: [],
-      // sync
-      synced_devices: [],
-      sync_status: 0, // 0: unsynced; 1: sync_ready; 2: synced; 3: syncing
-      last_synced: null,
-      // search value
-      filterValue: '',
-      filterFoundValue: true,
-      // others
-      userID: _reactCookie2.default.load('userID'),
-      isLoaded: false,
-      isLoggedIn: false,
-      error: null,
-      redirect: false
-    };
-    return _this;
-  }
-  /* COMPONENT MOUNT */
+		_this.dismiss = function () {
+			_this.toastSyncId && _reactToastify.toast.dismiss(_this.toastSyncId);
+		};
+
+		_this.state = {
+			// active user
+			user: null,
+			token: null,
+
+			// data
+			data: [],
+
+			// sync
+			syncedDevices: [],
+
+			// 0: unsynced; 1: sync_ready; 2: synced; 3: syncing
+			syncStatus: 0,
+			lastSynced: null,
+
+			// search value
+			filterValue: '',
+			filterFoundValue: true,
+
+			// others
+			userID: _reactCookie2.default.load('userID'),
+			isLoaded: false,
+			isLoggedIn: false,
+			error: null,
+			redirect: false
+		};
+		return _this;
+	}
+
+	/* COMPONENT MOUNT */
 
 
-  _createClass(Main, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+	_createClass(Main, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-      // get user id and token
-      var _props = this.props,
-          user = _props.user,
-          token = _props.token,
-          data = _props.data;
-      // set user id and token
+			// get user id and token
+			var _props = this.props,
+			    user = _props.user,
+			    token = _props.token,
+			    data = _props.data;
 
-      this.setState({ user: user, token: token, data: data, isLoggedIn: true, isLoaded: true });
-      // sync
-      this.sync_api(token);
-      // check syncronization
-      this.check_sync_id = setInterval(function () {
-        if (_this2.state.last_synced && (0, _moment2.default)().diff(_this2.state.last_synced, 'seconds') > 20 && _this2.state.sync_status != 1) {
-          _this2.setState({ sync_status: 0 }); //unsynced
-        }
-      }, 1000);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      clearInterval(this.check_sync_id);
-    }
-    /* UPDATE DATA */
+			// set user id and token
 
-    /* SYNC DATA */
+			this.setState({ user: user, token: token, data: data, isLoggedIn: true, isLoaded: true });
 
-    /* HANDLE SEARCH */
+			// sync
+			this.syncApi(token);
 
-    /* ALERTS */
+			// check syncronization
+			this.checkSyncId = setInterval(function () {
+				if (_this2.state.lastSynced && (0, _moment2.default)().diff(_this2.state.lastSynced, 'seconds') > 20 && _this2.state.syncStatus != 1) {
+					//unsynced
+					_this2.setState({ syncStatus: 0 });
+				}
+			}, 1000);
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			clearInterval(this.checkSyncId);
+		}
 
-  }, {
-    key: 'render',
+		/* UPDATE DATA */
 
-    /* RENDER COMPONENT */
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'row main' },
-        _react2.default.createElement(_reactToastify.ToastContainer, { closeButton: false, hideProgressBar: true }),
-        _react2.default.createElement(_navigation.Navigation, _extends({ filterData: this.filterData, update: this.update, sync: this.sync, sync_api: this.sync_api }, this.state)),
-        _react2.default.createElement(_content.Content, _extends({ sync_device_image: this.sync_device_image, filterFound: this.filterFound, update: this.update, notify: this.notify }, this.state))
-      );
-    }
-  }]);
 
-  return Main;
+		/* SYNC DATA */
+
+
+		/* HANDLE SEARCH */
+
+
+		/* ALERTS */
+
+	}, {
+		key: 'render',
+
+
+		/* RENDER COMPONENT */
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'row main' },
+				_react2.default.createElement(_reactToastify.ToastContainer, { closeButton: false, hideProgressBar: true }),
+				_react2.default.createElement(_navigation.Navigation, _extends({ filterData: this.filterData, update: this.update, sync: this.sync, syncApi: this.syncApi }, this.state)),
+				_react2.default.createElement(_content.Content, _extends({ filterFound: this.filterFound, update: this.update, notify: this.notify }, this.state))
+			);
+		}
+	}]);
+
+	return Main;
 }(_react.Component);
 
 ;
@@ -66253,7 +66270,7 @@ module.exports = function spread(callback) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.Navigation = undefined;
 
@@ -66266,6 +66283,8 @@ var _react2 = _interopRequireDefault(_react);
 var _reactRouterDom = __webpack_require__(2);
 
 var _navButton = __webpack_require__(288);
+
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66281,241 +66300,224 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENT */
 var Navigation = exports.Navigation = function (_Component) {
-  _inherits(Navigation, _Component);
+	_inherits(Navigation, _Component);
 
-  function Navigation() {
-    var _ref;
+	function Navigation() {
+		var _ref;
 
-    var _temp, _this, _ret;
+		var _temp, _this, _ret;
 
-    _classCallCheck(this, Navigation);
+		_classCallCheck(this, Navigation);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call.apply(_ref, [this].concat(args))), _this), _this.handleSearch = function (event) {
-      _this.props.filterData(event.target.value);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call.apply(_ref, [this].concat(args))), _this), _this.handleSearch = function (event) {
+			_this.props.filterData(event.target.value);
+		}, _temp), _possibleConstructorReturn(_this, _ret);
+	}
 
-  /* HANDLE SEARCH */
-
-
-  _createClass(Navigation, [{
-    key: 'render',
+	/* HANDLE SEARCH */
 
 
-    /* RENDER COMPONENT */
-    value: function render() {
-      var _this2 = this;
+	_createClass(Navigation, [{
+		key: 'render',
 
-      // get
-      var _props = this.props,
-          _props$data = _props.data,
-          displays = _props$data.displays,
-          images = _props$data.images,
-          groups = _props$data.groups,
-          devices = _props$data.devices,
-          gateways = _props$data.gateways,
-          user = _props.user,
-          sync_status = _props.sync_status,
-          token = _props.token;
 
-      var navigationUser = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "displays", text: "Displays", icon: "television", count: true, number: displays ? displays.length + '/' + devices.length : '...' }, { exact: false, linkTo: "images", text: "Imagenes", icon: "picture-o", count: true, number: images ? images.length : '...' }, { exact: false, linkTo: "groups", text: "Grupos", icon: "list", count: true, number: groups ? groups.length : '...' }];
+		/* RENDER COMPONENT */
+		value: function render() {
+			var _this2 = this;
 
-      var navigationAdmin = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "devices", text: "Dispositivos", icon: "tablet", count: true, number: devices ? devices.length : '...' }, { exact: false, linkTo: "gateways", text: "Puertas de enlace", icon: "sitemap", count: true, number: gateways ? gateways.length : '...' }];
+			var _props = this.props,
+			    _props$data = _props.data,
+			    displays = _props$data.displays,
+			    images = _props$data.images,
+			    groups = _props$data.groups,
+			    devices = _props$data.devices,
+			    gateways = _props$data.gateways,
+			    user = _props.user,
+			    syncStatus = _props.syncStatus,
+			    token = _props.token;
 
-      var nav = user && user.admin ? navigationAdmin.map(function (nav, i) {
-        return _react2.default.createElement(_navButton.NavButton, { key: i, exact: nav.exact, linkTo: nav.linkTo, text: nav.text, icon: nav.icon, count: nav.count, number: nav.number });
-      }) : navigationUser.map(function (nav, i) {
-        return _react2.default.createElement(_navButton.NavButton, { key: i, exact: nav.exact, linkTo: nav.linkTo, text: nav.text, icon: nav.icon, count: nav.count, number: nav.number });
-      });
 
-      switch (sync_status) {
-        case 0:
-          //unsynced
-          var sync_button = _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'button',
-              { onClick: function onClick() {
-                  return _this2.props.sync_api(token);
-                }, type: 'button', className: 'btn btn-nav btn-block mb-1' },
-              _react2.default.createElement('i', { className: 'fa fa-refresh mr-2', 'aria-hidden': 'true' }),
-              ' Buscar dispositivos'
-            )
-          );
-          break;
-        case 1:
-          //sync_ready
-          var sync_button = _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'button',
-              { onClick: function onClick() {
-                  return _this2.props.sync();
-                }, type: 'button', className: 'btn btn-nav btn-block mb-1' },
-              _react2.default.createElement('i', { className: 'fa fa-link mr-2', 'aria-hidden': 'true' }),
-              ' Sincronizar'
-            )
-          );
-          break;
-        case 2:
-          //synced
-          var sync_button = _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'button',
-              { onClick: function onClick() {
-                  return _this2.props.sync();
-                }, type: 'button', className: 'btn btn-nav btn-block mb-1' },
-              _react2.default.createElement('i', { className: 'fa fa-check mr-2', 'aria-hidden': 'true' }),
-              ' Sincronizado'
-            )
-          );
-          break;
-        case 3:
-          //syncing
-          var sync_button = _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'button',
-              { onClick: function onClick() {
-                  return _this2.props.sync_api(token);
-                }, type: 'button', className: 'btn btn-nav btn-block mb-1', disabled: true },
-              _react2.default.createElement('i', { className: 'fa fa-refresh fa-spin mr-2', 'aria-hidden': 'true' }),
-              ' Sincronizando'
-            )
-          );
-          break;
-      }
+			var navigationUser = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "displays", text: "Displays", icon: "television", count: true, number: displays ? displays.length + '/' + devices.length : '...' }, { exact: false, linkTo: "images", text: "Imagenes", icon: "picture-o", count: true, number: images ? images.length : '...' }, { exact: false, linkTo: "groups", text: "Grupos", icon: "list", count: true, number: groups ? groups.length : '...' }];
 
-      return _react2.default.createElement(
-        'div',
-        { className: 'col-2 navigation' },
-        _react2.default.createElement(
-          'div',
-          { className: 'titulo mb-4 text-center' },
-          _react2.default.createElement(
-            'h1',
-            null,
-            'MENU'
-          )
-        ),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement(
-          'div',
-          { className: 'card menu' },
-          _react2.default.createElement(
-            'div',
-            { className: 'button-menu' },
-            _react2.default.createElement(
-              'div',
-              { className: 'busqueda mb-3' },
-              _react2.default.createElement(
-                'p',
-                null,
-                'B\xDASQUEDA'
-              ),
-              _react2.default.createElement('input', { onChange: this.handleSearch, type: 'text', className: 'form-control search', id: 'busqueda', 'aria-describedby': 'campoBusqueda', placeholder: 'Buscar...' })
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'mb-3' },
-              _react2.default.createElement(
-                'p',
-                null,
-                'NAVEGACI\xD3N'
-              ),
-              _react2.default.createElement(
-                'ul',
-                { className: 'nav-list' },
-                nav
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'mb-3' },
-              _react2.default.createElement(
-                'p',
-                null,
-                'AJUSTES'
-              ),
-              _react2.default.createElement(
-                'ul',
-                { className: 'nav-list' },
-                _react2.default.createElement(
-                  _reactRouterDom.NavLink,
-                  { to: '/docs' },
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn btn-nav btn-block mb-1' },
-                      _react2.default.createElement('i', { className: 'fa fa-book mr-2', 'aria-hidden': 'true' }),
-                      ' Documentaci\xF3n'
-                    )
-                  )
-                ),
-                user && user.admin && _react2.default.createElement(
-                  _reactRouterDom.NavLink,
-                  { to: '/settings' },
-                  _react2.default.createElement(
-                    'li',
-                    null,
-                    _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn btn-nav btn-block mb-1' },
-                      _react2.default.createElement('i', { className: 'fa fa-cogs mr-2', 'aria-hidden': 'true' }),
-                      ' Configuraci\xF3n'
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'li',
-                  null,
-                  _react2.default.createElement(
-                    'a',
-                    { href: '/disconect' },
-                    _react2.default.createElement(
-                      'button',
-                      { type: 'button', className: 'btn btn-nav btn-block mb-1' },
-                      _react2.default.createElement('i', { className: 'fa fa-sign-out mr-2', 'aria-hidden': 'true' }),
-                      ' Desconectar'
-                    )
-                  )
-                ),
-                sync_button
-              )
-            )
-          ),
-          _react2.default.createElement('hr', null),
-          _react2.default.createElement(
-            'p',
-            { className: 'd-flex justify-content-between' },
-            _react2.default.createElement(
-              'span',
-              null,
-              'v0.1.5'
-            ),
-            _react2.default.createElement(
-              'span',
-              null,
-              user ? user.name : 'Cargando...'
-            )
-          )
-        )
-      );
-    }
-  }]);
+			var navigationAdmin = [{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' }, { exact: false, linkTo: "devices", text: "Dispositivos", icon: "tablet", count: true, number: devices ? devices.length : '...' }, { exact: false, linkTo: "gateways", text: "Puertas de enlace", icon: "sitemap", count: true, number: gateways ? gateways.length : '...' }];
 
-  return Navigation;
+			var nav = user && user.admin ? navigationAdmin.map(function (nav, index) {
+				return _react2.default.createElement(_navButton.NavButton, { key: index, exact: nav.exact, linkTo: nav.linkTo, text: nav.text, icon: nav.icon, count: nav.count, number: nav.number });
+			}) : navigationUser.map(function (nav, index) {
+				return _react2.default.createElement(_navButton.NavButton, { key: index, exact: nav.exact, linkTo: nav.linkTo, text: nav.text, icon: nav.icon, count: nav.count, number: nav.number });
+			});
+
+			switch (syncStatus) {
+				// unsynced
+				case 0:
+					{
+						var syncButton = _react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								'button',
+								{ onClick: function onClick() {
+										return _this2.props.syncApi(token);
+									}, type: 'button', className: 'btn btn-nav btn-block mb-1' },
+								_react2.default.createElement(_icon.Icon, { icon: 'refresh', mr: '2', fw: true }),
+								' Buscar dispositivos'
+							)
+						);
+						break;
+					}
+
+				//syncReady
+				case 1:
+					{
+						var syncButton = _react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								'button',
+								{ onClick: function onClick() {
+										return _this2.props.sync();
+									}, type: 'button', className: 'btn btn-nav btn-block mb-1' },
+								_react2.default.createElement(_icon.Icon, { icon: 'link', mr: '2', fw: true }),
+								' Sincronizar'
+							)
+						);
+						break;
+					}
+
+				//synced
+				case 2:
+					{
+						var syncButton = _react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								'button',
+								{ type: 'button', className: 'btn btn-nav btn-block mb-1' },
+								_react2.default.createElement(_icon.Icon, { icon: 'check', mr: '2', fw: true }),
+								' Sincronizado'
+							)
+						);
+						break;
+					}
+
+				//syncing
+				case 3:
+					{
+						var syncButton = _react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								'button',
+								{ onClick: function onClick() {
+										return _this2.props.syncApi(token);
+									}, type: 'button', className: 'btn btn-nav btn-block mb-1', disabled: true },
+								_react2.default.createElement(_icon.Icon, { icon: 'refresh', mr: '2', fw: true, spin: true }),
+								' Sincronizando'
+							)
+						);
+						break;
+					}
+			}
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'col-2 navigation' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'titulo mb-4 text-center' },
+					_react2.default.createElement(
+						'h1',
+						null,
+						'MENU'
+					)
+				),
+				_react2.default.createElement('hr', null),
+				_react2.default.createElement(
+					'div',
+					{ className: 'card menu' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'button-menu' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'busqueda mb-3' },
+							_react2.default.createElement(
+								'p',
+								null,
+								'B\xDASQUEDA'
+							),
+							_react2.default.createElement('input', { onChange: this.handleSearch, type: 'text', className: 'form-control search', id: 'busqueda', 'aria-describedby': 'campoBusqueda', placeholder: 'Buscar...' })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'mb-3' },
+							_react2.default.createElement(
+								'p',
+								null,
+								'NAVEGACI\xD3N'
+							),
+							_react2.default.createElement(
+								'ul',
+								{ className: 'nav-list' },
+								nav
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'mb-3' },
+							_react2.default.createElement(
+								'p',
+								null,
+								'AJUSTES'
+							),
+							_react2.default.createElement(
+								'ul',
+								{ className: 'nav-list' },
+								_react2.default.createElement(_navButton.NavButton, { key: 'docs', linkTo: 'docs', text: 'Documentaci\xF3n', icon: 'book' }),
+								user && user.admin && _react2.default.createElement(_navButton.NavButton, { key: 'settings', linkTo: 'settings', text: 'Configuraci\xF3n', icon: 'cogs' }),
+								_react2.default.createElement(
+									'li',
+									null,
+									_react2.default.createElement(
+										'a',
+										{ href: '/disconect' },
+										_react2.default.createElement(
+											'button',
+											{ type: 'button', className: 'btn btn-nav btn-block mb-1' },
+											_react2.default.createElement(_icon.Icon, { icon: 'sign-out', mr: '2', fw: true }),
+											' Desconectar'
+										)
+									)
+								),
+								syncButton
+							)
+						)
+					),
+					_react2.default.createElement('hr', null),
+					_react2.default.createElement(
+						'p',
+						{ className: 'd-flex justify-content-between' },
+						_react2.default.createElement(
+							'span',
+							null,
+							'v0.1.5'
+						),
+						_react2.default.createElement(
+							'span',
+							null,
+							user ? user.name : 'Cargando...'
+						)
+					)
+				)
+			);
+		}
+	}]);
+
+	return Navigation;
 }(_react.Component);
 
 /***/ }),
@@ -66536,11 +66538,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _icon = __webpack_require__(13);
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var cx = __webpack_require__(7); // Importacion de librerias
+var cx = __webpack_require__(7);
+
+/* IMPORT COMPONENTS */
+/* IMPORT MODULES */
 var NavButton = exports.NavButton = function NavButton(_ref) {
   var linkTo = _ref.linkTo,
       text = _ref.text,
@@ -66552,7 +66557,7 @@ var NavButton = exports.NavButton = function NavButton(_ref) {
   var location = { pathname: '/' + linkTo };
   return _react2.default.createElement(
     _reactRouterDom.NavLink,
-    { exact: exact ? exact : false, to: location },
+    { exact: !!exact, to: location },
     _react2.default.createElement(
       'li',
       null,
@@ -66688,7 +66693,7 @@ var _reactRouterDom = __webpack_require__(2);
 
 var _list = __webpack_require__(17);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 var _displayForm = __webpack_require__(184);
 
@@ -66759,8 +66764,8 @@ var ContentDisplays = function ContentDisplays(_ref) {
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_displayRouter.DisplayRouter, _extends({}, props, { display: displays.find(function (d) {
-                      return d._id == match.params.displayId;
+                  return _react2.default.createElement(_displayRouter.DisplayRouter, _extends({}, props, { display: displays.find(function (display) {
+                      return display._id == match.params.displayId;
                     }) }));
                 } })
             ),
@@ -66796,22 +66801,23 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var Display = exports.Display = function Display(_ref) {
-  var display = _ref.display;
-  var _id = display._id,
-      url = display.url,
-      name = display.name,
-      description = display.description,
-      tags_total = display.tags_total,
-      updated_at = display.updated_at;
+  var _ref$display = _ref.display,
+      _id = _ref$display._id,
+      url = _ref$display.url,
+      name = _ref$display.name,
+      description = _ref$display.description,
+      tags_total = _ref$display.tags_total,
+      updated_at = _ref$display.updated_at;
 
   var updated = moment(updated_at).from(moment());
-  var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
+  var tagsClass = cx({ 'fa fa-tags fa-flip-horizontal mr-1': tags_total > 1 }, { 'fa fa-tag fa-flip-horizontal mr-1': tags_total < 2 });
+  var elementClass = cx('list-group-item-action list-group-item flex-column align-items-start');
   var location = {
     pathname: '/displays/' + _id
   };
@@ -66839,7 +66845,7 @@ var Display = exports.Display = function Display(_ref) {
           _react2.default.createElement(
             'small',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
+            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2', 'aria-hidden': 'true' }),
             '?'
           )
         ),
@@ -66862,7 +66868,7 @@ var Display = exports.Display = function Display(_ref) {
             'small',
             null,
             updated,
-            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
+            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-2', 'aria-hidden': 'true' })
           )
         )
       )
@@ -66891,22 +66897,23 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var Image = exports.Image = function Image(_ref) {
-  var image = _ref.image;
-  var _id = image._id,
-      url = image.url,
-      name = image.name,
-      description = image.description,
-      tags_total = image.tags_total,
-      updated_at = image.updated_at;
+  var _ref$image = _ref.image,
+      _id = _ref$image._id,
+      url = _ref$image.url,
+      name = _ref$image.name,
+      description = _ref$image.description,
+      tags_total = _ref$image.tags_total,
+      updated_at = _ref$image.updated_at;
 
   var updated = moment(updated_at).from(moment());
-  var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
+  var tagsClass = cx({ 'fa fa-tags fa-flip-horizontal mr-1': tags_total > 1 }, { 'fa fa-tag fa-flip-horizontal mr-1': tags_total < 2 });
+  var elementClass = cx('list-group-item-action list-group-item flex-column align-items-start');
   var location = {
     pathname: '/images/' + _id
   };
@@ -66934,7 +66941,7 @@ var Image = exports.Image = function Image(_ref) {
           _react2.default.createElement(
             'small',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
+            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2', 'aria-hidden': 'true' }),
             '?'
           )
         ),
@@ -66957,7 +66964,7 @@ var Image = exports.Image = function Image(_ref) {
             'small',
             null,
             updated,
-            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
+            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-2', 'aria-hidden': 'true' })
           )
         )
       )
@@ -66986,22 +66993,23 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var Group = exports.Group = function Group(_ref) {
-  var group = _ref.group;
-  var _id = group._id,
-      url = group.url,
-      name = group.name,
-      description = group.description,
-      tags_total = group.tags_total,
-      updated_at = group.updated_at;
+  var _ref$group = _ref.group,
+      _id = _ref$group._id,
+      url = _ref$group.url,
+      name = _ref$group.name,
+      description = _ref$group.description,
+      tags_total = _ref$group.tags_total,
+      updated_at = _ref$group.updated_at;
 
   var updated = moment(updated_at).from(moment());
-  var tagsClass = cx({ "fa fa-tags fa-flip-horizontal mr-1": tags_total > 1 }, { "fa fa-tag fa-flip-horizontal mr-1": tags_total < 2 });
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
+  var tagsClass = cx({ 'fa fa-tags fa-flip-horizontal mr-1': tags_total > 1 }, { 'fa fa-tag fa-flip-horizontal mr-1': tags_total < 2 });
+  var elementClass = cx('list-group-item-action list-group-item flex-column align-items-start');
   var location = {
     pathname: '/groups/' + _id
   };
@@ -67029,7 +67037,7 @@ var Group = exports.Group = function Group(_ref) {
           _react2.default.createElement(
             'small',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-1', 'aria-hidden': 'true' }),
+            _react2.default.createElement('i', { className: 'fa fa-hashtag mr-2', 'aria-hidden': 'true' }),
             '?'
           )
         ),
@@ -67052,7 +67060,7 @@ var Group = exports.Group = function Group(_ref) {
             'small',
             null,
             updated,
-            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
+            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-2', 'aria-hidden': 'true' })
           )
         )
       )
@@ -67078,12 +67086,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _icon = __webpack_require__(13);
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* IMPORT COMPONENTS */
@@ -67091,20 +67100,20 @@ var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var Device = exports.Device = function Device(_ref) {
-  var device = _ref.device;
-  var _id = device._id,
-      url = device.url,
-      name = device.name,
-      description = device.description,
-      batt = device.batt,
-      rssi = device.rssi,
-      found = device.found,
-      mac = device.mac,
-      updated_at = device.updated_at,
-      created_at = device.created_at;
+  var _ref$device = _ref.device,
+      _id = _ref$device._id,
+      url = _ref$device.url,
+      name = _ref$device.name,
+      description = _ref$device.description,
+      batt = _ref$device.batt,
+      rssi = _ref$device.rssi,
+      found = _ref$device.found,
+      mac = _ref$device.mac,
+      updated_at = _ref$device.updated_at,
+      created_at = _ref$device.created_at;
 
   var updated = moment(updated_at).from(moment());
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
+  var elementClass = cx('list-group-item-action list-group-item flex-column align-items-start');
   var location = {
     pathname: '/devices/' + _id
   };
@@ -67133,7 +67142,7 @@ var Device = exports.Device = function Device(_ref) {
             'small',
             null,
             found ? _react2.default.createElement(_icon.Icon, { icon: 'battery', fw: 'true', mr: '1', batt: batt }) : _react2.default.createElement(_icon.Icon, { icon: 'chain-broken', fw: 'true', mr: '1' }),
-            found ? batt : ""
+            found ? batt : ''
           )
         ),
         _react2.default.createElement('hr', { className: 'element-division' }),
@@ -67148,14 +67157,14 @@ var Device = exports.Device = function Device(_ref) {
           _react2.default.createElement(
             'small',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-server mr-1', 'aria-hidden': 'true' }),
+            _react2.default.createElement('i', { className: 'fa fa-server mr-2', 'aria-hidden': 'true' }),
             mac
           ),
           _react2.default.createElement(
             'small',
             null,
             updated,
-            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-1', 'aria-hidden': 'true' })
+            _react2.default.createElement('i', { className: 'fa fa-calendar-o ml-2', 'aria-hidden': 'true' })
           )
         )
       )
@@ -67184,21 +67193,22 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var Gateway = exports.Gateway = function Gateway(_ref) {
-  var gateway = _ref.gateway;
-  var _id = gateway._id,
-      url = gateway.url,
-      name = gateway.name,
-      description = gateway.description,
-      ip = gateway.ip,
-      mac = gateway.mac,
-      created_at = gateway.created_at;
+  var _ref$gateway = _ref.gateway,
+      _id = _ref$gateway._id,
+      url = _ref$gateway.url,
+      name = _ref$gateway.name,
+      description = _ref$gateway.description,
+      ip = _ref$gateway.ip,
+      mac = _ref$gateway.mac,
+      created_at = _ref$gateway.created_at;
 
-  var created = moment(gateway.created_at).from(moment());
+  var created = moment(created_at).from(moment());
   var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start");
   var location = {
     pathname: '/gateways/' + _id
@@ -67227,8 +67237,7 @@ var Gateway = exports.Gateway = function Gateway(_ref) {
           _react2.default.createElement(
             'small',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-wifi mr-1', 'aria-hidden': 'true' }),
-            ' ',
+            _react2.default.createElement('i', { className: 'fa fa-wifi mr-2', 'aria-hidden': 'true' }),
             ip
           )
         ),
@@ -67244,8 +67253,7 @@ var Gateway = exports.Gateway = function Gateway(_ref) {
           _react2.default.createElement(
             'small',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-server mr-1', 'aria-hidden': 'true' }),
-            ' ',
+            _react2.default.createElement('i', { className: 'fa fa-server mr-2', 'aria-hidden': 'true' }),
             mac
           ),
           _react2.default.createElement(
@@ -67268,7 +67276,7 @@ var Gateway = exports.Gateway = function Gateway(_ref) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.DisplayRouter = undefined;
 
@@ -67300,99 +67308,100 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
+
 /* IMPORT COMPONENTS */
 
 
 /* COMPONENT */
 var DisplayRouter = exports.DisplayRouter = function (_Component) {
-  _inherits(DisplayRouter, _Component);
+	_inherits(DisplayRouter, _Component);
 
-  function DisplayRouter(props) {
-    _classCallCheck(this, DisplayRouter);
+	function DisplayRouter(props) {
+		_classCallCheck(this, DisplayRouter);
 
-    var _this = _possibleConstructorReturn(this, (DisplayRouter.__proto__ || Object.getPrototypeOf(DisplayRouter)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (DisplayRouter.__proto__ || Object.getPrototypeOf(DisplayRouter)).call(this, props));
 
-    _this.state = {
-      display: null,
-      isLoaded: false,
-      error: null
-    };
-    return _this;
-  }
-  /* FETCH FULL DATA ABOUT THE DISPLAY */
+		_this.state = {
+			display: null,
+			isLoaded: false,
+			error: null
+		};
+		return _this;
+	}
+	/* FETCH FULL DATA ABOUT THE DISPLAY */
 
 
-  _createClass(DisplayRouter, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+	_createClass(DisplayRouter, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-      if (this.props.display) {
-        _axios2.default.get(this.props.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
-          // resolve callback
-          _this2.setState({ display: display.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this2.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
-    /* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
+			if (this.props.display) {
+				_axios2.default.get(this.props.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
+					// resolve callback
+					_this2.setState({ display: display.data, isLoaded: true });
+				}, function (error) {
+					// reject callback
+					_this2.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
+		/* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
 
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _this3 = this;
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			var _this3 = this;
 
-      if (nextProps.display && (nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at)) {
-        // if props actually changed
-        _axios2.default.get(nextProps.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
-          // resolve callback
-          _this3.setState({ display: display.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this3.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this4 = this;
+			if (nextProps.display && (nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at)) {
+				// if props actually changed
+				_axios2.default.get(nextProps.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (display) {
+					// resolve callback
+					_this3.setState({ display: display.data, isLoaded: true });
+				}, function (error) {
+					// reject callback
+					_this3.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this4 = this;
 
-      var _state = this.state,
-          error = _state.error,
-          isLoaded = _state.isLoaded,
-          display = _state.display;
-      // wait for resource to be loaded or handle errors if any
+			var _state = this.state,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded,
+			    display = _state.display;
+			// wait for resource to be loaded or handle errors if any
 
-      if (error) {
-        // TODO: error handling
-        return null;
-      } else if (!isLoaded) {
-        return null;
-      } else {
-        return _react2.default.createElement(
-          _reactRouterDom.Switch,
-          null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId/edit', render: function render(_ref) {
-              var match = _ref.match;
-              return _react2.default.createElement(_displayForm.DisplayForm, _extends({}, _this4.props, { display: display }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId/delete', render: function render(_ref2) {
-              var match = _ref2.match;
-              return _react2.default.createElement(_displayDelete.DisplayDelete, _extends({}, _this4.props, { display: display }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId', render: function render(_ref3) {
-              var match = _ref3.match;
-              return _react2.default.createElement(_displayDetails.DisplayDetails, _extends({}, _this4.props, { display: display }));
-            } })
-        );
-      }
-    }
-  }]);
+			if (error) {
+				// TODO: error handling
+				return null;
+			} else if (!isLoaded) {
+				return null;
+			} else {
+				return _react2.default.createElement(
+					_reactRouterDom.Switch,
+					null,
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId/edit', render: function render(_ref) {
+							var match = _ref.match;
+							return _react2.default.createElement(_displayForm.DisplayForm, _extends({}, _this4.props, { display: display }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId/delete', render: function render(_ref2) {
+							var match = _ref2.match;
+							return _react2.default.createElement(_displayDelete.DisplayDelete, _extends({}, _this4.props, { display: display }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/displays/:displayId', render: function render(_ref3) {
+							var match = _ref3.match;
+							return _react2.default.createElement(_displayDetails.DisplayDetails, _extends({}, _this4.props, { display: display }));
+						} })
+				);
+			}
+		}
+	}]);
 
-  return DisplayRouter;
+	return DisplayRouter;
 }(_react.Component);
 
 /***/ }),
@@ -67425,7 +67434,7 @@ var _associated = __webpack_require__(23);
 
 var _tag = __webpack_require__(24);
 
-var _icon = __webpack_require__(13);
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67438,6 +67447,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var moment = __webpack_require__(0);
 moment.locale('es');
+
 /* IMPORT COMPONENTS */
 
 /* COMPONENT */
@@ -67453,8 +67463,8 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 
     _this.handleInputChange = function (event) {
       var value = event.target.value;
-      var image = _this.props.data.images.find(function (i) {
-        return value == i._id;
+      var image = _this.props.data.images.find(function (image) {
+        return value == image._id;
       });
       _this.setState({ syncing: true, syncing_to: image._id });
       var url = "http://localhost:4000/" + 'update/' + _this.state.display._id; // set url for the request
@@ -67482,7 +67492,6 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
     };
 
     _this.state = {
-      // form data stored in state
       display: _this.props.display,
       active_image: '',
       syncing: false,
@@ -67515,6 +67524,7 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
         });
       }
     }
+
     /* HANDLE INPUT CHANGE */
 
   }, {
@@ -67536,25 +67546,26 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 
       var updated = moment(updated_at).format('dddd, D [de] MMMM [de] YYYY');
       // generate tag list
-      var tag_list = tags.map(function (tag, i) {
-        return _react2.default.createElement(_tag.Tag, { key: i, category: 'displays', tag: tag });
+      var tag_list = tags.map(function (tag, index) {
+        return _react2.default.createElement(_tag.Tag, { key: index, category: 'displays', tag: tag });
       });
       // define routes for edit and delete based on the id
       var linktoEdit = '/displays/' + _id + '/edit';
       var linktoDelete = '/displays/' + _id + '/delete';
       // check if active_image is set and if not set the undefined img
       var src = active_image && active_image.src_url;
-      var imagesOptions = images.map(function (i) {
+      var imagesOptions = images.map(function (image) {
         return _react2.default.createElement(
           'option',
-          { value: i._id, key: i._id },
-          i.name
+          { value: image._id, key: image._id },
+          image.name
         );
       });
       // get screen info
-      var screen = this.props.data.screens.find(function (s) {
-        return s.screen_code == device.screen;
+      var screen = this.props.data.screens.find(function (screen) {
+        return screen.screen_code == device.screen;
       });
+
       return _react2.default.createElement(
         'div',
         { className: 'card detalles' },
@@ -67768,7 +67779,7 @@ var DisplayDetails = exports.DisplayDetails = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.DisplayDelete = undefined;
 
@@ -67800,100 +67811,99 @@ moment.locale('es');
 
 /* COMPONENT */
 var DisplayDelete = exports.DisplayDelete = function (_Component) {
-  _inherits(DisplayDelete, _Component);
+	_inherits(DisplayDelete, _Component);
 
-  function DisplayDelete(props) {
-    _classCallCheck(this, DisplayDelete);
+	function DisplayDelete(props) {
+		_classCallCheck(this, DisplayDelete);
 
-    var _this = _possibleConstructorReturn(this, (DisplayDelete.__proto__ || Object.getPrototypeOf(DisplayDelete)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (DisplayDelete.__proto__ || Object.getPrototypeOf(DisplayDelete)).call(this, props));
 
-    _this.handleDelete = function (event) {
-      event.preventDefault();
-      _axios2.default.delete(_this.props.display.url, {
-        headers: {
-          Authorization: 'Bearer ' + _this.props.token
-        }
-      }).then(function (res) {
-        if (res.status == 200) {
-          _this.props.notify('Display eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          _this.props.update('displays', res.resourceId, 'remove', res.data.resource, res.data.devices); // update dataset
-        }
-      }).then(function (res) {
-        return _this.setState({ redirect: true });
-      }).catch(function (err) {
-        console.log(err);
-        return _this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleDelete = function (event) {
+			event.preventDefault();
+			_axios2.default.delete(_this.props.display.url, {
+				headers: {
+					Authorization: 'Bearer ' + _this.props.token
+				}
+			}).then(function (res) {
+				if (res.status == 200) {
+					_this.props.notify('Display eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+					_this.props.update('displays', res.resourceId, 'remove', res.data.resource, res.data.devices); // update dataset
+				}
+			}).then(function (res) {
+				return _this.setState({ redirect: true });
+			}).catch(function (err) {
+				return _this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    _this.state = {
-      // for redirect after deletion
-      redirect: false
-    };
-    return _this;
-  }
+		_this.state = {
+			// for redirect after deletion
+			redirect: false
+		};
+		return _this;
+	}
 
-  /* HANDLE DELETE EVENT */
+	/* HANDLE DELETE EVENT */
 
 
-  _createClass(DisplayDelete, [{
-    key: 'render',
-    value: function render() {
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/displays' });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-                  'Eliminar Display'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'text-center' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                '\xBFEliminar display?'
-              ),
-              _react2.default.createElement('hr', { className: 'card-division' }),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Esta acci\xF3n no se puede deshacer'
-              ),
-              _react2.default.createElement(
-                'button',
-                { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
-                _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-                'Eliminar'
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+	_createClass(DisplayDelete, [{
+		key: 'render',
+		value: function render() {
+			if (this.state.redirect) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/displays' });
+			} else {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card detalles' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+									'Eliminar Display'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'text-center' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'\xBFEliminar display?'
+							),
+							_react2.default.createElement('hr', { className: 'card-division' }),
+							_react2.default.createElement(
+								'p',
+								null,
+								'Esta acci\xF3n no se puede deshacer'
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
+								_react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+								'Eliminar'
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
 
-  return DisplayDelete;
+	return DisplayDelete;
 }(_react.Component);
 
 /***/ }),
@@ -67994,7 +68004,7 @@ var _ImageGeneric = __webpack_require__(308);
 
 var _list = __webpack_require__(17);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -68083,7 +68093,7 @@ exports.ContentImages = ContentImages;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.ImageRouter = undefined;
 
@@ -68121,97 +68131,93 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var ImageRouter = exports.ImageRouter = function (_Component) {
-  _inherits(ImageRouter, _Component);
+	_inherits(ImageRouter, _Component);
 
-  function ImageRouter(props) {
-    _classCallCheck(this, ImageRouter);
+	function ImageRouter(props) {
+		_classCallCheck(this, ImageRouter);
 
-    var _this = _possibleConstructorReturn(this, (ImageRouter.__proto__ || Object.getPrototypeOf(ImageRouter)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (ImageRouter.__proto__ || Object.getPrototypeOf(ImageRouter)).call(this, props));
 
-    _this.state = {
-      image: null,
-      isLoaded: false,
-      error: null
-    };
-    return _this;
-  }
+		_this.state = {
+			image: null,
+			isLoaded: false,
+			error: null
+		};
+		return _this;
+	}
 
-  /* FETCH FULL DATA ABOUT THE IMAGE */
+	/* FETCH FULL DATA ABOUT THE IMAGE */
 
 
-  _createClass(ImageRouter, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+	_createClass(ImageRouter, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-      if (this.props.image) {
-        _axios2.default.get(this.props.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
-          // resolve callback
-          _this2.setState({ image: image.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this2.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
+			if (this.props.image) {
+				_axios2.default.get(this.props.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
+					return _this2.setState({ image: image.data, isLoaded: true });
+				}, function (error) {
+					return _this2.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
 
-    /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
+		/* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
 
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _this3 = this;
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			var _this3 = this;
 
-      if (nextProps.image && (nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at)) {
-        // if props actually changed
-        _axios2.default.get(nextProps.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
-          // resolve callback
-          _this3.setState({ image: image.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this3.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this4 = this;
+			if (nextProps.image && (nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at)) {
+				// if props actually changed
+				_axios2.default.get(nextProps.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
+					return _this3.setState({ image: image.data, isLoaded: true });
+				}, function (error) {
+					return _this3.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this4 = this;
 
-      var _state = this.state,
-          error = _state.error,
-          isLoaded = _state.isLoaded,
-          image = _state.image;
-      // wait for resource to be loaded or handle errors if any
+			var _state = this.state,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded,
+			    image = _state.image;
+			// wait for resource to be loaded or handle errors if any
 
-      if (error) {
-        // TODO: error handling
-        return null;
-      } else if (!isLoaded) {
-        // TODO: loading
-        return null;
-      } else {
-        return _react2.default.createElement(
-          _reactRouterDom.Switch,
-          null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId/edit', render: function render(_ref) {
-              var match = _ref.match;
-              return _react2.default.createElement(_ImageForm.ImageForm, _extends({}, _this4.props, { image: image }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId/delete', render: function render(_ref2) {
-              var match = _ref2.match;
-              return _react2.default.createElement(_ImageDelete.ImageDelete, _extends({}, _this4.props, { image: image }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render(_ref3) {
-              var match = _ref3.match;
-              return _react2.default.createElement(_ImageDetails.ImageDetails, _extends({}, _this4.props, { image: image }));
-            } })
-        );
-      }
-    }
-  }]);
+			if (error) {
+				// TODO: error handling
+				return null;
+			} else if (!isLoaded) {
+				// TODO: loading
+				return null;
+			} else {
+				return _react2.default.createElement(
+					_reactRouterDom.Switch,
+					null,
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId/edit', render: function render(_ref) {
+							var match = _ref.match;
+							return _react2.default.createElement(_ImageForm.ImageForm, _extends({}, _this4.props, { image: image }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId/delete', render: function render(_ref2) {
+							var match = _ref2.match;
+							return _react2.default.createElement(_ImageDelete.ImageDelete, _extends({}, _this4.props, { image: image }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render(_ref3) {
+							var match = _ref3.match;
+							return _react2.default.createElement(_ImageDetails.ImageDetails, _extends({}, _this4.props, { image: image }));
+						} })
+				);
+			}
+		}
+	}]);
 
-  return ImageRouter;
+	return ImageRouter;
 }(_react.Component);
 
 /***/ }),
@@ -68346,11 +68352,11 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
           tags = _props$image2.tags;
       // refactor date constants with format
 
-      var created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
-      var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
+      var created = moment(created_at).format('dddd, D [de] MMMM [de] YYYY');
+      var updated = moment(updated_at).format('dddd, D [de] MMMM [de] YYYY');
       // generate tag list
-      var tag_list = tags.map(function (tag, i) {
-        return _react2.default.createElement(_tag.Tag, { key: i, category: 'images', tag: tag });
+      var tag_list = tags.map(function (tag, index) {
+        return _react2.default.createElement(_tag.Tag, { key: index, category: 'images', tag: tag });
       });
       // define routes for edit and delete based on the id
       var linktoEdit = '/images/' + _id + '/edit';
@@ -68481,7 +68487,7 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                 ),
                 _react2.default.createElement(
                   _reactDropzone2.default,
-                  { onDropAccepted: this.onDropAccepted, activeClassName: 'dropzone-accepted', className: this.state.accepted ? "dropzone dropzone-accepted" : "dropzone" },
+                  { onDropAccepted: this.onDropAccepted, activeClassName: 'dropzone-accepted', className: this.state.accepted ? 'dropzone dropzone-accepted' : 'dropzone' },
                   _react2.default.createElement(
                     'div',
                     { className: 'vista-imagen d-flex w-100 justify-content-center' },
@@ -69284,7 +69290,7 @@ module.exports=function(t){function n(e){if(r[e])return r[e].exports;var o=r[e]=
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.ImageDelete = undefined;
 
@@ -69313,102 +69319,99 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var ImageDelete = exports.ImageDelete = function (_Component) {
-  _inherits(ImageDelete, _Component);
+	_inherits(ImageDelete, _Component);
 
-  function ImageDelete(props) {
-    _classCallCheck(this, ImageDelete);
+	function ImageDelete(props) {
+		_classCallCheck(this, ImageDelete);
 
-    var _this = _possibleConstructorReturn(this, (ImageDelete.__proto__ || Object.getPrototypeOf(ImageDelete)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (ImageDelete.__proto__ || Object.getPrototypeOf(ImageDelete)).call(this, props));
 
-    _this.handleDelete = function (event) {
-      event.preventDefault();
-      _axios2.default.delete(_this.props.image.url, {
-        headers: {
-          Authorization: 'Bearer ' + _this.props.token
-        }
-      }).then(function (res) {
-        if (res.status == 200) {
-          _this.props.notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          _this.props.update('images', res.resourceId, 'remove'); // update dataset
-        }
-      }).then(function (res) {
-        return _this.setState({ redirect: true });
-      }).catch(function (err) {
-        return _this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleDelete = function (event) {
+			event.preventDefault();
+			_axios2.default.delete(_this.props.image.url, {
+				headers: {
+					Authorization: 'Bearer ' + _this.props.token
+				}
+			}).then(function (res) {
+				if (res.status == 200) {
+					_this.props.notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+					_this.props.update('images', res.resourceId, 'remove');
+				}
+			}).then(function (res) {
+				return _this.setState({ redirect: true });
+			}).catch(function (err) {
+				return _this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    _this.state = {
-      // for redirect after deletion
-      redirect: false
-    };
-    return _this;
-  }
+		_this.state = {
+			redirect: false
+		};
+		return _this;
+	}
 
-  /* HANDLE DELETE EVENT */
+	/* HANDLE DELETE EVENT */
 
 
-  _createClass(ImageDelete, [{
-    key: 'render',
-    value: function render() {
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/images' });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-                  'Eliminar Imagen'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'text-center' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                '\xBFEliminar imagen?'
-              ),
-              _react2.default.createElement('hr', { className: 'card-division' }),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Esta acci\xF3n no se puede deshacer'
-              ),
-              _react2.default.createElement(
-                'button',
-                { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
-                _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-                'Eliminar'
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+	_createClass(ImageDelete, [{
+		key: 'render',
+		value: function render() {
+			if (this.state.redirect) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/images' });
+			} else {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card detalles' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+									'Eliminar Imagen'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'text-center' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'\xBFEliminar imagen?'
+							),
+							_react2.default.createElement('hr', { className: 'card-division' }),
+							_react2.default.createElement(
+								'p',
+								null,
+								'Esta acci\xF3n no se puede deshacer'
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
+								_react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+								'Eliminar'
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
 
-  return ImageDelete;
+	return ImageDelete;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 308 */
@@ -69508,7 +69511,7 @@ var _groupGeneric = __webpack_require__(313);
 
 var _list = __webpack_require__(17);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69597,7 +69600,7 @@ exports.ContentGroups = ContentGroups;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.GroupRouter = undefined;
 
@@ -69635,97 +69638,93 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var GroupRouter = exports.GroupRouter = function (_Component) {
-  _inherits(GroupRouter, _Component);
+	_inherits(GroupRouter, _Component);
 
-  function GroupRouter(props) {
-    _classCallCheck(this, GroupRouter);
+	function GroupRouter(props) {
+		_classCallCheck(this, GroupRouter);
 
-    var _this = _possibleConstructorReturn(this, (GroupRouter.__proto__ || Object.getPrototypeOf(GroupRouter)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (GroupRouter.__proto__ || Object.getPrototypeOf(GroupRouter)).call(this, props));
 
-    _this.state = {
-      group: null,
-      isLoaded: false,
-      error: null
-    };
-    return _this;
-  }
+		_this.state = {
+			group: null,
+			isLoaded: false,
+			error: null
+		};
+		return _this;
+	}
 
-  /* FETCH FULL DATA ABOUT THE GROUP */
+	/* FETCH FULL DATA ABOUT THE GROUP */
 
 
-  _createClass(GroupRouter, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+	_createClass(GroupRouter, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-      if (this.props.group) {
-        _axios2.default.get(this.props.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
-          // resolve callback
-          _this2.setState({ group: group.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this2.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
+			if (this.props.group) {
+				_axios2.default.get(this.props.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
+					return _this2.setState({ group: group.data, isLoaded: true });
+				}, function (error) {
+					return _this2.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
 
-    /* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP*/
+		/* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP*/
 
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _this3 = this;
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			var _this3 = this;
 
-      if (nextProps.group && (nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at)) {
-        // if props actually changed
-        _axios2.default.get(nextProps.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
-          // resolve callback
-          _this3.setState({ group: group.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this3.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this4 = this;
+			if (nextProps.group && (nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at)) {
+				// if props actually changed
+				_axios2.default.get(nextProps.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
+					return _this3.setState({ group: group.data, isLoaded: true });
+				}, function (error) {
+					return _this3.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this4 = this;
 
-      var _state = this.state,
-          error = _state.error,
-          isLoaded = _state.isLoaded,
-          group = _state.group;
-      // wait for resource to be loaded or handle errors if any
+			var _state = this.state,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded,
+			    group = _state.group;
+			// wait for resource to be loaded or handle errors if any
 
-      if (error) {
-        // TODO: error handling
-        return null;
-      } else if (!isLoaded) {
-        // TODO: loading
-        return null;
-      } else {
-        return _react2.default.createElement(
-          _reactRouterDom.Switch,
-          null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId/edit', render: function render(_ref) {
-              var match = _ref.match;
-              return _react2.default.createElement(_groupForm.GroupForm, _extends({}, _this4.props, { group: group }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId/delete', render: function render(_ref2) {
-              var match = _ref2.match;
-              return _react2.default.createElement(_groupDelete.GroupDelete, _extends({}, _this4.props, { group: group }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', render: function render(_ref3) {
-              var match = _ref3.match;
-              return _react2.default.createElement(_groupDetails.GroupDetails, _extends({}, _this4.props, { group: group }));
-            } })
-        );
-      }
-    }
-  }]);
+			if (error) {
+				// TODO: error handling
+				return null;
+			} else if (!isLoaded) {
+				// TODO: loading
+				return null;
+			} else {
+				return _react2.default.createElement(
+					_reactRouterDom.Switch,
+					null,
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId/edit', render: function render(_ref) {
+							var match = _ref.match;
+							return _react2.default.createElement(_groupForm.GroupForm, _extends({}, _this4.props, { group: group }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId/delete', render: function render(_ref2) {
+							var match = _ref2.match;
+							return _react2.default.createElement(_groupDelete.GroupDelete, _extends({}, _this4.props, { group: group }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', render: function render(_ref3) {
+							var match = _ref3.match;
+							return _react2.default.createElement(_groupDetails.GroupDetails, _extends({}, _this4.props, { group: group }));
+						} })
+				);
+			}
+		}
+	}]);
 
-  return GroupRouter;
+	return GroupRouter;
 }(_react.Component);
 
 /***/ }),
@@ -69736,7 +69735,7 @@ var GroupRouter = exports.GroupRouter = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+		value: true
 });
 exports.GroupDetails = undefined;
 
@@ -69767,301 +69766,298 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* IMPORT COMPONENTS */
 
 /* COMPONENTS */
 var GroupDetails = exports.GroupDetails = function (_Component) {
-  _inherits(GroupDetails, _Component);
+		_inherits(GroupDetails, _Component);
 
-  function GroupDetails(props) {
-    _classCallCheck(this, GroupDetails);
+		function GroupDetails(props) {
+				_classCallCheck(this, GroupDetails);
 
-    var _this = _possibleConstructorReturn(this, (GroupDetails.__proto__ || Object.getPrototypeOf(GroupDetails)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (GroupDetails.__proto__ || Object.getPrototypeOf(GroupDetails)).call(this, props));
 
-    _this.handleInputChange = function (event) {
-      var value = event.target.value;
-      var image = _this.props.images.find(function (i) {
-        return value == i._id;
-      });
-      var form = { active_image: image ? image._id : null, userGroup: _this.props.userGroup._id };
-      (0, _axios2.default)({
-        method: 'put',
-        url: _this.state.group.url,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        data: form
-      }).then(function (res) {
-        if (res.status == 201) {
-          var new_image = _this.state.group.images.find(function (i) {
-            return value == i._id;
-          });
-          var src_url = new_image ? new_image.src_url : null;
-          _this.props.notify('Imagen cambiada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          // this.setState({ active_image: value, src_url: src_url });
-          return _this.props.update(_this.props.user); // update dataset
-        } else {
-          return _this.setState({ error: res.data }); // set error
-        }
-      });
-    };
+				_this.handleInputChange = function (event) {
+						var value = event.target.value;
+						var image = _this.props.images.find(function (image) {
+								return value == image._id;
+						});
+						var form = { active_image: image ? image._id : null, userGroup: _this.props.userGroup._id };
+						(0, _axios2.default)({
+								method: 'put',
+								url: _this.state.group.url,
+								headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+								data: form
+						}).then(function (res) {
+								if (res.status == 201) {
+										var new_image = _this.state.group.images.find(function (i) {
+												return value == i._id;
+										});
+										var src_url = new_image ? new_image.src_url : null;
+										_this.props.notify('Imagen cambiada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+										_this.props.update(_this.props.user);
+								} else {
+										_this.setState({ error: res.data });
+								}
+						});
+				};
 
-    var _this$props = _this.props,
-        group = _this$props.group,
-        user = _this$props.user;
+				var _this$props = _this.props,
+				    group = _this$props.group,
+				    user = _this$props.user;
 
-    _this.state = {
-      // form data stored in state
-      group: '',
-      active_image: '',
-      images: '',
-      error: null
-    };
-    return _this;
-  }
+				_this.state = {
+						group: '',
+						active_image: '',
+						images: '',
+						error: null
+				};
+				return _this;
+		}
 
-  _createClass(GroupDetails, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      // get data
-      var active_image = this.props.group.active_image;
-      // state
+		_createClass(GroupDetails, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						// get data
+						var active_image = this.props.group.active_image;
+						// state
 
-      this.setState({
-        group: this.props.group,
-        active_image: active_image ? active_image._id : '',
-        src_url: active_image ? active_image.src_url : null
-      });
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      // get data
-      var active_image = nextProps.group.active_image;
-      // state
+						this.setState({
+								group: this.props.group,
+								active_image: active_image ? active_image._id : '',
+								src_url: active_image ? active_image.src_url : null
+						});
+				}
+		}, {
+				key: 'componentWillReceiveProps',
+				value: function componentWillReceiveProps(nextProps) {
+						// get data
+						var active_image = nextProps.group.active_image;
+						// state
 
-      this.setState({
-        group: nextProps.group,
-        active_image: active_image ? active_image._id : '',
-        src_url: active_image ? active_image.src_url : null
-      });
-    }
+						this.setState({
+								group: nextProps.group,
+								active_image: active_image ? active_image._id : '',
+								src_url: active_image ? active_image.src_url : null
+						});
+				}
 
-    /* HANDLE INPUT CHANGE */
+				/* HANDLE INPUT CHANGE */
 
-  }, {
-    key: 'render',
-    value: function render() {
-      // define constants from props for better readability
-      var _props$group = this.props.group,
-          _id = _props$group._id,
-          name = _props$group.name,
-          description = _props$group.description,
-          created_at = _props$group.created_at,
-          updated_at = _props$group.updated_at,
-          created_by = _props$group.created_by,
-          displays = _props$group.displays,
-          images = _props$group.images,
-          active_image = _props$group.active_image,
-          tags = _props$group.tags;
-      // refactor date constants with format
+		}, {
+				key: 'render',
+				value: function render() {
+						// define constants from props for better readability
+						var _props$group = this.props.group,
+						    _id = _props$group._id,
+						    name = _props$group.name,
+						    description = _props$group.description,
+						    created_at = _props$group.created_at,
+						    updated_at = _props$group.updated_at,
+						    created_by = _props$group.created_by,
+						    displays = _props$group.displays,
+						    images = _props$group.images,
+						    active_image = _props$group.active_image,
+						    tags = _props$group.tags;
+						// refactor date constants with format
 
-      var created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
-      var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
-      // generate tag list
-      var tag_list = tags.map(function (tag, i) {
-        return _react2.default.createElement(_tag.Tag, { key: i, category: 'groups', tag: tag });
-      });
-      // check if active_image is set and if not set the undefined img
-      var src = this.state.src_url;
-      // define routes for edit and delete based on the id
-      var linktoEdit = '/groups/' + _id + '/edit';
-      var linktoDelete = '/groups/' + _id + '/delete';
-      var imagesOptions = images.map(function (i) {
-        return _react2.default.createElement(
-          'option',
-          { value: i._id, key: i._id },
-          i.name
-        );
-      });
+						var created = moment(created_at).format('dddd, D [de] MMMM [de] YYYY');
+						var updated = moment(updated_at).format('dddd, D [de] MMMM [de] YYYY');
+						// generate tag list
+						var tag_list = tags.map(function (tag, index) {
+								return _react2.default.createElement(_tag.Tag, { key: index, category: 'groups', tag: tag });
+						});
+						// check if active_image is set and if not set the undefined img
+						var src = this.state.src_url;
+						// define routes for edit and delete based on the id
+						var linktoEdit = '/groups/' + _id + '/edit';
+						var linktoDelete = '/groups/' + _id + '/delete';
+						var imagesOptions = images.map(function (image) {
+								return _react2.default.createElement(
+										'option',
+										{ value: image._id, key: image._id },
+										image.name
+								);
+						});
 
-      return _react2.default.createElement(
-        'div',
-        { className: 'card detalles' },
-        _react2.default.createElement(
-          'div',
-          { className: 'card-header' },
-          _react2.default.createElement(
-            'ul',
-            { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-            _react2.default.createElement(
-              'li',
-              { className: 'nav-item mr-auto' },
-              _react2.default.createElement(
-                'h2',
-                { className: 'detalles-titulo' },
-                _react2.default.createElement('i', { className: 'fa fa-list mr-3', 'aria-hidden': 'true' }),
-                name
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              { className: 'nav-item mr-2' },
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: linktoEdit },
-                _react2.default.createElement(
-                  'button',
-                  { type: 'button', className: 'btn btn-outline-warning' },
-                  _react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-1', 'aria-hidden': 'true' }),
-                  'Editar'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              { className: 'nav-item ml-2' },
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: linktoDelete },
-                _react2.default.createElement(
-                  'button',
-                  { type: 'button', className: 'btn btn-outline-danger' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
-                  'Eliminar'
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'card-body' },
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-              'div',
-              { className: 'col' },
-              _react2.default.createElement(
-                'p',
-                { className: 'titulo' },
-                'DETALLES'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
-                description
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
-                created
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
-                ' ',
-                created_by ? created_by.name : 'Usuario eliminado'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'titulo' },
-                'ETIQUETAS'
-              ),
-              tag_list
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'col' },
-              _react2.default.createElement(
-                'div',
-                { className: 'vista-previa' },
-                _react2.default.createElement(
-                  'p',
-                  { className: 'titulo text-right' },
-                  'IMAGEN ACTIVA'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'vista-imagen-grupo d-flex w-100 justify-content-center mb-3' },
-                  src ? _react2.default.createElement('img', { className: 'imagen', src: src }) : _react2.default.createElement(
-                    'div',
-                    { className: 'align-self-center' },
-                    _react2.default.createElement(
-                      'h4',
-                      null,
-                      'La imagen activa aun no ha sido determinada'
-                    ),
-                    _react2.default.createElement(
-                      'small',
-                      null,
-                      'Suba una imagen al servidor'
-                    )
-                  )
-                ),
-                _react2.default.createElement(
-                  'select',
-                  { className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
-                  _react2.default.createElement(
-                    'option',
-                    { value: '', key: 0 },
-                    'Sin imagen activa'
-                  ),
-                  imagesOptions
-                )
-              )
-            )
-          ),
-          _react2.default.createElement('hr', { className: 'card-division' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-              'div',
-              { className: 'col' },
-              _react2.default.createElement(
-                'div',
-                { className: 'asociados' },
-                _react2.default.createElement(
-                  'p',
-                  { className: 'titulo' },
-                  'DISPLAYS (',
-                  displays.length,
-                  ')'
-                ),
-                _react2.default.createElement(_associated.Associated, { content: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'col' },
-              _react2.default.createElement(
-                'div',
-                { className: 'asociados' },
-                _react2.default.createElement(
-                  'p',
-                  { className: 'titulo text-right' },
-                  'IMAGENES ASOCIADAS (',
-                  images.length,
-                  ')'
-                ),
-                _react2.default.createElement(_associated.Associated, { content: images, category: 'images', appearance: 'elemento-imagen', icon: 'picture-o', active: this.state.active_image })
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
+						return _react2.default.createElement(
+								'div',
+								{ className: 'card detalles' },
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-header' },
+										_react2.default.createElement(
+												'ul',
+												{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+												_react2.default.createElement(
+														'li',
+														{ className: 'nav-item mr-auto' },
+														_react2.default.createElement(
+																'h2',
+																{ className: 'detalles-titulo' },
+																_react2.default.createElement('i', { className: 'fa fa-list mr-3', 'aria-hidden': 'true' }),
+																name
+														)
+												),
+												_react2.default.createElement(
+														'li',
+														{ className: 'nav-item mr-2' },
+														_react2.default.createElement(
+																_reactRouterDom.Link,
+																{ to: linktoEdit },
+																_react2.default.createElement(
+																		'button',
+																		{ type: 'button', className: 'btn btn-outline-warning' },
+																		_react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-1', 'aria-hidden': 'true' }),
+																		'Editar'
+																)
+														)
+												),
+												_react2.default.createElement(
+														'li',
+														{ className: 'nav-item ml-2' },
+														_react2.default.createElement(
+																_reactRouterDom.Link,
+																{ to: linktoDelete },
+																_react2.default.createElement(
+																		'button',
+																		{ type: 'button', className: 'btn btn-outline-danger' },
+																		_react2.default.createElement('i', { className: 'fa fa-trash-o', 'aria-hidden': 'true' }),
+																		'Eliminar'
+																)
+														)
+												)
+										)
+								),
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-body' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'row' },
+												_react2.default.createElement(
+														'div',
+														{ className: 'col' },
+														_react2.default.createElement(
+																'p',
+																{ className: 'titulo' },
+																'DETALLES'
+														),
+														_react2.default.createElement(
+																'p',
+																{ className: 'card-text' },
+																_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
+																description
+														),
+														_react2.default.createElement(
+																'p',
+																{ className: 'card-text' },
+																_react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
+																created
+														),
+														_react2.default.createElement(
+																'p',
+																{ className: 'card-text' },
+																_react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
+																' ',
+																created_by ? created_by.name : 'Usuario eliminado'
+														),
+														_react2.default.createElement(
+																'p',
+																{ className: 'titulo' },
+																'ETIQUETAS'
+														),
+														tag_list
+												),
+												_react2.default.createElement(
+														'div',
+														{ className: 'col' },
+														_react2.default.createElement(
+																'div',
+																{ className: 'vista-previa' },
+																_react2.default.createElement(
+																		'p',
+																		{ className: 'titulo text-right' },
+																		'IMAGEN ACTIVA'
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'vista-imagen-grupo d-flex w-100 justify-content-center mb-3' },
+																		src ? _react2.default.createElement('img', { className: 'imagen', src: src }) : _react2.default.createElement(
+																				'div',
+																				{ className: 'align-self-center' },
+																				_react2.default.createElement(
+																						'h4',
+																						null,
+																						'La imagen activa aun no ha sido determinada'
+																				),
+																				_react2.default.createElement(
+																						'small',
+																						null,
+																						'Suba una imagen al servidor'
+																				)
+																		)
+																),
+																_react2.default.createElement(
+																		'select',
+																		{ className: 'custom-select', id: 'active_image', name: 'active_image', value: this.state.active_image, onChange: this.handleInputChange },
+																		_react2.default.createElement(
+																				'option',
+																				{ value: '', key: 0 },
+																				'Sin imagen activa'
+																		),
+																		imagesOptions
+																)
+														)
+												)
+										),
+										_react2.default.createElement('hr', { className: 'card-division' }),
+										_react2.default.createElement(
+												'div',
+												{ className: 'row' },
+												_react2.default.createElement(
+														'div',
+														{ className: 'col' },
+														_react2.default.createElement(
+																'div',
+																{ className: 'asociados' },
+																_react2.default.createElement(
+																		'p',
+																		{ className: 'titulo' },
+																		'DISPLAYS (',
+																		displays.length,
+																		')'
+																),
+																_react2.default.createElement(_associated.Associated, { content: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
+														)
+												),
+												_react2.default.createElement(
+														'div',
+														{ className: 'col' },
+														_react2.default.createElement(
+																'div',
+																{ className: 'asociados' },
+																_react2.default.createElement(
+																		'p',
+																		{ className: 'titulo text-right' },
+																		'IMAGENES ASOCIADAS (',
+																		images.length,
+																		')'
+																),
+																_react2.default.createElement(_associated.Associated, { content: images, category: 'images', appearance: 'elemento-imagen', icon: 'picture-o', active: this.state.active_image })
+														)
+												)
+										)
+								)
+						);
+				}
+		}]);
 
-  return GroupDetails;
+		return GroupDetails;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 312 */
@@ -70071,7 +70067,7 @@ var GroupDetails = exports.GroupDetails = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.GroupDelete = undefined;
 
@@ -70100,100 +70096,95 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var GroupDelete = exports.GroupDelete = function (_Component) {
-  _inherits(GroupDelete, _Component);
+	_inherits(GroupDelete, _Component);
 
-  function GroupDelete(props) {
-    _classCallCheck(this, GroupDelete);
+	function GroupDelete(props) {
+		_classCallCheck(this, GroupDelete);
 
-    var _this = _possibleConstructorReturn(this, (GroupDelete.__proto__ || Object.getPrototypeOf(GroupDelete)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (GroupDelete.__proto__ || Object.getPrototypeOf(GroupDelete)).call(this, props));
 
-    _this.handleDelete = function (event) {
-      event.preventDefault();
-      _axios2.default.delete(_this.props.group.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
-        if (res.status == 200) {
-          _this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          return _this.props.update('groups', res.resourceId, 'remove'); // update dataset
-        }
-      }).then(function (res) {
-        _this.setState({ redirect: true });
-        return res;
-      }).catch(function (err) {
-        console.log(err);
-        return _this.props.notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleDelete = function (event) {
+			event.preventDefault();
+			_axios2.default.delete(_this.props.group.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
+				if (res.status == 200) {
+					_this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+					_this.props.update('groups', res.resourceId, 'remove');
+				}
+			}).then(function (res) {
+				return _this.setState({ redirect: true });
+			}).catch(function (err) {
+				return _this.props.notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    _this.state = {
-      // for redirect after deletion
-      redirect: false
-    };
-    return _this;
-  }
+		_this.state = {
+			redirect: false
+		};
+		return _this;
+	}
 
-  /* HANDLE DELETE EVENT */
+	/* HANDLE DELETE EVENT */
 
 
-  _createClass(GroupDelete, [{
-    key: 'render',
-    value: function render() {
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/groups' });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-                  'Eliminar Grupo'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'text-center' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                '\xBFEliminar grupo?'
-              ),
-              _react2.default.createElement('hr', { className: 'card-division' }),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Esta acci\xF3n no se puede deshacer'
-              ),
-              _react2.default.createElement(
-                'button',
-                { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
-                _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-                'Eliminar'
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+	_createClass(GroupDelete, [{
+		key: 'render',
+		value: function render() {
+			if (this.state.redirect) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/groups' });
+			} else {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card detalles' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+									'Eliminar Grupo'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'text-center' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'\xBFEliminar grupo?'
+							),
+							_react2.default.createElement('hr', { className: 'card-division' }),
+							_react2.default.createElement(
+								'p',
+								null,
+								'Esta acci\xF3n no se puede deshacer'
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
+								_react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+								'Eliminar'
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
 
-  return GroupDelete;
+	return GroupDelete;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 313 */
@@ -70283,7 +70274,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70369,7 +70360,8 @@ var ContentAccount = function ContentAccount(_ref) {
             )
           )
         )
-      )
+      ),
+      '\xBA'
     )
   );
 };
@@ -70395,7 +70387,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 var _manageUsers = __webpack_require__(316);
 
@@ -70405,7 +70397,7 @@ var _manageLocations = __webpack_require__(320);
 
 var _manageScreens = __webpack_require__(322);
 
-var _icon = __webpack_require__(13);
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70436,21 +70428,21 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
 
       var menu_items = [{ exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings' }, { exact: false, text: 'Grupos de gestión', icon: 'users', location: '/settings/groups' }, { exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations' }, { exact: false, text: 'Pantallas', icon: 'window-maximize', location: '/settings/screens' }];
 
-      var menu = menu_items.map(function (i, j) {
+      var menu = menu_items.map(function (item, index) {
         return _react2.default.createElement(
           'div',
-          { key: j, className: 'list-group-item flex-column align-items-start' },
+          { key: index, className: 'list-group-item flex-column align-items-start' },
           _react2.default.createElement(
             _reactRouterDom.NavLink,
-            { exact: i.exact, to: i.location },
+            { exact: item.exact, to: item.location },
             _react2.default.createElement(
               'div',
               { className: 'd-flex elemento settings-menu-item' },
               _react2.default.createElement(
                 'p',
                 { className: 'mb-0' },
-                _react2.default.createElement(_icon.Icon, { icon: i.icon, mr: 3 }),
-                i.text
+                _react2.default.createElement(_icon.Icon, { icon: item.icon, mr: 3 }),
+                item.text
               )
             )
           )
@@ -70523,8 +70515,6 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
   return ContentSettings;
 }(_react.Component);
 
-;
-
 /***/ }),
 /* 316 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -70533,7 +70523,7 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.ManageUsers = undefined;
 
@@ -70567,405 +70557,402 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var ManageUsers = exports.ManageUsers = function (_Component) {
-  _inherits(ManageUsers, _Component);
+	_inherits(ManageUsers, _Component);
 
-  function ManageUsers(props) {
-    _classCallCheck(this, ManageUsers);
+	function ManageUsers(props) {
+		_classCallCheck(this, ManageUsers);
 
-    var _this = _possibleConstructorReturn(this, (ManageUsers.__proto__ || Object.getPrototypeOf(ManageUsers)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (ManageUsers.__proto__ || Object.getPrototypeOf(ManageUsers)).call(this, props));
 
-    _this.handleInputChange = function (event) {
-      var target = event.target;
-      var name = target.name;
-      var value = name != 'admin' ? target.value : !_this.state.admin;
-      _this.setState(_defineProperty({}, name, value));
-    };
+		_this.handleInputChange = function (event) {
+			var target = event.target;
+			var name = target.name;
+			var value = name != 'admin' ? target.value : !_this.state.admin;
+			_this.setState(_defineProperty({}, name, value));
+		};
 
-    _this.edit = function (element_id) {
-      var user = _this.state.users.find(function (u) {
-        return u._id == element_id;
-      });
-      _this.setState({
-        login: user.login,
-        name: user.name,
-        email: user.email,
-        password: '',
-        checkPassword: '',
-        admin: user.admin,
-        userGroup: user.userGroup ? user.userGroup._id : '',
-        edit: true,
-        element_id: element_id
-      });
-    };
+		_this.edit = function (element_id) {
+			var user = _this.state.users.find(function (user) {
+				return user._id == element_id;
+			});
+			_this.setState({
+				login: user.login,
+				name: user.name,
+				email: user.email,
+				password: '',
+				checkPassword: '',
+				admin: user.admin,
+				userGroup: user.userGroup ? user.userGroup._id : '',
+				edit: true,
+				element_id: element_id
+			});
+		};
 
-    _this.cancel = function () {
-      _this.setState({
-        login: '',
-        name: '',
-        email: '',
-        password: '',
-        checkPassword: '',
-        admin: false,
-        userGroup: '',
-        edit: false,
-        element_id: ''
-      });
-    };
+		_this.cancel = function () {
+			_this.setState({
+				login: '',
+				name: '',
+				email: '',
+				password: '',
+				checkPassword: '',
+				admin: false,
+				userGroup: '',
+				edit: false,
+				element_id: ''
+			});
+		};
 
-    _this.handleSubmit = function (method) {
-      // FORM DATA
-      var form = {
-        'name': _this.state.name,
-        'login': _this.state.login,
-        'email': _this.state.email,
-        'admin': _this.state.admin
-      };
-      if (_this.state.userGroup != '') {
-        form.userGroup = _this.state.userGroup;
-      };
-      if (_this.state.password != '') {
-        form.password = _this.state.password;
-      };
-      if (_this.state.checkPassword != '') {
-        form.checkPassword = _this.state.checkPassword;
-      };
-      (0, _axios2.default)({
-        method: method,
-        url: _this.state.edit ? 'http://localhost:4000/users/' + _this.state.element_id : 'http://localhost:4000/users/signup',
-        data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
-      }).then(function (res) {
-        if (res.status == 201 || res.status == 200) {
-          switch (method) {
-            case 'put':
-              _this.props.notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.props.update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
-              break;
-            case 'post':
-              _this.props.notify('Usuario creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.props.update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
-              _this.edit(res.data.resourceId);
-              break;
-            case 'delete':
-              _this.props.notify('Usuario eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.cancel();
-              _this.props.update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
-              break;
-            default:
-              console.log('Something went wrong');
-          }
-        } else {
-          return _this.setState({
-            isLoaded: true,
-            error: res.data
-          });
-        }
-      }).catch(function (err) {
-        console.log(err);
-        return _this.props.notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleSubmit = function (method) {
+			// FORM DATA
+			var form = {
+				'name': _this.state.name,
+				'login': _this.state.login,
+				'email': _this.state.email,
+				'admin': _this.state.admin
+			};
+			if (_this.state.userGroup != '') {
+				form.userGroup = _this.state.userGroup;
+			}
+			if (_this.state.password != '') {
+				form.password = _this.state.password;
+			}
+			if (_this.state.checkPassword != '') {
+				form.checkPassword = _this.state.checkPassword;
+			}
+			(0, _axios2.default)({
+				method: method,
+				url: _this.state.edit ? 'http://localhost:4000/users/' + _this.state.element_id : 'http://localhost:4000/users/signup',
+				data: form,
+				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
+			}).then(function (res) {
+				if (res.status == 201 || res.status == 200) {
+					switch (method) {
+						case 'put':
+							_this.props.notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.props.update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
+							break;
+						case 'post':
+							_this.props.notify('Usuario creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.props.update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
+							_this.edit(res.data.resourceId);
+							break;
+						case 'delete':
+							_this.props.notify('Usuario eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.cancel();
+							_this.props.update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
+							break;
+						default:
+							console.log('Something went wrong');
+					}
+				} else {
+					_this.setState({
+						isLoaded: true,
+						error: res.data
+					});
+				}
+			}).catch(function (err) {
+				return _this.props.notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    _this.state = {
-      users: null,
-      isLoaded: false,
-      error: null,
-      edit: false,
-      element_id: '',
-      // form
-      login: '',
-      name: '',
-      password: '',
-      checkPassword: '',
-      email: '',
-      userGroup: '',
-      admin: false
-    };
-    return _this;
-  }
+		_this.state = {
+			users: null,
+			isLoaded: false,
+			error: null,
+			edit: false,
+			element_id: '',
+			// form
+			login: '',
+			name: '',
+			password: '',
+			checkPassword: '',
+			email: '',
+			userGroup: '',
+			admin: false
+		};
+		return _this;
+	}
 
-  _createClass(ManageUsers, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.setState({ isLoaded: true, users: this.props.data.users });
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      this.setState({ isLoaded: true, users: nextProps.data.users });
-    }
+	_createClass(ManageUsers, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.setState({ isLoaded: true, users: this.props.data.users });
+		}
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			this.setState({ isLoaded: true, users: nextProps.data.users });
+		}
 
-    /* HANDLE SUBMIT */
+		/* HANDLE SUBMIT */
 
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
 
-      var _state = this.state,
-          users = _state.users,
-          error = _state.error,
-          isLoaded = _state.isLoaded;
+			var _state = this.state,
+			    users = _state.users,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded;
 
-      var optionsUserGroup = this.props.data.userGroups.map(function (u, i) {
-        return _react2.default.createElement(
-          'option',
-          { value: u._id, key: i },
-          u.name
-        );
-      });
+			var optionsUserGroup = this.props.data.userGroups.map(function (user, index) {
+				return _react2.default.createElement(
+					'option',
+					{ value: user._id, key: index },
+					user.name
+				);
+			});
 
-      if (error) {
-        return null; // TODO: handle error
-      } else if (!isLoaded) {
-        return null; // TODO: handle loading
-      } else {
-        var list = users.map(function (user) {
-          if (user._id == _this2.state.element_id) {
-            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: true });
-          } else {
-            return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: false });
-          }
-        });
-        list.push(_react2.default.createElement(
-          'div',
-          { key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
-          _react2.default.createElement(
-            'div',
-            { className: 'text-center elemento' },
-            _react2.default.createElement(
-              'h4',
-              { className: 'mb-1' },
-              'No se han encontrado ',
-              users.length > 0 && 'más',
-              ' usuarios'
-            ),
-            _react2.default.createElement('hr', { className: 'card-division' }),
-            _react2.default.createElement(
-              'small',
-              null,
-              'N\xFAmero de grupos de gesti\xF3n: ',
-              users.length
-            )
-          )
-        ));
-        return _react2.default.createElement(
-          'div',
-          { className: 'card settings' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-user mr-3', 'aria-hidden': 'true' }),
-                  'Usuarios'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'row' },
-              _react2.default.createElement(
-                'div',
-                { className: 'col-6' },
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  this.state.edit ? 'Editar Usuario' : 'Añadir Usuario'
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'form',
-                  null,
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'login' },
-                        _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-                        'Usuario'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'login', placeholder: 'Nombre de usuario', name: 'login', value: this.state.login, onChange: this.handleInputChange })
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'name' },
-                        _react2.default.createElement('i', { className: 'fa fa-id-card-o mr-2' }),
-                        'Nombre'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre completo', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'email' },
-                        _react2.default.createElement('i', { className: 'fa fa-envelope-o mr-2' }),
-                        'Correo electr\xF3nico'
-                      ),
-                      _react2.default.createElement('input', { type: 'email', className: 'form-control', id: 'email', placeholder: 'Correo electr\xF3nico', name: 'email', value: this.state.email, onChange: this.handleInputChange })
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'password' },
-                        _react2.default.createElement('i', { className: 'fa fa-key mr-2' }),
-                        this.state.edit ? 'Nueva contraseña' : 'Contraseña'
-                      ),
-                      _react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'usuario', placeholder: 'Contrase\xF1a', name: 'password', value: this.state.password, onChange: this.handleInputChange })
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'checkPassword' },
-                        _react2.default.createElement('i', { className: 'fa fa-key mr-2' }),
-                        'Confirmar contrase\xF1a'
-                      ),
-                      _react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'checkPassword', placeholder: 'Confirmar contrase\xF1a', name: 'checkPassword', value: this.state.checkPassword, onChange: this.handleInputChange })
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'userGroup' },
-                      _react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
-                      'Grupo de gesti\xF3n de dispositivos'
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      null,
-                      _react2.default.createElement(
-                        'select',
-                        { className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
-                        _react2.default.createElement(
-                          'option',
-                          { value: '', key: '0' },
-                          'Sin asignar'
-                        ),
-                        optionsUserGroup
-                      )
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
-                    _react2.default.createElement(
-                      'label',
-                      { className: 'custom-control custom-checkbox' },
-                      _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'checkbox', checked: this.state.admin, name: 'admin', value: this.state.admin, className: 'custom-control-input' }),
-                      _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-                      _react2.default.createElement(
-                        'span',
-                        { className: 'custom-control-description' },
-                        'Dar permisos de administrador'
-                      )
-                    )
-                  ),
-                  !this.state.edit ? _react2.default.createElement(
-                    'button',
-                    { onClick: function onClick() {
-                        return _this2.handleSubmit('post');
-                      }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
-                    _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-                    'A\xF1adir'
-                  ) : _react2.default.createElement(
-                    'div',
-                    { className: 'd-flex w-100 justify-content-between' },
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.handleSubmit('put');
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
-                      _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
-                      'Actualizar'
-                    ),
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.handleSubmit('delete');
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
-                      _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
-                      'Eliminar'
-                    ),
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.cancel();
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
-                      _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
-                      'Cancelar'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'col-6' },
-                _react2.default.createElement(
-                  'h3',
-                  { className: 'd-flex w-100 justify-content-between' },
-                  'Usuarios',
-                  _react2.default.createElement(
-                    'span',
-                    null,
-                    this.state.users.length
-                  )
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'list settings-list' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'list-group mb-3' },
-                    list
-                  )
-                )
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+			if (error) {
+				return null; // TODO: handle error
+			} else if (!isLoaded) {
+				return null; // TODO: handle loading
+			} else {
+				var list = users.map(function (user) {
+					if (user._id == _this2.state.element_id) {
+						return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: true });
+					} else {
+						return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: false });
+					}
+				});
+				list.push(_react2.default.createElement(
+					'div',
+					{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'text-center elemento' },
+						_react2.default.createElement(
+							'h4',
+							{ className: 'mb-1' },
+							'No se han encontrado ',
+							users.length > 0 && 'más',
+							' usuarios'
+						),
+						_react2.default.createElement('hr', { className: 'card-division' }),
+						_react2.default.createElement(
+							'small',
+							null,
+							'N\xFAmero de grupos de gesti\xF3n: ',
+							users.length
+						)
+					)
+				));
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card settings' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-user mr-3', 'aria-hidden': 'true' }),
+									'Usuarios'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-6' },
+								_react2.default.createElement(
+									'h3',
+									null,
+									this.state.edit ? 'Editar Usuario' : 'Añadir Usuario'
+								),
+								_react2.default.createElement('hr', { className: 'card-division' }),
+								_react2.default.createElement(
+									'form',
+									null,
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'login' },
+												_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+												'Usuario'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'login', placeholder: 'Nombre de usuario', name: 'login', value: this.state.login, onChange: this.handleInputChange })
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'name' },
+												_react2.default.createElement('i', { className: 'fa fa-id-card-o mr-2' }),
+												'Nombre'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre completo', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'email' },
+												_react2.default.createElement('i', { className: 'fa fa-envelope-o mr-2' }),
+												'Correo electr\xF3nico'
+											),
+											_react2.default.createElement('input', { type: 'email', className: 'form-control', id: 'email', placeholder: 'Correo electr\xF3nico', name: 'email', value: this.state.email, onChange: this.handleInputChange })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'password' },
+												_react2.default.createElement('i', { className: 'fa fa-key mr-2' }),
+												this.state.edit ? 'Nueva contraseña' : 'Contraseña'
+											),
+											_react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'usuario', placeholder: 'Contrase\xF1a', name: 'password', value: this.state.password, onChange: this.handleInputChange })
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'checkPassword' },
+												_react2.default.createElement('i', { className: 'fa fa-key mr-2' }),
+												'Confirmar contrase\xF1a'
+											),
+											_react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'checkPassword', placeholder: 'Confirmar contrase\xF1a', name: 'checkPassword', value: this.state.checkPassword, onChange: this.handleInputChange })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-group' },
+										_react2.default.createElement(
+											'label',
+											{ htmlFor: 'userGroup' },
+											_react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
+											'Grupo de gesti\xF3n de dispositivos'
+										),
+										_react2.default.createElement(
+											'div',
+											null,
+											_react2.default.createElement(
+												'select',
+												{ className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
+												_react2.default.createElement(
+													'option',
+													{ value: '', key: '0' },
+													'Sin asignar'
+												),
+												optionsUserGroup
+											)
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-group' },
+										_react2.default.createElement(
+											'label',
+											{ className: 'custom-control custom-checkbox' },
+											_react2.default.createElement('input', { onChange: this.handleInputChange, type: 'checkbox', checked: this.state.admin, name: 'admin', value: this.state.admin, className: 'custom-control-input' }),
+											_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+											_react2.default.createElement(
+												'span',
+												{ className: 'custom-control-description' },
+												'Dar permisos de administrador'
+											)
+										)
+									),
+									!this.state.edit ? _react2.default.createElement(
+										'button',
+										{ onClick: function onClick() {
+												return _this2.handleSubmit('post');
+											}, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
+										_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+										'A\xF1adir'
+									) : _react2.default.createElement(
+										'div',
+										{ className: 'd-flex w-100 justify-content-between' },
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.handleSubmit('put');
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
+											_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+											'Actualizar'
+										),
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.handleSubmit('delete');
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
+											_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+											'Eliminar'
+										),
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.cancel();
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
+											_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+											'Cancelar'
+										)
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-6' },
+								_react2.default.createElement(
+									'h3',
+									{ className: 'd-flex w-100 justify-content-between' },
+									'Usuarios',
+									_react2.default.createElement(
+										'span',
+										null,
+										this.state.users.length
+									)
+								),
+								_react2.default.createElement('hr', { className: 'card-division' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'list settings-list' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'list-group mb-3' },
+										list
+									)
+								)
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
 
-  return ManageUsers;
+	return ManageUsers;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 317 */
@@ -70988,25 +70975,26 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var User = exports.User = function User(_ref) {
-  var user = _ref.user,
+  var _ref$user = _ref.user,
+      url = _ref$user.url,
+      _id = _ref$user._id,
+      id = _ref$user.id,
+      name = _ref$user.name,
+      login = _ref$user.login,
+      email = _ref$user.email,
+      created_at = _ref$user.created_at,
+      admin = _ref$user.admin,
+      userGroup = _ref$user.userGroup,
       edit = _ref.edit,
       active = _ref.active;
-  var url = user.url,
-      _id = user._id,
-      id = user.id,
-      name = user.name,
-      login = user.login,
-      email = user.email,
-      created_at = user.created_at,
-      admin = user.admin,
-      userGroup = user.userGroup;
 
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", { "active": active });
+  var elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { 'active': active });
   return _react2.default.createElement(
     'div',
     { className: elementClass, onClick: function onClick() {
@@ -71049,7 +71037,7 @@ var User = exports.User = function User(_ref) {
         ),
         _react2.default.createElement(
           'small',
-          { className: userGroup || "text-danger" },
+          { className: userGroup || 'text-danger' },
           _react2.default.createElement('i', { className: 'fa fa-users mr-2', 'aria-hidden': 'true' }),
           userGroup ? userGroup.name : 'Sin asignar'
         )
@@ -71066,7 +71054,7 @@ var User = exports.User = function User(_ref) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.ManageUserGroups = undefined;
 
@@ -71100,295 +71088,294 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
-  _inherits(ManageUserGroups, _Component);
+	_inherits(ManageUserGroups, _Component);
 
-  function ManageUserGroups(props) {
-    _classCallCheck(this, ManageUserGroups);
+	function ManageUserGroups(props) {
+		_classCallCheck(this, ManageUserGroups);
 
-    var _this = _possibleConstructorReturn(this, (ManageUserGroups.__proto__ || Object.getPrototypeOf(ManageUserGroups)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (ManageUserGroups.__proto__ || Object.getPrototypeOf(ManageUserGroups)).call(this, props));
 
-    _this.handleInputChange = function (event) {
-      var target = event.target;
-      var name = target.name;
-      var value = target.value;
-      _this.setState(_defineProperty({}, name, value));
-    };
+		_this.handleInputChange = function (event) {
+			var target = event.target;
+			var name = target.name;
+			var value = target.value;
+			_this.setState(_defineProperty({}, name, value));
+		};
 
-    _this.edit = function (element_id) {
-      var userGroup = _this.state.userGroups.find(function (u) {
-        return u._id == element_id;
-      });
-      _this.setState({
-        name: userGroup.name,
-        description: userGroup.description,
-        edit: true,
-        element_id: element_id
-      });
-    };
+		_this.edit = function (element_id) {
+			var userGroup = _this.state.userGroups.find(function (userGroup) {
+				return userGroup._id == element_id;
+			});
+			_this.setState({
+				name: userGroup.name,
+				description: userGroup.description,
+				edit: true,
+				element_id: element_id
+			});
+		};
 
-    _this.cancel = function () {
-      _this.setState({
-        name: '',
-        description: '',
-        edit: false,
-        element_id: ''
-      });
-    };
+		_this.cancel = function () {
+			_this.setState({
+				name: '',
+				description: '',
+				edit: false,
+				element_id: ''
+			});
+		};
 
-    _this.handleSubmit = function (method) {
-      // FORM DATA
-      var form = {
-        'name': _this.state.name,
-        'description': _this.state.description
-      };
-      (0, _axios2.default)({
-        method: method,
-        url: _this.state.edit ? 'http://localhost:4000/userGroups/' + _this.state.element_id : 'http://localhost:4000/userGroups',
-        data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
-      }).then(function (res) {
-        // resolve callback
-        if (res.status == 201 || res.status == 200) {
-          switch (method) {
-            case 'put':
-              _this.props.notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.props.update('userGroups', res.data.resourceId, 'edit', res.data.resource); // update dataset
-              break;
-            case 'post':
-              _this.props.notify('Grupo creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.props.update('userGroups', res.data.resourceId, 'add', res.data.resource); // update dataset
-              _this.edit(res.data.resourceId);
-              break;
-            case 'delete':
-              _this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.cancel();
-              _this.props.update('userGroups', res.data.resourceId, 'remove', res.data.resource); // update dataset
-              break;
-            default:
-              console.log('Something went wrong');
-          }
-        } else {
-          return _this.setState({
-            isLoaded: true,
-            error: res.data
-          });
-        }
-      }).catch(function (err) {
-        console.log(err);
-        return _this.props.notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleSubmit = function (method) {
+			// FORM DATA
+			var form = {
+				'name': _this.state.name,
+				'description': _this.state.description
+			};
+			(0, _axios2.default)({
+				method: method,
+				url: _this.state.edit ? 'http://localhost:4000/userGroups/' + _this.state.element_id : 'http://localhost:4000/userGroups',
+				data: form,
+				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
+			}).then(function (res) {
+				// resolve callback
+				if (res.status == 201 || res.status == 200) {
+					switch (method) {
+						case 'put':
+							_this.props.notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.props.update('userGroups', res.data.resourceId, 'edit', res.data.resource); // update dataset
+							break;
+						case 'post':
+							_this.props.notify('Grupo creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.props.update('userGroups', res.data.resourceId, 'add', res.data.resource); // update dataset
+							_this.edit(res.data.resourceId);
+							break;
+						case 'delete':
+							_this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.cancel();
+							_this.props.update('userGroups', res.data.resourceId, 'remove', res.data.resource); // update dataset
+							break;
+						default:
+							console.log('Something went wrong');
+					}
+				} else {
+					_this.setState({
+						isLoaded: true,
+						error: res.data
+					});
+				}
+			}).catch(function (err) {
+				return _this.props.notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    _this.state = {
-      userGroups: null,
-      isLoaded: false,
-      error: null,
-      edit: false,
-      element_id: '',
-      // form
-      name: '',
-      description: ''
-    };
-    return _this;
-  }
+		_this.state = {
+			userGroups: null,
+			isLoaded: false,
+			error: null,
+			edit: false,
+			element_id: '',
+			// form
+			name: '',
+			description: ''
+		};
+		return _this;
+	}
 
-  _createClass(ManageUserGroups, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.setState({ isLoaded: true, userGroups: this.props.data.userGroups });
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups });
-    }
+	_createClass(ManageUserGroups, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.setState({ isLoaded: true, userGroups: this.props.data.userGroups });
+		}
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups });
+		}
 
-    /* HANDLE SUBMIT */
+		/* HANDLE SUBMIT */
 
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
 
-      var _state = this.state,
-          userGroups = _state.userGroups,
-          error = _state.error,
-          isLoaded = _state.isLoaded;
+			var _state = this.state,
+			    userGroups = _state.userGroups,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded;
 
 
-      if (error) {
-        return null; // TODO: handle error
-      } else if (!isLoaded) {
-        return null; // TODO: handle loading
-      } else {
-        var list = userGroups.map(function (userGroup) {
-          if (userGroup._id == _this2.state.element_id) {
-            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: true });
-          } else {
-            return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: false });
-          }
-        });
-        list.push(_react2.default.createElement(
-          'div',
-          { key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
-          _react2.default.createElement(
-            'div',
-            { className: 'text-center elemento' },
-            _react2.default.createElement(
-              'h4',
-              { className: 'mb-1' },
-              'No se han encontrado ',
-              userGroups.length > 0 && 'más',
-              ' grupos de gesti\xF3n'
-            ),
-            _react2.default.createElement('hr', { className: 'card-division' }),
-            _react2.default.createElement(
-              'small',
-              null,
-              'N\xFAmero de grupos de gesti\xF3n: ',
-              userGroups.length
-            )
-          )
-        ));
+			if (error) {
+				return null; // TODO: handle error
+			} else if (!isLoaded) {
+				return null; // TODO: handle loading
+			} else {
+				var list = userGroups.map(function (userGroup) {
+					if (userGroup._id == _this2.state.element_id) {
+						return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: true });
+					} else {
+						return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: false });
+					}
+				});
+				list.push(_react2.default.createElement(
+					'div',
+					{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'text-center elemento' },
+						_react2.default.createElement(
+							'h4',
+							{ className: 'mb-1' },
+							'No se han encontrado ',
+							userGroups.length > 0 && 'más',
+							' grupos de gesti\xF3n'
+						),
+						_react2.default.createElement('hr', { className: 'card-division' }),
+						_react2.default.createElement(
+							'small',
+							null,
+							'N\xFAmero de grupos de gesti\xF3n: ',
+							userGroups.length
+						)
+					)
+				));
 
-        return _react2.default.createElement(
-          'div',
-          { className: 'card settings' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-users mr-3', 'aria-hidden': 'true' }),
-                  'Grupos de gesti\xF3n'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'row' },
-              _react2.default.createElement(
-                'div',
-                { className: 'col-6' },
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  this.state.edit ? 'Editar Grupo de gestión' : 'Añadir Grupo de gestión'
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'form',
-                  null,
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'name' },
-                        _react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
-                        'Nombre'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre del grupo de gesti\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'description' },
-                        _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                        'Descripci\xF3n'
-                      ),
-                      _react2.default.createElement('input', { type: 'description', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n del grupo de gesti\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-                    )
-                  ),
-                  !this.state.edit ? _react2.default.createElement(
-                    'button',
-                    { onClick: function onClick() {
-                        return _this2.handleSubmit('post');
-                      }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
-                    _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-                    'A\xF1adir'
-                  ) : _react2.default.createElement(
-                    'div',
-                    { className: 'd-flex w-100 justify-content-between' },
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.handleSubmit('put');
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
-                      _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
-                      'Actualizar'
-                    ),
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.handleSubmit('delete');
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
-                      _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
-                      'Eliminar'
-                    ),
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.cancel();
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
-                      _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
-                      'Cancelar'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'col-6' },
-                _react2.default.createElement(
-                  'h3',
-                  { className: 'd-flex w-100 justify-content-between' },
-                  'Grupos de gesti\xF3n',
-                  _react2.default.createElement(
-                    'span',
-                    null,
-                    this.state.userGroups.length
-                  )
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'list settings-list' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'list-group mb-3' },
-                    list
-                  )
-                )
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card settings' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-users mr-3', 'aria-hidden': 'true' }),
+									'Grupos de gesti\xF3n'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-6' },
+								_react2.default.createElement(
+									'h3',
+									null,
+									this.state.edit ? 'Editar Grupo de gestión' : 'Añadir Grupo de gestión'
+								),
+								_react2.default.createElement('hr', { className: 'card-division' }),
+								_react2.default.createElement(
+									'form',
+									null,
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'name' },
+												_react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
+												'Nombre'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre del grupo de gesti\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'description' },
+												_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+												'Descripci\xF3n'
+											),
+											_react2.default.createElement('input', { type: 'description', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n del grupo de gesti\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+										)
+									),
+									!this.state.edit ? _react2.default.createElement(
+										'button',
+										{ onClick: function onClick() {
+												return _this2.handleSubmit('post');
+											}, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
+										_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+										'A\xF1adir'
+									) : _react2.default.createElement(
+										'div',
+										{ className: 'd-flex w-100 justify-content-between' },
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.handleSubmit('put');
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
+											_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+											'Actualizar'
+										),
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.handleSubmit('delete');
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
+											_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+											'Eliminar'
+										),
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.cancel();
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
+											_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+											'Cancelar'
+										)
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-6' },
+								_react2.default.createElement(
+									'h3',
+									{ className: 'd-flex w-100 justify-content-between' },
+									'Grupos de gesti\xF3n',
+									_react2.default.createElement(
+										'span',
+										null,
+										this.state.userGroups.length
+									)
+								),
+								_react2.default.createElement('hr', { className: 'card-division' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'list settings-list' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'list-group mb-3' },
+										list
+									)
+								)
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
 
-  return ManageUserGroups;
+	return ManageUserGroups;
 }(_react.Component);
 
 /***/ }),
@@ -71412,26 +71399,27 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var UserGroup = exports.UserGroup = function UserGroup(_ref) {
-  var userGroup = _ref.userGroup,
+  var _ref$userGroup = _ref.userGroup,
+      url = _ref$userGroup.url,
+      _id = _ref$userGroup._id,
+      name = _ref$userGroup.name,
+      description = _ref$userGroup.description,
+      created_at = _ref$userGroup.created_at,
+      devices = _ref$userGroup.devices,
+      displays = _ref$userGroup.displays,
+      groups = _ref$userGroup.groups,
+      images = _ref$userGroup.images,
+      users = _ref$userGroup.users,
       edit = _ref.edit,
       active = _ref.active;
-  var url = userGroup.url,
-      _id = userGroup._id,
-      name = userGroup.name,
-      description = userGroup.description,
-      created_at = userGroup.created_at,
-      devices = userGroup.devices,
-      displays = userGroup.displays,
-      groups = userGroup.groups,
-      images = userGroup.images,
-      users = userGroup.users;
 
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", { "active": active });
+  var elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { 'active': active });
   return _react2.default.createElement(
     'div',
     { className: elementClass, onClick: function onClick() {
@@ -71484,7 +71472,7 @@ var UserGroup = exports.UserGroup = function UserGroup(_ref) {
           'small',
           null,
           _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2', 'aria-hidden': 'true' }),
-          moment(created_at).format("dddd, D [de] MMMM [de] YYYY")
+          moment(created_at).format('dddd, D [de] MMMM [de] YYYY')
         )
       )
     )
@@ -71499,7 +71487,7 @@ var UserGroup = exports.UserGroup = function UserGroup(_ref) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.ManageLocations = undefined;
 
@@ -71533,300 +71521,299 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var ManageLocations = exports.ManageLocations = function (_Component) {
-  _inherits(ManageLocations, _Component);
+	_inherits(ManageLocations, _Component);
 
-  function ManageLocations(props) {
-    _classCallCheck(this, ManageLocations);
+	function ManageLocations(props) {
+		_classCallCheck(this, ManageLocations);
 
-    var _this = _possibleConstructorReturn(this, (ManageLocations.__proto__ || Object.getPrototypeOf(ManageLocations)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (ManageLocations.__proto__ || Object.getPrototypeOf(ManageLocations)).call(this, props));
 
-    _this.handleInputChange = function (event) {
-      var target = event.target;
-      var name = target.name;
-      var value = target.value;
-      _this.setState(_defineProperty({}, name, value));
-    };
+		_this.handleInputChange = function (event) {
+			var target = event.target;
+			var name = target.name;
+			var value = target.value;
+			_this.setState(_defineProperty({}, name, value));
+		};
 
-    _this.edit = function (element_id) {
-      var location = _this.state.locations.find(function (l) {
-        return l._id == element_id;
-      });
-      _this.setState({
-        name: location.name,
-        description: location.description,
-        element_id: element_id,
-        edit: true
-      });
-    };
+		_this.edit = function (element_id) {
+			var location = _this.state.locations.find(function (location) {
+				return location._id == element_id;
+			});
+			_this.setState({
+				name: location.name,
+				description: location.description,
+				element_id: element_id,
+				edit: true
+			});
+		};
 
-    _this.cancel = function () {
-      _this.setState({
-        name: '',
-        description: '',
-        element_id: '',
-        edit: false
-      });
-    };
+		_this.cancel = function () {
+			_this.setState({
+				name: '',
+				description: '',
+				element_id: '',
+				edit: false
+			});
+		};
 
-    _this.handleSubmit = function (method) {
-      // FORM DATA
-      var form = { 'name': _this.state.name };
-      if (_this.state.description != '') {
-        form.description = _this.state.description;
-      }
-      // HTTP request
-      (0, _axios2.default)({
-        method: method,
-        url: _this.state.edit ? 'http://localhost:4000/locations/' + _this.state.element_id : 'http://localhost:4000/locations',
-        data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
-      }).then(function (res) {
-        if (res.status == 201 || res.status == 200) {
-          switch (method) {
-            case 'put':
-              _this.props.notify('Localización modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.props.update('locations', res.data.resourceId, 'edit', res.data.resource); // update dataset
-              break;
-            case 'post':
-              _this.props.notify('Localización creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.props.update('locations', res.data.resourceId, 'add', res.data.resource); // update dataset
-              _this.edit(res.data.resource._id);
-              break;
-            case 'delete':
-              _this.props.notify('Localización eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.cancel();
-              _this.props.update('locations', res.data.resourceId, 'remove', res.data.resource); // update dataset
-              break;
-            default:
-              console.log('Something went wrong');
-          }
-        } else {
-          return _this.setState({
-            isLoaded: true,
-            error: res.data
-          });
-        }
-      }).catch(function (err) {
-        console.log(err);
-        return _this.props.notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleSubmit = function (method) {
+			// FORM DATA
+			var form = { 'name': _this.state.name };
+			if (_this.state.description != '') {
+				form.description = _this.state.description;
+			}
+			// HTTP request
+			(0, _axios2.default)({
+				method: method,
+				url: _this.state.edit ? 'http://localhost:4000/locations/' + _this.state.element_id : 'http://localhost:4000/locations',
+				data: form,
+				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
+			}).then(function (res) {
+				if (res.status == 201 || res.status == 200) {
+					switch (method) {
+						case 'put':
+							_this.props.notify('Localización modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.props.update('locations', res.data.resourceId, 'edit', res.data.resource); // update dataset
+							break;
+						case 'post':
+							_this.props.notify('Localización creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.props.update('locations', res.data.resourceId, 'add', res.data.resource); // update dataset
+							_this.edit(res.data.resource._id);
+							break;
+						case 'delete':
+							_this.props.notify('Localización eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.cancel();
+							_this.props.update('locations', res.data.resourceId, 'remove', res.data.resource); // update dataset
+							break;
+						default:
+							console.log('Something went wrong');
+					}
+				} else {
+					_this.setState({
+						isLoaded: true,
+						error: res.data
+					});
+				}
+			}).catch(function (err) {
+				return _this.props.notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    var user = _this.props.user;
+		var user = _this.props.user;
 
-    _this.state = {
-      locations: false,
-      isLoaded: false,
-      error: null,
-      edit: false,
-      element_id: '',
-      // form
-      name: '',
-      description: ''
-    };
-    return _this;
-  }
+		_this.state = {
+			locations: false,
+			isLoaded: false,
+			error: null,
+			edit: false,
+			element_id: '',
+			// form
+			name: '',
+			description: ''
+		};
+		return _this;
+	}
 
-  // Handle changes
-
-
-  _createClass(ManageLocations, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.setState({ isLoaded: true, locations: this.props.data.locations });
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      this.setState({ isLoaded: true, locations: nextProps.data.locations });
-    }
-
-    /* HANDLE SUBMIT */
-
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var _state = this.state,
-          locations = _state.locations,
-          error = _state.error,
-          isLoaded = _state.isLoaded;
+	// Handle changes
 
 
-      if (error) {
-        return null; // TODO: handle error
-      } else if (!isLoaded) {
-        return null; // TODO: handle loading
-      } else {
-        var list = locations.map(function (location) {
-          if (location._id == _this2.state.element_id) {
-            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: true });
-          } else {
-            return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: false });
-          }
-        });
-        list.push(_react2.default.createElement(
-          'div',
-          { key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
-          _react2.default.createElement(
-            'div',
-            { className: 'text-center elemento' },
-            _react2.default.createElement(
-              'h4',
-              { className: 'mb-1' },
-              'No se han encontrado ',
-              locations.length > 0 && 'más',
-              ' localizaciones'
-            ),
-            _react2.default.createElement('hr', { className: 'card-division' }),
-            _react2.default.createElement(
-              'small',
-              null,
-              'N\xFAmero de localizaciones: ',
-              locations.length
-            )
-          )
-        ));
+	_createClass(ManageLocations, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.setState({ isLoaded: true, locations: this.props.data.locations });
+		}
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			this.setState({ isLoaded: true, locations: nextProps.data.locations });
+		}
 
-        return _react2.default.createElement(
-          'div',
-          { className: 'card settings' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-map-marker mr-3', 'aria-hidden': 'true' }),
-                  'Localizaciones'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'row' },
-              _react2.default.createElement(
-                'div',
-                { className: 'col-6' },
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  this.state.edit ? 'Editar Localización' : 'Añadir Localizacion'
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'form',
-                  null,
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'name' },
-                        _react2.default.createElement('i', { className: 'fa fa-map-marker mr-2' }),
-                        'Nombre'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la localizaci\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'description' },
-                        _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-                        'Descripci\xF3n'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-                    )
-                  ),
-                  !this.state.edit ? _react2.default.createElement(
-                    'button',
-                    { onClick: function onClick() {
-                        return _this2.handleSubmit('post');
-                      }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
-                    _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-                    'A\xF1adir'
-                  ) : _react2.default.createElement(
-                    'div',
-                    { className: 'd-flex w-100 justify-content-between' },
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.handleSubmit('put');
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
-                      _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
-                      'Actualizar'
-                    ),
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.handleSubmit('delete');
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
-                      _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
-                      'Eliminar'
-                    ),
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.cancel();
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
-                      _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
-                      'Cancelar'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'col-6' },
-                _react2.default.createElement(
-                  'h3',
-                  { className: 'd-flex w-100 justify-content-between' },
-                  'Localizaciones',
-                  _react2.default.createElement(
-                    'span',
-                    null,
-                    this.state.locations.length
-                  )
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'list settings-list' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'list-group mb-3' },
-                    list
-                  )
-                )
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+		/* HANDLE SUBMIT */
 
-  return ManageLocations;
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			var _state = this.state,
+			    locations = _state.locations,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded;
+
+
+			if (error) {
+				return null; // TODO: handle error
+			} else if (!isLoaded) {
+				return null; // TODO: handle loading
+			} else {
+				var list = locations.map(function (location) {
+					if (location._id == _this2.state.element_id) {
+						return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: true });
+					} else {
+						return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: false });
+					}
+				});
+				list.push(_react2.default.createElement(
+					'div',
+					{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'text-center elemento' },
+						_react2.default.createElement(
+							'h4',
+							{ className: 'mb-1' },
+							'No se han encontrado ',
+							locations.length > 0 && 'más',
+							' localizaciones'
+						),
+						_react2.default.createElement('hr', { className: 'card-division' }),
+						_react2.default.createElement(
+							'small',
+							null,
+							'N\xFAmero de localizaciones: ',
+							locations.length
+						)
+					)
+				));
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card settings' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-map-marker mr-3', 'aria-hidden': 'true' }),
+									'Localizaciones'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-6' },
+								_react2.default.createElement(
+									'h3',
+									null,
+									this.state.edit ? 'Editar Localización' : 'Añadir Localizacion'
+								),
+								_react2.default.createElement('hr', { className: 'card-division' }),
+								_react2.default.createElement(
+									'form',
+									null,
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'name' },
+												_react2.default.createElement('i', { className: 'fa fa-map-marker mr-2' }),
+												'Nombre'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la localizaci\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'description' },
+												_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+												'Descripci\xF3n'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+										)
+									),
+									!this.state.edit ? _react2.default.createElement(
+										'button',
+										{ onClick: function onClick() {
+												return _this2.handleSubmit('post');
+											}, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
+										_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+										'A\xF1adir'
+									) : _react2.default.createElement(
+										'div',
+										{ className: 'd-flex w-100 justify-content-between' },
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.handleSubmit('put');
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
+											_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+											'Actualizar'
+										),
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.handleSubmit('delete');
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
+											_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+											'Eliminar'
+										),
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.cancel();
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
+											_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+											'Cancelar'
+										)
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-6' },
+								_react2.default.createElement(
+									'h3',
+									{ className: 'd-flex w-100 justify-content-between' },
+									'Localizaciones',
+									_react2.default.createElement(
+										'span',
+										null,
+										this.state.locations.length
+									)
+								),
+								_react2.default.createElement('hr', { className: 'card-division' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'list settings-list' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'list-group mb-3' },
+										list
+									)
+								)
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
+
+	return ManageLocations;
 }(_react.Component);
 
 /***/ }),
@@ -71850,22 +71837,22 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var Location = exports.Location = function Location(_ref) {
-  var location = _ref.location,
+  var _ref$location = _ref.location,
+      url = _ref$location.url,
+      _id = _ref$location._id,
+      id = _ref$location.id,
+      name = _ref$location.name,
+      description = _ref$location.description,
       edit = _ref.edit,
       active = _ref.active;
-  var url = location.url,
-      _id = location._id,
-      id = location.id,
-      name = location.name,
-      description = location.description;
 
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", { "active": active });
-
+  var elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { 'active': active });
   return _react2.default.createElement(
     'div',
     { className: elementClass, onClick: function onClick() {
@@ -71905,7 +71892,7 @@ var Location = exports.Location = function Location(_ref) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.ManageScreens = undefined;
 
@@ -71939,377 +71926,374 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var ManageScreens = exports.ManageScreens = function (_Component) {
-  _inherits(ManageScreens, _Component);
+	_inherits(ManageScreens, _Component);
 
-  function ManageScreens(props) {
-    _classCallCheck(this, ManageScreens);
+	function ManageScreens(props) {
+		_classCallCheck(this, ManageScreens);
 
-    var _this = _possibleConstructorReturn(this, (ManageScreens.__proto__ || Object.getPrototypeOf(ManageScreens)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (ManageScreens.__proto__ || Object.getPrototypeOf(ManageScreens)).call(this, props));
 
-    _this.edit = function (element_id) {
-      var screen = _this.state.screens.find(function (r) {
-        return r._id == element_id;
-      });
-      _this.setState({
-        name: screen.name,
-        width: screen.size.width,
-        height: screen.size.height,
-        description: screen.description,
-        screen_code: screen.screen_code,
-        color_profile: screen.color_profile,
-        element_id: element_id,
-        edit: true
-      });
-    };
+		_this.edit = function (element_id) {
+			var screen = _this.state.screens.find(function (screen) {
+				return screen._id == element_id;
+			});
+			_this.setState({
+				name: screen.name,
+				width: screen.size.width,
+				height: screen.size.height,
+				description: screen.description,
+				screen_code: screen.screen_code,
+				color_profile: screen.color_profile,
+				element_id: element_id,
+				edit: true
+			});
+		};
 
-    _this.cancel = function () {
-      _this.setState({
-        name: '',
-        width: '',
-        height: '',
-        description: '',
-        screen_code: '',
-        color_profile: 'grayscale',
-        element_id: '',
-        edit: false
-      });
-    };
+		_this.cancel = function () {
+			_this.setState({
+				name: '',
+				width: '',
+				height: '',
+				description: '',
+				screen_code: '',
+				color_profile: 'grayscale',
+				element_id: '',
+				edit: false
+			});
+		};
 
-    _this.handleInputChange = function (event) {
-      var target = event.target;
-      var name = target.name;
-      var value = target.value;
-      _this.setState(_defineProperty({}, name, value));
-    };
+		_this.handleInputChange = function (event) {
+			var target = event.target;
+			var name = target.name;
+			var value = target.value;
+			_this.setState(_defineProperty({}, name, value));
+		};
 
-    _this.handleSubmit = function (method) {
-      // FORM DATA
-      var form = {
-        'name': _this.state.name,
-        'size': {
-          'height': _this.state.height,
-          'width': _this.state.width
-        },
-        'screen_code': _this.state.screen_code,
-        'color_profile': _this.state.color_profile
-      };
-      if (_this.state.description != '') {
-        form.description = _this.state.description;
-      }
-      (0, _axios2.default)({
-        method: method,
-        url: _this.state.edit ? 'http://localhost:4000/screens/' + _this.state.element_id : 'http://localhost:4000/screens',
-        data: form,
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
-      }).then(function (res) {
-        if (res.status == 201 || res.status == 200) {
-          switch (method) {
-            case 'put':
-              _this.props.notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.props.update('screens', res.data.resourceId, 'edit', res.data.resource); // update dataset
-              break;
-            case 'post':
-              _this.props.notify('Pantalla creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.props.update('screens', res.data.resourceId, 'add', res.data.resource); // update dataset
-              _this.edit(res.data.resourceId);
-              break;
-            case 'delete':
-              _this.props.notify('Pantalla eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-              _this.cancel();
-              _this.props.update('screens', res.data.resourceId, 'remove', res.data.resource); // update dataset
-              break;
-            default:
-              console.log('Something went wrong');
-          }
-        } else {
-          return _this.setState({
-            isLoaded: true,
-            error: res.data
-          });
-        }
-      }).catch(function (err) {
-        console.log(err);
-        return _this.props.notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleSubmit = function (method) {
+			// FORM DATA
+			var form = {
+				'name': _this.state.name,
+				'size': {
+					'height': _this.state.height,
+					'width': _this.state.width
+				},
+				'screen_code': _this.state.screen_code,
+				'color_profile': _this.state.color_profile
+			};
+			if (_this.state.description != '') {
+				form.description = _this.state.description;
+			}
+			(0, _axios2.default)({
+				method: method,
+				url: _this.state.edit ? 'http://localhost:4000/screens/' + _this.state.element_id : 'http://localhost:4000/screens',
+				data: form,
+				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
+			}).then(function (res) {
+				if (res.status == 201 || res.status == 200) {
+					switch (method) {
+						case 'put':
+							_this.props.notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.props.update('screens', res.data.resourceId, 'edit', res.data.resource); // update dataset
+							break;
+						case 'post':
+							_this.props.notify('Pantalla creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.props.update('screens', res.data.resourceId, 'add', res.data.resource); // update dataset
+							_this.edit(res.data.resourceId);
+							break;
+						case 'delete':
+							_this.props.notify('Pantalla eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+							_this.cancel();
+							_this.props.update('screens', res.data.resourceId, 'remove', res.data.resource); // update dataset
+							break;
+						default:
+							console.log('Something went wrong');
+					}
+				} else {
+					_this.setState({
+						isLoaded: true,
+						error: res.data
+					});
+				}
+			}).catch(function (err) {
+				return _this.props.notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    _this.state = {
-      users: null,
-      isLoaded: false,
-      error: null,
-      edit: false,
-      element_id: '',
-      // form
-      name: '',
-      height: 0,
-      width: 0,
-      screen_code: '',
-      color_profile: 'grayscale',
-      description: ''
-    };
-    return _this;
-  }
+		_this.state = {
+			users: null,
+			isLoaded: false,
+			error: null,
+			edit: false,
+			element_id: '',
+			// form
+			name: '',
+			height: 0,
+			width: 0,
+			screen_code: '',
+			color_profile: 'grayscale',
+			description: ''
+		};
+		return _this;
+	}
 
-  _createClass(ManageScreens, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.setState({ isLoaded: true, screens: this.props.data.screens });
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      this.setState({ isLoaded: true, screens: nextProps.data.screens });
-    }
+	_createClass(ManageScreens, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.setState({ isLoaded: true, screens: this.props.data.screens });
+		}
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			this.setState({ isLoaded: true, screens: nextProps.data.screens });
+		}
 
-    /* HANDLE SUBMIT */
+		/* HANDLE SUBMIT */
 
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
 
-      var _state = this.state,
-          screens = _state.screens,
-          error = _state.error,
-          isLoaded = _state.isLoaded;
+			var _state = this.state,
+			    screens = _state.screens,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded;
 
 
-      if (error) {
-        return null; // TODO: handle error
-      } else if (!isLoaded) {
-        return null; // TODO: handle loading
-      } else {
-        var list = screens.map(function (screen) {
-          if (screen._id == _this2.state.element_id) {
-            return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: true });
-          } else {
-            return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: false });
-          }
-        });
-        list.push(_react2.default.createElement(
-          'div',
-          { key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
-          _react2.default.createElement(
-            'div',
-            { className: 'text-center elemento' },
-            _react2.default.createElement(
-              'h4',
-              { className: 'mb-1' },
-              'No se han encontrado ',
-              screens.length > 0 && 'más',
-              ' pantallas'
-            ),
-            _react2.default.createElement('hr', { className: 'card-division' }),
-            _react2.default.createElement(
-              'small',
-              null,
-              'N\xFAmero de pantallas: ',
-              screens.length
-            )
-          )
-        ));
-        return _react2.default.createElement(
-          'div',
-          { className: 'card settings' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-window-maximize mr-3', 'aria-hidden': 'true' }),
-                  'Pantallas'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'row' },
-              _react2.default.createElement(
-                'div',
-                { className: 'col-6' },
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  this.state.edit ? 'Editar pantalla' : 'Añadir pantalla'
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'form',
-                  null,
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col-6' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'name' },
-                        _react2.default.createElement('i', { className: 'fa fa-fw fa-window-maximize mr-2' }),
-                        'Nombre'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la resoluci\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col-3' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'heigth' },
-                        _react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-v mr-2' }),
-                        'Alto'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'heigth', placeholder: 'Alto', name: 'height', value: this.state.height, onChange: this.handleInputChange })
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col-3' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'width' },
-                        _react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-h mr-2' }),
-                        'Ancho'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'width', placeholder: 'Ancho', name: 'width', value: this.state.width, onChange: this.handleInputChange })
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
-                    _react2.default.createElement(
-                      'label',
-                      { htmlFor: 'description' },
-                      _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2' }),
-                      'Descripci\xF3n'
-                    ),
-                    _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n de la resoluci\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-row' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'color_profile' },
-                        _react2.default.createElement('i', { className: 'fa fa-adjust mr-2' }),
-                        'Color'
-                      ),
-                      _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                          'select',
-                          { className: 'custom-select', name: 'color_profile', value: this.state.color_profile, onChange: this.handleInputChange },
-                          _react2.default.createElement(
-                            'option',
-                            { value: 'color' },
-                            'Color'
-                          ),
-                          _react2.default.createElement(
-                            'option',
-                            { value: 'grayscale' },
-                            'Escala de grises'
-                          )
-                        )
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'form-group col' },
-                      _react2.default.createElement(
-                        'label',
-                        { htmlFor: 'screen_code' },
-                        _react2.default.createElement('i', { className: 'fa fa-fw fa-code mr-2' }),
-                        'C\xF3digo de pantalla'
-                      ),
-                      _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'screen_code', placeholder: 'C\xF3digo', name: 'screen_code', value: this.state.screen_code, onChange: this.handleInputChange })
-                    )
-                  ),
-                  !this.state.edit ? _react2.default.createElement(
-                    'button',
-                    { onClick: function onClick() {
-                        return _this2.handleSubmit('post');
-                      }, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
-                    _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-                    'A\xF1adir'
-                  ) : _react2.default.createElement(
-                    'div',
-                    { className: 'd-flex w-100 justify-content-between' },
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.handleSubmit('put');
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
-                      _react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
-                      'Actualizar'
-                    ),
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.handleSubmit('delete');
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
-                      _react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
-                      'Eliminar'
-                    ),
-                    _react2.default.createElement(
-                      'button',
-                      { onClick: function onClick() {
-                          return _this2.cancel();
-                        }, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
-                      _react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
-                      'Cancelar'
-                    )
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'col-6' },
-                _react2.default.createElement(
-                  'h3',
-                  { className: 'd-flex w-100 justify-content-between' },
-                  'Pantallas',
-                  _react2.default.createElement(
-                    'span',
-                    null,
-                    this.state.screens.length
-                  )
-                ),
-                _react2.default.createElement('hr', { className: 'card-division' }),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'list settings-list' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'list-group mb-3' },
-                    list
-                  )
-                )
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+			if (error) {
+				return null; // TODO: handle error
+			} else if (!isLoaded) {
+				return null; // TODO: handle loading
+			} else {
+				var list = screens.map(function (screen) {
+					if (screen._id == _this2.state.element_id) {
+						return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: true });
+					} else {
+						return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: false });
+					}
+				});
+				list.push(_react2.default.createElement(
+					'div',
+					{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'text-center elemento' },
+						_react2.default.createElement(
+							'h4',
+							{ className: 'mb-1' },
+							'No se han encontrado ',
+							screens.length > 0 && 'más',
+							' pantallas'
+						),
+						_react2.default.createElement('hr', { className: 'card-division' }),
+						_react2.default.createElement(
+							'small',
+							null,
+							'N\xFAmero de pantallas: ',
+							screens.length
+						)
+					)
+				));
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card settings' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-window-maximize mr-3', 'aria-hidden': 'true' }),
+									'Pantallas'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'row' },
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-6' },
+								_react2.default.createElement(
+									'h3',
+									null,
+									this.state.edit ? 'Editar pantalla' : 'Añadir pantalla'
+								),
+								_react2.default.createElement('hr', { className: 'card-division' }),
+								_react2.default.createElement(
+									'form',
+									null,
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col-6' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'name' },
+												_react2.default.createElement('i', { className: 'fa fa-fw fa-window-maximize mr-2' }),
+												'Nombre'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la resoluci\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col-3' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'heigth' },
+												_react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-v mr-2' }),
+												'Alto'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'heigth', placeholder: 'Alto', name: 'height', value: this.state.height, onChange: this.handleInputChange })
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col-3' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'width' },
+												_react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-h mr-2' }),
+												'Ancho'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'width', placeholder: 'Ancho', name: 'width', value: this.state.width, onChange: this.handleInputChange })
+										)
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-group' },
+										_react2.default.createElement(
+											'label',
+											{ htmlFor: 'description' },
+											_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2' }),
+											'Descripci\xF3n'
+										),
+										_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n de la resoluci\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+									),
+									_react2.default.createElement(
+										'div',
+										{ className: 'form-row' },
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'color_profile' },
+												_react2.default.createElement('i', { className: 'fa fa-adjust mr-2' }),
+												'Color'
+											),
+											_react2.default.createElement(
+												'div',
+												null,
+												_react2.default.createElement(
+													'select',
+													{ className: 'custom-select', name: 'color_profile', value: this.state.color_profile, onChange: this.handleInputChange },
+													_react2.default.createElement(
+														'option',
+														{ value: 'color' },
+														'Color'
+													),
+													_react2.default.createElement(
+														'option',
+														{ value: 'grayscale' },
+														'Escala de grises'
+													)
+												)
+											)
+										),
+										_react2.default.createElement(
+											'div',
+											{ className: 'form-group col' },
+											_react2.default.createElement(
+												'label',
+												{ htmlFor: 'screen_code' },
+												_react2.default.createElement('i', { className: 'fa fa-fw fa-code mr-2' }),
+												'C\xF3digo de pantalla'
+											),
+											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'screen_code', placeholder: 'C\xF3digo', name: 'screen_code', value: this.state.screen_code, onChange: this.handleInputChange })
+										)
+									),
+									!this.state.edit ? _react2.default.createElement(
+										'button',
+										{ onClick: function onClick() {
+												return _this2.handleSubmit('post');
+											}, type: 'button', className: 'btn btn-block btn-small btn-outline-success' },
+										_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+										'A\xF1adir'
+									) : _react2.default.createElement(
+										'div',
+										{ className: 'd-flex w-100 justify-content-between' },
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.handleSubmit('put');
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-success mr-2' },
+											_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+											'Actualizar'
+										),
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.handleSubmit('delete');
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-danger ml-1 mr-1' },
+											_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+											'Eliminar'
+										),
+										_react2.default.createElement(
+											'button',
+											{ onClick: function onClick() {
+													return _this2.cancel();
+												}, type: 'button', className: 'btn btn-block btn-small btn-outline-warning ml-2' },
+											_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+											'Cancelar'
+										)
+									)
+								)
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: 'col-6' },
+								_react2.default.createElement(
+									'h3',
+									{ className: 'd-flex w-100 justify-content-between' },
+									'Pantallas',
+									_react2.default.createElement(
+										'span',
+										null,
+										this.state.screens.length
+									)
+								),
+								_react2.default.createElement('hr', { className: 'card-division' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'list settings-list' },
+									_react2.default.createElement(
+										'div',
+										{ className: 'list-group mb-3' },
+										list
+									)
+								)
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
 
-  return ManageScreens;
+	return ManageScreens;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 323 */
@@ -72332,24 +72316,25 @@ var _reactRouterDom = __webpack_require__(2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* IMPORT MODULES */
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 var cx = __webpack_require__(7);
 
 /* COMPONENT */
 var Screen = exports.Screen = function Screen(_ref) {
-  var screen = _ref.screen,
+  var _ref$screen = _ref.screen,
+      url = _ref$screen.url,
+      _id = _ref$screen._id,
+      name = _ref$screen.name,
+      size = _ref$screen.size,
+      description = _ref$screen.description,
+      screen_code = _ref$screen.screen_code,
+      color_profile = _ref$screen.color_profile,
+      created_at = _ref$screen.created_at,
       edit = _ref.edit,
       active = _ref.active;
-  var url = screen.url,
-      _id = screen._id,
-      name = screen.name,
-      size = screen.size,
-      description = screen.description,
-      screen_code = screen.screen_code,
-      color_profile = screen.color_profile,
-      created_at = screen.created_at;
 
-  var elementClass = cx("list-group-item-action list-group-item flex-column align-items-start", { "active": active });
+  var elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { 'active': active });
   return _react2.default.createElement(
     'div',
     { className: elementClass, onClick: function onClick() {
@@ -72403,7 +72388,7 @@ var Screen = exports.Screen = function Screen(_ref) {
           'small',
           null,
           _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2', 'aria-hidden': 'true' }),
-          moment(created_at).format("dddd, D [de] MMMM [de] YYYY")
+          moment(created_at).format('dddd, D [de] MMMM [de] YYYY')
         )
       )
     )
@@ -72428,7 +72413,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(2);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72458,7 +72443,7 @@ var ContentDocs = function ContentDocs(_ref) {
           _react2.default.createElement(
             'h1',
             null,
-            'CUENTA'
+            'DOCUMENTACI\xD3N'
           )
         ),
         _react2.default.createElement('hr', null)
@@ -72525,7 +72510,7 @@ var _reactRouterDom = __webpack_require__(2);
 
 var _list = __webpack_require__(17);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 var _gatewayGeneric = __webpack_require__(326);
 
@@ -72596,8 +72581,8 @@ var ContentGateways = function ContentGateways(_ref) {
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_gatewayRouter.GatewayRouter, _extends({}, props, { gateway: gateways.find(function (g) {
-                      return g._id == match.params.gatewayId;
+                  return _react2.default.createElement(_gatewayRouter.GatewayRouter, _extends({}, props, { gateway: gateways.find(function (gateway) {
+                      return gateway._id == match.params.gatewayId;
                     }) }));
                 } })
             ),
@@ -72690,7 +72675,7 @@ var GatewayGeneric = exports.GatewayGeneric = function GatewayGeneric() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.GatewayRouter = undefined;
 
@@ -72728,96 +72713,91 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var GatewayRouter = exports.GatewayRouter = function (_Component) {
-  _inherits(GatewayRouter, _Component);
+	_inherits(GatewayRouter, _Component);
 
-  function GatewayRouter(props) {
-    _classCallCheck(this, GatewayRouter);
+	function GatewayRouter(props) {
+		_classCallCheck(this, GatewayRouter);
 
-    var _this = _possibleConstructorReturn(this, (GatewayRouter.__proto__ || Object.getPrototypeOf(GatewayRouter)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (GatewayRouter.__proto__ || Object.getPrototypeOf(GatewayRouter)).call(this, props));
 
-    _this.state = {
-      gateway: null,
-      isLoaded: false,
-      error: null
-    };
-    return _this;
-  }
+		_this.state = {
+			gateway: null,
+			isLoaded: false,
+			error: null
+		};
+		return _this;
+	}
 
-  /* FETCH FULL DATA ABOUT THE IMAGE */
+	/* FETCH FULL DATA ABOUT THE IMAGE */
 
 
-  _createClass(GatewayRouter, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+	_createClass(GatewayRouter, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-      if (this.props.gateway) {
-        _axios2.default.get(this.props.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (gateway) {
-          // resolve callback
-          _this2.setState({ gateway: gateway.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this2.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
+			if (this.props.gateway) {
+				_axios2.default.get(this.props.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (gateway) {
+					return _this2.setState({ gateway: gateway.data, isLoaded: true });
+				}, function (error) {
+					return _this2.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
 
-    /* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
+		/* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
 
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _this3 = this;
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			var _this3 = this;
 
-      if (nextProps.gateway && (nextProps.gateway._id != this.props.gateway._id || nextProps.gateway.updated_at != this.props.gateway.updated_at)) {
-        // if props actually changed
-        _axios2.default.get(nextProps.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (gateway) {
-          // resolve callback
-          _this3.setState({ gateway: gateway.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this3.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this4 = this;
+			if (nextProps.gateway && (nextProps.gateway._id != this.props.gateway._id || nextProps.gateway.updated_at != this.props.gateway.updated_at)) {
+				_axios2.default.get(nextProps.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (gateway) {
+					return _this3.setState({ gateway: gateway.data, isLoaded: true });
+				}, function (error) {
+					return _this3.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this4 = this;
 
-      var _state = this.state,
-          error = _state.error,
-          isLoaded = _state.isLoaded,
-          gateway = _state.gateway;
-      // wait for resource to be loaded or handle errors if any
+			var _state = this.state,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded,
+			    gateway = _state.gateway;
+			// wait for resource to be loaded or handle errors if any
 
-      if (error) {
-        // TODO: Error handling
-      } else if (!isLoaded) {
-        // TODO: loading
-        return null;
-      } else {
-        return _react2.default.createElement(
-          _reactRouterDom.Switch,
-          null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId/edit', render: function render(_ref) {
-              var match = _ref.match;
-              return _react2.default.createElement(_gatewayForm.GatewayForm, _extends({}, _this4.props, { gateway: _this4.state.gateway }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId/delete', render: function render(_ref2) {
-              var match = _ref2.match;
-              return _react2.default.createElement(_gatewayDelete.GatewayDelete, _extends({}, _this4.props, { gateway: _this4.state.gateway }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId', render: function render(_ref3) {
-              var match = _ref3.match;
-              return _react2.default.createElement(_gatewayDetails.GatewayDetails, _extends({}, _this4.props, { gateway: _this4.state.gateway }));
-            } })
-        );
-      }
-    }
-  }]);
+			if (error) {
+				// TODO: Error handling
+			} else if (!isLoaded) {
+				// TODO: loading
+				return null;
+			} else {
+				return _react2.default.createElement(
+					_reactRouterDom.Switch,
+					null,
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId/edit', render: function render(_ref) {
+							var match = _ref.match;
+							return _react2.default.createElement(_gatewayForm.GatewayForm, _extends({}, _this4.props, { gateway: _this4.state.gateway }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId/delete', render: function render(_ref2) {
+							var match = _ref2.match;
+							return _react2.default.createElement(_gatewayDelete.GatewayDelete, _extends({}, _this4.props, { gateway: _this4.state.gateway }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/gateways/:gatewayId', render: function render(_ref3) {
+							var match = _ref3.match;
+							return _react2.default.createElement(_gatewayDetails.GatewayDetails, _extends({}, _this4.props, { gateway: _this4.state.gateway }));
+						} })
+				);
+			}
+		}
+	}]);
 
-  return GatewayRouter;
+	return GatewayRouter;
 }(_react.Component);
 
 /***/ }),
@@ -72883,12 +72863,12 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 			    mac = _props$gateway.mac,
 			    ip = _props$gateway.ip;
 
-			var devices = this.props.data.devices.filter(function (d) {
-				return d.gateway._id == _id;
+			var devices = this.props.data.devices.filter(function (device) {
+				return device.gateway._id == _id;
 			});
 			// refactor date constants with format
-			var created = moment(created_at).format("dddd, D [de] MMMM [de] YYYY");
-			var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
+			var created = moment(created_at).format('dddd, D [de] MMMM [de] YYYY');
+			var updated = moment(updated_at).format('dddd, D [de] MMMM [de] YYYY');
 			// define routes for edit and delete based on the id
 			var linktoEdit = '/gateways/' + _id + '/edit';
 			var linktoDelete = '/gateways/' + _id + '/delete';
@@ -73026,7 +73006,7 @@ var GatewayDetails = exports.GatewayDetails = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.GatewayDelete = undefined;
 
@@ -73053,104 +73033,100 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* COMPONENTS */
 var GatewayDelete = exports.GatewayDelete = function (_Component) {
-  _inherits(GatewayDelete, _Component);
+	_inherits(GatewayDelete, _Component);
 
-  function GatewayDelete(props) {
-    _classCallCheck(this, GatewayDelete);
+	function GatewayDelete(props) {
+		_classCallCheck(this, GatewayDelete);
 
-    var _this = _possibleConstructorReturn(this, (GatewayDelete.__proto__ || Object.getPrototypeOf(GatewayDelete)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (GatewayDelete.__proto__ || Object.getPrototypeOf(GatewayDelete)).call(this, props));
 
-    _this.handleDelete = function (event) {
-      event.preventDefault();
-      _axios2.default.delete(_this.props.gateway.url).then(function (res) {
-        if (res.status == 200) {
-          _this.props.notify('Gateway eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          return _this.props.update(_this.props.user); // update dataset
-        }
-      }).then(function (res) {
-        _this.setState({ redirect: true });
-        return res;
-      }).catch(function (err) {
-        console.log(err);
-        return _this.props.notify('Error al eliminar el gateway', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleDelete = function (event) {
+			event.preventDefault();
+			_axios2.default.delete(_this.props.gateway.url).then(function (res) {
+				if (res.status == 200) {
+					_this.props.notify('Gateway eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+					_this.props.update(_this.props.user);
+				}
+			}).then(function (res) {
+				return _this.setState({ redirect: true });
+			}).catch(function (err) {
+				return _this.props.notify('Error al eliminar el gateway', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    _this.state = {
-      // for redirect after deletion
-      redirect: false
-    };
-    return _this;
-  }
+		_this.state = {
+			redirect: false
+		};
+		return _this;
+	}
 
-  /* HANDLE DELETE EVENT */
+	/* HANDLE DELETE EVENT */
 
 
-  _createClass(GatewayDelete, [{
-    key: 'render',
-    value: function render() {
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/gateways' });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-                  'Eliminar Puerta de enlace'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'text-center' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                '\xBFEliminar puerta de enlace?'
-              ),
-              _react2.default.createElement('hr', { className: 'card-division' }),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Esta acci\xF3n no se puede deshacer'
-              ),
-              _react2.default.createElement(
-                'button',
-                { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
-                _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-                'Eliminar'
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+	_createClass(GatewayDelete, [{
+		key: 'render',
+		value: function render() {
+			if (this.state.redirect) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/gateways' });
+			} else {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card detalles' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+									'Eliminar Puerta de enlace'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'text-center' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'\xBFEliminar puerta de enlace?'
+							),
+							_react2.default.createElement('hr', { className: 'card-division' }),
+							_react2.default.createElement(
+								'p',
+								null,
+								'Esta acci\xF3n no se puede deshacer'
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
+								_react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+								'Eliminar'
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
 
-  return GatewayDelete;
+	return GatewayDelete;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 330 */
@@ -73174,7 +73150,7 @@ var _reactRouterDom = __webpack_require__(2);
 
 var _list = __webpack_require__(17);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 var _deviceGeneric = __webpack_require__(331);
 
@@ -73244,8 +73220,8 @@ var ContentDevices = function ContentDevices(_ref) {
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_deviceRouter.DeviceRouter, _extends({}, props, { device: devices.find(function (d) {
-                      return d._id == match.params.deviceId;
+                  return _react2.default.createElement(_deviceRouter.DeviceRouter, _extends({}, props, { device: devices.find(function (device) {
+                      return device._id == match.params.deviceId;
                     }) }));
                 } })
             ),
@@ -73331,7 +73307,7 @@ var DeviceGeneric = exports.DeviceGeneric = function DeviceGeneric() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.DeviceRouter = undefined;
 
@@ -73369,97 +73345,97 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var DeviceRouter = exports.DeviceRouter = function (_Component) {
-  _inherits(DeviceRouter, _Component);
+	_inherits(DeviceRouter, _Component);
 
-  function DeviceRouter(props) {
-    _classCallCheck(this, DeviceRouter);
+	function DeviceRouter(props) {
+		_classCallCheck(this, DeviceRouter);
 
-    var _this = _possibleConstructorReturn(this, (DeviceRouter.__proto__ || Object.getPrototypeOf(DeviceRouter)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (DeviceRouter.__proto__ || Object.getPrototypeOf(DeviceRouter)).call(this, props));
 
-    _this.state = {
-      device: null,
-      isLoaded: false,
-      error: null
-    };
-    return _this;
-  }
+		_this.state = {
+			device: null,
+			isLoaded: false,
+			error: null
+		};
+		return _this;
+	}
 
-  /* FETCH FULL DATA ABOUT THE IMAGE */
+	/* FETCH FULL DATA ABOUT THE IMAGE */
 
 
-  _createClass(DeviceRouter, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+	_createClass(DeviceRouter, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-      if (this.props.device) {
-        _axios2.default.get(this.props.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (device) {
-          // resolve callback
-          _this2.setState({ device: device.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this2.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
+			if (this.props.device) {
+				_axios2.default.get(this.props.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (device) {
+					// resolve callback
+					_this2.setState({ device: device.data, isLoaded: true });
+				}, function (error) {
+					// reject callback
+					_this2.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
 
-    /* FORCE UPDATE IF WE CHANGE TO ANOTHER DEVICE */
+		/* FORCE UPDATE IF WE CHANGE TO ANOTHER DEVICE */
 
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _this3 = this;
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(nextProps) {
+			var _this3 = this;
 
-      if (nextProps.device && (nextProps.device._id != this.props.device._id || nextProps.device.updated_at != this.props.device.updated_at)) {
-        // if props actually changed
-        _axios2.default.get(nextProps.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (device) {
-          // resolve callback
-          _this3.setState({ device: device.data, isLoaded: true });
-        }, function (error) {
-          // reject callback
-          _this3.setState({ error: error, isLoaded: true });
-        });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this4 = this;
+			if (nextProps.device && (nextProps.device._id != this.props.device._id || nextProps.device.updated_at != this.props.device.updated_at)) {
+				// if props actually changed
+				_axios2.default.get(nextProps.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (device) {
+					// resolve callback
+					_this3.setState({ device: device.data, isLoaded: true });
+				}, function (error) {
+					// reject callback
+					_this3.setState({ error: error, isLoaded: true });
+				});
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this4 = this;
 
-      var _state = this.state,
-          error = _state.error,
-          isLoaded = _state.isLoaded,
-          device = _state.device;
-      // wait for resource to be loaded or handle errors if any
+			var _state = this.state,
+			    error = _state.error,
+			    isLoaded = _state.isLoaded,
+			    device = _state.device;
+			// wait for resource to be loaded or handle errors if any
 
-      if (error) {
-        // TODO: error handling
-        return null;
-      } else if (!isLoaded) {
-        // TODO: loading
-        return null;
-      } else {
-        return _react2.default.createElement(
-          _reactRouterDom.Switch,
-          null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId/edit', render: function render(_ref) {
-              var match = _ref.match;
-              return _react2.default.createElement(_deviceForm.DeviceForm, _extends({}, _this4.props, { device: device }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId/delete', render: function render(_ref2) {
-              var match = _ref2.match;
-              return _react2.default.createElement(_deviceDelete.DeviceDelete, _extends({}, _this4.props, { device: device }));
-            } }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId', render: function render(_ref3) {
-              var match = _ref3.match;
-              return _react2.default.createElement(_deviceDetails.DeviceDetails, _extends({}, _this4.props, { device: device }));
-            } })
-        );
-      }
-    }
-  }]);
+			if (error) {
+				// TODO: error handling
+				return null;
+			} else if (!isLoaded) {
+				// TODO: loading
+				return null;
+			} else {
+				return _react2.default.createElement(
+					_reactRouterDom.Switch,
+					null,
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId/edit', render: function render(_ref) {
+							var match = _ref.match;
+							return _react2.default.createElement(_deviceForm.DeviceForm, _extends({}, _this4.props, { device: device }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId/delete', render: function render(_ref2) {
+							var match = _ref2.match;
+							return _react2.default.createElement(_deviceDelete.DeviceDelete, _extends({}, _this4.props, { device: device }));
+						} }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/devices/:deviceId', render: function render(_ref3) {
+							var match = _ref3.match;
+							return _react2.default.createElement(_deviceDetails.DeviceDetails, _extends({}, _this4.props, { device: device }));
+						} })
+				);
+			}
+		}
+	}]);
 
-  return DeviceRouter;
+	return DeviceRouter;
 }(_react.Component);
 
 /***/ }),
@@ -73486,7 +73462,7 @@ var _associated = __webpack_require__(23);
 
 var _tag = __webpack_require__(24);
 
-var _icon = __webpack_require__(13);
+var _icon = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73531,27 +73507,30 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 			    found = _props$device.found,
 			    userGroup = _props$device.userGroup;
 			var screens = this.props.data.screens;
+
 			// refactor date constants with format
 
-			var updated = moment(updated_at).format("dddd, D [de] MMMM [de] YYYY");
+			var updated = moment(updated_at).format('dddd, D [de] MMMM [de] YYYY');
+
 			// define routes for edit and delete based on the id
-			var battery_icon = "fa fa-fw fa-battery-empty mr-2";
+			var batteryIcon = 'fa fa-fw fa-battery-empty mr-2';
 			if (batt && batt < 25) {
-				battery_icon = "fa fa-fw fa-battery-quarter mr-2";
+				batteryIcon = 'fa fa-fw fa-battery-quarter mr-2';
 			} else if (batt && batt < 50) {
-				battery_icon = "fa fa-fw fa-battery-half mr-2";
+				batteryIcon = 'fa fa-fw fa-battery-half mr-2';
 			} else if (batt && batt < 75) {
-				battery_icon = "fa fa-fw fa-battery-three-quarters mr-2";
+				batteryIcon = 'fa fa-fw fa-battery-three-quarters mr-2';
 			} else if (batt) {
-				battery_icon = "fa fa-fw fa-battery-full mr-2";
+				batteryIcon = 'fa fa-fw fa-battery-full mr-2';
 			}
 
+			// FIXME: rename variables
 			var screenObj = screens.find(function (r) {
 				return r.screen_code == screen;
 			});
-			var screenName = screenObj ? screenObj.name : "No se encuentra la pantalla (código: " + screen + " )";
-			var color = screenObj ? screenObj.color_profile : "No se encuentra la pantalla (código: " + screen + " )";
-			var size = screenObj ? screenObj.size.width + "x" + screenObj.size.height : "No se encuentra la pantalla (código: " + screen + " )";
+			var screenName = screenObj ? screenObj.name : 'No se encuentra la pantalla (código: ' + screen + ' )';
+			var color = screenObj ? screenObj.color_profile : 'No se encuentra la pantalla (código: ' + screen + ' )';
+			var size = screenObj ? screenObj.size.width + 'x' + screenObj.size.height : 'No se encuentra la pantalla (código: ' + screen + ' )';
 
 			var linktoEdit = '/devices/' + _id + '/edit';
 			var linktoDelete = '/devices/' + _id + '/delete';
@@ -73633,37 +73612,37 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: found ? "card-text" : "card-text text-danger" },
+								{ className: found ? 'card-text' : 'card-text text-danger' },
 								_react2.default.createElement(_icon.Icon, { icon: 'battery', fw: 'true', mr: '2', batt: batt || 0 }),
-								found ? batt + '%' : "Información no disponible"
+								found ? batt + '%' : 'Información no disponible'
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: found ? "card-text" : "card-text text-danger" },
+								{ className: found ? 'card-text' : 'card-text text-danger' },
 								_react2.default.createElement(_icon.Icon, { icon: 'signal', fw: 'true', mr: '2' }),
-								found ? rssi : "Información no disponible"
+								found ? rssi : 'Información no disponible'
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: found ? "card-text" : "card-text text-danger" },
+								{ className: found ? 'card-text' : 'card-text text-danger' },
 								_react2.default.createElement(_icon.Icon, { icon: 'tint', fw: 'true', mr: '2' }),
 								screenName
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: found ? "card-text" : "card-text text-danger" },
+								{ className: found ? 'card-text' : 'card-text text-danger' },
 								_react2.default.createElement(_icon.Icon, { icon: 'adjust', fw: 'true', mr: '2' }),
 								color
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: found ? "card-text" : "card-text text-danger" },
+								{ className: found ? 'card-text' : 'card-text text-danger' },
 								_react2.default.createElement(_icon.Icon, { icon: 'arrows-alt', fw: 'true', mr: '2' }),
 								size
 							),
 							_react2.default.createElement(
 								'p',
-								{ className: gateway && found ? "card-text" : "card-text text-danger" },
+								{ className: gateway && found ? 'card-text' : 'card-text text-danger' },
 								_react2.default.createElement(_icon.Icon, { icon: 'sitemap', fw: 'true', mr: '2' }),
 								gateway && found ? gateway.name : 'Información no disponible'
 							),
@@ -73704,7 +73683,7 @@ var DeviceDetails = exports.DeviceDetails = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.DeviceDelete = undefined;
 
@@ -73731,104 +73710,101 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);moment.locale('es');
+var moment = __webpack_require__(0);
+moment.locale('es');
 
 /* COMPONENTS */
 var DeviceDelete = exports.DeviceDelete = function (_Component) {
-  _inherits(DeviceDelete, _Component);
+	_inherits(DeviceDelete, _Component);
 
-  function DeviceDelete(props) {
-    _classCallCheck(this, DeviceDelete);
+	function DeviceDelete(props) {
+		_classCallCheck(this, DeviceDelete);
 
-    var _this = _possibleConstructorReturn(this, (DeviceDelete.__proto__ || Object.getPrototypeOf(DeviceDelete)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (DeviceDelete.__proto__ || Object.getPrototypeOf(DeviceDelete)).call(this, props));
 
-    _this.handleDelete = function (event) {
-      event.preventDefault();
-      _axios2.default.delete(_this.props.device.url).then(function (res) {
-        if (res.status == 200) {
-          _this.props.notify('Dispositivo eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-          return _this.props.update(_this.props.user); // update dataset
-        }
-      }).then(function (res) {
-        _this.setState({ redirect: true });
-        return res;
-      }).catch(function (err) {
-        console.log(err);
-        return _this.props.notify('Error al eliminar el dispositivo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-      });
-    };
+		_this.handleDelete = function (event) {
+			event.preventDefault();
+			_axios2.default.delete(_this.props.device.url).then(function (res) {
+				if (res.status == 200) {
+					_this.props.notify('Dispositivo eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+					_this.props.update(_this.props.user);
+				}
+			}).then(function (res) {
+				return _this.setState({ redirect: true });
+			}).catch(function (err) {
+				return _this.props.notify('Error al eliminar el dispositivo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+			});
+		};
 
-    _this.state = {
-      // for redirect after deletion
-      redirect: false
-    };
-    return _this;
-  }
+		_this.state = {
+			// for redirect after deletion
+			redirect: false
+		};
+		return _this;
+	}
 
-  /* HANDLE DELETE EVENT */
+	/* HANDLE DELETE EVENT */
 
 
-  _createClass(DeviceDelete, [{
-    key: 'render',
-    value: function render() {
-      if (this.state.redirect) {
-        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/devices' });
-      } else {
-        return _react2.default.createElement(
-          'div',
-          { className: 'card detalles' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card-header' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-              _react2.default.createElement(
-                'li',
-                { className: 'nav-item mr-auto' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'detalles-titulo' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-                  'Eliminar dispositivo f\xEDsico'
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'card-body' },
-            _react2.default.createElement(
-              'div',
-              { className: 'text-center' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                '\xBFEliminar dispositivo f\xEDsico'
-              ),
-              _react2.default.createElement('hr', { className: 'card-division' }),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Esta acci\xF3n no se puede deshacer'
-              ),
-              _react2.default.createElement(
-                'button',
-                { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
-                _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-                'Eliminar'
-              )
-            )
-          )
-        );
-      }
-    }
-  }]);
+	_createClass(DeviceDelete, [{
+		key: 'render',
+		value: function render() {
+			if (this.state.redirect) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/devices' });
+			} else {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'card detalles' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-header' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+							_react2.default.createElement(
+								'li',
+								{ className: 'nav-item mr-auto' },
+								_react2.default.createElement(
+									'h2',
+									{ className: 'detalles-titulo' },
+									_react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+									'Eliminar dispositivo f\xEDsico'
+								)
+							)
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'card-body' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'text-center' },
+							_react2.default.createElement(
+								'h1',
+								null,
+								'\xBFEliminar dispositivo f\xEDsico'
+							),
+							_react2.default.createElement('hr', { className: 'card-division' }),
+							_react2.default.createElement(
+								'p',
+								null,
+								'Esta acci\xF3n no se puede deshacer'
+							),
+							_react2.default.createElement(
+								'button',
+								{ onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-outline-danger' },
+								_react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+								'Eliminar'
+							)
+						)
+					)
+				);
+			}
+		}
+	}]);
 
-  return DeviceDelete;
+	return DeviceDelete;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 335 */
@@ -73925,7 +73901,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _list = __webpack_require__(17);
 
-var _title = __webpack_require__(11);
+var _title = __webpack_require__(12);
 
 var _addButton = __webpack_require__(14);
 
@@ -73994,7 +73970,8 @@ var ProtectedRoute = function ProtectedRoute(_ref) {
 
   return _react2.default.createElement(_reactRouterDom.Route, _extends({}, rest, { render: function render(props) {
       return user.admin == true ? _react2.default.createElement(Component, _extends({ user: user }, rest)) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
-    } }));
+    }
+  }));
 };
 exports.ProtectedRoute = ProtectedRoute;
 
@@ -74006,7 +73983,7 @@ exports.ProtectedRoute = ProtectedRoute;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 exports.Login = undefined;
 
@@ -74044,154 +74021,153 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 /* COMPONENTS */
 var Login = exports.Login = function (_Component) {
-  _inherits(Login, _Component);
+	_inherits(Login, _Component);
 
-  function Login(props) {
-    _classCallCheck(this, Login);
+	function Login(props) {
+		_classCallCheck(this, Login);
 
-    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
-    _this.handleInputChange = function (event) {
-      var target = event.target;
-      var value = target.name != 'remember' ? target.value : !_this.state.remember;
-      var name = target.name;
-      _this.setState(_defineProperty({}, name, value));
-    };
+		_this.handleInputChange = function (event) {
+			var target = event.target;
+			var value = target.name != 'remember' ? target.value : !_this.state.remember;
+			var name = target.name;
+			_this.setState(_defineProperty({}, name, value));
+		};
 
-    _this.handleSubmit = function (event) {
-      event.preventDefault(); // prevent default from submit
-      if (_this.state.remember) {
-        // if checkbox checked save login to local storage
-        localStorage.setItem('login', _this.state.login);
-      }
-      // login request
-      _axios2.default.post('/users/login', {
-        login: _this.state.login,
-        password: _this.state.password
-      }).then(function (res) {
-        // resolve callback
-        if (res.status == 200) {
-          // if auth is successful
-          return _this.props.login(res.data.user, res.data.token, res.data.data); // login function
-        }
-      }, function (error) {
-        // reject callback
-        _this.setState({ error: error }); // set error on failure
-      }).catch(function (error) {
-        _this.setState({ error: error });
-      });
-    };
+		_this.handleSubmit = function (event) {
+			event.preventDefault();
 
-    _this.state = {
-      // form fields
-      login: '', // username
-      password: '', // password
-      remember: false, // if true save login in local sotorage
-      // error handling
-      error: null
-    };
-    return _this;
-  }
+			// if checkbox checked save login to local storage
+			if (_this.state.remember) {
+				localStorage.setItem('login', _this.state.login);
+			}
 
-  _createClass(Login, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      // on component mount
-      this.setState({ login: localStorage.getItem('login') || '' }); // get login from local storage
-      this.setState({ remember: localStorage.getItem('login') ? true : false }); // set the checkbox to true if login was found
-    }
+			// login request
+			_axios2.default.post('/users/login', {
+				login: _this.state.login,
+				password: _this.state.password
+			}).then(function (res) {
+				if (res.status == 200) {
+					_this.props.login(res.data.user, res.data.token, res.data.data);
+					// TODO: render loading status
+				}
+			}).catch(function (error) {
+				return _this.setState({ error: error });
+			});
+		};
 
-    /* HANDLE INPUT CHANGE */
+		_this.state = {
+			// form fields
+			login: '',
+			password: '',
+			remember: false,
+
+			// error handling
+			error: null
+		};
+		return _this;
+	}
+
+	_createClass(Login, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			// get login from local storage
+			this.setState({ login: localStorage.getItem('login') || '' });
+
+			// set the checkbox to true if login was found
+			this.setState({ remember: localStorage.getItem('login') ? true : false });
+		}
+
+		/* HANDLE INPUT CHANGE */
 
 
-    /* HANDLE LOGIN */
+		/* HANDLE LOGIN */
 
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'row login justify-content-center' },
-        _react2.default.createElement(
-          'div',
-          { className: 'col-lg-4 col-md-8 col-sm-12 align-self-center' },
-          _react2.default.createElement(
-            'div',
-            { className: 'card' },
-            _react2.default.createElement(
-              'div',
-              { className: 'card-body' },
-              _react2.default.createElement(
-                'h1',
-                { className: 'text-center' },
-                _react2.default.createElement('i', { className: 'fa fa-barcode fa-4x mb-3' })
-              ),
-              _react2.default.createElement(
-                'small',
-                { className: 'float-right' },
-                'v0.1.5'
-              ),
-              _react2.default.createElement(
-                'form',
-                { onSubmit: this.handleSubmit },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group' },
-                  _react2.default.createElement(
-                    'label',
-                    { className: 'sr-only', htmlFor: 'login' },
-                    'Usuario'
-                  ),
-                  _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'text', className: 'form-control', id: 'login', value: this.state.login, name: 'login', placeholder: 'Usuario' })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group' },
-                  _react2.default.createElement(
-                    'label',
-                    { className: 'sr-only', htmlFor: 'password' },
-                    'Password'
-                  ),
-                  _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'password', className: 'form-control', id: 'password', value: this.state.password, name: 'password', placeholder: 'Contrase\xF1a' })
-                ),
-                _react2.default.createElement(
-                  'button',
-                  { onClick: this.handleSubmit, type: 'submit', className: 'btn btn-block btn-outline-primary' },
-                  'Entrar'
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group mt-2' },
-                  _react2.default.createElement(
-                    'label',
-                    { className: 'custom-control custom-checkbox' },
-                    _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'checkbox', checked: this.state.remember, name: 'remember', value: this.state.remember, className: 'custom-control-input' }),
-                    _react2.default.createElement('span', { className: 'custom-control-indicator' }),
-                    _react2.default.createElement(
-                      'span',
-                      { className: 'custom-control-description' },
-                      'Recordar usuario'
-                    )
-                  )
-                )
-              ),
-              this.state.error && _react2.default.createElement(
-                'p',
-                { className: 'text-center text-danger' },
-                _react2.default.createElement('i', { className: 'fa fa-times mr-2' }),
-                'Usuario o contrase\xF1a incorrectos'
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'row login justify-content-center' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'col-lg-4 col-md-8 col-sm-12 align-self-center' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'card-body' },
+							_react2.default.createElement(
+								'h1',
+								{ className: 'text-center' },
+								_react2.default.createElement('i', { className: 'fa fa-barcode fa-4x mb-3' })
+							),
+							_react2.default.createElement(
+								'small',
+								{ className: 'float-right' },
+								'v0.1.5'
+							),
+							_react2.default.createElement(
+								'form',
+								{ onSubmit: this.handleSubmit },
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'sr-only', htmlFor: 'login' },
+										'Usuario'
+									),
+									_react2.default.createElement('input', { onChange: this.handleInputChange, type: 'text', className: 'form-control', id: 'login', value: this.state.login, name: 'login', placeholder: 'Usuario' })
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'sr-only', htmlFor: 'password' },
+										'Password'
+									),
+									_react2.default.createElement('input', { onChange: this.handleInputChange, type: 'password', className: 'form-control', id: 'password', value: this.state.password, name: 'password', placeholder: 'Contrase\xF1a' })
+								),
+								_react2.default.createElement(
+									'button',
+									{ onClick: this.handleSubmit, type: 'submit', className: 'btn btn-block btn-outline-primary' },
+									'Entrar'
+								),
+								_react2.default.createElement(
+									'div',
+									{ className: 'form-group mt-2' },
+									_react2.default.createElement(
+										'label',
+										{ className: 'custom-control custom-checkbox' },
+										_react2.default.createElement('input', { onChange: this.handleInputChange, type: 'checkbox', checked: this.state.remember, name: 'remember', value: this.state.remember, className: 'custom-control-input' }),
+										_react2.default.createElement('span', { className: 'custom-control-indicator' }),
+										_react2.default.createElement(
+											'span',
+											{ className: 'custom-control-description' },
+											'Recordar usuario'
+										)
+									)
+								)
+							),
+							this.state.error && _react2.default.createElement(
+								'p',
+								{ className: 'text-center text-danger' },
+								_react2.default.createElement('i', { className: 'fa fa-times mr-2' }),
+								'Usuario o contrase\xF1a incorrectos'
+							)
+						)
+					)
+				)
+			);
+		}
+	}]);
 
-  return Login;
+	return Login;
 }(_react.Component);
-
-;
 
 /***/ }),
 /* 339 */

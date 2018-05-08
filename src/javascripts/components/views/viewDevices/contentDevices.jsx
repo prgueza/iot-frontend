@@ -10,37 +10,37 @@ import { DeviceRouter } from './viewDevices-components/deviceRouter.jsx'
 import { DeviceForm } from './viewDevices-components/deviceForm.jsx'
 
 /* COMPONENTS */
-export const ContentDevices = ({ filterValue, filterFoundValue, filterFound, ...props }) => {
+export const ContentDevices = ( { filterValue, filterFoundValue, filterFound, ...props } ) => {
 
-  const { data: { devices } } = props
+	const { data: { devices } } = props
 
-  return(
-    <div className="overview">
-      <div className="row">
-        <div className="col">
-          <div className="titulo mb-4 text-right">
+	return (
+		<div className='overview'>
+      <div className='row'>
+        <div className='col'>
+          <div className='titulo mb-4 text-right'>
             <h1>DISPOSITIVOS FÍSICOS</h1>
           </div>
           <hr></hr>
         </div>
       </div>
-      <div className="row-panel">
-        <div className="panel">
-          <Title total={devices.length} appearance="card title-devices" icon="tablet"/>
-          <div className="row controls">
-            <div className="col-4">
+      <div className='row-panel'>
+        <div className='panel'>
+          <Title total={devices.length} appearance='card title-devices' icon='tablet'/>
+          <div className='row controls'>
+            <div className='col-4'>
               <List filterValue={filterValue} filterFoundValue={filterFoundValue} filterFound={filterFound} category='devices' content={devices}/>
             </div>
-            <div className="col-8">
+            <div className='col-8'>
               <Switch>
                 {/* For route /deviceId we select the device based on the id and pass it separately */}
-                <Route path="/devices/:deviceId" render={({ match }) => (<DeviceRouter {...props} device={devices.find(d => d._id == match.params.deviceId)}/>)}/>
+                <Route path='/devices/:deviceId' render={({ match }) => <DeviceRouter {...props} device={devices.find( device => device._id == match.params.deviceId)}/>}/>
               </Switch>
-              <Route exact path="/devices" render={() => (<DeviceGeneric/>)}/>
+              <Route exact path='/devices' render={() => <DeviceGeneric/>}/>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+	)
 }
