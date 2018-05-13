@@ -39,10 +39,10 @@ export class List extends Component {
 			var elements = content.map( element => <Display display={element} key={element._id}/> )
 			var elementName = 'displays'
 		} else if ( category === 'images' ) {
-			var elements = content.map( element => <Image image={element} key={element._id}/> )
+			var elements = content.map( ( element, index ) => <Image image={element} index={index} key={element._id}/> )
 			var elementName = 'imágenes'
 		} else if ( category === 'groups' ) {
-			var elements = content.map( element => <Group group={element} key={element._id}/> )
+			var elements = content.map( ( element, index ) => <Group group={element} index={index} key={element._id}/> )
 			var elementName = 'grupos'
 		} else if ( category === 'devices' ) {
 			var elements = content.map( element => <Device device={element} key={element._id}/> )
@@ -65,11 +65,10 @@ export class List extends Component {
         </div>
         { category != 'devices' ?
           <AddButton category={category}/> :
-          <label className='custom-control custom-checkbox'>
-            <input onChange={this.handleFilter} type='checkbox' defaultChecked={this.props.filterFoundValue} value={this.props.filterFoundValue} name='found' className='custom-control-input'></input>
-            <span className='custom-control-indicator'></span>
-            <span className='custom-control-description'> Mostrar únicamente dispositivos localizados</span>
-          </label>
+					<div className='custom-control custom-checkbox'>
+						<input onChange={this.handleFilter} id='filter' type='checkbox' defaultChecked={this.props.filterFoundValue} name='found' className='custom-control-input'></input>
+						<label className='custom-control-label' htmlFor='filter'>Mostrar únicamente dispositivos localizados</label>
+					</div>
         }
       </div>
 		)

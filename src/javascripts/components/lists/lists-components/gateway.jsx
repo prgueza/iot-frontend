@@ -6,8 +6,8 @@ moment.locale( 'es' )
 const cx = require( 'classnames' )
 
 /* COMPONENT */
-export const Gateway = ( { gateway: { _id, url, name, description, ip, mac, created_at } } ) => {
-	const created = moment( created_at )
+export const Gateway = ( { gateway: { _id, url, name, description, ip, mac, createdAt } } ) => {
+	const created = moment( createdAt )
 		.from( moment() )
 	const elementClass = cx( "list-group-item-action list-group-item flex-column align-items-start" )
 	const location = {

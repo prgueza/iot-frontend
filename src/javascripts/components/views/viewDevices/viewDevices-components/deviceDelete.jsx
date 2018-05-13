@@ -49,7 +49,7 @@ export class DeviceDelete extends Component {
             <h1>¿Eliminar dispositivo físico</h1>
             <hr className='card-division'></hr>
             <p>Esta acción no se puede deshacer</p>
-            <button onClick={this.handleDelete} type='button' className='btn btn-block btn-outline-danger'><i className='fa fa-trash mr-1' aria-hidden='true'></i>Eliminar</button>
+            <button onClick={this.handleDelete} type='button' className='btn btn-block btn-danger'><i className='fa fa-trash mr-1' aria-hidden='true'></i>Eliminar</button>
           </div>
         </div>
       </div>

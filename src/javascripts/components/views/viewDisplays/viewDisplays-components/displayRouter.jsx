@@ -32,7 +32,7 @@ export class DisplayRouter extends Component {
 	}
 	/* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.display && ( nextProps.display._id != this.props.display._id || nextProps.display.updated_at != this.props.display.updated_at ) ) { // if props actually changed
+		if ( nextProps.display && ( nextProps.display._id != this.props.display._id || nextProps.display.updatedAt != this.props.display.updatedAt ) ) { // if props actually changed
 			axios.get( nextProps.display.url, { headers: { Authorization: 'Bearer ' + this.props.token } } )
 				.then(
 					( display ) => { // resolve callback

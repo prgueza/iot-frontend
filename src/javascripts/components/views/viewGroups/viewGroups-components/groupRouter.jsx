@@ -33,7 +33,7 @@ export class GroupRouter extends Component {
 
 	/* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP*/
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.group && ( nextProps.group._id != this.props.group._id || nextProps.group.updated_at != this.props.group.updated_at ) ) { // if props actually changed
+		if ( nextProps.group && ( nextProps.group._id != this.props.group._id || nextProps.group.updatedAt != this.props.group.updatedAt ) ) { // if props actually changed
 			axios.get( nextProps.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } } )
 				.then(
 					group => this.setState( { group: group.data, isLoaded: true } ),

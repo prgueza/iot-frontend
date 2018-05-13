@@ -16,7 +16,7 @@ export class ManageUsers extends Component {
 			isLoaded: false,
 			error: null,
 			edit: false,
-			element_id: '',
+			elementId: '',
 			// form
 			login: '',
 			name: '',
@@ -45,8 +45,8 @@ export class ManageUsers extends Component {
 		this.setState( { isLoaded: true, users: nextProps.data.users } )
 	}
 
-	edit = ( element_id ) => {
-		const user = this.state.users.find( user => user._id == element_id )
+	edit = ( elementId ) => {
+		const user = this.state.users.find( user => user._id == elementId )
 		this.setState( {
 			login: user.login,
 			name: user.name,
@@ -56,7 +56,7 @@ export class ManageUsers extends Component {
 			admin: user.admin,
 			userGroup: user.userGroup ? user.userGroup._id : '',
 			edit: true,
-			element_id: element_id
+			elementId: elementId
 		} )
 	}
 
@@ -70,7 +70,7 @@ export class ManageUsers extends Component {
 			admin: false,
 			userGroup: '',
 			edit: false,
-			element_id: '',
+			elementId: '',
 		} )
 	}
 
@@ -88,7 +88,7 @@ export class ManageUsers extends Component {
 		if ( this.state.checkPassword != '' ) { form.checkPassword = this.state.checkPassword }
 		axios( {
 				method: method,
-				url: this.state.edit ? 'http://localhost:4000/users/' + this.state.element_id : 'http://localhost:4000/users/signup',
+				url: this.state.edit ? 'http://localhost:4000/users/' + this.state.elementId : 'http://localhost:4000/users/signup',
 				data: form,
 				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.props.token },
 			} )
@@ -96,16 +96,16 @@ export class ManageUsers extends Component {
 				if ( res.status == 201 || res.status == 200 ) {
 					switch ( method ) {
 					case 'put':
-						this.props.notify( 'Usuario modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Usuario modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT )
 						this.props.update( 'users', res.data.resourceId, 'edit', res.data.resource ) // update dataset
 						break
 					case 'post':
-						this.props.notify( 'Usuario creado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Usuario creado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT )
 						this.props.update( 'users', res.data.resourceId, 'add', res.data.resource ) // update dataset
 						this.edit( res.data.resourceId )
 						break
 					case 'delete':
-						this.props.notify( 'Usuario eliminado con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Usuario eliminado con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT )
 						this.cancel()
 						this.props.update( 'users', res.data.resourceId, 'remove', res.data.resource ) // update dataset
 						break
@@ -119,7 +119,7 @@ export class ManageUsers extends Component {
 					} )
 				}
 			} )
-			.catch( err => this.props.notify( 'Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) )
 	}
 
 	render() {
@@ -132,7 +132,7 @@ export class ManageUsers extends Component {
 			return null // TODO: handle loading
 		} else {
 			const list = users.map( user => {
-				if ( user._id == this.state.element_id ) {
+				if ( user._id == this.state.elementId ) {
 					return <User user={user} key={user._id} edit={this.edit} active={true}/>
 				} else {
 					return <User user={user} key={user._id} edit={this.edit} active={false}/>

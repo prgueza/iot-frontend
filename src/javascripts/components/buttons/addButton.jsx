@@ -5,7 +5,7 @@ const cx = require( 'classnames' )
 
 /* COMPONENT */
 export const AddButton = ( { category } ) => {
-	const claseBoton = cx( 'btn btn-block btn-small', { 'btn-outline-success': category === 'displays' }, { 'btn-outline-info': category === 'images' }, { 'btn-outline-warning': category === 'groups' }, { 'btn-outline-primary': category === 'devices' }, { 'btn-outline-primary': category === 'gateways' } )
+	const claseBoton = cx( 'btn btn-block btn-small', { 'btn-success': category === 'displays' }, { 'btn-info': category === 'images' }, { 'btn-warning': category === 'groups' }, { 'btn-success': category === 'devices' }, { 'btn-outline-primary': category === 'gateways' } )
 	const location = {
 		pathname: '/' + category + '/add'
 	}

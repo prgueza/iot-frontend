@@ -1,0 +1,121 @@
+.vista-previa{
+  padding: 0;
+}
+
+.vista-imagen{
+  max-width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  padding: 30 0 30 0;
+}
+
+.vista-imagen-grupo{
+  border: 1px solid $bd-color;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: 300px;
+  overflow: hidden;
+  text-align: center;
+  padding: 30 0 30 0;
+}
+
+.edit-image-view{
+  position: relative;
+  border: 1px solid $bd-color;
+  border-radius: 0.25rem;
+  width: 100%;
+  min-height: 300px;
+  overflow: hidden;
+  text-align: center;
+  padding: 30 0 30 0;
+}
+
+.main-image{
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.aditional-image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.coordinates-map{
+  position: absolute;
+  background-color: transparent;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+}
+
+
+.vista-imagen-display{
+}
+
+.preview-image{
+  position: relative;
+  border: 1px solid $bd-color;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+  text-align: center;
+  padding: 30 0 30 0;
+}
+
+.imagen{
+  width: 100%;
+}
+
+.dropzone-accepted{
+  width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid $display-color !important;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dropzone{
+  width: 100%;
+  height: 300px;
+  border-radius: 0.25rem;
+  border: 1px solid $bd-color;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: $success-color;
+  opacity: 0.80;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: .5s ease;
+  cursor: pointer;
+}
+
+.overlay-text{
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.vista-imagen-display:hover .overlay {
+  height: 100%;
+}

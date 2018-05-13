@@ -6,7 +6,7 @@ moment.locale( 'es' )
 const cx = require( 'classnames' )
 
 /* COMPONENT */
-export const User = ( { user: { url, _id, id, name, login, email, created_at, admin, userGroup }, edit, active } ) => {
+export const User = ( { user: { url, _id, id, name, login, email, admin, userGroup }, edit, active } ) => {
 	const elementClass = cx( 'list-group-item-action list-group-item flex-column align-items-start', { 'active': active } )
 	return (
 		<div className={elementClass} onClick={() => edit(_id)}>

@@ -6,7 +6,7 @@ moment.locale( 'es' )
 const cx = require( 'classnames' )
 
 /* COMPONENT */
-export const UserGroup = ( { userGroup: { url, _id, name, description, created_at, devices, displays, groups, images, users }, edit, active } ) => {
+export const UserGroup = ( { userGroup: { url, _id, name, description, createdAt, devices, displays, groups, images, users }, edit, active } ) => {
 	const elementClass = cx( 'list-group-item-action list-group-item flex-column align-items-start', { 'active': active } )
 	return (
 		<div className={elementClass} onClick={() => edit(_id)}>
@@ -25,7 +25,7 @@ export const UserGroup = ( { userGroup: { url, _id, name, description, created_a
             <i className='fa fa-picture-o mr-2 ml-2' aria-hidden='true'></i>{images ? images.length : '0'}
             <i className='fa fa-list mr-2 ml-2' aria-hidden='true'></i>{groups ? groups.length : '0'}
           </small>
-          <small><i className='fa fa-calendar-o mr-2' aria-hidden='true'></i>{moment(created_at).format('dddd, D [de] MMMM [de] YYYY')}</small>
+          <small><i className='fa fa-calendar-o mr-2' aria-hidden='true'></i>{moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')}</small>
         </div>
       </div>
     </div>

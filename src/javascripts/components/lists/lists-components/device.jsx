@@ -9,8 +9,8 @@ const cx = require( 'classnames' )
 import { Icon } from '../../icons/icon.jsx'
 
 /* COMPONENT */
-export const Device = ( { device: { _id, url, name, description, batt, rssi, found, mac, updated_at, created_at } } ) => {
-	const updated = moment( updated_at )
+export const Device = ( { device: { _id, url, name, description, batt, rssi, initcode, found, mac, updatedAt, createdAt } } ) => {
+	const updated = moment( updatedAt )
 		.from( moment() )
 	const elementClass = cx( 'list-group-item-action list-group-item flex-column align-items-start' )
 	const location = {
@@ -24,7 +24,7 @@ export const Device = ( { device: { _id, url, name, description, batt, rssi, fou
             <h5 className='w-60'><strong>{name}</strong></h5>
             <small>
               { found
-                ? <Icon icon='battery' fw='true' mr='1' batt={ batt }></Icon>
+                ? <Icon icon='battery' fw='true' mr='1' batt={batt}></Icon>
                 : <Icon icon='chain-broken' fw='true' mr='1'></Icon>
               }
               { found ? batt : '' }

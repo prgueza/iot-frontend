@@ -5,10 +5,16 @@ import React, { Component } from 'react'
 import { Icon } from '../icons/icon.jsx'
 
 /* COMPONENTS */
-export const Notification = ( { text, icon, spin } ) => {
+export const Notification = ( { text, icon, spin, info } ) => {
 	return (
-		<div className='text-center'>
-      <Icon icon={icon} mr='1' spin={spin}/> {text}
-    </div>
+		<div className='notify-content'>
+      <Icon icon={icon} mr='1' spin={spin}/><strong>{text}</strong>
+			{ info &&
+				<div>
+					<hr className='notify-division'></hr>
+					<small className='notify-info'>{info}</small>
+				</div>
+			}
+		</div>
 	)
 }

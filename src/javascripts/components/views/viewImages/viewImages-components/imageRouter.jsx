@@ -33,7 +33,7 @@ export class ImageRouter extends Component {
 
 	/* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.image && ( nextProps.image._id != this.props.image._id || nextProps.image.updated_at != this.props.image.updated_at ) ) { // if props actually changed
+		if ( nextProps.image && ( nextProps.image._id != this.props.image._id || nextProps.image.updatedAt != this.props.image.updatedAt ) ) { // if props actually changed
 			axios.get( nextProps.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } } )
 				.then(
 					image => this.setState( { image: image.data, isLoaded: true } ),

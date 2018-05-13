@@ -20,20 +20,20 @@ export class ImageDetails extends Component { // TODO: transform to component
 			file: [],
 			accepted: false,
 			// image details
-			src_url: null,
+			src: null,
 			file: '',
 			size: ''
 		}
 	}
 
 	componentDidMount() {
-		const { src_url, extension, size } = this.props.image
-		this.setState( { src_url: src_url, extension: extension, size: size } )
+		const { src, extension, size } = this.props.image
+		this.setState( { src, extension, size } )
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		const { src_url, extension, size } = nextProps.image
-		this.setState( { src_url: src_url, extension: extension, size: size } )
+		const { src, extension, size } = nextProps.image
+		this.setState( { src, extension, size } )
 	}
 
 	onDropAccepted = ( acceptedFile ) => {
@@ -48,25 +48,22 @@ export class ImageDetails extends Component { // TODO: transform to component
 			.then( ( res ) => {
 				if ( res.status == 200 ) {
 					this.props.update( 'images', res.data.resourceId, 'edit', res.data.resource )
-					return this.props.notify( 'Imagen cargada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
+					this.props.notify( 'Imagen cargada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
 				}
 			} )
-			.catch( ( err ) => {
-				console.log( err )
-				return this.props.notify( 'Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT )
-			} )
+			.catch( err => { this.props.notify( 'Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) } )
 	}
 
 	render() {
 		// define constants from props for better readability
-		const { _id, name, description, src_url, created_at, updated_at, created_by, color_profile, resolution, category, groups, displays, tags_total, tags } = this.props.image
+		const { _id, name, description, src, createdAt, updatedAt, createdBy, colorProfile, resolution, category, groups, displays, tags } = this.props.image
 		// refactor date constants with format
-		const created = moment( created_at )
+		const created = moment( createdAt )
 			.format( 'dddd, D [de] MMMM [de] YYYY' )
-		const updated = moment( updated_at )
+		const updated = moment( updatedAt )
 			.format( 'dddd, D [de] MMMM [de] YYYY' )
 		// generate tag list
-		const tag_list = tags.map( ( tag, index ) => <Tag key={index} category='images' tag={tag}/> )
+		const tagList = tags.map( ( tag, index ) => <Tag key={index} category='images' filterData={this.props.filterData} tag={tag}/> )
 		// define routes for edit and delete based on the id
 		const linktoEdit = '/images/' + _id + '/edit'
 		const linktoDelete = '/images/' + _id + '/delete'
@@ -80,13 +77,13 @@ export class ImageDetails extends Component { // TODO: transform to component
           </li>
           <li className='nav-item mr-2'>
             <Link to={linktoEdit}>
-              <button type='button' className='btn btn-outline-warning'>
+              <button type='button' className='btn btn-warning'>
                 <i className='fa fa-pencil-square-o mr-2' aria-hidden='true'></i>Editar</button>
             </Link>
           </li>
           <li className='nav-item ml-2'>
             <Link to={linktoDelete}>
-              <button type='button' className='btn btn-outline-danger'>
+              <button type='button' className='btn btn-danger'>
                 <i className='fa fa-trash-o mr-2' aria-hidden='true'></i>Eliminar</button>
             </Link>
           </li>
@@ -109,17 +106,17 @@ export class ImageDetails extends Component { // TODO: transform to component
             <p className='card-text'>
               <i className='fa fa-fw fa-database mr-2' aria-hidden='true'></i>{this.state.size}</p>
             <p className='card-text'>
-              <i className='fa fa-fw fa-tint mr-2' aria-hidden='true'></i>{color_profile}</p>
+              <i className='fa fa-fw fa-tint mr-2' aria-hidden='true'></i>{colorProfile}</p>
             <p className='card-text'>
               <i className='fa fa-fw fa-calendar-o mr-2' aria-hidden='true'></i>{created}</p>
             <p className='card-text'>
               <i className='fa fa-fw fa-user-o mr-2' aria-hidden='true'></i>{
-                created_by
-                  ? created_by.name
+                createdBy
+                  ? createdBy.name
                   : 'Usuario eliminado'
               }</p>
             <p className='titulo'>ETIQUETAS</p>
-            {tag_list}
+            {tagList}
           </div>
           <div className='col'>
             <div className='vista-previa'>
@@ -129,8 +126,8 @@ export class ImageDetails extends Component { // TODO: transform to component
                   : 'dropzone'}>
                 <div className='vista-imagen d-flex w-100 justify-content-center'>
                   {
-                    this.state.src_url
-                      ? <img className='imagen' src={this.state.src_url}/>
+                    this.state.src
+                      ? <img className='imagen' src={this.state.src}/>
                       : <div className='align-self-center'>
                           <h4>Arrastre una imagen</h4>
                           <small>formatos permitidos: png/jpeg</small>

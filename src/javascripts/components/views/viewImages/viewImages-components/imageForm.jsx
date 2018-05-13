@@ -6,6 +6,9 @@ import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
+/* IMPORT COMPONENTS */
+import { Tag } from '../../../tags/tag.jsx'
+
 /* COMPONENTS */
 export class ImageForm extends Component {
 
@@ -16,18 +19,18 @@ export class ImageForm extends Component {
 		this.state = {
 			name: image ? image.name : '',
 			description: image ? image.description : '',
-			created_by: image ? ( image.created_by || { name: 'Usuario eliminado' } ) : user,
-			updated_by: user.name,
+			createdBy: image ? ( image.createdBy || { name: 'Usuario eliminado' } ) : user,
+			updatedBy: user.name,
 			category: image ? ( image.category ? image.category : '' ) : '',
 			tags: image ? image.tags : [],
-			created_at: image ? moment( image.created_at ) : moment(),
-			updated_at: moment(),
+			createdAt: image ? moment( image.createdAt ) : moment(),
+			updatedAt: moment(),
 			displays: image ? image.displays.map( display => display._id ) : [],
 			groups: image ? image.groups.map( group => group._id ) : [],
 			color: image ? image.color_profile : 'color',
 
 			redirect: false,
-			location: '/images',
+			redirectLocation: '/images',
 			error: null
 		}
 	}
@@ -37,7 +40,7 @@ export class ImageForm extends Component {
 		const { images, image } = this.props
 		// set state with initial values
 		this.setState( {
-			location: image ? '/images/' + image._id : '/images' // Redirect url
+			redirectLocation: image ? '/images/' + image._id : '/images' // Redirect url
 		} )
 	}
 
@@ -103,13 +106,13 @@ export class ImageForm extends Component {
 		const form = {
 			name: this.state.name,
 			description: this.state.description,
-			updated_by: this.state.updated_by._id, // send user_id
+			updatedBy: this.state.updatedBy._id, // send user_id
 			category: this.state.category,
 			tags: this.state.tags,
 			color_profile: this.state.color
 		}
 		// possible empty fields
-		if ( !this.props.image ) form.created_by = this.props.user._id
+		if ( !this.props.image ) form.createdBy = this.props.user._id
 		this.state.displays.length > 0 ? form.displays = this.state.displays : form.displays = []
 		this.state.groups.length > 0 ? form.groups = this.state.groups : form.groups = []
 		// HTTP request
@@ -139,21 +142,21 @@ export class ImageForm extends Component {
 		const { data: { devices, images, groups, displays }, image } = this.props
 
 		// Options
-		const optionsGroups = groups.map( group => <label key={group._id} className='custom-control custom-checkbox'>
-      <input onChange={this.handleCheckGroups} type='checkbox' defaultChecked={this.state.groups.find(c => c == group._id)} name={group._id} defaultValue={group._id} className='custom-control-input'></input>
-      <span className='custom-control-indicator'></span>
-      <span className='custom-control-description'>{group.name}</span>
-    </label> )
-		const optionsDisplays = displays.sort( ( a, b ) => a.updated_at - b.updated_at )
-			.map( display => <label key={display._id} className='custom-control custom-checkbox'>
-      <input onChange={this.handleCheckDisplays} type='checkbox' defaultChecked={this.state.displays.find( c => c == display._id)} name={display._id} defaultValue={display._id} className='custom-control-input'></input>
-      <span className='custom-control-indicator'></span>
-      <span className='custom-control-description'>{display.name}</span>
-    </label> )
+		const optionsGroups = groups.map( group =>
+			<div key={group._id} className="custom-control custom-checkbox">
+			  <input onChange={this.handleCheckGroups} id={group._id} type="checkbox" defaultChecked={this.state.groups.find((c) => c == group._id)} name={group._id} defaultValue={group._id} className='custom-control-input'></input>
+			  <label className="custom-control-label" htmlFor={group._id}>{group.name}</label>
+			</div> )
+		const optionsDisplays = displays.sort( ( a, b ) => a.updatedAt - b.updatedAt )
+			.map( display =>
+				<div key={display._id} className="custom-control custom-checkbox">
+				  <input onChange={this.handleCheckDisplays} id={display._id} type="checkbox" defaultChecked={this.state.displays.find((c) => c == display._id)} name={display._id} defaultValue={display._id} className='custom-control-input'></input>
+				  <label className="custom-control-label" htmlFor={display._id}>{display.name}</label>
+				</div> )
 
 		// Render return
 		if ( this.state.redirect ) {
-			return ( <Redirect to={this.state.location}/> )
+			return ( <Redirect to={this.state.redirectLocation}/> )
 		} else {
 			return ( <div className='card detalles'>
         <div className='card-header'>
@@ -168,8 +171,8 @@ export class ImageForm extends Component {
             <li className='nav-item ml-2'>
               {
                 image
-                  ? <button onClick={this.handleSubmit} type='button' className='btn btn-outline-info'><i className='fa fa-save mr-2' aria-hidden='true'></i>Guardar cambios</button>
-                  : <button onClick={this.handleSubmit} type='button' className='btn btn-outline-info'><i className='fa fa-plus-circle mr-2' aria-hidden='true'></i>Añadir</button>
+                  ? <button onClick={this.handleSubmit} type='button' className='btn btn-info'><i className='fa fa-save mr-2' aria-hidden='true'></i>Guardar cambios</button>
+                  : <button onClick={this.handleSubmit} type='button' className='btn btn-info'><i className='fa fa-plus-circle mr-2' aria-hidden='true'></i>Añadir</button>
               }
             </li>
           </ul>
@@ -207,14 +210,14 @@ export class ImageForm extends Component {
               <div className='form-group col'>
                 <label htmlFor='displays'>
                   <i className='fa fa-television mr-2'></i>Asociar uno o varios displays</label>
-                <div className='custom-controls-stacked shadow'>
+                <div className='custom-controls-stacked'>
                   {optionsDisplays}
                 </div>
               </div>
               <div className='form-group col'>
                 <label htmlFor='groups'>
                   <i className='fa fa-list mr-2'></i>Asociar uno o varios grupos</label>
-                <div className='custom-controls-stacked shadow'>
+                <div className='custom-controls-stacked'>
                   {optionsGroups}
                 </div>
               </div>
@@ -231,7 +234,7 @@ export class ImageForm extends Component {
                 {
                   this.state.tags.map(
                     (tag, index) => tag.length > 1
-                    ? <button type='button' className='btn mr-1 btn-outline-imagen btn-tiny' key={index}>{tag}</button>
+                    ? <Tag key={index} tag={tag} category='images'/>
                     : '')
                 }
               </div>
@@ -239,18 +242,18 @@ export class ImageForm extends Component {
             <div className='form-group'>
               <label htmlFor='creador'>
                 <i className='fa fa-user-o mr-2'></i>Creador</label>
-              <input type='text' className='form-control' id='creador' name='user' value={this.state.created_by.name} readOnly='readOnly'></input>
+              <input type='text' className='form-control' id='creador' name='user' value={this.state.createdBy.name} readOnly='readOnly'></input>
             </div>
             <div className='form-row'>
               <div className='form-group col-md-6'>
                 <label htmlFor='fechaCreacion'>
                   <i className='fa fa-calendar-o mr-2'></i>Fecha de creación</label>
-                <input type='text' className='form-control' id='fechaCreacion' name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly='readOnly'></input>
+                <input type='text' className='form-control' id='fechaCreacion' name='createdAt ' value={moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly='readOnly'></input>
               </div>
               <div className='form-group col-md-6'>
                 <label htmlFor='fechaModificacion'>
                   <i className='fa fa-calendar-o mr-2'></i>Fecha de modificación</label>
-                <input type='text' className='form-control' id='fechaModificacion' name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly='readOnly'></input>
+                <input type='text' className='form-control' id='fechaModificacion' name='updatedAt' value={moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly='readOnly'></input>
               </div>
             </div>
           </form>

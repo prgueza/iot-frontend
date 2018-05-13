@@ -37,7 +37,7 @@ export class DeviceRouter extends Component {
 
 	/* FORCE UPDATE IF WE CHANGE TO ANOTHER DEVICE */
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.device && ( nextProps.device._id != this.props.device._id || nextProps.device.updated_at != this.props.device.updated_at ) ) { // if props actually changed
+		if ( nextProps.device && ( nextProps.device._id != this.props.device._id || nextProps.device.updatedAt != this.props.device.updatedAt ) ) { // if props actually changed
 			axios.get( nextProps.device.url, { headers: { Authorization: 'Bearer ' + this.props.token } } )
 				.then(
 					( device ) => { // resolve callback

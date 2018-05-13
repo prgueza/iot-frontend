@@ -6,7 +6,7 @@ moment.locale( 'es' )
 const cx = require( 'classnames' )
 
 /* COMPONENT */
-export const Screen = ( { screen: { url, _id, name, size, description, screen_code, color_profile, created_at }, edit, active } ) => {
+export const Screen = ( { screen: { url, _id, name, size, description, screenCode, colorProfile, createdAt }, edit, active } ) => {
 	const elementClass = cx( 'list-group-item-action list-group-item flex-column align-items-start', { 'active': active } )
 	return (
 		<div className={elementClass} onClick={() => edit(_id)}>
@@ -20,10 +20,10 @@ export const Screen = ( { screen: { url, _id, name, size, description, screen_co
         </div>
         <div className='d-flex w-100 justify-content-between'>
           <small>
-            <i className='fa fa-code mr-1' aria-hidden='true'></i>{screen_code}
-            <i className='fa fa-adjust ml-3 mr-1' aria-hidden='true'></i>{color_profile}
+            <i className='fa fa-code mr-1' aria-hidden='true'></i>{screenCode}
+            <i className='fa fa-adjust ml-3 mr-1' aria-hidden='true'></i>{colorProfile}
           </small>
-          <small><i className='fa fa-calendar-o mr-2' aria-hidden='true'></i>{moment(created_at).format('dddd, D [de] MMMM [de] YYYY')}</small>
+          <small><i className='fa fa-calendar-o mr-2' aria-hidden='true'></i>{moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')}</small>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 const moment = require( 'moment' )
 moment.locale( 'es' )
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 
@@ -16,17 +16,17 @@ export class GatewayForm extends Component {
 			id: gateway ? gateway.id : '',
 			name: gateway ? gateway.name : '',
 			description: gateway ? gateway.description : '',
-			created_by: gateway ? ( gateway.created_by ? gateway.created_by.name : 'Usuario eliminado' ) : user.name,
-			updated_by: user.name,
-			created_at: gateway ? moment( gateway.created_at ) : moment(),
-			updated_at: moment(),
+			createdBy: gateway ? ( gateway.createdBy ? gateway.createdBy.name : 'Usuario eliminado' ) : user.name,
+			updatedBy: user.name,
+			createdAt: gateway ? moment( gateway.createdAt ) : moment(),
+			updatedAt: moment(),
 			mac: gateway ? gateway.mac : '',
 			port: gateway ? gateway.port : '',
 			ip: gateway ? gateway.ip : '',
 			location: gateway ? gateway.location._id : locations[ 0 ]._id,
 
 			redirect: false,
-			redirect_location: '/gateways',
+			redirectLocation: '/gateways',
 			error: null
 		}
 	}
@@ -36,7 +36,7 @@ export class GatewayForm extends Component {
 		const { gateways, gateway } = this.props
 		// set state with initial values
 		this.setState( {
-			redirect_location: gateway ? '/gateways/' + gateway._id : '/gateways' // Redirect url
+			redirectLocation: gateway ? '/gateways/' + gateway._id : '/gateways' // Redirect url
 		} )
 	}
 
@@ -59,41 +59,49 @@ export class GatewayForm extends Component {
 			id: this.state.id,
 			name: this.state.name,
 			description: this.state.description,
-			updated_by: this.state.updated_by._id, // send user_id
+			updatedBy: this.state.updatedBy._id, // send user_id
 			mac: this.state.mac,
 			ip: this.state.ip,
 			port: this.state.port,
 			location: this.state.location,
 		}
 		// possible empty fields
-		if ( !this.props.gateway ) form.created_by = this.props.user._id
+		if ( !this.props.gateway ) form.createdBy = this.props.user._id
 		// HTTP request
 		axios( {
 				method: gateway ? 'put' : 'post',
 				url: gateway ? gateway.url : 'http://localhost:4000/gateways',
 				data: form,
-				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + this.props.token
+				},
 			} )
 			.then( ( res ) => {
 				if ( res.status == 201 || res.status == 200 ) {
-					this.props.notify( 'Puerta de enlace configurada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
+					this.props.notify( 'Puerta de enlace configurada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify )
 					return this.props.update( this.props.user ) // update dataset
 				}
 			} )
 			.then( res => this.setState( { redirect: true } ) )
-			.catch( err => this.props.notify( 'Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) )
 	}
 
 	/* RENDER COMPONENT */
 	render() {
 
+		const { gateway } = this.props
+
 		// Options
 		const optionsLocation = this.props.data.locations.sort( ( a, b ) => a.name - b.name )
 			.map( ( location, index ) => <option value={location._id} key={index}>{location.name}</option> )
 
+		const linkBack = gateway ? '/gateways/' + gateway._id : '/gateways'
+
 		// Render return
 		if ( this.state.redirect ) {
-			return ( <Redirect to={this.state.redirect_location} /> )
+			return ( <Redirect to={this.state.redirectLocation} /> )
 		} else {
 			return (
 				<div className='card detalles'>
@@ -105,10 +113,16 @@ export class GatewayForm extends Component {
                   : <h2 className='detalles-titulo'><i className='fa fa-plus-circle mr-3' aria-hidden='true'></i>Añadir una nueva puerta de enlace</h2>
                 }
               </li>
+							<li className='nav-item mr-2'>
+								<Link to={linkBack}>
+									<button type='button' className='btn btn-warning'>
+										<i className='fa fa-times mr-2' aria-hidden='true'></i>Cancelar</button>
+								</Link>
+							</li>
               <li className='nav-item ml-2'>
                 { this.props.gateway
-                  ? <button onClick={this.handleSubmit} type='button' className='btn btn-outline-primary'><i className='fa fa-save mr-2' aria-hidden='true'></i>Guardar cambios</button>
-                  : <button onClick={this.handleSubmit} type='button' className='btn btn-outline-primary'><i className='fa fa-plus-circle mr-2' aria-hidden='true'></i>Añadir</button>
+                  ? <button onClick={this.handleSubmit} type='button' className='btn btn-primary'><i className='fa fa-save mr-2' aria-hidden='true'></i>Guardar cambios</button>
+                  : <button onClick={this.handleSubmit} type='button' className='btn btn-primary'><i className='fa fa-plus-circle mr-2' aria-hidden='true'></i>Añadir</button>
                 }
               </li>
             </ul>
@@ -139,7 +153,7 @@ export class GatewayForm extends Component {
                   <input type='text' className='form-control' id='port' placeholder='Puerto de la puerta de enlace' name='mac' value={this.state.port} onChange={this.handleInputChange}></input>
                 </div>
                 <div className='form-group col'>
-                  <label htmlFor='location'><i className='fa fa-map-marker mr-2'></i>Location</label>
+                  <label htmlFor='location'><i className='fa fa-map-marker mr-2'></i>Localización</label>
                   <div>
                     <select className='custom-select' name='location' onChange={this.handleInputChange}>
                       {optionsLocation}
@@ -148,17 +162,17 @@ export class GatewayForm extends Component {
                 </div>
               </div>
               <div className='form-group'>
-                <label htmlFor='created_by'><i className='fa fa-user-o mr-2'></i>Creador</label>
-                <input type='text' className='form-control' id='created_by' name='created_by' value={this.state.created_by} readOnly></input>
+                <label htmlFor='createdBy'><i className='fa fa-user-o mr-2'></i>Creador</label>
+                <input type='text' className='form-control' id='createdBy' name='createdBy' value={this.state.createdBy} readOnly></input>
               </div>
               <div className='form-row'>
                 <div className='form-group col-md-6'>
                   <label htmlFor='fechaCreacion'><i className='fa fa-calendar-o mr-2'></i>Fecha de creación</label>
-                  <input type='text' className='form-control' id='fechaCreacion' name='created_at ' value={moment(this.state.created_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                  <input type='text' className='form-control' id='fechaCreacion' name='createdAt ' value={moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
                 </div>
                 <div className='form-group col-md-6'>
                   <label htmlFor='fechaModificacion'><i className='fa fa-calendar-o mr-2'></i>Fecha de modificación</label>
-                  <input type='text' className='form-control' id='fechaModificacion' name='updated_at' value={moment(this.state.updated_at).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                  <input type='text' className='form-control' id='fechaModificacion' name='updatedAt' value={moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
                 </div>
               </div>
             </form>

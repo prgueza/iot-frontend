@@ -16,27 +16,27 @@ export class ManageScreens extends Component {
 			isLoaded: false,
 			error: null,
 			edit: false,
-			element_id: '',
+			elementId: '',
 			// form
 			name: '',
 			height: 0,
 			width: 0,
-			screen_code: '',
-			color_profile: 'grayscale',
+			screenCode: '',
+			colorProfile: 'grayscale',
 			description: '',
 		}
 	}
 
-	edit = ( element_id ) => {
-		const screen = this.state.screens.find( screen => screen._id == element_id )
+	edit = ( elementId ) => {
+		const screen = this.state.screens.find( screen => screen._id == elementId )
 		this.setState( {
 			name: screen.name,
 			width: screen.size.width,
 			height: screen.size.height,
 			description: screen.description,
-			screen_code: screen.screen_code,
-			color_profile: screen.color_profile,
-			element_id: element_id,
+			screenCode: screen.screenCode,
+			colorProfile: screen.colorProfile,
+			elementId: elementId,
 			edit: true
 		} )
 	}
@@ -47,9 +47,9 @@ export class ManageScreens extends Component {
 			width: '',
 			height: '',
 			description: '',
-			screen_code: '',
-			color_profile: 'grayscale',
-			element_id: '',
+			screenCode: '',
+			colorProfile: 'grayscale',
+			elementId: '',
 			edit: false
 		} )
 	}
@@ -80,13 +80,13 @@ export class ManageScreens extends Component {
 				'height': this.state.height,
 				'width': this.state.width
 			},
-			'screen_code': this.state.screen_code,
-			'color_profile': this.state.color_profile,
+			'screenCode': this.state.screenCode,
+			'colorProfile': this.state.colorProfile,
 		}
 		if ( this.state.description != '' ) { form.description = this.state.description }
 		axios( {
 				method: method,
-				url: this.state.edit ? 'http://localhost:4000/screens/' + this.state.element_id : 'http://localhost:4000/screens',
+				url: this.state.edit ? 'http://localhost:4000/screens/' + this.state.elementId : 'http://localhost:4000/screens',
 				data: form,
 				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.props.token },
 			} )
@@ -94,16 +94,16 @@ export class ManageScreens extends Component {
 				if ( res.status == 201 || res.status == 200 ) {
 					switch ( method ) {
 					case 'put':
-						this.props.notify( 'Pantalla modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Pantalla modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT )
 						this.props.update( 'screens', res.data.resourceId, 'edit', res.data.resource ) // update dataset
 						break
 					case 'post':
-						this.props.notify( 'Pantalla creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Pantalla creada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT )
 						this.props.update( 'screens', res.data.resourceId, 'add', res.data.resource ) // update dataset
 						this.edit( res.data.resourceId )
 						break
 					case 'delete':
-						this.props.notify( 'Pantalla eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Pantalla eliminada con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT )
 						this.cancel()
 						this.props.update( 'screens', res.data.resourceId, 'remove', res.data.resource ) // update dataset
 						break
@@ -117,7 +117,7 @@ export class ManageScreens extends Component {
 					} )
 				}
 			} )
-			.catch( err => this.props.notify( 'Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) )
 	}
 
 	render() {
@@ -129,7 +129,7 @@ export class ManageScreens extends Component {
 			return null // TODO: handle loading
 		} else {
 			const list = screens.map( screen => {
-				if ( screen._id == this.state.element_id ) {
+				if ( screen._id == this.state.elementId ) {
 					return <Screen screen={screen} key={screen._id} edit={this.edit} active={true}/>
 				} else {
 					return <Screen screen={screen} key={screen._id} edit={this.edit} active={false}/>
@@ -179,17 +179,17 @@ export class ManageScreens extends Component {
                   </div>
                   <div className='form-row'>
                     <div className='form-group col'>
-                      <label htmlFor='color_profile'><i className='fa fa-adjust mr-2'></i>Color</label>
+                      <label htmlFor='colorProfile'><i className='fa fa-adjust mr-2'></i>Color</label>
                       <div>
-                        <select className='custom-select' name='color_profile' value={this.state.color_profile} onChange={this.handleInputChange}>
+                        <select className='custom-select' name='colorProfile' value={this.state.colorProfile} onChange={this.handleInputChange}>
                           <option value='color'>Color</option>
                           <option value='grayscale'>Escala de grises</option>
                         </select>
                       </div>
                     </div>
                     <div className='form-group col'>
-                      <label htmlFor='screen_code'><i className='fa fa-fw fa-code mr-2'></i>Código de pantalla</label>
-                      <input type='text' className='form-control' id='screen_code' placeholder='Código' name='screen_code' value={this.state.screen_code} onChange={this.handleInputChange}></input>
+                      <label htmlFor='screenCode'><i className='fa fa-fw fa-code mr-2'></i>Código de pantalla</label>
+                      <input type='text' className='form-control' id='screenCode' placeholder='Código' name='screenCode' value={this.state.screenCode} onChange={this.handleInputChange}></input>
                     </div>
                   </div>
                   { !this.state.edit ?

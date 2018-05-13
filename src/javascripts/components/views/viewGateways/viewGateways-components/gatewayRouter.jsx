@@ -33,7 +33,7 @@ export class GatewayRouter extends Component {
 
 	/* FORCE UPDATE IF WE CHANGE TO ANOTHER DISPLAY */
 	componentWillReceiveProps( nextProps ) {
-		if ( nextProps.gateway && ( nextProps.gateway._id != this.props.gateway._id || nextProps.gateway.updated_at != this.props.gateway.updated_at ) ) {
+		if ( nextProps.gateway && ( nextProps.gateway._id != this.props.gateway._id || nextProps.gateway.updatedAt != this.props.gateway.updatedAt ) ) {
 			axios.get( nextProps.gateway.url, { headers: { Authorization: 'Bearer ' + this.props.token } } )
 				.then(
 					gateway => this.setState( { gateway: gateway.data, isLoaded: true } ),

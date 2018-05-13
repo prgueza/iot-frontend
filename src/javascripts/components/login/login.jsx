@@ -81,13 +81,12 @@ export class Login extends Component {
                   <label className='sr-only' htmlFor='password'>Password</label>
                   <input onChange={this.handleInputChange} type='password' className='form-control' id='password' value={this.state.password} name='password' placeholder='Contraseña'></input>
                 </div>
-                <button onClick={this.handleSubmit} type='submit' className='btn btn-block btn-outline-primary'>Entrar</button>
+                <button onClick={this.handleSubmit} type='submit' className='btn btn-block btn-primary'>Entrar</button>
                 <div className='form-group mt-2'>
-                  <label className='custom-control custom-checkbox'>
-                    <input onChange={this.handleInputChange} type='checkbox' checked={this.state.remember} name='remember' value={this.state.remember} className='custom-control-input'></input>
-                    <span className='custom-control-indicator'></span>
-                    <span className='custom-control-description'>Recordar usuario</span>
-                  </label>
+									<div className='custom-control custom-checkbox'>
+										<input onChange={this.handleInputChange} id='remember' type='checkbox' checked={this.state.remember} name='remember' value={this.state.remember} className='custom-control-input'></input>
+										<label className='custom-control-label' htmlFor='remember'>Recordar usuario</label>
+									</div>
                 </div>
               </form>
               { this.state.error && <p className='text-center text-danger'><i className='fa fa-times mr-2'></i>Usuario o contraseña incorrectos</p> }

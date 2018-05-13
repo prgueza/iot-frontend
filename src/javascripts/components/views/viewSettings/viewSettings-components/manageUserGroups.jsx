@@ -16,7 +16,7 @@ export class ManageUserGroups extends Component {
 			isLoaded: false,
 			error: null,
 			edit: false,
-			element_id: '',
+			elementId: '',
 			// form
 			name: '',
 			description: '',
@@ -40,13 +40,13 @@ export class ManageUserGroups extends Component {
 		this.setState( { isLoaded: true, userGroups: nextProps.data.userGroups } )
 	}
 
-	edit = ( element_id ) => {
-		const userGroup = this.state.userGroups.find( userGroup => userGroup._id == element_id )
+	edit = ( elementId ) => {
+		const userGroup = this.state.userGroups.find( userGroup => userGroup._id == elementId )
 		this.setState( {
 			name: userGroup.name,
 			description: userGroup.description,
 			edit: true,
-			element_id: element_id
+			elementId: elementId
 		} )
 	}
 
@@ -55,7 +55,7 @@ export class ManageUserGroups extends Component {
 			name: '',
 			description: '',
 			edit: false,
-			element_id: '',
+			elementId: '',
 		} )
 	}
 
@@ -68,7 +68,7 @@ export class ManageUserGroups extends Component {
 		}
 		axios( {
 				method: method,
-				url: this.state.edit ? 'http://localhost:4000/userGroups/' + this.state.element_id : 'http://localhost:4000/userGroups',
+				url: this.state.edit ? 'http://localhost:4000/userGroups/' + this.state.elementId : 'http://localhost:4000/userGroups',
 				data: form,
 				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.props.token },
 			} )
@@ -76,16 +76,16 @@ export class ManageUserGroups extends Component {
 				if ( res.status == 201 || res.status == 200 ) {
 					switch ( method ) {
 					case 'put':
-						this.props.notify( 'Grupo modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Grupo modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT )
 						this.props.update( 'userGroups', res.data.resourceId, 'edit', res.data.resource ) // update dataset
 						break
 					case 'post':
-						this.props.notify( 'Grupo creado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Grupo creado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT )
 						this.props.update( 'userGroups', res.data.resourceId, 'add', res.data.resource ) // update dataset
 						this.edit( res.data.resourceId )
 						break
 					case 'delete':
-						this.props.notify( 'Grupo eliminado con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Grupo eliminado con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT )
 						this.cancel()
 						this.props.update( 'userGroups', res.data.resourceId, 'remove', res.data.resource ) // update dataset
 						break
@@ -99,7 +99,7 @@ export class ManageUserGroups extends Component {
 					} )
 				}
 			} )
-			.catch( err => this.props.notify( 'Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) )
 	}
 
 	render() {
@@ -111,7 +111,7 @@ export class ManageUserGroups extends Component {
 			return null // TODO: handle loading
 		} else {
 			const list = userGroups.map( userGroup => {
-				if ( userGroup._id == this.state.element_id ) {
+				if ( userGroup._id == this.state.elementId ) {
 					return <UserGroup userGroup={userGroup} key={userGroup._id} edit={this.edit} active={true}/>
 				} else {
 					return <UserGroup userGroup={userGroup} key={userGroup._id} edit={this.edit} active={false}/>

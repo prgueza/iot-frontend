@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 const moment = require( 'moment' )
 moment.locale( 'es' )
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 
@@ -16,10 +16,10 @@ export class DeviceForm extends Component {
 			name: device.name,
 			description: device.description,
 			updatedBy: user.name,
-			createdAt: moment( device.created_at ),
+			createdAt: moment( device.createdAt ),
 			updatedAt: moment(),
 			mac: device.mac,
-			prefGateway: device.pref_gateway ? device.pref_gateway._id : gateways[ 0 ]._id,
+			prefGateway: device.prefGateway ? device.prefGateway._id : gateways[ 0 ]._id,
 			userGroup: device.userGroup ? device.userGroup._id : '',
 
 			redirect: false,
@@ -55,8 +55,8 @@ export class DeviceForm extends Component {
 		const form = {
 			name: this.state.name,
 			description: this.state.description,
-			updated_by: this.state.updated_by._id, // send user_id
-			pref_gateway: this.state.prefGateway,
+			updatedBy: this.state.updatedBy._id, // send user_id
+			prefGateway: this.state.prefGateway,
 			mac: this.state.mac,
 		}
 		if ( this.state.userGroup ) form.userGroup = this.state.userGroup // FIXME: include it within the declaration of form somehow
@@ -88,11 +88,13 @@ export class DeviceForm extends Component {
 
 		const { device, data: { gateways, screens, userGroups } } = this.props
 
+		const linkBack = '/devices/' + device._id
+
 		// Options
 		const optionsGateway = gateways.map( ( gateway, index ) => <option value={gateway._id} key={index}>{gateway.name}</option> )
 		const optionsUserGroup = userGroups.map( ( userGroup, index ) => <option value={userGroup._id} key={index}>{userGroup.name}</option> )
 
-		const screen = screens.find( screen => screen.screen_code == device.screen )
+		const screen = screens.find( screen => screen.screenCode == device.screen )
 		const screenName = screen ? screen.name : 'No se encuentra la pantalla (código: ' + device.screen + ' )'
 
 		// Render return
@@ -106,8 +108,14 @@ export class DeviceForm extends Component {
               <li className='nav-item mr-auto'>
                 <h2 className='detalles-titulo'><i className='fa fa-fw fa-pencil mr-3' aria-hidden='true'></i>Configurar un dispositivo físico</h2>
               </li>
+							<li className='nav-item mr-2'>
+								<Link to={linkBack}>
+									<button type='button' className='btn btn-warning'>
+										<i className='fa fa-times mr-2' aria-hidden='true'></i>Cancelar</button>
+								</Link>
+							</li>
               <li className='nav-item ml-2'>
-                <button onClick={this.handleSubmit} type='button' className='btn btn-outline-primary'><i className='fa  fa-fw fa-floppy-o mr-2' aria-hidden='true'></i>Guardar cambios</button>
+                <button onClick={this.handleSubmit} type='button' className='btn btn-primary'><i className='fa  fa-fw fa-floppy-o mr-2' aria-hidden='true'></i>Guardar cambios</button>
               </li>
             </ul>
           </div>
@@ -149,17 +157,17 @@ export class DeviceForm extends Component {
                 </div>
               </div>
               <div className='form-group'>
-                <label htmlFor='updated_by'><i className='fa fa-fw fa-user-o mr-2'></i>Ultima modificación por</label>
-                <input type='text' className='form-control' id='updated_by' name='updated_by' value={this.state.updatedBy} readOnly></input>
+                <label htmlFor='updatedBy'><i className='fa fa-fw fa-user-o mr-2'></i>Ultima modificación por</label>
+                <input type='text' className='form-control' id='updatedBy' name='updatedBy' value={this.state.updatedBy} readOnly></input>
               </div>
               <div className='form-row'>
                 <div className='form-group col-md-6'>
                   <label htmlFor='fechaCreacion'><i className='fa fa-fw fa-calendar-o mr-2'></i>Fecha de creación</label>
-                  <input type='text' className='form-control' id='fechaCreacion' name='created_at ' value={moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                  <input type='text' className='form-control' id='fechaCreacion' name='createdAt ' value={moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
                 </div>
                 <div className='form-group col-md-6'>
                   <label htmlFor='fechaModificacion'><i className='fa fa-fw fa-calendar-o mr-2'></i>Fecha de modificación</label>
-                  <input type='text' className='form-control' id='fechaModificacion' name='updated_at' value={moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
+                  <input type='text' className='form-control' id='fechaModificacion' name='updatedAt' value={moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly></input>
                 </div>
               </div>
             </form>

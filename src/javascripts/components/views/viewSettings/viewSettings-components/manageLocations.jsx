@@ -17,7 +17,7 @@ export class ManageLocations extends Component {
 			isLoaded: false,
 			error: null,
 			edit: false,
-			element_id: '',
+			elementId: '',
 			// form
 			name: '',
 			description: ''
@@ -42,12 +42,12 @@ export class ManageLocations extends Component {
 		this.setState( { isLoaded: true, locations: nextProps.data.locations } )
 	}
 
-	edit = ( element_id ) => {
-		const location = this.state.locations.find( location => location._id == element_id )
+	edit = ( elementId ) => {
+		const location = this.state.locations.find( location => location._id == elementId )
 		this.setState( {
 			name: location.name,
 			description: location.description,
-			element_id: element_id,
+			elementId: elementId,
 			edit: true
 		} )
 	}
@@ -56,7 +56,7 @@ export class ManageLocations extends Component {
 		this.setState( {
 			name: '',
 			description: '',
-			element_id: '',
+			elementId: '',
 			edit: false
 		} )
 	}
@@ -69,7 +69,7 @@ export class ManageLocations extends Component {
 		// HTTP request
 		axios( {
 				method: method,
-				url: this.state.edit ? 'http://localhost:4000/locations/' + this.state.element_id : 'http://localhost:4000/locations',
+				url: this.state.edit ? 'http://localhost:4000/locations/' + this.state.elementId : 'http://localhost:4000/locations',
 				data: form,
 				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.props.token },
 			} )
@@ -77,16 +77,16 @@ export class ManageLocations extends Component {
 				if ( res.status == 201 || res.status == 200 ) {
 					switch ( method ) {
 					case 'put':
-						this.props.notify( 'Localización modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Localización modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT )
 						this.props.update( 'locations', res.data.resourceId, 'edit', res.data.resource ) // update dataset
 						break
 					case 'post':
-						this.props.notify( 'Localización creada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Localización creada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT )
 						this.props.update( 'locations', res.data.resourceId, 'add', res.data.resource ) // update dataset
 						this.edit( res.data.resource._id )
 						break
 					case 'delete':
-						this.props.notify( 'Localización eliminada con éxito', 'notify-success', 'trash', toast.POSITION.BOTTOM_LEFT )
+						this.props.notify( 'Localización eliminada con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT )
 						this.cancel()
 						this.props.update( 'locations', res.data.resourceId, 'remove', res.data.resource ) // update dataset
 						break
@@ -100,7 +100,7 @@ export class ManageLocations extends Component {
 					} )
 				}
 			} )
-			.catch( err => this.props.notify( 'Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) )
 	}
 
 	render() {
@@ -112,7 +112,7 @@ export class ManageLocations extends Component {
 			return null // TODO: handle loading
 		} else {
 			const list = locations.map( location => {
-				if ( location._id == this.state.element_id ) {
+				if ( location._id == this.state.elementId ) {
 					return <Location location={location} key={location._id} edit={this.edit} active={true}/>
 				} else {
 					return <Location location={location} key={location._id} edit={this.edit} active={false}/>

@@ -16,7 +16,7 @@ export class Navigation extends Component {
 
 	/* RENDER COMPONENT */
 	render() {
-		const { data: { displays, images, groups, devices, gateways }, user, syncStatus, token } = this.props
+		const { data: { displays, images, groups, devices, gateways }, user, syncStatus, token, filterValue } = this.props
 
 		const navigationUser = [
 			{ exact: true, linkTo: "", text: "Vista general", icon: "eye", count: false, number: '' },
@@ -75,7 +75,7 @@ export class Navigation extends Component {
           <div className="button-menu">
             <div className="busqueda mb-3">
               <p>BÚSQUEDA</p>
-              <input onChange={this.handleSearch} type="text" className="form-control search" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..."></input>
+              <input onChange={this.handleSearch} value={filterValue} type="text" className="form-control search" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..."></input>
             </div>
             <div className="mb-3">
               <p>NAVEGACIÓN</p>
