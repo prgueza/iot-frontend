@@ -5,10 +5,12 @@ moment.locale( 'es' )
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import ReactModal from 'react-modal'
 
 /* IMPORT COMPONENTS */
 import { Associated } from '../../associated.jsx'
 import { Tag } from '../../../tags/tag.jsx'
+import { EditImageForm } from '/Users/Pedro/Documents/Universidad/TFG/iot-frontend/src/javascripts/components/views/viewGroups/viewGroups-components/editImageForm.jsx'
 
 /* COMPONENTS */
 export class GroupDetails extends Component {
@@ -20,6 +22,7 @@ export class GroupDetails extends Component {
 			group: '',
 			activeImage: '',
 			images: '',
+			modal: false,
 			error: null
 		}
 	}
@@ -44,6 +47,15 @@ export class GroupDetails extends Component {
 			activeImage: activeImage ? activeImage._id : '',
 			src: activeImage ? activeImage.src : null
 		} )
+	}
+
+	/* MODAL */
+	handleOpenModal = () => {
+		this.setState( { modal: true } )
+	}
+
+	handleCloseModal = () => {
+		this.setState( { modal: false } )
 	}
 
 	/* HANDLE INPUT CHANGE */
@@ -106,6 +118,9 @@ export class GroupDetails extends Component {
         </ul>
       </div>
       <div className='card-body'>
+				<ReactModal isOpen={this.state.modal} ariaHideApp={false} className="modal-content">
+					<EditImageForm handleCloseModal={this.handleCloseModal} {...this.props}/>
+				</ReactModal>
         <div className='row'>
           <div className='col'>
             <p className='titulo'>DETALLES</p>
@@ -115,24 +130,30 @@ export class GroupDetails extends Component {
             <p className='titulo'>ETIQUETAS</p>
             {tagList}
           </div>
-          <div className='col'>
+					<div className='col'>
             <div className='vista-previa'>
-              <p className='titulo text-right'>IMAGEN ACTIVA</p>
-              <div className='vista-imagen-grupo d-flex w-100 justify-content-center mb-3'>
-                { src ?
-                  <img className='imagen' src={src}/> :
-                  <div className='align-self-center'>
-                    <h4>La imagen activa aun no ha sido determinada</h4>
-                    <small>Suba una imagen al servidor</small>
-                  </div>
+              {
+                this.state.syncing
+                  ? <p className='titulo text-right'><i className='fa fa-fw fa-refresh fa-spin mr-2' aria-hidden='true'></i>SINCRONIZANDO IMAGEN</p>
+                  : <p className='titulo text-right'>IMAGEN ACTIVA</p>
+              }
+              <div className='vista-imagen-display d-flex w-100 align-items-center mb-3 shadow'>
+                {
+                  src
+                    ? <img className='imagen' src={src}/>
+                    : <div className='image-placeholder d-flex align-items-center'>
+                        <div>
+													<h4>La imagen activa aun no ha sido determinada</h4>
+	                        <small>Haga click para determinarla</small>
+												</div>
+                      </div>
                 }
+								<div className="overlay d-flex w-100 justify-content-center" onClick={this.handleOpenModal}>
+							    <p className="d-flex overlay-text">Haga click para editar la imagen</p>
+							  </div>
               </div>
-              <select className='custom-select' id='activeImage' name='activeImage' value={this.state.activeImage} onChange={this.handleInputChange}>
-                <option value={''} key={0}>Sin imagen activa</option>
-                {imagesOptions}
-              </select>
             </div>
-          </div>
+				</div>
         </div>
         <hr className='card-division'></hr>
         <div className='row'>

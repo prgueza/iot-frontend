@@ -31,7 +31,7 @@ export class DisplayForm extends Component {
 			deviceDescription: '',
 			// form options stored in state
 			optionsActiveImage: [],
-			previewImageImage: null,
+			previewImage: '',
 			// redirect variables
 			redirect: false,
 			location: '/displays',
@@ -57,7 +57,7 @@ export class DisplayForm extends Component {
 				optionsActiveImage: optionsActiveImage
 			} );
 		} else {
-			this.setState( { device: null } )
+			this.setState( { device: '' } )
 		}
 	}
 
@@ -67,7 +67,7 @@ export class DisplayForm extends Component {
 	}
 
 	handleOnMouseLeave = () => {
-		this.setState( { previewImage: null } )
+		this.setState( { previewImage: '' } )
 	}
 
 	/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
@@ -173,7 +173,7 @@ export class DisplayForm extends Component {
 		// Options
 		const optionsDevices = devices.filter( device => !device.display || device.display._id == ( display && display._id ) )
 			.map( ( device, index ) => <option value={device._id} key={index}>{device.name}</option> )
-		const optionsGroup = groups.map( group => <option value={group._id} key={group._id}>{group.name}</option> )
+		const optionsGroup = groups.map( group => ( <option value={group._id} key={group._id}>{group.name}</option> ) )
 		const optionsImages = images.sort( ( a, b ) => a.updatedAt - b.updatedAt )
 			.map( image =>
 				<div key={image._id} onMouseEnter={() => this.handleOnMouseEnter(image._id)} onMouseLeave={this.handleOnMouseLeave} className='custom-control custom-checkbox'>
@@ -185,7 +185,7 @@ export class DisplayForm extends Component {
 		// Render return
 		if ( this.state.redirect ) {
 			return ( <Redirect to={this.state.location}/> )
-		} else if ( this.state.device == null ) {
+		} else if ( !this.state.device ) {
 			return ( <div className='card detalles'>
         <div className='card-header'>
           <ul className='nav nav-pills card-header-pills justify-content-end mx-1'>
@@ -268,33 +268,44 @@ export class DisplayForm extends Component {
                 <input type='text' className='form-control' id='category' placeholder='Categoría' name='category' value={this.state.category} onChange={this.handleInputChange}></input>
               </div>
               <div className='form-group col'>
-                <label htmlFor='activeImage'><i className='fa fa-picture-o mr-2'></i>Seleccionar la imagen activa</label>
-                <select className='custom-select' id='activeImage' name='activeImage' value={this.state.activeImage} onChange={this.handleInputChange}>
-                  <option value={''} key={0}>Sin imagen activa</option>
-                  {this.state.optionsActiveImage}
-                </select>
+								<label htmlFor='group'><i className='fa fa-list mr-2'></i>Incluir en un grupo</label>
+									<select className='custom-select' id='group' name='group' value={this.state.group} onChange={this.handleInputChange}>
+										<option value={''} key={0}>Sin grupo asignado</option>
+										{optionsGroup}
+									</select>
               </div>
             </div>
             <div className='form-group'>
-              <label htmlFor='group'><i className='fa fa-list mr-2'></i>Incluir en un grupo</label>
-								<select className='custom-select' id='group' name='group' value={this.state.group} onChange={this.handleInputChange}>
-									<option value={''} key={0}>Sin grupo asignado</option>
-									{this.state.optionsGroup}
-								</select>
+							<label htmlFor='activeImage'><i className='fa fa-picture-o mr-2'></i>Seleccionar la imagen activa</label>
+							<select className='custom-select' id='activeImage' name='activeImage' value={this.state.activeImage} onChange={this.handleInputChange}>
+								<option value={''} key={0}>Sin imagen activa</option>
+								{this.state.optionsActiveImage}
+							</select>
 						</div>
 						<div className='form-row'>
 	            <div className='form-group col'>
 	              <label htmlFor='images'><i className='fa fa-television mr-2'></i>Asociar una o varias imagenes</label>
-	              <div className='custom-controls-stacked'>
-	                {optionsImages}
-	              </div>
+								{optionsImages.length > 0
+										? <div className='custom-controls-stacked'>{optionsImages}</div>
+										: <div className='no-image-available d-flex w-100 align-items-center justify-content-center'>
+												<p>No hay imágenes disponibles</p>
+											</div>
+								}
 	            </div>
 							<div className='form-group col'>
-								<label htmlFor='images'><i className='fa fa-eye mr-2'></i>Previsualización de la imagen</label>
-								<div className='preview-image d-flex w-100 align-items-center mb-3 shadow'>
-									<img src={this.state.previewImage && this.state.previewImage.src}/>
-									<p>{this.state.previewImage && this.state.previewImage.name}</p>
-								</div>
+								<label htmlFor='images'><i className='fa fa-eye mr-2'></i>Previsualización de la imagen <small>(Puede aparecer recortada)</small></label>
+									{ this.state.previewImage
+										 ? ( this.state.previewImage.src
+											 ? <div className='preview-image d-flex w-100 align-items-center shadow'>
+													<img className='imagen' src={this.state.previewImage.src}/>
+												</div>
+										  : <div className='preview-image-empty d-flex w-100 align-items-center justify-content-center shadow'>
+													<p>La imagen aun no ha sido determinada</p>
+												</div>)
+										 : <div className='preview-image-empty d-flex w-100 align-items-center'>
+												<p>Pase el raton por encima de los nombres de las imágenes para previsualizarlas</p>
+											</div>
+									}
 							</div>
 						</div>
             <div className='form-row'>

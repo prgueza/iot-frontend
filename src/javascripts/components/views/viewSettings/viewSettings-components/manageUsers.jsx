@@ -83,7 +83,7 @@ export class ManageUsers extends Component {
 			'email': this.state.email,
 			'admin': this.state.admin,
 		}
-		if ( this.state.userGroup != '' ) { form.userGroup = this.state.userGroup }
+		if ( this.state.userGroup != '' ) { form.userGroup = this.state.userGroup } else { form.userGroup = null }
 		if ( this.state.password != '' ) { form.password = this.state.password }
 		if ( this.state.checkPassword != '' ) { form.checkPassword = this.state.checkPassword }
 		axios( {
@@ -96,7 +96,7 @@ export class ManageUsers extends Component {
 				if ( res.status == 201 || res.status == 200 ) {
 					switch ( method ) {
 					case 'put':
-						this.props.notify( 'Usuario modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT )
+						this.props.notify( 'Usuario modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT, res.data.notify )
 						this.props.update( 'users', res.data.resourceId, 'edit', res.data.resource ) // update dataset
 						break
 					case 'post':
@@ -143,7 +143,7 @@ export class ManageUsers extends Component {
           <div className='text-center elemento'>
             <h4 className='mb-1'>No se han encontrado {users.length > 0 && 'más'} usuarios</h4>
             <hr className='card-division'></hr>
-            <small>Número de grupos de gestión: {users.length}</small>
+            <small>Número de usuarios: {users.length}</small>
           </div>
         </div>
 			)
@@ -198,18 +198,17 @@ export class ManageUsers extends Component {
                     </div>
                   </div>
                   <div className='form-group'>
-                    <label className='custom-control custom-checkbox'>
-                      <input onChange={this.handleInputChange} type='checkbox' checked={this.state.admin} name='admin' value={this.state.admin} className='custom-control-input'></input>
-                      <span className='custom-control-indicator'></span>
-                      <span className='custom-control-description'>Dar permisos de administrador</span>
-                    </label>
+										<div className='custom-control custom-checkbox'>
+											<input onChange={this.handleInputChange} id='admin' type='checkbox' checked={this.state.admin} name='remember' value={this.state.admin} className='custom-control-input'></input>
+											<label className='custom-control-label' htmlFor='admin'>Dar permisos de administrador</label>
+										</div>
                   </div>
                   { !this.state.edit ?
-                    <button onClick={() => this.handleSubmit('post')} type='button' className='btn btn-block btn-small btn-outline-success'><i className='fa fa-plus-circle mr-1' aria-hidden='true'></i>Añadir</button> :
+                    <button onClick={() => this.handleSubmit('post')} type='button' className='btn btn-block btn-small btn-success'><i className='fa fa-plus-circle mr-1' aria-hidden='true'></i>Añadir</button> :
                     <div className='d-flex w-100 justify-content-between'>
-                      <button onClick={() => this.handleSubmit('put')} type='button' className='btn btn-block btn-small btn-outline-success mr-2'><i className='fa fa-floppy-o mr-1' aria-hidden='true'></i>Actualizar</button>
-                      <button onClick={() => this.handleSubmit('delete')} type='button' className='btn btn-block btn-small btn-outline-danger ml-1 mr-1'><i className='fa fa-trash-o mr-1' aria-hidden='true'></i>Eliminar</button>
-                      <button onClick={() => this.cancel()} type='button' className='btn btn-block btn-small btn-outline-warning ml-2'><i className='fa fa-times mr-1' aria-hidden='true'></i>Cancelar</button>
+                      <button onClick={() => this.handleSubmit('put')} type='button' className='btn btn-block btn-small btn-success mr-2'><i className='fa fa-floppy-o mr-1' aria-hidden='true'></i>Actualizar</button>
+                      <button onClick={() => this.handleSubmit('delete')} type='button' className='btn btn-block btn-small btn-danger ml-1 mr-1'><i className='fa fa-trash-o mr-1' aria-hidden='true'></i>Eliminar</button>
+                      <button onClick={() => this.cancel()} type='button' className='btn btn-block btn-small btn-warning ml-2'><i className='fa fa-times mr-1' aria-hidden='true'></i>Cancelar</button>
                     </div>
                   }
                 </form>

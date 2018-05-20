@@ -25,7 +25,7 @@ export class EditImageForm extends Component {
 	}
 
 	componentDidMount() {
-		const { images, activeImage, overlayImage } = this.props.display
+		const { images, activeImage, overlayImage } = this.props.group
 		const options = images.map( image => <option value={image._id} key={image._id}>{image.name}</option> )
 		this.setState( {
 			images,
@@ -79,7 +79,7 @@ export class EditImageForm extends Component {
 				yCoordinate: this.state.yCoordinate
 			}
 		}
-		axios.put( this.props.display.url, form, { // send request
+		axios.put( this.props.group.url, form, { // send request
 				timeout: process.env.TIMEOUT,
 				headers: {
 					Authorization: 'Bearer ' + this.props.token
@@ -87,7 +87,7 @@ export class EditImageForm extends Component {
 			} )
 			.then( res => {
 				if ( res.status == 201 ) { // with success
-					this.props.update( 'displays', res.data.resourceId, 'edit', res.data.resource ) // update the device info with new activeImage
+					this.props.update( 'groups', res.data.resourceId, 'edit', res.data.resource ) // update the device info with new activeImage
 					this.props.notify( 'Imagen actualizada con éxito', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify ) // notify success
 					this.props.handleCloseModal()
 				} else {
@@ -165,19 +165,14 @@ export class EditImageForm extends Component {
 				</div>
 			<div className='col-6'>
 				<div className = 'edit-image-view d-flex w-100 justify-content-center mb-3 shadow' >
-						<div onClick={this.getCoordinates} className='coordinates-map'></div> {
+						<div onClick={this.getCoordinates} className="coordinates-map"></div> {
 							src
 								?
 								<img className='main-image image-fluid' src={src}/> :
 								<div className='image-preview-placeholder d-flex align-items-center'>
-									<h4>Seleccione una imagen como imagen principal</h4>
-								</div>
+													<h4>Seleccione una imagen como imagen principal</h4>
+												</div>
 						} { src_aditional && <img className='aditional-image shadow' height={this.state.size + '%'} width={'auto'} style={overlayImageStyle} src={src_aditional}/> }
-						{	this.props.display.imageFromGroup &&
-							<div className='image-warning d-flex w-100 justify-content-center'>
-								<p className='d-flex image-warning-text'>Se está utilizando la imagen del grupo</p>
-							</div>
-						}
 						</div>
 				</div>
 			</div>

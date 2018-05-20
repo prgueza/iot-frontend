@@ -76,16 +76,16 @@ export class ManageUserGroups extends Component {
 				if ( res.status == 201 || res.status == 200 ) {
 					switch ( method ) {
 					case 'put':
-						this.props.notify( 'Grupo modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT )
+						this.props.notify( 'Grupo modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT, res.data.notify )
 						this.props.update( 'userGroups', res.data.resourceId, 'edit', res.data.resource ) // update dataset
 						break
 					case 'post':
-						this.props.notify( 'Grupo creado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT )
+						this.props.notify( 'Grupo creado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify )
 						this.props.update( 'userGroups', res.data.resourceId, 'add', res.data.resource ) // update dataset
 						this.edit( res.data.resourceId )
 						break
 					case 'delete':
-						this.props.notify( 'Grupo eliminado con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT )
+						this.props.notify( 'Grupo eliminado con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT, res.data.notify )
 						this.cancel()
 						this.props.update( 'userGroups', res.data.resourceId, 'remove', res.data.resource ) // update dataset
 						break
@@ -155,11 +155,11 @@ export class ManageUserGroups extends Component {
                     </div>
                   </div>
                   { !this.state.edit ?
-                    <button onClick={() => this.handleSubmit('post')} type='button' className='btn btn-block btn-small btn-outline-success'><i className='fa fa-plus-circle mr-1' aria-hidden='true'></i>Añadir</button> :
+                    <button onClick={() => this.handleSubmit('post')} type='button' className='btn btn-block btn-small btn-success'><i className='fa fa-plus-circle mr-1' aria-hidden='true'></i>Añadir</button> :
                     <div className='d-flex w-100 justify-content-between'>
-                      <button onClick={() => this.handleSubmit('put')} type='button' className='btn btn-block btn-small btn-outline-success mr-2'><i className='fa fa-floppy-o mr-1' aria-hidden='true'></i>Actualizar</button>
-                      <button onClick={() => this.handleSubmit('delete')} type='button' className='btn btn-block btn-small btn-outline-danger ml-1 mr-1'><i className='fa fa-trash-o mr-1' aria-hidden='true'></i>Eliminar</button>
-                      <button onClick={() => this.cancel()} type='button' className='btn btn-block btn-small btn-outline-warning ml-2'><i className='fa fa-times mr-1' aria-hidden='true'></i>Cancelar</button>
+                      <button onClick={() => this.handleSubmit('put')} type='button' className='btn btn-block btn-small btn-success mr-2'><i className='fa fa-floppy-o mr-1' aria-hidden='true'></i>Actualizar</button>
+                      <button onClick={() => this.handleSubmit('delete')} type='button' className='btn btn-block btn-small btn-danger ml-1 mr-1'><i className='fa fa-trash-o mr-1' aria-hidden='true'></i>Eliminar</button>
+                      <button onClick={() => this.cancel()} type='button' className='btn btn-block btn-small btn-warning ml-2'><i className='fa fa-times mr-1' aria-hidden='true'></i>Cancelar</button>
                     </div>
                   }
                 </form>

@@ -53,7 +53,7 @@ export class GatewayForm extends Component {
 
 	/* HANDLE SUMBIT (PUT OR POST) */
 	handleSubmit = () => {
-		const { gateway } = this.props
+		const { gateway, token } = this.props
 		// define form values to send
 		const form = {
 			id: this.state.id,
@@ -75,7 +75,7 @@ export class GatewayForm extends Component {
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json',
-					'Authorization': 'Bearer ' + this.props.token
+					'Authorization': 'Bearer ' + token
 				},
 			} )
 			.then( ( res ) => {

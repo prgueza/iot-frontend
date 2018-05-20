@@ -155,14 +155,14 @@ export class Main extends Component {
 	}
 
 	/* ALERTS */
-	notify = ( text, style, icon, position = toast.POSITION.TOP_RIGHT, info = false ) => {
+	notify = ( text, style, icon, position = toast.POSITION.TOP_RIGHT, info ) => {
 		toast( <Notification text={text} icon={icon} info={info}/>, {
 			position,
 			className: style
 		} )
 	}
 
-	notifySync = ( text, style, icon, info = false ) => {
+	notifySync = ( text, style, icon, info ) => {
 		this.toastSyncId = toast( <Notification text={text} icon={icon} spin={true} info={info}/>, {
 			position: toast.POSITION.TOP_RIGHT,
 			autoClose: false,

@@ -39,3 +39,11 @@ label,
 .image-placeholder{
   padding: 15px;
 }
+
+.toggle{
+  cursor: pointer;
+}
+
+.toggle > .fa {
+  font-size: 1.25em;
+}

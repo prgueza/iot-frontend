@@ -24,8 +24,8 @@
   position: relative;
   border: 1px solid $bd-color;
   border-radius: 0.25rem;
+  height: 100%;
   width: 100%;
-  min-height: 300px;
   overflow: hidden;
   text-align: center;
   padding: 30 0 30 0;
@@ -56,9 +56,6 @@
 
 
 .vista-imagen-display{
-}
-
-.preview-image{
   position: relative;
   border: 1px solid $bd-color;
   border-radius: 0.25rem;
@@ -67,6 +64,49 @@
   overflow: hidden;
   text-align: center;
   padding: 30 0 30 0;
+}
+
+.image-placeholder{
+  height: 300px;
+}
+
+.image-preview-placeholder{
+  height: 100%;
+  min-height: 270px;
+}
+
+.preview-image{
+  position: relative;
+  border: 1px solid $bd-color;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+  overflow: hidden;
+  text-align: center;
+  padding: 30 0 30 0;
+}
+
+.preview-image-empty{
+  position: relative;
+  border: 1px solid $bd-color;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: 200px;
+  overflow: hidden;
+  text-align: center;
+  padding: 0px 0px 0px 0px;
+}
+
+.no-image-available{
+  position: relative;
+  border: 1px solid $bd-color;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height: 200px;
+  overflow: hidden;
+  text-align: center;
+  padding: 0px 30px 0px 30px;
 }
 
 .imagen{
@@ -95,7 +135,7 @@
   bottom: 0;
   left: 0;
   background-color: $success-color;
-  opacity: 0.80;
+  opacity: 0.90;
   overflow: hidden;
   width: 100%;
   height: 0;
@@ -118,4 +158,24 @@
 
 .vista-imagen-display:hover .overlay {
   height: 100%;
+}
+
+.image-warning{
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $danger-color;
+  opacity: 0.90;
+  overflow: hidden;
+  width: 100%;
+  height: 30px;
+}
+
+.image-warning-text{
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
 }

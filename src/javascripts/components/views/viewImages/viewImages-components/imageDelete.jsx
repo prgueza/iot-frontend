@@ -24,12 +24,12 @@ export class ImageDelete extends Component {
 			} )
 			.then( ( res ) => {
 				if ( res.status == 200 ) {
-					this.props.notify( 'Imagen eliminada con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT )
+					this.props.notify( 'Imagen eliminada con éxito', 'notify-success', 'trash-o', toast.POSITION.TOP_RIGHT, res.data.notify )
 					this.props.update( 'images', res.resourceId, 'remove' )
 				}
 			} )
 			.then( res => this.setState( { redirect: true } ) )
-			.catch( err => this.props.notify( 'Error al eliminar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al eliminar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) )
 	}
 
 	render() {

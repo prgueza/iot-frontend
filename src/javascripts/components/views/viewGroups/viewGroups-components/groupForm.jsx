@@ -106,7 +106,7 @@ export class GroupForm extends Component {
 			this.setState( { activeImage: '' } )
 		}
 		this.setState( {
-			optionsActiveImage: this.props.images.filter( image => this.state.images.find( c => c == image._id ) )
+			optionsActiveImage: this.props.data.images.filter( image => this.state.images.find( c => c == image._id ) )
 				.map( image => <option value={image._id} key={image._id}>{image.name}</option> )
 		} )
 	} // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
@@ -136,13 +136,13 @@ export class GroupForm extends Component {
 			} )
 			.then( ( res ) => {
 				if ( res.status == 201 ) {
-					this.props.notify( 'Grupo configurada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT )
+					this.props.notify( 'Grupo configurada con éxito', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify )
 					var action = group ? 'edit' : 'add'
 					this.props.update( 'groups', res.resourceId, action, res.data.resource ) // update dataset
 				}
 			} )
 			.then( res => this.setState( { redirect: true } ) )
-			.catch( err => this.props.notify( 'Error al configurar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al configurar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) )
 	}
 
 	render() {

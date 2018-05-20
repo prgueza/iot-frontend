@@ -21,8 +21,6 @@ export class DisplayDetails extends Component {
 		this.state = {
 			display: this.props.display,
 			activeImage: '',
-			syncing: false,
-			syncingTo: '',
 			error: null,
 			modal: false
 		}
@@ -40,9 +38,7 @@ export class DisplayDetails extends Component {
 			const { activeImage } = nextProps.display
 			this.setState( {
 				display: nextProps.display,
-				activeImage: activeImage ? activeImage._id : '',
-				syncing: false,
-				syncingTo: ''
+				activeImage: activeImage ? activeImage._id : ''
 			} )
 		}
 	}
@@ -56,16 +52,12 @@ export class DisplayDetails extends Component {
 		this.setState( { modal: false } )
 	}
 
-	/* HANDLE INPUT CHANGE */
-	handleInputChange = ( event ) => {
-		const value = event.target.value
-		const image = this.props.data.images.find( image => value == image._id )
-		this.setState( { syncing: true, syncingTo: image._id } )
-		const url = process.env.API_URL + 'update/' + this.state.display._id // set url for the request
-		const body = { // set body containing the image to be uploaded to the device
-			image_id: image._id
+	/* HANDLE SHOW GROUP IMAGE */
+	handleShowGroupImage = () => {
+		const form = {
+			imageFromGroup: !this.props.display.imageFromGroup
 		}
-		axios.put( url, body, { // send request
+		axios.put( this.props.display.url, form, { // send request
 				timeout: process.env.TIMEOUT,
 				headers: {
 					Authorization: 'Bearer ' + this.props.token
@@ -74,21 +66,19 @@ export class DisplayDetails extends Component {
 			.then( res => {
 				if ( res.status == 201 ) { // with success
 					this.props.update( 'displays', res.data.resourceId, 'edit', res.data.resource ) // update the device info with new activeImage
-					this.props.notify( 'Imagen sincronizada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT ) // notify success
+					this.props.notify( 'Cambios realizados', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify ) // notify success
 				} else {
-					this.props.notify( 'Error al sincronizar la imagen', 'notify-error', 'times', toast.POSITION.BOTTOM_LEFT ) // notify error
-					this.setState( { syncing: false, syncingTo: '' } )
+					this.props.notify( 'Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, res.data.notify ) // notify error
 				}
 			} )
 			.catch( err => {
-				this.props.notify( 'Error al sincronizar la imagen', 'notify-error', 'times', toast.POSITION.BOTTOM_LEFT ) // notify error
-				this.setState( { syncing: false, syncingTo: '' } )
+				this.props.notify( 'Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, res.data.notify ) // notify error
 			} )
 	}
 
 	render() {
 		// define constants from state for better readability
-		const { _id, name, description, group, images, activeImage, device, tags, updatedAt, updatedBy } = this.state.display
+		const { _id, name, description, group, images, activeImage, imageFromGroup, device, tags, updatedAt, updatedBy } = this.state.display
 		// refactor date constants with format
 		const updated = moment( updatedAt )
 			.format( 'dddd, D [de] MMMM [de] YYYY' )
@@ -98,9 +88,10 @@ export class DisplayDetails extends Component {
 		const linktoEdit = '/displays/' + _id + '/edit'
 		const linktoDelete = '/displays/' + _id + '/delete'
 		// check if activeImage is set and if not set the undefined img
-		const src = activeImage && activeImage.src_url
+		const src = imageFromGroup ? ( group.activeImage && group.activeImage.src ) : ( activeImage && activeImage.src )
+		const groupImageIcon = imageFromGroup ? 'toggle-on' : 'toggle-off'
 		// get screen info
-		const screen = this.props.data.screens.find( screen => screen.screenCode == device.screen )
+		const screen = device && this.props.data.screens.find( screen => screen.screenCode == device.screen )
 
 		return (
 			<div className='card detalles'>
@@ -126,7 +117,7 @@ export class DisplayDetails extends Component {
 		      </div>
       <div className='card-body'>
 				<ReactModal isOpen={this.state.modal} ariaHideApp={false} className="modal-content">
-					<EditImageForm handleCloseModal={this.handleCloseModal} display={this.props.display}/>
+					<EditImageForm handleCloseModal={this.handleCloseModal} {...this.props}/>
 				</ReactModal>
         <div className='row'>
           <div className='col'>
@@ -135,7 +126,7 @@ export class DisplayDetails extends Component {
               <i className='fa fa-fw fa-info-circle mr-2' aria-hidden='true'></i>{description}</p>
             <p className='card-text'>
               <i className='fa fa-fw fa-map-marker mr-2' aria-hidden='true'></i>{
-                device.gateway
+                device && device.gateway
                   ? (
                     device.gateway.location
                     ? device.gateway.location.name
@@ -145,8 +136,8 @@ export class DisplayDetails extends Component {
             <p className='card-text'>
               <i className='fa fa-fw fa-arrows-alt mr-2' aria-hidden='true'></i>{
                 screen != -1
-                  ? screen.name
-                  : device.screen
+                  ? screen && screen.name
+                  : device ? device.screen : 'Dispositivo no asignado'
               }</p>
             <p className='card-text'>
               <i className='fa fa-fw fa-calendar-o mr-2' aria-hidden='true'></i>{updated}</p>
@@ -161,18 +152,15 @@ export class DisplayDetails extends Component {
           </div>
           <div className='col'>
             <div className='vista-previa'>
-              {
-                this.state.syncing
-                  ? <p className='titulo text-right'><i className='fa fa-fw fa-refresh fa-spin mr-2' aria-hidden='true'></i>SINCRONIZANDO IMAGEN</p>
-                  : <p className='titulo text-right'>IMAGEN ACTIVA</p>
-              }
               <div className='vista-imagen-display d-flex w-100 align-items-center mb-3 shadow'>
                 {
                   src
                     ? <img className='imagen' src={src}/>
-                    : <div className='image-placeholder align-self-center'>
-                        <h4>La imagen activa aun no ha sido determinada</h4>
-                        <small>Suba una imagen al servidor</small>
+                    : <div className='image-placeholder d-flex align-items-center'>
+                        <div>
+													<h4>La imagen activa aun no ha sido determinada</h4>
+	                        <small>Haga click para determinarla</small>
+												</div>
                       </div>
                 }
 								<div className="overlay d-flex w-100 justify-content-center" onClick={this.handleOpenModal}>
@@ -192,8 +180,8 @@ export class DisplayDetails extends Component {
           </div>
           <div className='col'>
             <div className='asociados'>
-              <p className='titulo text-right'>GRUPO</p>
-              <Associated content={group} category='groups' appearance='elemento-grupo' icon='list'/>
+              <p onClick={this.handleShowGroupImage} className='titulo text-right toggle'>MOSTRAR IMAGEN DE GRUPO<Icon icon={groupImageIcon} fw={true} ml='1'/></p>
+							<Associated content={[group]} category='groups' appearance='elemento-grupo' icon='list' active={this.props.display.group._id}/>
             </div>
           </div>
         </div>

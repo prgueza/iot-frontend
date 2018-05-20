@@ -38,20 +38,19 @@ export class ImageDetails extends Component { // TODO: transform to component
 
 	onDropAccepted = ( acceptedFile ) => {
 		this.setState( { file: acceptedFile, accepted: true } )
-
 		// Form
 		const data = new FormData()
 		data.append( 'image', acceptedFile[ 0 ] )
 
 		// upload file
-		axios.post( 'http://localhost:4000/images/' + this.props.image._id, data )
+		axios.post( this.props.image.url, data )
 			.then( ( res ) => {
 				if ( res.status == 200 ) {
 					this.props.update( 'images', res.data.resourceId, 'edit', res.data.resource )
-					this.props.notify( 'Imagen cargada con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
+					this.props.notify( 'Imagen cargada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify )
 				}
 			} )
-			.catch( err => { this.props.notify( 'Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) } )
+			.catch( err => { this.props.notify( 'Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) } )
 	}
 
 	render() {
@@ -130,7 +129,7 @@ export class ImageDetails extends Component { // TODO: transform to component
                       ? <img className='imagen' src={this.state.src}/>
                       : <div className='align-self-center'>
                           <h4>Arrastre una imagen</h4>
-                          <small>formatos permitidos: png/jpeg</small>
+                          <small>formato: bmp</small>
                         </div>
                   }
                 </div>

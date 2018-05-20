@@ -50,7 +50,7 @@ export class DeviceForm extends Component {
 
 	/* HANDLE SUBMIT (PUT OR POST) */
 	handleSubmit = () => {
-		const { device } = this.props
+		const { device, token } = this.props
 		// define form values to send
 		const form = {
 			name: this.state.name,
@@ -65,11 +65,15 @@ export class DeviceForm extends Component {
 				method: 'put',
 				url: device.url,
 				data: form,
-				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
+				},
 			} )
 			.then( ( res ) => {
 				if ( res.status == 201 || res.status == 200 ) {
-					this.props.notify( 'Dispositivo configurado con éxito', 'notify-success', 'upload', toast.POSITION.BOTTOM_LEFT )
+					this.props.notify( 'Dispositivo configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify )
 					return this.props.update( this.props.user ) // update dataset
 				}
 			} )
@@ -79,7 +83,7 @@ export class DeviceForm extends Component {
 			} )
 			.catch( ( err ) => {
 				console.log( err )
-				return this.props.notify( 'Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT )
+				return this.props.notify( 'Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT )
 			} )
 	}
 
@@ -141,7 +145,7 @@ export class DeviceForm extends Component {
                 <div className='form-group col'>
                   <label htmlFor='gateway'><i className='fa fa-fw fa-sitemap mr-2'></i>Puerta de enlace preferida</label>
                   <div>
-                    <select className='custom-select' name='gateway' value={this.state.prefGateway} onChange={this.handleInputChange}>
+                    <select className='custom-select' name='prefGateway' value={this.state.prefGateway} onChange={this.handleInputChange}>
                       {optionsGateway}
                     </select>
                   </div>

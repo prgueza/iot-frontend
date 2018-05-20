@@ -12,7 +12,8 @@ export const Icon = ( { icon, mr, ml, fw, size, batt, spin, mod } ) => {
 	const marginRight = mr ? 'mr-' + mr : ''
 	const fullWidth = fw ? 'fa-fw' : ''
 	const modifier = mod && ''
-	const className = cx( 'fa fa-fw', iconName, iconSize, marginLeft, marginRight, fullWidth, iconSpin, modifier )
+	const toggle = icon == 'toggle-on' ? 'text-display' : ''
+	const className = cx( 'fa fa-fw', iconName, iconSize, marginLeft, marginRight, fullWidth, iconSpin, modifier, toggle )
 
 	return (
 		<i className={className} aria-hidden='true'></i>

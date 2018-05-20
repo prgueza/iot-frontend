@@ -75,8 +75,8 @@ export class Navigation extends Component {
           <div className="button-menu">
             <div className="busqueda mb-3">
               <p>BÚSQUEDA</p>
-              <input onChange={this.handleSearch} value={filterValue} type="text" className="form-control search" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..."></input>
-            </div>
+            	<input onChange={this.handleSearch} value={filterValue} type="text" className="form-control search" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..."></input>
+					  </div>
             <div className="mb-3">
               <p>NAVEGACIÓN</p>
               <ul className="nav-list">

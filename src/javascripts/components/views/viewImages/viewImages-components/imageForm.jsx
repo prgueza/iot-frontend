@@ -127,13 +127,14 @@ export class ImageForm extends Component {
 				}
 			} )
 			.then( ( res ) => {
-				if ( res.status == 201 || res.status == 200 ) {
-					this.props.notify( 'Imagen configurada con éxito', 'notify-success', 'check', toast.POSITION.BOTTOM_LEFT )
-					this.props.update( this.props.user )
+				if ( res.status == 201 ) {
+					this.props.notify( 'Imagen configurada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify )
+					var action = image ? 'edit' : 'add'
+					return this.props.update( 'images', res.data.resourceId, action, res.data.resource ) // update dataset
 				}
 			} )
 			.then( res => this.setState( { redirect: true } ) )
-			.catch( err => this.props.notify( 'Error al configurar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al configurar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) );
 	}
 
 	/* RENDER COMPONENT */
