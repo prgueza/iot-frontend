@@ -20,13 +20,10 @@ export class List extends Component {
 			var d = element.screen && element.screen.indexOf( filterValue ) > -1
 			var e = element.location && element.location.name.indexOf( filterValue ) > -1
 			var f = element.mac && element.mac.indexOf( filterValue ) > -1
-			return a || b || c || d || e || f
+			var g = element.initcode && element.initcode.indexOf( filterValue ) > -1
+			return a || b || c || d || e || f || g
 		} )
 		return filteredData
-	}
-
-	handleFilter = () => {
-		this.props.filterFound()
 	}
 
 	render() {
@@ -66,7 +63,7 @@ export class List extends Component {
         { category != 'devices' ?
           <AddButton category={category}/> :
 					<div className='custom-control custom-checkbox'>
-						<input onChange={this.handleFilter} id='filter' type='checkbox' defaultChecked={this.props.filterFoundValue} name='found' className='custom-control-input'></input>
+						<input onChange={() => this.props.filterFound()} id='filter' type='checkbox' defaultChecked={this.props.filterFoundValue} name='found' className='custom-control-input'></input>
 						<label className='custom-control-label' htmlFor='filter'>Mostrar únicamente dispositivos localizados</label>
 					</div>
         }

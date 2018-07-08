@@ -14,7 +14,8 @@ export class GatewayDetails extends Component {
 	render() {
 		// define constants from props for better readability
 		const { _id, name, description, location, createdAt, updatedAt, createdBy, mac, ip } = this.props.gateway
-		const devices = this.props.data.devices.filter( device => device.gateway._id == _id )
+		console.log( this.props.data.devices )
+		const devices = this.props.data.devices.filter( device => device.gateway && device.gateway._id == _id )
 		// refactor date constants with format
 		const created = moment( createdAt )
 			.format( 'dddd, D [de] MMMM [de] YYYY' )

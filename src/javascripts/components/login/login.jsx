@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import cookie from 'react-cookie'
 import axios from 'axios'
 
 /* IMPORT COMPONENTS */
@@ -13,18 +12,15 @@ export class Login extends Component {
 	constructor( props ) {
 		super( props )
 		this.state = {
-			// form fields
 			login: '',
 			password: '',
 			remember: false,
-
-			// error handling
 			error: null
 		}
 	}
 
 	componentDidMount() {
-		// get login from local storage
+		// get login from local storage	
 		this.setState( { login: localStorage.getItem( 'login' ) || '' } )
 
 		// set the checkbox to true if login was found

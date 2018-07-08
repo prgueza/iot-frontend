@@ -20,23 +20,19 @@ export class DeviceDelete extends Component {
 	/* HANDLE DELETE EVENT */
 	handleDelete = ( event ) => {
 		event.preventDefault()
-		axios( {
-				method: 'delete',
-				url: this.props.device.url,
+		axios.delete( this.props.device.url, {
 				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-					'Authorization': 'Bearer ' + this.props.token
+					Authorization: 'Bearer ' + this.props.token
 				}
 			} )
 			.then( ( res ) => {
-				if ( res.status == 200 ) {
-					this.props.notify( 'Dispositivo eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.TOP_RIGHT, res.data.notify )
-					this.props.update( this.props.user )
+				if ( res.status >= 200 ) {
+					this.props.notify( 'Dispositivo eliminado con éxito', 'notify-success', 'trash-o' )
+					this.props.update( 'devices', res.resourceId, 'remove', res.data.resource ) // update dataset
 				}
 			} )
 			.then( res => this.setState( { redirect: true } ) )
-			.catch( err => this.props.notify( 'Error al eliminar el dispositivo', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al eliminar el dispositivo', 'notify-error', 'exclamation-triangle' ) )
 	}
 
 	render() {

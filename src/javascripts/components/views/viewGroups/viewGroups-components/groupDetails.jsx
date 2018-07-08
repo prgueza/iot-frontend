@@ -83,7 +83,7 @@ export class GroupDetails extends Component {
 
 	render() {
 		// define constants from props for better readability
-		const { _id, name, description, createdAt, updatedAt, createdBy, displays, images, activeImage, tags } = this.props.group
+		const { _id, name, description, createdAt, updatedAt, createdBy, displays, images, activeImage, overlayImage, tags } = this.props.group
 		// refactor date constants with format
 		const created = moment( createdAt )
 			.format( 'dddd, D [de] MMMM [de] YYYY' )
@@ -92,8 +92,12 @@ export class GroupDetails extends Component {
 		// generate tag list
 		const tagList = tags.map( ( tag, index ) => <Tag filterData={this.props.filterData} key={index} category='groups' tag={tag} /> )
 		// check if activeImage is set and if not set the undefined img
-		const { src } = this.state
-		// define routes for edit and delete based on the id
+		const src = activeImage && activeImage.src
+		const srcOverlay = overlayImage && overlayImage.image.src
+		const overlayImageStyle = {
+			left: overlayImage && overlayImage.xCoordinate + '%',
+			top: overlayImage && overlayImage.yCoordinate + '%'
+		} // define routes for edit and delete based on the id
 		const linktoEdit = '/groups/' + _id + '/edit'
 		const linktoDelete = '/groups/' + _id + '/delete'
 		const imagesOptions = images.map( image => <option value={image._id} key={image._id}>{image.name}</option> )
@@ -122,7 +126,7 @@ export class GroupDetails extends Component {
 					<EditImageForm handleCloseModal={this.handleCloseModal} {...this.props}/>
 				</ReactModal>
         <div className='row'>
-          <div className='col'>
+          <div className='col-lg-6'>
             <p className='titulo'>DETALLES</p>
             <p className='card-text'><i className='fa fa-fw fa-info-circle mr-2' aria-hidden='true'></i>{description}</p>
             <p className='card-text'><i className='fa fa-fw fa-calendar-o mr-2' aria-hidden='true'></i>{created}</p>
@@ -130,28 +134,22 @@ export class GroupDetails extends Component {
             <p className='titulo'>ETIQUETAS</p>
             {tagList}
           </div>
-					<div className='col'>
-            <div className='vista-previa'>
+					<div className='col-lg-6'>
+            <div className='vista-imagen-display d-flex w-100 align-items-center mb-3 shadow'>
               {
-                this.state.syncing
-                  ? <p className='titulo text-right'><i className='fa fa-fw fa-refresh fa-spin mr-2' aria-hidden='true'></i>SINCRONIZANDO IMAGEN</p>
-                  : <p className='titulo text-right'>IMAGEN ACTIVA</p>
+                src
+                  ? <img className='main-image' src={src}/>
+									: <div className='image-placeholder d-flex align-items-center'>
+                      <div>
+												<h4>La imagen activa aun no ha sido determinada</h4>
+                        <small>Haga click para determinarla</small>
+											</div>
+                    </div>
               }
-              <div className='vista-imagen-display d-flex w-100 align-items-center mb-3 shadow'>
-                {
-                  src
-                    ? <img className='imagen' src={src}/>
-                    : <div className='image-placeholder d-flex align-items-center'>
-                        <div>
-													<h4>La imagen activa aun no ha sido determinada</h4>
-	                        <small>Haga click para determinarla</small>
-												</div>
-                      </div>
-                }
-								<div className="overlay d-flex w-100 justify-content-center" onClick={this.handleOpenModal}>
-							    <p className="d-flex overlay-text">Haga click para editar la imagen</p>
-							  </div>
-              </div>
+							{ srcOverlay && <img className='overlay-image shadow' height={overlayImage.size + '%'} width={'auto'} style={overlayImageStyle} src={srcOverlay}/> }
+							<div className="overlay d-flex w-100 justify-content-center" onClick={this.handleOpenModal}>
+						    <p className="d-flex overlay-text">Haga click para editar la imagen</p>
+						  </div>
             </div>
 				</div>
         </div>

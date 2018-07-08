@@ -72,19 +72,14 @@ export class DeviceForm extends Component {
 				},
 			} )
 			.then( ( res ) => {
-				if ( res.status == 201 || res.status == 200 ) {
-					this.props.notify( 'Dispositivo configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify )
-					return this.props.update( this.props.user ) // update dataset
+				if ( res.status >= 200 ) {
+					this.props.notify( 'Dispositivo configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT )
+					var action = device ? 'edit' : 'add'
+					return this.props.update( 'devices', res.data.resourceId, action, res.data.resource ) // update dataset
 				}
 			} )
-			.then( ( res ) => {
-				this.setState( { redirect: true } )
-				return res
-			} )
-			.catch( ( err ) => {
-				console.log( err )
-				return this.props.notify( 'Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT )
-			} )
+			.then( res => this.setState( { redirect: true } ) )
+			.catch( err => this.props.notify( 'Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) );
 	}
 
 	/* RENDER COMPONENT */

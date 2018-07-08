@@ -11,7 +11,8 @@ export class GatewayForm extends Component {
 
 	constructor( props ) {
 		super( props )
-		const { gateway, user, locations } = this.props
+		const { gateway, user } = this.props
+		const { locations } = this.props.data
 		this.state = {
 			id: gateway ? gateway.id : '',
 			name: gateway ? gateway.name : '',
@@ -23,7 +24,7 @@ export class GatewayForm extends Component {
 			mac: gateway ? gateway.mac : '',
 			port: gateway ? gateway.port : '',
 			ip: gateway ? gateway.ip : '',
-			location: gateway ? gateway.location._id : locations[ 0 ]._id,
+			location: gateway ? ( gateway.location ? gateway.location._id : 'No hay localizaciones configuradas' ) : ( locations[ 0 ] ? locations[ 0 ]._id : 'No hay localizaciones configuradas' ),
 
 			redirect: false,
 			redirectLocation: '/gateways',
@@ -63,7 +64,7 @@ export class GatewayForm extends Component {
 			mac: this.state.mac,
 			ip: this.state.ip,
 			port: this.state.port,
-			location: this.state.location,
+			location: this.props.data.locations.length > 0 ? this.state.location : undefined,
 		}
 		// possible empty fields
 		if ( !this.props.gateway ) form.createdBy = this.props.user._id
@@ -79,13 +80,14 @@ export class GatewayForm extends Component {
 				},
 			} )
 			.then( ( res ) => {
-				if ( res.status == 201 || res.status == 200 ) {
-					this.props.notify( 'Puerta de enlace configurada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify )
-					return this.props.update( this.props.user ) // update dataset
+				if ( res.status == 201 ) {
+					this.props.notify( 'Puerta de enlace configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT )
+					var action = gateway ? 'edit' : 'add'
+					return this.props.update( 'gateways', res.data.resourceId, action, res.data.resource ) // update dataset
 				}
 			} )
 			.then( res => this.setState( { redirect: true } ) )
-			.catch( err => this.props.notify( 'Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT ) )
+			.catch( err => this.props.notify( 'Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) );
 	}
 
 	/* RENDER COMPONENT */
@@ -96,6 +98,7 @@ export class GatewayForm extends Component {
 		// Options
 		const optionsLocation = this.props.data.locations.sort( ( a, b ) => a.name - b.name )
 			.map( ( location, index ) => <option value={location._id} key={index}>{location.name}</option> )
+		if ( optionsLocation.length == 0 ) optionsLocation.push( <option value='' key='0'>No hay localizaciones configuradas</option> )
 
 		const linkBack = gateway ? '/gateways/' + gateway._id : '/gateways'
 
@@ -134,8 +137,8 @@ export class GatewayForm extends Component {
                 <input type='text' className='form-control' id='nombre' placeholder='Nombre de la puerta de enlace' name='name' value={this.state.name} onChange={this.handleInputChange}></input>
               </div>
               <div className='form-group'>
-                <label htmlFor='descripcion'><i className='fa fa-info-circle mr-2'></i>Descripcion</label>
-                <input type='text' className='form-control' id='descripcion' placeholder='Descripcion de la puerta de enlace' name='description' value={this.state.description} onChange={this.handleInputChange}></input>
+                <label htmlFor='descripcion'><i className='fa fa-info-circle mr-2'></i>Descripción</label>
+                <input type='text' className='form-control' id='descripcion' placeholder='Descripción de la puerta de enlace' name='description' value={this.state.description} onChange={this.handleInputChange}></input>
               </div>
               <div className='form-row'>
                 <div className='form-group col'>
@@ -150,12 +153,12 @@ export class GatewayForm extends Component {
               <div className='form-row'>
                 <div className='form-group col'>
                   <label htmlFor='port'><i className='fa fa-exchange mr-2'></i>Puerto</label>
-                  <input type='text' className='form-control' id='port' placeholder='Puerto de la puerta de enlace' name='mac' value={this.state.port} onChange={this.handleInputChange}></input>
+                  <input type='text' className='form-control' id='port' placeholder='Puerto de la puerta de enlace' name='port' value={this.state.port} onChange={this.handleInputChange}></input>
                 </div>
                 <div className='form-group col'>
                   <label htmlFor='location'><i className='fa fa-map-marker mr-2'></i>Localización</label>
                   <div>
-                    <select className='custom-select' name='location' onChange={this.handleInputChange}>
+                    <select className='custom-select' name='location' onChange={this.handleInputChange} value={this.state.location} disabled={this.props.data.locations.length == 0}>
                       {optionsLocation}
                     </select>
                   </div>

@@ -19,15 +19,19 @@ export class GatewayDelete extends Component {
 	/* HANDLE DELETE EVENT */
 	handleDelete = ( event ) => {
 		event.preventDefault()
-		axios.delete( this.props.gateway.url )
+		axios.delete( this.props.gateway.url, {
+				headers: {
+					Authorization: 'Bearer ' + this.props.token
+				}
+			} )
 			.then( ( res ) => {
 				if ( res.status == 200 ) {
-					this.props.notify( 'Gateway eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.BOTTOM_LEFT )
-					this.props.update( this.props.user )
+					this.props.notify( 'Puerta de enlace eliminado con éxito', 'notify-success', 'trash-o' )
+					this.props.update( 'gateways', res.resourceId, 'remove', res.data.resource ) // update dataset
 				}
 			} )
 			.then( res => this.setState( { redirect: true } ) )
-			.catch( err => this.props.notify( 'Error al eliminar el gateway', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT ) )
+			.catch( err => this.props.notify( 'Error al eliminar la puerta de enlace', 'notify-error', 'exclamation-triangle' ) )
 	}
 
 	render() {

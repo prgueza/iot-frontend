@@ -33,7 +33,7 @@ export const Device = ( { device: { _id, url, name, description, batt, rssi, ini
           <hr className='element-division'></hr>
           <p className='mb-3 mt-2'>{description}</p>
           <div className='d-flex w-100 justify-content-between mt-3'>
-            <small><i className='fa fa-server mr-2' aria-hidden='true'></i>{mac}</small>
+            <small><i className='fa fa-code mr-2' aria-hidden='true'></i>{initcode}</small>
             <small>{updated}<i className='fa fa-calendar-o ml-2' aria-hidden='true'></i></small>
           </div>
         </div>

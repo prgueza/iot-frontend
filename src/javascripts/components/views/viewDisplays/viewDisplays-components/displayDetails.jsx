@@ -89,6 +89,12 @@ export class DisplayDetails extends Component {
 		const linktoDelete = '/displays/' + _id + '/delete'
 		// check if activeImage is set and if not set the undefined img
 		const src = imageFromGroup ? ( group.activeImage && group.activeImage.src ) : ( activeImage && activeImage.src )
+		const overlayImage = imageFromGroup ? group.overlayImage : this.state.display.overlayImage
+		const srcOverlay = overlayImage.image && overlayImage.image.src
+		const overlayImageStyle = {
+			left: overlayImage && overlayImage.xCoordinate + '%',
+			top: overlayImage && overlayImage.yCoordinate + '%'
+		}
 		const groupImageIcon = imageFromGroup ? 'toggle-on' : 'toggle-off'
 		// get screen info
 		const screen = device && this.props.data.screens.find( screen => screen.screenCode == device.screen )
@@ -120,7 +126,7 @@ export class DisplayDetails extends Component {
 					<EditImageForm handleCloseModal={this.handleCloseModal} {...this.props}/>
 				</ReactModal>
         <div className='row'>
-          <div className='col'>
+          <div className='col-lg-6'>
             <p className='titulo'>DETALLES</p>
             <p className='card-text'>
               <i className='fa fa-fw fa-info-circle mr-2' aria-hidden='true'></i>{description}</p>
@@ -150,39 +156,42 @@ export class DisplayDetails extends Component {
             <p className='titulo'>ETIQUETAS</p>
             {tagList}
           </div>
-          <div className='col'>
-            <div className='vista-previa'>
-              <div className='vista-imagen-display d-flex w-100 align-items-center mb-3 shadow'>
-                {
-                  src
-                    ? <img className='imagen' src={src}/>
-                    : <div className='image-placeholder d-flex align-items-center'>
-                        <div>
-													<h4>La imagen activa aun no ha sido determinada</h4>
-	                        <small>Haga click para determinarla</small>
-												</div>
-                      </div>
-                }
-								<div className="overlay d-flex w-100 justify-content-center" onClick={this.handleOpenModal}>
-							    <p className="d-flex overlay-text">Haga click para editar la imagen</p>
-							  </div>
-              </div>
+          <div className='col-lg-6'>
+            <div className='vista-imagen-display d-flex w-100 align-items-center mb-3 shadow'>
+              {
+                src
+                  ? <img className='main-image' src={src}/>
+									: <div className='image-placeholder d-flex align-items-center'>
+                      <div>
+												<h4>La imagen activa aun no ha sido determinada</h4>
+                        <small>Haga click para determinarla</small>
+											</div>
+                    </div>
+              }
+							{ srcOverlay && <img className='overlay-image' height={overlayImage.size + '%'} width={'auto'} style={overlayImageStyle} src={srcOverlay}/> }
+							<div className="overlay d-flex w-100 justify-content-center" onClick={this.handleOpenModal}>
+						    <p className="d-flex overlay-text">Haga click para editar la imagen</p>
+						  </div>
             </div>
 				</div>
 			</div>
 			<hr className='card-division'></hr>
 			<div className='row'>
+          { images.length > 0 &&
+						<div className='col'>
+	            <div className='asociados'>
+	              <p className='titulo'>IMAGENES ASOCIADAS ({images.length})</p>
+	              <Associated content={images} category='images' appearance='elemento-imagen' icon='picture-o' active={this.state.activeImage}/>
+	            </div>
+	          </div>
+					}
           <div className='col'>
-            <div className='asociados'>
-              <p className='titulo'>IMAGENES ASOCIADAS ({images.length})</p>
-              <Associated content={images} category='images' appearance='elemento-imagen' icon='picture-o' active={this.state.activeImage}/>
-            </div>
-          </div>
-          <div className='col'>
-            <div className='asociados'>
-              <p onClick={this.handleShowGroupImage} className='titulo text-right toggle'>MOSTRAR IMAGEN DE GRUPO<Icon icon={groupImageIcon} fw={true} ml='1'/></p>
-							<Associated content={[group]} category='groups' appearance='elemento-grupo' icon='list' active={this.props.display.group._id}/>
-            </div>
+						{ group &&
+	            <div className='asociados'>
+	              <p onClick={this.handleShowGroupImage} className='titulo text-right toggle'>MOSTRAR IMAGEN DE GRUPO<Icon icon={groupImageIcon} fw={true} ml='1'/></p>
+								<Associated content={[group]} category='groups' appearance='elemento-grupo' icon='list' active={this.props.display.group._id}/>
+	            </div>
+						}
           </div>
         </div>
 			</div>

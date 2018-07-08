@@ -53,7 +53,7 @@ module.exports = {
     new webpack.DefinePlugin( {
 			'process.env': {
 				'API_URL': JSON.stringify( 'http://localhost:4000/' ),
-				'TIMEOUT': 10000
+				'TIMEOUT': 50000
 			}
 		} )
   ]

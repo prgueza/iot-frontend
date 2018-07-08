@@ -86,12 +86,11 @@ export class Navigation extends Component {
             <div className="mb-3">
               <p>AJUSTES</p>
               <ul className="nav-list">
-                <NavButton key='docs' linkTo= 'docs' text='Documentación' icon='book'/>
+							{syncButton}
               { user && user.admin &&
                 <NavButton key='settings' linkTo='settings' text='Configuración' icon='cogs'/>
               }
                 <li><a href="/disconect"><button type="button" className="btn btn-nav btn-block mb-1"><Icon icon='sign-out' mr='2' fw={true}></Icon> Desconectar</button></a></li>
-              {syncButton}
               </ul>
             </div>
           </div>

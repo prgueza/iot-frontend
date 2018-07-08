@@ -22,6 +22,7 @@ export class EditImageForm extends Component {
 			yCoordinate: 0,
 			options: null
 		}
+		this.coordinatesMap = null;
 	}
 
 	componentDidMount() {
@@ -36,6 +37,10 @@ export class EditImageForm extends Component {
 			xCoordinate: overlayImage ? overlayImage.xCoordinate : 0,
 			yCoordinate: overlayImage ? overlayImage.yCoordinate : 0
 		} )
+	}
+
+	setCoordinatesMap = ( element ) => {
+		this.coordinatesMap = element
 	}
 
 	handleInputChange = ( event ) => {
@@ -63,21 +68,23 @@ export class EditImageForm extends Component {
 	}
 
 	getCoordinates = ( event ) => {
+		const width = this.coordinatesMap.offsetWidth
+		const height = this.coordinatesMap.offsetHeight
 		this.setState( {
-			xCoordinate: event.nativeEvent.offsetX,
-			yCoordinate: event.nativeEvent.offsetY,
+			xCoordinate: Math.round( event.nativeEvent.offsetX / width * 100 ),
+			yCoordinate: Math.round( event.nativeEvent.offsetY / height * 100 ),
 		} )
 	}
 
 	handleSubmit = () => {
 		const form = {
 			activeImage: this.state.activeImage ? this.state.activeImage._id : null,
-			overlayImage: this.state.overlayImage && {
+			overlayImage: this.state.overlayImage ? {
 				image: this.state.overlayImage,
 				size: this.state.size,
 				xCoordinate: this.state.xCoordinate,
 				yCoordinate: this.state.yCoordinate
-			}
+			} : null
 		}
 		axios.put( this.props.display.url, form, { // send request
 				timeout: process.env.TIMEOUT,
@@ -102,10 +109,10 @@ export class EditImageForm extends Component {
 	render() {
 		const { images, activeImage, overlayImage, options } = this.state
 		const src = activeImage && activeImage.src
-		const src_aditional = overlayImage && overlayImage.src
+		const src_overlay = overlayImage && overlayImage.src
 		const overlayImageStyle = {
-			left: this.state.xCoordinate + 'px',
-			top: this.state.yCoordinate + 'px'
+			left: this.state.xCoordinate + '%',
+			top: this.state.yCoordinate + '%'
 		}
 		return (
 			<div>
@@ -165,23 +172,24 @@ export class EditImageForm extends Component {
 				</div>
 			<div className='col-6'>
 				<div className = 'edit-image-view d-flex w-100 justify-content-center mb-3 shadow' >
-						<div onClick={this.getCoordinates} className='coordinates-map'></div> {
+						<div onClick={this.getCoordinates} className='coordinates-map' ref={this.setCoordinatesMap}></div> {
 							src
 								?
 								<img className='main-image image-fluid' src={src}/> :
 								<div className='image-preview-placeholder d-flex align-items-center'>
 									<h4>Seleccione una imagen como imagen principal</h4>
 								</div>
-						} { src_aditional && <img className='aditional-image shadow' height={this.state.size + '%'} width={'auto'} style={overlayImageStyle} src={src_aditional}/> }
+						}
+						{ src_overlay && <img className='overlay-image shadow' height={this.state.size + '%'} width={'auto'} style={overlayImageStyle} src={src_overlay}/> }
 						{	this.props.display.imageFromGroup &&
 							<div className='image-warning d-flex w-100 justify-content-center'>
 								<p className='d-flex image-warning-text'>Se está utilizando la imagen del grupo</p>
 							</div>
 						}
-						</div>
 				</div>
 			</div>
 		</div>
+	</div>
 		)
 	}
 

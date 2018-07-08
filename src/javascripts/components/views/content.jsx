@@ -23,7 +23,6 @@ export const Content = ( { isLoaded, ...rest } ) => {
         <Route path="/displays" render={() => <ContentDisplays {...rest}/>}/>
         <Route path="/images" render={() => <ContentImages {...rest}/>}/>
         <Route path="/groups" render={() => <ContentGroups {...rest}/>}/>
-        <Route path="/docs" render={() => <ContentDocs {...rest}/>}/>
         <ProtectedRoute {...rest} path="/settings" component={ContentSettings}/>
         <ProtectedRoute {...rest} path="/devices" component={ContentDevices}/>
         <ProtectedRoute {...rest} path="/gateways" component={ContentGateways}/>
