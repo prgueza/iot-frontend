@@ -35,3 +35,15 @@ label,
   -ms-user-select: none;
   user-select: none;
 }
+
+.image-placeholder{
+  padding: 15px;
+}
+
+.toggle{
+  cursor: pointer;
+}
+
+.toggle > .fa {
+  font-size: 1.25em;
+}

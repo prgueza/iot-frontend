@@ -1,16 +1,11 @@
 /* IMPORT MODULES */
-import React from 'react'
-const cx = require('classnames')
+import React, { Component } from 'react'
+const cx = require( 'classnames' )
 
 /* COMPONENT */
-export const Tag = ({ category, tag }) => {
-  const tagClass = cx("btn mr-1",
-    {"btn-outline-success": category === "displays"},
-    {"btn-outline-info": category === "images"},
-    {"btn-outline-warning": category === "groups"},
-    "btn-tiny"
-  )
-  return(
-    <button type="button" className={tagClass}>{tag}</button>
-  )
+export const Tag = ( { category, tag, filterData } ) => {
+	const tagClass = cx( 'btn mr-1', { 'btn-success': category === 'displays' }, { 'btn-info': category === 'images' }, { 'btn-warning': category === 'groups' },
+		'btn-tiny'
+	)
+	return <button onClick={() => filterData && filterData(tag)} type='button' className={tagClass}>{tag}</button>
 }

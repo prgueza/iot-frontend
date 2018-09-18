@@ -10,39 +10,39 @@ import { List } from '../../lists/list.jsx'
 import { Title } from '../../tags/title.jsx'
 
 /* COMPONENTS */
-export const ContentGroups = ({ filterValue, ...props }) => {
+export const ContentGroups = ( { filterValue, ...props } ) => {
 
-  const { data: { groups } } = props
+	const { data: { groups } } = props
 
-  return(
-    <div className="overview">
-      <div className="row">
-        <div className="col">
-          <div className="titulo mb-4 text-right">
+	return (
+		<div className='overview'>
+      <div className='row'>
+        <div className='col'>
+          <div className='titulo mb-4 text-right'>
             <h1>GRUPOS</h1>
           </div>
           <hr></hr>
         </div>
       </div>
-      <div className="row-panel">
-        <div className="panel">
-          <Title total={groups.length} appearance="card title-groups" icon="list"/>
-          <div className="row controls">
-            <div className="col-4">
+      <div className='row-panel'>
+        <div className='panel'>
+          <Title total={groups.length} appearance='card title-groups' icon='list'/>
+          <div className='row controls'>
+            <div className='col-4'>
               <List filterValue={filterValue} category='groups' content={groups}/>
             </div>
-            <div className="col-8">
+            <div className='col-8'>
               <Switch>
                 {/* For route /add we pass all props incluldying displays, groups, images and functions */}
-                <Route path="/groups/add" render={() => <GroupForm {...props} groups={groups}/>}/>
+                <Route path='/groups/add' render={() => <GroupForm {...props} groups={groups}/>}/>
                 {/* For route /groupId we select the image based on the id and pass it separately */}
-                <Route path="/groups/:groupId" render={({ match }) => (<GroupRouter {...props} group={groups.find(g => g._id == match.params.groupId)}/>)}/>
+                <Route path='/groups/:groupId' render={({ match }) => (<GroupRouter {...props} group={groups.find(g => g._id == match.params.groupId)}/>)}/>
               </Switch>
-              <Route exact path="/groups" render={() => (<GroupGeneric/>)}/>
+              <Route exact path='/groups' render={() => (<GroupGeneric/>)}/>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+	)
 }

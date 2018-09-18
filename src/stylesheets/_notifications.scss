@@ -1,23 +1,35 @@
-.css-ym4q3b, [data-css-ym4q3b]{
-  width: 320px;
-  left: 0;
+.notify-content{
+  min-width: 400px;
 }
 
-
 .notify-success{
-  background-color: $bg-secondary-color;
+  position: absolute;
+  right: 40px;
+  min-width: 400px;
+  background-color: $primary-color;
   border: 1px solid $primary-color;
-  color: $primary-color;
+  color: white;
   border-radius: 0.25rem;
-  margin-left: $padding-left;
-  margin-bottom: 30px;
+  box-shadow: $box-shadow !important;
 }
 
 .notify-error{
-  background-color: $bg-secondary-color;
+  position: absolute;
+  right: 40px;
+  min-width: 400px;
+  background-color: $danger-color;
   border: 1px solid $danger-color;
-  color: $danger-color;
+  color: white;
   border-radius: 0.25rem;
-  margin-left: $padding-left;
-  margin-bottom: 30px;
+  box-shadow: $box-shadow !important;
+}
+
+.notify-division{
+  border-color: white;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.notify-info{
+  color: white;
 }

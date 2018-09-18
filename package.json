@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --progress --config webpack.config.js"
   },
   "dependencies": {
     "axios": "^0.17.1",
     "body-parser": "~1.18.2",
-    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap": "^4.1.0",
     "classnames": "^2.2.5",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -17,15 +17,19 @@
     "express": "~4.15.5",
     "express-session": "^1.15.6",
     "glamor": "^2.20.40",
+    "jquery": "^3.3.1",
     "moment": "^2.19.1",
     "mongoose": "^4.13.2",
     "morgan": "~1.9.0",
     "node-fetch": "^1.7.3",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.9.0",
     "node-sass-middleware": "0.9.8",
+    "popper.js": "^1.14.3",
     "react": "^16.1.1",
+    "react-cookie": "^2.2.0",
     "react-dom": "^16.1.1",
     "react-dropzone": "^4.2.7",
+    "react-modal": "^3.4.4",
     "react-router-dom": "^4.2.2",
     "react-select": "^1.1.0",
     "react-toastify": "^3.1.2"
@@ -47,9 +51,9 @@
     "jquery": "^3.2.1",
     "nodemon": "^1.12.6",
     "popper.js": "^1.12.9",
-    "postcss-loader": "^2.0.8",
+    "postcss-loader": "^2.1.5",
     "precss": "^2.0.0",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^7.0.1",
     "style-loader": "^0.19.0",
     "webpack": "^3.7.1"
   }
