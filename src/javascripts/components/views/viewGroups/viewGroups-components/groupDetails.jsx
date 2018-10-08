@@ -10,7 +10,7 @@ import ReactModal from 'react-modal'
 /* IMPORT COMPONENTS */
 import { Associated } from '../../associated.jsx'
 import { Tag } from '../../../tags/tag.jsx'
-import { EditImageForm } from '/Users/Pedro/Documents/Universidad/TFG/iot-frontend/src/javascripts/components/views/viewGroups/viewGroups-components/editImageForm.jsx'
+import { EditImageForm } from './editImageForm.jsx'
 
 /* COMPONENTS */
 export class GroupDetails extends Component {

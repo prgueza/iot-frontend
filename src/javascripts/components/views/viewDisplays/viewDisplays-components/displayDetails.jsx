@@ -11,7 +11,7 @@ import ReactModal from 'react-modal'
 import { Associated } from '../../associated.jsx'
 import { Tag } from '../../../tags/tag.jsx'
 import { Icon } from '../../../icons/icon.jsx'
-import { EditImageForm } from '/Users/Pedro/Documents/Universidad/TFG/iot-frontend/src/javascripts/components/views/viewDisplays/viewDisplays-components/editImageForm.jsx'
+import { EditImageForm } from './editImageForm.jsx'
 
 /* COMPONENT */
 export class DisplayDetails extends Component {
