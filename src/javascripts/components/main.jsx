@@ -5,9 +5,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 /* IMPORT COMPONENTS */
-import Navigation from './views/navigation.jsx';
-import { Content } from './views/content.jsx';
-import { Notification } from './tags/notification.jsx';
+import Navigation from './views/navigation';
+import Content from './views/content';
+import Notification from './tags/notification';
 
 /* CONFIGURE AXIOS */
 axios.defaults.baseURL = process.env.API_URL;
@@ -73,28 +73,30 @@ class Main extends Component {
 
 	/* UPDATE DATA */
 	update = (resourceType, _id, action, data, devices) => {
-	  const stateData = this.state.data;
+	  const { data: stateData } = this.state.data;
 	  switch (action) {
 	    case 'remove':
 	    {
-	      const index = stateData[resourceType].findIndex(resource => resource._id == _id);
-	      console.log(resource._id);
+	      const index = stateData[resourceType].findIndex(resource => resource._id === _id);
 	      stateData[resourceType].splice(index, 1);
-	      devices && (stateData.devices = devices);
+	      if (devices) stateData.devices = devices;
 	      break;
 	    }
 	    case 'add':
 	    {
 	      stateData[resourceType].push(data);
-	      devices && (stateData.devices = devices);
+	      if (devices) stateData.devices = devices;
 	      break;
 	    }
 	    case 'edit':
 	    {
-	      const index = stateData[resourceType].findIndex(resource => resource._id == _id);
+	      const index = stateData[resourceType].findIndex(resource => resource._id === _id);
 	      stateData[resourceType].splice(index, 1, data);
-	      devices && (stateData.devices = devices);
+	      if (devices) stateData.devices = devices;
 	      break;
+	    }
+	    default: {
+	      return;
 	    }
 	  }
 	  this.setState({ data: stateData });
@@ -115,7 +117,7 @@ class Main extends Component {
 	  })
 	    .then(
 	      (res) => {
-	        if (res.status == 200) {
+	        if (res.status === 200) {
 	          this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false, 'Sincronice la aplicación con los dispositivos encontrados');
 	          this.setState({ syncedDevices: res.data, syncStatus: 1, lastSynced: moment() });
 	        } else {
@@ -134,8 +136,9 @@ class Main extends Component {
 	}
 
 	sync = () => {
-	  const devices = this.state.syncedDevices;
-	  const data = this.state.data;
+	  const { syncedDevices } = this.state;
+	  const { data } = this.state;
+	  const devices = syncedDevices;
 	  data.devices = devices;
 	  this.updateSync('Dispositivos sincronizados', 'notify-success', 'check', true, 'Dispositivos sincronizados con éxito');
 	  this.setState({ data, syncStatus: 2 }); // synced
@@ -177,13 +180,14 @@ class Main extends Component {
 	    autoClose,
 	    className: style,
 	    onClose: () => {
-	      this.state.syncStatus == 1 && this.sync();
+	      const { syncStatus } = this.state;
+	      if (syncStatus === 1) this.sync();
 	    },
 	  });
 	}
 
 	dismiss = () => {
-	  this.toastSyncId && toast.dismiss(this.toastSyncId);
+	  if (this.toastSyncId) toast.dismiss(this.toastSyncId);
 	}
 
 	/* RENDER COMPONENT */

@@ -1,15 +1,17 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 /* IMPORT COMPONENTS */
-import NavButton from '../buttons/navButton.jsx';
-import Icon from '../icons/icon.jsx';
+import NavButton from '../buttons/navButton';
+import Icon from '../icons/icon';
 
 /* COMPONENT */
 class Navigation extends Component {
 	/* HANDLE SEARCH */
 	handleSearch = (event) => {
-	  this.props.filterData(event.target.value);
+	  const { filterData } = this.props;
+	  filterData(event.target.value);
 	}
 
 	/* RENDER COMPONENT */
@@ -17,52 +19,53 @@ class Navigation extends Component {
 	  const {
 	    data: {
 	      displays, images, groups, devices, gateways,
-	    }, user, syncStatus, token, filterValue,
+	    }, user, syncStatus, token, filterValue, sync, syncApi,
 	  } = this.props;
 
 	  const navigationUser = [
 	    {
-	      exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
+	      id: 1, exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
 	    },
 	    {
-	      exact: false, linkTo: 'displays', text: 'Displays', icon: 'television', count: true, number: displays ? `${displays.length}/${devices.length}` : '...',
+	      id: 2, exact: false, linkTo: 'displays', text: 'Displays', icon: 'television', count: true, number: displays ? `${displays.length}/${devices.length}` : '...',
 	    },
 	    {
-	      exact: false, linkTo: 'images', text: 'Imagenes', icon: 'picture-o', count: true, number: images ? String(images.length) : '...',
+	      id: 3, exact: false, linkTo: 'images', text: 'Imagenes', icon: 'picture-o', count: true, number: images ? String(images.length) : '...',
 	    },
 	    {
-	      exact: false, linkTo: 'groups', text: 'Grupos', icon: 'list', count: true, number: groups ? String(groups.length) : '...',
+	      id: 4, exact: false, linkTo: 'groups', text: 'Grupos', icon: 'list', count: true, number: groups ? String(groups.length) : '...',
 	    },
 	  ];
 
 	  const navigationAdmin = [
 	    {
-	      exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
+	      id: 1, exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
 	    },
 	    {
-	      exact: false, linkTo: 'devices', text: 'Dispositivos', icon: 'tablet', count: true, number: devices ? devices.length : '...',
+	      id: 2, exact: false, linkTo: 'devices', text: 'Dispositivos', icon: 'tablet', count: true, number: devices ? String(devices.length) : '...',
 	    },
 	    {
-	      exact: false, linkTo: 'gateways', text: 'Puertas de enlace', icon: 'sitemap', count: true, number: gateways ? gateways.length : '...',
+	      id: 3, exact: false, linkTo: 'gateways', text: 'Puertas de enlace', icon: 'sitemap', count: true, number: gateways ? String(gateways.length) : '...',
 	    },
 	  ];
 
 	  const nav = user && user.admin
-	    ? navigationAdmin.map((nav, index) => <NavButton key={index} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number} />)
-	    : navigationUser.map((nav, index) => <NavButton key={index} exact={nav.exact} linkTo={nav.linkTo} text={nav.text} icon={nav.icon} count={nav.count} number={nav.number} />);
+	    ? navigationAdmin.map(navItem => <NavButton key={navItem.id} exact={navItem.exact} linkTo={navItem.linkTo} text={navItem.text} icon={navItem.icon} count={navItem.count} number={navItem.number} />)
+	    : navigationUser.map(navItem => <NavButton key={navItem.id} exact={navItem.exact} linkTo={navItem.linkTo} text={navItem.text} icon={navItem.icon} count={navItem.count} number={navItem.number} />);
+
+	  let syncButton;
 
 	  switch (syncStatus) {
 	    // unsynced
 	    case 0:
 	    {
-	      var syncButton = (
-  <li>
-    <button onClick={() => this.props.syncApi(token)} type="button" className="btn btn-nav btn-block mb-1">
-      <Icon icon="refresh" mr="2" fw />
-      {' '}
-Buscar dispositivos
-    </button>
-  </li>
+	      syncButton = (
+				  <li>
+						<button onClick={() => syncApi(token)} type="button" className="btn btn-nav btn-block mb-1">
+							<Icon icon="refresh" mr="2" fw />
+							Buscar dispositivos
+						</button>
+				  </li>
 	      );
 	      break;
 	    }
@@ -70,29 +73,27 @@ Buscar dispositivos
 	    // syncReady
 	    case 1:
 	    {
-	      var syncButton = (
-  <li>
-    <button onClick={() => this.props.sync()} type="button" className="btn btn-nav btn-block mb-1">
-      <Icon icon="link" mr="2" fw />
-      {' '}
-Sincronizar
-    </button>
-  </li>
-	      );
+	      syncButton = (
+				  <li>
+				    <button onClick={() => sync()} type="button" className="btn btn-nav btn-block mb-1">
+				      <Icon icon="link" mr="2" fw />
+								Sincronizar
+        		</button>
+				  </li>
+			  );
 	      break;
 	    }
 
 	    // synced
 	    case 2:
 	    {
-	      var syncButton = (
-  <li>
-    <button type="button" className="btn btn-nav btn-block mb-1">
-      <Icon icon="check" mr="2" fw />
-      {' '}
-Sincronizado
-    </button>
-  </li>
+	      syncButton = (
+				  <li>
+				    <button type="button" className="btn btn-nav btn-block mb-1">
+				      <Icon icon="check" mr="2" fw />
+							Sincronizado
+        		</button>
+				  </li>
 	      );
 	      break;
 	    }
@@ -100,16 +101,18 @@ Sincronizado
 	    // syncing
 	    case 3:
 	    {
-	      var syncButton = (
-  <li>
-    <button onClick={() => this.props.syncApi(token)} type="button" className="btn btn-nav btn-block mb-1" disabled>
-      <Icon icon="refresh" mr="2" fw spin />
-      {' '}
-Sincronizando
-    </button>
-  </li>
+	      syncButton = (
+				  <li>
+				    <button onClick={() => syncApi(token)} type="button" className="btn btn-nav btn-block mb-1" disabled>
+				      <Icon icon="refresh" mr="2" fw spin />
+							Sincronizando
+				    </button>
+				  </li>
 	      );
 	      break;
+	    }
+	    default: {
+	      syncButton = '';
 	    }
 	  }
 
@@ -143,7 +146,7 @@ Sincronizando
                 <button type="button" className="btn btn-nav btn-block mb-1">
                   <Icon icon="sign-out" mr="2" fw />
                   {' '}
-Desconectar
+									Desconectar
                 </button>
               </a>
             </li>
@@ -160,5 +163,16 @@ Desconectar
 	  );
 	}
 }
+
+Navigation.propTypes = {
+  data: PropTypes.shape.isRequired,
+  user: PropTypes.shape.isRequired,
+  syncStatus: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
+  filterValue: PropTypes.string.isRequired,
+  filterData: PropTypes.shape.isRequired,
+  sync: PropTypes.shape.isRequired,
+  syncApi: PropTypes.shape.isRequired,
+};
 
 export default Navigation;

@@ -89,13 +89,15 @@ class DeviceForm extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  const { device, data: { gateways, screens, userGroups } } = this.props;
-	  const { redirect, redirectLocation } = this.state;
+	  const {
+	    redirect, redirectLocation, name, description, updatedBy, updatedAt, createdAt, mac, prefGateway, userGroup,
+	  } = this.state;
 
 	  const linkBack = `/devices/${device._id}`;
 
 	  // Options
 	  const optionsGateway = gateways.map(gateway => <option value={gateway._id} key={gateway._id}>{gateway.name}</option>);
-	  const optionsUserGroup = userGroups.map(userGroup => <option value={userGroup._id} key={userGroup._id}>{userGroup.name}</option>);
+	  const optionsUserGroup = userGroups.map(ug => <option value={ug._id} key={ug._id}>{ug.name}</option>);
 
 	  const screen = screens.find(s => s.screenCode === device.screen);
 	  const screenName = screen ? screen.name : `No se encuentra la pantalla (código: ${device.screen} )`;
@@ -135,21 +137,21 @@ class DeviceForm extends Component {
             <i className="fa fa-fw fa-tablet mr-2" />
 						Nombre
           </label>
-          <input type="text" className="form-control" id="nombre" placeholder="Nombre del dispositivo físico" name="name" value={this.state.name} onChange={this.handleInputChange} />
+          <input type="text" className="form-control" id="nombre" placeholder="Nombre del dispositivo físico" name="name" value={name} onChange={this.handleInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="descripcion">
             <i className="fa fa-fw fa-info-circle mr-2" />
 						Descripcion
           </label>
-          <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name="description" value={this.state.description} onChange={this.handleInputChange} />
+          <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name="description" value={description} onChange={this.handleInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="mac">
             <i className="fa fa-fw fa-server mr-2" />
 						Dirección MAC
           </label>
-          <input type="text" className="form-control" id="mac" placeholder="Dirección MAC de la puerta de enlace" name="mac" value={this.state.mac} readOnly />
+          <input type="text" className="form-control" id="mac" placeholder="Dirección MAC de la puerta de enlace" name="mac" value={mac} readOnly />
         </div>
         <div className="form-row">
           <div className="form-group col">
@@ -165,7 +167,7 @@ class DeviceForm extends Component {
 							Puerta de enlace preferida
             </label>
             <div>
-              <select className="custom-select" name="prefGateway" value={this.state.prefGateway} onChange={this.handleInputChange}>
+              <select className="custom-select" name="prefGateway" value={prefGateway} onChange={this.handleInputChange}>
                 {optionsGateway}
               </select>
             </div>
@@ -177,7 +179,7 @@ class DeviceForm extends Component {
 						Grupo de gestión del dispositivo
           </label>
           <div>
-            <select className="custom-select" name="userGroup" value={this.state.userGroup} onChange={this.handleInputChange}>
+            <select className="custom-select" name="userGroup" value={userGroup} onChange={this.handleInputChange}>
               <option value="" key="0">Ninguno seleccionado</option>
               {optionsUserGroup}
             </select>
@@ -188,7 +190,7 @@ class DeviceForm extends Component {
             <i className="fa fa-fw fa-user-o mr-2" />
 						Ultima modificación por
           </label>
-          <input type="text" className="form-control" id="updatedBy" name="updatedBy" value={this.state.updatedBy} readOnly />
+          <input type="text" className="form-control" id="updatedBy" name="updatedBy" value={updatedBy} readOnly />
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
@@ -196,14 +198,14 @@ class DeviceForm extends Component {
               <i className="fa fa-fw fa-calendar-o mr-2" />
 							Fecha de creación
             </label>
-            <input type="text" className="form-control" id="fechaCreacion" name="createdAt " value={moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
+            <input type="text" className="form-control" id="fechaCreacion" name="createdAt " value={moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="fechaModificacion">
               <i className="fa fa-fw fa-calendar-o mr-2" />
 							Fecha de modificación
             </label>
-            <input type="text" className="form-control" id="fechaModificacion" name="updatedAt" value={moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
+            <input type="text" className="form-control" id="fechaModificacion" name="updatedAt" value={moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
           </div>
         </div>
       </form>

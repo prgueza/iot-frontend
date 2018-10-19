@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 /* IMPORT COMPONENTS */
-import { Icon } from '../../../icons/icon.jsx';
+import Icon from '../../../icons/icon';
 
 const moment = require('moment');
 
