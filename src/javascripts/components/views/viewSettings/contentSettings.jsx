@@ -11,7 +11,7 @@ import ManageScreens from './viewSettings-components/manageScreens';
 import Icon from '../../icons/icon';
 
 /* COMPONENTS */
-const ContentSettings = ({ props }) => {
+const ContentSettings = (props) => {
   const menuItems = [
     {
       id: 1, exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings',
