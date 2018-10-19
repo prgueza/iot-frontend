@@ -1,8 +1,9 @@
 /* IMPORT MODULES */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* IMPORT COMPONENTS */
-import Icon from '../icons/icon.jsx';
+import Icon from '../icons/icon';
 
 /* COMPONENT */
 const Title = ({ appearance, total, icon }) => (
@@ -17,5 +18,11 @@ const Title = ({ appearance, total, icon }) => (
     </div>
   </div>
 );
+
+Title.propTypes = {
+  appearance: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
+};
 
 export default Title;
