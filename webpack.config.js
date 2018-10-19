@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   watch: true,
@@ -31,8 +33,8 @@ module.exports = {
             options: {
               plugins() { // post css plugins, can be exported to postcss.config.js
                 return [
-                  require('precss'),
-                  require('autoprefixer'),
+                  precss,
+                  autoprefixer,
                 ];
               },
             },

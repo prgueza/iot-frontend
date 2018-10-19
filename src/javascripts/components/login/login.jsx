@@ -1,5 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 /* COMPONENTS */
@@ -58,7 +59,9 @@ class Login extends Component {
 	}
 
 	render() {
-	  const { remember, login, password } = this.state;
+	  const {
+	    remember, login, password, error,
+	  } = this.state;
 	  return (
   <div className="row login justify-content-center">
     <div className="col-lg-4 col-md-8 col-sm-12 align-self-center">
@@ -83,7 +86,7 @@ class Login extends Component {
               </div>
             </div>
           </form>
-          { this.state.error && (
+          { error && (
           <p className="text-center text-danger">
             <i className="fa fa-times mr-2" />
 						Usuario o contraseña incorrectos
@@ -96,5 +99,9 @@ class Login extends Component {
 	  );
 	}
 }
+
+Login.propTypes = {
+  loginAction: PropTypes.shape.isRequired,
+};
 
 export default Login;
