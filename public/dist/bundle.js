@@ -36616,485 +36616,7 @@ var canUseDOM = exports.canUseDOM = EE.canUseDOM;
 exports.default = SafeHTMLElement;
 
 /***/ }),
-/* 192 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-		value: true
-});
-exports.ImageForm = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactToastify = __webpack_require__(5);
-
-var _reactRouterDom = __webpack_require__(3);
-
-var _axios = __webpack_require__(4);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _tag = __webpack_require__(15);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
-
-
-var moment = __webpack_require__(0);
-moment.locale('es');
-
-/* IMPORT COMPONENTS */
-
-/* COMPONENTS */
-var ImageForm = exports.ImageForm = function (_Component) {
-		_inherits(ImageForm, _Component);
-
-		/* STATE */
-		function ImageForm(props) {
-				_classCallCheck(this, ImageForm);
-
-				var _this = _possibleConstructorReturn(this, (ImageForm.__proto__ || Object.getPrototypeOf(ImageForm)).call(this, props));
-
-				_initialiseProps.call(_this);
-
-				var _this$props = _this.props,
-				    image = _this$props.image,
-				    user = _this$props.user;
-
-				_this.state = {
-						name: image ? image.name : '',
-						description: image ? image.description : '',
-						createdBy: image ? image.createdBy || { name: 'Usuario eliminado' } : user,
-						updatedBy: user.name,
-						category: image ? image.category ? image.category : '' : '',
-						tags: image ? image.tags : [],
-						createdAt: image ? moment(image.createdAt) : moment(),
-						updatedAt: moment(),
-						displays: image ? image.displays.map(function (display) {
-								return display._id;
-						}) : [],
-						groups: image ? image.groups.map(function (group) {
-								return group._id;
-						}) : [],
-						color: image ? image.color_profile : 'color',
-
-						redirect: false,
-						redirectLocation: '/images',
-						error: null
-				};
-				return _this;
-		}
-
-		/* INITIAL VALUES FOR FORM INPUTS */
-
-
-		_createClass(ImageForm, [{
-				key: 'componentDidMount',
-				value: function componentDidMount() {
-						var _props = this.props,
-						    images = _props.images,
-						    image = _props.image;
-						// set state with initial values
-
-						this.setState({
-								redirectLocation: image ? '/images/' + image._id : '/images' // Redirect url
-						});
-				}
-
-				/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
-
-
-				/* HANDLE MULTIPLE CHECKBOX */
-				// TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
-
-				/* HANDLE SUMBIT (PUT OR POST) */
-
-		}, {
-				key: 'render',
-
-
-				/* RENDER COMPONENT */
-				value: function render() {
-						var _this2 = this;
-
-						var _props2 = this.props,
-						    _props2$data = _props2.data,
-						    devices = _props2$data.devices,
-						    images = _props2$data.images,
-						    groups = _props2$data.groups,
-						    displays = _props2$data.displays,
-						    image = _props2.image;
-
-						// Options
-
-						var optionsGroups = groups.map(function (group) {
-								return _react2.default.createElement(
-										'div',
-										{ key: group._id, className: 'custom-control custom-checkbox' },
-										_react2.default.createElement('input', { onChange: _this2.handleCheckGroups, id: group._id, type: 'checkbox', defaultChecked: _this2.state.groups.find(function (c) {
-														return c == group._id;
-												}), name: group._id, defaultValue: group._id, className: 'custom-control-input' }),
-										_react2.default.createElement(
-												'label',
-												{ className: 'custom-control-label', htmlFor: group._id },
-												group.name
-										)
-								);
-						});
-						var optionsDisplays = displays.sort(function (a, b) {
-								return a.updatedAt - b.updatedAt;
-						}).map(function (display) {
-								return _react2.default.createElement(
-										'div',
-										{ key: display._id, className: 'custom-control custom-checkbox' },
-										_react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, id: display._id, type: 'checkbox', defaultChecked: _this2.state.displays.find(function (c) {
-														return c == display._id;
-												}), name: display._id, defaultValue: display._id, className: 'custom-control-input' }),
-										_react2.default.createElement(
-												'label',
-												{ className: 'custom-control-label', htmlFor: display._id },
-												display.name
-										)
-								);
-						});
-
-						// Render return
-						if (this.state.redirect) {
-								return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.redirectLocation });
-						} else {
-								return _react2.default.createElement(
-										'div',
-										{ className: 'card detalles' },
-										_react2.default.createElement(
-												'div',
-												{ className: 'card-header' },
-												_react2.default.createElement(
-														'ul',
-														{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-														_react2.default.createElement(
-																'li',
-																{ className: 'nav-item mr-auto' },
-																image ? _react2.default.createElement(
-																		'h2',
-																		{ className: 'detalles-titulo' },
-																		_react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-																		'Editar una imagen'
-																) : _react2.default.createElement(
-																		'h2',
-																		{ className: 'detalles-titulo' },
-																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-																		'A\xF1adir una nueva imagen'
-																)
-														),
-														_react2.default.createElement(
-																'li',
-																{ className: 'nav-item ml-2' },
-																image ? _react2.default.createElement(
-																		'button',
-																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-info' },
-																		_react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
-																		'Guardar cambios'
-																) : _react2.default.createElement(
-																		'button',
-																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-info' },
-																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
-																		'A\xF1adir'
-																)
-														)
-												)
-										),
-										_react2.default.createElement(
-												'div',
-												{ className: 'card-body' },
-												_react2.default.createElement(
-														'form',
-														{ id: 'form' },
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-group' },
-																_react2.default.createElement(
-																		'label',
-																		{ htmlFor: 'nombre' },
-																		_react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-																		'Nombre'
-																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-group' },
-																_react2.default.createElement(
-																		'label',
-																		{ htmlFor: 'descripcion' },
-																		_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-																		'Descripcion'
-																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la imagen', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col-6' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'category' },
-																				_react2.default.createElement('i', { className: 'fa fa-th-large mr-2' }),
-																				'Categor\xEDa'
-																		),
-																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: this.state.category, onChange: this.handleInputChange })
-																),
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'color' },
-																				_react2.default.createElement('i', { className: 'fa fa-tint mr-2' }),
-																				'Color'
-																		),
-																		_react2.default.createElement(
-																				'div',
-																				null,
-																				_react2.default.createElement(
-																						'select',
-																						{ className: 'custom-select', name: 'color', value: this.state.color, onChange: this.handleInputChange },
-																						_react2.default.createElement(
-																								'option',
-																								{ value: 'color' },
-																								'Color'
-																						),
-																						_react2.default.createElement(
-																								'option',
-																								{ value: 'escala de grises' },
-																								'Escala de grises'
-																						)
-																				)
-																		)
-																)
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'displays' },
-																				_react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-																				'Asociar uno o varios displays'
-																		),
-																		_react2.default.createElement(
-																				'div',
-																				{ className: 'custom-controls-stacked' },
-																				optionsDisplays
-																		)
-																),
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'groups' },
-																				_react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
-																				'Asociar uno o varios grupos'
-																		),
-																		_react2.default.createElement(
-																				'div',
-																				{ className: 'custom-controls-stacked' },
-																				optionsGroups
-																		)
-																)
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'etiquetas' },
-																				_react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
-																				'Etiquetas'
-																		),
-																		_react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
-																)
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		this.state.tags.map(function (tag, index) {
-																				return tag.length > 1 ? _react2.default.createElement(_tag.Tag, { key: index, tag: tag, category: 'images' }) : '';
-																		})
-																)
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-group' },
-																_react2.default.createElement(
-																		'label',
-																		{ htmlFor: 'creador' },
-																		_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-																		'Creador'
-																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.createdBy.name, readOnly: 'readOnly' })
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col-md-6' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'fechaCreacion' },
-																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-																				'Fecha de creaci\xF3n'
-																		),
-																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'createdAt ', value: moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
-																),
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col-md-6' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'fechaModificacion' },
-																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-																				'Fecha de modificaci\xF3n'
-																		),
-																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updatedAt', value: moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
-																)
-														)
-												)
-										)
-								);
-						}
-				}
-		}]);
-
-		return ImageForm;
-}(_react.Component);
-
-var _initialiseProps = function _initialiseProps() {
-		var _this3 = this;
-
-		this.handleInputChange = function (event) {
-				var target = event.target;
-				var name = target.name;
-				if (name === 'tags') {
-						var value = target.value.split(','); // TODO: better string to array conversion
-				} else {
-						var value = target.value;
-				}
-
-				_this3.setState(_defineProperty({}, name, value));
-		};
-
-		this.handleCheckDisplays = function (event) {
-				// get value from the checkbox
-				var target = event.target;
-				var value = target.value;
-				// check if the checkbox has been selected
-				if (!_this3.state.displays.find(function (c) {
-						return c == value;
-				})) {
-						// check if value is stored in state
-						// if it is NOT stored, save the state, push the new value and save back the new state
-						var prevState = _this3.state.displays;
-						prevState.push(value);
-						_this3.setState({ displays: prevState });
-				} else {
-						// if it IS stored, save the state, splice the old value and save back the new state
-						var _prevState = _this3.state.displays;
-						_prevState.splice(_prevState.indexOf(value), 1);
-						_this3.setState({ displays: _prevState });
-				}
-		};
-
-		this.handleCheckGroups = function (event) {
-				// get value from the checkbox
-				var target = event.target;
-				var value = target.value;
-				// check if the checkbox has been selected
-				if (!_this3.state.groups.find(function (c) {
-						return c == value;
-				})) {
-						// check if value is stored in state
-						// if it is NOT stored, save the state, push the new value and save back the new state
-						var prevState = _this3.state.groups;
-						prevState.push(value);
-						_this3.setState({ groups: prevState });
-						target.checked = true;
-				} else {
-						// if it IS stored, save the state, splice the old value and save back the new state
-						var _prevState2 = _this3.state.groups;
-						_prevState2.splice(_prevState2.indexOf(value), 1);
-						_this3.setState({ groups: _prevState2 });
-						target.checked = false;
-				}
-		};
-
-		this.handleSubmit = function () {
-				// get image if any
-				var image = _this3.props.image;
-				// define form values to send
-
-				var form = {
-						name: _this3.state.name,
-						description: _this3.state.description,
-						updatedBy: _this3.state.updatedBy._id, // send user_id
-						category: _this3.state.category,
-						tags: _this3.state.tags,
-						color_profile: _this3.state.color
-						// possible empty fields
-				};if (!_this3.props.image) form.createdBy = _this3.props.user._id;
-				_this3.state.displays.length > 0 ? form.displays = _this3.state.displays : form.displays = [];
-				_this3.state.groups.length > 0 ? form.groups = _this3.state.groups : form.groups = [];
-				// HTTP request
-				(0, _axios2.default)({
-						method: image ? 'put' : 'post',
-						url: image ? image.url : 'http://localhost:4000/images',
-						data: form,
-						headers: {
-								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': 'Bearer ' + _this3.props.token
-						}
-				}).then(function (res) {
-						if (res.status == 201) {
-								_this3.props.notify('Imagen configurada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-								var action = image ? 'edit' : 'add';
-								return _this3.props.update('images', res.data.resourceId, action, res.data.resource); // update dataset
-						}
-				}).then(function (res) {
-						return _this3.setState({ redirect: true });
-				}).catch(function (err) {
-						return _this3.props.notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-				});
-		};
-};
-
-/***/ }),
+/* 192 */,
 /* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -70185,7 +69707,6 @@ exports.default = DisplayGeneric;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ContentImages = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -70195,15 +69716,25 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(3);
 
-var _ImageForm = __webpack_require__(192);
+var _imageForm = __webpack_require__(357);
 
-var _ImageRouter = __webpack_require__(313);
+var _imageForm2 = _interopRequireDefault(_imageForm);
 
-var _ImageGeneric = __webpack_require__(320);
+var _imageRouter = __webpack_require__(358);
+
+var _imageRouter2 = _interopRequireDefault(_imageRouter);
+
+var _imageGeneric = __webpack_require__(359);
+
+var _imageGeneric2 = _interopRequireDefault(_imageGeneric);
 
 var _list = __webpack_require__(14);
 
+var _list2 = _interopRequireDefault(_list);
+
 var _title = __webpack_require__(12);
+
+var _title2 = _interopRequireDefault(_title);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70248,14 +69779,14 @@ var ContentImages = function ContentImages(_ref) {
       _react2.default.createElement(
         'div',
         { className: 'panel' },
-        _react2.default.createElement(_title.Title, { total: images.length, appearance: 'card title-images', icon: 'picture-o' }),
+        _react2.default.createElement(_title2.default, { total: images.length, appearance: 'card title-images', icon: 'picture-o' }),
         _react2.default.createElement(
           'div',
           { className: 'row controls' },
           _react2.default.createElement(
             'div',
             { className: 'col-4' },
-            _react2.default.createElement(_list.List, { filterValue: filterValue, category: 'images', content: images })
+            _react2.default.createElement(_list2.default, { filterValue: filterValue, category: 'images', content: images })
           ),
           _react2.default.createElement(
             'div',
@@ -70264,17 +69795,17 @@ var ContentImages = function ContentImages(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/add', render: function render() {
-                  return _react2.default.createElement(_ImageForm.ImageForm, _extends({}, props, { images: images }));
+                  return _react2.default.createElement(_imageForm2.default, _extends({}, props, { images: images }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_ImageRouter.ImageRouter, _extends({}, props, { image: images.find(function (i) {
-                      return i._id == match.params.imageId;
+                  return _react2.default.createElement(_imageRouter2.default, _extends({}, props, { image: images.find(function (i) {
+                      return i._id === match.params.imageId;
                     }) }));
                 } })
             ),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/images', render: function render() {
-                return _react2.default.createElement(_ImageGeneric.ImageGeneric, null);
+                return _react2.default.createElement(_imageGeneric2.default, null);
               } })
           )
         )
@@ -70282,478 +69813,12 @@ var ContentImages = function ContentImages(_ref) {
     )
   );
 };
-exports.ContentImages = ContentImages;
+
+exports.default = ContentImages;
 
 /***/ }),
-/* 313 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.ImageRouter = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(3);
-
-var _axios = __webpack_require__(4);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _ImageDetails = __webpack_require__(314);
-
-var _ImageForm = __webpack_require__(192);
-
-var _ImageDelete = __webpack_require__(319);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
-
-
-/* IMPORT COMPONENTS */
-
-
-/* COMPONENTS */
-var ImageRouter = exports.ImageRouter = function (_Component) {
-	_inherits(ImageRouter, _Component);
-
-	function ImageRouter(props) {
-		_classCallCheck(this, ImageRouter);
-
-		var _this = _possibleConstructorReturn(this, (ImageRouter.__proto__ || Object.getPrototypeOf(ImageRouter)).call(this, props));
-
-		_this.state = {
-			image: null,
-			isLoaded: false,
-			error: null
-		};
-		return _this;
-	}
-
-	/* FETCH FULL DATA ABOUT THE IMAGE */
-
-
-	_createClass(ImageRouter, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this2 = this;
-
-			if (this.props.image) {
-				_axios2.default.get(this.props.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
-					return _this2.setState({ image: image.data, isLoaded: true });
-				}, function (error) {
-					return _this2.setState({ error: error, isLoaded: true });
-				});
-			}
-		}
-
-		/* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE*/
-
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			var _this3 = this;
-
-			if (nextProps.image && (nextProps.image._id != this.props.image._id || nextProps.image.updatedAt != this.props.image.updatedAt)) {
-				// if props actually changed
-				_axios2.default.get(nextProps.image.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (image) {
-					return _this3.setState({ image: image.data, isLoaded: true });
-				}, function (error) {
-					return _this3.setState({ error: error, isLoaded: true });
-				});
-			}
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this4 = this;
-
-			var _state = this.state,
-			    error = _state.error,
-			    isLoaded = _state.isLoaded,
-			    image = _state.image;
-			// wait for resource to be loaded or handle errors if any
-
-			if (error) {
-				// TODO: error handling
-				return null;
-			} else if (!isLoaded) {
-				// TODO: loading
-				return null;
-			} else {
-				return _react2.default.createElement(
-					_reactRouterDom.Switch,
-					null,
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId/edit', render: function render(_ref) {
-							var match = _ref.match;
-							return _react2.default.createElement(_ImageForm.ImageForm, _extends({}, _this4.props, { image: image }));
-						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId/delete', render: function render(_ref2) {
-							var match = _ref2.match;
-							return _react2.default.createElement(_ImageDelete.ImageDelete, _extends({}, _this4.props, { image: image }));
-						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render(_ref3) {
-							var match = _ref3.match;
-							return _react2.default.createElement(_ImageDetails.ImageDetails, _extends({}, _this4.props, { image: image }));
-						} })
-				);
-			}
-		}
-	}]);
-
-	return ImageRouter;
-}(_react.Component);
-
-/***/ }),
-/* 314 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ImageDetails = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDropzone = __webpack_require__(315);
-
-var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
-
-var _reactToastify = __webpack_require__(5);
-
-var _reactRouterDom = __webpack_require__(3);
-
-var _axios = __webpack_require__(4);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _associated = __webpack_require__(26);
-
-var _tag = __webpack_require__(15);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
-
-
-var moment = __webpack_require__(0);
-moment.locale('es');
-
-/* IMPORT COMPONENTS */
-
-/* COMPONENTS */
-var ImageDetails = exports.ImageDetails = function (_Component) {
-  _inherits(ImageDetails, _Component);
-
-  // TODO: transform to component
-
-  function ImageDetails(props) {
-    var _this$state;
-
-    _classCallCheck(this, ImageDetails);
-
-    var _this = _possibleConstructorReturn(this, (ImageDetails.__proto__ || Object.getPrototypeOf(ImageDetails)).call(this, props));
-
-    _this.onDropAccepted = function (acceptedFile) {
-      _this.setState({ file: acceptedFile, accepted: true });
-      // Form
-      var data = new FormData();
-      data.append('image', acceptedFile[0]);
-
-      // upload file
-      _axios2.default.post(_this.props.image.url, data).then(function (res) {
-        if (res.status == 200) {
-          _this.props.update('images', res.data.resourceId, 'edit', res.data.resource);
-          _this.props.notify('Imagen cargada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-        }
-      }).catch(function (err) {
-        _this.props.notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
-      });
-    };
-
-    _this.state = (_this$state = {
-      file: [],
-      accepted: false,
-      // image details
-      src: null
-    }, _defineProperty(_this$state, 'file', ''), _defineProperty(_this$state, 'size', ''), _this$state);
-    return _this;
-  }
-
-  _createClass(ImageDetails, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _props$image = this.props.image,
-          src = _props$image.src,
-          extension = _props$image.extension,
-          size = _props$image.size;
-
-      this.setState({ src: src, extension: extension, size: size });
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _nextProps$image = nextProps.image,
-          src = _nextProps$image.src,
-          extension = _nextProps$image.extension,
-          size = _nextProps$image.size;
-
-      this.setState({ src: src, extension: extension, size: size });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      // define constants from props for better readability
-      var _props$image2 = this.props.image,
-          _id = _props$image2._id,
-          name = _props$image2.name,
-          description = _props$image2.description,
-          src = _props$image2.src,
-          createdAt = _props$image2.createdAt,
-          updatedAt = _props$image2.updatedAt,
-          createdBy = _props$image2.createdBy,
-          colorProfile = _props$image2.colorProfile,
-          resolution = _props$image2.resolution,
-          category = _props$image2.category,
-          groups = _props$image2.groups,
-          displays = _props$image2.displays,
-          tags = _props$image2.tags;
-      // refactor date constants with format
-
-      var created = moment(createdAt).format('dddd, D [de] MMMM [de] YYYY');
-      var updated = moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY');
-      // generate tag list
-      var tagList = tags.map(function (tag, index) {
-        return _react2.default.createElement(_tag.Tag, { key: index, category: 'images', filterData: _this2.props.filterData, tag: tag });
-      });
-      // define routes for edit and delete based on the id
-      var linktoEdit = '/images/' + _id + '/edit';
-      var linktoDelete = '/images/' + _id + '/delete';
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'card detalles' },
-        _react2.default.createElement(
-          'div',
-          { className: 'card-header' },
-          _react2.default.createElement(
-            'ul',
-            { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-            _react2.default.createElement(
-              'li',
-              { className: 'nav-item mr-auto' },
-              _react2.default.createElement(
-                'h2',
-                { className: 'detalles-titulo' },
-                _react2.default.createElement('i', { className: 'fa fa-picture-o mr-3', 'aria-hidden': 'true' }),
-                name
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              { className: 'nav-item mr-2' },
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: linktoEdit },
-                _react2.default.createElement(
-                  'button',
-                  { type: 'button', className: 'btn btn-warning' },
-                  _react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-2', 'aria-hidden': 'true' }),
-                  'Editar'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              { className: 'nav-item ml-2' },
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: linktoDelete },
-                _react2.default.createElement(
-                  'button',
-                  { type: 'button', className: 'btn btn-danger' },
-                  _react2.default.createElement('i', { className: 'fa fa-trash-o mr-2', 'aria-hidden': 'true' }),
-                  'Eliminar'
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'card-body' },
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-              'div',
-              { className: 'col' },
-              _react2.default.createElement(
-                'p',
-                { className: 'titulo' },
-                'DETALLES'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
-                description
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-alt mr-2', 'aria-hidden': 'true' }),
-                resolution ? resolution.name : 'Resolución no especificada'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-file-image-o mr-2', 'aria-hidden': 'true' }),
-                this.state.extension
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-database mr-2', 'aria-hidden': 'true' }),
-                this.state.size
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-tint mr-2', 'aria-hidden': 'true' }),
-                colorProfile
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
-                created
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'card-text' },
-                _react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
-                createdBy ? createdBy.name : 'Usuario eliminado'
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'titulo' },
-                'ETIQUETAS'
-              ),
-              tagList
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'col' },
-              _react2.default.createElement(
-                'div',
-                { className: 'vista-previa' },
-                _react2.default.createElement(
-                  'p',
-                  { className: 'titulo text-right' },
-                  'VISTA PREVIA'
-                ),
-                _react2.default.createElement(
-                  _reactDropzone2.default,
-                  { onDropAccepted: this.onDropAccepted, activeClassName: 'dropzone-accepted', className: this.state.accepted ? 'dropzone dropzone-accepted' : 'dropzone' },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'vista-imagen d-flex w-100 justify-content-center' },
-                    this.state.src ? _react2.default.createElement('img', { className: 'imagen', src: this.state.src }) : _react2.default.createElement(
-                      'div',
-                      { className: 'align-self-center' },
-                      _react2.default.createElement(
-                        'h4',
-                        null,
-                        'Arrastre una imagen'
-                      ),
-                      _react2.default.createElement(
-                        'small',
-                        null,
-                        'formato: bmp'
-                      )
-                    )
-                  )
-                )
-              )
-            )
-          ),
-          _react2.default.createElement('hr', { className: 'card-division' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'row' },
-            _react2.default.createElement(
-              'div',
-              { className: 'col' },
-              _react2.default.createElement(
-                'div',
-                { className: 'asociados' },
-                _react2.default.createElement(
-                  'p',
-                  { className: 'titulo' },
-                  'DISPLAYS ASOCIADOS (',
-                  displays.length,
-                  ')'
-                ),
-                _react2.default.createElement(_associated.Associated, { content: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'col' },
-              _react2.default.createElement(
-                'div',
-                { className: 'asociados' },
-                _react2.default.createElement(
-                  'p',
-                  { className: 'titulo' },
-                  'GRUPOS ASOCIADOS (',
-                  groups.length,
-                  ')'
-                ),
-                _react2.default.createElement(_associated.Associated, { content: groups, category: 'groups', appearance: 'elemento-grupo', icon: 'list' })
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return ImageDetails;
-}(_react.Component);
-
-/***/ }),
+/* 313 */,
+/* 314 */,
 /* 315 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -71481,207 +70546,8 @@ module.exports=function(t){function n(e){if(r[e])return r[e].exports;var o=r[e]=
 });
 
 /***/ }),
-/* 319 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.ImageDelete = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(3);
-
-var _reactToastify = __webpack_require__(5);
-
-var _axios = __webpack_require__(4);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
-
-
-/* COMPONENTS */
-var ImageDelete = exports.ImageDelete = function (_Component) {
-	_inherits(ImageDelete, _Component);
-
-	function ImageDelete(props) {
-		_classCallCheck(this, ImageDelete);
-
-		var _this = _possibleConstructorReturn(this, (ImageDelete.__proto__ || Object.getPrototypeOf(ImageDelete)).call(this, props));
-
-		_this.handleDelete = function (event) {
-			event.preventDefault();
-			_axios2.default.delete(_this.props.image.url, {
-				headers: {
-					Authorization: 'Bearer ' + _this.props.token
-				}
-			}).then(function (res) {
-				if (res.status == 200) {
-					_this.props.notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-					_this.props.update('images', res.resourceId, 'remove');
-				}
-			}).then(function (res) {
-				return _this.setState({ redirect: true });
-			}).catch(function (err) {
-				return _this.props.notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
-			});
-		};
-
-		_this.state = {
-			redirect: false
-		};
-		return _this;
-	}
-
-	/* HANDLE DELETE EVENT */
-
-
-	_createClass(ImageDelete, [{
-		key: 'render',
-		value: function render() {
-			if (this.state.redirect) {
-				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/images' });
-			} else {
-				return _react2.default.createElement(
-					'div',
-					{ className: 'card detalles' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-header' },
-						_react2.default.createElement(
-							'ul',
-							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-auto' },
-								_react2.default.createElement(
-									'h2',
-									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-									'Eliminar Imagen'
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-body' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'text-center' },
-							_react2.default.createElement(
-								'h1',
-								null,
-								'\xBFEliminar imagen?'
-							),
-							_react2.default.createElement('hr', { className: 'card-division' }),
-							_react2.default.createElement(
-								'p',
-								null,
-								'Esta acci\xF3n no se puede deshacer'
-							),
-							_react2.default.createElement(
-								'button',
-								{ onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-danger' },
-								_react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-								'Eliminar'
-							)
-						)
-					)
-				);
-			}
-		}
-	}]);
-
-	return ImageDelete;
-}(_react.Component);
-
-/***/ }),
-/* 320 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ImageGeneric = undefined;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _addButton = __webpack_require__(21);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* COMPONENT */
-/* IMPORT MODULES */
-var ImageGeneric = exports.ImageGeneric = function ImageGeneric() {
-  return _react2.default.createElement(
-    'div',
-    { className: 'card detalles' },
-    _react2.default.createElement(
-      'div',
-      { className: 'card-header' },
-      _react2.default.createElement(
-        'ul',
-        { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-        _react2.default.createElement(
-          'li',
-          { className: 'nav-item mr-auto' },
-          _react2.default.createElement(
-            'h2',
-            { className: 'detalles-titulo text-center' },
-            _react2.default.createElement('i', { className: 'fa-picture-o', 'aria-hidden': 'true' }),
-            'Detalles'
-          )
-        )
-      )
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'card-body' },
-      _react2.default.createElement(
-        'div',
-        { className: 'text-center' },
-        _react2.default.createElement(
-          'h1',
-          null,
-          _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
-          'Seleccione una imagen'
-        ),
-        _react2.default.createElement('hr', { className: 'card-division' }),
-        _react2.default.createElement(
-          'p',
-          null,
-          'O a\xF1ada una nueva'
-        ),
-        _react2.default.createElement(_addButton.AddButton, { category: 'images' })
-      )
-    )
-  );
-};
-
-/* IMPORT COMPONENTS */
-
-/***/ }),
+/* 319 */,
+/* 320 */,
 /* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71691,7 +70557,6 @@ var ImageGeneric = exports.ImageGeneric = function ImageGeneric() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ContentGroups = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -71703,13 +70568,23 @@ var _reactRouterDom = __webpack_require__(3);
 
 var _groupRouter = __webpack_require__(322);
 
+var _groupRouter2 = _interopRequireDefault(_groupRouter);
+
 var _groupForm = __webpack_require__(193);
+
+var _groupForm2 = _interopRequireDefault(_groupForm);
 
 var _groupGeneric = __webpack_require__(326);
 
+var _groupGeneric2 = _interopRequireDefault(_groupGeneric);
+
 var _list = __webpack_require__(14);
 
+var _list2 = _interopRequireDefault(_list);
+
 var _title = __webpack_require__(12);
+
+var _title2 = _interopRequireDefault(_title);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -71754,14 +70629,14 @@ var ContentGroups = function ContentGroups(_ref) {
       _react2.default.createElement(
         'div',
         { className: 'panel' },
-        _react2.default.createElement(_title.Title, { total: groups.length, appearance: 'card title-groups', icon: 'list' }),
+        _react2.default.createElement(_title2.default, { total: groups.length, appearance: 'card title-groups', icon: 'list' }),
         _react2.default.createElement(
           'div',
           { className: 'row controls' },
           _react2.default.createElement(
             'div',
             { className: 'col-4' },
-            _react2.default.createElement(_list.List, { filterValue: filterValue, category: 'groups', content: groups })
+            _react2.default.createElement(_list2.default, { filterValue: filterValue, category: 'groups', content: groups })
           ),
           _react2.default.createElement(
             'div',
@@ -71770,17 +70645,17 @@ var ContentGroups = function ContentGroups(_ref) {
               _reactRouterDom.Switch,
               null,
               _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/add', render: function render() {
-                  return _react2.default.createElement(_groupForm.GroupForm, _extends({}, props, { groups: groups }));
+                  return _react2.default.createElement(_groupForm2.default, _extends({}, props, { groups: groups }));
                 } }),
               _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', render: function render(_ref2) {
                   var match = _ref2.match;
-                  return _react2.default.createElement(_groupRouter.GroupRouter, _extends({}, props, { group: groups.find(function (g) {
-                      return g._id == match.params.groupId;
+                  return _react2.default.createElement(_groupRouter2.default, _extends({}, props, { group: groups.find(function (g) {
+                      return g._id === match.params.groupId;
                     }) }));
                 } })
             ),
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/groups', render: function render() {
-                return _react2.default.createElement(_groupGeneric.GroupGeneric, null);
+                return _react2.default.createElement(_groupGeneric2.default, null);
               } })
           )
         )
@@ -71788,7 +70663,8 @@ var ContentGroups = function ContentGroups(_ref) {
     )
   );
 };
-exports.ContentGroups = ContentGroups;
+
+exports.default = ContentGroups;
 
 /***/ }),
 /* 322 */
@@ -71798,9 +70674,8 @@ exports.ContentGroups = ContentGroups;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-exports.GroupRouter = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -71818,9 +70693,15 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _groupDetails = __webpack_require__(323);
 
+var _groupDetails2 = _interopRequireDefault(_groupDetails);
+
 var _groupForm = __webpack_require__(193);
 
+var _groupForm2 = _interopRequireDefault(_groupForm);
+
 var _groupDelete = __webpack_require__(325);
+
+var _groupDelete2 = _interopRequireDefault(_groupDelete);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -71835,95 +70716,101 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* COMPONENTS */
-var GroupRouter = exports.GroupRouter = function (_Component) {
-	_inherits(GroupRouter, _Component);
+var GroupRouter = function (_Component) {
+  _inherits(GroupRouter, _Component);
 
-	function GroupRouter(props) {
-		_classCallCheck(this, GroupRouter);
+  function GroupRouter(props) {
+    _classCallCheck(this, GroupRouter);
 
-		var _this = _possibleConstructorReturn(this, (GroupRouter.__proto__ || Object.getPrototypeOf(GroupRouter)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (GroupRouter.__proto__ || Object.getPrototypeOf(GroupRouter)).call(this, props));
 
-		_this.state = {
-			group: null,
-			isLoaded: false,
-			error: null
-		};
-		return _this;
-	}
+    _this.state = {
+      group: null,
+      isLoaded: false,
+      error: null
+    };
+    return _this;
+  }
 
-	/* FETCH FULL DATA ABOUT THE GROUP */
+  /* FETCH FULL DATA ABOUT THE GROUP */
 
 
-	_createClass(GroupRouter, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this2 = this;
+  _createClass(GroupRouter, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
 
-			if (this.props.group) {
-				_axios2.default.get(this.props.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
-					return _this2.setState({ group: group.data, isLoaded: true });
-				}, function (error) {
-					return _this2.setState({ error: error, isLoaded: true });
-				});
-			}
-		}
+      var _props = this.props,
+          group = _props.group,
+          token = _props.token;
 
-		/* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP*/
+      if (group) {
+        _axios2.default.get(group.url, { headers: { Authorization: 'Bearer ' + token } }).then(function (res) {
+          return _this2.setState({ group: res.data, isLoaded: true });
+        }, function (error) {
+          return _this2.setState({ error: error, isLoaded: true });
+        });
+      }
+    }
 
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			var _this3 = this;
+    /* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP */
 
-			if (nextProps.group && (nextProps.group._id != this.props.group._id || nextProps.group.updatedAt != this.props.group.updatedAt)) {
-				// if props actually changed
-				_axios2.default.get(nextProps.group.url, { headers: { Authorization: 'Bearer ' + this.props.token } }).then(function (group) {
-					return _this3.setState({ group: group.data, isLoaded: true });
-				}, function (error) {
-					return _this3.setState({ error: error, isLoaded: true });
-				});
-			}
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this4 = this;
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this3 = this;
 
-			var _state = this.state,
-			    error = _state.error,
-			    isLoaded = _state.isLoaded,
-			    group = _state.group;
-			// wait for resource to be loaded or handle errors if any
+      var _props2 = this.props,
+          group = _props2.group,
+          token = _props2.token;
 
-			if (error) {
-				// TODO: error handling
-				return null;
-			} else if (!isLoaded) {
-				// TODO: loading
-				return null;
-			} else {
-				return _react2.default.createElement(
-					_reactRouterDom.Switch,
-					null,
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId/edit', render: function render(_ref) {
-							var match = _ref.match;
-							return _react2.default.createElement(_groupForm.GroupForm, _extends({}, _this4.props, { group: group }));
-						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId/delete', render: function render(_ref2) {
-							var match = _ref2.match;
-							return _react2.default.createElement(_groupDelete.GroupDelete, _extends({}, _this4.props, { group: group }));
-						} }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', render: function render(_ref3) {
-							var match = _ref3.match;
-							return _react2.default.createElement(_groupDetails.GroupDetails, _extends({}, _this4.props, { group: group }));
-						} })
-				);
-			}
-		}
-	}]);
+      if (nextProps.group && (nextProps.group._id !== group._id || nextProps.group.updatedAt !== group.updatedAt)) {
+        // if props actually changed
+        _axios2.default.get(nextProps.group.url, { headers: { Authorization: 'Bearer ' + token } }).then(function (res) {
+          return _this3.setState({ group: res.data, isLoaded: true });
+        }, function (error) {
+          return _this3.setState({ error: error, isLoaded: true });
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
 
-	return GroupRouter;
+      var _state = this.state,
+          error = _state.error,
+          isLoaded = _state.isLoaded,
+          group = _state.group;
+      // wait for resource to be loaded or handle errors if any
+
+      if (error) {
+        // TODO: error handling
+        return null;
+      }if (!isLoaded) {
+        // TODO: loading
+        return null;
+      }
+      return _react2.default.createElement(
+        _reactRouterDom.Switch,
+        null,
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId/edit', render: function render() {
+            return _react2.default.createElement(_groupForm2.default, _extends({}, _this4.props, { group: group }));
+          } }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId/delete', render: function render() {
+            return _react2.default.createElement(_groupDelete2.default, _extends({}, _this4.props, { group: group }));
+          } }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/groups/:groupId', render: function render() {
+            return _react2.default.createElement(_groupDetails2.default, _extends({}, _this4.props, { group: group }));
+          } })
+      );
+    }
+  }]);
+
+  return GroupRouter;
 }(_react.Component);
+
+exports.default = GroupRouter;
 
 /***/ }),
 /* 323 */
@@ -72644,9 +71531,8 @@ var EditImageForm = exports.EditImageForm = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-exports.GroupDelete = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -72662,6 +71548,10 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactToastify = __webpack_require__(5);
 
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72672,96 +71562,112 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* COMPONENTS */
-var GroupDelete = exports.GroupDelete = function (_Component) {
-	_inherits(GroupDelete, _Component);
+var GroupDelete = function (_Component) {
+  _inherits(GroupDelete, _Component);
 
-	function GroupDelete(props) {
-		_classCallCheck(this, GroupDelete);
+  function GroupDelete(props) {
+    _classCallCheck(this, GroupDelete);
 
-		var _this = _possibleConstructorReturn(this, (GroupDelete.__proto__ || Object.getPrototypeOf(GroupDelete)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (GroupDelete.__proto__ || Object.getPrototypeOf(GroupDelete)).call(this, props));
 
-		_this.handleDelete = function (event) {
-			event.preventDefault();
-			_axios2.default.delete(_this.props.group.url, { headers: { Authorization: 'Bearer ' + _this.props.token } }).then(function (res) {
-				if (res.status == 200) {
-					_this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.notify);
-					_this.props.update('groups', res.resourceId, 'remove');
-				}
-			}).then(function (res) {
-				return _this.setState({ redirect: true });
-			}).catch(function (err) {
-				return _this.props.notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT, res.notify);
-			});
-		};
+    _this.handleDelete = function (event) {
+      event.preventDefault();
+      var _this$props = _this.props,
+          group = _this$props.group,
+          token = _this$props.token,
+          update = _this$props.update,
+          notify = _this$props.notify;
 
-		_this.state = {
-			redirect: false
-		};
-		return _this;
-	}
+      _axios2.default.delete(group.url, { headers: { Authorization: 'Bearer ' + token } }).then(function (res) {
+        if (res.status === 200) {
+          notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.notify);
+          update('groups', res.resourceId, 'remove');
+        }
+      }).then(function () {
+        return _this.setState({ redirect: true });
+      }).catch(function () {
+        return notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
+      });
+    };
 
-	/* HANDLE DELETE EVENT */
+    _this.state = {
+      redirect: false
+    };
+    return _this;
+  }
+
+  /* HANDLE DELETE EVENT */
 
 
-	_createClass(GroupDelete, [{
-		key: 'render',
-		value: function render() {
-			if (this.state.redirect) {
-				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/groups' });
-			} else {
-				return _react2.default.createElement(
-					'div',
-					{ className: 'card detalles' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-header' },
-						_react2.default.createElement(
-							'ul',
-							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-auto' },
-								_react2.default.createElement(
-									'h2',
-									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
-									'Eliminar Grupo'
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-body' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'text-center' },
-							_react2.default.createElement(
-								'h1',
-								null,
-								'\xBFEliminar grupo?'
-							),
-							_react2.default.createElement('hr', { className: 'card-division' }),
-							_react2.default.createElement(
-								'p',
-								null,
-								'Esta acci\xF3n no se puede deshacer'
-							),
-							_react2.default.createElement(
-								'button',
-								{ onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-danger' },
-								_react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
-								'Eliminar'
-							)
-						)
-					)
-				);
-			}
-		}
-	}]);
+  _createClass(GroupDelete, [{
+    key: 'render',
+    value: function render() {
+      var redirect = this.state.redirect;
 
-	return GroupDelete;
+      if (redirect) {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/groups' });
+      }
+      return _react2.default.createElement(
+        'div',
+        { className: 'card detalles' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card-header' },
+          _react2.default.createElement(
+            'ul',
+            { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+            _react2.default.createElement(
+              'li',
+              { className: 'nav-item mr-auto' },
+              _react2.default.createElement(
+                'h2',
+                { className: 'detalles-titulo' },
+                _react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+                'Eliminar Grupo'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'card-body' },
+          _react2.default.createElement(
+            'div',
+            { className: 'text-center' },
+            _react2.default.createElement(
+              'h1',
+              null,
+              '\xBFEliminar grupo?'
+            ),
+            _react2.default.createElement('hr', { className: 'card-division' }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Esta acci\xF3n no se puede deshacer'
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-danger' },
+              _react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+              'Eliminar'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return GroupDelete;
 }(_react.Component);
+
+GroupDelete.propTypes = {
+  group: _propTypes2.default.shape.isRequired,
+  token: _propTypes2.default.string.isRequired,
+  update: _propTypes2.default.shape.isRequired,
+  notify: _propTypes2.default.shape.isRequired
+};
+
+exports.default = GroupDelete;
 
 /***/ }),
 /* 326 */
@@ -72773,7 +71679,6 @@ var GroupDelete = exports.GroupDelete = function (_Component) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GroupGeneric = undefined;
 
 var _react = __webpack_require__(1);
 
@@ -72781,11 +71686,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _addButton = __webpack_require__(21);
 
+var _addButton2 = _interopRequireDefault(_addButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* COMPONENTS */
 /* IMPORT MODULES */
-var GroupGeneric = exports.GroupGeneric = function GroupGeneric() {
+var GroupGeneric = function GroupGeneric() {
   return _react2.default.createElement(
     'div',
     { className: 'card detalles' },
@@ -72825,13 +71732,14 @@ var GroupGeneric = exports.GroupGeneric = function GroupGeneric() {
           null,
           'O a\xF1ada uno nuevo'
         ),
-        _react2.default.createElement(_addButton.AddButton, { category: 'groups' })
+        _react2.default.createElement(_addButton2.default, { category: 'groups' })
       )
     )
   );
 };
 
 /* IMPORT COMPONENTS */
+exports.default = GroupGeneric;
 
 /***/ }),
 /* 327 */
@@ -72843,9 +71751,6 @@ var GroupGeneric = exports.GroupGeneric = function GroupGeneric() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ContentSettings = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
 
@@ -72855,131 +71760,132 @@ var _reactRouterDom = __webpack_require__(3);
 
 var _title = __webpack_require__(12);
 
+var _title2 = _interopRequireDefault(_title);
+
 var _manageUsers = __webpack_require__(328);
+
+var _manageUsers2 = _interopRequireDefault(_manageUsers);
 
 var _manageUserGroups = __webpack_require__(330);
 
+var _manageUserGroups2 = _interopRequireDefault(_manageUserGroups);
+
 var _manageLocations = __webpack_require__(332);
+
+var _manageLocations2 = _interopRequireDefault(_manageLocations);
 
 var _manageScreens = __webpack_require__(334);
 
+var _manageScreens2 = _interopRequireDefault(_manageScreens);
+
 var _icon = __webpack_require__(10);
+
+var _icon2 = _interopRequireDefault(_icon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
+/* COMPONENTS */
 
 
 /* IMPORT COMPONENTS */
+/* IMPORT MODULES */
+var ContentSettings = function ContentSettings(_ref) {
+  var props = _ref.props;
 
+  var menuItems = [{
+    id: 1, exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings'
+  }, {
+    id: 2, exact: false, text: 'Grupos', icon: 'users', location: '/settings/groups'
+  }, {
+    id: 3, exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations'
+  }, {
+    id: 4, exact: false, text: 'Pantallas', icon: 'window-maximize', location: '/settings/screens'
+  }];
 
-/* COMPONENTS */
-var ContentSettings = exports.ContentSettings = function (_Component) {
-  _inherits(ContentSettings, _Component);
-
-  function ContentSettings() {
-    _classCallCheck(this, ContentSettings);
-
-    return _possibleConstructorReturn(this, (ContentSettings.__proto__ || Object.getPrototypeOf(ContentSettings)).apply(this, arguments));
-  }
-
-  _createClass(ContentSettings, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var menu_items = [{ exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings' }, { exact: false, text: 'Grupos', icon: 'users', location: '/settings/groups' }, { exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations' }, { exact: false, text: 'Pantallas', icon: 'window-maximize', location: '/settings/screens' }];
-
-      var menu = menu_items.map(function (item, index) {
-        return _react2.default.createElement(
-          'div',
-          { key: index, className: 'list-group-item flex-column align-items-start' },
-          _react2.default.createElement(
-            _reactRouterDom.NavLink,
-            { exact: item.exact, to: item.location },
-            _react2.default.createElement(
-              'div',
-              { className: 'd-flex elemento settings-menu-item' },
-              _react2.default.createElement(
-                'p',
-                { className: 'mb-0' },
-                _react2.default.createElement(_icon.Icon, { icon: item.icon, mr: 3 }),
-                item.text
-              )
-            )
-          )
-        );
-      });
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'overview' },
+  var menu = menuItems.map(function (item) {
+    return _react2.default.createElement(
+      'div',
+      { key: item.id, className: 'list-group-item flex-column align-items-start' },
+      _react2.default.createElement(
+        _reactRouterDom.NavLink,
+        { exact: item.exact, to: item.location },
         _react2.default.createElement(
           'div',
-          { className: 'row' },
+          { className: 'd-flex elemento settings-menu-item' },
+          _react2.default.createElement(
+            'p',
+            { className: 'mb-0' },
+            _react2.default.createElement(_icon2.default, { icon: item.icon, mr: 3 }),
+            item.text
+          )
+        )
+      )
+    );
+  });
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'overview' },
+    _react2.default.createElement(
+      'div',
+      { className: 'row' },
+      _react2.default.createElement(
+        'div',
+        { className: 'col' },
+        _react2.default.createElement(
+          'div',
+          { className: 'titulo mb-4 text-right' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            'SISTEMA'
+          )
+        ),
+        _react2.default.createElement('hr', null)
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'row-panel' },
+      _react2.default.createElement(
+        'div',
+        { className: 'panel' },
+        _react2.default.createElement(_title2.default, { total: 'Configuraci\xF3n', appearance: 'card title-settings', icon: 'cogs' }),
+        _react2.default.createElement(
+          'div',
+          { className: 'row controls' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-2' },
+            _react2.default.createElement(
+              'div',
+              { className: 'list-group list-group-small mb-3' },
+              menu
+            )
+          ),
           _react2.default.createElement(
             'div',
             { className: 'col' },
-            _react2.default.createElement(
-              'div',
-              { className: 'titulo mb-4 text-right' },
-              _react2.default.createElement(
-                'h1',
-                null,
-                'SISTEMA'
-              )
-            ),
-            _react2.default.createElement('hr', null)
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'row-panel' },
-          _react2.default.createElement(
-            'div',
-            { className: 'panel' },
-            _react2.default.createElement(_title.Title, { total: 'Configuraci\xF3n', appearance: 'card title-settings', icon: 'cogs' }),
-            _react2.default.createElement(
-              'div',
-              { className: 'row controls' },
-              _react2.default.createElement(
-                'div',
-                { className: 'col-2' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'list-group list-group-small mb-3' },
-                  menu
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'col' },
-                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/settings', render: function render() {
-                    return _react2.default.createElement(_manageUsers.ManageUsers, _this2.props);
-                  } }),
-                _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/groups', render: function render() {
-                    return _react2.default.createElement(_manageUserGroups.ManageUserGroups, _this2.props);
-                  } }),
-                _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/locations', render: function render() {
-                    return _react2.default.createElement(_manageLocations.ManageLocations, _this2.props);
-                  } }),
-                _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/screens', render: function render() {
-                    return _react2.default.createElement(_manageScreens.ManageScreens, _this2.props);
-                  } })
-              )
-            )
+            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/settings', render: function render() {
+                return _react2.default.createElement(_manageUsers2.default, props);
+              } }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/groups', render: function render() {
+                return _react2.default.createElement(_manageUserGroups2.default, props);
+              } }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/locations', render: function render() {
+                return _react2.default.createElement(_manageLocations2.default, props);
+              } }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/settings/screens', render: function render() {
+                return _react2.default.createElement(_manageScreens2.default, props);
+              } })
           )
         )
-      );
-    }
-  }]);
+      )
+    )
+  );
+};
 
-  return ContentSettings;
-}(_react.Component);
+exports.default = ContentSettings;
 
 /***/ }),
 /* 328 */
@@ -72989,9 +71895,8 @@ var ContentSettings = exports.ContentSettings = function (_Component) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+		value: true
 });
-exports.ManageUsers = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -73005,7 +71910,13 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactToastify = __webpack_require__(5);
 
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _user = __webpack_require__(329);
+
+var _user2 = _interopRequireDefault(_user);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73022,404 +71933,442 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* COMPONENTS */
-var ManageUsers = exports.ManageUsers = function (_Component) {
-	_inherits(ManageUsers, _Component);
+var ManageUsers = function (_Component) {
+		_inherits(ManageUsers, _Component);
 
-	function ManageUsers(props) {
-		_classCallCheck(this, ManageUsers);
+		function ManageUsers(props) {
+				_classCallCheck(this, ManageUsers);
 
-		var _this = _possibleConstructorReturn(this, (ManageUsers.__proto__ || Object.getPrototypeOf(ManageUsers)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (ManageUsers.__proto__ || Object.getPrototypeOf(ManageUsers)).call(this, props));
 
-		_this.handleInputChange = function (event) {
-			var target = event.target;
-			var name = target.name;
-			var value = name != 'admin' ? target.value : !_this.state.admin;
-			_this.setState(_defineProperty({}, name, value));
-		};
+				_this.handleInputChange = function (event) {
+						var target = event.target,
+						    name = event.target.name;
+						var admin = _this.state.admin;
 
-		_this.edit = function (elementId) {
-			var user = _this.state.users.find(function (user) {
-				return user._id == elementId;
-			});
-			_this.setState({
-				login: user.login,
-				name: user.name,
-				email: user.email,
-				password: '',
-				checkPassword: '',
-				admin: user.admin,
-				userGroup: user.userGroup ? user.userGroup._id : '',
-				edit: true,
-				elementId: elementId
-			});
-		};
+						var value = name !== 'admin' ? target.value : !admin;
+						_this.setState(_defineProperty({}, name, value));
+				};
 
-		_this.cancel = function () {
-			_this.setState({
-				login: '',
-				name: '',
-				email: '',
-				password: '',
-				checkPassword: '',
-				admin: false,
-				userGroup: '',
-				edit: false,
-				elementId: ''
-			});
-		};
+				_this.edit = function (elementId) {
+						var users = _this.state.users;
 
-		_this.handleSubmit = function (method) {
-			// FORM DATA
-			var form = {
-				'name': _this.state.name,
-				'login': _this.state.login,
-				'email': _this.state.email,
-				'admin': _this.state.admin
-			};
-			if (_this.state.userGroup != '') {
-				form.userGroup = _this.state.userGroup;
-			} else {
-				form.userGroup = null;
-			}
-			if (_this.state.password != '') {
-				form.password = _this.state.password;
-			}
-			if (_this.state.checkPassword != '') {
-				form.checkPassword = _this.state.checkPassword;
-			}
-			(0, _axios2.default)({
-				method: method,
-				url: _this.state.edit ? 'http://localhost:4000/users/' + _this.state.elementId : 'http://localhost:4000/users/signup',
-				data: form,
-				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
-			}).then(function (res) {
-				if (res.status == 201 || res.status == 200) {
-					switch (method) {
-						case 'put':
-							_this.props.notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.props.update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
-							break;
-						case 'post':
-							_this.props.notify('Usuario creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT);
-							_this.props.update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
-							_this.edit(res.data.resourceId);
-							break;
-						case 'delete':
-							_this.props.notify('Usuario eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.TOP_RIGHT);
-							_this.cancel();
-							_this.props.update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
-							break;
-						default:
-							console.log('Something went wrong');
-					}
-				} else {
-					_this.setState({
-						isLoaded: true,
-						error: res.data
-					});
+						var user = users.find(function (u) {
+								return u._id === elementId;
+						});
+						_this.setState({
+								login: user.login,
+								name: user.name,
+								email: user.email,
+								password: '',
+								checkPassword: '',
+								admin: user.admin,
+								userGroup: user.userGroup ? user.userGroup._id : '',
+								edit: true,
+								elementId: elementId
+						});
+				};
+
+				_this.cancel = function () {
+						_this.setState({
+								login: '',
+								name: '',
+								email: '',
+								password: '',
+								checkPassword: '',
+								admin: false,
+								userGroup: '',
+								edit: false,
+								elementId: ''
+						});
+				};
+
+				_this.handleSubmit = function (method) {
+						// FORM DATA
+						var _this$state = _this.state,
+						    name = _this$state.name,
+						    login = _this$state.login,
+						    email = _this$state.email,
+						    admin = _this$state.admin,
+						    userGroup = _this$state.userGroup,
+						    password = _this$state.password,
+						    checkPassword = _this$state.checkPassword,
+						    edit = _this$state.edit,
+						    elementId = _this$state.elementId;
+						var _this$props = _this.props,
+						    token = _this$props.token,
+						    notify = _this$props.notify,
+						    update = _this$props.update;
+
+						var form = {
+								name: name,
+								login: login,
+								email: email,
+								admin: admin
+						};
+						if (userGroup !== '') {
+								form.userGroup = userGroup;
+						} else {
+								form.userGroup = null;
+						}
+						if (password !== '') {
+								form.password = password;
+						}
+						if (checkPassword !== '') {
+								form.checkPassword = checkPassword;
+						}
+						(0, _axios2.default)({
+								method: method,
+								url: edit ? 'http://localhost:4000/users/' + elementId : 'http://localhost:4000/users/signup',
+								data: form,
+								headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }
+						}).then(function (res) {
+								if (res.status === 201 || res.status === 200) {
+										switch (method) {
+												case 'put':
+														notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
+														break;
+												case 'post':
+														notify('Usuario creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT);
+														update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
+														_this.edit(res.data.resourceId);
+														break;
+												case 'delete':
+														notify('Usuario eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.TOP_RIGHT);
+														_this.cancel();
+														update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
+														break;
+												default:
+														console.log('Something went wrong');
+										}
+								} else {
+										_this.setState({
+												isLoaded: true,
+												error: res.data
+										});
+								}
+						}).catch(function () {
+								return notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
+						});
+				};
+
+				_this.state = {
+						users: null,
+						isLoaded: false,
+						error: null,
+						edit: false,
+						elementId: '',
+						// form
+						login: '',
+						name: '',
+						password: '',
+						checkPassword: '',
+						email: '',
+						userGroup: '',
+						admin: false
+				};
+				return _this;
+		}
+
+		_createClass(ManageUsers, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var users = this.props.data.users;
+
+						this.setState({ isLoaded: true, users: users });
 				}
-			}).catch(function (err) {
-				return _this.props.notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
-			});
-		};
+		}, {
+				key: 'componentWillReceiveProps',
+				value: function componentWillReceiveProps(nextProps) {
+						this.setState({ isLoaded: true, users: nextProps.data.users });
+				}
 
-		_this.state = {
-			users: null,
-			isLoaded: false,
-			error: null,
-			edit: false,
-			elementId: '',
-			// form
-			login: '',
-			name: '',
-			password: '',
-			checkPassword: '',
-			email: '',
-			userGroup: '',
-			admin: false
-		};
-		return _this;
-	}
+				/* HANDLE SUBMIT */
 
-	_createClass(ManageUsers, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.setState({ isLoaded: true, users: this.props.data.users });
-		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			this.setState({ isLoaded: true, users: nextProps.data.users });
-		}
+		}, {
+				key: 'render',
+				value: function render() {
+						var _this2 = this;
 
-		/* HANDLE SUBMIT */
+						var data = this.props.data;
+						var _state = this.state,
+						    users = _state.users,
+						    error = _state.error,
+						    isLoaded = _state.isLoaded,
+						    elementId = _state.elementId,
+						    edit = _state.edit,
+						    login = _state.login,
+						    name = _state.name,
+						    email = _state.email,
+						    password = _state.password,
+						    checkPassword = _state.checkPassword,
+						    userGroup = _state.userGroup,
+						    admin = _state.admin;
 
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
+						var optionsUserGroup = data.userGroups.map(function (user) {
+								return _react2.default.createElement(
+										'option',
+										{ value: user._id, key: user._id },
+										user.name
+								);
+						});
 
-			var _state = this.state,
-			    users = _state.users,
-			    error = _state.error,
-			    isLoaded = _state.isLoaded;
-
-			var optionsUserGroup = this.props.data.userGroups.map(function (user, index) {
-				return _react2.default.createElement(
-					'option',
-					{ value: user._id, key: index },
-					user.name
-				);
-			});
-
-			if (error) {
-				return null; // TODO: handle error
-			} else if (!isLoaded) {
-				return null; // TODO: handle loading
-			} else {
-				var list = users.map(function (user) {
-					if (user._id == _this2.state.elementId) {
-						return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: true });
-					} else {
-						return _react2.default.createElement(_user.User, { user: user, key: user._id, edit: _this2.edit, active: false });
-					}
-				});
-				list.push(_react2.default.createElement(
-					'div',
-					{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'text-center elemento' },
-						_react2.default.createElement(
-							'h4',
-							{ className: 'mb-1' },
-							'No se han encontrado ',
-							users.length > 0 && 'más',
-							' usuarios'
-						),
-						_react2.default.createElement('hr', { className: 'card-division' }),
-						_react2.default.createElement(
-							'small',
-							null,
-							'N\xFAmero de usuarios: ',
-							users.length
-						)
-					)
-				));
-				return _react2.default.createElement(
-					'div',
-					{ className: 'card settings' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-header' },
-						_react2.default.createElement(
-							'ul',
-							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-auto' },
-								_react2.default.createElement(
-									'h2',
-									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-user mr-3', 'aria-hidden': 'true' }),
-									'Usuarios'
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-body' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'row' },
-							_react2.default.createElement(
+						if (error) {
+								return null; // TODO: handle error
+						}if (!isLoaded) {
+								return null; // TODO: handle loading
+						}
+						var list = users.map(function (user) {
+								if (user._id === elementId) {
+										return _react2.default.createElement(_user2.default, { user: user, key: user._id, edit: _this2.edit, active: true });
+								}
+								return _react2.default.createElement(_user2.default, { user: user, key: user._id, edit: _this2.edit, active: false });
+						});
+						list.push(_react2.default.createElement(
 								'div',
-								{ className: 'col-6' },
+								{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
 								_react2.default.createElement(
-									'h3',
-									null,
-									this.state.edit ? 'Editar Usuario' : 'Añadir Usuario'
-								),
-								_react2.default.createElement('hr', { className: 'card-division' }),
+										'div',
+										{ className: 'text-center elemento' },
+										_react2.default.createElement(
+												'h4',
+												{ className: 'mb-1' },
+												'No se han encontrado ',
+												users.length > 0 && 'más',
+												' usuarios'
+										),
+										_react2.default.createElement('hr', { className: 'card-division' }),
+										_react2.default.createElement(
+												'small',
+												null,
+												'N\xFAmero de usuarios: ',
+												users.length
+										)
+								)
+						));
+						return _react2.default.createElement(
+								'div',
+								{ className: 'card settings' },
 								_react2.default.createElement(
-									'form',
-									null,
-									_react2.default.createElement(
 										'div',
-										{ className: 'form-row' },
+										{ className: 'card-header' },
 										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'login' },
-												_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-												'Usuario'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'login', placeholder: 'Nombre de usuario', name: 'login', value: this.state.login, onChange: this.handleInputChange })
-										),
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'name' },
-												_react2.default.createElement('i', { className: 'fa fa-id-card-o mr-2' }),
-												'Nombre'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre completo', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'form-row' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'email' },
-												_react2.default.createElement('i', { className: 'fa fa-envelope-o mr-2' }),
-												'Correo electr\xF3nico'
-											),
-											_react2.default.createElement('input', { type: 'email', className: 'form-control', id: 'email', placeholder: 'Correo electr\xF3nico', name: 'email', value: this.state.email, onChange: this.handleInputChange })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'form-row' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'password' },
-												_react2.default.createElement('i', { className: 'fa fa-key mr-2' }),
-												this.state.edit ? 'Nueva contraseña' : 'Contraseña'
-											),
-											_react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'usuario', placeholder: 'Contrase\xF1a', name: 'password', value: this.state.password, onChange: this.handleInputChange })
-										),
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'checkPassword' },
-												_react2.default.createElement('i', { className: 'fa fa-key mr-2' }),
-												'Confirmar contrase\xF1a'
-											),
-											_react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'checkPassword', placeholder: 'Confirmar contrase\xF1a', name: 'checkPassword', value: this.state.checkPassword, onChange: this.handleInputChange })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'form-group' },
-										_react2.default.createElement(
-											'label',
-											{ htmlFor: 'userGroup' },
-											_react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
-											'Grupo de gesti\xF3n de dispositivos'
-										),
-										_react2.default.createElement(
-											'div',
-											null,
-											_react2.default.createElement(
-												'select',
-												{ className: 'custom-select', name: 'userGroup', value: this.state.userGroup, onChange: this.handleInputChange },
+												'ul',
+												{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
 												_react2.default.createElement(
-													'option',
-													{ value: '', key: '0' },
-													'Sin asignar'
-												),
-												optionsUserGroup
-											)
+														'li',
+														{ className: 'nav-item mr-auto' },
+														_react2.default.createElement(
+																'h2',
+																{ className: 'detalles-titulo' },
+																_react2.default.createElement('i', { className: 'fa fa-user mr-3', 'aria-hidden': 'true' }),
+																'Usuarios'
+														)
+												)
 										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'form-group' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'custom-control custom-checkbox' },
-											_react2.default.createElement('input', { onChange: this.handleInputChange, id: 'admin', type: 'checkbox', checked: this.state.admin, name: 'remember', value: this.state.admin, className: 'custom-control-input' }),
-											_react2.default.createElement(
-												'label',
-												{ className: 'custom-control-label', htmlFor: 'admin' },
-												'Dar permisos de administrador'
-											)
-										)
-									),
-									!this.state.edit ? _react2.default.createElement(
-										'button',
-										{ onClick: function onClick() {
-												return _this2.handleSubmit('post');
-											}, type: 'button', className: 'btn btn-block btn-small btn-success' },
-										_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-										'A\xF1adir'
-									) : _react2.default.createElement(
-										'div',
-										{ className: 'd-flex w-100 justify-content-between' },
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.handleSubmit('put');
-												}, type: 'button', className: 'btn btn-block btn-small btn-success mr-2' },
-											_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
-											'Actualizar'
-										),
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.handleSubmit('delete');
-												}, type: 'button', className: 'btn btn-block btn-small btn-danger ml-1 mr-1' },
-											_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
-											'Eliminar'
-										),
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.cancel();
-												}, type: 'button', className: 'btn btn-block btn-small btn-warning ml-2' },
-											_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
-											'Cancelar'
-										)
-									)
-								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'col-6' },
-								_react2.default.createElement(
-									'h3',
-									{ className: 'd-flex w-100 justify-content-between' },
-									'Usuarios',
-									_react2.default.createElement(
-										'span',
-										null,
-										this.state.users.length
-									)
 								),
-								_react2.default.createElement('hr', { className: 'card-division' }),
 								_react2.default.createElement(
-									'div',
-									{ className: 'list settings-list' },
-									_react2.default.createElement(
 										'div',
-										{ className: 'list-group mb-3' },
-										list
-									)
+										{ className: 'card-body' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'row' },
+												_react2.default.createElement(
+														'div',
+														{ className: 'col-6' },
+														_react2.default.createElement(
+																'h3',
+																null,
+																edit ? 'Editar Usuario' : 'Añadir Usuario'
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'form',
+																null,
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'login' },
+																						_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+																						'Usuario'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'login', placeholder: 'Nombre de usuario', name: 'login', value: login, onChange: this.handleInputChange })
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'name' },
+																						_react2.default.createElement('i', { className: 'fa fa-id-card-o mr-2' }),
+																						'Nombre'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre completo', name: 'name', value: name, onChange: this.handleInputChange })
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'email' },
+																						_react2.default.createElement('i', { className: 'fa fa-envelope-o mr-2' }),
+																						'Correo electr\xF3nico'
+																				),
+																				_react2.default.createElement('input', { type: 'email', className: 'form-control', id: 'email', placeholder: 'Correo electr\xF3nico', name: 'email', value: email, onChange: this.handleInputChange })
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'password' },
+																						_react2.default.createElement('i', { className: 'fa fa-key mr-2' }),
+																						edit ? 'Nueva contraseña' : 'Contraseña'
+																				),
+																				_react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'usuario', placeholder: 'Contrase\xF1a', name: 'password', value: password, onChange: this.handleInputChange })
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'checkPassword' },
+																						_react2.default.createElement('i', { className: 'fa fa-key mr-2' }),
+																						'Confirmar contrase\xF1a'
+																				),
+																				_react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'checkPassword', placeholder: 'Confirmar contrase\xF1a', name: 'checkPassword', value: checkPassword, onChange: this.handleInputChange })
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'userGroup' },
+																				_react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
+																				'Grupo de gesti\xF3n de dispositivos'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				null,
+																				_react2.default.createElement(
+																						'select',
+																						{ className: 'custom-select', name: 'userGroup', value: userGroup, onChange: this.handleInputChange },
+																						_react2.default.createElement(
+																								'option',
+																								{ value: '', key: '0' },
+																								'Sin asignar'
+																						),
+																						optionsUserGroup
+																				)
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'custom-control custom-checkbox' },
+																				_react2.default.createElement('input', { onChange: this.handleInputChange, id: 'admin', type: 'checkbox', checked: admin, name: 'remember', value: admin, className: 'custom-control-input' }),
+																				_react2.default.createElement(
+																						'label',
+																						{ className: 'custom-control-label', htmlFor: 'admin' },
+																						'Dar permisos de administrador'
+																				)
+																		)
+																),
+																!edit ? _react2.default.createElement(
+																		'button',
+																		{ onClick: function onClick() {
+																						return _this2.handleSubmit('post');
+																				}, type: 'button', className: 'btn btn-block btn-small btn-success' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+																		'A\xF1adir'
+																) : _react2.default.createElement(
+																		'div',
+																		{ className: 'd-flex w-100 justify-content-between' },
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.handleSubmit('put');
+																						}, type: 'button', className: 'btn btn-block btn-small btn-success mr-2' },
+																				_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+																				'Actualizar'
+																		),
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.handleSubmit('delete');
+																						}, type: 'button', className: 'btn btn-block btn-small btn-danger ml-1 mr-1' },
+																				_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+																				'Eliminar'
+																		),
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.cancel();
+																						}, type: 'button', className: 'btn btn-block btn-small btn-warning ml-2' },
+																				_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+																				'Cancelar'
+																		)
+																)
+														)
+												),
+												_react2.default.createElement(
+														'div',
+														{ className: 'col-6' },
+														_react2.default.createElement(
+																'h3',
+																{ className: 'd-flex w-100 justify-content-between' },
+																'Usuarios',
+																_react2.default.createElement(
+																		'span',
+																		null,
+																		users.length
+																)
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'div',
+																{ className: 'list settings-list' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'list-group mb-3' },
+																		list
+																)
+														)
+												)
+										)
 								)
-							)
-						)
-					)
-				);
-			}
-		}
-	}]);
+						);
+				}
+		}]);
 
-	return ManageUsers;
+		return ManageUsers;
 }(_react.Component);
+
+ManageUsers.propTypes = {
+		data: _propTypes2.default.shape.isRequired,
+		token: _propTypes2.default.string.isRequired,
+		notify: _propTypes2.default.shape.isRequired,
+		update: _propTypes2.default.shape.isRequired
+};
+
+exports.default = ManageUsers;
 
 /***/ }),
 /* 329 */
@@ -73530,9 +72479,8 @@ exports.default = User;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+		value: true
 });
-exports.ManageUserGroups = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -73546,7 +72494,13 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactToastify = __webpack_require__(5);
 
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _userGroup = __webpack_require__(331);
+
+var _userGroup2 = _interopRequireDefault(_userGroup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -73563,296 +72517,325 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* COMPONENTS */
-var ManageUserGroups = exports.ManageUserGroups = function (_Component) {
-	_inherits(ManageUserGroups, _Component);
+var ManageUserGroups = function (_Component) {
+		_inherits(ManageUserGroups, _Component);
 
-	function ManageUserGroups(props) {
-		_classCallCheck(this, ManageUserGroups);
+		function ManageUserGroups(props) {
+				_classCallCheck(this, ManageUserGroups);
 
-		var _this = _possibleConstructorReturn(this, (ManageUserGroups.__proto__ || Object.getPrototypeOf(ManageUserGroups)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (ManageUserGroups.__proto__ || Object.getPrototypeOf(ManageUserGroups)).call(this, props));
 
-		_this.handleInputChange = function (event) {
-			var target = event.target;
-			var name = target.name;
-			var value = target.value;
-			_this.setState(_defineProperty({}, name, value));
-		};
+				_this.handleInputChange = function (event) {
+						var _event$target$target = event.target.target,
+						    name = _event$target$target.name,
+						    value = _event$target$target.value;
 
-		_this.edit = function (elementId) {
-			var userGroup = _this.state.userGroups.find(function (userGroup) {
-				return userGroup._id == elementId;
-			});
-			_this.setState({
-				name: userGroup.name,
-				description: userGroup.description,
-				edit: true,
-				elementId: elementId
-			});
-		};
+						_this.setState(_defineProperty({}, name, value));
+				};
 
-		_this.cancel = function () {
-			_this.setState({
-				name: '',
-				description: '',
-				edit: false,
-				elementId: ''
-			});
-		};
+				_this.edit = function (elementId) {
+						var userGroups = _this.state.userGroups;
 
-		_this.handleSubmit = function (method) {
-			// FORM DATA
-			var form = {
-				'name': _this.state.name,
-				'description': _this.state.description
-			};
-			(0, _axios2.default)({
-				method: method,
-				url: _this.state.edit ? 'http://localhost:4000/userGroups/' + _this.state.elementId : 'http://localhost:4000/userGroups',
-				data: form,
-				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
-			}).then(function (res) {
-				// resolve callback
-				if (res.status == 201 || res.status == 200) {
-					switch (method) {
-						case 'put':
-							_this.props.notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.props.update('userGroups', res.data.resourceId, 'edit', res.data.resource); // update dataset
-							break;
-						case 'post':
-							_this.props.notify('Grupo creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.props.update('userGroups', res.data.resourceId, 'add', res.data.resource); // update dataset
-							_this.edit(res.data.resourceId);
-							break;
-						case 'delete':
-							_this.props.notify('Grupo eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.cancel();
-							_this.props.update('userGroups', res.data.resourceId, 'remove', res.data.resource); // update dataset
-							break;
-						default:
-							console.log('Something went wrong');
-					}
-				} else {
-					_this.setState({
-						isLoaded: true,
-						error: res.data
-					});
+						var _userGroups$find = userGroups.find(function (u) {
+								return u._id === elementId;
+						}),
+						    name = _userGroups$find.name,
+						    description = _userGroups$find.description;
+
+						_this.setState({
+								name: name,
+								description: description,
+								elementId: elementId,
+								edit: true
+						});
+				};
+
+				_this.cancel = function () {
+						_this.setState({
+								name: '',
+								description: '',
+								edit: false,
+								elementId: ''
+						});
+				};
+
+				_this.handleSubmit = function (method) {
+						var _this$state = _this.state,
+						    name = _this$state.name,
+						    description = _this$state.description,
+						    edit = _this$state.edit,
+						    elementId = _this$state.elementId;
+						var _this$props = _this.props,
+						    token = _this$props.token,
+						    update = _this$props.update,
+						    notify = _this$props.notify;
+						// FORM DATA
+
+						var form = {
+								name: name,
+								description: description
+						};
+						(0, _axios2.default)({
+								method: method,
+								url: edit ? 'http://localhost:4000/userGroups/' + elementId : 'http://localhost:4000/userGroups',
+								data: form,
+								headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }
+						}).then(function (res) {
+								// resolve callback
+								if (res.status === 201 || res.status === 200) {
+										switch (method) {
+												case 'put':
+														notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														update('userGroups', res.data.resourceId, 'edit', res.data.resource); // update dataset
+														break;
+												case 'post':
+														notify('Grupo creado con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														update('userGroups', res.data.resourceId, 'add', res.data.resource); // update dataset
+														_this.edit(res.data.resourceId);
+														break;
+												case 'delete':
+														notify('Grupo eliminado con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														_this.cancel();
+														update('userGroups', res.data.resourceId, 'remove', res.data.resource); // update dataset
+														break;
+												default:
+														console.log('Something went wrong');
+										}
+								} else {
+										_this.setState({
+												isLoaded: true,
+												error: res.data
+										});
+								}
+						}).catch(function () {
+								return notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
+						});
+				};
+
+				_this.state = {
+						userGroups: null,
+						isLoaded: false,
+						error: null,
+						edit: false,
+						elementId: '',
+						// form
+						name: '',
+						description: ''
+				};
+				return _this;
+		}
+
+		_createClass(ManageUserGroups, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var userGroups = this.props.data.userGroups;
+
+						this.setState({ isLoaded: true, userGroups: userGroups });
 				}
-			}).catch(function (err) {
-				return _this.props.notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
-			});
-		};
+		}, {
+				key: 'componentWillReceiveProps',
+				value: function componentWillReceiveProps(nextProps) {
+						this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups });
+				}
 
-		_this.state = {
-			userGroups: null,
-			isLoaded: false,
-			error: null,
-			edit: false,
-			elementId: '',
-			// form
-			name: '',
-			description: ''
-		};
-		return _this;
-	}
+				/* HANDLE SUBMIT */
 
-	_createClass(ManageUserGroups, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.setState({ isLoaded: true, userGroups: this.props.data.userGroups });
-		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups });
-		}
+		}, {
+				key: 'render',
+				value: function render() {
+						var _this2 = this;
 
-		/* HANDLE SUBMIT */
-
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
-
-			var _state = this.state,
-			    userGroups = _state.userGroups,
-			    error = _state.error,
-			    isLoaded = _state.isLoaded;
+						var _state = this.state,
+						    userGroups = _state.userGroups,
+						    error = _state.error,
+						    isLoaded = _state.isLoaded,
+						    elementId = _state.elementId,
+						    edit = _state.edit,
+						    name = _state.name,
+						    description = _state.description;
 
 
-			if (error) {
-				return null; // TODO: handle error
-			} else if (!isLoaded) {
-				return null; // TODO: handle loading
-			} else {
-				var list = userGroups.map(function (userGroup) {
-					if (userGroup._id == _this2.state.elementId) {
-						return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: true });
-					} else {
-						return _react2.default.createElement(_userGroup.UserGroup, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: false });
-					}
-				});
-				list.push(_react2.default.createElement(
-					'div',
-					{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'text-center elemento' },
-						_react2.default.createElement(
-							'h4',
-							{ className: 'mb-1' },
-							'No se han encontrado ',
-							userGroups.length > 0 && 'más',
-							' grupos de gesti\xF3n'
-						),
-						_react2.default.createElement('hr', { className: 'card-division' }),
-						_react2.default.createElement(
-							'small',
-							null,
-							'N\xFAmero de grupos de gesti\xF3n: ',
-							userGroups.length
-						)
-					)
-				));
-
-				return _react2.default.createElement(
-					'div',
-					{ className: 'card settings' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-header' },
-						_react2.default.createElement(
-							'ul',
-							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-auto' },
-								_react2.default.createElement(
-									'h2',
-									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-users mr-3', 'aria-hidden': 'true' }),
-									'Grupos de gesti\xF3n'
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-body' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'row' },
-							_react2.default.createElement(
+						if (error) {
+								return null; // TODO: handle error
+						}if (!isLoaded) {
+								return null; // TODO: handle loading
+						}
+						var list = userGroups.map(function (userGroup) {
+								if (userGroup._id === elementId) {
+										return _react2.default.createElement(_userGroup2.default, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: true });
+								}
+								return _react2.default.createElement(_userGroup2.default, { userGroup: userGroup, key: userGroup._id, edit: _this2.edit, active: false });
+						});
+						list.push(_react2.default.createElement(
 								'div',
-								{ className: 'col-6' },
+								{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
 								_react2.default.createElement(
-									'h3',
-									null,
-									this.state.edit ? 'Editar Grupo de gestión' : 'Añadir Grupo de gestión'
-								),
-								_react2.default.createElement('hr', { className: 'card-division' }),
-								_react2.default.createElement(
-									'form',
-									null,
-									_react2.default.createElement(
 										'div',
-										{ className: 'form-row' },
+										{ className: 'text-center elemento' },
 										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'name' },
-												_react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
-												'Nombre'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre del grupo de gesti\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'form-row' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'description' },
-												_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-												'Descripci\xF3n'
-											),
-											_react2.default.createElement('input', { type: 'description', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n del grupo de gesti\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-										)
-									),
-									!this.state.edit ? _react2.default.createElement(
-										'button',
-										{ onClick: function onClick() {
-												return _this2.handleSubmit('post');
-											}, type: 'button', className: 'btn btn-block btn-small btn-success' },
-										_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-										'A\xF1adir'
-									) : _react2.default.createElement(
-										'div',
-										{ className: 'd-flex w-100 justify-content-between' },
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.handleSubmit('put');
-												}, type: 'button', className: 'btn btn-block btn-small btn-success mr-2' },
-											_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
-											'Actualizar'
+												'h4',
+												{ className: 'mb-1' },
+												'No se han encontrado ',
+												userGroups.length > 0 && 'más',
+												' grupos de gesti\xF3n'
 										),
+										_react2.default.createElement('hr', { className: 'card-division' }),
 										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.handleSubmit('delete');
-												}, type: 'button', className: 'btn btn-block btn-small btn-danger ml-1 mr-1' },
-											_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
-											'Eliminar'
-										),
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.cancel();
-												}, type: 'button', className: 'btn btn-block btn-small btn-warning ml-2' },
-											_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
-											'Cancelar'
+												'small',
+												null,
+												'N\xFAmero de grupos de gesti\xF3n: ',
+												userGroups.length
 										)
-									)
 								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'col-6' },
-								_react2.default.createElement(
-									'h3',
-									{ className: 'd-flex w-100 justify-content-between' },
-									'Grupos de gesti\xF3n',
-									_react2.default.createElement(
-										'span',
-										null,
-										this.state.userGroups.length
-									)
-								),
-								_react2.default.createElement('hr', { className: 'card-division' }),
-								_react2.default.createElement(
-									'div',
-									{ className: 'list settings-list' },
-									_react2.default.createElement(
-										'div',
-										{ className: 'list-group mb-3' },
-										list
-									)
-								)
-							)
-						)
-					)
-				);
-			}
-		}
-	}]);
+						));
 
-	return ManageUserGroups;
+						return _react2.default.createElement(
+								'div',
+								{ className: 'card settings' },
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-header' },
+										_react2.default.createElement(
+												'ul',
+												{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+												_react2.default.createElement(
+														'li',
+														{ className: 'nav-item mr-auto' },
+														_react2.default.createElement(
+																'h2',
+																{ className: 'detalles-titulo' },
+																_react2.default.createElement('i', { className: 'fa fa-users mr-3', 'aria-hidden': 'true' }),
+																'Grupos de gesti\xF3n'
+														)
+												)
+										)
+								),
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-body' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'row' },
+												_react2.default.createElement(
+														'div',
+														{ className: 'col-6' },
+														_react2.default.createElement(
+																'h3',
+																null,
+																edit ? 'Editar Grupo de gestión' : 'Añadir Grupo de gestión'
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'form',
+																null,
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'name' },
+																						_react2.default.createElement('i', { className: 'fa fa-users mr-2' }),
+																						'Nombre'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre del grupo de gesti\xF3n', name: 'name', value: name, onChange: this.handleInputChange })
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'description' },
+																						_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+																						'Descripci\xF3n'
+																				),
+																				_react2.default.createElement('input', { type: 'description', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n del grupo de gesti\xF3n', name: 'description', value: description, onChange: this.handleInputChange })
+																		)
+																),
+																!edit ? _react2.default.createElement(
+																		'button',
+																		{ onClick: function onClick() {
+																						return _this2.handleSubmit('post');
+																				}, type: 'button', className: 'btn btn-block btn-small btn-success' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+																		'A\xF1adir'
+																) : _react2.default.createElement(
+																		'div',
+																		{ className: 'd-flex w-100 justify-content-between' },
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.handleSubmit('put');
+																						}, type: 'button', className: 'btn btn-block btn-small btn-success mr-2' },
+																				_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+																				'Actualizar'
+																		),
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.handleSubmit('delete');
+																						}, type: 'button', className: 'btn btn-block btn-small btn-danger ml-1 mr-1' },
+																				_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+																				'Eliminar'
+																		),
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.cancel();
+																						}, type: 'button', className: 'btn btn-block btn-small btn-warning ml-2' },
+																				_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+																				'Cancelar'
+																		)
+																)
+														)
+												),
+												_react2.default.createElement(
+														'div',
+														{ className: 'col-6' },
+														_react2.default.createElement(
+																'h3',
+																{ className: 'd-flex w-100 justify-content-between' },
+																'Grupos de gesti\xF3n',
+																_react2.default.createElement(
+																		'span',
+																		null,
+																		userGroups.length
+																)
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'div',
+																{ className: 'list settings-list' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'list-group mb-3' },
+																		list
+																)
+														)
+												)
+										)
+								)
+						);
+				}
+		}]);
+
+		return ManageUserGroups;
 }(_react.Component);
+
+ManageUserGroups.propTypes = {
+		data: _propTypes2.default.shape.isRequired,
+		token: _propTypes2.default.string.isRequired,
+		update: _propTypes2.default.shape.isRequired,
+		notify: _propTypes2.default.shape.isRequired
+};
+
+exports.default = ManageUserGroups;
 
 /***/ }),
 /* 331 */
@@ -73974,9 +72957,8 @@ exports.default = UserGroup;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+		value: true
 });
-exports.ManageLocations = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -73990,7 +72972,13 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactToastify = __webpack_require__(5);
 
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _location = __webpack_require__(333);
+
+var _location2 = _interopRequireDefault(_location);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74007,301 +72995,328 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* COMPONENTS */
-var ManageLocations = exports.ManageLocations = function (_Component) {
-	_inherits(ManageLocations, _Component);
+var ManageLocations = function (_Component) {
+		_inherits(ManageLocations, _Component);
 
-	function ManageLocations(props) {
-		_classCallCheck(this, ManageLocations);
+		function ManageLocations(props) {
+				_classCallCheck(this, ManageLocations);
 
-		var _this = _possibleConstructorReturn(this, (ManageLocations.__proto__ || Object.getPrototypeOf(ManageLocations)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (ManageLocations.__proto__ || Object.getPrototypeOf(ManageLocations)).call(this, props));
 
-		_this.handleInputChange = function (event) {
-			var target = event.target;
-			var name = target.name;
-			var value = target.value;
-			_this.setState(_defineProperty({}, name, value));
-		};
+				_this.handleInputChange = function (event) {
+						var _event$target$target = event.target.target,
+						    name = _event$target$target.name,
+						    value = _event$target$target.value;
 
-		_this.edit = function (elementId) {
-			var location = _this.state.locations.find(function (location) {
-				return location._id == elementId;
-			});
-			_this.setState({
-				name: location.name,
-				description: location.description,
-				elementId: elementId,
-				edit: true
-			});
-		};
+						_this.setState(_defineProperty({}, name, value));
+				};
 
-		_this.cancel = function () {
-			_this.setState({
-				name: '',
-				description: '',
-				elementId: '',
-				edit: false
-			});
-		};
+				_this.edit = function (elementId) {
+						var locations = _this.state.locations;
 
-		_this.handleSubmit = function (method) {
-			// FORM DATA
-			var form = { 'name': _this.state.name };
-			if (_this.state.description != '') {
-				form.description = _this.state.description;
-			}
-			// HTTP request
-			(0, _axios2.default)({
-				method: method,
-				url: _this.state.edit ? 'http://localhost:4000/locations/' + _this.state.elementId : 'http://localhost:4000/locations',
-				data: form,
-				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
-			}).then(function (res) {
-				if (res.status == 201 || res.status == 200) {
-					switch (method) {
-						case 'put':
-							_this.props.notify('Localización modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.props.update('locations', res.data.resourceId, 'edit', res.data.resource); // update dataset
-							break;
-						case 'post':
-							_this.props.notify('Localización creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.props.update('locations', res.data.resourceId, 'add', res.data.resource); // update dataset
-							_this.edit(res.data.resource._id);
-							break;
-						case 'delete':
-							_this.props.notify('Localización eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.cancel();
-							_this.props.update('locations', res.data.resourceId, 'remove', res.data.resource); // update dataset
-							break;
-						default:
-							console.log('Something went wrong');
-					}
-				} else {
-					_this.setState({
-						isLoaded: true,
-						error: res.data
-					});
+						var _locations$find = locations.find(function (l) {
+								return l._id === elementId;
+						}),
+						    name = _locations$find.name,
+						    description = _locations$find.description;
+
+						_this.setState({
+								name: name,
+								description: description,
+								elementId: elementId,
+								edit: true
+						});
+				};
+
+				_this.cancel = function () {
+						_this.setState({
+								name: '',
+								description: '',
+								elementId: '',
+								edit: false
+						});
+				};
+
+				_this.handleSubmit = function (method) {
+						// FORM DATA
+						var _this$state = _this.state,
+						    name = _this$state.name,
+						    description = _this$state.description,
+						    edit = _this$state.edit,
+						    elementId = _this$state.elementId;
+						var _this$props = _this.props,
+						    token = _this$props.token,
+						    notify = _this$props.notify,
+						    update = _this$props.update;
+
+						var form = { name: name };
+						if (description !== '') {
+								form.description = description;
+						}
+						// HTTP request
+						(0, _axios2.default)({
+								method: method,
+								url: edit ? 'http://localhost:4000/locations/' + elementId : 'http://localhost:4000/locations',
+								data: form,
+								headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }
+						}).then(function (res) {
+								if (res.status === 201 || res.status === 200) {
+										switch (method) {
+												case 'put':
+														notify('Localización modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														update('locations', res.data.resourceId, 'edit', res.data.resource); // update dataset
+														break;
+												case 'post':
+														notify('Localización creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														update('locations', res.data.resourceId, 'add', res.data.resource); // update dataset
+														_this.edit(res.data.resource._id);
+														break;
+												case 'delete':
+														notify('Localización eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														_this.cancel();
+														update('locations', res.data.resourceId, 'remove', res.data.resource); // update dataset
+														break;
+												default:
+														console.log('Something went wrong');
+										}
+								} else {
+										_this.setState({
+												isLoaded: true,
+												error: res.data
+										});
+								}
+						}).catch(function () {
+								return notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
+						});
+				};
+
+				_this.state = {
+						locations: false,
+						isLoaded: false,
+						error: null,
+						edit: false,
+						elementId: '',
+						// form
+						name: '',
+						description: ''
+				};
+				return _this;
+		}
+
+		_createClass(ManageLocations, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var locations = this.props.data.locations;
+
+						this.setState({ isLoaded: true, locations: locations });
 				}
-			}).catch(function (err) {
-				return _this.props.notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
-			});
-		};
+		}, {
+				key: 'componentWillReceiveProps',
+				value: function componentWillReceiveProps(nextProps) {
+						this.setState({ isLoaded: true, locations: nextProps.data.locations });
+				}
 
-		var user = _this.props.user;
-
-		_this.state = {
-			locations: false,
-			isLoaded: false,
-			error: null,
-			edit: false,
-			elementId: '',
-			// form
-			name: '',
-			description: ''
-		};
-		return _this;
-	}
-
-	// Handle changes
+				// Handle changes
 
 
-	_createClass(ManageLocations, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.setState({ isLoaded: true, locations: this.props.data.locations });
-		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			this.setState({ isLoaded: true, locations: nextProps.data.locations });
-		}
+				/* HANDLE SUBMIT */
 
-		/* HANDLE SUBMIT */
+		}, {
+				key: 'render',
+				value: function render() {
+						var _this2 = this;
 
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
-
-			var _state = this.state,
-			    locations = _state.locations,
-			    error = _state.error,
-			    isLoaded = _state.isLoaded;
+						var _state = this.state,
+						    locations = _state.locations,
+						    error = _state.error,
+						    isLoaded = _state.isLoaded,
+						    elementId = _state.elementId,
+						    edit = _state.edit,
+						    name = _state.name,
+						    description = _state.description;
 
 
-			if (error) {
-				return null; // TODO: handle error
-			} else if (!isLoaded) {
-				return null; // TODO: handle loading
-			} else {
-				var list = locations.map(function (location) {
-					if (location._id == _this2.state.elementId) {
-						return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: true });
-					} else {
-						return _react2.default.createElement(_location.Location, { location: location, key: location._id, edit: _this2.edit, active: false });
-					}
-				});
-				list.push(_react2.default.createElement(
-					'div',
-					{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'text-center elemento' },
-						_react2.default.createElement(
-							'h4',
-							{ className: 'mb-1' },
-							'No se han encontrado ',
-							locations.length > 0 && 'más',
-							' localizaciones'
-						),
-						_react2.default.createElement('hr', { className: 'card-division' }),
-						_react2.default.createElement(
-							'small',
-							null,
-							'N\xFAmero de localizaciones: ',
-							locations.length
-						)
-					)
-				));
-
-				return _react2.default.createElement(
-					'div',
-					{ className: 'card settings' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-header' },
-						_react2.default.createElement(
-							'ul',
-							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-auto' },
-								_react2.default.createElement(
-									'h2',
-									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-map-marker mr-3', 'aria-hidden': 'true' }),
-									'Localizaciones'
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-body' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'row' },
-							_react2.default.createElement(
+						if (error) {
+								return null; // TODO: handle error
+						}if (!isLoaded) {
+								return null; // TODO: handle loading
+						}
+						var list = locations.map(function (location) {
+								if (location._id === elementId) {
+										return _react2.default.createElement(_location2.default, { location: location, key: location._id, edit: _this2.edit, active: true });
+								}
+								return _react2.default.createElement(_location2.default, { location: location, key: location._id, edit: _this2.edit, active: false });
+						});
+						list.push(_react2.default.createElement(
 								'div',
-								{ className: 'col-6' },
+								{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
 								_react2.default.createElement(
-									'h3',
-									null,
-									this.state.edit ? 'Editar Localización' : 'Añadir Localizacion'
-								),
-								_react2.default.createElement('hr', { className: 'card-division' }),
-								_react2.default.createElement(
-									'form',
-									null,
-									_react2.default.createElement(
 										'div',
-										{ className: 'form-row' },
+										{ className: 'text-center elemento' },
 										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'name' },
-												_react2.default.createElement('i', { className: 'fa fa-map-marker mr-2' }),
-												'Nombre'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la localizaci\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'form-row' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'description' },
-												_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-												'Descripci\xF3n'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-										)
-									),
-									!this.state.edit ? _react2.default.createElement(
-										'button',
-										{ onClick: function onClick() {
-												return _this2.handleSubmit('post');
-											}, type: 'button', className: 'btn btn-block btn-small btn-success' },
-										_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-										'A\xF1adir'
-									) : _react2.default.createElement(
-										'div',
-										{ className: 'd-flex w-100 justify-content-between' },
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.handleSubmit('put');
-												}, type: 'button', className: 'btn btn-block btn-small btn-success mr-2' },
-											_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
-											'Actualizar'
+												'h4',
+												{ className: 'mb-1' },
+												'No se han encontrado ',
+												locations.length > 0 && 'más',
+												' localizaciones'
 										),
+										_react2.default.createElement('hr', { className: 'card-division' }),
 										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.handleSubmit('delete');
-												}, type: 'button', className: 'btn btn-block btn-small btn-danger ml-1 mr-1' },
-											_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
-											'Eliminar'
-										),
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.cancel();
-												}, type: 'button', className: 'btn btn-block btn-small btn-warning ml-2' },
-											_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
-											'Cancelar'
+												'small',
+												null,
+												'N\xFAmero de localizaciones: ',
+												locations.length
 										)
-									)
 								)
-							),
-							_react2.default.createElement(
-								'div',
-								{ className: 'col-6' },
-								_react2.default.createElement(
-									'h3',
-									{ className: 'd-flex w-100 justify-content-between' },
-									'Localizaciones',
-									_react2.default.createElement(
-										'span',
-										null,
-										this.state.locations.length
-									)
-								),
-								_react2.default.createElement('hr', { className: 'card-division' }),
-								_react2.default.createElement(
-									'div',
-									{ className: 'list settings-list' },
-									_react2.default.createElement(
-										'div',
-										{ className: 'list-group mb-3' },
-										list
-									)
-								)
-							)
-						)
-					)
-				);
-			}
-		}
-	}]);
+						));
 
-	return ManageLocations;
+						return _react2.default.createElement(
+								'div',
+								{ className: 'card settings' },
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-header' },
+										_react2.default.createElement(
+												'ul',
+												{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+												_react2.default.createElement(
+														'li',
+														{ className: 'nav-item mr-auto' },
+														_react2.default.createElement(
+																'h2',
+																{ className: 'detalles-titulo' },
+																_react2.default.createElement('i', { className: 'fa fa-map-marker mr-3', 'aria-hidden': 'true' }),
+																'Localizaciones'
+														)
+												)
+										)
+								),
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-body' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'row' },
+												_react2.default.createElement(
+														'div',
+														{ className: 'col-6' },
+														_react2.default.createElement(
+																'h3',
+																null,
+																edit ? 'Editar Localización' : 'Añadir Localizacion'
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'form',
+																null,
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'name' },
+																						_react2.default.createElement('i', { className: 'fa fa-map-marker mr-2' }),
+																						'Nombre'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la localizaci\xF3n', name: 'name', value: name, onChange: this.handleInputChange })
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'description' },
+																						_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+																						'Descripci\xF3n'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n', name: 'description', value: description, onChange: this.handleInputChange })
+																		)
+																),
+																!edit ? _react2.default.createElement(
+																		'button',
+																		{ onClick: function onClick() {
+																						return _this2.handleSubmit('post');
+																				}, type: 'button', className: 'btn btn-block btn-small btn-success' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+																		'A\xF1adir'
+																) : _react2.default.createElement(
+																		'div',
+																		{ className: 'd-flex w-100 justify-content-between' },
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.handleSubmit('put');
+																						}, type: 'button', className: 'btn btn-block btn-small btn-success mr-2' },
+																				_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+																				'Actualizar'
+																		),
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.handleSubmit('delete');
+																						}, type: 'button', className: 'btn btn-block btn-small btn-danger ml-1 mr-1' },
+																				_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+																				'Eliminar'
+																		),
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.cancel();
+																						}, type: 'button', className: 'btn btn-block btn-small btn-warning ml-2' },
+																				_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+																				'Cancelar'
+																		)
+																)
+														)
+												),
+												_react2.default.createElement(
+														'div',
+														{ className: 'col-6' },
+														_react2.default.createElement(
+																'h3',
+																{ className: 'd-flex w-100 justify-content-between' },
+																'Localizaciones',
+																_react2.default.createElement(
+																		'span',
+																		null,
+																		locations.length
+																)
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'div',
+																{ className: 'list settings-list' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'list-group mb-3' },
+																		list
+																)
+														)
+												)
+										)
+								)
+						);
+				}
+		}]);
+
+		return ManageLocations;
 }(_react.Component);
+
+ManageLocations.propTypes = {
+		data: _propTypes2.default.shape.isRequired,
+		token: _propTypes2.default.string.isRequired,
+		notify: _propTypes2.default.shape.isRequired,
+		update: _propTypes2.default.shape.isRequired
+};
+
+exports.default = ManageLocations;
 
 /***/ }),
 /* 333 */
@@ -74389,9 +73404,8 @@ exports.default = Location;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+		value: true
 });
-exports.ManageScreens = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -74405,7 +73419,13 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactToastify = __webpack_require__(5);
 
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _screen = __webpack_require__(335);
+
+var _screen2 = _interopRequireDefault(_screen);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74422,375 +73442,411 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /* COMPONENTS */
-var ManageScreens = exports.ManageScreens = function (_Component) {
-	_inherits(ManageScreens, _Component);
+var ManageScreens = function (_Component) {
+		_inherits(ManageScreens, _Component);
 
-	function ManageScreens(props) {
-		_classCallCheck(this, ManageScreens);
+		function ManageScreens(props) {
+				_classCallCheck(this, ManageScreens);
 
-		var _this = _possibleConstructorReturn(this, (ManageScreens.__proto__ || Object.getPrototypeOf(ManageScreens)).call(this, props));
+				var _this = _possibleConstructorReturn(this, (ManageScreens.__proto__ || Object.getPrototypeOf(ManageScreens)).call(this, props));
 
-		_this.edit = function (elementId) {
-			var screen = _this.state.screens.find(function (screen) {
-				return screen._id == elementId;
-			});
-			_this.setState({
-				name: screen.name,
-				width: screen.size.width,
-				height: screen.size.height,
-				description: screen.description,
-				screenCode: screen.screenCode,
-				colorProfile: screen.colorProfile,
-				elementId: elementId,
-				edit: true
-			});
-		};
+				_this.edit = function (elementId) {
+						var screens = _this.state.screens;
 
-		_this.cancel = function () {
-			_this.setState({
-				name: '',
-				width: '',
-				height: '',
-				description: '',
-				screenCode: '',
-				colorProfile: 'grayscale',
-				elementId: '',
-				edit: false
-			});
-		};
+						var _screens$find = screens.find(function (s) {
+								return s._id === elementId;
+						}),
+						    name = _screens$find.name,
+						    width = _screens$find.width,
+						    height = _screens$find.height,
+						    description = _screens$find.description,
+						    screenCode = _screens$find.screenCode,
+						    colorProfile = _screens$find.colorProfile;
 
-		_this.handleInputChange = function (event) {
-			var target = event.target;
-			var name = target.name;
-			var value = target.value;
-			_this.setState(_defineProperty({}, name, value));
-		};
+						_this.setState({
+								name: name,
+								width: width,
+								height: height,
+								description: description,
+								screenCode: screenCode,
+								colorProfile: colorProfile,
+								elementId: elementId,
+								edit: true
+						});
+				};
 
-		_this.handleSubmit = function (method) {
-			// FORM DATA
-			var form = {
-				'name': _this.state.name,
-				'size': {
-					'height': _this.state.height,
-					'width': _this.state.width
-				},
-				'screenCode': _this.state.screenCode,
-				'colorProfile': _this.state.colorProfile
-			};
-			if (_this.state.description != '') {
-				form.description = _this.state.description;
-			}
-			(0, _axios2.default)({
-				method: method,
-				url: _this.state.edit ? 'http://localhost:4000/screens/' + _this.state.elementId : 'http://localhost:4000/screens',
-				data: form,
-				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _this.props.token }
-			}).then(function (res) {
-				if (res.status == 201 || res.status == 200) {
-					switch (method) {
-						case 'put':
-							_this.props.notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.props.update('screens', res.data.resourceId, 'edit', res.data.resource); // update dataset
-							break;
-						case 'post':
-							_this.props.notify('Pantalla creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.props.update('screens', res.data.resourceId, 'add', res.data.resource); // update dataset
-							_this.edit(res.data.resourceId);
-							break;
-						case 'delete':
-							_this.props.notify('Pantalla eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-							_this.cancel();
-							_this.props.update('screens', res.data.resourceId, 'remove', res.data.resource); // update dataset
-							break;
-						default:
-							console.log('Something went wrong');
-					}
-				} else {
-					_this.setState({
-						isLoaded: true,
-						error: res.data
-					});
+				_this.cancel = function () {
+						_this.setState({
+								name: '',
+								width: '',
+								height: '',
+								description: '',
+								screenCode: '',
+								colorProfile: 'grayscale',
+								elementId: '',
+								edit: false
+						});
+				};
+
+				_this.handleInputChange = function (event) {
+						var _event$target = event.target,
+						    name = _event$target.name,
+						    value = _event$target.value;
+
+						_this.setState(_defineProperty({}, name, value));
+				};
+
+				_this.handleSubmit = function (method) {
+						var _this$state = _this.state,
+						    name = _this$state.name,
+						    size = _this$state.size,
+						    screenCode = _this$state.screenCode,
+						    colorProfile = _this$state.colorProfile,
+						    description = _this$state.description,
+						    edit = _this$state.edit,
+						    elementId = _this$state.elementId;
+						var _this$props = _this.props,
+						    token = _this$props.token,
+						    update = _this$props.update,
+						    notify = _this$props.notify;
+						// FORM DATA
+
+						var form = {
+								name: name,
+								size: size,
+								screenCode: screenCode,
+								colorProfile: colorProfile
+						};
+						if (description !== '') {
+								form.description = description;
+						}
+						(0, _axios2.default)({
+								method: method,
+								url: edit ? 'http://localhost:4000/screens/' + elementId : 'http://localhost:4000/screens',
+								data: form,
+								headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: 'Bearer ' + token }
+						}).then(function (res) {
+								if (res.status === 201 || res.status === 200) {
+										switch (method) {
+												case 'put':
+														notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														update('screens', res.data.resourceId, 'edit', res.data.resource); // update dataset
+														break;
+												case 'post':
+														notify('Pantalla creada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														update('screens', res.data.resourceId, 'add', res.data.resource); // update dataset
+														_this.edit(res.data.resourceId);
+														break;
+												case 'delete':
+														notify('Pantalla eliminada con éxito', 'notify-success', 'trash', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+														_this.cancel();
+														update('screens', res.data.resourceId, 'remove', res.data.resource); // update dataset
+														break;
+												default:
+														console.log('Something went wrong');
+										}
+								} else {
+										_this.setState({
+												isLoaded: true,
+												error: res.data
+										});
+								}
+						}).catch(function () {
+								return notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
+						});
+				};
+
+				_this.state = {
+						isLoaded: false,
+						error: null,
+						edit: false,
+						elementId: '',
+						// form
+						name: '',
+						height: 0,
+						width: 0,
+						screenCode: '',
+						colorProfile: 'grayscale',
+						description: ''
+				};
+				return _this;
+		}
+
+		_createClass(ManageScreens, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var screens = this.props.data.screens;
+
+						this.setState({ isLoaded: true, screens: screens });
 				}
-			}).catch(function (err) {
-				return _this.props.notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
-			});
-		};
+		}, {
+				key: 'componentWillReceiveProps',
+				value: function componentWillReceiveProps(nextProps) {
+						this.setState({ isLoaded: true, screens: nextProps.data.screens });
+				}
 
-		_this.state = {
-			users: null,
-			isLoaded: false,
-			error: null,
-			edit: false,
-			elementId: '',
-			// form
-			name: '',
-			height: 0,
-			width: 0,
-			screenCode: '',
-			colorProfile: 'grayscale',
-			description: ''
-		};
-		return _this;
-	}
+				/* HANDLE SUBMIT */
 
-	_createClass(ManageScreens, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			this.setState({ isLoaded: true, screens: this.props.data.screens });
-		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			this.setState({ isLoaded: true, screens: nextProps.data.screens });
-		}
+		}, {
+				key: 'render',
+				value: function render() {
+						var _this2 = this;
 
-		/* HANDLE SUBMIT */
-
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
-
-			var _state = this.state,
-			    screens = _state.screens,
-			    error = _state.error,
-			    isLoaded = _state.isLoaded;
+						var _state = this.state,
+						    screens = _state.screens,
+						    error = _state.error,
+						    isLoaded = _state.isLoaded,
+						    edit = _state.edit,
+						    elementId = _state.elementId,
+						    name = _state.name,
+						    height = _state.height,
+						    width = _state.width,
+						    description = _state.description,
+						    colorProfile = _state.colorProfile,
+						    screenCode = _state.screenCode;
 
 
-			if (error) {
-				return null; // TODO: handle error
-			} else if (!isLoaded) {
-				return null; // TODO: handle loading
-			} else {
-				var list = screens.map(function (screen) {
-					if (screen._id == _this2.state.elementId) {
-						return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: true });
-					} else {
-						return _react2.default.createElement(_screen.Screen, { screen: screen, key: screen._id, edit: _this2.edit, active: false });
-					}
-				});
-				list.push(_react2.default.createElement(
-					'div',
-					{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'text-center elemento' },
-						_react2.default.createElement(
-							'h4',
-							{ className: 'mb-1' },
-							'No se han encontrado ',
-							screens.length > 0 && 'más',
-							' pantallas'
-						),
-						_react2.default.createElement('hr', { className: 'card-division' }),
-						_react2.default.createElement(
-							'small',
-							null,
-							'N\xFAmero de pantallas: ',
-							screens.length
-						)
-					)
-				));
-				return _react2.default.createElement(
-					'div',
-					{ className: 'card settings' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-header' },
-						_react2.default.createElement(
-							'ul',
-							{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-							_react2.default.createElement(
-								'li',
-								{ className: 'nav-item mr-auto' },
-								_react2.default.createElement(
-									'h2',
-									{ className: 'detalles-titulo' },
-									_react2.default.createElement('i', { className: 'fa fa-window-maximize mr-3', 'aria-hidden': 'true' }),
-									'Pantallas'
-								)
-							)
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'card-body' },
-						_react2.default.createElement(
-							'div',
-							{ className: 'row' },
-							_react2.default.createElement(
+						if (error) {
+								return null; // TODO: handle error
+						}if (!isLoaded) {
+								return null; // TODO: handle loading
+						}
+						var list = screens.map(function (screen) {
+								if (screen._id === elementId) {
+										return _react2.default.createElement(_screen2.default, { screen: screen, key: screen._id, edit: _this2.edit, active: true });
+								}
+								return _react2.default.createElement(_screen2.default, { screen: screen, key: screen._id, edit: _this2.edit, active: false });
+						});
+						list.push(_react2.default.createElement(
 								'div',
-								{ className: 'col-6' },
+								{ key: '0', className: 'list-group-item-action list-group-item flex-column align-items-start' },
 								_react2.default.createElement(
-									'h3',
-									null,
-									this.state.edit ? 'Editar pantalla' : 'Añadir pantalla'
-								),
-								_react2.default.createElement('hr', { className: 'card-division' }),
-								_react2.default.createElement(
-									'form',
-									null,
-									_react2.default.createElement(
 										'div',
-										{ className: 'form-row' },
+										{ className: 'text-center elemento' },
 										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col-6' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'name' },
-												_react2.default.createElement('i', { className: 'fa fa-fw fa-window-maximize mr-2' }),
-												'Nombre'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la resoluci\xF3n', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+												'h4',
+												{ className: 'mb-1' },
+												'No se han encontrado ',
+												screens.length > 0 && 'más',
+												' pantallas'
 										),
+										_react2.default.createElement('hr', { className: 'card-division' }),
 										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col-3' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'heigth' },
-												_react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-v mr-2' }),
-												'Alto'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'heigth', placeholder: 'Alto', name: 'height', value: this.state.height, onChange: this.handleInputChange })
-										),
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col-3' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'width' },
-												_react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-h mr-2' }),
-												'Ancho'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'width', placeholder: 'Ancho', name: 'width', value: this.state.width, onChange: this.handleInputChange })
-										)
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'form-group' },
-										_react2.default.createElement(
-											'label',
-											{ htmlFor: 'description' },
-											_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2' }),
-											'Descripci\xF3n'
-										),
-										_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n de la resoluci\xF3n', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-									),
-									_react2.default.createElement(
-										'div',
-										{ className: 'form-row' },
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'colorProfile' },
-												_react2.default.createElement('i', { className: 'fa fa-adjust mr-2' }),
-												'Color'
-											),
-											_react2.default.createElement(
-												'div',
+												'small',
 												null,
-												_react2.default.createElement(
-													'select',
-													{ className: 'custom-select', name: 'colorProfile', value: this.state.colorProfile, onChange: this.handleInputChange },
-													_react2.default.createElement(
-														'option',
-														{ value: 'color' },
-														'Color'
-													),
-													_react2.default.createElement(
-														'option',
-														{ value: 'grayscale' },
-														'Escala de grises'
-													)
-												)
-											)
-										),
-										_react2.default.createElement(
-											'div',
-											{ className: 'form-group col' },
-											_react2.default.createElement(
-												'label',
-												{ htmlFor: 'screenCode' },
-												_react2.default.createElement('i', { className: 'fa fa-fw fa-code mr-2' }),
-												'C\xF3digo de pantalla'
-											),
-											_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'screenCode', placeholder: 'C\xF3digo', name: 'screenCode', value: this.state.screenCode, onChange: this.handleInputChange })
+												'N\xFAmero de pantallas: ',
+												screens.length
 										)
-									),
-									!this.state.edit ? _react2.default.createElement(
-										'button',
-										{ onClick: function onClick() {
-												return _this2.handleSubmit('post');
-											}, type: 'button', className: 'btn btn-block btn-small btn-success' },
-										_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
-										'A\xF1adir'
-									) : _react2.default.createElement(
-										'div',
-										{ className: 'd-flex w-100 justify-content-between' },
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.handleSubmit('put');
-												}, type: 'button', className: 'btn btn-block btn-small btn-success mr-2' },
-											_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
-											'Actualizar'
-										),
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.handleSubmit('delete');
-												}, type: 'button', className: 'btn btn-block btn-small btn-danger ml-1 mr-1' },
-											_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
-											'Eliminar'
-										),
-										_react2.default.createElement(
-											'button',
-											{ onClick: function onClick() {
-													return _this2.cancel();
-												}, type: 'button', className: 'btn btn-block btn-small btn-warning ml-2' },
-											_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
-											'Cancelar'
-										)
-									)
 								)
-							),
-							_react2.default.createElement(
+						));
+						return _react2.default.createElement(
 								'div',
-								{ className: 'col-6' },
+								{ className: 'card settings' },
 								_react2.default.createElement(
-									'h3',
-									{ className: 'd-flex w-100 justify-content-between' },
-									'Pantallas',
-									_react2.default.createElement(
-										'span',
-										null,
-										this.state.screens.length
-									)
-								),
-								_react2.default.createElement('hr', { className: 'card-division' }),
-								_react2.default.createElement(
-									'div',
-									{ className: 'list settings-list' },
-									_react2.default.createElement(
 										'div',
-										{ className: 'list-group mb-3' },
-										list
-									)
+										{ className: 'card-header' },
+										_react2.default.createElement(
+												'ul',
+												{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+												_react2.default.createElement(
+														'li',
+														{ className: 'nav-item mr-auto' },
+														_react2.default.createElement(
+																'h2',
+																{ className: 'detalles-titulo' },
+																_react2.default.createElement('i', { className: 'fa fa-window-maximize mr-3', 'aria-hidden': 'true' }),
+																'Pantallas'
+														)
+												)
+										)
+								),
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-body' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'row' },
+												_react2.default.createElement(
+														'div',
+														{ className: 'col-6' },
+														_react2.default.createElement(
+																'h3',
+																null,
+																edit ? 'Editar pantalla' : 'Añadir pantalla'
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'form',
+																null,
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col-6' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'name' },
+																						_react2.default.createElement('i', { className: 'fa fa-fw fa-window-maximize mr-2' }),
+																						'Nombre'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', placeholder: 'Nombre de la resoluci\xF3n', name: 'name', value: name, onChange: this.handleInputChange })
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col-3' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'heigth' },
+																						_react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-v mr-2' }),
+																						'Alto'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'heigth', placeholder: 'Alto', name: 'height', value: height, onChange: this.handleInputChange })
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col-3' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'width' },
+																						_react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-h mr-2' }),
+																						'Ancho'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'width', placeholder: 'Ancho', name: 'width', value: width, onChange: this.handleInputChange })
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'description' },
+																				_react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2' }),
+																				'Descripci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'description', placeholder: 'Descripci\xF3n de la resoluci\xF3n', name: 'description', value: description, onChange: this.handleInputChange })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-row' },
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'colorProfile' },
+																						_react2.default.createElement('i', { className: 'fa fa-adjust mr-2' }),
+																						'Color'
+																				),
+																				_react2.default.createElement(
+																						'div',
+																						null,
+																						_react2.default.createElement(
+																								'select',
+																								{ className: 'custom-select', name: 'colorProfile', value: colorProfile, onChange: this.handleInputChange },
+																								_react2.default.createElement(
+																										'option',
+																										{ value: 'color' },
+																										'Color'
+																								),
+																								_react2.default.createElement(
+																										'option',
+																										{ value: 'grayscale' },
+																										'Escala de grises'
+																								)
+																						)
+																				)
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'form-group col' },
+																				_react2.default.createElement(
+																						'label',
+																						{ htmlFor: 'screenCode' },
+																						_react2.default.createElement('i', { className: 'fa fa-fw fa-code mr-2' }),
+																						'C\xF3digo de pantalla'
+																				),
+																				_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'screenCode', placeholder: 'C\xF3digo', name: 'screenCode', value: screenCode, onChange: this.handleInputChange })
+																		)
+																),
+																!edit ? _react2.default.createElement(
+																		'button',
+																		{ onClick: function onClick() {
+																						return _this2.handleSubmit('post');
+																				}, type: 'button', className: 'btn btn-block btn-small btn-success' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-1', 'aria-hidden': 'true' }),
+																		'A\xF1adir'
+																) : _react2.default.createElement(
+																		'div',
+																		{ className: 'd-flex w-100 justify-content-between' },
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.handleSubmit('put');
+																						}, type: 'button', className: 'btn btn-block btn-small btn-success mr-2' },
+																				_react2.default.createElement('i', { className: 'fa fa-floppy-o mr-1', 'aria-hidden': 'true' }),
+																				'Actualizar'
+																		),
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.handleSubmit('delete');
+																						}, type: 'button', className: 'btn btn-block btn-small btn-danger ml-1 mr-1' },
+																				_react2.default.createElement('i', { className: 'fa fa-trash-o mr-1', 'aria-hidden': 'true' }),
+																				'Eliminar'
+																		),
+																		_react2.default.createElement(
+																				'button',
+																				{ onClick: function onClick() {
+																								return _this2.cancel();
+																						}, type: 'button', className: 'btn btn-block btn-small btn-warning ml-2' },
+																				_react2.default.createElement('i', { className: 'fa fa-times mr-1', 'aria-hidden': 'true' }),
+																				'Cancelar'
+																		)
+																)
+														)
+												),
+												_react2.default.createElement(
+														'div',
+														{ className: 'col-6' },
+														_react2.default.createElement(
+																'h3',
+																{ className: 'd-flex w-100 justify-content-between' },
+																'Pantallas',
+																_react2.default.createElement(
+																		'span',
+																		null,
+																		screens.length
+																)
+														),
+														_react2.default.createElement('hr', { className: 'card-division' }),
+														_react2.default.createElement(
+																'div',
+																{ className: 'list settings-list' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'list-group mb-3' },
+																		list
+																)
+														)
+												)
+										)
 								)
-							)
-						)
-					)
-				);
-			}
-		}
-	}]);
+						);
+				}
+		}]);
 
-	return ManageScreens;
+		return ManageScreens;
 }(_react.Component);
+
+ManageScreens.propTypes = {
+		data: _propTypes2.default.shape.isRequired,
+		token: _propTypes2.default.string.isRequired,
+		update: _propTypes2.default.shape.isRequired,
+		notify: _propTypes2.default.shape.isRequired
+};
+
+exports.default = ManageScreens;
 
 /***/ }),
 /* 335 */
@@ -77719,6 +76775,1187 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 357 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+		value: true
+});
+exports.ImageForm = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactToastify = __webpack_require__(5);
+
+var _reactRouterDom = __webpack_require__(3);
+
+var _axios = __webpack_require__(4);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _tag = __webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
+
+
+var moment = __webpack_require__(0);
+moment.locale('es');
+
+/* IMPORT COMPONENTS */
+
+/* COMPONENTS */
+var ImageForm = exports.ImageForm = function (_Component) {
+		_inherits(ImageForm, _Component);
+
+		/* STATE */
+		function ImageForm(props) {
+				_classCallCheck(this, ImageForm);
+
+				var _this = _possibleConstructorReturn(this, (ImageForm.__proto__ || Object.getPrototypeOf(ImageForm)).call(this, props));
+
+				_initialiseProps.call(_this);
+
+				var _this$props = _this.props,
+				    image = _this$props.image,
+				    user = _this$props.user;
+
+				_this.state = {
+						name: image ? image.name : '',
+						description: image ? image.description : '',
+						createdBy: image ? image.createdBy || { name: 'Usuario eliminado' } : user,
+						updatedBy: user.name,
+						category: image ? image.category ? image.category : '' : '',
+						tags: image ? image.tags : [],
+						createdAt: image ? moment(image.createdAt) : moment(),
+						updatedAt: moment(),
+						displays: image ? image.displays.map(function (display) {
+								return display._id;
+						}) : [],
+						groups: image ? image.groups.map(function (group) {
+								return group._id;
+						}) : [],
+						color: image ? image.color_profile : 'color',
+
+						redirect: false,
+						redirectLocation: '/images',
+						error: null
+				};
+				return _this;
+		}
+
+		/* INITIAL VALUES FOR FORM INPUTS */
+
+
+		_createClass(ImageForm, [{
+				key: 'componentDidMount',
+				value: function componentDidMount() {
+						var _props = this.props,
+						    images = _props.images,
+						    image = _props.image;
+						// set state with initial values
+
+						this.setState({
+								redirectLocation: image ? '/images/' + image._id : '/images' // Redirect url
+						});
+				}
+
+				/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
+
+
+				/* HANDLE MULTIPLE CHECKBOX */
+				// TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
+
+				/* HANDLE SUMBIT (PUT OR POST) */
+
+		}, {
+				key: 'render',
+
+
+				/* RENDER COMPONENT */
+				value: function render() {
+						var _this2 = this;
+
+						var _props2 = this.props,
+						    _props2$data = _props2.data,
+						    devices = _props2$data.devices,
+						    images = _props2$data.images,
+						    groups = _props2$data.groups,
+						    displays = _props2$data.displays,
+						    image = _props2.image;
+
+						// Options
+
+						var optionsGroups = groups.map(function (group) {
+								return _react2.default.createElement(
+										'div',
+										{ key: group._id, className: 'custom-control custom-checkbox' },
+										_react2.default.createElement('input', { onChange: _this2.handleCheckGroups, id: group._id, type: 'checkbox', defaultChecked: _this2.state.groups.find(function (c) {
+														return c == group._id;
+												}), name: group._id, defaultValue: group._id, className: 'custom-control-input' }),
+										_react2.default.createElement(
+												'label',
+												{ className: 'custom-control-label', htmlFor: group._id },
+												group.name
+										)
+								);
+						});
+						var optionsDisplays = displays.sort(function (a, b) {
+								return a.updatedAt - b.updatedAt;
+						}).map(function (display) {
+								return _react2.default.createElement(
+										'div',
+										{ key: display._id, className: 'custom-control custom-checkbox' },
+										_react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, id: display._id, type: 'checkbox', defaultChecked: _this2.state.displays.find(function (c) {
+														return c == display._id;
+												}), name: display._id, defaultValue: display._id, className: 'custom-control-input' }),
+										_react2.default.createElement(
+												'label',
+												{ className: 'custom-control-label', htmlFor: display._id },
+												display.name
+										)
+								);
+						});
+
+						// Render return
+						if (this.state.redirect) {
+								return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.redirectLocation });
+						} else {
+								return _react2.default.createElement(
+										'div',
+										{ className: 'card detalles' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-header' },
+												_react2.default.createElement(
+														'ul',
+														{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item mr-auto' },
+																image ? _react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+																		'Editar una imagen'
+																) : _react2.default.createElement(
+																		'h2',
+																		{ className: 'detalles-titulo' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+																		'A\xF1adir una nueva imagen'
+																)
+														),
+														_react2.default.createElement(
+																'li',
+																{ className: 'nav-item ml-2' },
+																image ? _react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-info' },
+																		_react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+																		'Guardar cambios'
+																) : _react2.default.createElement(
+																		'button',
+																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-info' },
+																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
+																		'A\xF1adir'
+																)
+														)
+												)
+										),
+										_react2.default.createElement(
+												'div',
+												{ className: 'card-body' },
+												_react2.default.createElement(
+														'form',
+														{ id: 'form' },
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'nombre' },
+																		_react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+																		'Nombre'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'descripcion' },
+																		_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+																		'Descripcion'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la imagen', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'category' },
+																				_react2.default.createElement('i', { className: 'fa fa-th-large mr-2' }),
+																				'Categor\xEDa'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: this.state.category, onChange: this.handleInputChange })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'color' },
+																				_react2.default.createElement('i', { className: 'fa fa-tint mr-2' }),
+																				'Color'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				null,
+																				_react2.default.createElement(
+																						'select',
+																						{ className: 'custom-select', name: 'color', value: this.state.color, onChange: this.handleInputChange },
+																						_react2.default.createElement(
+																								'option',
+																								{ value: 'color' },
+																								'Color'
+																						),
+																						_react2.default.createElement(
+																								'option',
+																								{ value: 'escala de grises' },
+																								'Escala de grises'
+																						)
+																				)
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'displays' },
+																				_react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+																				'Asociar uno o varios displays'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'custom-controls-stacked' },
+																				optionsDisplays
+																		)
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'groups' },
+																				_react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
+																				'Asociar uno o varios grupos'
+																		),
+																		_react2.default.createElement(
+																				'div',
+																				{ className: 'custom-controls-stacked' },
+																				optionsGroups
+																		)
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'etiquetas' },
+																				_react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
+																				'Etiquetas'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col' },
+																		this.state.tags.map(function (tag, index) {
+																				return tag.length > 1 ? _react2.default.createElement(_tag.Tag, { key: index, tag: tag, category: 'images' }) : '';
+																		})
+																)
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-group' },
+																_react2.default.createElement(
+																		'label',
+																		{ htmlFor: 'creador' },
+																		_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+																		'Creador'
+																),
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.createdBy.name, readOnly: 'readOnly' })
+														),
+														_react2.default.createElement(
+																'div',
+																{ className: 'form-row' },
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaCreacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+																				'Fecha de creaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'createdAt ', value: moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+																),
+																_react2.default.createElement(
+																		'div',
+																		{ className: 'form-group col-md-6' },
+																		_react2.default.createElement(
+																				'label',
+																				{ htmlFor: 'fechaModificacion' },
+																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+																				'Fecha de modificaci\xF3n'
+																		),
+																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updatedAt', value: moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+																)
+														)
+												)
+										)
+								);
+						}
+				}
+		}]);
+
+		return ImageForm;
+}(_react.Component);
+
+var _initialiseProps = function _initialiseProps() {
+		var _this3 = this;
+
+		this.handleInputChange = function (event) {
+				var target = event.target;
+				var name = target.name;
+				if (name === 'tags') {
+						var value = target.value.split(','); // TODO: better string to array conversion
+				} else {
+						var value = target.value;
+				}
+
+				_this3.setState(_defineProperty({}, name, value));
+		};
+
+		this.handleCheckDisplays = function (event) {
+				// get value from the checkbox
+				var target = event.target;
+				var value = target.value;
+				// check if the checkbox has been selected
+				if (!_this3.state.displays.find(function (c) {
+						return c == value;
+				})) {
+						// check if value is stored in state
+						// if it is NOT stored, save the state, push the new value and save back the new state
+						var prevState = _this3.state.displays;
+						prevState.push(value);
+						_this3.setState({ displays: prevState });
+				} else {
+						// if it IS stored, save the state, splice the old value and save back the new state
+						var _prevState = _this3.state.displays;
+						_prevState.splice(_prevState.indexOf(value), 1);
+						_this3.setState({ displays: _prevState });
+				}
+		};
+
+		this.handleCheckGroups = function (event) {
+				// get value from the checkbox
+				var target = event.target;
+				var value = target.value;
+				// check if the checkbox has been selected
+				if (!_this3.state.groups.find(function (c) {
+						return c == value;
+				})) {
+						// check if value is stored in state
+						// if it is NOT stored, save the state, push the new value and save back the new state
+						var prevState = _this3.state.groups;
+						prevState.push(value);
+						_this3.setState({ groups: prevState });
+						target.checked = true;
+				} else {
+						// if it IS stored, save the state, splice the old value and save back the new state
+						var _prevState2 = _this3.state.groups;
+						_prevState2.splice(_prevState2.indexOf(value), 1);
+						_this3.setState({ groups: _prevState2 });
+						target.checked = false;
+				}
+		};
+
+		this.handleSubmit = function () {
+				// get image if any
+				var image = _this3.props.image;
+				// define form values to send
+
+				var form = {
+						name: _this3.state.name,
+						description: _this3.state.description,
+						updatedBy: _this3.state.updatedBy._id, // send user_id
+						category: _this3.state.category,
+						tags: _this3.state.tags,
+						color_profile: _this3.state.color
+						// possible empty fields
+				};if (!_this3.props.image) form.createdBy = _this3.props.user._id;
+				_this3.state.displays.length > 0 ? form.displays = _this3.state.displays : form.displays = [];
+				_this3.state.groups.length > 0 ? form.groups = _this3.state.groups : form.groups = [];
+				// HTTP request
+				(0, _axios2.default)({
+						method: image ? 'put' : 'post',
+						url: image ? image.url : 'http://localhost:4000/images',
+						data: form,
+						headers: {
+								'Accept': 'application/json',
+								'Content-Type': 'application/json',
+								'Authorization': 'Bearer ' + _this3.props.token
+						}
+				}).then(function (res) {
+						if (res.status == 201) {
+								_this3.props.notify('Imagen configurada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+								var action = image ? 'edit' : 'add';
+								return _this3.props.update('images', res.data.resourceId, action, res.data.resource); // update dataset
+						}
+				}).then(function (res) {
+						return _this3.setState({ redirect: true });
+				}).catch(function (err) {
+						return _this3.props.notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+				});
+		};
+};
+
+/***/ }),
+/* 358 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(3);
+
+var _axios = __webpack_require__(4);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _imageDetails = __webpack_require__(360);
+
+var _imageDetails2 = _interopRequireDefault(_imageDetails);
+
+var _imageForm = __webpack_require__(357);
+
+var _imageForm2 = _interopRequireDefault(_imageForm);
+
+var _imageDelete = __webpack_require__(361);
+
+var _imageDelete2 = _interopRequireDefault(_imageDelete);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
+
+
+/* IMPORT COMPONENTS */
+
+
+/* COMPONENTS */
+var ImageRouter = function (_Component) {
+  _inherits(ImageRouter, _Component);
+
+  function ImageRouter(props) {
+    _classCallCheck(this, ImageRouter);
+
+    var _this = _possibleConstructorReturn(this, (ImageRouter.__proto__ || Object.getPrototypeOf(ImageRouter)).call(this, props));
+
+    _this.state = {
+      image: null,
+      isLoaded: false,
+      error: null
+    };
+    return _this;
+  }
+
+  /* FETCH FULL DATA ABOUT THE IMAGE */
+
+
+  _createClass(ImageRouter, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var _props = this.props,
+          image = _props.image,
+          token = _props.token;
+
+      if (image) {
+        _axios2.default.get(image.url, { headers: { Authorization: 'Bearer ' + token } }).then(function (res) {
+          return _this2.setState({ image: res.data, isLoaded: true });
+        }, function (error) {
+          return _this2.setState({ error: error, isLoaded: true });
+        });
+      }
+    }
+
+    /* FORCE UPDATE IF WE CHANGE TO ANOTHER IMAGE */
+
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this3 = this;
+
+      var _props2 = this.props,
+          image = _props2.image,
+          token = _props2.token;
+
+      if (nextProps.image && (nextProps.image._id !== image._id || nextProps.image.updatedAt !== image.updatedAt)) {
+        // if props actually changed
+        _axios2.default.get(nextProps.image.url, { headers: { Authorization: 'Bearer ' + token } }).then(function (res) {
+          return _this3.setState({ image: res.data, isLoaded: true });
+        }, function (error) {
+          return _this3.setState({ error: error, isLoaded: true });
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
+
+      var _state = this.state,
+          error = _state.error,
+          isLoaded = _state.isLoaded,
+          image = _state.image;
+      // wait for resource to be loaded or handle errors if any
+
+      if (error) {
+        // TODO: error handling
+        return null;
+      }if (!isLoaded) {
+        // TODO: loading
+        return null;
+      }
+      return _react2.default.createElement(
+        _reactRouterDom.Switch,
+        null,
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId/edit', render: function render() {
+            return _react2.default.createElement(_imageForm2.default, _extends({}, _this4.props, { image: image }));
+          } }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId/delete', render: function render() {
+            return _react2.default.createElement(_imageDelete2.default, _extends({}, _this4.props, { image: image }));
+          } }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/images/:imageId', render: function render() {
+            return _react2.default.createElement(_imageDetails2.default, _extends({}, _this4.props, { image: image }));
+          } })
+      );
+    }
+  }]);
+
+  return ImageRouter;
+}(_react.Component);
+
+exports.default = ImageRouter;
+
+/***/ }),
+/* 359 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _addButton = __webpack_require__(21);
+
+var _addButton2 = _interopRequireDefault(_addButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* COMPONENT */
+/* IMPORT MODULES */
+var ImageGeneric = function ImageGeneric() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'card detalles' },
+    _react2.default.createElement(
+      'div',
+      { className: 'card-header' },
+      _react2.default.createElement(
+        'ul',
+        { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+        _react2.default.createElement(
+          'li',
+          { className: 'nav-item mr-auto' },
+          _react2.default.createElement(
+            'h2',
+            { className: 'detalles-titulo text-center' },
+            _react2.default.createElement('i', { className: 'fa-picture-o', 'aria-hidden': 'true' }),
+            'Detalles'
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'card-body' },
+      _react2.default.createElement(
+        'div',
+        { className: 'text-center' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-arrow-left mr-3' }),
+          'Seleccione una imagen'
+        ),
+        _react2.default.createElement('hr', { className: 'card-division' }),
+        _react2.default.createElement(
+          'p',
+          null,
+          'O a\xF1ada una nueva'
+        ),
+        _react2.default.createElement(_addButton2.default, { category: 'images' })
+      )
+    )
+  );
+};
+
+/* IMPORT COMPONENTS */
+exports.default = ImageGeneric;
+
+/***/ }),
+/* 360 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ImageDetails = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDropzone = __webpack_require__(315);
+
+var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+
+var _reactToastify = __webpack_require__(5);
+
+var _reactRouterDom = __webpack_require__(3);
+
+var _axios = __webpack_require__(4);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _associated = __webpack_require__(26);
+
+var _tag = __webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
+
+
+var moment = __webpack_require__(0);
+moment.locale('es');
+
+/* IMPORT COMPONENTS */
+
+/* COMPONENTS */
+var ImageDetails = exports.ImageDetails = function (_Component) {
+  _inherits(ImageDetails, _Component);
+
+  // TODO: transform to component
+
+  function ImageDetails(props) {
+    var _this$state;
+
+    _classCallCheck(this, ImageDetails);
+
+    var _this = _possibleConstructorReturn(this, (ImageDetails.__proto__ || Object.getPrototypeOf(ImageDetails)).call(this, props));
+
+    _this.onDropAccepted = function (acceptedFile) {
+      _this.setState({ file: acceptedFile, accepted: true });
+      // Form
+      var data = new FormData();
+      data.append('image', acceptedFile[0]);
+
+      // upload file
+      _axios2.default.post(_this.props.image.url, data).then(function (res) {
+        if (res.status == 200) {
+          _this.props.update('images', res.data.resourceId, 'edit', res.data.resource);
+          _this.props.notify('Imagen cargada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+        }
+      }).catch(function (err) {
+        _this.props.notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
+      });
+    };
+
+    _this.state = (_this$state = {
+      file: [],
+      accepted: false,
+      // image details
+      src: null
+    }, _defineProperty(_this$state, 'file', ''), _defineProperty(_this$state, 'size', ''), _this$state);
+    return _this;
+  }
+
+  _createClass(ImageDetails, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _props$image = this.props.image,
+          src = _props$image.src,
+          extension = _props$image.extension,
+          size = _props$image.size;
+
+      this.setState({ src: src, extension: extension, size: size });
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _nextProps$image = nextProps.image,
+          src = _nextProps$image.src,
+          extension = _nextProps$image.extension,
+          size = _nextProps$image.size;
+
+      this.setState({ src: src, extension: extension, size: size });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      // define constants from props for better readability
+      var _props$image2 = this.props.image,
+          _id = _props$image2._id,
+          name = _props$image2.name,
+          description = _props$image2.description,
+          src = _props$image2.src,
+          createdAt = _props$image2.createdAt,
+          updatedAt = _props$image2.updatedAt,
+          createdBy = _props$image2.createdBy,
+          colorProfile = _props$image2.colorProfile,
+          resolution = _props$image2.resolution,
+          category = _props$image2.category,
+          groups = _props$image2.groups,
+          displays = _props$image2.displays,
+          tags = _props$image2.tags;
+      // refactor date constants with format
+
+      var created = moment(createdAt).format('dddd, D [de] MMMM [de] YYYY');
+      var updated = moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY');
+      // generate tag list
+      var tagList = tags.map(function (tag, index) {
+        return _react2.default.createElement(_tag.Tag, { key: index, category: 'images', filterData: _this2.props.filterData, tag: tag });
+      });
+      // define routes for edit and delete based on the id
+      var linktoEdit = '/images/' + _id + '/edit';
+      var linktoDelete = '/images/' + _id + '/delete';
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'card detalles' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card-header' },
+          _react2.default.createElement(
+            'ul',
+            { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+            _react2.default.createElement(
+              'li',
+              { className: 'nav-item mr-auto' },
+              _react2.default.createElement(
+                'h2',
+                { className: 'detalles-titulo' },
+                _react2.default.createElement('i', { className: 'fa fa-picture-o mr-3', 'aria-hidden': 'true' }),
+                name
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: 'nav-item mr-2' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: linktoEdit },
+                _react2.default.createElement(
+                  'button',
+                  { type: 'button', className: 'btn btn-warning' },
+                  _react2.default.createElement('i', { className: 'fa fa-pencil-square-o mr-2', 'aria-hidden': 'true' }),
+                  'Editar'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: 'nav-item ml-2' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: linktoDelete },
+                _react2.default.createElement(
+                  'button',
+                  { type: 'button', className: 'btn btn-danger' },
+                  _react2.default.createElement('i', { className: 'fa fa-trash-o mr-2', 'aria-hidden': 'true' }),
+                  'Eliminar'
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'card-body' },
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col' },
+              _react2.default.createElement(
+                'p',
+                { className: 'titulo' },
+                'DETALLES'
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'card-text' },
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-info-circle mr-2', 'aria-hidden': 'true' }),
+                description
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'card-text' },
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-arrows-alt mr-2', 'aria-hidden': 'true' }),
+                resolution ? resolution.name : 'Resolución no especificada'
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'card-text' },
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-file-image-o mr-2', 'aria-hidden': 'true' }),
+                this.state.extension
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'card-text' },
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-database mr-2', 'aria-hidden': 'true' }),
+                this.state.size
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'card-text' },
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-tint mr-2', 'aria-hidden': 'true' }),
+                colorProfile
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'card-text' },
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-calendar-o mr-2', 'aria-hidden': 'true' }),
+                created
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'card-text' },
+                _react2.default.createElement('i', { className: 'fa fa-fw fa-user-o mr-2', 'aria-hidden': 'true' }),
+                createdBy ? createdBy.name : 'Usuario eliminado'
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'titulo' },
+                'ETIQUETAS'
+              ),
+              tagList
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col' },
+              _react2.default.createElement(
+                'div',
+                { className: 'vista-previa' },
+                _react2.default.createElement(
+                  'p',
+                  { className: 'titulo text-right' },
+                  'VISTA PREVIA'
+                ),
+                _react2.default.createElement(
+                  _reactDropzone2.default,
+                  { onDropAccepted: this.onDropAccepted, activeClassName: 'dropzone-accepted', className: this.state.accepted ? 'dropzone dropzone-accepted' : 'dropzone' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'vista-imagen d-flex w-100 justify-content-center' },
+                    this.state.src ? _react2.default.createElement('img', { className: 'imagen', src: this.state.src }) : _react2.default.createElement(
+                      'div',
+                      { className: 'align-self-center' },
+                      _react2.default.createElement(
+                        'h4',
+                        null,
+                        'Arrastre una imagen'
+                      ),
+                      _react2.default.createElement(
+                        'small',
+                        null,
+                        'formato: bmp'
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          _react2.default.createElement('hr', { className: 'card-division' }),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col' },
+              _react2.default.createElement(
+                'div',
+                { className: 'asociados' },
+                _react2.default.createElement(
+                  'p',
+                  { className: 'titulo' },
+                  'DISPLAYS ASOCIADOS (',
+                  displays.length,
+                  ')'
+                ),
+                _react2.default.createElement(_associated.Associated, { content: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col' },
+              _react2.default.createElement(
+                'div',
+                { className: 'asociados' },
+                _react2.default.createElement(
+                  'p',
+                  { className: 'titulo' },
+                  'GRUPOS ASOCIADOS (',
+                  groups.length,
+                  ')'
+                ),
+                _react2.default.createElement(_associated.Associated, { content: groups, category: 'groups', appearance: 'elemento-grupo', icon: 'list' })
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return ImageDetails;
+}(_react.Component);
+
+/***/ }),
+/* 361 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+		value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(3);
+
+var _reactToastify = __webpack_require__(5);
+
+var _axios = __webpack_require__(4);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
+
+
+/* COMPONENTS */
+var ImageDelete = function (_Component) {
+		_inherits(ImageDelete, _Component);
+
+		function ImageDelete(props) {
+				_classCallCheck(this, ImageDelete);
+
+				var _this = _possibleConstructorReturn(this, (ImageDelete.__proto__ || Object.getPrototypeOf(ImageDelete)).call(this, props));
+
+				_this.handleDelete = function (event) {
+						event.preventDefault();
+						var _this$props = _this.props,
+						    image = _this$props.image,
+						    token = _this$props.token,
+						    notify = _this$props.notify,
+						    update = _this$props.update;
+
+						_axios2.default.delete(image.url, {
+								headers: {
+										Authorization: 'Bearer ' + token
+								}
+						}).then(function (res) {
+								if (res.status === 200) {
+										notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+										update('images', res.resourceId, 'remove');
+								}
+						}).then(function () {
+								return _this.setState({ redirect: true });
+						}).catch(function () {
+								return notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
+						});
+				};
+
+				_this.state = {
+						redirect: false
+				};
+				return _this;
+		}
+
+		/* HANDLE DELETE EVENT */
+
+
+		_createClass(ImageDelete, [{
+				key: 'render',
+				value: function render() {
+						var redirect = this.state.redirect;
+
+						if (redirect) {
+								return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/images' });
+						}
+						return _react2.default.createElement(
+								'div',
+								{ className: 'card detalles' },
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-header' },
+										_react2.default.createElement(
+												'ul',
+												{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+												_react2.default.createElement(
+														'li',
+														{ className: 'nav-item mr-auto' },
+														_react2.default.createElement(
+																'h2',
+																{ className: 'detalles-titulo' },
+																_react2.default.createElement('i', { className: 'fa fa-trash mr-3', 'aria-hidden': 'true' }),
+																'Eliminar Imagen'
+														)
+												)
+										)
+								),
+								_react2.default.createElement(
+										'div',
+										{ className: 'card-body' },
+										_react2.default.createElement(
+												'div',
+												{ className: 'text-center' },
+												_react2.default.createElement(
+														'h1',
+														null,
+														'\xBFEliminar imagen?'
+												),
+												_react2.default.createElement('hr', { className: 'card-division' }),
+												_react2.default.createElement(
+														'p',
+														null,
+														'Esta acci\xF3n no se puede deshacer'
+												),
+												_react2.default.createElement(
+														'button',
+														{ onClick: this.handleDelete, type: 'button', className: 'btn btn-block btn-danger' },
+														_react2.default.createElement('i', { className: 'fa fa-trash mr-1', 'aria-hidden': 'true' }),
+														'Eliminar'
+												)
+										)
+								)
+						);
+				}
+		}]);
+
+		return ImageDelete;
+}(_react.Component);
+
+ImageDelete.propTypes = {
+		image: _propTypes2.default.shape.isRequired,
+		token: _propTypes2.default.string.isRequired,
+		notify: _propTypes2.default.shape.isRequired,
+		update: _propTypes2.default.shape.isRequired
+};
+
+exports.default = ImageDelete;
 
 /***/ })
 /******/ ]);
