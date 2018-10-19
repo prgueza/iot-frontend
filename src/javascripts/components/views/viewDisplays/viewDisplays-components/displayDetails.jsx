@@ -52,6 +52,24 @@ export class DisplayDetails extends Component {
 		this.setState( { modal: false } )
 	}
 
+	/* HANDLE SEND IMAGE TO DISPLAY */
+	handleSendImage = () => {
+		axios({
+				method: 'post',
+				url: 'update/' + this.state.display._id,
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + this.props.token
+				}
+			}).then( res => {
+
+			}).catch(e => {
+				console.log(e)
+			})
+	}
+
+
 	/* HANDLE SHOW GROUP IMAGE */
 	handleShowGroupImage = () => {
 		const form = {
@@ -88,9 +106,9 @@ export class DisplayDetails extends Component {
 		const linktoEdit = '/displays/' + _id + '/edit'
 		const linktoDelete = '/displays/' + _id + '/delete'
 		// check if activeImage is set and if not set the undefined img
-		const src = imageFromGroup ? ( group.activeImage && group.activeImage.src ) : ( activeImage && activeImage.src )
-		const overlayImage = imageFromGroup ? group.overlayImage : this.state.display.overlayImage
-		const srcOverlay = overlayImage.image && overlayImage.image.src
+		const src = imageFromGroup && group ? ( group.activeImage && group.activeImage.src ) : ( activeImage && activeImage.src )
+		const overlayImage = imageFromGroup && group ? group.overlayImage : this.state.display.overlayImage
+		const srcOverlay = overlayImage && overlayImage.image && overlayImage.image.src
 		const overlayImageStyle = {
 			left: overlayImage && overlayImage.xCoordinate + '%',
 			top: overlayImage && overlayImage.yCoordinate + '%'
@@ -173,6 +191,7 @@ export class DisplayDetails extends Component {
 						    <p className="d-flex overlay-text">Haga click para editar la imagen</p>
 						  </div>
             </div>
+						<button onClick={this.handleSendImage} className="btn btn-primary btn-block">Enviar imagen al dispositivo</button>
 				</div>
 			</div>
 			<hr className='card-division'></hr>

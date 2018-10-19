@@ -1,13 +1,14 @@
-//Entry file for webpack
+// Entry file for webpack
 
 // bootstrap js
+import 'bootstrap';
+
+// react components
+import App from './javascripts/app.jsx';
+
 require('jquery/dist/jquery');
 require('bootstrap/dist/js/bootstrap');
-import "bootstrap";
 
 
 // styles
 require('./stylesheets/style.scss');
-
-// react components
-import App from './javascripts/app.jsx';

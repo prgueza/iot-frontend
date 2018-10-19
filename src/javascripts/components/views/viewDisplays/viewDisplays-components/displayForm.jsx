@@ -140,7 +140,7 @@ export class DisplayForm extends Component {
 		if ( !this.props.display ) form.createdBy = this.props.user._id
 		this.state.activeImage != '' ? form.activeImage = this.state.activeImage : form.activeImage = null
 		this.state.images.length > 0 ? form.images = this.state.images : form.images = []
-		this.state.group != '' ? form.group = this.state.group._id : form.group = null
+		this.state.group && this.state.group._id ? form.group = this.state.group._id : form.group = null
 		// HTTP request
 		axios( {
 				method: display ? 'put' : 'post',

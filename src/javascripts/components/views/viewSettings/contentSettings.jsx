@@ -17,7 +17,7 @@ export class ContentSettings extends Component {
 
 		const menu_items = [
 			{ exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings' },
-			{ exact: false, text: 'Grupos de gestión', icon: 'users', location: '/settings/groups' },
+			{ exact: false, text: 'Grupos', icon: 'users', location: '/settings/groups' },
 			{ exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations' },
 			{ exact: false, text: 'Pantallas', icon: 'window-maximize', location: '/settings/screens' }
       ]

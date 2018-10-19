@@ -1,0 +1,26 @@
+{
+  "extends": ["eslint:recommended", "airbnb"],
+  "rules": {
+    "no-console": "off",
+    "react/no-unescaped-entities": "off",
+    "no-tabs": "off",
+    "no-mixed-spaces-and-tabs": "off",
+    "max-len": "off",
+    "no-underscore-dangle": "off"
+  },
+  "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true,
+            "experimentalObjectRestSpread": true
+        }
+    }
+}

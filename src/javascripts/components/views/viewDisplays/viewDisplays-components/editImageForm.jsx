@@ -144,7 +144,7 @@ export class EditImageForm extends Component {
 							<label htmlFor='device'>
 								<i className='fa fa-th-large mr-2'></i>Imagen superpuesta</label>
 							<div>
-								<select className='custom-select' name='overlayImage' value={this.state.overlayImage ? this.state.overlayImage._id : ''} onChange={this.handleImageChange}>
+								<select className='custom-select' name='overlayImage' value={this.state.overlayImage ? this.state.overlayImage._id : ''} onChange={this.handleImageChange} disabled={true}>
 									<option value='' key='0'>Ninguna imagen seleccionada</option>
 									{options}
 								</select>
@@ -153,15 +153,15 @@ export class EditImageForm extends Component {
 						<div className='form-row'>
 						 <div className='form-group col-6'>
 							 <label><Icon icon='arrows-alt' mr='2' fw={true}></Icon>Tamaño</label>
-							 <input onChange={this.handleSizeChange} value={this.state.size} type='number' className='form-control' placeholder='100'></input>
+							 <input onChange={this.handleSizeChange} value={this.state.size} type='number' className='form-control' placeholder='100' disabled={true}></input>
 						 </div>
 						 <div className='form-group col'>
 							 <label><Icon icon='long-arrow-right' mr='2' fw={true}></Icon>Posición</label>
-							 <input onChange={this.handleInputChange} value={this.state.xCoordinate} name='xCoordinate' type='number' className='form-control' placeholder='0'></input>
+							 <input onChange={this.handleInputChange} value={this.state.xCoordinate} name='xCoordinate' type='number' className='form-control' placeholder='0' disabled={true}></input>
 						 </div>
 						 <div className='form-group col'>
 							 <label><Icon icon='long-arrow-up' mr='2' fw={true}></Icon>Posición</label>
-							 <input onChange={this.handleInputChange} value={this.state.yCoordinate} name='yCoordinate' type='number' className='form-control' placeholder='0'></input>
+							 <input onChange={this.handleInputChange} value={this.state.yCoordinate} name='yCoordinate' type='number' className='form-control' placeholder='0' disabled={true}></input>
 						 </div>
 					 </div>
 					 <div className='d-flex w-100 justify-content-between'>
