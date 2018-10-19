@@ -20,21 +20,16 @@ class Main extends Component {
       // active user
       user: null,
       token: null,
-
       // data
       data: [],
-
       // sync
       syncedDevices: [],
-
       // 0: unsynced 1: sync_ready 2: synced 3: syncing
       syncStatus: 0,
       lastSynced: null,
-
       // search value
       filterValue: '',
       filterFoundValue: true,
-
       // others
       userID: '',
       isLoaded: false,
@@ -53,18 +48,6 @@ class Main extends Component {
     this.setState({
       user, token, data, isLoggedIn: true, isLoaded: true,
     });
-
-    // // sync
-    // this.syncApi( token )
-    //
-    // // check syncronization
-    // this.checkSyncId = setInterval( () => {
-    // 	if ( this.state.lastSynced && moment()
-    // 		.diff( this.state.lastSynced, 'seconds' ) > 5 && this.state.syncStatus != 1 ) {
-    // 		//unsynced
-    // 		this.setState( { syncStatus: 0 } )
-    // 	}
-    // }, 1000 )
   }
 
   componentWillUnmount() {

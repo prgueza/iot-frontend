@@ -5672,11 +5672,17 @@ var List = function (_Component) {
 }(_react.Component);
 
 List.propTypes = {
-		content: _propTypes2.default.string.isRequired,
+		content: _propTypes2.default.shape,
 		category: _propTypes2.default.string.isRequired,
 		filterValue: _propTypes2.default.string.isRequired,
-		filterFoundValue: _propTypes2.default.bool.isRequired,
-		filterFound: _propTypes2.default.shape.isRequired
+		filterFoundValue: _propTypes2.default.bool,
+		filterFound: _propTypes2.default.shape
+};
+
+List.defaultProps = {
+		content: null,
+		filterFoundValue: false,
+		filterFound: null
 };
 
 exports.default = List;
@@ -35815,8 +35821,17 @@ var DisplayForm = function (_Component) {
 				} else {
 						activeImage = '';
 				}
+				var images = void 0;
+				if (display && display.images) {
+						images = display.images.map(function (image) {
+								return image._id;
+						});
+				} else {
+						images = [];
+				}
 				_this.state = {
 						activeImage: activeImage,
+						images: images,
 						name: display ? display.name : '',
 						description: display ? display.description : '',
 						createdBy: display ? display.createdBy || { name: 'Usuario eliminado' } : user,
@@ -35824,9 +35839,6 @@ var DisplayForm = function (_Component) {
 						category: display ? display.category : '',
 						createdAt: display ? moment(display.createdAt) : moment(),
 						updatedAt: moment(),
-						images: display ? display.images.map(function (image) {
-								return image._id;
-						}) : [],
 						group: display ? display.group : '',
 						device: '',
 						deviceDescription: '',
@@ -35846,18 +35858,15 @@ var DisplayForm = function (_Component) {
 		_createClass(DisplayForm, [{
 				key: 'componentDidMount',
 				value: function componentDidMount() {
-						var _this2 = this;
-
 						var _props = this.props,
 						    display = _props.display,
-						    _props$data = _props.data,
-						    devices = _props$data.devices,
-						    images = _props$data.images;
+						    data = _props.data;
+						var images = this.state.images;
 						// get options for active image
 
-						var optionsActiveImage = images.filter(function (image) {
-								return _this2.state.images.find(function (c) {
-										return c == image._id;
+						var optionsActiveImage = data.images.filter(function (image) {
+								return images.find(function (c) {
+										return c === image._id;
 								});
 						}).map(function (image) {
 								return _react2.default.createElement(
@@ -35867,7 +35876,7 @@ var DisplayForm = function (_Component) {
 								);
 						});
 						// get a list of unused devices
-						var unusedDevices = devices.filter(function (device) {
+						var unusedDevices = data.devices.filter(function (device) {
 								return !device.display;
 						});
 						// set state with initial values
@@ -35897,8 +35906,23 @@ var DisplayForm = function (_Component) {
 
 				/* RENDER COMPONENT */
 				value: function render() {
-						var _this3 = this;
+						var _this2 = this;
 
+						var _state = this.state,
+						    redirect = _state.redirect,
+						    location = _state.location,
+						    device = _state.device,
+						    deviceDescription = _state.deviceDescription,
+						    name = _state.name,
+						    description = _state.description,
+						    category = _state.category,
+						    group = _state.group,
+						    activeImage = _state.activeImage,
+						    optionsActiveImage = _state.optionsActiveImage,
+						    tags = _state.tags,
+						    createdAt = _state.createdAt,
+						    updatedAt = _state.updatedAt,
+						    createdBy = _state.createdBy;
 						var _props2 = this.props,
 						    display = _props2.display,
 						    _props2$data = _props2.data,
@@ -35910,20 +35934,20 @@ var DisplayForm = function (_Component) {
 						var linkBack = display ? '/displays/' + display._id : '/displays';
 
 						// Options
-						var optionsDevices = devices.filter(function (device) {
-								return !device.display || device.display._id == (display && display._id);
-						}).map(function (device, index) {
+						var optionsDevices = devices.filter(function (d) {
+								return !d.display || d.display._id === (display && display._id);
+						}).map(function (d) {
 								return _react2.default.createElement(
 										'option',
-										{ value: device._id, key: index },
-										device.name
+										{ value: d._id, key: d._id },
+										d.name
 								);
 						});
-						var optionsGroup = groups.map(function (group) {
+						var optionsGroup = groups.map(function (g) {
 								return _react2.default.createElement(
 										'option',
-										{ value: group._id, key: group._id },
-										group.name
+										{ value: g._id, key: g._id },
+										g.name
 								);
 						});
 						var optionsImages = images.sort(function (a, b) {
@@ -35932,10 +35956,10 @@ var DisplayForm = function (_Component) {
 								return _react2.default.createElement(
 										'div',
 										{ key: image._id, onMouseEnter: function onMouseEnter() {
-														return _this3.handleOnMouseEnter(image._id);
-												}, onMouseLeave: _this3.handleOnMouseLeave, className: 'custom-control custom-checkbox' },
-										_react2.default.createElement('input', { onChange: _this3.handleCheckImages, id: image._id, type: 'checkbox', defaultChecked: _this3.state.images.find(function (c) {
-														return c == image._id;
+														return _this2.handleOnMouseEnter(image._id);
+												}, onMouseLeave: _this2.handleOnMouseLeave, className: 'custom-control custom-checkbox' },
+										_react2.default.createElement('input', { onChange: _this2.handleCheckImages, id: image._id, type: 'checkbox', defaultChecked: _this2.state.images.find(function (c) {
+														return c === image._id;
 												}), name: image._id, defaultValue: image._id, className: 'custom-control-input' }),
 										_react2.default.createElement(
 												'label',
@@ -35946,9 +35970,9 @@ var DisplayForm = function (_Component) {
 						});
 
 						// Render return
-						if (this.state.redirect) {
-								return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.location });
-						}if (!this.state.device) {
+						if (redirect) {
+								return _react2.default.createElement(_reactRouterDom.Redirect, { to: location });
+						}if (!device) {
 								return _react2.default.createElement(
 										'div',
 										{ className: 'card detalles' },
@@ -36083,7 +36107,7 @@ var DisplayForm = function (_Component) {
 																		_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
 																		'Descripci\xF3n'
 																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control text-truncate', id: 'bt', name: 'bt', value: this.state.deviceDescription, readOnly: 'readOnly' })
+																_react2.default.createElement('input', { type: 'text', className: 'form-control text-truncate', id: 'bt', name: 'bt', value: deviceDescription, readOnly: 'readOnly' })
 														)
 												),
 												_react2.default.createElement('hr', { className: 'card-division' }),
@@ -36096,7 +36120,7 @@ var DisplayForm = function (_Component) {
 																_react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
 																'Nombre'
 														),
-														_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: this.state.name, onChange: this.handleInputChange })
+														_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre del display', name: 'name', value: name, onChange: this.handleInputChange })
 												),
 												_react2.default.createElement(
 														'div',
@@ -36107,7 +36131,7 @@ var DisplayForm = function (_Component) {
 																_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
 																'Descripcion'
 														),
-														_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion del display', name: 'description', value: this.state.description, onChange: this.handleInputChange })
+														_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion del display', name: 'description', value: description, onChange: this.handleInputChange })
 												),
 												_react2.default.createElement(
 														'div',
@@ -36121,7 +36145,7 @@ var DisplayForm = function (_Component) {
 																		_react2.default.createElement('i', { className: 'fa fa-arrows-alt mr-2' }),
 																		'Categor\xEDa'
 																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', placeholder: 'Categor\xEDa', name: 'category', value: this.state.category, onChange: this.handleInputChange })
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', placeholder: 'Categor\xEDa', name: 'category', value: category, onChange: this.handleInputChange })
 														),
 														_react2.default.createElement(
 																'div',
@@ -36134,7 +36158,7 @@ var DisplayForm = function (_Component) {
 																),
 																_react2.default.createElement(
 																		'select',
-																		{ className: 'custom-select', id: 'group', name: 'group', value: this.state.group, onChange: this.handleInputChange },
+																		{ className: 'custom-select', id: 'group', name: 'group', value: group, onChange: this.handleInputChange },
 																		_react2.default.createElement(
 																				'option',
 																				{ value: '', key: 0 },
@@ -36155,13 +36179,13 @@ var DisplayForm = function (_Component) {
 														),
 														_react2.default.createElement(
 																'select',
-																{ className: 'custom-select', id: 'activeImage', name: 'activeImage', value: this.state.activeImage, onChange: this.handleInputChange },
+																{ className: 'custom-select', id: 'activeImage', name: 'activeImage', value: activeImage, onChange: this.handleInputChange },
 																_react2.default.createElement(
 																		'option',
 																		{ value: '', key: 0 },
 																		'Sin imagen activa'
 																),
-																this.state.optionsActiveImage
+																optionsActiveImage
 														)
 												),
 												_react2.default.createElement(
@@ -36239,7 +36263,7 @@ var DisplayForm = function (_Component) {
 																		_react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
 																		'Etiquetas'
 																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: tags, onChange: this.handleInputChange })
 														)
 												),
 												_react2.default.createElement(
@@ -36248,8 +36272,8 @@ var DisplayForm = function (_Component) {
 														_react2.default.createElement(
 																'div',
 																{ className: 'form-group col' },
-																this.state.tags.map(function (tag, index) {
-																		return tag.length > 1 ? _react2.default.createElement(_tag2.default, { key: index, tag: tag, category: 'displays' }) : '';
+																tags.map(function (tag) {
+																		return tag.length > 1 ? _react2.default.createElement(_tag2.default, { key: tag, tag: tag, category: 'displays' }) : '';
 																})
 														)
 												),
@@ -36265,7 +36289,7 @@ var DisplayForm = function (_Component) {
 																		_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
 																		'Fecha de creaci\xF3n'
 																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'createdAt ', value: moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'createdAt ', value: moment(createdAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
 														),
 														_react2.default.createElement(
 																'div',
@@ -36276,7 +36300,7 @@ var DisplayForm = function (_Component) {
 																		_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
 																		'Fecha de modificaci\xF3n'
 																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updatedAt', value: moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updatedAt', value: moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
 														)
 												),
 												_react2.default.createElement(
@@ -36288,7 +36312,7 @@ var DisplayForm = function (_Component) {
 																_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
 																'Creador'
 														),
-														_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.createdBy.name, readOnly: 'readOnly' })
+														_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: createdBy.name, readOnly: 'readOnly' })
 												)
 										)
 								)
@@ -36300,23 +36324,23 @@ var DisplayForm = function (_Component) {
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-		var _this4 = this;
+		var _this3 = this;
 
 		this.handleOnMouseEnter = function (imageId) {
-				var images = _this4.props.data.images;
+				var images = _this3.props.data.images;
 
 				var previewImage = images.find(function (image) {
 						return image._id === imageId;
 				});
-				_this4.setState({ previewImage: previewImage });
+				_this3.setState({ previewImage: previewImage });
 		};
 
 		this.handleOnMouseLeave = function () {
-				_this4.setState({ previewImage: '' });
+				_this3.setState({ previewImage: '' });
 		};
 
 		this.handleInputChange = function (event) {
-				var devices = _this4.props.data.devices;
+				var devices = _this3.props.data.devices;
 				var target = event.target;
 				var name = target.name;
 
@@ -36324,7 +36348,9 @@ var _initialiseProps = function _initialiseProps() {
 				if (name === 'tags') {
 						value = target.value.split(','); // TODO: better string to array conversion
 				} else {
-						value = target.value;
+						var aux = target.value;
+
+						value = aux;
 				}
 
 				if (name === 'device') {
@@ -36334,44 +36360,47 @@ var _initialiseProps = function _initialiseProps() {
 						var device = unusedDevices.find(function (d) {
 								return d._id === value;
 						});
-						_this4.setState({
+						_this3.setState({
 								deviceDescription: device.description
 						});
 				}
 
-				_this4.setState(_defineProperty({}, name, value));
+				_this3.setState(_defineProperty({}, name, value));
 		};
 
 		this.handleCheckImages = function (event) {
+				var images = _this3.state.images;
+				var data = _this3.props.data;
 				// get value from the checkbox
-				var target = event.target;
-				var value = target.value;
+
+				var value = event.target.value;
 				// check if the checkbox has been selected
-				if (!_this4.state.images.find(function (c) {
-						return c == value;
+
+				if (!images.find(function (c) {
+						return c === value;
 				})) {
 						// check if value is stored in state
 						// if it is NOT stored, save the state, push the new value and save back the new state
-						var prevState = _this4.state.images;
+						var prevState = images;
 						prevState.push(value);
-						_this4.setState({ images: prevState });
+						_this3.setState({ images: prevState });
 				} else {
 						// if it IS stored, save the state, splice the old value and save back the new state
-						var _prevState = _this4.state.images;
+						var _prevState = images;
 						_prevState.splice(_prevState.indexOf(value), 1);
-						_this4.setState({ images: _prevState });
+						_this3.setState({ images: _prevState });
 				}
-				if (_this4.state.images.length == 1) {
+				if (images.length === 1) {
 						// set when first image is selected
-						_this4.setState({ activeImage: _this4.state.images[0] });
-				} else if (_this4.state.images.length == 0) {
+						_this3.setState({ activeImage: images[0] });
+				} else if (images.length === 0) {
 						// if there are no images deselect
-						_this4.setState({ activeImage: '' });
+						_this3.setState({ activeImage: '' });
 				}
-				_this4.setState({
-						optionsActiveImage: _this4.props.data.images.filter(function (image) {
-								return _this4.state.images.find(function (c) {
-										return c == image._id;
+				_this3.setState({
+						optionsActiveImage: data.images.filter(function (image) {
+								return images.find(function (c) {
+										return c === image._id;
 								});
 						}).map(function (image) {
 								return _react2.default.createElement(
@@ -36386,18 +36415,18 @@ var _initialiseProps = function _initialiseProps() {
 		this.handleSubmit = function () {
 				// FIXME: handleSubmit (method) specify method beforehand from the buttom
 				// get display if any
-				var _props3 = _this4.props,
+				var _props3 = _this3.props,
 				    display = _props3.display,
 				    user = _props3.user,
 				    token = _props3.token,
 				    notify = _props3.notify,
 				    update = _props3.update;
-				var _state = _this4.state,
-				    name = _state.name,
-				    description = _state.description,
-				    category = _state.category,
-				    tags = _state.tags,
-				    device = _state.device;
+				var _state2 = _this3.state,
+				    name = _state2.name,
+				    description = _state2.description,
+				    category = _state2.category,
+				    tags = _state2.tags,
+				    device = _state2.device;
 				// define form values to send
 
 				var form = {
@@ -36409,10 +36438,10 @@ var _initialiseProps = function _initialiseProps() {
 						updatedBy: user._id // send user_id
 				};
 				// possible empty fields
-				if (!display) form.createdBy = _this4.props.user._id;
-				_this4.state.activeImage != '' ? form.activeImage = _this4.state.activeImage : form.activeImage = null;
-				_this4.state.images.length > 0 ? form.images = _this4.state.images : form.images = [];
-				_this4.state.group && _this4.state.group._id ? form.group = _this4.state.group._id : form.group = null;
+				if (!display) form.createdBy = _this3.props.user._id;
+				_this3.state.activeImage != '' ? form.activeImage = _this3.state.activeImage : form.activeImage = null;
+				_this3.state.images.length > 0 ? form.images = _this3.state.images : form.images = [];
+				_this3.state.group && _this3.state.group._id ? form.group = _this3.state.group._id : form.group = null;
 				// HTTP request
 				(0, _axios2.default)({
 						method: display ? 'put' : 'post',
@@ -36431,7 +36460,7 @@ var _initialiseProps = function _initialiseProps() {
 						}
 						return false;
 				}).then(function () {
-						return _this4.setState({ redirect: true });
+						return _this3.setState({ redirect: true });
 				}).catch(function () {
 						return notify('Error al configurar el display', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
 				});
@@ -36441,13 +36470,14 @@ var _initialiseProps = function _initialiseProps() {
 DisplayForm.propTypes = {
 		display: _propTypes2.default.shape,
 		user: _propTypes2.default.shape.isRequired,
+		token: _propTypes2.default.string.isRequired,
 		data: _propTypes2.default.shape.isRequired,
 		notify: _propTypes2.default.shape.isRequired,
 		update: _propTypes2.default.shape.isRequired
 };
 
 DisplayForm.defaultProps = {
-		display: {}
+		display: null
 };
 
 exports.default = DisplayForm;
@@ -61162,21 +61192,16 @@ var Main = function (_Component) {
 						// active user
 						user: null,
 						token: null,
-
 						// data
 						data: [],
-
 						// sync
 						syncedDevices: [],
-
 						// 0: unsynced 1: sync_ready 2: synced 3: syncing
 						syncStatus: 0,
 						lastSynced: null,
-
 						// search value
 						filterValue: '',
 						filterFoundValue: true,
-
 						// others
 						userID: '',
 						isLoaded: false,
@@ -61204,18 +61229,6 @@ var Main = function (_Component) {
 						this.setState({
 								user: user, token: token, data: data, isLoggedIn: true, isLoaded: true
 						});
-
-						// // sync
-						// this.syncApi( token )
-						//
-						// // check syncronization
-						// this.checkSyncId = setInterval( () => {
-						// 	if ( this.state.lastSynced && moment()
-						// 		.diff( this.state.lastSynced, 'seconds' ) > 5 && this.state.syncStatus != 1 ) {
-						// 		//unsynced
-						// 		this.setState( { syncStatus: 0 } )
-						// 	}
-						// }, 1000 )
 				}
 		}, {
 				key: 'componentWillUnmount',
@@ -76076,7 +76089,6 @@ var Login = function (_Component) {
     value: function componentDidMount() {
       // get login from local storage
       this.setState({ login: localStorage.getItem('login') || '' });
-
       // set the checkbox to true if login was found
       this.setState({ remember: !!localStorage.getItem('login') });
     }
@@ -76784,9 +76796,8 @@ module.exports = function (css) {
 
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+  value: true
 });
-exports.ImageForm = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -76802,7 +76813,13 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _tag = __webpack_require__(15);
+
+var _tag2 = _interopRequireDefault(_tag);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76815,445 +76832,497 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);
-moment.locale('es');
-
 /* IMPORT COMPONENTS */
 
+
+var moment = __webpack_require__(0);
+
+moment.locale('es');
+
 /* COMPONENTS */
-var ImageForm = exports.ImageForm = function (_Component) {
-		_inherits(ImageForm, _Component);
 
-		/* STATE */
-		function ImageForm(props) {
-				_classCallCheck(this, ImageForm);
+var ImageForm = function (_Component) {
+  _inherits(ImageForm, _Component);
 
-				var _this = _possibleConstructorReturn(this, (ImageForm.__proto__ || Object.getPrototypeOf(ImageForm)).call(this, props));
+  /* STATE */
+  function ImageForm(props) {
+    _classCallCheck(this, ImageForm);
 
-				_initialiseProps.call(_this);
+    var _this = _possibleConstructorReturn(this, (ImageForm.__proto__ || Object.getPrototypeOf(ImageForm)).call(this, props));
 
-				var _this$props = _this.props,
-				    image = _this$props.image,
-				    user = _this$props.user;
+    _initialiseProps.call(_this);
 
-				_this.state = {
-						name: image ? image.name : '',
-						description: image ? image.description : '',
-						createdBy: image ? image.createdBy || { name: 'Usuario eliminado' } : user,
-						updatedBy: user.name,
-						category: image ? image.category ? image.category : '' : '',
-						tags: image ? image.tags : [],
-						createdAt: image ? moment(image.createdAt) : moment(),
-						updatedAt: moment(),
-						displays: image ? image.displays.map(function (display) {
-								return display._id;
-						}) : [],
-						groups: image ? image.groups.map(function (group) {
-								return group._id;
-						}) : [],
-						color: image ? image.color_profile : 'color',
+    var _this$props = _this.props,
+        image = _this$props.image,
+        user = _this$props.user;
 
-						redirect: false,
-						redirectLocation: '/images',
-						error: null
-				};
-				return _this;
-		}
+    _this.state = {
+      name: image ? image.name : '',
+      description: image ? image.description : '',
+      createdBy: image ? image.createdBy || { name: 'Usuario eliminado' } : user,
+      updatedBy: user.name,
+      category: image ? image.category : '',
+      tags: image ? image.tags : [],
+      createdAt: image ? moment(image.createdAt) : moment(),
+      updatedAt: moment(),
+      displays: image ? image.displays.map(function (display) {
+        return display._id;
+      }) : [],
+      groups: image ? image.groups.map(function (group) {
+        return group._id;
+      }) : [],
+      color: image ? image.color_profile : 'color',
+      redirect: false,
+      redirectLocation: '/images'
+    };
+    return _this;
+  }
 
-		/* INITIAL VALUES FOR FORM INPUTS */
-
-
-		_createClass(ImageForm, [{
-				key: 'componentDidMount',
-				value: function componentDidMount() {
-						var _props = this.props,
-						    images = _props.images,
-						    image = _props.image;
-						// set state with initial values
-
-						this.setState({
-								redirectLocation: image ? '/images/' + image._id : '/images' // Redirect url
-						});
-				}
-
-				/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
+  /* INITIAL VALUES FOR FORM INPUTS */
 
 
-				/* HANDLE MULTIPLE CHECKBOX */
-				// TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
+  _createClass(ImageForm, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var image = this.props.image;
+      // set state with initial values
 
-				/* HANDLE SUMBIT (PUT OR POST) */
+      this.setState({
+        redirectLocation: image ? '/images/' + image._id : '/images' // Redirect url
+      });
+    }
 
-		}, {
-				key: 'render',
+    /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 
 
-				/* RENDER COMPONENT */
-				value: function render() {
-						var _this2 = this;
+    /* HANDLE MULTIPLE CHECKBOX */
+    // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
-						var _props2 = this.props,
-						    _props2$data = _props2.data,
-						    devices = _props2$data.devices,
-						    images = _props2$data.images,
-						    groups = _props2$data.groups,
-						    displays = _props2$data.displays,
-						    image = _props2.image;
+    /* HANDLE SUMBIT (PUT OR POST) */
 
-						// Options
+  }, {
+    key: 'render',
 
-						var optionsGroups = groups.map(function (group) {
-								return _react2.default.createElement(
-										'div',
-										{ key: group._id, className: 'custom-control custom-checkbox' },
-										_react2.default.createElement('input', { onChange: _this2.handleCheckGroups, id: group._id, type: 'checkbox', defaultChecked: _this2.state.groups.find(function (c) {
-														return c == group._id;
-												}), name: group._id, defaultValue: group._id, className: 'custom-control-input' }),
-										_react2.default.createElement(
-												'label',
-												{ className: 'custom-control-label', htmlFor: group._id },
-												group.name
-										)
-								);
-						});
-						var optionsDisplays = displays.sort(function (a, b) {
-								return a.updatedAt - b.updatedAt;
-						}).map(function (display) {
-								return _react2.default.createElement(
-										'div',
-										{ key: display._id, className: 'custom-control custom-checkbox' },
-										_react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, id: display._id, type: 'checkbox', defaultChecked: _this2.state.displays.find(function (c) {
-														return c == display._id;
-												}), name: display._id, defaultValue: display._id, className: 'custom-control-input' }),
-										_react2.default.createElement(
-												'label',
-												{ className: 'custom-control-label', htmlFor: display._id },
-												display.name
-										)
-								);
-						});
 
-						// Render return
-						if (this.state.redirect) {
-								return _react2.default.createElement(_reactRouterDom.Redirect, { to: this.state.redirectLocation });
-						} else {
-								return _react2.default.createElement(
-										'div',
-										{ className: 'card detalles' },
-										_react2.default.createElement(
-												'div',
-												{ className: 'card-header' },
-												_react2.default.createElement(
-														'ul',
-														{ className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
-														_react2.default.createElement(
-																'li',
-																{ className: 'nav-item mr-auto' },
-																image ? _react2.default.createElement(
-																		'h2',
-																		{ className: 'detalles-titulo' },
-																		_react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
-																		'Editar una imagen'
-																) : _react2.default.createElement(
-																		'h2',
-																		{ className: 'detalles-titulo' },
-																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
-																		'A\xF1adir una nueva imagen'
-																)
-														),
-														_react2.default.createElement(
-																'li',
-																{ className: 'nav-item ml-2' },
-																image ? _react2.default.createElement(
-																		'button',
-																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-info' },
-																		_react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
-																		'Guardar cambios'
-																) : _react2.default.createElement(
-																		'button',
-																		{ onClick: this.handleSubmit, type: 'button', className: 'btn btn-info' },
-																		_react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
-																		'A\xF1adir'
-																)
-														)
-												)
-										),
-										_react2.default.createElement(
-												'div',
-												{ className: 'card-body' },
-												_react2.default.createElement(
-														'form',
-														{ id: 'form' },
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-group' },
-																_react2.default.createElement(
-																		'label',
-																		{ htmlFor: 'nombre' },
-																		_react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
-																		'Nombre'
-																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: this.state.name, onChange: this.handleInputChange })
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-group' },
-																_react2.default.createElement(
-																		'label',
-																		{ htmlFor: 'descripcion' },
-																		_react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
-																		'Descripcion'
-																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la imagen', name: 'description', value: this.state.description, onChange: this.handleInputChange })
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col-6' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'category' },
-																				_react2.default.createElement('i', { className: 'fa fa-th-large mr-2' }),
-																				'Categor\xEDa'
-																		),
-																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: this.state.category, onChange: this.handleInputChange })
-																),
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'color' },
-																				_react2.default.createElement('i', { className: 'fa fa-tint mr-2' }),
-																				'Color'
-																		),
-																		_react2.default.createElement(
-																				'div',
-																				null,
-																				_react2.default.createElement(
-																						'select',
-																						{ className: 'custom-select', name: 'color', value: this.state.color, onChange: this.handleInputChange },
-																						_react2.default.createElement(
-																								'option',
-																								{ value: 'color' },
-																								'Color'
-																						),
-																						_react2.default.createElement(
-																								'option',
-																								{ value: 'escala de grises' },
-																								'Escala de grises'
-																						)
-																				)
-																		)
-																)
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'displays' },
-																				_react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
-																				'Asociar uno o varios displays'
-																		),
-																		_react2.default.createElement(
-																				'div',
-																				{ className: 'custom-controls-stacked' },
-																				optionsDisplays
-																		)
-																),
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'groups' },
-																				_react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
-																				'Asociar uno o varios grupos'
-																		),
-																		_react2.default.createElement(
-																				'div',
-																				{ className: 'custom-controls-stacked' },
-																				optionsGroups
-																		)
-																)
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'etiquetas' },
-																				_react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
-																				'Etiquetas'
-																		),
-																		_react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: this.state.tags, onChange: this.handleInputChange })
-																)
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col' },
-																		this.state.tags.map(function (tag, index) {
-																				return tag.length > 1 ? _react2.default.createElement(_tag.Tag, { key: index, tag: tag, category: 'images' }) : '';
-																		})
-																)
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-group' },
-																_react2.default.createElement(
-																		'label',
-																		{ htmlFor: 'creador' },
-																		_react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
-																		'Creador'
-																),
-																_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: this.state.createdBy.name, readOnly: 'readOnly' })
-														),
-														_react2.default.createElement(
-																'div',
-																{ className: 'form-row' },
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col-md-6' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'fechaCreacion' },
-																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-																				'Fecha de creaci\xF3n'
-																		),
-																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'createdAt ', value: moment(this.state.createdAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
-																),
-																_react2.default.createElement(
-																		'div',
-																		{ className: 'form-group col-md-6' },
-																		_react2.default.createElement(
-																				'label',
-																				{ htmlFor: 'fechaModificacion' },
-																				_react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
-																				'Fecha de modificaci\xF3n'
-																		),
-																		_react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updatedAt', value: moment(this.state.updatedAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
-																)
-														)
-												)
-										)
-								);
-						}
-				}
-		}]);
+    /* RENDER COMPONENT */
+    value: function render() {
+      var _this2 = this;
 
-		return ImageForm;
+      var image = this.props.image;
+      var _state = this.state,
+          groups = _state.groups,
+          displays = _state.displays,
+          redirect = _state.redirect,
+          redirectLocation = _state.redirectLocation,
+          name = _state.name,
+          description = _state.description,
+          category = _state.category,
+          color = _state.color,
+          tags = _state.tags,
+          createdBy = _state.createdBy,
+          createdAt = _state.createdAt,
+          updatedAt = _state.updatedAt;
+      // Options
+
+      var optionsGroups = groups.map(function (group) {
+        return _react2.default.createElement(
+          'div',
+          { key: group._id, className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: _this2.handleCheckGroups, id: group._id, type: 'checkbox', defaultChecked: groups.find(function (c) {
+              return c === group._id;
+            }), name: group._id, defaultValue: group._id, className: 'custom-control-input' }),
+          _react2.default.createElement(
+            'label',
+            { className: 'custom-control-label', htmlFor: group._id },
+            group.name
+          )
+        );
+      });
+      var optionsDisplays = displays.sort(function (a, b) {
+        return a.updatedAt - b.updatedAt;
+      }).map(function (display) {
+        return _react2.default.createElement(
+          'div',
+          { key: display._id, className: 'custom-control custom-checkbox' },
+          _react2.default.createElement('input', { onChange: _this2.handleCheckDisplays, id: display._id, type: 'checkbox', defaultChecked: displays.find(function (c) {
+              return c === display._id;
+            }), name: display._id, defaultValue: display._id, className: 'custom-control-input' }),
+          _react2.default.createElement(
+            'label',
+            { className: 'custom-control-label', htmlFor: display._id },
+            display.name
+          )
+        );
+      });
+
+      // Render return
+      if (redirect) {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: redirectLocation });
+      }
+      return _react2.default.createElement(
+        'div',
+        { className: 'card detalles' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card-header' },
+          _react2.default.createElement(
+            'ul',
+            { className: 'nav nav-pills card-header-pills justify-content-end mx-1' },
+            _react2.default.createElement(
+              'li',
+              { className: 'nav-item mr-auto' },
+              image ? _react2.default.createElement(
+                'h2',
+                { className: 'detalles-titulo' },
+                _react2.default.createElement('i', { className: 'fa fa-pencil mr-3', 'aria-hidden': 'true' }),
+                'Editar una imagen'
+              ) : _react2.default.createElement(
+                'h2',
+                { className: 'detalles-titulo' },
+                _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-3', 'aria-hidden': 'true' }),
+                'A\xF1adir una nueva imagen'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: 'nav-item ml-2' },
+              image ? _react2.default.createElement(
+                'button',
+                { onClick: this.handleSubmit, type: 'button', className: 'btn btn-info' },
+                _react2.default.createElement('i', { className: 'fa fa-save mr-2', 'aria-hidden': 'true' }),
+                'Guardar cambios'
+              ) : _react2.default.createElement(
+                'button',
+                { onClick: this.handleSubmit, type: 'button', className: 'btn btn-info' },
+                _react2.default.createElement('i', { className: 'fa fa-plus-circle mr-2', 'aria-hidden': 'true' }),
+                'A\xF1adir'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'card-body' },
+          _react2.default.createElement(
+            'form',
+            { id: 'form' },
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'nombre' },
+                _react2.default.createElement('i', { className: 'fa fa-picture-o mr-2' }),
+                'Nombre'
+              ),
+              _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'nombre', placeholder: 'Nombre de la imagen', name: 'name', value: name, onChange: this.handleInputChange })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'descripcion' },
+                _react2.default.createElement('i', { className: 'fa fa-info-circle mr-2' }),
+                'Descripcion'
+              ),
+              _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'descripcion', placeholder: 'Descripcion de la imagen', name: 'description', value: description, onChange: this.handleInputChange })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col-6' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'category' },
+                  _react2.default.createElement('i', { className: 'fa fa-th-large mr-2' }),
+                  'Categor\xEDa'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'category', name: 'category', value: category, onChange: this.handleInputChange })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'color' },
+                  _react2.default.createElement('i', { className: 'fa fa-tint mr-2' }),
+                  'Color'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'select',
+                    { className: 'custom-select', name: 'color', value: color, onChange: this.handleInputChange },
+                    _react2.default.createElement(
+                      'option',
+                      { value: 'color' },
+                      'Color'
+                    ),
+                    _react2.default.createElement(
+                      'option',
+                      { value: 'escala de grises' },
+                      'Escala de grises'
+                    )
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'displays' },
+                  _react2.default.createElement('i', { className: 'fa fa-television mr-2' }),
+                  'Asociar uno o varios displays'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'custom-controls-stacked' },
+                  optionsDisplays
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'groups' },
+                  _react2.default.createElement('i', { className: 'fa fa-list mr-2' }),
+                  'Asociar uno o varios grupos'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'custom-controls-stacked' },
+                  optionsGroups
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'etiquetas' },
+                  _react2.default.createElement('i', { className: 'fa fa-tags mr-2' }),
+                  'Etiquetas'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'tags', id: 'etiquetas', value: tags, onChange: this.handleInputChange })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col' },
+                tags.map(function (tag) {
+                  return tag.length > 1 ? _react2.default.createElement(_tag2.default, { key: tag, tag: tag, category: 'images' }) : '';
+                })
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'creador' },
+                _react2.default.createElement('i', { className: 'fa fa-user-o mr-2' }),
+                'Creador'
+              ),
+              _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'creador', name: 'user', value: createdBy.name, readOnly: 'readOnly' })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col-md-6' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'fechaCreacion' },
+                  _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                  'Fecha de creaci\xF3n'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaCreacion', name: 'createdAt ', value: moment(createdAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group col-md-6' },
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'fechaModificacion' },
+                  _react2.default.createElement('i', { className: 'fa fa-calendar-o mr-2' }),
+                  'Fecha de modificaci\xF3n'
+                ),
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'fechaModificacion', name: 'updatedAt', value: moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY'), readOnly: 'readOnly' })
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return ImageForm;
 }(_react.Component);
 
 var _initialiseProps = function _initialiseProps() {
-		var _this3 = this;
+  var _this3 = this;
 
-		this.handleInputChange = function (event) {
-				var target = event.target;
-				var name = target.name;
-				if (name === 'tags') {
-						var value = target.value.split(','); // TODO: better string to array conversion
-				} else {
-						var value = target.value;
-				}
+  this.handleInputChange = function (event) {
+    var target = event.target,
+        name = event.target.name;
 
-				_this3.setState(_defineProperty({}, name, value));
-		};
+    var value = void 0;
+    if (name === 'tags') {
+      value = target.value.split(','); // TODO: better string to array conversion
+    } else {
+      var aux = target.value;
 
-		this.handleCheckDisplays = function (event) {
-				// get value from the checkbox
-				var target = event.target;
-				var value = target.value;
-				// check if the checkbox has been selected
-				if (!_this3.state.displays.find(function (c) {
-						return c == value;
-				})) {
-						// check if value is stored in state
-						// if it is NOT stored, save the state, push the new value and save back the new state
-						var prevState = _this3.state.displays;
-						prevState.push(value);
-						_this3.setState({ displays: prevState });
-				} else {
-						// if it IS stored, save the state, splice the old value and save back the new state
-						var _prevState = _this3.state.displays;
-						_prevState.splice(_prevState.indexOf(value), 1);
-						_this3.setState({ displays: _prevState });
-				}
-		};
+      value = aux;
+    }
 
-		this.handleCheckGroups = function (event) {
-				// get value from the checkbox
-				var target = event.target;
-				var value = target.value;
-				// check if the checkbox has been selected
-				if (!_this3.state.groups.find(function (c) {
-						return c == value;
-				})) {
-						// check if value is stored in state
-						// if it is NOT stored, save the state, push the new value and save back the new state
-						var prevState = _this3.state.groups;
-						prevState.push(value);
-						_this3.setState({ groups: prevState });
-						target.checked = true;
-				} else {
-						// if it IS stored, save the state, splice the old value and save back the new state
-						var _prevState2 = _this3.state.groups;
-						_prevState2.splice(_prevState2.indexOf(value), 1);
-						_this3.setState({ groups: _prevState2 });
-						target.checked = false;
-				}
-		};
+    _this3.setState(_defineProperty({}, name, value));
+  };
 
-		this.handleSubmit = function () {
-				// get image if any
-				var image = _this3.props.image;
-				// define form values to send
+  this.handleCheckDisplays = function (event) {
+    var displays = _this3.state.displays;
+    // get value from the checkbox
 
-				var form = {
-						name: _this3.state.name,
-						description: _this3.state.description,
-						updatedBy: _this3.state.updatedBy._id, // send user_id
-						category: _this3.state.category,
-						tags: _this3.state.tags,
-						color_profile: _this3.state.color
-						// possible empty fields
-				};if (!_this3.props.image) form.createdBy = _this3.props.user._id;
-				_this3.state.displays.length > 0 ? form.displays = _this3.state.displays : form.displays = [];
-				_this3.state.groups.length > 0 ? form.groups = _this3.state.groups : form.groups = [];
-				// HTTP request
-				(0, _axios2.default)({
-						method: image ? 'put' : 'post',
-						url: image ? image.url : 'http://localhost:4000/images',
-						data: form,
-						headers: {
-								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': 'Bearer ' + _this3.props.token
-						}
-				}).then(function (res) {
-						if (res.status == 201) {
-								_this3.props.notify('Imagen configurada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
-								var action = image ? 'edit' : 'add';
-								return _this3.props.update('images', res.data.resourceId, action, res.data.resource); // update dataset
-						}
-				}).then(function (res) {
-						return _this3.setState({ redirect: true });
-				}).catch(function (err) {
-						return _this3.props.notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
-				});
-		};
+    var value = event.target.target.value;
+    // check if the checkbox has been selected
+
+    if (!displays.find(function (c) {
+      return c === value;
+    })) {
+      // check if value is stored in state
+      // if it is NOT stored, save the state, push the new value and save back the new state
+      var prevState = displays;
+      prevState.push(value);
+      _this3.setState({ displays: prevState });
+    } else {
+      // if it IS stored, save the state, splice the old value and save back the new state
+      var _prevState = displays;
+      _prevState.splice(_prevState.indexOf(value), 1);
+      _this3.setState({ displays: _prevState });
+    }
+  };
+
+  this.handleCheckGroups = function (event) {
+    var groups = _this3.state.groups;
+    // get value from the checkbox
+
+    var _event$target = event.target,
+        target = _event$target.target,
+        value = _event$target.target.value;
+    // check if the checkbox has been selected
+
+    if (!groups.find(function (c) {
+      return c === value;
+    })) {
+      // check if value is stored in state
+      // if it is NOT stored, save the state, push the new value and save back the new state
+      var prevState = groups;
+      prevState.push(value);
+      _this3.setState({ groups: prevState });
+      target.checked = true;
+    } else {
+      // if it IS stored, save the state, splice the old value and save back the new state
+      var _prevState2 = groups;
+      _prevState2.splice(_prevState2.indexOf(value), 1);
+      _this3.setState({ groups: _prevState2 });
+      target.checked = false;
+    }
+  };
+
+  this.handleSubmit = function () {
+    // get image if any
+    var _props = _this3.props,
+        image = _props.image,
+        user = _props.user,
+        token = _props.token,
+        update = _props.update,
+        notify = _props.notify;
+    var _state2 = _this3.state,
+        name = _state2.name,
+        description = _state2.description,
+        updatedBy = _state2.updatedBy,
+        category = _state2.category,
+        tags = _state2.tags,
+        color = _state2.color,
+        displays = _state2.displays,
+        groups = _state2.groups;
+    // define form values to send
+
+    var form = {
+      name: name,
+      description: description,
+      category: category,
+      tags: tags,
+      updatedBy: updatedBy._id, // send user_id
+      color_profile: color
+    };
+    // possible empty fields
+    if (!image) form.createdBy = user._id;
+    if (displays.length > 0) {
+      form.displays = displays;
+    } else {
+      form.displays = [];
+    }
+    if (groups.length > 0) {
+      form.groups = groups;
+    } else {
+      form.groups = [];
+    }
+    // HTTP request
+    (0, _axios2.default)({
+      method: image ? 'put' : 'post',
+      url: image ? image.url : 'http://localhost:4000/images',
+      data: form,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    }).then(function (res) {
+      if (res.status === 201) {
+        notify('Imagen configurada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+        var action = image ? 'edit' : 'add';
+        return update('images', res.data.resourceId, action, res.data.resource); // update dataset
+      }
+      return false;
+    }).then(function () {
+      return _this3.setState({ redirect: true });
+    }).catch(function () {
+      return notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.BOTTOM_LEFT);
+    });
+  };
 };
+
+ImageForm.propTypes = {
+  image: _propTypes2.default.shape,
+  user: _propTypes2.default.shape.isRequired,
+  token: _propTypes2.default.string.isRequired,
+  update: _propTypes2.default.shape.isRequired,
+  notify: _propTypes2.default.shape.isRequired
+};
+
+ImageForm.defaultProps = {
+  image: null
+};
+
+exports.default = ImageForm;
 
 /***/ }),
 /* 358 */
@@ -77483,7 +77552,6 @@ exports.default = ImageGeneric;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ImageDetails = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -77503,13 +77571,19 @@ var _axios = __webpack_require__(4);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _propTypes = __webpack_require__(2);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _associated = __webpack_require__(26);
+
+var _associated2 = _interopRequireDefault(_associated);
 
 var _tag = __webpack_require__(15);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _tag2 = _interopRequireDefault(_tag);
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -77518,47 +77592,51 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* IMPORT MODULES */
 
 
-var moment = __webpack_require__(0);
-moment.locale('es');
-
 /* IMPORT COMPONENTS */
 
+
+var moment = __webpack_require__(0);
+
+moment.locale('es');
+
 /* COMPONENTS */
-var ImageDetails = exports.ImageDetails = function (_Component) {
+
+var ImageDetails = function (_Component) {
   _inherits(ImageDetails, _Component);
 
-  // TODO: transform to component
-
   function ImageDetails(props) {
-    var _this$state;
-
     _classCallCheck(this, ImageDetails);
 
     var _this = _possibleConstructorReturn(this, (ImageDetails.__proto__ || Object.getPrototypeOf(ImageDetails)).call(this, props));
 
     _this.onDropAccepted = function (acceptedFile) {
-      _this.setState({ file: acceptedFile, accepted: true });
+      var _this$props = _this.props,
+          image = _this$props.image,
+          update = _this$props.update,
+          notify = _this$props.notify;
+
+      _this.setState({ accepted: true });
       // Form
       var data = new FormData();
       data.append('image', acceptedFile[0]);
 
       // upload file
-      _axios2.default.post(_this.props.image.url, data).then(function (res) {
-        if (res.status == 200) {
-          _this.props.update('images', res.data.resourceId, 'edit', res.data.resource);
-          _this.props.notify('Imagen cargada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
+      _axios2.default.post(image.url, data).then(function (res) {
+        if (res.status === 200) {
+          update('images', res.data.resourceId, 'edit', res.data.resource);
+          notify('Imagen cargada con éxito', 'notify-success', 'upload', _reactToastify.toast.POSITION.TOP_RIGHT, res.data.notify);
         }
-      }).catch(function (err) {
-        _this.props.notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
+      }).catch(function () {
+        notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', _reactToastify.toast.POSITION.TOP_RIGHT);
       });
     };
 
-    _this.state = (_this$state = {
-      file: [],
+    _this.state = {
       accepted: false,
-      // image details
-      src: null
-    }, _defineProperty(_this$state, 'file', ''), _defineProperty(_this$state, 'size', ''), _this$state);
+      src: null,
+      extension: '',
+      size: ''
+    };
     return _this;
   }
 
@@ -77585,30 +77663,31 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       // define constants from props for better readability
-      var _props$image2 = this.props.image,
+      var _props = this.props,
+          _props$image2 = _props.image,
           _id = _props$image2._id,
           name = _props$image2.name,
           description = _props$image2.description,
-          src = _props$image2.src,
           createdAt = _props$image2.createdAt,
-          updatedAt = _props$image2.updatedAt,
           createdBy = _props$image2.createdBy,
           colorProfile = _props$image2.colorProfile,
           resolution = _props$image2.resolution,
-          category = _props$image2.category,
           groups = _props$image2.groups,
           displays = _props$image2.displays,
-          tags = _props$image2.tags;
+          tags = _props$image2.tags,
+          filterData = _props.filterData;
+      var _state = this.state,
+          src = _state.src,
+          accepted = _state.accepted,
+          extension = _state.extension,
+          size = _state.size;
       // refactor date constants with format
 
       var created = moment(createdAt).format('dddd, D [de] MMMM [de] YYYY');
-      var updated = moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY');
       // generate tag list
-      var tagList = tags.map(function (tag, index) {
-        return _react2.default.createElement(_tag.Tag, { key: index, category: 'images', filterData: _this2.props.filterData, tag: tag });
+      var tagList = tags.map(function (tag) {
+        return _react2.default.createElement(_tag2.default, { key: tag, category: 'images', filterData: filterData, tag: tag });
       });
       // define routes for edit and delete based on the id
       var linktoEdit = '/images/' + _id + '/edit';
@@ -77693,13 +77772,13 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                 'p',
                 { className: 'card-text' },
                 _react2.default.createElement('i', { className: 'fa fa-fw fa-file-image-o mr-2', 'aria-hidden': 'true' }),
-                this.state.extension
+                extension
               ),
               _react2.default.createElement(
                 'p',
                 { className: 'card-text' },
                 _react2.default.createElement('i', { className: 'fa fa-fw fa-database mr-2', 'aria-hidden': 'true' }),
-                this.state.size
+                size
               ),
               _react2.default.createElement(
                 'p',
@@ -77739,11 +77818,15 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                 ),
                 _react2.default.createElement(
                   _reactDropzone2.default,
-                  { onDropAccepted: this.onDropAccepted, activeClassName: 'dropzone-accepted', className: this.state.accepted ? 'dropzone dropzone-accepted' : 'dropzone' },
+                  {
+                    onDropAccepted: this.onDropAccepted,
+                    activeClassName: 'dropzone-accepted',
+                    className: accepted ? 'dropzone dropzone-accepted' : 'dropzone'
+                  },
                   _react2.default.createElement(
                     'div',
                     { className: 'vista-imagen d-flex w-100 justify-content-center' },
-                    this.state.src ? _react2.default.createElement('img', { className: 'imagen', src: this.state.src }) : _react2.default.createElement(
+                    src ? _react2.default.createElement('img', { alt: '', className: 'imagen', src: src }) : _react2.default.createElement(
                       'div',
                       { className: 'align-self-center' },
                       _react2.default.createElement(
@@ -77779,7 +77862,7 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                   displays.length,
                   ')'
                 ),
-                _react2.default.createElement(_associated.Associated, { content: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
+                _react2.default.createElement(_associated2.default, { content: displays, category: 'displays', appearance: 'elemento-display', icon: 'television' })
               )
             ),
             _react2.default.createElement(
@@ -77795,7 +77878,7 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
                   groups.length,
                   ')'
                 ),
-                _react2.default.createElement(_associated.Associated, { content: groups, category: 'groups', appearance: 'elemento-grupo', icon: 'list' })
+                _react2.default.createElement(_associated2.default, { content: groups, category: 'groups', appearance: 'elemento-grupo', icon: 'list' })
               )
             )
           )
@@ -77806,6 +77889,15 @@ var ImageDetails = exports.ImageDetails = function (_Component) {
 
   return ImageDetails;
 }(_react.Component);
+
+ImageDetails.propTypes = {
+  image: _propTypes2.default.shape.isRequired,
+  update: _propTypes2.default.shape.isRequired,
+  notify: _propTypes2.default.shape.isRequired,
+  filterData: _propTypes2.default.shape.isRequired
+};
+
+exports.default = ImageDetails;
 
 /***/ }),
 /* 361 */

@@ -18,7 +18,6 @@ class Login extends Component {
   componentDidMount() {
     // get login from local storage
     this.setState({ login: localStorage.getItem('login') || '' });
-
     // set the checkbox to true if login was found
     this.setState({ remember: !!localStorage.getItem('login') });
   }
