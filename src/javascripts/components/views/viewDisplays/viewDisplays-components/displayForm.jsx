@@ -62,11 +62,13 @@ class DisplayForm extends Component {
     const unusedDevices = data.devices.filter(device => !device.display);
     // set state with initial values
     if (unusedDevices.length > 0 || display) {
+      let device = unusedDevices[0]._id;
+      if (display && display.device) device = display.device.user_id;
       this.setState({
-        location: display ? `/displays/${display._id}` : '/displays', // Redirect url
-        device: display ? (display.device ? display.device._id : unusedDevices[0]._id) : unusedDevices[0]._id,
-        deviceDescription: display ? display.device.description : unusedDevices[0].description,
+        device,
         optionsActiveImage,
+        location: display ? `/displays/${display._id}` : '/displays', // Redirect url
+        deviceDescription: display ? display.device.description : unusedDevices[0].description,
       });
     } else {
       this.setState({ device: '' });
@@ -147,7 +149,7 @@ class DisplayForm extends Component {
 	    display, user, token, notify, update,
 	  } = this.props;
 	  const {
-	    name, description, category, tags, device,
+	    name, description, category, tags, device, activeImage, images, group,
 	  } = this.state;
 	  // define form values to send
 	  const form = {
@@ -156,13 +158,16 @@ class DisplayForm extends Component {
 	    category,
 	    tags,
 	    device,
+	    activeImage: null,
+	    images: null,
+	    group: null,
 	    updatedBy: user._id, // send user_id
 	  };
 	  // possible empty fields
-	  if (!display) form.createdBy = this.props.user._id;
-	  this.state.activeImage != '' ? form.activeImage = this.state.activeImage : form.activeImage = null;
-	  this.state.images.length > 0 ? form.images = this.state.images : form.images = [];
-	  this.state.group && this.state.group._id ? form.group = this.state.group._id : form.group = null;
+	  if (!display) form.createdBy = user._id;
+	  if (activeImage !== '') form.activeImage = activeImage;
+	  if (images.length > 0) form.images = images;
+	  if (group && group._id) form.group = group._id;
 	  // HTTP request
 	  axios({
 	    method: display ? 'put' : 'post',
@@ -189,11 +194,11 @@ class DisplayForm extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  const {
-	    redirect, location, device, deviceDescription, name, description, category, group, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy,
+	    redirect, images, location, device, deviceDescription, name, description, category, group, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy, previewImage,
 	  } = this.state;
 	  const {
-	    display, data: {
-	    devices, images, groups,
+	    display, data, data: {
+	    devices, groups,
 	  },
 	  } = this.props;
 
@@ -203,20 +208,42 @@ class DisplayForm extends Component {
 	  const optionsDevices = devices.filter(d => !d.display || d.display._id === (display && display._id))
 	    .map(d => <option value={d._id} key={d._id}>{d.name}</option>);
 	  const optionsGroup = groups.map(g => (<option value={g._id} key={g._id}>{g.name}</option>));
-	  const optionsImages = images.sort((a, b) => a.updatedAt - b.updatedAt)
+	  const optionsImages = data.images.sort((a, b) => a.updatedAt - b.updatedAt)
 	    .map(image => (
         <div key={image._id} onMouseEnter={() => this.handleOnMouseEnter(image._id)} onMouseLeave={this.handleOnMouseLeave} className="custom-control custom-checkbox">
-				  <input onChange={this.handleCheckImages} id={image._id} type="checkbox" defaultChecked={this.state.images.find(c => c === image._id)} name={image._id} defaultValue={image._id} className="custom-control-input" />
+				  <input onChange={this.handleCheckImages} id={image._id} type="checkbox" defaultChecked={images.find(c => c === image._id)} name={image._id} defaultValue={image._id} className="custom-control-input" />
 				  <label className="custom-control-label" htmlFor={image._id}>{image.name}</label>
 				</div>
 	    ));
 
+	  let showImage;
+	  if (previewImage && previewImage.src) {
+	    showImage = (
+        <div className="preview-image d-flex w-100 align-items-center shadow">
+           <img alt="" className="imagen" src={previewImage.src} />
+        </div>
+	    );
+	  } else if (previewImage) {
+	    showImage = (
+        <div className="preview-image-empty d-flex w-100 align-items-center justify-content-center shadow">
+          <p>La imagen aun no ha sido determinada</p>
+        </div>
+	    );
+	  } else {
+	    showImage = (
+       <div className="preview-image-empty d-flex w-100 align-items-center">
+         <p>Pase el raton por encima de los nombres de las imágenes para previsualizarlas</p>
+       </div>
+	    );
+	  }
+
 	  // Render return
+
 	  if (redirect) {
 	    return (<Redirect to={location} />);
 	  } if (!device) {
 	    return (
-<div className="card detalles">
+      <div className="card card-detalles">
         <div className="card-header">
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">
@@ -236,7 +263,7 @@ class DisplayForm extends Component {
 	    );
 	  }
 	  return (
-<div className="card detalles">
+      <div className="card detalles">
         <div className="card-header">
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">
@@ -340,24 +367,7 @@ class DisplayForm extends Component {
 	            </div>
 							<div className="form-group col">
 								<label htmlFor="images"><i className="fa fa-eye mr-2" />Previsualización de la imagen <small>(Puede aparecer recortada)</small></label>
-									{ this.state.previewImage
-										 ? (this.state.previewImage.src
-											 ? (
-<div className="preview-image d-flex w-100 align-items-center shadow">
-													<img className="imagen" src={this.state.previewImage.src} />
-												</div>
-									    )
-										  : (
-<div className="preview-image-empty d-flex w-100 align-items-center justify-content-center shadow">
-													<p>La imagen aun no ha sido determinada</p>
-												</div>
-									    ))
-										 : (
-<div className="preview-image-empty d-flex w-100 align-items-center">
-												<p>Pase el raton por encima de los nombres de las imágenes para previsualizarlas</p>
-											</div>
-									  )
-									}
+									{ showImage	}
 							</div>
 						</div>
             <div className="form-row">

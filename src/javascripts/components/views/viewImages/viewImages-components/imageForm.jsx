@@ -179,7 +179,7 @@ class ImageForm extends Component {
 	    return (<Redirect to={redirectLocation} />);
 	  }
 	  return (
-<div className="card detalles">
+<div className="card card-detalles">
         <div className="card-header">
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">

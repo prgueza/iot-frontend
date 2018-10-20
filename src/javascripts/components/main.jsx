@@ -56,7 +56,7 @@ class Main extends Component {
 
 	/* UPDATE DATA */
 	update = (resourceType, _id, action, data, devices) => {
-	  const { data: stateData } = this.state.data;
+	  const { data: stateData } = this.state;
 	  switch (action) {
 	    case 'remove':
 	    {

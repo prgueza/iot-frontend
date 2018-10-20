@@ -1,3 +1,24 @@
 .card-division {
-    border-color: $bd-color;
+  border-color: $bd-color;
+}
+
+.card {
+  box-shadow: $shadow;
+}
+
+.card-login,
+.card-menu,
+.card-detalles,
+.card-configuracion {
+  border-width: 0;
+}
+
+.card-detalles {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card-detalles > .card-body {
+  height: 100%;
+  overflow-y: scroll;
 }

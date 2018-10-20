@@ -13,6 +13,7 @@
 @import 'botones';
 @import 'modal';
 @import 'image';
+@import 'inputs';
 @import 'react-select/dist/react-select.css';
 
 // style
@@ -80,18 +81,6 @@ body{
   max-height: 90%;
   padding-bottom: 15px;
   overflow-y: scroll;
-}
-
-.settings{
-
-}
-
-.settings .card-body{
-
-}
-
-.asociados{
-
 }
 
 ::-webkit-scrollbar{

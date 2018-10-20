@@ -122,11 +122,11 @@ class Navigation extends Component {
       <h1>MENU</h1>
     </div>
     <hr />
-    <div className="card menu">
+    <div className="card card-menu menu">
       <div className="button-menu">
         <div className="busqueda mb-3">
           <p>BÚSQUEDA</p>
-          <input onChange={this.handleSearch} value={filterValue} type="text" className="form-control search" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..." />
+          <input onChange={this.handleSearch} value={filterValue} type="text" className="form-control input-no-border search" id="busqueda" aria-describedby="campoBusqueda" placeholder="Buscar..." />
         </div>
         <div className="mb-3">
           <p>NAVEGACIÓN</p>
@@ -142,7 +142,7 @@ class Navigation extends Component {
                 && <NavButton key="settings" linkTo="settings" text="Configuración" icon="cogs" />
               }
             <li>
-              <a href="/disconect">
+              <a tabIndex={-1} href="/disconect">
                 <button type="button" className="btn btn-nav btn-block mb-1">
                   <Icon icon="sign-out" mr="2" fw />
                   {' '}

@@ -64,18 +64,18 @@ class Login extends Component {
 	  return (
   <div className="row login justify-content-center">
     <div className="col-lg-4 col-md-8 col-sm-12 align-self-center">
-      <div className="card">
+      <div className="card card-login">
         <div className="card-body">
           <h1 className="text-center"><i className="fa fa-barcode fa-4x mb-3" /></h1>
           <small className="float-right">v0.1.5</small>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label className="sr-only" htmlFor="login">Usuario</label>
-              <input onChange={this.handleInputChange} type="text" className="form-control" id="login" value={login} name="login" placeholder="Usuario" />
+              <input onChange={this.handleInputChange} type="text" className="form-control input-no-border" id="login" value={login} name="login" placeholder="Usuario" />
             </div>
             <div className="form-group">
               <label className="sr-only" htmlFor="password">Password</label>
-              <input onChange={this.handleInputChange} type="password" className="form-control" id="password" value={password} name="password" placeholder="Contraseña" />
+              <input onChange={this.handleInputChange} type="password" className="form-control input-no-border" id="password" value={password} name="password" placeholder="Contraseña" />
             </div>
             <button onClick={this.handleSubmit} type="submit" className="btn btn-block btn-primary">Entrar</button>
             <div className="form-group mt-2">

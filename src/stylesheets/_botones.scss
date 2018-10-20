@@ -1,3 +1,26 @@
+.a:not(:disabled):not(.disabled):active:focus,
+.a:not(:disabled):not(.disabled).active:focus
+.a:not(:disabled):not(.disabled):active,
+.a:not(:disabled):not(.disabled).active,
+.btn:not(:disabled):not(.disabled):active:focus,
+.btn:not(:disabled):not(.disabled).active:focus
+.btn:not(:disabled):not(.disabled):active,
+.btn:not(:disabled):not(.disabled).active {
+  background-image: none;
+  box-shadow: none;
+}
+
+a:focus{
+  background-image: none;
+  box-shadow: none;
+}
+
+.btn:focus,
+.btn.focus {
+    border: 1px solid $primary-color;
+    box-shadow: none;
+}
+
 .btn-tiny{
   padding: 0.2rem;
   font-size: 0.75rem;

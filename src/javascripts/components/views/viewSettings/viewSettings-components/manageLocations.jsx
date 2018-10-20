@@ -134,7 +134,7 @@ class ManageLocations extends Component {
 	  );
 
 	  return (
-				<div className="card settings">
+				<div className="card card-settings">
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">

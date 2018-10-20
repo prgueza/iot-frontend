@@ -121,7 +121,7 @@ class EditImageForm extends Component {
 	    top: `${yCoordinate}%`,
 	  };
 	  return (
-			<div>
+		<div>
 			<div className="row">
 				<div className="col-6">
 					<h3>Componer imagen</h3>

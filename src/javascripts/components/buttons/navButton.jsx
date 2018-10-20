@@ -12,7 +12,7 @@ const NavButton = ({
 }) => {
   const location = { pathname: `/${linkTo}` };
   return (
-    <NavLink exact={!!exact} to={location}>
+    <NavLink tabIndex={-1} exact={!!exact} to={location}>
       <li>
         <button type="button" className="btn btn-nav btn-block mb-1 d-flex justify-content-between align-items-center">
           <div>

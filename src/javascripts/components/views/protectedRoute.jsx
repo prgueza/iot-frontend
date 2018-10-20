@@ -9,7 +9,7 @@ const ProtectedRoute = ({ component: Component, user, ...rest }) => (
     render={() => (
       user.admin === true
         ? <Component user={user} {...rest} /> : <Redirect to="/" />)
-}
+    }
   />
 );
 

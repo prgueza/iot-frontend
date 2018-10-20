@@ -9,7 +9,7 @@ const cx = require('classnames');
 
 /* COMPONENT */
 const AddButton = ({ category }) => {
-  const claseBoton = cx('btn btn-block btn-small', { 'btn-success': category === 'displays' }, { 'btn-info': category === 'images' }, { 'btn-warning': category === 'groups' }, { 'btn-success': category === 'devices' }, { 'btn-outline-primary': category === 'gateways' });
+  const claseBoton = cx('btn btn-block btn-small', { 'btn-success': category === 'displays' }, { 'btn-info': category === 'images' }, { 'btn-warning': category === 'groups' }, { 'btn-success': category === 'gateways' });
   const location = {
     pathname: `/${category}/add`,
   };
