@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const favicon = require('serve-favicon');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const expressSession = require('express-session');
@@ -18,6 +19,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public/img', 'favicon.ico')));
 app.use(expressSession({ secret: 'secretString', saveUninitialized: false, resave: false }));
 
 app.use('/', index);
