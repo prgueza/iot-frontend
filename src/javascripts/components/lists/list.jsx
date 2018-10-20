@@ -89,11 +89,17 @@ class List extends Component {
 }
 
 List.propTypes = {
-  content: PropTypes.string.isRequired,
+  content: PropTypes.shape,
   category: PropTypes.string.isRequired,
   filterValue: PropTypes.string.isRequired,
-  filterFoundValue: PropTypes.bool.isRequired,
-  filterFound: PropTypes.shape.isRequired,
+  filterFoundValue: PropTypes.bool,
+  filterFound: PropTypes.shape,
+};
+
+List.defaultProps = {
+  content: null,
+  filterFoundValue: false,
+  filterFound: null,
 };
 
 export default List;

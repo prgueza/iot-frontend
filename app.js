@@ -3,7 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const expressSession = require('express-session');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -13,12 +13,12 @@ app.set('view engine', 'ejs');
 
 const index = require('./routes/index');
 
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressSession({secret: 'secretString', saveUninitialized: false, resave: false}));
+app.use(expressSession({ secret: 'secretString', saveUninitialized: false, resave: false }));
 
 app.use('/', index);
 
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -4,12 +4,12 @@ import { Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 
 /* IMPORT COMPONENTS */
-import DeviceDetails from './deviceDetails.jsx';
-import DeviceForm from './deviceForm.jsx';
-import DeviceDelete from './deviceDelete.jsx';
+import DeviceDetails from './deviceDetails';
+import DeviceForm from './deviceForm';
+import DeviceDelete from './deviceDelete';
 
 /* COMPONENTS */
-export class DeviceRouter extends Component {
+class DeviceRouter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,11 +21,12 @@ export class DeviceRouter extends Component {
 
   /* FETCH FULL DATA ABOUT THE IMAGE */
   componentDidMount() {
-    if (this.props.device) {
-      axios.get(this.props.device.url, { headers: { Authorization: `Bearer ${this.props.token}` } })
+    const { token, device } = this.props;
+    if (device) {
+      axios.get(device.url, { headers: { Authorization: `Bearer ${token}` } })
         .then(
-          (device) => { // resolve callback
-            this.setState({ device: device.data, isLoaded: true });
+          (doc) => { // resolve callback
+            this.setState({ device: doc.data, isLoaded: true });
           },
           (error) => { // reject callback
             this.setState({ error, isLoaded: true });
@@ -36,11 +37,12 @@ export class DeviceRouter extends Component {
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER DEVICE */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.device && (nextProps.device._id != this.props.device._id || nextProps.device.updatedAt != this.props.device.updatedAt)) { // if props actually changed
-      axios.get(nextProps.device.url, { headers: { Authorization: `Bearer ${this.props.token}` } })
+    const { token, device } = this.props;
+    if (nextProps.device && (nextProps.device._id !== device._id || nextProps.device.updatedAt !== device.updatedAt)) { // if props actually changed
+      axios.get(nextProps.device.url, { headers: { Authorization: `Bearer ${token}` } })
         .then(
-          (device) => { // resolve callback
-            this.setState({ device: device.data, isLoaded: true });
+          (doc) => { // resolve callback
+            this.setState({ device: doc.data, isLoaded: true });
           },
           (error) => { // reject callback
             this.setState({ error, isLoaded: true });
@@ -61,10 +63,12 @@ export class DeviceRouter extends Component {
     }
     return (
       <Switch>
-        <Route path="/devices/:deviceId/edit" render={({ match }) => <DeviceForm {...this.props} device={device} />} />
-        <Route path="/devices/:deviceId/delete" render={({ match }) => <DeviceDelete {...this.props} device={device} />} />
-        <Route path="/devices/:deviceId" render={({ match }) => <DeviceDetails {...this.props} device={device} />} />
+        <Route path="/devices/:deviceId/edit" render={() => <DeviceForm {...this.props} device={device} />} />
+        <Route path="/devices/:deviceId/delete" render={() => <DeviceDelete {...this.props} device={device} />} />
+        <Route path="/devices/:deviceId" render={() => <DeviceDetails {...this.props} device={device} />} />
       </Switch>
     );
   }
 }
+
+export default DeviceRouter;

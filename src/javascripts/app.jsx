@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 /* IMPORT COMPONENTS */
-import Main from './components/main.jsx';
-import Login from './components/login/login.jsx';
+import Main from './components/main';
+import Login from './components/login/login';
 
 /* COMPONENTS */
 class App extends Component {
