@@ -14,10 +14,10 @@ moment.locale('es');
 /* COMPONENT */
 const Device = ({
   device: {
-    _id, name, description, batt, initcode, found, updatedAt,
+    _id, name, description, batt, initcode, found, lastFound,
   },
 }) => {
-  const updated = moment(updatedAt).from(moment());
+  const last = moment(lastFound).from(moment());
   const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start');
   const location = {
     pathname: `/devices/${_id}`,
@@ -44,8 +44,8 @@ const Device = ({
               {initcode}
             </small>
             <small>
-              {updated}
-              <i className="fa fa-calendar-o ml-2" aria-hidden="true" />
+              {last}
+              <i className="fa fa-refresh ml-2" aria-hidden="true" />
             </small>
           </div>
         </div>

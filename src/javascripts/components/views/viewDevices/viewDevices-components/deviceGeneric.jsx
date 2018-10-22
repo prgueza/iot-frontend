@@ -8,7 +8,7 @@ const DeviceGeneric = () => (
       <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
         <li className="nav-item mr-auto">
           <h2 className="detalles-titulo text-center">
-            <i className="fa-map-marker" aria-hidden="true" />
+            <i className="fa fa-tablet mr-3" aria-hidden="true" />
 						Detalles
           </h2>
         </li>
