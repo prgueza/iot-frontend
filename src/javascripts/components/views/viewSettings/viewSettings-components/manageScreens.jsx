@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 /* IMPORT COMPONENTS */
@@ -97,16 +96,16 @@ class ManageScreens extends Component {
 	      if (res.status === 201 || res.status === 200) {
 	        switch (method) {
 	          case 'put':
-	            notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Pantalla modificada con éxito', 'notify-success', 'floppy-o', res.data.notify);
 	            update('screens', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	            break;
 	          case 'post':
-	            notify('Pantalla creada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Pantalla creada con éxito', 'notify-success', 'upload', res.data.notify);
 	            update('screens', res.data.resourceId, 'add', res.data.resource); // update dataset
 	            this.edit(res.data.resourceId);
 	            break;
 	          case 'delete':
-	            notify('Pantalla eliminada con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Pantalla eliminada con éxito', 'notify-success', 'trash', res.data.notify);
 	            this.cancel();
 	            update('screens', res.data.resourceId, 'remove', res.data.resource); // update dataset
 	            break;
@@ -120,7 +119,7 @@ class ManageScreens extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT));
+	    .catch(() => notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle'));
 	}
 
 	render() {

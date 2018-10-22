@@ -1,6 +1,5 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -142,14 +141,14 @@ class ImageForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 201) {
-	        notify('Imagen configurada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify);
+	        notify('Imagen configurada con éxito', 'notify-success', 'upload', res.data.notify);
 	        const action = image ? 'edit' : 'add';
 	        return update('images', res.data.resourceId, action, res.data.resource); // update dataset
 	      }
 	      return false;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
+	    .catch(() => notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle'));
 	}
 
 	/* RENDER COMPONENT */

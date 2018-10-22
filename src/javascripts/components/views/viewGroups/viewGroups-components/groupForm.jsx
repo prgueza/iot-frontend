@@ -1,6 +1,5 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -149,13 +148,13 @@ class GroupForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 201) {
-	        notify('Grupo configurada con éxito', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify);
+	        notify('Grupo configurada con éxito', 'notify-success', 'check', res.data.notify);
 	        const action = group ? 'edit' : 'add';
 	        update('groups', res.resourceId, action, res.data.resource); // update dataset
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT));
+	    .catch(() => notify('Error al configurar el grupo', 'notify-error', 'exclamation-triangle'));
 	}
 
 	render() {

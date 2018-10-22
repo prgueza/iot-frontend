@@ -11,7 +11,8 @@
     "jsx-a11y/label-has-associated-control": "off",
     "react/jsx-indent": ["on", 'tab'],
     "react/jsx-closing-tag-location": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "no-trailing-spaces": "off"
   },
   "env": {
       "browser": true,

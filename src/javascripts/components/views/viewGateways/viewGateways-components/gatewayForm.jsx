@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -92,15 +91,15 @@ class GatewayForm extends Component {
 	    },
 	  })
 	    .then((res) => {
-	      if (res.status === 201) {
-	        notify('Puerta de enlace configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT);
+	      if (res.status >= 200) {
+	        notify('Puerta de enlace configurada con éxito', 'notify-success', 'upload');
 	        const action = gateway ? 'edit' : 'add';
 	        return update('gateways', res.data.resourceId, action, res.data.resource); // update dataset
 	      }
-	      return false;
+	      return null;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
+	    .catch(() => notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle'));
 	}
 
 	/* RENDER COMPONENT */

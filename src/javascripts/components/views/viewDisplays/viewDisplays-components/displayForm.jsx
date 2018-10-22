@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -181,14 +180,14 @@ class DisplayForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 201) {
-	        notify('Display configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT);
+	        notify('Display configurado con éxito', 'notify-success', 'upload');
 	        const action = display ? 'edit' : 'add';
 	        return update('displays', res.data.resourceId, action, res.data.resource, res.data.devices); // update dataset
 	      }
 	      return false;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
+	    .catch(() => notify('Error al configurar el display', 'notify-error', 'exclamation-triangle'));
 	}
 
 	/* RENDER COMPONENT */

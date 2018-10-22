@@ -18,7 +18,7 @@ class List extends Component {
 	    const b = element.description && element.description.indexOf(filterValue) > -1;
 	    const c = element.category && element.category.indexOf(filterValue) > -1;
 	    const d = element.screen && element.screen.indexOf(filterValue) > -1;
-	    const e = element.location && element.location.name.indexOf(filterValue) > -1;
+	    const e = element.location && element.location.name && element.location.name.indexOf(filterValue) > -1;
 	    const f = element.mac && element.mac.indexOf(filterValue) > -1;
 	    const g = element.initcode && element.initcode.indexOf(filterValue) > -1;
 	    return a || b || c || d || e || f || g;
@@ -59,9 +59,8 @@ class List extends Component {
       <div className="list-group-item-action list-group-item flex-column align-items-start">
         <div className="text-center elemento">
           <h4 className="mb-1">
-					No se han encontrado
-            {content.length > 0 && 'más'}
-            {' '}
+						No se han encontrado
+            {content.length > 0 && ' más '}
             {elementName}
           </h4>
           <hr className="element-division" />
