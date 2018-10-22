@@ -22,8 +22,14 @@ class Login extends Component {
     this.setState({ remember: !!localStorage.getItem('login') });
   }
 
+  /* RESET ERROR */
+  resetError = () => {
+    this.setState({ error: null });
+  }
+
 	/* HANDLE INPUT CHANGE */
 	handleInputChange = (event) => {
+	  this.resetError();
 	  const { target } = event;
 	  const { remember } = this.state;
 	  const { name } = target;
@@ -85,12 +91,14 @@ class Login extends Component {
               </div>
             </div>
           </form>
-          { error && (
-          <p className="text-center text-danger">
-            <i className="fa fa-times mr-2" />
-						Usuario o contraseña incorrectos
+          <p className="text-center text-danger login-error">
+            { error && (
+              <span>
+                <i className="fa fa-times mr-2" />
+    						Usuario o contraseña incorrectos
+              </span>
+            ) }
           </p>
-          ) }
         </div>
       </div>
     </div>
