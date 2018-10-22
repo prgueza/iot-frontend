@@ -13,12 +13,13 @@ moment.locale('es');
 /* COMPONENTS */
 const DeviceDetails = ({
   device: {
-    _id, name, description, updatedAt, updatedBy, mac, gateway, batt, rssi, screen, found, userGroup,
+    _id, name, description, updatedAt, updatedBy, mac, gateway, batt, rssi, screen, found, lastFound, userGroup,
   },
   data: { screens },
 }) => {
   // refactor date constants with format
   const updated = moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY');
+  const last = moment(lastFound).format('dddd, D [de] MMMM [de] YYYY [, a las] HH:mm:ss');
 
   // FIXME: rename variables
   const screenObj = screens.find(r => r.screenCode === screen);
@@ -68,6 +69,10 @@ const DeviceDetails = ({
             <p className="card-text">
               <Icon icon="server" fw="true" mr="2" />
               { mac }
+            </p>
+            <p className={lastFound ? 'card-text' : 'card-text text-danger'}>
+              <Icon icon="refresh" fw="true" mr="2" />
+              {last}
             </p>
             <p className={found ? 'card-text' : 'card-text text-danger'}>
               <Icon icon="battery" fw="true" mr="2" batt={batt || 0} />

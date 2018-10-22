@@ -10,7 +10,7 @@ const GatewayGeneric = () => (
     <div className="card-header">
       <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
         <li className="nav-item mr-auto">
-          <h2 className="detalles-titulo text-center"><i className="fa-map-marker" aria-hidden="true" />Detalles</h2>
+          <h2 className="detalles-titulo text-center"><i className="fa fa-sitemap mr-3" aria-hidden="true" />Detalles</h2>
         </li>
       </ul>
     </div>
