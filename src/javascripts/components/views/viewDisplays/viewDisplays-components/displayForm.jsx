@@ -61,8 +61,9 @@ class DisplayForm extends Component {
     const unusedDevices = data.devices.filter(device => !device.display);
     // set state with initial values
     if (unusedDevices.length > 0 || display) {
-      let device = unusedDevices[0]._id;
-      if (display && display.device) device = display.device.user_id;
+      let device;
+      if (display && display.device) device = display.device._id;
+      if (!display) device = unusedDevices[0]._id;
       this.setState({
         device,
         optionsActiveImage,

@@ -1,6 +1,5 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -98,14 +97,14 @@ class EditImageForm extends Component {
 	    .then((res) => {
 	      if (res.status === 201) { // with success
 	        update('displays', res.data.resourceId, 'edit', res.data.resource); // update the device info with new activeImage
-	        notify('Imagen actualizada con éxito', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify); // notify success
+	        notify('Imagen actualizada con éxito', 'notify-success', 'check', res.data.notify); // notify success
 	        handleCloseModal();
 	      } else {
-	        notify('Error al actualizar la imagen', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, res.data.notify); // notify error
+	        notify('Error al actualizar la imagen', 'notify-error', 'times', res.data.notify); // notify error
 	      }
 	    })
 	    .catch((err) => {
-	      notify('Error al actualizar la imagen', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, err.message); // notify error
+	      notify('Error al actualizar la imagen', 'notify-error', 'times', err.message); // notify error
 	    });
 	}
 

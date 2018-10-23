@@ -22,7 +22,7 @@ class GatewayForm extends Component {
     }
     if (gateway && gateway.location) {
       location = gateway.location._id;
-    } else if (gateway) {
+    } else if (locations.length > 0) {
       [location] = locations;
     }
     this.state = {
@@ -52,8 +52,7 @@ class GatewayForm extends Component {
 
 	/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 	handleInputChange = (event) => {
-	  const { target: { value, name } } = event.target;
-
+	  const { target: { value, name } } = event;
 	  this.setState({
 	    [name]: value,
 	  });

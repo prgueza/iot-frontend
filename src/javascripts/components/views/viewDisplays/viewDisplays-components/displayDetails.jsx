@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import ReactModal from 'react-modal';
 
@@ -59,13 +58,13 @@ class DisplayDetails extends Component {
 	  }).then((res) => {
 	    if (res.status === 201) { // with success
 	      update('displays', res.data.resourceId, 'edit', res.data.resource); // update the device info with new activeImage
-	      notify('Cambios realizados', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify); // notify success
+	      notify('Cambios realizados', 'notify-success', 'check', res.data.notify); // notify success
 	    } else {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, res.data.notify); // notify error
+	      notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify); // notify error
 	    }
 	  })
 	    .catch((err) => {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, err.message); // notify error
+	      notify('Error al realizar los cambios', 'notify-error', 'times', err.message); // notify error
 	    });
 	}
 
@@ -87,13 +86,13 @@ class DisplayDetails extends Component {
 	    .then((res) => {
 	      if (res.status === 201) { // with success
 	        update('displays', res.data.resourceId, 'edit', res.data.resource); // update the device info with new activeImage
-	        notify('Cambios realizados', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify); // notify success
+	        notify('Cambios realizados', 'notify-success', 'check', res.data.notify); // notify success
 	      } else {
-	        notify('Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, res.data.notify); // notify error
+	        notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify); // notify error
 	      }
 	    })
 	    .catch((err) => {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, err.message); // notify error
+	      notify('Error al realizar los cambios', 'notify-error', 'times', err.message); // notify error
 	    });
 	}
 
@@ -102,15 +101,13 @@ class DisplayDetails extends Component {
 	  const {
 	    display,
 	    modal,
-	    data: { screens },
 	    display: {
 	      _id, name, description, group, images, activeImage, imageFromGroup, device, tags, updatedAt, updatedBy,
 	    },
 	  } = this.state;
-	  const { filterData } = this.props;
+	  const { data: { screens }, filterData } = this.props;
 	  // refactor date constants with format
-	  const updated = moment(updatedAt)
-	    .format('dddd, D [de] MMMM [de] YYYY');
+	  const updated = moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY');
 	  // generate tag list
 	  const tagList = tags.map(tag => <Tag filterData={filterData} key={tag} category="displays" tag={tag} />);
 	  // define routes for edit and delete based on the id
@@ -126,18 +123,18 @@ class DisplayDetails extends Component {
 	  };
 	  const groupImageIcon = imageFromGroup ? 'toggle-on' : 'toggle-off';
 	  // get screen info
-	  const screen = device && screens.find(s => s.screenCode === device.screen);
+	  const screen = device.screen && screens.find(s => s.screenCode === device.screen);
 	  let screenName;
-	  if (screen !== -1) {
+	  if (screen !== undefined && screen !== -1) {
 	    screenName = screen.name;
-	  } else if (device) {
+	  } else if (device.screen) {
 	    screenName = device.screen;
 	  } else {
 	    screenName = 'Dispositivo no asignado';
 	  }
 	  let locationName;
 	  if (device && device.gateway) {
-	    locationName = device.gateway.location;
+	    locationName = device.gateway.location.name;
 	  } else {
 	    locationName = 'Localización no especificada';
 	  }

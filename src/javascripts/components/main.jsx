@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import moment from 'moment';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 import axios from 'axios';
 
 /* IMPORT COMPONENTS */
@@ -141,14 +141,14 @@ class Main extends Component {
 	}
 
 	/* ALERTS */
-	notify = (text, style, icon, position = toast.POSITION.TOP_CENTER, info, error) => {
+	notify = (text, style, icon, info = false, error = false) => {
 	  toast(<Notification text={text} icon={icon} info={info} error={error} />, {
-	    position,
+	    position: toast.POSITION.TOP_CENTER,
 	    className: style,
 	  });
 	}
 
-	notifySync = (text, style, icon, info, error) => {
+	notifySync = (text, style, icon, info = false, error = false) => {
 	  this.toastSyncId = toast(<Notification text={text} icon={icon} spin info={info} error={error} />, {
 	    position: toast.POSITION.TOP_CENTER,
 	    autoClose: false,
@@ -177,7 +177,7 @@ class Main extends Component {
 	render() {
 	  return (
   <div className="row main">
-    <ToastContainer closeButton={false} hideProgressBar />
+    <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
     <Navigation filterData={this.filterData} update={this.update} sync={this.sync} syncApi={this.syncApi} {...this.state} />
     <Content filterData={this.filterData} filterFound={this.filterFound} update={this.update} notify={this.notify} {...this.state} />
   </div>);

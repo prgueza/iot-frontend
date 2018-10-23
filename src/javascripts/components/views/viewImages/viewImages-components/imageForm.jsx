@@ -53,7 +53,6 @@ class ImageForm extends Component {
 	    const { value: aux } = target;
 	    value = aux;
 	  }
-
 	  this.setState({
 	    [name]: value,
 	  });
@@ -154,19 +153,19 @@ class ImageForm extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  const {
-	    image,
+	    image, data,
 	  } = this.props;
 	  const {
 	    groups, displays, redirect, redirectLocation, name, description, category, color, tags, createdBy, createdAt, updatedAt,
 	  } = this.state;
 	  // Options
-	  const optionsGroups = groups.map(group => (
+	  const optionsGroups = data.groups.map(group => (
 			<div key={group._id} className="custom-control custom-checkbox">
 			  <input onChange={this.handleCheckGroups} id={group._id} type="checkbox" defaultChecked={groups.find(c => c === group._id)} name={group._id} defaultValue={group._id} className="custom-control-input" />
 			  <label className="custom-control-label" htmlFor={group._id}>{group.name}</label>
 			</div>
 	  ));
-	  const optionsDisplays = displays.sort((a, b) => a.updatedAt - b.updatedAt).map(display => (
+	  const optionsDisplays = data.displays.sort((a, b) => a.updatedAt - b.updatedAt).map(display => (
 				<div key={display._id} className="custom-control custom-checkbox">
 				  <input onChange={this.handleCheckDisplays} id={display._id} type="checkbox" defaultChecked={displays.find(c => c === display._id)} name={display._id} defaultValue={display._id} className="custom-control-input" />
 				  <label className="custom-control-label" htmlFor={display._id}>{display.name}</label>
@@ -286,6 +285,7 @@ class ImageForm extends Component {
 
 ImageForm.propTypes = {
   image: PropTypes.shape,
+  data: PropTypes.shape.isRequired,
   user: PropTypes.shape.isRequired,
   token: PropTypes.string.isRequired,
   update: PropTypes.shape.isRequired,
