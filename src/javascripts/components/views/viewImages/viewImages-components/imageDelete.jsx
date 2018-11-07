@@ -65,10 +65,15 @@ class ImageDelete extends Component {
 
 
 ImageDelete.propTypes = {
-  image: PropTypes.shape.isRequired,
+  image: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+ImageDelete.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default ImageDelete;

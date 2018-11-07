@@ -284,16 +284,18 @@ class ImageForm extends Component {
 }
 
 ImageForm.propTypes = {
-  image: PropTypes.shape,
-  data: PropTypes.shape.isRequired,
-  user: PropTypes.shape.isRequired,
+  image: PropTypes.shape({}),
+  data: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
 };
 
 ImageForm.defaultProps = {
   image: null,
+  update: () => false,
+  notify: () => false,
 };
 
 export default ImageForm;

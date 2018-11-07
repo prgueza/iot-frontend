@@ -28,11 +28,12 @@ class ManageUserGroups extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-	  this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups });
+    const { data: { userGroups } } = nextProps;
+	  this.setState({ isLoaded: true, userGroups });
   }
 
 	handleInputChange = (event) => {
-	  const { target: { name, value } } = event.target;
+	  const { target: { name, value } } = event;
 	  this.setState({
 	    [name]: value,
 	  });
@@ -187,10 +188,15 @@ class ManageUserGroups extends Component {
 }
 
 ManageUserGroups.propTypes = {
-  data: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+};
+
+ManageUserGroups.defaultProps = {
+  update: () => false,
+  notify: () => false,
 };
 
 export default ManageUserGroups;

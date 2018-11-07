@@ -68,10 +68,15 @@ class DisplayDelete extends Component {
 }
 
 DisplayDelete.propTypes = {
-  display: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  display: PropTypes.shape({}).isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
   token: PropTypes.string.isRequired,
+};
+
+DisplayDelete.defaultProps = {
+  update: () => false,
+  notify: () => false,
 };
 
 export default DisplayDelete;

@@ -59,10 +59,15 @@ class GroupDelete extends Component {
 }
 
 GroupDelete.propTypes = {
-  group: PropTypes.shape.isRequired,
+  group: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+};
+
+GroupDelete.defaultProps = {
+  update: () => false,
+  notify: () => false,
 };
 
 export default GroupDelete;

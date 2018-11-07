@@ -215,12 +215,17 @@ class DeviceForm extends Component {
 }
 
 DeviceForm.propTypes = {
-  device: PropTypes.shape.isRequired,
-  user: PropTypes.shape.isRequired,
-  data: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  device: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}).isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+DeviceForm.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default DeviceForm;

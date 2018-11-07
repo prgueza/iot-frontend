@@ -62,7 +62,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 						<button onClick={() => syncApi(token)} type="button" className="btn btn-nav btn-block mb-1">
-							<Icon icon="refresh" mr="2" fw />
+							<Icon icon="refresh" mr={2} fw />
 							Buscar dispositivos
 						</button>
 				  </li>
@@ -76,7 +76,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 				    <button onClick={() => sync()} type="button" className="btn btn-nav btn-block mb-1">
-				      <Icon icon="link" mr="2" fw />
+				      <Icon icon="link" mr={2} fw />
 								Sincronizar
         		</button>
 				  </li>
@@ -90,7 +90,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 				    <button type="button" className="btn btn-nav btn-block mb-1">
-				      <Icon icon="check" mr="2" fw />
+				      <Icon icon="check" mr={2} fw />
 							Sincronizado
         		</button>
 				  </li>
@@ -104,7 +104,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 				    <button onClick={() => syncApi(token)} type="button" className="btn btn-nav btn-block mb-1" disabled>
-				      <Icon icon="refresh" mr="2" fw spin />
+				      <Icon icon="refresh" mr={2} fw spin />
 							Sincronizando
 				    </button>
 				  </li>
@@ -144,7 +144,7 @@ class Navigation extends Component {
             <li>
               <a tabIndex={-1} href="/disconect">
                 <button type="button" className="btn btn-nav btn-block mb-1">
-                  <Icon icon="sign-out" mr="2" fw />
+                  <Icon icon="sign-out" mr={2} fw />
                   {' '}
 									Desconectar
                 </button>
@@ -165,14 +165,39 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  data: PropTypes.shape.isRequired,
-  user: PropTypes.shape.isRequired,
+  data: PropTypes.shape({
+    displays: PropTypes.any,
+    groups: PropTypes.any,
+    images: PropTypes.any,
+    devices: PropTypes.any,
+    gateways: PropTypes.any,
+    screens: PropTypes.any,
+    locations: PropTypes.any,
+    users: PropTypes.any,
+  }),
+  user: PropTypes.shape({
+    admin: PropTypes.bool,
+    createdAt: PropTypes.string,
+    name: PropTypes.string,
+    url: PropTypes.string,
+    _id: PropTypes.string,
+  }),
   syncStatus: PropTypes.number.isRequired,
-  token: PropTypes.string.isRequired,
-  filterValue: PropTypes.string.isRequired,
-  filterData: PropTypes.shape.isRequired,
-  sync: PropTypes.shape.isRequired,
-  syncApi: PropTypes.shape.isRequired,
+  token: PropTypes.string,
+  filterValue: PropTypes.string,
+  filterData: PropTypes.func,
+  sync: PropTypes.func,
+  syncApi: PropTypes.func,
+};
+
+Navigation.defaultProps = {
+  data: null,
+  user: null,
+  token: null,
+  filterValue: '',
+  filterData: () => false,
+  sync: () => false,
+  syncApi: () => false,
 };
 
 export default Navigation;

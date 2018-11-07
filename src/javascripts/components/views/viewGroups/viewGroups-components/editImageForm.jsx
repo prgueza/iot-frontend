@@ -157,15 +157,15 @@ class EditImageForm extends Component {
 						</div>
 						<div className="form-row">
 						 <div className="form-group col-6">
-							 <label><Icon icon="arrows-alt" mr="2" fw />Tamaño</label>
+							 <label><Icon icon="arrows-alt" mr={2} fw />Tamaño</label>
 							 <input onChange={this.handleSizeChange} value={size} type="number" className="form-control" placeholder="100" />
 						 </div>
 						 <div className="form-group col">
-							 <label><Icon icon="long-arrow-right" mr="2" fw />Posición</label>
+							 <label><Icon icon="long-arrow-right" mr={2} fw />Posición</label>
 							 <input onChange={this.handleInputChange} value={xCoordinate} name="xCoordinate" type="number" className="form-control" placeholder="0" />
 						 </div>
 						 <div className="form-group col">
-							 <label><Icon icon="long-arrow-up" mr="2" fw />Posición</label>
+							 <label><Icon icon="long-arrow-up" mr={2} fw />Posición</label>
 							 <input onChange={this.handleInputChange} value={yCoordinate} name="yCoordinate" type="number" className="form-control" placeholder="0" />
 						 </div>
 					 </div>
@@ -196,11 +196,17 @@ class EditImageForm extends Component {
 }
 
 EditImageForm.propTypes = {
-  group: PropTypes.shape.isRequired,
+  group: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  handleCloseModal: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+  handleCloseModal: PropTypes.func,
+};
+
+EditImageForm.defaultProps = {
+  update: () => false,
+  notify: () => false,
+  handleCloseModal: () => false,
 };
 
 export default EditImageForm;

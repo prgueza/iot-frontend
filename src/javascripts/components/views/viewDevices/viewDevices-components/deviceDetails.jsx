@@ -63,51 +63,51 @@ const DeviceDetails = ({
           <div className="col">
             <p className="titulo">DETALLES</p>
             <p className="card-text">
-              <Icon icon="info-circle" fw="true" mr="2" />
+              <Icon icon="info-circle" fw="true" mr={2} />
               { description }
             </p>
             <p className="card-text">
-              <Icon icon="server" fw="true" mr="2" />
+              <Icon icon="server" fw="true" mr={2} />
               { mac }
             </p>
             <p className={lastFound ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="refresh" fw="true" mr="2" />
+              <Icon icon="refresh" fw="true" mr={2} />
               {last}
             </p>
             <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="battery" fw="true" mr="2" batt={batt || 0} />
+              <Icon icon="battery" fw="true" mr={2} batt={batt || 0} />
               {found ? `${batt}%` : 'Información no disponible'}
             </p>
             <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="signal" fw="true" mr="2" />
+              <Icon icon="signal" fw="true" mr={2} />
               {found ? rssi : 'Información no disponible'}
             </p>
             <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="tint" fw="true" mr="2" />
+              <Icon icon="tint" fw="true" mr={2} />
               {screenName}
             </p>
             <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="adjust" fw="true" mr="2" />
+              <Icon icon="adjust" fw="true" mr={2} />
               {color}
             </p>
             <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="arrows-alt" fw="true" mr="2" />
+              <Icon icon="arrows-alt" fw="true" mr={2} />
               {size}
             </p>
             <p className={(gateway && found) ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="sitemap" fw="true" mr="2" />
+              <Icon icon="sitemap" fw="true" mr={2} />
               {(gateway && found) ? gateway.name : 'Información no disponible'}
             </p>
             <p className="card-text">
-              <Icon icon="users" fw="true" mr="2" />
+              <Icon icon="users" fw="true" mr={2} />
               {userGroup ? userGroup.name : 'Dispositivo sin configurar'}
             </p>
             <p className="card-text">
-              <Icon icon="calendar-o" fw="true" mr="2" />
+              <Icon icon="calendar-o" fw="true" mr={2} />
               {updated}
             </p>
             <p className="card-text">
-              <Icon icon="user-o" fw="true" mr="2" />
+              <Icon icon="user-o" fw="true" mr={2} />
               {updatedBy ? updatedBy.name : 'Usuario eliminado'}
             </p>
           </div>
@@ -119,8 +119,8 @@ const DeviceDetails = ({
 };
 
 DeviceDetails.propTypes = {
-  device: PropTypes.shape.isRequired,
-  data: PropTypes.shape.isRequired,
+  device: PropTypes.shape({}).isRequired,
+  data: PropTypes.shape({}).isRequired,
 };
 
 

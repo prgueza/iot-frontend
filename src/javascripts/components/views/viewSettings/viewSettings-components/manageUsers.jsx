@@ -34,7 +34,8 @@ class ManageUsers extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-	  this.setState({ isLoaded: true, users: nextProps.data.users });
+    const { data: users } = nextProps;
+	  this.setState({ isLoaded: true, users });
   }
 
 	handleInputChange = (event) => {
@@ -189,11 +190,11 @@ class ManageUsers extends Component {
                   <div className="form-row">
                     <div className="form-group col">
                       <label htmlFor="password"><i className="fa fa-key mr-2" />{edit ? 'Nueva contraseña' : 'Contraseña'}</label>
-                      <input type="password" className="form-control" id="usuario" placeholder="Contraseña" name="password" value={password} onChange={this.handleInputChange} />
+                      <input autoComplete="on" type="password" className="form-control" id="password" placeholder="Contraseña" name="password" value={password} onChange={this.handleInputChange} />
                     </div>
                     <div className="form-group col">
                       <label htmlFor="checkPassword"><i className="fa fa-key mr-2" />Confirmar contraseña</label>
-                      <input type="password" className="form-control" id="checkPassword" placeholder="Confirmar contraseña" name="checkPassword" value={checkPassword} onChange={this.handleInputChange} />
+                      <input autoComplete="on" type="password" className="form-control" id="checkPassword" placeholder="Confirmar contraseña" name="checkPassword" value={checkPassword} onChange={this.handleInputChange} />
                     </div>
                   </div>
                   <div className="form-group">
@@ -214,7 +215,7 @@ class ManageUsers extends Component {
                   { !edit
                     ? <button onClick={() => this.handleSubmit('post')} type="button" className="btn btn-block btn-small btn-success"><i className="fa fa-plus-circle mr-1" aria-hidden="true" />Añadir</button>
                     : (
-<div className="d-flex w-100 justify-content-between">
+                    <div className="d-flex w-100 justify-content-between">
                       <button onClick={() => this.handleSubmit('put')} type="button" className="btn btn-block btn-small btn-success mr-2"><i className="fa fa-floppy-o mr-1" aria-hidden="true" />Actualizar</button>
                       <button onClick={() => this.handleSubmit('delete')} type="button" className="btn btn-block btn-small btn-danger ml-1 mr-1"><i className="fa fa-trash-o mr-1" aria-hidden="true" />Eliminar</button>
                       <button onClick={() => this.cancel()} type="button" className="btn btn-block btn-small btn-warning ml-2"><i className="fa fa-times mr-1" aria-hidden="true" />Cancelar</button>
@@ -240,10 +241,15 @@ class ManageUsers extends Component {
 }
 
 ManageUsers.propTypes = {
-  data: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+ManageUsers.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default ManageUsers;

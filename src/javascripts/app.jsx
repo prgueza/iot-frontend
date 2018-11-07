@@ -1,11 +1,11 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 /* IMPORT COMPONENTS */
 import Main from './components/main';
 import Login from './components/login/login';
+
 
 /* COMPONENTS */
 class App extends Component {
@@ -43,11 +43,11 @@ class App extends Component {
 	    return <Login loginAction={this.login} />;
 	  }
 	  return (
-  <Router basename="/">
-    <Main logout={this.logout} {...this.state} />
-  </Router>
+    <Router basename="/">
+      <Main logout={this.logout} {...this.state} />
+    </Router>
 	  );
 	}
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default App;

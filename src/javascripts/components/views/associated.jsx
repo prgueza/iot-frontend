@@ -22,7 +22,7 @@ const Associated = ({
           };
           return (
             <div key={element._id} className="list-group-item flex-column align-items-start">
-              <div className={active && active === element._id ? 'active' : ''}>
+              <div className={active && active._id === element._id ? 'active' : ''}>
                 <Link to={location}>
                   { category === 'devices'
                     ? (
@@ -35,14 +35,14 @@ const Associated = ({
                           ? (
                             <span>
                               <small className="mb-0">
-                                <Icon icon="battery" mr="1" />
+                                <Icon icon="battery" mr={1} />
                                 {element.batt}
-                                <Icon icon="signal" mr="1" ml="2" />
+                                <Icon icon="signal" mr={1} ml={2} />
                                 {element.rssi}
                               </small>
                             </span>
                           )
-                          : <span><small className="mb-0"><Icon icon="chain-broken" mr="1" /></small></span>
+                          : <span><small className="mb-0"><Icon icon="chain-broken" mr={1} /></small></span>
                       }
                       </div>
                     )
@@ -65,11 +65,16 @@ const Associated = ({
 };
 
 Associated.propTypes = {
-  content: PropTypes.shape.isRequired,
+  content: PropTypes.arrayOf(PropTypes.object),
   category: PropTypes.string.isRequired,
-  active: PropTypes.string.isRequired,
+  active: PropTypes.shape({}),
   appearance: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
+};
+
+Associated.defaultProps = {
+  content: null,
+  active: null,
 };
 
 export default Associated;

@@ -81,7 +81,7 @@ class Login extends Component {
             </div>
             <div className="form-group">
               <label className="sr-only" htmlFor="password">Password</label>
-              <input onChange={this.handleInputChange} type="password" className="form-control input-no-border" id="password" value={password} name="password" placeholder="Contraseña" />
+              <input onChange={this.handleInputChange} autoComplete="on" type="password" className="form-control input-no-border" id="password" value={password} name="password" placeholder="Contraseña" />
             </div>
             <button onClick={this.handleSubmit} type="submit" className="btn btn-block btn-primary">Entrar</button>
             <div className="form-group mt-2">
@@ -108,7 +108,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  loginAction: PropTypes.shape.isRequired,
+  loginAction: PropTypes.func.isRequired,
 };
 
 export default Login;

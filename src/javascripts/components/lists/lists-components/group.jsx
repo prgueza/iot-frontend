@@ -50,7 +50,14 @@ const Group = ({
 };
 
 Group.propTypes = {
-  group: PropTypes.shape.isRequired,
+  group: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    updatedAt: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
   index: PropTypes.number.isRequired,
 };
 

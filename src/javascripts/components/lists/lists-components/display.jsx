@@ -50,7 +50,15 @@ const Display = ({
 };
 
 Display.propTypes = {
-  display: PropTypes.shape.isRequired,
+  display: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    device: PropTypes.object,
+    updatedAt: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
 };
 
 export default Display;

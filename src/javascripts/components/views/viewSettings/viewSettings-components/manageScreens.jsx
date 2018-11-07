@@ -32,7 +32,8 @@ class ManageScreens extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-	  this.setState({ isLoaded: true, screens: nextProps.data.screens });
+    const { data: { screens } } = nextProps;
+	  this.setState({ isLoaded: true, screens });
   }
 
 	edit = (elementId) => {
@@ -224,10 +225,15 @@ class ManageScreens extends Component {
 }
 
 ManageScreens.propTypes = {
-  data: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+ManageScreens.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default ManageScreens;

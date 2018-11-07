@@ -248,7 +248,7 @@ class DisplayForm extends Component {
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">
               <h2 className="detalles-titulo text-center">
-                <i className="fa-picture-o" aria-hidden="true" />Configurar dispositivo</h2>
+                <i className="fa fa-television mr-3" aria-hidden="true" />Configurar dispositivo</h2>
             </li>
           </ul>
         </div>
@@ -413,16 +413,18 @@ class DisplayForm extends Component {
 }
 
 DisplayForm.propTypes = {
-  display: PropTypes.shape,
-  user: PropTypes.shape.isRequired,
+  display: PropTypes.shape({}),
+  user: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  data: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
 };
 
 DisplayForm.defaultProps = {
   display: null,
+  notify: () => false,
+  update: () => false,
 };
 
 export default DisplayForm;

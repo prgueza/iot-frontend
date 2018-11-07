@@ -22,13 +22,21 @@ const Panel = ({
 
 Panel.propTypes = {
   category: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.arrayOf(PropTypes.object),
   size: PropTypes.string.isRequired,
   appearance: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
-  filterValue: PropTypes.string.isRequired,
-  filterFound: PropTypes.shape.isRequired,
-  filterFoundValue: PropTypes.bool.isRequired,
+  filterValue: PropTypes.string,
+  filterFound: PropTypes.func,
+  filterFoundValue: PropTypes.bool,
 };
+
+Panel.defaultProps = {
+  content: null,
+  filterValue: '',
+  filterFound: () => false,
+  filterFoundValue: () => false,
+};
+
 
 export default Panel;

@@ -24,7 +24,7 @@ class EditImageForm extends Component {
 
   componentDidMount() {
     const { display: { images, activeImage, overlayImage } } = this.props;
-    const options = images.map(image => <option value={image._id} key={image._id}>{image.name}</option>);
+    const options = images && images.map(image => <option value={image._id} key={image._id}>{image.name}</option>);
     this.setState({
       images,
       options,
@@ -157,15 +157,15 @@ class EditImageForm extends Component {
 						</div>
 						<div className="form-row">
 						 <div className="form-group col-6">
-							 <label><Icon icon="arrows-alt" mr="2" fw />Tamaño</label>
+							 <label><Icon icon="arrows-alt" mr={2} fw />Tamaño</label>
 							 <input onChange={this.handleSizeChange} value={size} type="number" className="form-control" placeholder="100" disabled />
 						 </div>
 						 <div className="form-group col">
-							 <label><Icon icon="long-arrow-right" mr="2" fw />Posición</label>
+							 <label><Icon icon="long-arrow-right" mr={2} fw />Posición</label>
 							 <input onChange={this.handleInputChange} value={xCoordinate} name="xCoordinate" type="number" className="form-control" placeholder="0" disabled />
 						 </div>
 						 <div className="form-group col">
-							 <label><Icon icon="long-arrow-up" mr="2" fw />Posición</label>
+							 <label><Icon icon="long-arrow-up" mr={2} fw />Posición</label>
 							 <input onChange={this.handleInputChange} value={yCoordinate} name="yCoordinate" type="number" className="form-control" placeholder="0" disabled />
 						 </div>
 					 </div>
@@ -203,11 +203,18 @@ class EditImageForm extends Component {
 }
 
 EditImageForm.propTypes = {
-  display: PropTypes.shape.isRequired,
+  display: PropTypes.shape({}),
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  handleCloseModal: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+  handleCloseModal: PropTypes.func,
+};
+
+EditImageForm.defaultProps = {
+  display: null,
+  update: () => false,
+  notify: () => false,
+  handleCloseModal: () => false,
 };
 
 export default EditImageForm;

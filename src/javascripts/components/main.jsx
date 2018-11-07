@@ -21,11 +21,12 @@ class Main extends Component {
       user: null,
       token: null,
       // data
-      data: [],
+      data: {},
       // sync
       syncedDevices: [],
       // 0: unsynced 1: sync_ready 2: synced 3: syncing
       syncStatus: 0,
+      sendingImage: false,
       lastSynced: null,
       // search value
       filterValue: '',
@@ -124,7 +125,7 @@ class Main extends Component {
 	  const devices = syncedDevices;
 	  data.devices = devices;
 	  this.updateSync('Dispositivos sincronizados', 'notify-success', 'check', true, 'Dispositivos sincronizados con éxito', false);
-	  this.setState({ data, syncStatus: 2 }); // synced
+	  this.setState({ data, syncStatus: 2 });
 	}
 
 	/* HANDLE SEARCH */

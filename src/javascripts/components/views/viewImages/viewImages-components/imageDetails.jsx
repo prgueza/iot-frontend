@@ -174,10 +174,16 @@ class ImageDetails extends Component {
 }
 
 ImageDetails.propTypes = {
-  image: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  filterData: PropTypes.shape.isRequired,
+  image: PropTypes.shape({}).isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+  filterData: PropTypes.func,
+};
+
+ImageDetails.defaultProps = {
+  update: () => false,
+  notify: () => false,
+  filterData: () => false,
 };
 
 export default ImageDetails;

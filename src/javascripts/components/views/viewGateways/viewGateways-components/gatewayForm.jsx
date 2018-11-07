@@ -199,12 +199,17 @@ class GatewayForm extends Component {
 }
 
 GatewayForm.propTypes = {
-  data: PropTypes.shape.isRequired,
-  gateway: PropTypes.shape.isRequired,
-  user: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
+  gateway: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+};
+
+GatewayForm.defaultProps = {
+  update: () => false,
+  notify: () => false,
 };
 
 export default GatewayForm;

@@ -52,9 +52,19 @@ const UserGroup = ({
 };
 
 UserGroup.propTypes = {
-  userGroup: PropTypes.shape.isRequired,
-  edit: PropTypes.shape.isRequired,
-  active: PropTypes.string.isRequired,
+  userGroup: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+  edit: PropTypes.func,
+  active: PropTypes.bool,
+};
+
+UserGroup.defaultProps = {
+  edit: () => false,
+  active: false,
 };
 
 export default UserGroup;

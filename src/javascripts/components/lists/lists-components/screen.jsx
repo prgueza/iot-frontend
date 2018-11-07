@@ -51,9 +51,18 @@ const Screen = ({
 };
 
 Screen.propTypes = {
-  screen: PropTypes.shape.isRequired,
-  edit: PropTypes.shape.isRequired,
-  active: PropTypes.string.isRequired,
+  screen: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+  edit: PropTypes.func,
+  active: PropTypes.bool,
+};
+
+Screen.defaultProps = {
+  edit: () => false,
+  active: false,
 };
 
 export default Screen;

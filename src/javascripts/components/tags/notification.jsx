@@ -18,7 +18,7 @@ const Notification = ({
     <div className="notify-content">
       <div className={notifyIconContainer}>
         <div className="notify-icon">
-          <Icon icon={icon} size="2" fw spin={spin} />
+          <Icon icon={icon} size={2} fw spin={spin} />
         </div>
       </div>
       <div className="notify-text">

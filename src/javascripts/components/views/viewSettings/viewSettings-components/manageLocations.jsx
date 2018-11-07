@@ -28,13 +28,14 @@ class ManageLocations extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-	  this.setState({ isLoaded: true, locations: nextProps.data.locations });
+    const { data: { locations } } = nextProps;
+	  this.setState({ isLoaded: true, locations });
   }
 
 
 		// Handle changes
 		handleInputChange = (event) => {
-		  const { target: { name, value } } = event.target;
+		  const { target: { name, value } } = event;
 		  this.setState({
 		    [name]: value,
 		  });
@@ -188,10 +189,15 @@ class ManageLocations extends Component {
 }
 
 ManageLocations.propTypes = {
-  data: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+ManageLocations.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default ManageLocations;

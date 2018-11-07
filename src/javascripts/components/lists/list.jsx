@@ -14,14 +14,17 @@ import AddButton from '../buttons/addButton';
 class List extends Component {
 	filterSearch = (data, filterValue) => {
 	  const filteredData = data.filter((element) => {
-	    const a = element.name && element.name.indexOf(filterValue) > -1;
-	    const b = element.description && element.description.indexOf(filterValue) > -1;
-	    const c = element.category && element.category.indexOf(filterValue) > -1;
-	    const d = element.screen && element.screen.indexOf(filterValue) > -1;
-	    const e = element.location && element.location.name && element.location.name.indexOf(filterValue) > -1;
-	    const f = element.mac && element.mac.indexOf(filterValue) > -1;
-	    const g = element.initcode && element.initcode.indexOf(filterValue) > -1;
-	    return a || b || c || d || e || f || g;
+	    if (element) {
+	      const a = element.name && element.name.indexOf(filterValue) > -1;
+		    const b = element.description && element.description.indexOf(filterValue) > -1;
+		    const c = element.category && element.category.indexOf(filterValue) > -1;
+		    const d = element.screen && element.screen.indexOf(filterValue) > -1;
+		    const e = element.location && element.location.name && element.location.name.indexOf(filterValue) > -1;
+		    const f = element.mac && element.mac.indexOf(filterValue) > -1;
+		    const g = element.initcode && element.initcode.indexOf(filterValue) > -1;
+		    return a || b || c || d || e || f || g;
+	    }
+	    return false;
 	  });
 	  return filteredData;
 	}
@@ -60,15 +63,15 @@ class List extends Component {
         <div className="text-center elemento">
           <h4 className="mb-1">
 						No se han encontrado
-            {content.length > 0 && ' más '}
-            {elementName}
+            {content.length > 0 && ' más'}
+            {` ${elementName}`}
           </h4>
           <hr className="element-division" />
           <small>
-					Número de
-            {elementName}
+						Número de
+            {` ${elementName}`}
 						:
-            {content.length}
+            {` ${content.length}`}
           </small>
         </div>
       </div>
@@ -88,17 +91,18 @@ class List extends Component {
 }
 
 List.propTypes = {
-  content: PropTypes.shape,
+  content: PropTypes.arrayOf(PropTypes.object),
   category: PropTypes.string.isRequired,
-  filterValue: PropTypes.string.isRequired,
+  filterValue: PropTypes.string,
   filterFoundValue: PropTypes.bool,
-  filterFound: PropTypes.shape,
+  filterFound: PropTypes.func,
 };
 
 List.defaultProps = {
   content: null,
+  filterValue: '',
   filterFoundValue: false,
-  filterFound: null,
+  filterFound: () => false,
 };
 
 export default List;

@@ -141,7 +141,16 @@ class GroupDetails extends Component {
 }
 
 GroupDetails.propTypes = {
-  group: PropTypes.shape.isRequired,
+  group: PropTypes.shape({}).isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+  filterData: PropTypes.func,
+};
+
+GroupDetails.defaultProps = {
+  update: () => false,
+  notify: () => false,
+  filterData: () => false,
 };
 
 export default GroupDetails;
