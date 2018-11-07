@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import ReactModal from 'react-modal';
 
@@ -22,6 +21,7 @@ class DisplayDetails extends Component {
     const { display } = this.props;
     this.state = {
       display,
+      uploading: false, // TODO: mover función de enviar imagen a main.jsx
       modal: false,
     };
   }
@@ -46,9 +46,12 @@ class DisplayDetails extends Component {
 
 	/* HANDLE SEND IMAGE TO DISPLAY */
 	handleSendImage = () => {
-	  const { display } = this.state;
-	  const { token, update, notify } = this.props;
-	  axios({
+	  const { display, uploading } = this.state;
+	  const { token, notify } = this.props;
+	  if (!uploading) {
+	    this.setState({ uploading: true });
+	    axios({
+	    timeout: 50000,
 	    method: 'post',
 	    url: `update/${display._id}`,
 	    headers: {
@@ -57,16 +60,19 @@ class DisplayDetails extends Component {
 	      Authorization: `Bearer ${token}`,
 	    },
 	  }).then((res) => {
-	    if (res.status === 201) { // with success
-	      update('displays', res.data.resourceId, 'edit', res.data.resource); // update the device info with new activeImage
-	      notify('Cambios realizados', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify); // notify success
+	    if (res.status >= 200) { // with success
+	      notify('Cambios realizados', 'notify-success', 'check', res.data.notify); // notify success
+	        this.setState({ uploading: false });
 	    } else {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, res.data.notify); // notify error
+	      notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify); // notify error
+	        this.setState({ uploading: false });
 	    }
 	  })
 	    .catch((err) => {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, err.message); // notify error
+	      notify('Error al realizar los cambios', 'notify-error', 'times', err.message); // notify error
+	        this.setState({ uploading: false });
 	    });
+	  }
 	}
 
 
@@ -85,32 +91,31 @@ class DisplayDetails extends Component {
 	    },
 	  })
 	    .then((res) => {
-	      if (res.status === 201) { // with success
+	      if (res.status >= 200) { // with success
 	        update('displays', res.data.resourceId, 'edit', res.data.resource); // update the device info with new activeImage
-	        notify('Cambios realizados', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify); // notify success
+	        notify('Cambios realizados', 'notify-success', 'check', res.data.notify); // notify success
 	      } else {
-	        notify('Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, res.data.notify); // notify error
+	        notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify); // notify error
 	      }
 	    })
 	    .catch((err) => {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, err.message); // notify error
+	      notify('Error al realizar los cambios', 'notify-error', 'times', err.message); // notify error
 	    });
 	}
 
 	render() {
 	  // define constants from state for better readability
 	  const {
+	    uploading,
 	    display,
 	    modal,
-	    data: { screens },
 	    display: {
 	      _id, name, description, group, images, activeImage, imageFromGroup, device, tags, updatedAt, updatedBy,
 	    },
 	  } = this.state;
-	  const { filterData } = this.props;
+	  const { data: { screens }, filterData } = this.props;
 	  // refactor date constants with format
-	  const updated = moment(updatedAt)
-	    .format('dddd, D [de] MMMM [de] YYYY');
+	  const updated = moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY');
 	  // generate tag list
 	  const tagList = tags.map(tag => <Tag filterData={filterData} key={tag} category="displays" tag={tag} />);
 	  // define routes for edit and delete based on the id
@@ -126,18 +131,18 @@ class DisplayDetails extends Component {
 	  };
 	  const groupImageIcon = imageFromGroup ? 'toggle-on' : 'toggle-off';
 	  // get screen info
-	  const screen = device && screens.find(s => s.screenCode === device.screen);
+	  const screen = device.screen && screens.find(s => s.screenCode === device.screen);
 	  let screenName;
-	  if (screen !== -1) {
+	  if (screen !== undefined && screen !== -1) {
 	    screenName = screen.name;
-	  } else if (device) {
+	  } else if (device.screen) {
 	    screenName = device.screen;
 	  } else {
 	    screenName = 'Dispositivo no asignado';
 	  }
 	  let locationName;
 	  if (device && device.gateway) {
-	    locationName = device.gateway.location;
+	    locationName = device.gateway.location.name;
 	  } else {
 	    locationName = 'Localización no especificada';
 	  }
@@ -207,14 +212,14 @@ class DisplayDetails extends Component {
 						    <p className="d-flex overlay-text">Haga click para editar la imagen</p>
 						  </div>
             </div>
-						<button type="button" onClick={this.handleSendImage} className="btn btn-primary btn-block">Enviar imagen al dispositivo</button>
+						<button type="button" onClick={this.handleSendImage} className="btn btn-primary btn-block" disabled={uploading}>Enviar imagen al dispositivo</button>
 				</div>
 			</div>
 			<hr className="card-division" />
 			<div className="row">
-          { images.length > 0
+          { images && images.length > 0
 						&& (
-<div className="col">
+            <div className="col">
 	            <div className="asociados">
 	              <p className="titulo">IMAGENES ASOCIADAS ({images.length})</p>
 	              <Associated content={images} category="images" appearance="elemento-imagen" icon="picture-o" active={activeImage} />

@@ -71,10 +71,15 @@ class DeviceDelete extends Component {
 }
 
 DeviceDelete.propTypes = {
-  device: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  device: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+DeviceDelete.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default DeviceDelete;

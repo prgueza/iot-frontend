@@ -31,7 +31,7 @@ class GatewayDelete extends Component {
 	    .then((res) => {
 	      if (res.status === 200) {
 	        notify('Puerta de enlace eliminado con éxito', 'notify-success', 'trash-o');
-	        update('gateways', res.resourceId, 'remove', res.data.resource); // update dataset
+	        update('gateways', res.resourceId, 'remove'); 
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))

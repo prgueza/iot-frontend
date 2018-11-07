@@ -17,27 +17,19 @@ moment.locale('es');
 class GroupDetails extends Component {
   constructor(props) {
     super(props);
+    const { group } = this.props;
     this.state = {
+      group,
       modal: false,
     };
   }
 
-  componentDidMount() {
-    // get data
-    const { group } = this.props;
-    // state
-    this.setState({
-      group,
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
-    // get data
-    const { group } = nextProps;
-    // state
-    this.setState({
-      group,
-    });
+    if (nextProps !== this.props) {
+      this.setState({
+        group: nextProps.group,
+      });
+    }
   }
 
 	/* MODAL */
@@ -65,11 +57,12 @@ class GroupDetails extends Component {
 	  const tagList = tags.map(tag => <Tag filterData={filterData} key={tag} category="groups" tag={tag} />);
 	  // check if activeImage is set and if not set the undefined img
 	  const src = activeImage && activeImage.src;
-	  const srcOverlay = overlayImage && overlayImage.image.src;
+	  const srcOverlay = overlayImage && overlayImage.image && overlayImage.image.src;
 	  const overlayImageStyle = {
 	    left: overlayImage && `${overlayImage.xCoordinate}%`,
 	    top: overlayImage && `${overlayImage.yCoordinate}%`,
-	  }; // define routes for edit and delete based on the id
+	  };
+	  // define routes for edit and delete based on the id
 	  const linktoEdit = `/groups/${_id}/edit`;
 	  const linktoDelete = `/groups/${_id}/delete`;
 
@@ -148,7 +141,16 @@ class GroupDetails extends Component {
 }
 
 GroupDetails.propTypes = {
-  group: PropTypes.shape.isRequired,
+  group: PropTypes.shape({}).isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+  filterData: PropTypes.func,
+};
+
+GroupDetails.defaultProps = {
+  update: () => false,
+  notify: () => false,
+  filterData: () => false,
 };
 
 export default GroupDetails;

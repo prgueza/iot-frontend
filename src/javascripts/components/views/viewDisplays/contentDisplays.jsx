@@ -12,7 +12,6 @@ import DisplayGeneric from './viewDisplays-components/displayGeneric';
 /* COMPONENTS */
 const ContentDisplays = ({ filterValue, ...props }) => {
   const { data: { displays } } = props;
-
   return (
 		<div className="overview">
       <div className="row">

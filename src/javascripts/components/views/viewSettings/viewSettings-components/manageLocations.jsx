@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 /* IMPORT COMPONENTS */
@@ -29,13 +28,14 @@ class ManageLocations extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-	  this.setState({ isLoaded: true, locations: nextProps.data.locations });
+    const { data: { locations } } = nextProps;
+	  this.setState({ isLoaded: true, locations });
   }
 
 
 		// Handle changes
 		handleInputChange = (event) => {
-		  const { target: { name, value } } = event.target;
+		  const { target: { name, value } } = event;
 		  this.setState({
 		    [name]: value,
 		  });
@@ -81,16 +81,16 @@ class ManageLocations extends Component {
 	      if (res.status === 201 || res.status === 200) {
 	        switch (method) {
 	          case 'put':
-	            notify('Localización modificada con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Localización modificada con éxito', 'notify-success', 'floppy-o', res.data.notify);
 	            update('locations', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	            break;
 	          case 'post':
-	            notify('Localización creada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Localización creada con éxito', 'notify-success', 'upload', res.data.notify);
 	            update('locations', res.data.resourceId, 'add', res.data.resource); // update dataset
 	            this.edit(res.data.resource._id);
 	            break;
 	          case 'delete':
-	            notify('Localización eliminada con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Localización eliminada con éxito', 'notify-success', 'trash', res.data.notify);
 	            this.cancel();
 	            update('locations', res.data.resourceId, 'remove', res.data.resource); // update dataset
 	            break;
@@ -104,7 +104,7 @@ class ManageLocations extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT));
+	    .catch(() => notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle'));
 	}
 
 	render() {
@@ -189,10 +189,15 @@ class ManageLocations extends Component {
 }
 
 ManageLocations.propTypes = {
-  data: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+ManageLocations.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default ManageLocations;

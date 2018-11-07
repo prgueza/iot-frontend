@@ -21,8 +21,12 @@ const Title = ({ appearance, total, icon }) => (
 
 Title.propTypes = {
   appearance: PropTypes.string.isRequired,
-  total: PropTypes.number.isRequired,
+  total: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   icon: PropTypes.string.isRequired,
+};
+
+Title.defaultProps = {
+  total: '',
 };
 
 export default Title;

@@ -50,7 +50,15 @@ const Gateway = ({
 };
 
 Gateway.propTypes = {
-  gateway: PropTypes.shape.isRequired,
+  gateway: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    mac: PropTypes.string,
+    sync: PropTypes.string,
+    updatedAt: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
 };
 
 export default Gateway;

@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -62,8 +61,9 @@ class DisplayForm extends Component {
     const unusedDevices = data.devices.filter(device => !device.display);
     // set state with initial values
     if (unusedDevices.length > 0 || display) {
-      let device = unusedDevices[0]._id;
-      if (display && display.device) device = display.device.user_id;
+      let device;
+      if (display && display.device) device = display.device._id;
+      if (!display) device = unusedDevices[0]._id;
       this.setState({
         device,
         optionsActiveImage,
@@ -181,14 +181,14 @@ class DisplayForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 201) {
-	        notify('Display configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT);
+	        notify('Display configurado con éxito', 'notify-success', 'upload');
 	        const action = display ? 'edit' : 'add';
 	        return update('displays', res.data.resourceId, action, res.data.resource, res.data.devices); // update dataset
 	      }
 	      return false;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
+	    .catch(() => notify('Error al configurar el display', 'notify-error', 'exclamation-triangle'));
 	}
 
 	/* RENDER COMPONENT */
@@ -248,7 +248,7 @@ class DisplayForm extends Component {
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">
               <h2 className="detalles-titulo text-center">
-                <i className="fa-picture-o" aria-hidden="true" />Configurar dispositivo</h2>
+                <i className="fa fa-television mr-3" aria-hidden="true" />Configurar dispositivo</h2>
             </li>
           </ul>
         </div>
@@ -413,16 +413,18 @@ class DisplayForm extends Component {
 }
 
 DisplayForm.propTypes = {
-  display: PropTypes.shape,
-  user: PropTypes.shape.isRequired,
+  display: PropTypes.shape({}),
+  user: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  data: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
 };
 
 DisplayForm.defaultProps = {
   display: null,
+  notify: () => false,
+  update: () => false,
 };
 
 export default DisplayForm;

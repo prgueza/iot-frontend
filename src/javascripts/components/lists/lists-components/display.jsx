@@ -26,10 +26,9 @@ const Display = ({
       <NavLink to={location}>
         <div className="elemento elemento-display">
           <div className="d-flex w-100 justify-content-between">
-            <h5 className="w-75"><strong>{name}</strong></h5>
+            <h5 className="w-60"><strong>{name}</strong></h5>
             <small>
-              <i className="fa fa-hashtag mr-1" aria-hidden="true" />
-              {device && device.initcode}
+              <i className="fa fa-hashtag mr-1" aria-hidden="true" /> {device && device.initcode}
             </small>
           </div>
           <hr className="element-division" />
@@ -51,7 +50,15 @@ const Display = ({
 };
 
 Display.propTypes = {
-  display: PropTypes.shape.isRequired,
+  display: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    device: PropTypes.object,
+    updatedAt: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
 };
 
 export default Display;

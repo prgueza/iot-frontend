@@ -1,6 +1,5 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -25,7 +24,7 @@ class EditImageForm extends Component {
 
   componentDidMount() {
     const { display: { images, activeImage, overlayImage } } = this.props;
-    const options = images.map(image => <option value={image._id} key={image._id}>{image.name}</option>);
+    const options = images && images.map(image => <option value={image._id} key={image._id}>{image.name}</option>);
     this.setState({
       images,
       options,
@@ -98,14 +97,14 @@ class EditImageForm extends Component {
 	    .then((res) => {
 	      if (res.status === 201) { // with success
 	        update('displays', res.data.resourceId, 'edit', res.data.resource); // update the device info with new activeImage
-	        notify('Imagen actualizada con éxito', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify); // notify success
+	        notify('Imagen actualizada con éxito', 'notify-success', 'check', res.data.notify); // notify success
 	        handleCloseModal();
 	      } else {
-	        notify('Error al actualizar la imagen', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, res.data.notify); // notify error
+	        notify('Error al actualizar la imagen', 'notify-error', 'times', res.data.notify); // notify error
 	      }
 	    })
 	    .catch((err) => {
-	      notify('Error al actualizar la imagen', 'notify-error', 'times', toast.POSITION.TOP_RIGHT, err.message); // notify error
+	      notify('Error al actualizar la imagen', 'notify-error', 'times', err.message); // notify error
 	    });
 	}
 
@@ -158,15 +157,15 @@ class EditImageForm extends Component {
 						</div>
 						<div className="form-row">
 						 <div className="form-group col-6">
-							 <label><Icon icon="arrows-alt" mr="2" fw />Tamaño</label>
+							 <label><Icon icon="arrows-alt" mr={2} fw />Tamaño</label>
 							 <input onChange={this.handleSizeChange} value={size} type="number" className="form-control" placeholder="100" disabled />
 						 </div>
 						 <div className="form-group col">
-							 <label><Icon icon="long-arrow-right" mr="2" fw />Posición</label>
+							 <label><Icon icon="long-arrow-right" mr={2} fw />Posición</label>
 							 <input onChange={this.handleInputChange} value={xCoordinate} name="xCoordinate" type="number" className="form-control" placeholder="0" disabled />
 						 </div>
 						 <div className="form-group col">
-							 <label><Icon icon="long-arrow-up" mr="2" fw />Posición</label>
+							 <label><Icon icon="long-arrow-up" mr={2} fw />Posición</label>
 							 <input onChange={this.handleInputChange} value={yCoordinate} name="yCoordinate" type="number" className="form-control" placeholder="0" disabled />
 						 </div>
 					 </div>
@@ -204,11 +203,18 @@ class EditImageForm extends Component {
 }
 
 EditImageForm.propTypes = {
-  display: PropTypes.shape.isRequired,
+  display: PropTypes.shape({}),
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  handleCloseModal: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+  handleCloseModal: PropTypes.func,
+};
+
+EditImageForm.defaultProps = {
+  display: null,
+  update: () => false,
+  notify: () => false,
+  handleCloseModal: () => false,
 };
 
 export default EditImageForm;

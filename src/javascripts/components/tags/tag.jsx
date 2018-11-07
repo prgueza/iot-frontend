@@ -14,7 +14,11 @@ const Tag = ({ category, tag, filterData }) => {
 Tag.propTypes = {
   category: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
-  filterData: PropTypes.shape.isRequired,
+  filterData: PropTypes.func,
+};
+
+Tag.defaultProps = {
+  filterData: () => false,
 };
 
 export default Tag;

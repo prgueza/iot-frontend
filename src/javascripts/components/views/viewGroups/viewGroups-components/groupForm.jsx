@@ -1,9 +1,11 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+
+/* IMPORT COMPONENTS */
+import Tag from '../../../tags/tag';
 
 const moment = require('moment');
 
@@ -55,20 +57,25 @@ class GroupForm extends Component {
     });
   }
 
-	/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
+  /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 	handleInputChange = (event) => {
-	  const { target: { name, value } } = event.target;
-	  const storeValue = value;
-	  if (name === 'tags') storeValue.split(',');
+	  const { target, target: { name } } = event;
+	  let value;
+	  if (name === 'tags') {
+	    value = target.value.split(','); // TODO: better string to array conversion
+	  } else {
+	    const { value: aux } = target;
+	    value = aux;
+	  }
 	  this.setState({
-	    [name]: storeValue,
+	    [name]: value,
 	  });
 	}
 
 	/* HANDLE MULTIPLE CHECKBOX */
 	handleCheckDisplays = (event) => {
 	  // get value from the checkbox
-	  const { target: { value } } = event.target;
+	  const { target: { value } } = event;
 	  const { displays } = this.state;
 	  // check if the checkbox has been selected
 	  if (!displays.find(c => c === value)) { // check if value is stored in state
@@ -86,7 +93,7 @@ class GroupForm extends Component {
 
 	handleCheckImages = (event) => {
 	  // get value from the checkbox
-	  const { target, target: { value } } = event.target;
+	  const { target, target: { value } } = event;
 	  const { images } = this.state;
 	  const { data } = this.props;
 	  // check if the checkbox has been selected
@@ -149,13 +156,13 @@ class GroupForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 201) {
-	        notify('Grupo configurada con éxito', 'notify-success', 'check', toast.POSITION.TOP_RIGHT, res.data.notify);
+	        notify('Grupo configurada con éxito', 'notify-success', 'check', res.data.notify);
 	        const action = group ? 'edit' : 'add';
 	        update('groups', res.resourceId, action, res.data.resource); // update dataset
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT));
+	    .catch(() => notify('Error al configurar el grupo', 'notify-error', 'exclamation-triangle'));
 	}
 
 	render() {
@@ -198,8 +205,8 @@ class GroupForm extends Component {
               </li>
               <li className="nav-item ml-2">
               { group
-                ? <button onClick={() => this.handleSubmit()} type="button" className="btn btn-success"><i className="fa fa-save mr-2" aria-hidden="true" />Guardar cambios</button>
-                : <button onClick={() => this.handleSubmit()} type="button" className="btn btn-success"><i className="fa fa-plus-circle mr-2" aria-hidden="true" />Añadir</button>
+                ? <button onClick={() => this.handleSubmit()} type="button" className="btn btn-warning"><i className="fa fa-save mr-2" aria-hidden="true" />Guardar cambios</button>
+                : <button onClick={() => this.handleSubmit()} type="button" className="btn btn-warning"><i className="fa fa-plus-circle mr-2" aria-hidden="true" />Añadir</button>
               }
               </li>
             </ul>
@@ -243,7 +250,13 @@ class GroupForm extends Component {
               </div>
               <div className="form-row">
                 <div className="form-group col">
-                  {tags.map(tag => (tag.length > 1 ? <button type="button" className="btn mr-1 btn-outline-group btn-tiny" key={tag}>{tag}</button> : ''))}
+                  {
+                    tags.map(
+                      tag => (tag.length > 1
+                        ? <Tag key={tag} tag={tag} category="groups" />
+                        : ''),
+                    )
+                  }
                 </div>
               </div>
               <div className="form-row">

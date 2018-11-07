@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -27,12 +26,12 @@ class ImageDelete extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 200) {
-	        notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', toast.POSITION.TOP_RIGHT, res.data.notify);
+	        notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', res.data.notify);
 	        update('images', res.resourceId, 'remove');
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT));
+	    .catch(() => notify('Error al eliminar el display', 'notify-error', 'exclamation-triangle'));
 	}
 
 	render() {
@@ -66,10 +65,15 @@ class ImageDelete extends Component {
 
 
 ImageDelete.propTypes = {
-  image: PropTypes.shape.isRequired,
+  image: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+ImageDelete.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default ImageDelete;

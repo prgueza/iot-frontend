@@ -32,9 +32,19 @@ const Location = ({
 };
 
 Location.propTypes = {
-  location: PropTypes.shape.isRequired,
-  edit: PropTypes.shape.isRequired,
-  active: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+  edit: PropTypes.func,
+  active: PropTypes.bool,
+};
+
+Location.defaultProps = {
+  edit: () => false,
+  active: false,
 };
 
 export default Location;

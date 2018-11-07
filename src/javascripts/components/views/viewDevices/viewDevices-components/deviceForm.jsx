@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const moment = require('moment');
@@ -76,14 +75,14 @@ class DeviceForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status >= 200) {
-	        notify('Dispositivo configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT);
+	        notify('Dispositivo configurado con éxito', 'notify-success', 'upload');
 	        const action = device ? 'edit' : 'add';
 	        return update('devices', res.data.resourceId, action, res.data.resource); // update dataset
 	      }
 	      return null;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT));
+	    .catch(() => notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle'));
 	}
 
 	/* RENDER COMPONENT */
@@ -216,12 +215,17 @@ class DeviceForm extends Component {
 }
 
 DeviceForm.propTypes = {
-  device: PropTypes.shape.isRequired,
-  user: PropTypes.shape.isRequired,
-  data: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
-  update: PropTypes.shape.isRequired,
+  device: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}).isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
+  notify: PropTypes.func,
+  update: PropTypes.func,
+};
+
+DeviceForm.defaultProps = {
+  notify: () => false,
+  update: () => false,
 };
 
 export default DeviceForm;

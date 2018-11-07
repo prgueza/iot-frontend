@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -23,7 +22,7 @@ class GatewayForm extends Component {
     }
     if (gateway && gateway.location) {
       location = gateway.location._id;
-    } else if (gateway) {
+    } else if (locations.length > 0) {
       [location] = locations;
     }
     this.state = {
@@ -53,8 +52,7 @@ class GatewayForm extends Component {
 
 	/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 	handleInputChange = (event) => {
-	  const { target: { value, name } } = event.target;
-
+	  const { target: { value, name } } = event;
 	  this.setState({
 	    [name]: value,
 	  });
@@ -92,15 +90,15 @@ class GatewayForm extends Component {
 	    },
 	  })
 	    .then((res) => {
-	      if (res.status === 201) {
-	        notify('Puerta de enlace configurado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT);
+	      if (res.status >= 200) {
+	        notify('Puerta de enlace configurada con éxito', 'notify-success', 'upload');
 	        const action = gateway ? 'edit' : 'add';
 	        return update('gateways', res.data.resourceId, action, res.data.resource); // update dataset
 	      }
-	      return false;
+	      return null;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
+	    .catch(() => notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle'));
 	}
 
 	/* RENDER COMPONENT */
@@ -201,12 +199,17 @@ class GatewayForm extends Component {
 }
 
 GatewayForm.propTypes = {
-  data: PropTypes.shape.isRequired,
-  gateway: PropTypes.shape.isRequired,
-  user: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
+  gateway: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+};
+
+GatewayForm.defaultProps = {
+  update: () => false,
+  notify: () => false,
 };
 
 export default GatewayForm;

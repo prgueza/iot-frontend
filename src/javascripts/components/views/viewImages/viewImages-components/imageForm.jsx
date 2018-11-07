@@ -1,6 +1,5 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
-import { toast } from 'react-toastify';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -54,7 +53,6 @@ class ImageForm extends Component {
 	    const { value: aux } = target;
 	    value = aux;
 	  }
-
 	  this.setState({
 	    [name]: value,
 	  });
@@ -142,32 +140,32 @@ class ImageForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 201) {
-	        notify('Imagen configurada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify);
+	        notify('Imagen configurada con éxito', 'notify-success', 'upload', res.data.notify);
 	        const action = image ? 'edit' : 'add';
 	        return update('images', res.data.resourceId, action, res.data.resource); // update dataset
 	      }
 	      return false;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.BOTTOM_LEFT));
+	    .catch(() => notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle'));
 	}
 
 	/* RENDER COMPONENT */
 	render() {
 	  const {
-	    image,
+	    image, data,
 	  } = this.props;
 	  const {
 	    groups, displays, redirect, redirectLocation, name, description, category, color, tags, createdBy, createdAt, updatedAt,
 	  } = this.state;
 	  // Options
-	  const optionsGroups = groups.map(group => (
+	  const optionsGroups = data.groups.map(group => (
 			<div key={group._id} className="custom-control custom-checkbox">
 			  <input onChange={this.handleCheckGroups} id={group._id} type="checkbox" defaultChecked={groups.find(c => c === group._id)} name={group._id} defaultValue={group._id} className="custom-control-input" />
 			  <label className="custom-control-label" htmlFor={group._id}>{group.name}</label>
 			</div>
 	  ));
-	  const optionsDisplays = displays.sort((a, b) => a.updatedAt - b.updatedAt).map(display => (
+	  const optionsDisplays = data.displays.sort((a, b) => a.updatedAt - b.updatedAt).map(display => (
 				<div key={display._id} className="custom-control custom-checkbox">
 				  <input onChange={this.handleCheckDisplays} id={display._id} type="checkbox" defaultChecked={displays.find(c => c === display._id)} name={display._id} defaultValue={display._id} className="custom-control-input" />
 				  <label className="custom-control-label" htmlFor={display._id}>{display.name}</label>
@@ -286,15 +284,18 @@ class ImageForm extends Component {
 }
 
 ImageForm.propTypes = {
-  image: PropTypes.shape,
-  user: PropTypes.shape.isRequired,
+  image: PropTypes.shape({}),
+  data: PropTypes.shape({}).isRequired,
+  user: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
 };
 
 ImageForm.defaultProps = {
   image: null,
+  update: () => false,
+  notify: () => false,
 };
 
 export default ImageForm;

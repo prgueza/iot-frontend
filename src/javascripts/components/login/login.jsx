@@ -22,8 +22,14 @@ class Login extends Component {
     this.setState({ remember: !!localStorage.getItem('login') });
   }
 
+  /* RESET ERROR */
+  resetError = () => {
+    this.setState({ error: null });
+  }
+
 	/* HANDLE INPUT CHANGE */
 	handleInputChange = (event) => {
+	  this.resetError();
 	  const { target } = event;
 	  const { remember } = this.state;
 	  const { name } = target;
@@ -75,7 +81,7 @@ class Login extends Component {
             </div>
             <div className="form-group">
               <label className="sr-only" htmlFor="password">Password</label>
-              <input onChange={this.handleInputChange} type="password" className="form-control input-no-border" id="password" value={password} name="password" placeholder="Contraseña" />
+              <input onChange={this.handleInputChange} autoComplete="on" type="password" className="form-control input-no-border" id="password" value={password} name="password" placeholder="Contraseña" />
             </div>
             <button onClick={this.handleSubmit} type="submit" className="btn btn-block btn-primary">Entrar</button>
             <div className="form-group mt-2">
@@ -85,12 +91,14 @@ class Login extends Component {
               </div>
             </div>
           </form>
-          { error && (
-          <p className="text-center text-danger">
-            <i className="fa fa-times mr-2" />
-						Usuario o contraseña incorrectos
+          <p className="text-center text-danger login-error">
+            { error && (
+              <span>
+                <i className="fa fa-times mr-2" />
+    						Usuario o contraseña incorrectos
+              </span>
+            ) }
           </p>
-          ) }
         </div>
       </div>
     </div>
@@ -100,7 +108,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  loginAction: PropTypes.shape.isRequired,
+  loginAction: PropTypes.func.isRequired,
 };
 
 export default Login;

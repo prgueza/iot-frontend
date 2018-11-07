@@ -68,8 +68,8 @@ const GatewayDetails = ({
 };
 
 GatewayDetails.propTypes = {
-  data: PropTypes.shape.isRequired,
-  gateway: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
+  gateway: PropTypes.shape({}).isRequired,
 };
 
 export default GatewayDetails;

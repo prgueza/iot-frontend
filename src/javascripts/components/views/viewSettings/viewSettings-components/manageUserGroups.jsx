@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 /* IMPORT COMPONENTS */
@@ -29,11 +28,12 @@ class ManageUserGroups extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-	  this.setState({ isLoaded: true, userGroups: nextProps.data.userGroups });
+    const { data: { userGroups } } = nextProps;
+	  this.setState({ isLoaded: true, userGroups });
   }
 
 	handleInputChange = (event) => {
-	  const { target: { name, value } } = event.target;
+	  const { target: { name, value } } = event;
 	  this.setState({
 	    [name]: value,
 	  });
@@ -80,16 +80,16 @@ class ManageUserGroups extends Component {
 	      if (res.status === 201 || res.status === 200) {
 	        switch (method) {
 	          case 'put':
-	            notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', res.data.notify);
 	            update('userGroups', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	            break;
 	          case 'post':
-	            notify('Grupo creado con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Grupo creado con éxito', 'notify-success', 'upload', res.data.notify);
 	            update('userGroups', res.data.resourceId, 'add', res.data.resource); // update dataset
 	            this.edit(res.data.resourceId);
 	            break;
 	          case 'delete':
-	            notify('Grupo eliminado con éxito', 'notify-success', 'trash', toast.POSITION.TOP_RIGHT, res.data.notify);
+	            notify('Grupo eliminado con éxito', 'notify-success', 'trash', res.data.notify);
 	            this.cancel();
 	            update('userGroups', res.data.resourceId, 'remove', res.data.resource); // update dataset
 	            break;
@@ -103,7 +103,7 @@ class ManageUserGroups extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT));
+	    .catch(() => notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle'));
 	}
 
 	render() {
@@ -188,10 +188,15 @@ class ManageUserGroups extends Component {
 }
 
 ManageUserGroups.propTypes = {
-  data: PropTypes.shape.isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  update: PropTypes.func,
+  notify: PropTypes.func,
+};
+
+ManageUserGroups.defaultProps = {
+  update: () => false,
+  notify: () => false,
 };
 
 export default ManageUserGroups;

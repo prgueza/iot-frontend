@@ -50,7 +50,14 @@ const Image = ({
 };
 
 Image.propTypes = {
-  image: PropTypes.shape.isRequired,
+  image: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    updatedAt: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
   index: PropTypes.number.isRequired,
 };
 

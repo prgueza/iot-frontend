@@ -41,9 +41,20 @@ const User = ({
 };
 
 User.propTypes = {
-  user: PropTypes.shape.isRequired,
-  edit: PropTypes.shape.isRequired,
-  active: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+  edit: PropTypes.func,
+  active: PropTypes.bool,
+};
+
+User.defaultProps = {
+  edit: () => false,
+  active: false,
 };
 
 export default User;

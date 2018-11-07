@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import moment from 'moment';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 import axios from 'axios';
 
 /* IMPORT COMPONENTS */
@@ -21,11 +21,12 @@ class Main extends Component {
       user: null,
       token: null,
       // data
-      data: [],
+      data: {},
       // sync
       syncedDevices: [],
       // 0: unsynced 1: sync_ready 2: synced 3: syncing
       syncStatus: 0,
+      sendingImage: false,
       lastSynced: null,
       // search value
       filterValue: '',
@@ -104,16 +105,16 @@ class Main extends Component {
 	          this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false, 'Sincronice la aplicación con los dispositivos encontrados');
 	          this.setState({ syncedDevices: res.data, syncStatus: 1, lastSynced: moment() });
 	        } else {
-	          this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, res.data.error);
+	          this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, res.data.error, true);
 	          this.setState({ syncing: false, syncStatus: 0 });
 	        }
 	      },
 	      (err) => {
-	        this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, err.data.error);
+	        this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, err.data.error, true);
 	      },
 	    )
-	    .catch((err) => {
-	      this.updateSync('Error', 'notify-error', 'times', true, `Ha ocurrido un error. ${err}`);
+	    .catch(() => {
+	      this.updateSync('Error', 'notify-error', 'times', true, 'Ha ocurrido un error', true);
 	      this.setState({ syncing: false, syncStatus: 0 });
 	    });
 	}
@@ -123,8 +124,8 @@ class Main extends Component {
 	  const { data } = this.state;
 	  const devices = syncedDevices;
 	  data.devices = devices;
-	  this.updateSync('Dispositivos sincronizados', 'notify-success', 'check', true, 'Dispositivos sincronizados con éxito');
-	  this.setState({ data, syncStatus: 2 }); // synced
+	  this.updateSync('Dispositivos sincronizados', 'notify-success', 'check', true, 'Dispositivos sincronizados con éxito', false);
+	  this.setState({ data, syncStatus: 2 });
 	}
 
 	/* HANDLE SEARCH */
@@ -141,25 +142,25 @@ class Main extends Component {
 	}
 
 	/* ALERTS */
-	notify = (text, style, icon, position = toast.POSITION.TOP_RIGHT, info) => {
-	  toast(<Notification text={text} icon={icon} info={info} />, {
-	    position,
+	notify = (text, style, icon, info = false, error = false) => {
+	  toast(<Notification text={text} icon={icon} info={info} error={error} />, {
+	    position: toast.POSITION.TOP_CENTER,
 	    className: style,
 	  });
 	}
 
-	notifySync = (text, style, icon, info) => {
-	  this.toastSyncId = toast(<Notification text={text} icon={icon} spin info={info} />, {
-	    position: toast.POSITION.TOP_RIGHT,
+	notifySync = (text, style, icon, info = false, error = false) => {
+	  this.toastSyncId = toast(<Notification text={text} icon={icon} spin info={info} error={error} />, {
+	    position: toast.POSITION.TOP_CENTER,
 	    autoClose: false,
 	    className: style,
 	  });
 	}
 
-	updateSync = (text, style, icon, autoClose, info = false) => {
+	updateSync = (text, style, icon, autoClose, info = false, error = false) => {
 	  toast.update(this.toastSyncId, {
-	    render: <Notification text={text} icon={icon} info={info} />,
-	    position: toast.POSITION.TOP_RIGHT,
+	    render: <Notification text={text} icon={icon} info={info} error={error} />,
+	    position: toast.POSITION.TOP_CENTER,
 	    autoClose,
 	    className: style,
 	    onClose: () => {
@@ -177,7 +178,7 @@ class Main extends Component {
 	render() {
 	  return (
   <div className="row main">
-    <ToastContainer closeButton={false} hideProgressBar />
+    <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
     <Navigation filterData={this.filterData} update={this.update} sync={this.sync} syncApi={this.syncApi} {...this.state} />
     <Content filterData={this.filterData} filterFound={this.filterFound} update={this.update} notify={this.notify} {...this.state} />
   </div>);
