@@ -1,9 +1,6 @@
 /* IMPORT MODULES */
 import React from 'react';
 
-/* IMPORT COMPONENTS */
-import AddButton from '../../../buttons/addButton';
-
 /* COMPONENT */
 const DisplayGeneric = () => (
 		<div className="card card-detalles">
@@ -18,8 +15,7 @@ const DisplayGeneric = () => (
       <div className="text-center">
         <h1><i className="fa fa-arrow-left mr-3" />Seleccione un display</h1>
         <hr className="card-division" />
-        <p>O añada uno nuevo</p>
-        <AddButton category="displays" />
+        <p>Para configurar un nuevo display compruebe que hay dispositivos disponibles</p>
       </div>
     </div>
   </div>

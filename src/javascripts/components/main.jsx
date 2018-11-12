@@ -31,6 +31,7 @@ class Main extends Component {
       // search value
       filterValue: '',
       filterFoundValue: true,
+      filterConfiguredValue: true,
       // others
       userID: '',
       isLoaded: false,
@@ -141,6 +142,10 @@ class Main extends Component {
 	  });
 	}
 
+  filterConfigured = (value) => {
+    this.setState({ filterConfiguredValue: value });
+  }
+
 	/* ALERTS */
 	notify = (text, style, icon, info = false, error = false) => {
 	  toast(<Notification text={text} icon={icon} info={info} error={error} />, {
@@ -180,7 +185,7 @@ class Main extends Component {
   <div className="row main">
     <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
     <Navigation filterData={this.filterData} update={this.update} sync={this.sync} syncApi={this.syncApi} {...this.state} />
-    <Content filterData={this.filterData} filterFound={this.filterFound} update={this.update} notify={this.notify} {...this.state} />
+    <Content filterData={this.filterData} filterFound={this.filterFound} filterConfigured={this.filterConfigured} update={this.update} notify={this.notify} {...this.state} />
   </div>);
 	}
 }

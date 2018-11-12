@@ -9,6 +9,7 @@ import Group from './lists-components/group';
 import Device from './lists-components/device';
 import Gateway from './lists-components/gateway';
 import AddButton from '../buttons/addButton';
+import SplitButton from '../buttons/splitButton';
 
 /* COMPONENT */
 class List extends Component {
@@ -31,17 +32,20 @@ class List extends Component {
 
 	render() {
 	  const {
-	    category, filterValue, filterFoundValue, filterFound,
+	    category, devices, filterValue, filterFoundValue, filterFound, filterConfigured, filterConfiguredValue,
 	  } = this.props;
 	  let { content } = this.props;
 	  let elements;
 	  let elementName;
 	  if (category === 'devices') content = content.filter(element => !filterFoundValue || element.found);
-	  content = this.filterSearch(content, filterValue)
-	    .sort((a, b) => b.found - a.found);
-	  if (category === 'displays') {
+	  if (category === 'displays' && !filterConfiguredValue) content = devices;
+	  content = this.filterSearch(content, filterValue).sort((a, b) => b.found - a.found);
+	  if (category === 'displays' && filterConfiguredValue) {
 	    elements = content.map(element => <Display display={element} key={element._id} />);
-	    elementName = 'displays';
+	    elementName = 'displays configurados';
+	  } else if (category === 'displays') {
+	    elements = content.map(element => (!element.display && <Device device={element} key={element._id} editDisplay />));
+	    elementName = 'dispositivos sin configurar';
 	  } else if (category === 'images') {
 	    elements = content.map((element, index) => <Image image={element} index={index} key={element._id} />);
 	    elementName = 'imágenes';
@@ -55,6 +59,24 @@ class List extends Component {
 	    elements = content.map(element => <Gateway gateway={element} key={element._id} />);
 	    elementName = 'puertas de enlace';
 	  }
+
+	  let button = false;
+	  switch (category) {
+	    case 'devices':
+	      button = (
+					<div className="custom-control custom-checkbox">
+	          <input onChange={() => filterFound()} id="filter" type="checkbox" defaultChecked={filterFoundValue} name="found" className="custom-control-input" />
+	          <label className="custom-control-label" htmlFor="filter">Mostrar únicamente dispositivos localizados</label>
+	        </div>
+	      );
+	      break;
+	    case 'displays':
+	      button = (<SplitButton filterConfigured={filterConfigured} filterConfiguredValue={filterConfiguredValue} />);
+	      break;
+	    default:
+	      button = (<AddButton category={category} />);
+	  }
+
 	  return (
   <div className="list">
     <div className="list-group mb-3">
@@ -71,20 +93,12 @@ class List extends Component {
 						Número de
             {` ${elementName}`}
 						:
-            {` ${content.length}`}
+            {` ${elements.filter(element => element).length}`}
           </small>
         </div>
       </div>
     </div>
-    { category !== 'devices'
-      ? <AddButton category={category} />
-      : (
-        <div className="custom-control custom-checkbox">
-          <input onChange={() => filterFound()} id="filter" type="checkbox" defaultChecked={filterFoundValue} name="found" className="custom-control-input" />
-          <label className="custom-control-label" htmlFor="filter">Mostrar únicamente dispositivos localizados</label>
-        </div>
-      )
-        }
+    { button }
   </div>
 	  );
 	}
@@ -92,17 +106,23 @@ class List extends Component {
 
 List.propTypes = {
   content: PropTypes.arrayOf(PropTypes.object),
+  devices: PropTypes.arrayOf(PropTypes.object),
   category: PropTypes.string.isRequired,
   filterValue: PropTypes.string,
   filterFoundValue: PropTypes.bool,
   filterFound: PropTypes.func,
+  filterConfigured: PropTypes.func,
+  filterConfiguredValue: PropTypes.bool,
 };
 
 List.defaultProps = {
-  content: null,
+  content: [],
+  devices: [],
   filterValue: '',
   filterFoundValue: false,
   filterFound: () => false,
+  filterConfigured: () => false,
+  filterConfiguredValue: false,
 };
 
 export default List;
