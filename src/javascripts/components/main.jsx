@@ -106,16 +106,18 @@ class Main extends Component {
 	          this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false, 'Sincronice la aplicación con los dispositivos encontrados');
 	          this.setState({ syncedDevices: res.data, syncStatus: 1, lastSynced: moment() });
 	        } else {
-	          this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, res.data.error, true);
+	          this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, res.data.notify, true);
 	          this.setState({ syncing: false, syncStatus: 0 });
 	        }
 	      },
 	      (err) => {
-	        this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, err.data.error, true);
+	        console.log(err.response);
+	        this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, err.response.data.error.notify, true);
+	        this.setState({ syncing: false, syncStatus: 0 });
 	      },
 	    )
-	    .catch(() => {
-	      this.updateSync('Error', 'notify-error', 'times', true, 'Ha ocurrido un error', true);
+	    .catch((err) => {
+	      this.updateSync('Error', 'notify-error', 'times', true, err.message, true);
 	      this.setState({ syncing: false, syncStatus: 0 });
 	    });
 	}

@@ -58,7 +58,7 @@ class DisplayForm extends Component {
     // set state with initial values
     if (display && display.device) {
       this.setState({
-        device: display.device._id,
+        device: display.device,
         optionsActiveImage,
         location: `/displays/${display._id}`, // Redirect url
       });
@@ -74,7 +74,7 @@ class DisplayForm extends Component {
   componentWillReceiveProps(nextProps) {
     const { device: newDevice } = nextProps;
     const { device: oldDevice } = this.state;
-    if (newDevice._id !== oldDevice._id) { // if props actually changed
+    if (newDevice && newDevice._id !== oldDevice._id) { // if props actually changed
       this.setState({ device: newDevice });
     }
   }

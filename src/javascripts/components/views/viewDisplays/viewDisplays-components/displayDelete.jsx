@@ -29,9 +29,9 @@ class DisplayDelete extends Component {
 	    },
 	  })
 	    .then((res) => {
-	      if (res.status === 200) {
+	      if (res.status >= 200) {
 	        notify('Display eliminado con éxito', 'notify-success', 'trash-o');
-	        update('displays', res.resourceId, 'remove', res.data.resource, res.data.devices); // update dataset
+	        update('displays', res.resourceId, 'remove', res.data, res.data.devices); // update dataset
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))

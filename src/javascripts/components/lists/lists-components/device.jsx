@@ -13,16 +13,17 @@ moment.locale('es');
 
 /* COMPONENT */
 const Device = ({
+  editDisplay,
   device: {
-    _id, name, description, batt, initcode, found, lastFound, editDisplay,
+    _id, name, description, batt, initcode, found, lastFound,
   },
 }) => {
   const last = moment(lastFound).from(moment());
   const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start');
   const location = editDisplay ? {
-    pathname: `/devices/${_id}`,
-  } : {
     pathname: `/displays/add/${_id}`,
+  } : {
+    pathname: `/devices/${_id}`,
   };
   return (
     <div className={elementClass}>
@@ -57,6 +58,7 @@ const Device = ({
 };
 
 Device.propTypes = {
+  editDisplay: PropTypes.bool,
   device: PropTypes.shape({
     name: PropTypes.string,
     url: PropTypes.string,
@@ -64,6 +66,10 @@ Device.propTypes = {
     updatedAt: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
+};
+
+Device.defaultProps = {
+  editDisplay: false,
 };
 
 
