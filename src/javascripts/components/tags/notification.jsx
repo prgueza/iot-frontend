@@ -5,15 +5,13 @@ import PropTypes from 'prop-types';
 /* IMPORT COMPONENTS */
 import Icon from '../icons/icon';
 
-const cx = require('classnames');
-
 /* COMPONENTS */
 const Notification = ({
-  text, icon, spin, info, error,
+  text, icon, spin, info, status,
 }) => {
-  const notifyIconContainer = cx({ 'notify-icon-container notify-icon-error': error }, { 'notify-icon-container notify-icon-success': !error });
-  const notifyDivision = cx({ 'notify-division-error': error }, { 'notify-division-success': !error });
-  const notifyInfo = cx({ 'notify-info-error': error }, { 'notify-info-success': !error });
+  const notifyIconContainer = `notify-icon-container notify-icon-${status}`;
+  const notifyDivision = `notify-division notify-division-${status}`;
+  const notifyInfo = `notify-info-${status}`;
   return (
     <div className="notify-content">
       <div className={notifyIconContainer}>
@@ -41,12 +39,12 @@ Notification.propTypes = {
   icon: PropTypes.string.isRequired,
   spin: PropTypes.bool,
   info: PropTypes.string,
-  error: PropTypes.bool,
+  status: PropTypes.oneOf(['error', 'warning', 'success']),
 };
 
 Notification.defaultProps = {
   spin: false,
-  error: false,
+  status: 'success',
   info: '',
 };
 

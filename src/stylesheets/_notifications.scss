@@ -21,6 +21,15 @@
   box-shadow: $shadow !important;
 }
 
+.notify-warning{
+  position: relative;
+  padding: 0;
+  min-width: 400px;
+  color: $warning-color;
+  border-radius: 0.25rem;
+  box-shadow: $shadow !important;
+}
+
 .notify-icon-container{
   position: relative;
   display: inline-block;
@@ -49,16 +58,25 @@
   background-color: $danger-color;
 }
 
-.notify-division-success{
-  border-color: $primary-color;
+.notify-icon-warning {
+  background-color: $warning-color;
+}
+
+.notify-division {
   margin-top: 3px;
   margin-bottom: 3px;
 }
 
+.notify-division-success{
+  border-color: $primary-color;
+}
+
 .notify-division-error{
   border-color: $danger-color;
-  margin-top: 3px;
-  margin-bottom: 3px;
+}
+
+.notify-division-warning{
+  border-color: $warning-color;
 }
 
 .notify-info-success{
@@ -67,4 +85,8 @@
 
 .notify-info-error{
   color: $danger-color;
+}
+
+.notify-info-warning{
+  color: $warning-color;
 }

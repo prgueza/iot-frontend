@@ -106,18 +106,18 @@ class Main extends Component {
 	          this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false, 'Sincronice la aplicación con los dispositivos encontrados');
 	          this.setState({ syncedDevices: res.data, syncStatus: 1, lastSynced: moment() });
 	        } else {
-	          this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, res.data.notify, true);
+	          this.updateSync('Error en la búsqueda', 'notify-warning', 'exclamation-triangle', false, res.data.notify, 'warning');
 	          this.setState({ syncing: false, syncStatus: 0 });
 	        }
 	      },
 	      (err) => {
 	        console.log(err.response);
-	        this.updateSync('Error en la búsqueda', 'notify-error', 'times', false, err.response.data.error.notify, true);
+	        this.updateSync('Error en la búsqueda', 'notify-warning', 'exclamation-triangle', false, err.response.data.error.notify, 'warning');
 	        this.setState({ syncing: false, syncStatus: 0 });
 	      },
 	    )
 	    .catch((err) => {
-	      this.updateSync('Error', 'notify-error', 'times', true, err.message, true);
+	      this.updateSync('Error', 'notify-error', 'times', true, err.message, 'error');
 	      this.setState({ syncing: false, syncStatus: 0 });
 	    });
 	}
@@ -127,7 +127,7 @@ class Main extends Component {
 	  const { data } = this.state;
 	  const devices = syncedDevices;
 	  data.devices = devices;
-	  this.updateSync('Dispositivos sincronizados', 'notify-success', 'check', true, 'Dispositivos sincronizados con éxito', false);
+	  this.updateSync('Dispositivos sincronizados', 'notify-success', 'check', true, 'Dispositivos sincronizados con éxito');
 	  this.setState({ data, syncStatus: 2 });
 	}
 
@@ -149,24 +149,24 @@ class Main extends Component {
   }
 
 	/* ALERTS */
-	notify = (text, style, icon, info = false, error = false) => {
-	  toast(<Notification text={text} icon={icon} info={info} error={error} />, {
+	notify = (text, style, icon, info = false, status = 'success') => {
+	  toast(<Notification text={text} icon={icon} info={info} status={status} />, {
 	    position: toast.POSITION.TOP_CENTER,
 	    className: style,
 	  });
 	}
 
-	notifySync = (text, style, icon, info = false, error = false) => {
-	  this.toastSyncId = toast(<Notification text={text} icon={icon} spin info={info} error={error} />, {
+	notifySync = (text, style, icon, info = false, status = 'success') => {
+	  this.toastSyncId = toast(<Notification text={text} icon={icon} spin info={info} status={status} />, {
 	    position: toast.POSITION.TOP_CENTER,
 	    autoClose: false,
 	    className: style,
 	  });
 	}
 
-	updateSync = (text, style, icon, autoClose, info = false, error = false) => {
+	updateSync = (text, style, icon, autoClose, info = false, status = 'success') => {
 	  toast.update(this.toastSyncId, {
-	    render: <Notification text={text} icon={icon} info={info} error={error} />,
+	    render: <Notification text={text} icon={icon} info={info} status={status} />,
 	    position: toast.POSITION.TOP_CENTER,
 	    autoClose,
 	    className: style,

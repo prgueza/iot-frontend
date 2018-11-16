@@ -183,7 +183,7 @@ class DisplayForm extends Component {
 	      return false;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar el display', 'notify-error', 'exclamation-triangle'));
+	    .catch(() => notify('Error al configurar el display', 'notify-error', 'times', 'error'));
 	}
 
 	/* RENDER COMPONENT */
