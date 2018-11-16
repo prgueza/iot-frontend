@@ -13,13 +13,16 @@ moment.locale('es');
 
 /* COMPONENT */
 const Device = ({
+  editDisplay,
   device: {
     _id, name, description, batt, initcode, found, lastFound,
   },
 }) => {
   const last = moment(lastFound).from(moment());
   const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start');
-  const location = {
+  const location = editDisplay ? {
+    pathname: `/displays/add/${_id}`,
+  } : {
     pathname: `/devices/${_id}`,
   };
   return (
@@ -30,8 +33,8 @@ const Device = ({
             <h5 className="w-60"><strong>{name}</strong></h5>
             <small>
               { found
-                ? <Icon icon="battery" fw="true" mr="1" batt={batt} />
-                : <Icon icon="chain-broken" fw="true" mr="1" />
+                ? <Icon icon="battery" fw mr={1} batt={batt} />
+                : <Icon icon="chain-broken" fw mr={1} />
               }
               { found ? batt : '' }
             </small>
@@ -55,7 +58,19 @@ const Device = ({
 };
 
 Device.propTypes = {
-  device: PropTypes.shape.isRequired,
+  editDisplay: PropTypes.bool,
+  device: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    updatedAt: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
 };
+
+Device.defaultProps = {
+  editDisplay: false,
+};
+
 
 export default Device;

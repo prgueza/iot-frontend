@@ -40,7 +40,6 @@ class DisplayForm extends Component {
       updatedAt: moment(),
       group: display ? display.group : '',
       device: '',
-      deviceDescription: '',
       // form options stored in state
       optionsActiveImage: [],
       previewImage: '',
@@ -52,26 +51,31 @@ class DisplayForm extends Component {
 
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount() {
-    const { display, data } = this.props;
+    const { display, data, device } = this.props;
     const { images } = this.state;
     // get options for active image
-    const optionsActiveImage = data.images.filter(image => images.find(c => c === image._id))
-      .map(image => <option value={image._id} key={image._id}>{image.name}</option>);
-    // get a list of unused devices
-    const unusedDevices = data.devices.filter(device => !device.display);
+    const optionsActiveImage = data.images.filter(image => images.find(c => c === image._id)).map(image => <option value={image._id} key={image._id}>{image.name}</option>);
     // set state with initial values
-    if (unusedDevices.length > 0 || display) {
-      let device;
-      if (display && display.device) device = display.device._id;
-      if (!display) device = unusedDevices[0]._id;
+    if (display && display.device) {
+      this.setState({
+        device: display.device,
+        optionsActiveImage,
+        location: `/displays/${display._id}`, // Redirect url
+      });
+    } else {
       this.setState({
         device,
         optionsActiveImage,
-        location: display ? `/displays/${display._id}` : '/displays', // Redirect url
-        deviceDescription: display ? display.device.description : unusedDevices[0].description,
+        location: '/displays', // Redirect url
       });
-    } else {
-      this.setState({ device: '' });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { device: newDevice } = nextProps;
+    const { device: oldDevice } = this.state;
+    if (newDevice && newDevice._id !== oldDevice._id) { // if props actually changed
+      this.setState({ device: newDevice });
     }
   }
 
@@ -87,7 +91,6 @@ class DisplayForm extends Component {
 
 	/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 	handleInputChange = (event) => {
-	  const { data: { devices } } = this.props;
 	  const { target } = event;
 	  const { name } = target;
 	  let value;
@@ -96,14 +99,6 @@ class DisplayForm extends Component {
 	  } else {
 	    const { value: aux } = target;
 	    value = aux;
-	  }
-
-	  if (name === 'device') {
-	    const unusedDevices = devices.filter(d => !d.display);
-	    const device = unusedDevices.find(d => d._id === value);
-	    this.setState({
-	      deviceDescription: device.description,
-	    });
 	  }
 
 	  this.setState({
@@ -157,7 +152,7 @@ class DisplayForm extends Component {
 	    description,
 	    category,
 	    tags,
-	    device,
+	    device: device._id,
 	    activeImage: null,
 	    images: null,
 	    group: null,
@@ -194,19 +189,15 @@ class DisplayForm extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  const {
-	    redirect, images, location, device, deviceDescription, name, description, category, group, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy, previewImage,
+	    redirect, images, location, device, name, description, category, group, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy, previewImage,
 	  } = this.state;
 	  const {
-	    display, data, data: {
-	    devices, groups,
-	  },
+	    display, data, data: { groups },
 	  } = this.props;
 
 	  const linkBack = display ? `/displays/${display._id}` : '/displays';
 
 	  // Options
-	  const optionsDevices = devices.filter(d => !d.display || d.display._id === (display && display._id))
-	    .map(d => <option value={d._id} key={d._id}>{d.name}</option>);
 	  const optionsGroup = groups.map(g => (<option value={g._id} key={g._id}>{g.name}</option>));
 	  const optionsImages = data.images.sort((a, b) => a.updatedAt - b.updatedAt)
 	    .map(image => (
@@ -311,15 +302,13 @@ class DisplayForm extends Component {
                 <label htmlFor="device">
                   <i className="fa fa-tablet mr-2" />Dispositivo físico asociado</label>
                 <div>
-                  <select className="custom-select" name="device" onChange={this.handleInputChange}>
-                    {optionsDevices}
-                  </select>
+                  <input className="form-control" name="device" value={device.name} readOnly="readOnly" />
                 </div>
               </div>
               <div className="form-group col">
                 <label htmlFor="bt">
                   <i className="fa fa-info-circle mr-2" />Descripción</label>
-                <input type="text" className="form-control text-truncate" id="bt" name="bt" value={deviceDescription} readOnly="readOnly" />
+                <input type="text" className="form-control text-truncate" id="bt" name="bt" value={device.description} readOnly="readOnly" />
               </div>
             </div>
             <hr className="card-division" />
@@ -413,6 +402,7 @@ class DisplayForm extends Component {
 }
 
 DisplayForm.propTypes = {
+  device: PropTypes.shape({}),
   display: PropTypes.shape({}),
   user: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
@@ -422,6 +412,7 @@ DisplayForm.propTypes = {
 };
 
 DisplayForm.defaultProps = {
+  device: null,
   display: null,
   notify: () => false,
   update: () => false,

@@ -22,7 +22,7 @@ const Overview = ({
     { !user.admin
         && (
         <div className="row row-panel">
-          <Panel content={displays} {...rest} category="displays" appearance="card title-displays" icon="television" size="small" />
+          <Panel content={displays} devices={devices} {...rest} category="displays" appearance="card title-displays" icon="television" size="small" />
           <Panel content={images} {...rest} category="images" appearance="card title-images" icon="picture-o" size="small" />
           <Panel content={groups} {...rest} category="groups" appearance="card title-groups" icon="list" size="small" />
         </div>
