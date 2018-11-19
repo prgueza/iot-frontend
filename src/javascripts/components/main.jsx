@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 /* IMPORT COMPONENTS */
 import Navigation from './views/navigation';
@@ -17,6 +18,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      socket: null,
       // active user
       user: null,
       token: null,
@@ -45,10 +47,14 @@ class Main extends Component {
   componentDidMount() {
     // get user id and token
     const { user, token, data } = this.props;
-
+    const socket = io('http://localhost:4000');
+    socket.emit('login', user);
+    socket.on('get data', () => {
+      console.log('getting data...');
+    });
     // set user id and token
     this.setState({
-      user, token, data, isLoggedIn: true, isLoaded: true,
+      user, token, socket, data, isLoggedIn: true, isLoaded: true,
     });
   }
 
