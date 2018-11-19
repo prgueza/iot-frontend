@@ -47,7 +47,7 @@ class DisplayDetails extends Component {
 	/* HANDLE SEND IMAGE TO DISPLAY */
 	handleSendImage = () => {
 	  const { display, uploading } = this.state;
-	  const { token, notify } = this.props;
+	  const { token, notify, update } = this.props;
 	  if (!uploading) {
 	    this.setState({ uploading: true });
 	    axios({
@@ -60,16 +60,16 @@ class DisplayDetails extends Component {
 	      Authorization: `Bearer ${token}`,
 	    },
 	  }).then((res) => {
-	    if (res.status >= 200) { // with success
+	    if (res.status === 200 || res.status === 201) { // with success
 	      notify('Cambios realizados', 'notify-success', 'check', res.data.notify); // notify success
+	        update('displays', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	        this.setState({ uploading: false });
 	    } else {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify); // notify error
+	      notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify, true); // notify error
 	        this.setState({ uploading: false });
 	    }
-	  })
-	    .catch((err) => {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', err.message); // notify error
+	  }).catch((err) => {
+	      notify('Error al realizar los cambios', 'notify-error', 'times', err.response.data.notify, true); // notify error
 	        this.setState({ uploading: false });
 	    });
 	  }
@@ -110,7 +110,7 @@ class DisplayDetails extends Component {
 	    display,
 	    modal,
 	    display: {
-	      _id, name, description, group, images, activeImage, imageFromGroup, device, tags, updatedAt, updatedBy,
+	      _id, name, description, group, images, activeImage, imageFromGroup, device, tags, updatedAt, updatedBy, lastUpdateResult, updating,
 	    },
 	  } = this.state;
 	  const { data: { screens }, filterData } = this.props;
@@ -129,6 +129,13 @@ class DisplayDetails extends Component {
 	    left: overlayImage && `${overlayImage.xCoordinate}%`,
 	    top: overlayImage && `${overlayImage.yCoordinate}%`,
 	  };
+	  // Set border color
+	  let border;
+	  if (updating) {
+	    border = 'border-warning';
+	  } else {
+	    border = lastUpdateResult ? 'border-success' : 'border-error';
+	  }
 	  const groupImageIcon = imageFromGroup ? 'toggle-on' : 'toggle-off';
 	  // get screen info
 	  const screen = device.screen && screens.find(s => s.screenCode === device.screen);
@@ -194,7 +201,7 @@ class DisplayDetails extends Component {
             {tagList}
           </div>
           <div className="col-lg-6">
-            <div className="vista-imagen-display d-flex w-100 align-items-center mb-3 shadow">
+            <div className={`vista-imagen-display d-flex w-100 align-items-center mb-3 shadow ${border}`}>
               {
                 src
                   ? <img alt="" className="main-image" src={src} />

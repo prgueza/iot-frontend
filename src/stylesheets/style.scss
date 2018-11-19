@@ -117,3 +117,15 @@ a:hover{
 .disponible{
   color: #495057;
 }
+
+.border-success {
+  border: 1px solid $success-color;
+}
+
+.border-error {
+  border: 1px solid $danger-color;
+}
+
+.border-warning {
+  border: 1px solid $warning-color;
+}

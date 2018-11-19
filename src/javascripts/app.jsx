@@ -19,6 +19,7 @@ class App extends Component {
       error: null,
     };
   }
+  
 
 	login = (user, token, data) => {
 	  this.setState({

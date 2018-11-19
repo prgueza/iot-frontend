@@ -100,11 +100,11 @@ class EditImageForm extends Component {
 	        notify('Imagen actualizada con éxito', 'notify-success', 'check', res.data.notify); // notify success
 	        handleCloseModal();
 	      } else {
-	        notify('Error al actualizar la imagen', 'notify-error', 'times', res.data.notify); // notify error
+	        notify('Error al actualizar la imagen', 'notify-error', 'times', res.data.notify, 'error'); // notify error
 	      }
 	    })
 	    .catch((err) => {
-	      notify('Error al actualizar la imagen', 'notify-error', 'times', err.message); // notify error
+	      notify('Error al actualizar la imagen', 'notify-error', 'times', err.message, 'error'); // notify error
 	    });
 	}
 
