@@ -47,7 +47,7 @@ class DisplayDetails extends Component {
 	/* HANDLE SEND IMAGE TO DISPLAY */
 	handleSendImage = () => {
 	  const { display, uploading } = this.state;
-	  const { token, notify, update } = this.props;
+	  const { token, notify } = this.props;
 	  if (!uploading) {
 	    this.setState({ uploading: true });
 	    axios({
@@ -61,12 +61,12 @@ class DisplayDetails extends Component {
 	    },
 	  }).then((res) => {
 	    if (res.status === 200 || res.status === 201) { // with success
-	      notify('Cambios realizados', 'notify-success', 'check', res.data.notify); // notify success
-	        update('displays', res.data.resourceId, 'edit', res.data.resource); // update dataset
-	        this.setState({ uploading: false });
+	       notify('Cambios realizados', 'notify-success', 'cloud-upload', res.data.notify); // notify success
+	       // update('displays', res.data.resourceId, 'edit', res.data.resource); // update dataset
+	       this.setState({ uploading: false });
 	    } else {
 	      notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify, true); // notify error
-	        this.setState({ uploading: false });
+	       this.setState({ uploading: false });
 	    }
 	  }).catch((err) => {
 	      notify('Error al realizar los cambios', 'notify-error', 'times', err.response.data.notify, true); // notify error

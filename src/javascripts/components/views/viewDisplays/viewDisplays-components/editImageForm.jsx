@@ -81,6 +81,7 @@ class EditImageForm extends Component {
 	  } = this.props;
 	  const form = {
 	    activeImage: activeImage ? activeImage._id : null,
+	    lastUpdateResult: false,
 	    overlayImage: overlayImage ? {
 	      size,
 	      xCoordinate,

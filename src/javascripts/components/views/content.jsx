@@ -9,6 +9,7 @@ import ContentGroups from './viewGroups/contentGroups';
 import ContentSettings from './viewSettings/contentSettings';
 import ContentGateways from './viewGateways/contentGateways';
 import ContentDevices from './viewDevices/contentDevices';
+import ContentState from './viewState/contentState';
 import Overview from './overview';
 import ProtectedRoute from './protectedRoute';
 
@@ -21,6 +22,7 @@ const Content = ({ isLoaded, ...rest }) => {
         <Route path="/displays" render={() => <ContentDisplays {...rest} />} />
         <Route path="/images" render={() => <ContentImages {...rest} />} />
         <Route path="/groups" render={() => <ContentGroups {...rest} />} />
+        <Route path="/state" render={() => <ContentState {...rest} />} />
         <ProtectedRoute {...rest} path="/settings" component={ContentSettings} />
         <ProtectedRoute {...rest} path="/devices" component={ContentDevices} />
         <ProtectedRoute {...rest} path="/gateways" component={ContentGateways} />

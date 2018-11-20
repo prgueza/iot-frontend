@@ -47,19 +47,36 @@ class Main extends Component {
   componentDidMount() {
     // get user id and token
     const { user, token, data } = this.props;
-    const socket = io('http://localhost:4000');
-    socket.emit('login', user);
-    socket.on('get data', () => {
-      console.log('getting data...');
-    });
+    // set socket.io
+    this.socketio(token);
     // set user id and token
     this.setState({
-      user, token, socket, data, isLoggedIn: true, isLoaded: true,
+      user, token, data, isLoggedIn: true, isLoaded: true,
     });
   }
 
   componentWillUnmount() {
     clearInterval(this.checkSyncId);
+  }
+
+  /* SET SOCKET.IO */
+  socketio = (token) => {
+    // Manage socket interaction
+    const socket = io('http://localhost:4000');
+    socket.emit('login', token);
+    socket.on('processing', (display) => {
+      this.update('displays', display._id, 'edit', display);
+    });
+    socket.on('done processing', (display) => {
+      this.update('displays', display._id, 'edit', display);
+      if (display.lastUpdateResult) {
+        this.notify('Imagen subida al dispositivo con éxito', 'notify-success', 'check', `Dispositivo: ${display.name}`); // notify success
+      } else {
+        this.notify('Error al subir la imagen al dispositivo', 'notify-error', 'times', `Dispositivo: ${display.name}`, 'error'); // notify success
+      }
+    });
+    // Save socket to state
+    this.setState({ socket });
   }
 
 	/* UPDATE DATA */
@@ -82,7 +99,7 @@ class Main extends Component {
 	    case 'edit':
 	    {
 	      const index = stateData[resourceType].findIndex(resource => resource._id === _id);
-	      stateData[resourceType].splice(index, 1, data);
+	      if (index !== -1) stateData[resourceType].splice(index, 1, data);
 	      if (devices) stateData.devices = devices;
 	      break;
 	    }

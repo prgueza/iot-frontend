@@ -10,6 +10,10 @@
   box-shadow: none;
 }
 
+:focus {
+  outline: none !important;
+}
+
 a:focus{
   background-image: none;
   box-shadow: none;

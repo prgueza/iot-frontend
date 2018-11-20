@@ -22,6 +22,8 @@ class Navigation extends Component {
 	    }, user, syncStatus, token, filterValue, sync, syncApi,
 	  } = this.props;
 
+	  const estado = displays && displays.filter(display => display.updating === true).length > 0 ? 'Procesando...' : 'Estado';
+
 	  const navigationUser = [
 	    {
 	      id: 1, exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
@@ -137,10 +139,9 @@ class Navigation extends Component {
         <div className="mb-3">
           <p>AJUSTES</p>
           <ul className="nav-list">
+						{ user && !user.admin && <NavButton key="state" linkTo="state" text={estado} icon="cloud-upload" /> }
             {syncButton}
-            { user && user.admin
-                && <NavButton key="settings" linkTo="settings" text="Configuración" icon="cogs" />
-              }
+            { user && user.admin && <NavButton key="settings" linkTo="settings" text="Configuración" icon="cogs" /> }
             <li>
               <a tabIndex={-1} href="/disconect">
                 <button type="button" className="btn btn-nav btn-block mb-1">

@@ -4,6 +4,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'forms';
 @import 'text';
+@import 'logs';
 @import 'nav';
 @import 'notifications';
 @import 'titles';
@@ -24,7 +25,9 @@ html {
 body{
   height: 100vh;
   max-height: 100vh;
-  font-family: "etica-display";
+  //font-family: "etica-display";
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   user-select: none !important;
 }
 

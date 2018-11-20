@@ -22,3 +22,15 @@
   height: 100%;
   overflow-y: scroll;
 }
+
+.card-success {
+  border: 1px solid $success-color;
+}
+
+.card-updating {
+  border: 1px solid $warning-color;
+}
+
+.card-error {
+  border: 1px solid $danger-color;
+}
