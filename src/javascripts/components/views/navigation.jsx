@@ -137,7 +137,7 @@ class Navigation extends Component {
           </ul>
         </div>
         <div className="mb-3">
-          <p>AJUSTES</p>
+          <p>SISTEMA</p>
           <ul className="nav-list">
 						{ user && !user.admin && <NavButton key="state" linkTo="state" text={estado} icon="cloud-upload" /> }
             {syncButton}

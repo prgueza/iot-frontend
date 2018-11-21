@@ -27,7 +27,7 @@ const Icon = ({
 Icon.propTypes = {
   icon: PropTypes.string.isRequired,
   mr: PropTypes.number,
-  ml: PropTypes.string,
+  ml: PropTypes.number,
   fw: PropTypes.bool,
   size: PropTypes.number,
   batt: PropTypes.number,
@@ -37,7 +37,7 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
   mr: 0,
-  ml: '0',
+  ml: 0,
   fw: false,
   size: 1,
   batt: -1,

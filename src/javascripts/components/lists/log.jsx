@@ -52,22 +52,27 @@ class Log extends React.Component {
   }
 
   render() {
-    const { display } = this.props;
+    const { display, queue } = this.props;
     const { showTimeline } = this.state;
     let result;
     let spin = false;
     let icon;
     let mod;
-    if (display.updating) {
+    const index = queue.findIndex(el => el === display._id);
+    if (index === 0) { // if it's the first one in queue
       result = 'updating';
       spin = true;
       icon = 'refresh';
       mod = 'text-warning';
-    } else if (display.lastUpdateResult) {
+    } else if (index !== -1) { // if it's in the queue but it's not the first one
+      result = 'updating';
+      icon = 'ellipsis-h';
+      mod = 'text-warning';
+    } else if (display.lastUpdateResult) { // if it's not in the queue but was updated correctly
       result = 'success';
       icon = 'check-circle-o';
       mod = 'text-success';
-    } else {
+    } else { // if it's not in the queue but was not updated correctly
       result = 'error';
       icon = 'times-circle-o';
       mod = 'text-error';
@@ -79,7 +84,12 @@ class Log extends React.Component {
             <Icon icon={icon} fw size={3} spin={spin} />
           </div>
           <div className="col-8 d-flex align-items-center">
-            <h4 onClick={this.showTimeline} className="mb-0"><Icon icon={showTimeline ? 'caret-down' : 'caret-right'} mr={1} />{display && display.name}</h4>
+            <h4 onClick={this.showTimeline} className="mb-0">
+              <Icon icon={showTimeline ? 'caret-down' : 'caret-right'} mr={1} />
+              {display && display.name}
+              <Icon icon="arrow-right" mr={2} ml={2} />
+              {display && display.activeImage && display.activeImage.name}
+            </h4>
           </div>
           <div className={`col-3 d-flex align-items-center justify-content-end ${mod}`}>
             {!display.updating && <button onClick={this.handleSendImage} type="button" className="btn btn-primary"><Icon icon="cloud-upload" fw mr={2} />Enviar imagen</button>}
@@ -98,12 +108,14 @@ class Log extends React.Component {
 
 Log.propTypes = {
   display: PropTypes.shape({}),
+  queue: PropTypes.arrayOf(PropTypes.string),
   token: PropTypes.string,
   notify: PropTypes.func,
 };
 
 Log.defaultProps = {
   display: null,
+  queue: [],
   token: '',
   notify: () => false,
 };

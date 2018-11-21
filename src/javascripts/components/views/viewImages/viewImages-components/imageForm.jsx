@@ -147,7 +147,7 @@ class ImageForm extends Component {
 	      return false;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle'));
+	    .catch(() => notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', 'error'));
 	}
 
 	/* RENDER COMPONENT */

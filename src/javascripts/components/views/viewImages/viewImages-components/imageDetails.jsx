@@ -67,8 +67,7 @@ class ImageDetails extends Component {
 	    src, accepted, extension, size,
 	  } = this.state;
 	  // refactor date constants with format
-	  const created = moment(createdAt)
-	    .format('dddd, D [de] MMMM [de] YYYY');
+	  const created = moment(createdAt).format('dddd, D [de] MMMM [de] YYYY');
 	  // generate tag list
 	  const tagList = tags.map(tag => <Tag key={tag} category="images" filterData={filterData} tag={tag} />);
 	  // define routes for edit and delete based on the id

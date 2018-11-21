@@ -19,6 +19,7 @@ class Main extends Component {
     super(props);
     this.state = {
       socket: null,
+      queue: [],
       // active user
       user: null,
       token: null,
@@ -64,6 +65,9 @@ class Main extends Component {
     // Manage socket interaction
     const socket = io('http://localhost:4000');
     socket.emit('login', token);
+    socket.on('update queue', (queue) => {
+      this.setState({ queue });
+    });
     socket.on('processing', (display) => {
       this.update('displays', display._id, 'edit', display);
     });
