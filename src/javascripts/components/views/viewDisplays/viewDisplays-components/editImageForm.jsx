@@ -77,7 +77,7 @@ class EditImageForm extends Component {
 	    activeImage, overlayImage, size, xCoordinate, yCoordinate,
 	  } = this.state;
 	  const {
-	    display, token, update, notify, handleCloseModal,
+	    display, token, notify, handleCloseModal,
 	  } = this.props;
 	  const form = {
 	    activeImage: activeImage ? activeImage._id : null,
@@ -89,23 +89,28 @@ class EditImageForm extends Component {
 	      image: overlayImage,
 	    } : null,
 	  };
-	  axios.put(display.url, form, { // send request
-	    timeout: process.env.TIMEOUT,
+	  axios({
+	    timeout: 50000,
+	    method: 'post',
+	    url: `update/${display._id}`,
+	    data: form,
 	    headers: {
+	      Accept: 'application/json',
+	      'Content-Type': 'application/json',
 	      Authorization: `Bearer ${token}`,
 	    },
-	  })
-	    .then((res) => {
-	      if (res.status === 201) { // with success
-	        update('displays', res.data.resourceId, 'edit', res.data.resource); // update the device info with new activeImage
-	        notify('Imagen actualizada con éxito', 'notify-success', 'check', res.data.notify); // notify success
+	  }).then((res) => {
+	      if (res.status === 200 || res.status === 201) { // with success
+	        notify('Cambios realizados', 'notify-success', 'cloud-upload', res.data.notify); // notify success
 	        handleCloseModal();
 	      } else {
-	        notify('Error al actualizar la imagen', 'notify-error', 'times', res.data.notify, 'error'); // notify error
+	        notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify, true); // notify error
+	        handleCloseModal();
 	      }
-	    })
-	    .catch((err) => {
-	      notify('Error al actualizar la imagen', 'notify-error', 'times', err.message, 'error'); // notify error
+	    }).catch((err) => {
+	      console.log(err);
+	      // notify('Error al realizar los cambios', 'notify-error', 'times', err.response.data.notify, true); // notify error
+	      handleCloseModal();
 	    });
 	}
 
@@ -206,14 +211,12 @@ class EditImageForm extends Component {
 EditImageForm.propTypes = {
   display: PropTypes.shape({}),
   token: PropTypes.string.isRequired,
-  update: PropTypes.func,
   notify: PropTypes.func,
   handleCloseModal: PropTypes.func,
 };
 
 EditImageForm.defaultProps = {
   display: null,
-  update: () => false,
   notify: () => false,
   handleCloseModal: () => false,
 };

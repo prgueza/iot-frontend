@@ -156,7 +156,7 @@ class GroupForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 201) {
-	        notify('Grupo configurada con éxito', 'notify-success', 'check', res.data.notify);
+	        notify('Grupo configurado con éxito', 'notify-success', 'check', res.data.notify);
 	        const action = group ? 'edit' : 'add';
 	        update('groups', res.resourceId, action, res.data.resource); // update dataset
 	      }

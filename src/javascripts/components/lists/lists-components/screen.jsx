@@ -10,7 +10,7 @@ moment.locale('es');
 /* COMPONENT */
 const Screen = ({
   screen: {
-    _id, name, size, description, screenCode, colorProfile, createdAt,
+    _id, name, width, height, description, screenCode, colorProfile, createdAt,
   }, edit, active,
 }) => {
   const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { active });
@@ -25,9 +25,9 @@ const Screen = ({
             </strong>
           </h5>
           <small>
-            {size.width}
+            {width}
 						x
-            {size.height}
+            {height}
           </small>
         </div>
         <div className="d-flex w-100 align-content-right">

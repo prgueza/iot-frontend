@@ -13,6 +13,22 @@ import Notification from './tags/notification';
 /* CONFIGURE AXIOS */
 axios.defaults.baseURL = process.env.API_URL;
 
+const notifications = {
+  image: {
+    post: 'Imagen configurada con éxito',
+    put: 'Imagen actualizada con éxito',
+    delete: 'Imagen eliminada con éxito',
+  },
+  display: {
+    post: 'Display configurado con éxito',
+    put: 'Display actualizado con éxito',
+    delete: 'Display eliminado con éxito',
+  },
+  post: {
+    icon: 'upload',
+  },
+};
+
 /* COMPONENT */
 class Main extends Component {
   constructor(props) {
@@ -82,6 +98,36 @@ class Main extends Component {
     // Save socket to state
     this.setState({ socket });
   }
+
+  apiRequest = (url, method, body) => {
+    const { token } = this.state;
+    axios({
+      url,
+      method,
+      data: body,
+      headers: {
+        Authorization: `Bearer ${token}`,
+	      Accept: 'application/json',
+	      'Content-Type': 'application/json',
+      },
+    }).then(
+      (result) => {
+        const { data } = result;
+        if (result.status === 200) {
+          this.update(data.resourceType, data.resourceId, method, data.resource, data.devices);
+          this.notify(data.resourceType, method);
+        } else {
+          this.notify(data.resourceType, method, 'error');
+        }
+      },
+      (error) => {
+        console.log(error);
+      },
+    ).catch((error) => {
+      console.log(error);
+    });
+  }
+
 
 	/* UPDATE DATA */
 	update = (resourceType, _id, action, data, devices) => {
@@ -175,13 +221,22 @@ class Main extends Component {
     this.setState({ filterConfiguredValue: value });
   }
 
-	/* ALERTS */
-	notify = (text, style, icon, info = false, status = 'success') => {
-	  toast(<Notification text={text} icon={icon} info={info} status={status} />, {
-	    position: toast.POSITION.TOP_CENTER,
-	    className: style,
-	  });
-	}
+  /* ALERTS */
+  notify = (text, style, icon, info = false, status = 'success') => {
+    toast(<Notification text={text} icon={icon} info={info} status={status} />, {
+      position: toast.POSITION.TOP_CENTER,
+      className: style,
+    });
+  }
+  // notify = (dataType, name, method, status = 'success', info = '') => {
+  //   const text = notifications[dataType][method];
+  //   const icon = notifications[method].icon;
+  //   const style = `notify-${status}`;
+  //   toast(<Notification text={text} icon={icon} info={info} status={status} />, {
+  //     position: toast.POSITION.TOP_CENTER,
+  //     className: style,
+  //   });
+  // }
 
 	notifySync = (text, style, icon, info = false, status = 'success') => {
 	  this.toastSyncId = toast(<Notification text={text} icon={icon} spin info={info} status={status} />, {
@@ -213,7 +268,7 @@ class Main extends Component {
 	  return (
   <div className="row main">
     <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
-    <Navigation filterData={this.filterData} update={this.update} sync={this.sync} syncApi={this.syncApi} {...this.state} />
+    <Navigation filterData={this.filterData} sync={this.sync} syncApi={this.syncApi} {...this.state} />
     <Content filterData={this.filterData} filterFound={this.filterFound} filterConfigured={this.filterConfigured} update={this.update} notify={this.notify} {...this.state} />
   </div>);
 	}

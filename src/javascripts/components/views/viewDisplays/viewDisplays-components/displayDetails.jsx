@@ -21,7 +21,6 @@ class DisplayDetails extends Component {
     const { display } = this.props;
     this.state = {
       display,
-      uploading: false, // TODO: mover función de enviar imagen a main.jsx
       modal: false,
     };
   }
@@ -45,35 +44,35 @@ class DisplayDetails extends Component {
 	}
 
 	/* HANDLE SEND IMAGE TO DISPLAY */
-	handleSendImage = () => {
-	  const { display, uploading } = this.state;
-	  const { token, notify } = this.props;
-	  if (!uploading) {
-	    this.setState({ uploading: true });
-	    axios({
-	    timeout: 50000,
-	    method: 'post',
-	    url: `update/${display._id}`,
-	    headers: {
-	      Accept: 'application/json',
-	      'Content-Type': 'application/json',
-	      Authorization: `Bearer ${token}`,
-	    },
-	  }).then((res) => {
-	    if (res.status === 200 || res.status === 201) { // with success
-	       notify('Cambios realizados', 'notify-success', 'cloud-upload', res.data.notify); // notify success
-	       // update('displays', res.data.resourceId, 'edit', res.data.resource); // update dataset
-	       this.setState({ uploading: false });
-	    } else {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify, true); // notify error
-	       this.setState({ uploading: false });
-	    }
-	  }).catch((err) => {
-	      notify('Error al realizar los cambios', 'notify-error', 'times', err.response.data.notify, true); // notify error
-	        this.setState({ uploading: false });
-	    });
-	  }
-	}
+	// handleSendImage = () => {
+	//   const { display, uploading } = this.state;
+	//   const { token, notify } = this.props;
+	//   if (!uploading) {
+	//     this.setState({ uploading: true });
+	//     axios({
+	//     timeout: 50000,
+	//     method: 'post',
+	//     url: `update/${display._id}`,
+	//     headers: {
+	//       Accept: 'application/json',
+	//       'Content-Type': 'application/json',
+	//       Authorization: `Bearer ${token}`,
+	//     },
+	//   }).then((res) => {
+	//     if (res.status === 200 || res.status === 201) { // with success
+	//        notify('Cambios realizados', 'notify-success', 'cloud-upload', res.data.notify); // notify success
+	//        // update('displays', res.data.resourceId, 'edit', res.data.resource); // update dataset
+	//        this.setState({ uploading: false });
+	//     } else {
+	//       notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify, true); // notify error
+	//        this.setState({ uploading: false });
+	//     }
+	//   }).catch((err) => {
+	//       notify('Error al realizar los cambios', 'notify-error', 'times', err.response.data.notify, true); // notify error
+	//         this.setState({ uploading: false });
+	//     });
+	//   }
+	// }
 
 
 	/* HANDLE SHOW GROUP IMAGE */
@@ -106,7 +105,6 @@ class DisplayDetails extends Component {
 	render() {
 	  // define constants from state for better readability
 	  const {
-	    uploading,
 	    display,
 	    modal,
 	    display: {
@@ -149,7 +147,7 @@ class DisplayDetails extends Component {
 	  }
 	  let locationName;
 	  if (device && device.gateway) {
-	    locationName = device.gateway.location.name;
+	    locationName = device.gateway.location ? device.gateway.location.name : 'La localización no ha sido configurada';
 	  } else {
 	    locationName = 'Localización no especificada';
 	  }
@@ -160,7 +158,11 @@ class DisplayDetails extends Component {
 		        <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
 		          <li className="nav-item mr-auto">
 		            <h2 className="detalles-titulo">
-		              <i className="fa fa-television mr-3" aria-hidden="true" />{name}</h2>
+                { updating
+                  ? <i className="fa fa-refresh fa-spin mr-3" aria-hidden="true" />
+                  : <i className="fa fa-television mr-3" aria-hidden="true" />
+                }
+                {name}</h2>
 		          </li>
 		          <li className="nav-item mr-2">
 		            <Link to={linktoEdit}>
@@ -187,6 +189,8 @@ class DisplayDetails extends Component {
               <i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true" />{description}</p>
             <p className="card-text">
               <i className="fa fa-fw fa-map-marker mr-2" aria-hidden="true" />{locationName}</p>
+            <p className="card-text">
+              <i className="fa fa-fw fa-tablet mr-2" aria-hidden="true" />{device.name}</p>
             <p className="card-text">
               <i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true" />{screenName}</p>
             <p className="card-text">
@@ -219,7 +223,6 @@ class DisplayDetails extends Component {
 						    <p className="d-flex overlay-text">Haga click para editar la imagen</p>
 						  </div>
             </div>
-						<button type="button" onClick={this.handleSendImage} className="btn btn-primary btn-block" disabled={uploading}>Enviar imagen al dispositivo</button>
 				</div>
 			</div>
 			<hr className="card-division" />

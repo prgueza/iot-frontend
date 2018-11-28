@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 /* COMPONENTS */
@@ -23,12 +22,12 @@ class GroupDelete extends Component {
 	  axios.delete(group.url, { headers: { Authorization: `Bearer ${token}` } })
 	    .then((res) => {
 	      if (res.status === 200) {
-	        notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', toast.POSITION.TOP_RIGHT, res.notify);
+	        notify('Grupo eliminado con éxito', 'notify-success', 'trash-o', res.notify);
 	        update('groups', res.resourceId, 'remove');
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT));
+	    .catch(() => notify('Error al eliminar el grupo', 'notify-error', 'exclamation-triangle', 'error'));
 	}
 
 	render() {

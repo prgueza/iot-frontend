@@ -10,7 +10,7 @@ moment.locale('es');
 /* COMPONENT */
 const UserGroup = ({
   userGroup: {
-    _id, name, description, createdAt, devices, displays, groups, images, users,
+    _id, name, description, createdAt, users, devices, displays, images, groups,
   }, edit, active,
 }) => {
   const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { active });

@@ -29,7 +29,7 @@ class Navigation extends Component {
 	      id: 1, exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
 	    },
 	    {
-	      id: 2, exact: false, linkTo: 'displays', text: 'Displays', icon: 'television', count: true, number: displays ? `${displays.length}/${devices.length}` : '...',
+	      id: 2, exact: false, linkTo: 'displays', text: 'Displays', icon: 'television', count: true, number: displays ? `${displays.length}/${devices.length}` : '...', 
 	    },
 	    {
 	      id: 3, exact: false, linkTo: 'images', text: 'Imagenes', icon: 'picture-o', count: true, number: images ? String(images.length) : '...',

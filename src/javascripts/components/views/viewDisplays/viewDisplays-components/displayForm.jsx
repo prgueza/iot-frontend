@@ -38,7 +38,6 @@ class DisplayForm extends Component {
       category: display ? display.category : '',
       createdAt: display ? moment(display.createdAt) : moment(),
       updatedAt: moment(),
-      group: display ? display.group : '',
       device: '',
       // form options stored in state
       optionsActiveImage: [],
@@ -144,7 +143,7 @@ class DisplayForm extends Component {
 	    display, user, token, notify, update,
 	  } = this.props;
 	  const {
-	    name, description, category, tags, device, activeImage, images, group,
+	    name, description, category, tags, device, activeImage, images,
 	  } = this.state;
 	  // define form values to send
 	  const form = {
@@ -155,14 +154,12 @@ class DisplayForm extends Component {
 	    device: device._id,
 	    activeImage: null,
 	    images: null,
-	    group: null,
 	    updatedBy: user._id, // send user_id
 	  };
 	  // possible empty fields
 	  if (!display) form.createdBy = user._id;
 	  if (activeImage !== '') form.activeImage = activeImage;
 	  if (images.length > 0) form.images = images;
-	  if (group && group._id) form.group = group._id;
 	  // HTTP request
 	  axios({
 	    method: display ? 'put' : 'post',
@@ -189,16 +186,15 @@ class DisplayForm extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  const {
-	    redirect, images, location, device, name, description, category, group, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy, previewImage,
+	    redirect, images, location, device, name, description, category, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy, previewImage,
 	  } = this.state;
 	  const {
-	    display, data, data: { groups },
+	    display, data,
 	  } = this.props;
 
 	  const linkBack = display ? `/displays/${display._id}` : '/displays';
 
 	  // Options
-	  const optionsGroup = groups.map(g => (<option value={g._id} key={g._id}>{g.name}</option>));
 	  const optionsImages = data.images.sort((a, b) => a.updatedAt - b.updatedAt)
 	    .map(image => (
         <div key={image._id} onMouseEnter={() => this.handleOnMouseEnter(image._id)} onMouseLeave={this.handleOnMouseLeave} className="custom-control custom-checkbox">
@@ -324,31 +320,24 @@ class DisplayForm extends Component {
             </div>
             <div className="form-row">
               <div className="form-group col">
+  							<label htmlFor="activeImage"><i className="fa fa-picture-o mr-2" />Seleccionar la imagen activa</label>
+  							<select className="custom-select" id="activeImage" name="activeImage" value={activeImage} onChange={this.handleInputChange}>
+  								<option value="" key={0}>Sin imagen activa</option>
+  								{optionsActiveImage}
+  							</select>
+  						</div>
+              <div className="form-group col">
                 <label htmlFor="category"><i className="fa fa-arrows-alt mr-2" />Categoría</label>
                 <input type="text" className="form-control" id="category" placeholder="Categoría" name="category" value={category} onChange={this.handleInputChange} />
               </div>
-              <div className="form-group col">
-								<label htmlFor="group"><i className="fa fa-list mr-2" />Incluir en un grupo</label>
-									<select className="custom-select" id="group" name="group" value={group} onChange={this.handleInputChange}>
-										<option value="" key={0}>Sin grupo asignado</option>
-										{optionsGroup}
-									</select>
-              </div>
             </div>
-            <div className="form-group">
-							<label htmlFor="activeImage"><i className="fa fa-picture-o mr-2" />Seleccionar la imagen activa</label>
-							<select className="custom-select" id="activeImage" name="activeImage" value={activeImage} onChange={this.handleInputChange}>
-								<option value="" key={0}>Sin imagen activa</option>
-								{optionsActiveImage}
-							</select>
-						</div>
 						<div className="form-row">
 	            <div className="form-group col">
 	              <label htmlFor="images"><i className="fa fa-television mr-2" />Asociar una o varias imagenes</label>
 								{optionsImages.length > 0
 								  ? <div className="custom-controls-stacked">{optionsImages}</div>
 								  : (
-<div className="no-image-available d-flex w-100 align-items-center justify-content-center">
+                      <div className="no-image-available d-flex w-100 align-items-center justify-content-center">
 												<p>No hay imágenes disponibles</p>
 											</div>
 								  )

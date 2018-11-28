@@ -34,7 +34,7 @@ class ManageUsers extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { data: users } = nextProps;
+    const { data: { users } } = nextProps;
 	  this.setState({ isLoaded: true, users });
   }
 
@@ -208,7 +208,7 @@ class ManageUsers extends Component {
                   </div>
                   <div className="form-group">
 										<div className="custom-control custom-checkbox">
-											<input onChange={this.handleInputChange} id="admin" type="checkbox" checked={admin} name="remember" value={admin} className="custom-control-input" />
+											<input onChange={this.handleInputChange} id="admin" type="checkbox" checked={admin} name="admin" value={admin} className="custom-control-input" />
 											<label className="custom-control-label" htmlFor="admin">Dar permisos de administrador</label>
 										</div>
                   </div>

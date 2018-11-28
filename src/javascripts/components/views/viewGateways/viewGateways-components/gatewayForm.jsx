@@ -15,8 +15,8 @@ class GatewayForm extends Component {
     const { gateway, user, data: { locations } } = this.props;
     let createdBy = user.name;
     let location = 'No hay localizaciones configuradas';
-    if (gateway && gateway.CreatedBy) {
-      createdBy = gateway.CreatedBy;
+    if (gateway && gateway.createdBy) {
+      createdBy = gateway.createdBy.name;
     } else if (gateway) {
       createdBy = 'Usuario eliminado';
     }

@@ -76,13 +76,14 @@ class ManageScreens extends Component {
 	/* HANDLE SUBMIT */
 	handleSubmit = (method) => {
 	  const {
-	    name, size, screenCode, colorProfile, description, edit, elementId,
+	    name, height, width, screenCode, colorProfile, description, edit, elementId,
 	  } = this.state;
 	  const { token, update, notify } = this.props;
 	  // FORM DATA
 	  const form = {
 	    name,
-	    size,
+	    height,
+	    width,
 	    screenCode,
 	    colorProfile,
 	  };

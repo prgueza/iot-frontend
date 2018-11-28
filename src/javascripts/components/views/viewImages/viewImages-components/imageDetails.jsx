@@ -1,7 +1,6 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -50,10 +49,10 @@ class ImageDetails extends Component {
 	    .then((res) => {
 	      if (res.status === 200) {
 	        update('images', res.data.resourceId, 'edit', res.data.resource);
-	        notify('Imagen cargada con éxito', 'notify-success', 'upload', toast.POSITION.TOP_RIGHT, res.data.notify);
+	        notify('Imagen cargada con éxito', 'notify-success', 'upload', res.data.notify);
 	      }
 	    })
-	    .catch(() => { notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', toast.POSITION.TOP_RIGHT); });
+	    .catch(() => { notify('Error al eliminar la imagen', 'notify-error', 'exclamation-triangle', 'error'); });
 	}
 
 	render() {
