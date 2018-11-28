@@ -20,7 +20,7 @@ class ManageScreens extends Component {
       height: 0,
       width: 0,
       screenCode: '',
-      colorProfile: 'grayscale',
+      color: 'Escala de grises',
       description: '',
     };
   }
@@ -39,7 +39,7 @@ class ManageScreens extends Component {
 	edit = (elementId) => {
 	  const { screens } = this.state;
 	  const {
-	    name, width, height, description, screenCode, colorProfile,
+	    name, width, height, description, screenCode, color,
 	  } = screens.find(s => s._id === elementId);
 	  this.setState({
 	    name,
@@ -47,7 +47,7 @@ class ManageScreens extends Component {
 	    height,
 	    description,
 	    screenCode,
-	    colorProfile,
+	    color,
 	    elementId,
 	    edit: true,
 	  });
@@ -60,7 +60,7 @@ class ManageScreens extends Component {
 	    height: '',
 	    description: '',
 	    screenCode: '',
-	    colorProfile: 'grayscale',
+	    color: 'Escala de grises',
 	    elementId: '',
 	    edit: false,
 	  });
@@ -76,7 +76,7 @@ class ManageScreens extends Component {
 	/* HANDLE SUBMIT */
 	handleSubmit = (method) => {
 	  const {
-	    name, height, width, screenCode, colorProfile, description, edit, elementId,
+	    name, height, width, screenCode, color, description, edit, elementId,
 	  } = this.state;
 	  const { token, update, notify } = this.props;
 	  // FORM DATA
@@ -85,7 +85,7 @@ class ManageScreens extends Component {
 	    height,
 	    width,
 	    screenCode,
-	    colorProfile,
+	    color,
 	  };
 	  if (description !== '') { form.description = description; }
 	  axios({
@@ -126,7 +126,7 @@ class ManageScreens extends Component {
 
 	render() {
 	  const {
-	    screens, error, isLoaded, edit, elementId, name, height, width, description, colorProfile, screenCode,
+	    screens, error, isLoaded, edit, elementId, name, height, width, description, color, screenCode,
 	  } = this.state;
 
 	  if (error) {
@@ -186,9 +186,9 @@ class ManageScreens extends Component {
                     <div className="form-group col">
                       <label htmlFor="colorProfile"><i className="fa fa-adjust mr-2" />Color</label>
                       <div>
-                        <select className="custom-select" name="colorProfile" value={colorProfile} onChange={this.handleInputChange}>
-                          <option value="color">Color</option>
-                          <option value="grayscale">Escala de grises</option>
+                        <select className="custom-select" name="color" value={color} onChange={this.handleInputChange}>
+                          <option value="Color">Color</option>
+                          <option value="Escala de grises">Escala de grises</option>
                         </select>
                       </div>
                     </div>

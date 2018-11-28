@@ -11,6 +11,8 @@ pids
 *.seed
 *.pid.lock
 
+bfg-1.13.0.jar
+
 # Webpack build result bundle.js
 public/dist/
 

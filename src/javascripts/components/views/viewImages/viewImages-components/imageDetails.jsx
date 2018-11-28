@@ -59,7 +59,7 @@ class ImageDetails extends Component {
 	  // define constants from props for better readability
 	  const {
 	   image: {
-	      _id, name, description, createdAt, createdBy, colorProfile, resolution, groups, displays, tags,
+	      _id, name, description, createdAt, createdBy, color, resolution, groups, displays, tags,
 	    }, filterData,
 	  } = this.props;
 	  const {
@@ -112,7 +112,7 @@ class ImageDetails extends Component {
             <p className="card-text">
               <i className="fa fa-fw fa-database mr-2" aria-hidden="true" />{size}</p>
             <p className="card-text">
-              <i className="fa fa-fw fa-tint mr-2" aria-hidden="true" />{colorProfile}</p>
+              <i className="fa fa-fw fa-tint mr-2" aria-hidden="true" />{color}</p>
             <p className="card-text">
               <i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true" />{created}</p>
             <p className="card-text">

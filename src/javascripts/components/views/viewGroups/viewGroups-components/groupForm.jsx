@@ -17,11 +17,6 @@ class GroupForm extends Component {
     super(props);
     const { group, user } = this.props;
     let createdBy = user;
-    let activeImage = '';
-    if (group && group.activeImage) {
-      const aux = group.activeImage;
-      activeImage = aux;
-    }
     if (group && group.CreatedBy) {
       createdBy = group.CreatedBy;
     } else if (group) {
@@ -29,7 +24,6 @@ class GroupForm extends Component {
     }
     this.state = {
       // form data stored in state
-      activeImage,
       createdBy,
       name: group ? group.name : '',
       description: group ? group.description : '',
@@ -37,7 +31,6 @@ class GroupForm extends Component {
       tags: group ? group.tags : [],
       images: group ? group.images.map(image => image._id) : [],
       displays: group ? group.displays.map(display => display._id) : [],
-      optionsActiveImage: [],
       redirect: false,
       redirectLocation: '',
     };
@@ -45,14 +38,9 @@ class GroupForm extends Component {
 
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount() {
-    const { data, group } = this.props;
-    const { images } = this.state;
-    // options for select inputs
-    const optionsActiveImage = data.images.filter(image => images.find(c => c === image._id))
-      .map(image => <option value={image._id} key={image._id}>{image.name}</option>);
+    const { group } = this.props;
     // set state with initial values
     this.setState({
-      optionsActiveImage,
       redirectLocation: group ? `/groups/${group._id}` : '/groups/',
     });
   }
@@ -95,7 +83,6 @@ class GroupForm extends Component {
 	  // get value from the checkbox
 	  const { target, target: { value } } = event;
 	  const { images } = this.state;
-	  const { data } = this.props;
 	  // check if the checkbox has been selected
 	  if (!images.find(c => c === value)) { // check if value is stored in state
 	    // if it is NOT stored, save the state, push the new value and save back the new state
@@ -110,17 +97,6 @@ class GroupForm extends Component {
 	    this.setState({ images: prevState });
 	    target.checked = false;
 	  }
-	  if (images.length === 1) {
-	    // set when first image is selected
-	    this.setState({ activeImage: images[0] });
-	  } else if (images.length === 0) {
-	    // if there are no images deselect
-	    this.setState({ activeImage: '' });
-	  }
-	  this.setState({
-	    optionsActiveImage: data.images.filter(image => images.find(c => c === image._id))
-	      .map(image => <option value={image._id} key={image._id}>{image.name}</option>),
-	  });
 	} // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
 
 	/* HANDLE SUBMIT */
@@ -130,21 +106,19 @@ class GroupForm extends Component {
 	    group, user, token, notify, update,
 	  } = this.props;
 	  const {
-	    name, description, updatedBy, tags, activeImage, displays, images,
+	    name, description, updatedBy, tags, displays, images,
 	  } = this.state;
 	  // define form values to send
 	  const form = {
 	    name,
 	    description,
 	    tags,
-	    activeImage: null,
 	    displays: [],
 	    images: [],
 	    updatedBy: updatedBy._id, // send user_id
 	  };
 	  // possible empty fields
 	  if (!group) form.createdBy = user._id;
-	  if (activeImage !== '') form.activeImage = activeImage;
 	  if (displays.length > 0) form.displays = displays;
 	  if (images.length > 0) form.images = images;
 	  // HTTP request
@@ -171,7 +145,7 @@ class GroupForm extends Component {
 	    data,
 	  } = this.props;
 	  const {
-	    displays, images, redirect, redirectLocation, name, description, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy,
+	    displays, images, redirect, redirectLocation, name, description, tags, createdAt, updatedAt, createdBy,
 	  } = this.state;
 	  // Options
 	  const optionsDisplays = data.displays.sort((a, b) => a.updated_at - b.updated_at)
@@ -220,13 +194,6 @@ class GroupForm extends Component {
               <div className="form-group">
                 <label htmlFor="description"><i className="fa fa-info-circle mr-2" />Descripcion</label>
                 <input type="text" className="form-control" id="description" name="description" value={description} onChange={this.handleInputChange} placeholder="Descripcion del Grupo" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="activeImage"><i className="fa fa-picture-o mr-2" />Seleccionar la imagen activa</label>
-                <select className="custom-select" id="activeImage" name="activeImage" value={activeImage} onChange={this.handleInputChange}>
-                  <option value="" key={0}>Sin imagen activa</option>
-                  {optionsActiveImage}
-                </select>
               </div>
               <div className="form-row">
                 <div className="form-group col">

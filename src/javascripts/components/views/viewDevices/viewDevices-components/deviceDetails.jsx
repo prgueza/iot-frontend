@@ -25,7 +25,7 @@ const DeviceDetails = ({
   const screenObj = screens.find(r => r.screenCode === screen);
   console.log(screenObj);
   const screenName = screenObj ? screenObj.name : `No se encuentra la pantalla (código: ${screen} )`;
-  const color = screenObj ? screenObj.colorProfile : `No se encuentra la pantalla (código: ${screen} )`;
+  const color = screenObj ? screenObj.color : `No se encuentra la pantalla (código: ${screen} )`;
   const size = screenObj ? `${screenObj.width} x ${screenObj.height}` : `No se encuentra la pantalla (código: ${screen} )`;
 
   const linktoEdit = `/devices/${_id}/edit`;

@@ -10,7 +10,7 @@ moment.locale('es');
 /* COMPONENT */
 const Screen = ({
   screen: {
-    _id, name, width, height, description, screenCode, colorProfile, createdAt,
+    _id, name, width, height, description, screenCode, color, createdAt,
   }, edit, active,
 }) => {
   const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { active });
@@ -38,7 +38,7 @@ const Screen = ({
             <i className="fa fa-code mr-1" aria-hidden="true" />
             {screenCode}
             <i className="fa fa-adjust ml-3 mr-1" aria-hidden="true" />
-            {colorProfile}
+            {color}
           </small>
           <small>
             <i className="fa fa-calendar-o mr-2" aria-hidden="true" />

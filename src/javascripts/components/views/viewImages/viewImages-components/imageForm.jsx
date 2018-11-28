@@ -28,7 +28,7 @@ class ImageForm extends Component {
       updatedAt: moment(),
       displays: image ? image.displays.map(display => display._id) : [],
       groups: image ? image.groups.map(group => group._id) : [],
-      color: image ? image.color_profile : 'color',
+      color: image ? image.color : 'Color',
       redirect: false,
       redirectLocation: '/images',
     };
@@ -58,45 +58,6 @@ class ImageForm extends Component {
 	  });
 	}
 
-	/* HANDLE MULTIPLE CHECKBOX */
-	handleCheckDisplays = (event) => {
-	  const { displays } = this.state;
-	  // get value from the checkbox
-	  const { target: { value } } = event.target;
-	  // check if the checkbox has been selected
-	  if (!displays.find(c => c === value)) { // check if value is stored in state
-	    // if it is NOT stored, save the state, push the new value and save back the new state
-	    const prevState = displays;
-	    prevState.push(value);
-	    this.setState({ displays: prevState });
-	  } else {
-	    // if it IS stored, save the state, splice the old value and save back the new state
-	    const prevState = displays;
-	    prevState.splice(prevState.indexOf(value), 1);
-	    this.setState({ displays: prevState });
-	  }
-	}
-
-	handleCheckGroups = (event) => {
-	  const { groups } = this.state;
-	  // get value from the checkbox
-	  const { target, target: { value } } = event.target;
-	  // check if the checkbox has been selected
-	  if (!groups.find(c => c === value)) { // check if value is stored in state
-	    // if it is NOT stored, save the state, push the new value and save back the new state
-	    const prevState = groups;
-	    prevState.push(value);
-	    this.setState({ groups: prevState });
-	    target.checked = true;
-	  } else {
-	    // if it IS stored, save the state, splice the old value and save back the new state
-	    const prevState = groups;
-	    prevState.splice(prevState.indexOf(value), 1);
-	    this.setState({ groups: prevState });
-	    target.checked = false;
-	  }
-	} // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
-
 	/* HANDLE SUMBIT (PUT OR POST) */
 	handleSubmit = () => {
 	  // get image if any
@@ -112,8 +73,8 @@ class ImageForm extends Component {
 	    description,
 	    category,
 	    tags,
+	    color,
 	    updatedBy: updatedBy._id, // send user_id
-	    color_profile: color,
 	  };
 	  // possible empty fields
 	  if (!image) form.createdBy = user._id;
@@ -153,24 +114,12 @@ class ImageForm extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  const {
-	    image, data,
+	    image,
 	  } = this.props;
 	  const {
-	    groups, displays, redirect, redirectLocation, name, description, category, color, tags, createdBy, createdAt, updatedAt,
+	    redirect, redirectLocation, name, description, category, color, tags, createdBy, createdAt, updatedAt,
 	  } = this.state;
-	  // Options
-	  const optionsGroups = data.groups.map(group => (
-			<div key={group._id} className="custom-control custom-checkbox">
-			  <input onChange={this.handleCheckGroups} id={group._id} type="checkbox" defaultChecked={groups.find(c => c === group._id)} name={group._id} defaultValue={group._id} className="custom-control-input" />
-			  <label className="custom-control-label" htmlFor={group._id}>{group.name}</label>
-			</div>
-	  ));
-	  const optionsDisplays = data.displays.sort((a, b) => a.updatedAt - b.updatedAt).map(display => (
-				<div key={display._id} className="custom-control custom-checkbox">
-				  <input onChange={this.handleCheckDisplays} id={display._id} type="checkbox" defaultChecked={displays.find(c => c === display._id)} name={display._id} defaultValue={display._id} className="custom-control-input" />
-				  <label className="custom-control-label" htmlFor={display._id}>{display.name}</label>
-				</div>
-	    ));
+
 
 	  // Render return
 	  if (redirect) {
@@ -219,25 +168,9 @@ class ImageForm extends Component {
                   <i className="fa fa-tint mr-2" />Color</label>
                 <div>
                   <select className="custom-select" name="color" value={color} onChange={this.handleInputChange}>
-                    <option value="color">Color</option>
-                    <option value="escala de grises">Escala de grises</option>
+                    <option value="Color">Color</option>
+                    <option value="Escala de grises">Escala de grises</option>
                   </select>
-                </div>
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-group col">
-                <label htmlFor="displays">
-                  <i className="fa fa-television mr-2" />Asociar uno o varios displays</label>
-                <div className="custom-controls-stacked">
-                  {optionsDisplays}
-                </div>
-              </div>
-              <div className="form-group col">
-                <label htmlFor="groups">
-                  <i className="fa fa-list mr-2" />Asociar uno o varios grupos</label>
-                <div className="custom-controls-stacked">
-                  {optionsGroups}
                 </div>
               </div>
             </div>

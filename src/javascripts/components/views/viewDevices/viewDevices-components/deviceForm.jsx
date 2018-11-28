@@ -13,15 +13,14 @@ moment.locale('es');
 class DeviceForm extends Component {
   constructor(props) {
     super(props);
-    const { device, user, data: { gateways } } = this.props;
+    const { device, user } = this.props;
     this.state = {
       name: device.name,
       description: device.description,
-      updatedBy: user.name,
+      updatedBy: user,
       createdAt: moment(device.createdAt),
       updatedAt: moment(),
       mac: device.mac,
-      prefGateway: device.prefGateway ? device.prefGateway._id : gateways[0]._id,
       userGroup: device.userGroup ? device.userGroup._id : '',
       redirect: false,
       redirectLocation: '/devices',
@@ -50,13 +49,12 @@ class DeviceForm extends Component {
 	    device, token, notify, update,
 	  } = this.props;
 	  const {
-	    name, description, prefGateway, mac, userGroup, updatedBy: { _id },
+	    name, description, mac, userGroup, updatedBy: { _id },
 	  } = this.state;
 	  // define form values to send
 	  const form = {
 	    name,
 	    description,
-	    prefGateway,
 	    mac,
 	    userGroup: undefined,
 	    updatedBy: _id, // send user_id
@@ -87,15 +85,14 @@ class DeviceForm extends Component {
 
 	/* RENDER COMPONENT */
 	render() {
-	  const { device, data: { gateways, screens, userGroups } } = this.props;
+	  const { device, data: { screens, userGroups } } = this.props;
 	  const {
-	    redirect, redirectLocation, name, description, updatedBy, updatedAt, createdAt, mac, prefGateway, userGroup,
+	    redirect, redirectLocation, name, description, updatedBy, updatedAt, createdAt, mac, userGroup,
 	  } = this.state;
 
 	  const linkBack = `/devices/${device._id}`;
 
 	  // Options
-	  const optionsGateway = gateways.map(gateway => <option value={gateway._id} key={gateway._id}>{gateway.name}</option>);
 	  const optionsUserGroup = userGroups.map(ug => <option value={ug._id} key={ug._id}>{ug.name}</option>);
 
 	  const screen = screens.find(s => s.screenCode === device.screen);
@@ -161,27 +158,16 @@ class DeviceForm extends Component {
             <input type="text" className="form-control" id="screen" name="screen" value={screenName} readOnly />
           </div>
           <div className="form-group col">
-            <label htmlFor="gateway">
-              <i className="fa fa-fw fa-sitemap mr-2" />
-							Puerta de enlace preferida
+            <label htmlFor="userGroup">
+              <i className="fa fa-fw fa-users mr-2" />
+  						Grupo de gestión del dispositivo
             </label>
             <div>
-              <select className="custom-select" name="prefGateway" value={prefGateway} onChange={this.handleInputChange}>
-                {optionsGateway}
+              <select className="custom-select" name="userGroup" value={userGroup} onChange={this.handleInputChange}>
+                <option value="" key="0">Ninguno seleccionado</option>
+                {optionsUserGroup}
               </select>
             </div>
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="userGroup">
-            <i className="fa fa-fw fa-users mr-2" />
-						Grupo de gestión del dispositivo
-          </label>
-          <div>
-            <select className="custom-select" name="userGroup" value={userGroup} onChange={this.handleInputChange}>
-              <option value="" key="0">Ninguno seleccionado</option>
-              {optionsUserGroup}
-            </select>
           </div>
         </div>
         <div className="form-group">
@@ -189,7 +175,7 @@ class DeviceForm extends Component {
             <i className="fa fa-fw fa-user-o mr-2" />
 						Ultima modificación por
           </label>
-          <input type="text" className="form-control" id="updatedBy" name="updatedBy" value={updatedBy} readOnly />
+          <input type="text" className="form-control" id="updatedBy" name="updatedBy" value={updatedBy.name} readOnly />
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">

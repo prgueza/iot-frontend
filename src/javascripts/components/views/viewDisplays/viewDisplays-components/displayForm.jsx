@@ -40,7 +40,6 @@ class DisplayForm extends Component {
       updatedAt: moment(),
       device: '',
       // form options stored in state
-      optionsActiveImage: [],
       previewImage: '',
       // redirect variables
       redirect: false,
@@ -50,21 +49,16 @@ class DisplayForm extends Component {
 
   /* INITIAL VALUES FOR FORM INPUTS */
   componentDidMount() {
-    const { display, data, device } = this.props;
-    const { images } = this.state;
-    // get options for active image
-    const optionsActiveImage = data.images.filter(image => images.find(c => c === image._id)).map(image => <option value={image._id} key={image._id}>{image.name}</option>);
+    const { display, device } = this.props;
     // set state with initial values
     if (display && display.device) {
       this.setState({
         device: display.device,
-        optionsActiveImage,
         location: `/displays/${display._id}`, // Redirect url
       });
     } else {
       this.setState({
         device,
-        optionsActiveImage,
         location: '/displays', // Redirect url
       });
     }
@@ -108,7 +102,6 @@ class DisplayForm extends Component {
 	/* HANDLE MULTIPLE CHECKBOX */
 	handleCheckImages = (event) => {
 	  const { images } = this.state;
-	  const { data } = this.props;
 	  // get value from the checkbox
 	  const { target: { value } } = event;
 	  // check if the checkbox has been selected
@@ -130,10 +123,6 @@ class DisplayForm extends Component {
 	    // if there are no images deselect
 	    this.setState({ activeImage: '' });
 	  }
-	  this.setState({
-	    optionsActiveImage: data.images.filter(image => images.find(c => c === image._id))
-	      .map(image => <option value={image._id} key={image._id}>{image.name}</option>),
-	  });
 	}
 
 	/* HANDLE SUMBIT (PUT OR POST) */
@@ -186,7 +175,7 @@ class DisplayForm extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  const {
-	    redirect, images, location, device, name, description, category, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy, previewImage,
+	    redirect, images, location, device, name, description, category, tags, createdAt, updatedAt, createdBy, previewImage,
 	  } = this.state;
 	  const {
 	    display, data,
@@ -319,13 +308,6 @@ class DisplayForm extends Component {
               <input type="text" className="form-control" id="descripcion" placeholder="Descripcion del display" name="description" value={description} onChange={this.handleInputChange} />
             </div>
             <div className="form-row">
-              <div className="form-group col">
-  							<label htmlFor="activeImage"><i className="fa fa-picture-o mr-2" />Seleccionar la imagen activa</label>
-  							<select className="custom-select" id="activeImage" name="activeImage" value={activeImage} onChange={this.handleInputChange}>
-  								<option value="" key={0}>Sin imagen activa</option>
-  								{optionsActiveImage}
-  							</select>
-  						</div>
               <div className="form-group col">
                 <label htmlFor="category"><i className="fa fa-arrows-alt mr-2" />Categoría</label>
                 <input type="text" className="form-control" id="category" placeholder="Categoría" name="category" value={category} onChange={this.handleInputChange} />
