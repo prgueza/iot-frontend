@@ -33,12 +33,16 @@ class GroupRouter extends Component {
 
   /* FORCE UPDATE IF WE CHANGE TO ANOTHER GROUP */
   componentWillReceiveProps(nextProps) {
-    const { group, token } = this.props;
+    const { token, group } = this.props;
     if (nextProps.group && (nextProps.group._id !== group._id || nextProps.group.updatedAt !== group.updatedAt)) { // if props actually changed
       axios.get(nextProps.group.url, { headers: { Authorization: `Bearer ${token}` } })
         .then(
-          res => this.setState({ group: res.data, isLoaded: true }),
-          error => this.setState({ error, isLoaded: true }),
+          (doc) => { // resolve callback
+            this.setState({ group: doc.data, isLoaded: true });
+          },
+          (error) => { // reject callback
+            this.setState({ error, isLoaded: true });
+          },
         );
     }
   }
@@ -54,11 +58,11 @@ class GroupRouter extends Component {
       return null;
     }
     return (
-				<Switch>
-          <Route path="/groups/:groupId/edit" render={() => <GroupForm {...this.props} group={group} />} />
-          <Route path="/groups/:groupId/delete" render={() => <GroupDelete {...this.props} group={group} />} />
-          <Route path="/groups/:groupId" render={() => <GroupDetails {...this.props} group={group} />} />
-        </Switch>
+			<Switch>
+        <Route path="/groups/:groupId/edit" render={() => <GroupForm {...this.props} group={group} />} />
+        <Route path="/groups/:groupId/delete" render={() => <GroupDelete {...this.props} group={group} />} />
+        <Route path="/groups/:groupId" render={() => <GroupDetails {...this.props} group={group} />} />
+      </Switch>
     );
   }
 }

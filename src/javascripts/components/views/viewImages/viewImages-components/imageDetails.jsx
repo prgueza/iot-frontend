@@ -4,6 +4,7 @@ import Dropzone from 'react-dropzone';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import Associated from '../../associated';
@@ -21,18 +22,18 @@ class ImageDetails extends Component {
       accepted: false,
       src: null,
       extension: '',
-      size: '',
+      bytes: 0,
     };
   }
 
   componentDidMount() {
-    const { image: { src, extension, size } } = this.props;
-    this.setState({ src, extension, size });
+    const { image: { src, extension, bytes } } = this.props;
+    this.setState({ src, extension, bytes });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { src, extension, size } = nextProps.image;
-    this.setState({ src, extension, size });
+    const { src, extension, bytes } = nextProps.image;
+    this.setState({ src, extension, bytes });
   }
 
 	onDropAccepted = (acceptedFile) => {
@@ -59,11 +60,11 @@ class ImageDetails extends Component {
 	  // define constants from props for better readability
 	  const {
 	   image: {
-	      _id, name, description, createdAt, createdBy, color, resolution, groups, displays, tags,
+	      _id, name, description, createdAt, createdBy, color, groups, displays, tags,
 	    }, filterData,
 	  } = this.props;
 	  const {
-	    src, accepted, extension, size,
+	    src, accepted, extension, bytes,
 	  } = this.state;
 	  // refactor date constants with format
 	  const created = moment(createdAt).format('dddd, D [de] MMMM [de] YYYY');
@@ -74,23 +75,23 @@ class ImageDetails extends Component {
 	  const linktoDelete = `/images/${_id}/delete`;
 
 	  return (
-<div className="card card-detalles">
+    <div className="card card-detalles">
       <div className="card-header">
         <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
           <li className="nav-item mr-auto">
             <h2 className="detalles-titulo">
-              <i className="fa fa-picture-o mr-3" aria-hidden="true" />{name}</h2>
+              <FontAwesomeIcon icon={['far', 'image']} className="mr-3" fixedWidth />{name}</h2>
           </li>
           <li className="nav-item mr-2">
             <Link to={linktoEdit}>
               <button type="button" className="btn btn-warning">
-                <i className="fa fa-pencil-square-o mr-2" aria-hidden="true" />Editar</button>
+                <FontAwesomeIcon icon={['far', 'edit']} className="mr-2" fixedWidth />Editar</button>
             </Link>
           </li>
           <li className="nav-item ml-2">
             <Link to={linktoDelete}>
               <button type="button" className="btn btn-danger">
-                <i className="fa fa-trash-o mr-2" aria-hidden="true" />Eliminar</button>
+                <FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />Eliminar</button>
             </Link>
           </li>
         </ul>
@@ -100,23 +101,17 @@ class ImageDetails extends Component {
           <div className="col">
             <p className="titulo">DETALLES</p>
             <p className="card-text">
-              <i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true" />{description}</p>
+              <FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />{description}</p>
             <p className="card-text">
-              <i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true" />{
-                resolution
-                  ? resolution.name
-                  : 'Resolución no especificada'
-              }</p>
+              <FontAwesomeIcon icon="database" className="mr-2" fixedWidth />{extension}</p>
             <p className="card-text">
-              <i className="fa fa-fw fa-file-image-o mr-2" aria-hidden="true" />{extension}</p>
+              <FontAwesomeIcon icon="file-image" className="mr-2" fixedWidth />{bytes}</p>
             <p className="card-text">
-              <i className="fa fa-fw fa-database mr-2" aria-hidden="true" />{size}</p>
+              <FontAwesomeIcon icon="adjust" className="mr-2" fixedWidth />{color}</p>
             <p className="card-text">
-              <i className="fa fa-fw fa-tint mr-2" aria-hidden="true" />{color}</p>
+              <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />{created}</p>
             <p className="card-text">
-              <i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true" />{created}</p>
-            <p className="card-text">
-              <i className="fa fa-fw fa-user-o mr-2" aria-hidden="true" />{
+              <FontAwesomeIcon icon="user" className="mr-2" fixedWidth />{
                 createdBy
                   ? createdBy.name
                   : 'Usuario eliminado'
@@ -155,13 +150,13 @@ class ImageDetails extends Component {
           <div className="col">
             <div className="asociados">
               <p className="titulo">DISPLAYS ASOCIADOS ({displays.length})</p>
-              <Associated content={displays} category="displays" appearance="elemento-display" icon="television" />
+              <Associated content={displays} category="displays" appearance="elemento-display" icon="tv" />
             </div>
           </div>
           <div className="col">
             <div className="asociados">
               <p className="titulo">GRUPOS ASOCIADOS ({groups.length})</p>
-              <Associated content={groups} category="groups" appearance="elemento-grupo" icon="list" />
+              <Associated content={groups} category="groups" appearance="elemento-grupo" icon="group-layer" />
             </div>
           </div>
         </div>

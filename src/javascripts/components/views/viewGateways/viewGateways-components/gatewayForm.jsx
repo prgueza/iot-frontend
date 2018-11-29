@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 
@@ -125,20 +126,20 @@ class GatewayForm extends Component {
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
                 { gateway
-                  ? <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true" />Editar una puerta de enlace</h2>
-                  : <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true" />Añadir una nueva puerta de enlace</h2>
+                  ? <h2 className="detalles-titulo"><FontAwesomeIcon icon={['far', 'edit']} className="mr-3" fixedWidth />Editar una puerta de enlace</h2>
+                  : <h2 className="detalles-titulo"><FontAwesomeIcon icon="plus-circle" className="mr-3" fixedWidth />Añadir una nueva puerta de enlace</h2>
                 }
               </li>
 							<li className="nav-item mr-2">
 								<Link to={linkBack}>
 									<button type="button" className="btn btn-warning">
-										<i className="fa fa-times mr-2" aria-hidden="true" />Cancelar</button>
+										<FontAwesomeIcon icon="times" className="mr-2" fixedWidth />Cancelar</button>
 								</Link>
 							</li>
               <li className="nav-item ml-2">
                 { gateway
-                  ? <button onClick={this.handleSubmit} type="button" className="btn btn-primary"><i className="fa fa-save mr-2" aria-hidden="true" />Guardar cambios</button>
-                  : <button onClick={this.handleSubmit} type="button" className="btn btn-primary"><i className="fa fa-plus-circle mr-2" aria-hidden="true" />Añadir</button>
+                  ? <button onClick={this.handleSubmit} type="button" className="btn btn-primary"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Guardar cambios</button>
+                  : <button onClick={this.handleSubmit} type="button" className="btn btn-primary"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Añadir</button>
                 }
               </li>
             </ul>
@@ -146,30 +147,30 @@ class GatewayForm extends Component {
           <div className="card-body">
             <form id="form">
               <div className="form-group">
-                <label htmlFor="nombre"><i className="fa fa-sitemap mr-2" />Nombre</label>
+                <label htmlFor="nombre"><FontAwesomeIcon icon="sitemap" className="mr-2" fixedWidth />Nombre</label>
                 <input type="text" className="form-control" id="nombre" placeholder="Nombre de la puerta de enlace" name="name" value={name} onChange={this.handleInputChange} />
               </div>
               <div className="form-group">
-                <label htmlFor="descripcion"><i className="fa fa-info-circle mr-2" />Descripción</label>
+                <label htmlFor="descripcion"><FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />Descripción</label>
                 <input type="text" className="form-control" id="descripcion" placeholder="Descripción de la puerta de enlace" name="description" value={description} onChange={this.handleInputChange} />
               </div>
               <div className="form-row">
                 <div className="form-group col">
-                  <label htmlFor="mac"><i className="fa fa-server mr-2" />Dirección MAC</label>
+                  <label htmlFor="mac"><FontAwesomeIcon icon="server" className="mr-2" fixedWidth />Dirección MAC</label>
                   <input type="text" className="form-control" id="mac" placeholder="Dirección MAC de la puerta de enlace" name="mac" value={mac} onChange={this.handleInputChange} />
                 </div>
                 <div className="form-group col">
-                  <label htmlFor="ip"><i className="fa fa-wifi mr-2" />Dirección IP</label>
+                  <label htmlFor="ip"><FontAwesomeIcon icon="wifi" className="mr-2" fixedWidth />Dirección IP</label>
                   <input type="text" className="form-control" id="ip" placeholder="Dirección IP de la puerta de enlace" name="ip" value={ip} onChange={this.handleInputChange} />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col">
-                  <label htmlFor="port"><i className="fa fa-exchange mr-2" />Puerto</label>
+                  <label htmlFor="port"><FontAwesomeIcon icon="exchange-alt" className="mr-2" fixedWidth />Puerto</label>
                   <input type="text" className="form-control" id="port" placeholder="Puerto de la puerta de enlace" name="port" value={port} onChange={this.handleInputChange} />
                 </div>
                 <div className="form-group col">
-                  <label htmlFor="location"><i className="fa fa-map-marker mr-2" />Localización</label>
+                  <label htmlFor="location"><FontAwesomeIcon icon="map-marker-alt" className="mr-2" fixedWidth />Localización</label>
                   <div>
                     <select className="custom-select" name="location" onChange={this.handleInputChange} value={location} disabled={data.locations.length === 0}>
                       {optionsLocation}
@@ -178,16 +179,16 @@ class GatewayForm extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="createdBy"><i className="fa fa-user-o mr-2" />Creador</label>
+                <label htmlFor="createdBy"><FontAwesomeIcon icon="user" className="mr-2" fixedWidth />Creador</label>
                 <input type="text" className="form-control" id="createdBy" name="createdBy" value={createdBy} readOnly />
               </div>
               <div className="form-row">
                 <div className="form-group col-md-6">
-                  <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2" />Fecha de creación</label>
+                  <label htmlFor="fechaCreacion"><FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Fecha de creación</label>
                   <input type="text" className="form-control" id="fechaCreacion" name="createdAt " value={moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
                 </div>
                 <div className="form-group col-md-6">
-                  <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2" />Fecha de modificación</label>
+                  <label htmlFor="fechaModificacion"><FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Fecha de modificación</label>
                   <input type="text" className="form-control" id="fechaModificacion" name="updatedAt" value={moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
                 </div>
               </div>

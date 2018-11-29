@@ -13,22 +13,6 @@ import Notification from './tags/notification';
 /* CONFIGURE AXIOS */
 axios.defaults.baseURL = process.env.API_URL;
 
-const notifications = {
-  image: {
-    post: 'Imagen configurada con éxito',
-    put: 'Imagen actualizada con éxito',
-    delete: 'Imagen eliminada con éxito',
-  },
-  display: {
-    post: 'Display configurado con éxito',
-    put: 'Display actualizado con éxito',
-    delete: 'Display eliminado con éxito',
-  },
-  post: {
-    icon: 'upload',
-  },
-};
-
 /* COMPONENT */
 class Main extends Component {
   constructor(props) {
@@ -164,7 +148,7 @@ class Main extends Component {
 	syncApi = (token) => {
 	  // set state to syncing
 	  this.setState({ syncStatus: 3, lastSynced: moment() });
-	  this.notifySync('Buscando dispositivos...', 'notify-success', 'refresh', 'Esto puede llevar varios minutos');
+	  this.notifySync('Buscando dispositivos...', 'notify-success', 'sync-alt', 'Esto puede tardar hasta 40s');
 
 	  // request the update
 	  axios.get('/update', {

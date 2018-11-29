@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 const cx = require('classnames');
@@ -20,7 +21,7 @@ const Location = ({
         <div className="d-flex w-100 justify-content-between">
           <h5 className="mb-1">
             <strong>
-              <i className="fa fa-map-marker mr-2" aria-hidden="true" />
+              <FontAwesomeIcon icon="map-marker-alt" className="mr-2" fixedWidth />
               {name}
             </strong>
           </h5>

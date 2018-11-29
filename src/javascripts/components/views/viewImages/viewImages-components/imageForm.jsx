@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import Tag from '../../../tags/tag';
@@ -20,74 +21,48 @@ class ImageForm extends Component {
     this.state = {
       name: image ? image.name : '',
       description: image ? image.description : '',
-      createdBy: image ? (image.createdBy || { name: 'Usuario eliminado' }) : user,
-      updatedBy: user.name,
       category: image ? image.category : '',
       tags: image ? image.tags : [],
+      color: image ? image.color : 'Color',
       createdAt: image ? moment(image.createdAt) : moment(),
       updatedAt: moment(),
-      displays: image ? image.displays.map(display => display._id) : [],
-      groups: image ? image.groups.map(group => group._id) : [],
-      color: image ? image.color : 'Color',
+      createdBy: image ? image.createdBy || null : user,
+      updatedBy: user.name,
       redirect: false,
-      redirectLocation: '/images',
     };
-  }
-
-  /* INITIAL VALUES FOR FORM INPUTS */
-  componentDidMount() {
-    const { image } = this.props;
-    // set state with initial values
-    this.setState({
-      redirectLocation: image ? `/images/${image._id}` : '/images', // Redirect url
-    });
   }
 
 	/* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 	handleInputChange = (event) => {
-	  const { target, target: { name } } = event;
-	  let value;
-	  if (name === 'tags') {
-	    value = target.value.split(','); // TODO: better string to array conversion
-	  } else {
-	    const { value: aux } = target;
-	    value = aux;
-	  }
-	  this.setState({
-	    [name]: value,
-	  });
+	  const { target: { name, value } } = event;
+	  this.setState({ [name]: value });
 	}
+
+  handleTagsChange = (event) => {
+    const { target, target: { name } } = event;
+    const value = target.value.split(',');
+    this.setState({ [name]: value });
+  }
 
 	/* HANDLE SUMBIT (PUT OR POST) */
 	handleSubmit = () => {
 	  // get image if any
 	  const {
-	    image, user, token, update, notify,
+	    image, token, update, notify,
 	  } = this.props;
 	  const {
-	    name, description, updatedBy, category, tags, color, displays, groups,
+	    name, description, updatedBy, createdBy, category, tags, color,
 	  } = this.state;
 	  // define form values to send
 	  const form = {
 	    name,
 	    description,
 	    category,
-	    tags,
 	    color,
-	    updatedBy: updatedBy._id, // send user_id
+	    tags: tags.map(tag => tag.trim()),
+	    createdBy: createdBy._id,
+	    updatedBy: updatedBy._id,
 	  };
-	  // possible empty fields
-	  if (!image) form.createdBy = user._id;
-	  if (displays.length > 0) {
-	    form.displays = displays;
-	  } else {
-	    form.displays = [];
-	  }
-	  if (groups.length > 0) {
-	    form.groups = groups;
-	  } else {
-	    form.groups = [];
-	  }
 	  // HTTP request
 	  axios({
 	    method: image ? 'put' : 'post',
@@ -100,12 +75,11 @@ class ImageForm extends Component {
 	    },
 	  })
 	    .then((res) => {
-	      if (res.status === 201) {
+	      if (res.status >= 200) {
+	        this.setState({ redirectLocation: `/images/${res.data.resourceId}` });
 	        notify('Imagen configurada con éxito', 'notify-success', 'upload', res.data.notify);
-	        const action = image ? 'edit' : 'add';
-	        return update('images', res.data.resourceId, action, res.data.resource); // update dataset
+	        update('images', res.data.resourceId, image ? 'edit' : 'add', res.data.resource); // update dataset
 	      }
-	      return false;
 	    })
 	    .then(() => this.setState({ redirect: true }))
 	    .catch(() => notify('Error al configurar la imagen', 'notify-error', 'exclamation-triangle', 'error'));
@@ -132,15 +106,15 @@ class ImageForm extends Component {
             <li className="nav-item mr-auto">
               {
                 image
-                  ? <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true" />Editar una imagen</h2>
-                  : <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true" />Añadir una nueva imagen</h2>
+                  ? <h2 className="detalles-titulo"><FontAwesomeIcon icon={['far', 'edit']} className="mr-3" fixedWidth />Editar una imagen</h2>
+                  : <h2 className="detalles-titulo"><FontAwesomeIcon icon="plus-circle" className="mr-3" fixedWidth />Añadir una nueva imagen</h2>
               }
             </li>
             <li className="nav-item ml-2">
               {
                 image
-                  ? <button onClick={this.handleSubmit} type="button" className="btn btn-info"><i className="fa fa-save mr-2" aria-hidden="true" />Guardar cambios</button>
-                  : <button onClick={this.handleSubmit} type="button" className="btn btn-info"><i className="fa fa-plus-circle mr-2" aria-hidden="true" />Añadir</button>
+                  ? <button onClick={this.handleSubmit} type="button" className="btn btn-info"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Guardar cambios</button>
+                  : <button onClick={this.handleSubmit} type="button" className="btn btn-info"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Añadir</button>
               }
             </li>
           </ul>
@@ -149,23 +123,23 @@ class ImageForm extends Component {
           <form id="form">
             <div className="form-group">
               <label htmlFor="nombre">
-                <i className="fa fa-picture-o mr-2" />Nombre</label>
+                <FontAwesomeIcon icon={['far', 'image']} className="mr-2" fixedWidth />Nombre</label>
               <input type="text" className="form-control" id="nombre" placeholder="Nombre de la imagen" name="name" value={name} onChange={this.handleInputChange} />
             </div>
             <div className="form-group">
               <label htmlFor="descripcion">
-                <i className="fa fa-info-circle mr-2" />Descripcion</label>
+                <FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />Descripcion</label>
               <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la imagen" name="description" value={description} onChange={this.handleInputChange} />
             </div>
             <div className="form-row">
               <div className="form-group col-6">
                 <label htmlFor="category">
-                  <i className="fa fa-th-large mr-2" />Categoría</label>
+                  <FontAwesomeIcon icon="folder-open" className="mr-2" fixedWidth />Categoría</label>
                 <input type="text" className="form-control" id="category" name="category" value={category} onChange={this.handleInputChange} />
               </div>
               <div className="form-group col">
                 <label htmlFor="color">
-                  <i className="fa fa-tint mr-2" />Color</label>
+                  <FontAwesomeIcon icon="adjust" className="mr-2" fixedWidth />Color</label>
                 <div>
                   <select className="custom-select" name="color" value={color} onChange={this.handleInputChange}>
                     <option value="Color">Color</option>
@@ -177,15 +151,15 @@ class ImageForm extends Component {
             <div className="form-row">
               <div className="form-group col">
                 <label htmlFor="etiquetas">
-                  <i className="fa fa-tags mr-2" />Etiquetas</label>
-                <input type="text" className="form-control" name="tags" id="etiquetas" value={tags} onChange={this.handleInputChange} />
+                  <FontAwesomeIcon icon="tags" className="mr-2" fixedWidth />Etiquetas</label>
+                <input type="text" className="form-control" name="tags" id="etiquetas" value={tags} onChange={this.handleTagsChange} />
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col">
                 {
                   tags.map(
-                    tag => (tag.length > 1
+                    tag => (tag.trim().length
                       ? <Tag key={tag} tag={tag} category="images" />
                       : ''),
                   )
@@ -194,18 +168,18 @@ class ImageForm extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="creador">
-                <i className="fa fa-user-o mr-2" />Creador</label>
+                <FontAwesomeIcon icon="user" className="mr-2" fixedWidth />Creador</label>
               <input type="text" className="form-control" id="creador" name="user" value={createdBy.name} readOnly="readOnly" />
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label htmlFor="fechaCreacion">
-                  <i className="fa fa-calendar-o mr-2" />Fecha de creación</label>
+                  <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Fecha de creación</label>
                 <input type="text" className="form-control" id="fechaCreacion" name="createdAt " value={moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly="readOnly" />
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="fechaModificacion">
-                  <i className="fa fa-calendar-o mr-2" />Fecha de modificación</label>
+                  <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Fecha de modificación</label>
                 <input type="text" className="form-control" id="fechaModificacion" name="updatedAt" value={moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly="readOnly" />
               </div>
             </div>

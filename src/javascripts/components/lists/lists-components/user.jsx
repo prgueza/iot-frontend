@@ -1,7 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 const cx = require('classnames');
@@ -21,7 +21,10 @@ const User = ({
         <div className="d-flex w-100 justify-content-between">
           <h5 className="mb-1">
             <strong>
-              <i className="fa fa-user-o mr-2" aria-hidden="true" />
+              { admin
+                ? <FontAwesomeIcon icon="user-tie" className="mr-2" fixedWidth />
+                : <FontAwesomeIcon icon="user" className="mr-2" fixedWidth />
+              }
               {name}
             </strong>
           </h5>
@@ -31,7 +34,7 @@ const User = ({
         <div className="d-flex w-100 justify-content-between">
           <small>{login}</small>
           <small className={userGroup || 'text-danger'}>
-            <i className="fa fa-users mr-2" aria-hidden="true" />
+            <FontAwesomeIcon icon="users" className="mr-2" fixedWidth />
             {userGroup ? userGroup.name : 'Sin asignar'}
           </small>
         </div>

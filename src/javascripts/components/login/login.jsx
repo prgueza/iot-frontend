@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* COMPONENTS */
 class Login extends Component {
@@ -72,7 +73,7 @@ class Login extends Component {
     <div className="col-lg-4 col-md-8 col-sm-12 align-self-center">
       <div className="card card-login">
         <div className="card-body">
-          <h1 className="text-center"><i className="fa fa-barcode fa-4x mb-3" /></h1>
+          <h1 className="text-center"><FontAwesomeIcon icon="barcode" size="5x" /></h1>
           <small className="float-right">v0.1.5</small>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">

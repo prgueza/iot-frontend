@@ -2,9 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
-/* IMPORT COMPONENTS */
-import Icon from '../../../icons/icon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 
@@ -20,6 +18,14 @@ const DeviceDetails = ({
   // refactor date constants with format
   const updated = moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY');
   const last = moment(lastFound).format('dddd, D [de] MMMM [de] YYYY [, a las] HH:mm:ss');
+
+  const battery = [
+    { icon: 'battery-empty', set: batt < 20 },
+    { icon: 'battery-quarter', set: batt >= 20 && batt < 40 },
+    { icon: 'battery-half', set: batt >= 40 && batt < 60 },
+    { icon: 'battery-three-quarters', set: batt >= 60 && batt < 80 },
+    { icon: 'battery-full', set: batt >= 80 },
+  ];
 
   // FIXME: rename variables
   const screenObj = screens.find(r => r.screenCode === screen);
@@ -37,14 +43,14 @@ const DeviceDetails = ({
         <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
           <li className="nav-item mr-auto">
             <h2 className="detalles-titulo">
-              <i className="fa fa-tablet mr-3" aria-hidden="true" />
+              <FontAwesomeIcon icon="tablet-alt" className="mr-3" fixedWidth />
               {name}
             </h2>
           </li>
           <li className="nav-item mr-2">
             <Link to={linktoEdit}>
               <button type="button" className="btn btn-warning">
-                <i className="fa fa-pencil-square-o mr-1" aria-hidden="true" />
+                <FontAwesomeIcon icon={['far', 'edit']} className="mr-2" fixedWidth />
 								Editar
               </button>
             </Link>
@@ -52,7 +58,7 @@ const DeviceDetails = ({
           <li className="nav-item ml-2">
             <Link to={linktoDelete}>
               <button type="button" className="btn btn-danger">
-                <i className="fa fa-trash-o mr-1" aria-hidden="true" />
+                <FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />
 								Eliminar
               </button>
             </Link>
@@ -63,54 +69,18 @@ const DeviceDetails = ({
         <div className="row">
           <div className="col">
             <p className="titulo">DETALLES</p>
-            <p className="card-text">
-              <Icon icon="info-circle" fw="true" mr={2} />
-              { description }
-            </p>
-            <p className="card-text">
-              <Icon icon="server" fw="true" mr={2} />
-              { mac }
-            </p>
-            <p className={lastFound ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="refresh" fw="true" mr={2} />
-              {last}
-            </p>
-            <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="battery" fw="true" mr={2} batt={batt || 0} />
-              {found ? `${batt}%` : 'Información no disponible'}
-            </p>
-            <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="signal" fw="true" mr={2} />
-              {found ? rssi : 'Información no disponible'}
-            </p>
-            <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="tint" fw="true" mr={2} />
-              {screenName}
-            </p>
-            <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="adjust" fw="true" mr={2} />
-              {color}
-            </p>
-            <p className={found ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="arrows-alt" fw="true" mr={2} />
-              {size}
-            </p>
-            <p className={(gateway && found) ? 'card-text' : 'card-text text-danger'}>
-              <Icon icon="sitemap" fw="true" mr={2} />
-              {(gateway && found) ? gateway.name : 'Información no disponible'}
-            </p>
-            <p className="card-text">
-              <Icon icon="users" fw="true" mr={2} />
-              {userGroup ? userGroup.name : 'Dispositivo sin configurar'}
-            </p>
-            <p className="card-text">
-              <Icon icon="calendar-o" fw="true" mr={2} />
-              {updated}
-            </p>
-            <p className="card-text">
-              <Icon icon="user-o" fw="true" mr={2} />
-              {updatedBy ? updatedBy.name : 'Usuario eliminado'}
-            </p>
+            <p className="card-text"><FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />{ description }</p>
+            <p className="card-text"><FontAwesomeIcon icon="server" className="mr-2" fixedWidth />{ mac }</p>
+            <p className={lastFound ? 'card-text' : 'card-text text-danger'}><FontAwesomeIcon icon="sync-alt" className="mr-2" fixedWidth />{last}</p>
+            <p className={found ? 'card-text' : 'card-text text-danger'}><FontAwesomeIcon icon={battery.find(bat => bat.set).icon} className="mr-2" fixedWidth />{found ? `${batt}%` : 'Información no disponible'}</p>
+            <p className={found ? 'card-text' : 'card-text text-danger'}><FontAwesomeIcon icon="wifi" className="mr-2" fixedWidth />{found ? rssi : 'Información no disponible'}</p>
+            <p className={found ? 'card-text' : 'card-text text-danger'}><FontAwesomeIcon icon={['far', 'window-maximize']} className="mr-2" fixedWidth />{screenName}</p>
+            <p className={found ? 'card-text' : 'card-text text-danger'}><FontAwesomeIcon icon="adjust" className="mr-2" fixedWidth />{color}</p>
+            <p className={found ? 'card-text' : 'card-text text-danger'}><FontAwesomeIcon icon="arrows-alt" className="mr-2" fixedWidth />{size}</p>
+            <p className={(gateway && found) ? 'card-text' : 'card-text text-danger'}><FontAwesomeIcon icon="sitemap" className="mr-2" fixedWidth />{(gateway && found) ? gateway.name : 'Información no disponible'}</p>
+            <p className="card-text"><FontAwesomeIcon icon="users" className="mr-2" fixedWidth />{userGroup ? userGroup.name : 'Dispositivo sin configurar'}</p>
+            <p className="card-text"><FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />{updated}</p>
+            <p className="card-text"><FontAwesomeIcon icon="user" className="mr-2" fixedWidth />{updatedBy ? updatedBy.name : 'Usuario eliminado'}</p>
           </div>
         </div>
         <div className="col" />

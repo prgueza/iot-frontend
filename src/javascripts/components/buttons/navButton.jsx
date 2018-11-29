@@ -1,10 +1,8 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  NavLink,
-} from 'react-router-dom';
-import Icon from '../icons/icon';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 const NavButton = ({
@@ -16,7 +14,7 @@ const NavButton = ({
       <li>
         <button type="button" className="btn btn-nav btn-block mb-1 d-flex justify-content-between align-items-center">
           <div>
-            <Icon icon={icon} mr={2} />
+            <FontAwesomeIcon icon={icon} className="mr-2" fixedWidth />
             {text}
           </div>
           {count && <span>{number}</span> }
@@ -31,7 +29,10 @@ NavButton.propTypes = {
   text: PropTypes.string.isRequired,
   count: PropTypes.bool,
   number: PropTypes.string,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]).isRequired,
   exact: PropTypes.bool,
 };
 

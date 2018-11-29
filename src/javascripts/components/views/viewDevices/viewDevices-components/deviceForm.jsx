@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 
@@ -106,21 +107,21 @@ class DeviceForm extends Component {
       <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
         <li className="nav-item mr-auto">
           <h2 className="detalles-titulo">
-            <i className="fa fa-fw fa-pencil mr-3" aria-hidden="true" />
+            <FontAwesomeIcon icon={['far', 'edit']} className="mr-3" fixedWidth />
 						Configurar un dispositivo físico
           </h2>
         </li>
         <li className="nav-item mr-2">
           <Link to={linkBack}>
             <button type="button" className="btn btn-warning">
-              <i className="fa fa-times mr-2" aria-hidden="true" />
+              <FontAwesomeIcon icon="times" className="mr-2" fixedWidth />
 							Cancelar
             </button>
           </Link>
         </li>
         <li className="nav-item ml-2">
           <button onClick={this.handleSubmit} type="button" className="btn btn-primary">
-            <i className="fa  fa-fw fa-floppy-o mr-2" aria-hidden="true" />
+            <FontAwesomeIcon icon="save" className="mr-2" fixedWidth />
 						Guardar cambios
           </button>
         </li>
@@ -130,21 +131,21 @@ class DeviceForm extends Component {
       <form id="form">
         <div className="form-group">
           <label htmlFor="nombre">
-            <i className="fa fa-fw fa-tablet mr-2" />
+            <FontAwesomeIcon icon="tablet-alt" className="mr-2" fixedWidth />
 						Nombre
           </label>
           <input type="text" className="form-control" id="nombre" placeholder="Nombre del dispositivo físico" name="name" value={name} onChange={this.handleInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="descripcion">
-            <i className="fa fa-fw fa-info-circle mr-2" />
+            <FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />
 						Descripcion
           </label>
           <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name="description" value={description} onChange={this.handleInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="mac">
-            <i className="fa fa-fw fa-server mr-2" />
+            <FontAwesomeIcon icon="server" className="mr-2" fixedWidth />
 						Dirección MAC
           </label>
           <input type="text" className="form-control" id="mac" placeholder="Dirección MAC de la puerta de enlace" name="mac" value={mac} readOnly />
@@ -152,14 +153,14 @@ class DeviceForm extends Component {
         <div className="form-row">
           <div className="form-group col">
             <label htmlFor="screen">
-              <i className="fa fa-fw fa-tint mr-2" />
+              <FontAwesomeIcon icon={['far', 'window-maximize']} className="mr-2" fixedWidth />
 							Pantalla
             </label>
             <input type="text" className="form-control" id="screen" name="screen" value={screenName} readOnly />
           </div>
           <div className="form-group col">
             <label htmlFor="userGroup">
-              <i className="fa fa-fw fa-users mr-2" />
+              <FontAwesomeIcon icon="users" className="mr-2" fixedWidth />
   						Grupo de gestión del dispositivo
             </label>
             <div>
@@ -172,7 +173,7 @@ class DeviceForm extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="updatedBy">
-            <i className="fa fa-fw fa-user-o mr-2" />
+            <FontAwesomeIcon icon="user" className="mr-2" fixedWidth />
 						Ultima modificación por
           </label>
           <input type="text" className="form-control" id="updatedBy" name="updatedBy" value={updatedBy.name} readOnly />
@@ -180,15 +181,13 @@ class DeviceForm extends Component {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="fechaCreacion">
-              <i className="fa fa-fw fa-calendar-o mr-2" />
-							Fecha de creación
+              <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Primera vez localizado
             </label>
             <input type="text" className="form-control" id="fechaCreacion" name="createdAt " value={moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="fechaModificacion">
-              <i className="fa fa-fw fa-calendar-o mr-2" />
-							Fecha de modificación
+              <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Fecha de modificación
             </label>
             <input type="text" className="form-control" id="fechaModificacion" name="updatedAt" value={moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
           </div>

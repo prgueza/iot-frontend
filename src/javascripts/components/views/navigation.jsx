@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Shapes } from '../util';
 
 /* IMPORT COMPONENTS */
 import NavButton from '../buttons/navButton';
@@ -29,13 +30,13 @@ class Navigation extends Component {
 	      id: 1, exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
 	    },
 	    {
-	      id: 2, exact: false, linkTo: 'displays', text: 'Displays', icon: 'television', count: true, number: displays ? `${displays.length}/${devices.length}` : '...', 
+	      id: 2, exact: false, linkTo: 'displays', text: 'Displays', icon: 'tv', count: true, number: displays ? `${displays.length}/${devices.length}` : '...',
 	    },
 	    {
-	      id: 3, exact: false, linkTo: 'images', text: 'Imagenes', icon: 'picture-o', count: true, number: images ? String(images.length) : '...',
+	      id: 3, exact: false, linkTo: 'images', text: 'Imagenes', icon: ['far', 'images'], count: true, number: images ? String(images.length) : '...',
 	    },
 	    {
-	      id: 4, exact: false, linkTo: 'groups', text: 'Grupos', icon: 'list', count: true, number: groups ? String(groups.length) : '...',
+	      id: 4, exact: false, linkTo: 'groups', text: 'Grupos', icon: 'layer-group', count: true, number: groups ? String(groups.length) : '...',
 	    },
 	  ];
 
@@ -44,7 +45,7 @@ class Navigation extends Component {
 	      id: 1, exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
 	    },
 	    {
-	      id: 2, exact: false, linkTo: 'devices', text: 'Dispositivos', icon: 'tablet', count: true, number: devices ? String(devices.length) : '...',
+	      id: 2, exact: false, linkTo: 'devices', text: 'Dispositivos', icon: 'tablet-alt', count: true, number: devices ? String(devices.length) : '...',
 	    },
 	    {
 	      id: 3, exact: false, linkTo: 'gateways', text: 'Puertas de enlace', icon: 'sitemap', count: true, number: gateways ? String(gateways.length) : '...',
@@ -139,7 +140,7 @@ class Navigation extends Component {
         <div className="mb-3">
           <p>SISTEMA</p>
           <ul className="nav-list">
-						{ user && !user.admin && <NavButton key="state" linkTo="state" text={estado} icon="cloud-upload" /> }
+						{ user && !user.admin && <NavButton key="state" linkTo="state" text={estado} icon="cloud-upload-alt" /> }
             {syncButton}
             { user && user.admin && <NavButton key="settings" linkTo="settings" text="Configuración" icon="cogs" /> }
             <li>
@@ -166,23 +167,8 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  data: PropTypes.shape({
-    displays: PropTypes.any,
-    groups: PropTypes.any,
-    images: PropTypes.any,
-    devices: PropTypes.any,
-    gateways: PropTypes.any,
-    screens: PropTypes.any,
-    locations: PropTypes.any,
-    users: PropTypes.any,
-  }),
-  user: PropTypes.shape({
-    admin: PropTypes.bool,
-    createdAt: PropTypes.string,
-    name: PropTypes.string,
-    url: PropTypes.string,
-    _id: PropTypes.string,
-  }),
+  data: PropTypes.shape(Shapes.data),
+  user: PropTypes.shape(Shapes.user),
   syncStatus: PropTypes.number.isRequired,
   token: PropTypes.string,
   filterValue: PropTypes.string,

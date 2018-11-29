@@ -1,9 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
-
-/* IMPORT COMPONENTS */
-import Icon from '../icons/icon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* COMPONENT */
 const Title = ({ appearance, total, icon }) => (
@@ -11,7 +9,7 @@ const Title = ({ appearance, total, icon }) => (
     <div className={appearance}>
       <div className="card-body text-right">
         <div className="card-text d-flex w-100 justify-content-between">
-          <h1 className="mb-0 display-3"><Icon icon={icon} /></h1>
+          <h1 className="mb-0 display-3"><FontAwesomeIcon icon={icon} /></h1>
           <h1 className="mb-0 display-3">{total}</h1>
         </div>
       </div>

@@ -2,9 +2,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-/* IMPORT COMPONENTS */
-import Icon from '../../icons/icon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 const cx = require('classnames');
@@ -20,6 +18,13 @@ const Device = ({
 }) => {
   const last = moment(lastFound).from(moment());
   const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start');
+  const battery = [
+    { icon: 'battery-empty', set: batt < 20 },
+    { icon: 'battery-quarter', set: batt >= 20 && batt < 40 },
+    { icon: 'battery-half', set: batt >= 40 && batt < 60 },
+    { icon: 'battery-three-quarters', set: batt >= 60 && batt < 80 },
+    { icon: 'battery-full', set: batt >= 80 },
+  ];
   const location = editDisplay ? {
     pathname: `/displays/add/${_id}`,
   } : {
@@ -33,8 +38,8 @@ const Device = ({
             <h5 className="w-60"><strong>{name}</strong></h5>
             <small>
               { found
-                ? <Icon icon="battery" fw mr={1} batt={batt} />
-                : <Icon icon="chain-broken" fw mr={1} />
+                ? <FontAwesomeIcon icon={battery.find(bat => bat.set).icon} className="mr-2" fixedWidth />
+                : <FontAwesomeIcon icon="unlink" fixedWidth />
               }
               { found ? batt : '' }
             </small>
@@ -43,12 +48,12 @@ const Device = ({
           <p className="mb-3 mt-2">{description}</p>
           <div className="d-flex w-100 justify-content-between mt-3">
             <small>
-              <i className="fa fa-code mr-2" aria-hidden="true" />
+              <FontAwesomeIcon icon={['far', 'hdd']} className="mr-2" fixedWidth />
               {initcode}
             </small>
             <small>
               {last}
-              <i className="fa fa-refresh ml-2" aria-hidden="true" />
+              <FontAwesomeIcon icon="sync-alt" className="ml-2" fixedWidth />
             </small>
           </div>
         </div>

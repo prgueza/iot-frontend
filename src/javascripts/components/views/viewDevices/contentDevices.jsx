@@ -26,7 +26,7 @@ const ContentDevices = ({
       </div>
       <div className="row-panel">
         <div className="panel">
-          <Title total={devices.length} appearance="card title-devices" icon="tablet" />
+          <Title total={devices.length} appearance="card title-devices" icon="tablet-alt" />
           <div className="row controls">
             <div className="col-4">
               <List filterValue={filterValue} filterFoundValue={filterFoundValue} filterFound={filterFound} category="devices" content={devices} />

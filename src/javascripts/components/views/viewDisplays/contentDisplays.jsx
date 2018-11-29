@@ -26,7 +26,7 @@ const ContentDisplays = ({
       </div>
       <div className="row-panel">
         <div className="panel">
-          <Title total={displays.length} appearance="card title-displays" icon="television" />
+          <Title total={displays.length} appearance="card title-displays" icon="tv" />
           <div className="row controls">
             <div className="col-4">
               <List filterValue={filterValue} devices={devices} filterConfiguredValue={filterConfiguredValue} filterConfigured={filterConfigured} category="displays" content={displays} />

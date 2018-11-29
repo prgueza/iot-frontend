@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import Location from '../../../lists/lists-components/location';
@@ -81,7 +82,7 @@ class ManageLocations extends Component {
 	      if (res.status === 201 || res.status === 200) {
 	        switch (method) {
 	          case 'put':
-	            notify('Localización modificada con éxito', 'notify-success', 'floppy-o', res.data.notify);
+	            notify('Localización modificada con éxito', 'notify-success', 'save', res.data.notify);
 	            update('locations', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	            break;
 	          case 'post':
@@ -138,7 +139,7 @@ class ManageLocations extends Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
-                <h2 className="detalles-titulo"><i className="fa fa-map-marker mr-3" aria-hidden="true" />Localizaciones</h2>
+                <h2 className="detalles-titulo"><FontAwesomeIcon icon="map-marker-alt" className="mr-2" fixedWidth />Localizaciones</h2>
               </li>
             </ul>
           </div>
@@ -150,24 +151,24 @@ class ManageLocations extends Component {
                 <form>
                   <div className="form-row">
                     <div className="form-group col">
-                      <label htmlFor="name"><i className="fa fa-map-marker mr-2" />Nombre</label>
+                      <label htmlFor="name"><FontAwesomeIcon icon="map-marker-alt" className="mr-2" fixedWidth />Nombre</label>
                       <input type="text" className="form-control" id="name" placeholder="Nombre de la localización" name="name" value={name} onChange={this.handleInputChange} />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group col">
-                      <label htmlFor="description"><i className="fa fa-info-circle mr-2" />Descripción</label>
+                      <label htmlFor="description"><FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />Descripción</label>
                       <input type="text" className="form-control" id="description" placeholder="Descripción" name="description" value={description} onChange={this.handleInputChange} />
                     </div>
                   </div>
                   { !edit
                     ? <button onClick={() => this.handleSubmit('post')} type="button" className="btn btn-block btn-small btn-success"><i className="fa fa-plus-circle mr-1" aria-hidden="true" />Añadir</button>
                     : (
-<div className="d-flex w-100 justify-content-between">
-                      <button onClick={() => this.handleSubmit('put')} type="button" className="btn btn-block btn-small btn-success mr-2"><i className="fa fa-floppy-o mr-1" aria-hidden="true" />Actualizar</button>
-                      <button onClick={() => this.handleSubmit('delete')} type="button" className="btn btn-block btn-small btn-danger ml-1 mr-1"><i className="fa fa-trash-o mr-1" aria-hidden="true" />Eliminar</button>
-                      <button onClick={() => this.cancel()} type="button" className="btn btn-block btn-small btn-warning ml-2"><i className="fa fa-times mr-1" aria-hidden="true" />Cancelar</button>
-                    </div>
+                      <div className="d-flex w-100 justify-content-between">
+                        <button onClick={() => this.handleSubmit('put')} type="button" className="btn btn-block btn-small btn-success mr-2"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Actualizar</button>
+                        <button onClick={() => this.handleSubmit('delete')} type="button" className="btn btn-block btn-small btn-danger ml-1 mr-1"><FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />Eliminar</button>
+                        <button onClick={() => this.cancel()} type="button" className="btn btn-block btn-small btn-warning ml-2"><FontAwesomeIcon icon={['far', 'times-circle']} className="mr-2" fixedWidth />Cancelar</button>
+                      </div>
                     )
                   }
                 </form>

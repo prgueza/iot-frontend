@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* COMPONENTS */
 class ImageDelete extends Component {
@@ -26,7 +27,7 @@ class ImageDelete extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 200) {
-	        notify('Imagen eliminada con éxito', 'notify-success', 'trash-o', res.data.notify);
+	        notify('Imagen eliminada con éxito', 'notify-success', 'trash', res.data.notify);
 	        update('images', res.resourceId, 'remove');
 	      }
 	    })
@@ -45,7 +46,7 @@ class ImageDelete extends Component {
           <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
             <li className="nav-item mr-auto">
               <h2 className="detalles-titulo">
-                <i className="fa fa-trash mr-3" aria-hidden="true" />Eliminar Imagen</h2>
+                <FontAwesomeIcon icon="trash" className="mr-3" fixedWidth />Eliminar Imagen</h2>
             </li>
           </ul>
         </div>
@@ -55,7 +56,7 @@ class ImageDelete extends Component {
             <hr className="card-division" />
             <p>Esta acción no se puede deshacer</p>
             <button onClick={this.handleDelete} type="button" className="btn btn-block btn-danger">
-              <i className="fa fa-trash mr-1" aria-hidden="true" />Eliminar</button>
+              <FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />Eliminar</button>
           </div>
         </div>
       </div>

@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReactModal from 'react-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import Associated from '../../associated';
 import Tag from '../../../tags/tag';
-import Icon from '../../../icons/icon';
 import EditImageForm from './editImageForm';
 
 const moment = require('moment');
@@ -138,7 +138,7 @@ class DisplayDetails extends Component {
 	  // get screen info
 	  const screen = device.screen && screens.find(s => s.screenCode === device.screen);
 	  let screenName;
-	  if (screen !== undefined && screen !== -1) {
+	  if (screen !== undefined) {
 	    screenName = screen.name;
 	  } else if (device.screen) {
 	    screenName = device.screen;
@@ -159,21 +159,21 @@ class DisplayDetails extends Component {
 		          <li className="nav-item mr-auto">
 		            <h2 className="detalles-titulo">
                 { updating
-                  ? <i className="fa fa-refresh fa-spin mr-3" aria-hidden="true" />
-                  : <i className="fa fa-television mr-3" aria-hidden="true" />
+                  ? <FontAwesomeIcon icon="sync-alt" spin className="mr-3" fixedWidth />
+                  : <FontAwesomeIcon icon="tv" className="mr-3" fixedWidth />
                 }
                 {name}</h2>
 		          </li>
 		          <li className="nav-item mr-2">
 		            <Link to={linktoEdit}>
 		              <button type="button" className="btn btn-warning">
-		                <i className="fa fa-pencil-square-o mr-2" aria-hidden="true" />Editar</button>
+		                <FontAwesomeIcon icon={['far', 'edit']} className="mr-2" fixedWidth />Editar</button>
 		            </Link>
 		          </li>
 		          <li className="nav-item ml-2">
 		            <Link to={linktoDelete}>
 		              <button type="button" className="btn btn-danger">
-		                <i className="fa fa-trash-o mr-2" aria-hidden="true" />Eliminar</button>
+		                <FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />Eliminar</button>
 		            </Link>
 		          </li>
 		        </ul>
@@ -185,22 +185,12 @@ class DisplayDetails extends Component {
         <div className="row">
           <div className="col-lg-6">
             <p className="titulo">DETALLES</p>
-            <p className="card-text">
-              <i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true" />{description}</p>
-            <p className="card-text">
-              <i className="fa fa-fw fa-map-marker mr-2" aria-hidden="true" />{locationName}</p>
-            <p className="card-text">
-              <i className="fa fa-fw fa-tablet mr-2" aria-hidden="true" />{device.name}</p>
-            <p className="card-text">
-              <i className="fa fa-fw fa-arrows-alt mr-2" aria-hidden="true" />{screenName}</p>
-            <p className="card-text">
-              <i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true" />{updated}</p>
-            <p className="card-text">
-              <i className="fa fa-fw fa-user-o mr-2" aria-hidden="true" />{
-                updatedBy
-                  ? updatedBy.name
-                  : 'Usuario eliminado'
-              }</p>
+            <p className="card-text"><FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />{description}</p>
+            <p className="card-text"><FontAwesomeIcon icon="map-marker-alt" className="mr-2" fixedWidth />{locationName}</p>
+            <p className="card-text"><FontAwesomeIcon icon="tablet-alt" className="mr-2" fixedWidth />{device.name}</p>
+            <p className="card-text"><FontAwesomeIcon icon={['far', 'window-maximize']} className="mr-2" fixedWidth />{screenName}</p>
+            <p className="card-text"><FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />{updated}</p>
+            <p className="card-text"><FontAwesomeIcon icon="user" className="mr-2" fixedWidth />{updatedBy ? updatedBy.name : 'Usuario eliminado'}</p>
             <p className="titulo">ETIQUETAS</p>
             {tagList}
           </div>
@@ -232,7 +222,7 @@ class DisplayDetails extends Component {
             <div className="col">
 	            <div className="asociados">
 	              <p className="titulo">IMAGENES ASOCIADAS ({images.length})</p>
-	              <Associated content={images} category="images" appearance="elemento-imagen" icon="picture-o" active={activeImage} />
+	              <Associated content={images} category="images" appearance="elemento-imagen" icon={['far', 'images']} active={activeImage} />
 	            </div>
 	          </div>
 						)
@@ -241,8 +231,8 @@ class DisplayDetails extends Component {
 						{ group
 	            && (
 								<div className="asociados">
-		             	<div tabIndex={0} role="button" onKeyDown={this.handleShowGroupImage} onClick={this.handleShowGroupImage} className="titulo text-right toggle"><p>MOSTRAR IMAGEN DE GRUPO</p><Icon icon={groupImageIcon} fw ml="1" /></div>
-									<Associated content={[group]} category="groups" appearance="elemento-grupo" icon="list" active={display.group._id} />
+		             	<div tabIndex={0} role="button" onKeyDown={this.handleShowGroupImage} onClick={this.handleShowGroupImage} className="titulo text-right toggle"><p>MOSTRAR IMAGEN DE GRUPO<FontAwesomeIcon icon={groupImageIcon} size="1x" className="ml-2" fixedWidth /></p></div>
+									<Associated content={[group]} category="groups" appearance="elemento-grupo" icon="layer-group" active={display.group._id} />
 		            </div>
 	            )
 						}

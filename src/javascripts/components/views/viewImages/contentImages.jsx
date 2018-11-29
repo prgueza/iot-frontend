@@ -25,7 +25,7 @@ const ContentImages = ({ filterValue, ...props }) => {
       </div>
       <div className="row-panel">
         <div className="panel">
-          <Title total={images.length} appearance="card title-images" icon="picture-o" />
+          <Title total={images.length} appearance="card title-images" icon={['far', 'images']} />
           <div className="row controls">
             <div className="col-4">
               <List filterValue={filterValue} category="images" content={images} />

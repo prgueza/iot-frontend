@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import Title from '../../tags/title';
@@ -8,22 +9,21 @@ import ManageUsers from './viewSettings-components/manageUsers';
 import ManageUserGroups from './viewSettings-components/manageUserGroups';
 import ManageLocations from './viewSettings-components/manageLocations';
 import ManageScreens from './viewSettings-components/manageScreens';
-import Icon from '../../icons/icon';
 
 /* COMPONENTS */
 const ContentSettings = (props) => {
   const menuItems = [
     {
-      id: 1, exact: true, text: 'Usuarios', icon: 'user-o', location: '/settings',
+      id: 1, exact: true, text: 'Usuarios', icon: 'user', location: '/settings',
     },
     {
       id: 2, exact: false, text: 'Grupos', icon: 'users', location: '/settings/groups',
     },
     {
-      id: 3, exact: false, text: 'Localizaciones', icon: 'map-marker', location: '/settings/locations',
+      id: 3, exact: false, text: 'Localizaciones', icon: 'map-marker-alt', location: '/settings/locations',
     },
     {
-      id: 4, exact: false, text: 'Pantallas', icon: 'window-maximize', location: '/settings/screens',
+      id: 4, exact: false, text: 'Pantallas', icon: ['far', 'window-maximize'], location: '/settings/screens',
     },
   ];
 
@@ -31,7 +31,7 @@ const ContentSettings = (props) => {
 			<div key={item.id} className="list-group-item flex-column align-items-start">
         <NavLink exact={item.exact} to={item.location}>
           <div className="d-flex elemento settings-menu-item">
-            <p className="mb-0"><Icon icon={item.icon} mr={3} />{item.text}</p>
+            <p className="mb-0"><FontAwesomeIcon icon={item.icon} className="mr-3" fixedWidth />{item.text}</p>
           </div>
         </NavLink>
       </div>));

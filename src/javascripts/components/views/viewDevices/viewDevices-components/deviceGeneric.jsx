@@ -1,5 +1,6 @@
 /* IMPORT MODULES */
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* COMPONENTS */
 const DeviceGeneric = () => (
@@ -8,7 +9,7 @@ const DeviceGeneric = () => (
       <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
         <li className="nav-item mr-auto">
           <h2 className="detalles-titulo text-center">
-            <i className="fa fa-tablet mr-3" aria-hidden="true" />
+            <FontAwesomeIcon icon="tablet-alt" className="mr-3" fixedWidth />
 						Detalles
           </h2>
         </li>
@@ -17,7 +18,7 @@ const DeviceGeneric = () => (
     <div className="card-body">
       <div className="text-center">
         <h1>
-          <i className="fa fa-arrow-left mr-3" />
+          <FontAwesomeIcon icon="arrow-left" className="mr-3" fixedWidth />
 					Seleccione un dispositivo físico
         </h1>
       </div>
