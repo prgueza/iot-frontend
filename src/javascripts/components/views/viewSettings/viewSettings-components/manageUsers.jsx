@@ -108,12 +108,12 @@ class ManageUsers extends Component {
 	            update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	            break;
 	          case 'post':
-	            notify('Usuario creado con éxito', 'notify-success', 'upload');
+	            notify('Usuario creado con éxito', 'notify-success', 'upload', res.data.notify);
 	           	update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
 	            this.edit(res.data.resourceId);
 	            break;
 	          case 'delete':
-	            notify('Usuario eliminado con éxito', 'notify-success', 'trash');
+	            notify('Usuario eliminado con éxito', 'notify-success', 'trash', res.data.notify);
 	            this.cancel();
 	            update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
 	            break;
@@ -127,7 +127,7 @@ class ManageUsers extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {

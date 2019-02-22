@@ -122,7 +122,7 @@ class ManageScreens extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {

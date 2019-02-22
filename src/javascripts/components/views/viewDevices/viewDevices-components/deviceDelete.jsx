@@ -32,12 +32,12 @@ class DeviceDelete extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status >= 200) {
-	        notify('Dispositivo eliminado con éxito', 'notify-success', 'trash');
-	        update('devices', res.resourceId, 'remove'); // update dataset
+	        notify('Dispositivo eliminado con éxito', 'notify-success', 'trash', res.data.notify);
+	        update('devices', res.data.resourceId, 'remove'); // update dataset
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al eliminar el dispositivo', 'notify-error', 'exclamation-triangle'));
+	    .catch(() => notify('Error al eliminar el dispositivo', 'notify-error', 'exclamation-triangle', false, 'error'));
 	}
 
 	render() {

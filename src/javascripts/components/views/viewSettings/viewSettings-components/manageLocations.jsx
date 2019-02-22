@@ -105,7 +105,7 @@ class ManageLocations extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {

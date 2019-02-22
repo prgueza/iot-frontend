@@ -98,7 +98,7 @@ class EditImageForm extends Component {
 	    },
 	  }).then((res) => {
 	      if (res.status >= 200) { // with success
-	        notify('Cambios realizados', 'notify-success', 'cloud-upload', res.data.notify); // notify success
+	        notify('Cambios realizados', 'notify-success', 'cloud-upload-alt', res.data.notify); // notify success
 	        handleCloseModal();
 	      } else {
 	        notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify, true); // notify error

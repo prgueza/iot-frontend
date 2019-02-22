@@ -92,14 +92,13 @@ class GatewayForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status >= 200) {
-	        notify('Puerta de enlace configurada con éxito', 'notify-success', 'upload');
-	        const action = gateway ? 'edit' : 'add';
-	        return update('gateways', res.data.resourceId, action, res.data.resource); // update dataset
+	        notify('Puerta de enlace configurada con éxito', 'notify-success', gateway ? 'save' : 'upload', res.data.notify);
+	        return update('gateways', res.data.resourceId, gateway ? 'edit' : 'add', res.data.resource); // update dataset
 	      }
 	      return null;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle'));
+	    .catch(() => notify('Error al configurar la puerta de enlace', 'notify-error', 'exclamation-triangle', false, 'error'));
 	}
 
 	/* RENDER COMPONENT */

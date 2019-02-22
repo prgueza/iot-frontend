@@ -104,7 +104,7 @@ class ManageUserGroups extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {

@@ -3,7 +3,8 @@
   "version": "0.1.5",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "watch": "nodemon ./bin/www",
     "build": "webpack --progress --config webpack.config.js"
   },
   "dependencies": {
@@ -22,12 +23,10 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "glamor": "^2.20.40",
-    "jquery": "^3.3.1",
     "moment": "^2.22.2",
     "mongoose": "^4.13.2",
     "morgan": "~1.9.0",
     "node-fetch": "^1.7.3",
-    "popper.js": "^1.14.3",
     "prop-types": "^15.6.2",
     "react": "^16.1.1",
     "react-cookie": "^2.2.0",
