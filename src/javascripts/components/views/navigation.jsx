@@ -1,10 +1,11 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Shapes } from '../util';
 
 /* IMPORT COMPONENTS */
 import NavButton from '../buttons/navButton';
-import Icon from '../icons/icon';
 
 /* COMPONENT */
 class Navigation extends Component {
@@ -29,13 +30,13 @@ class Navigation extends Component {
 	      id: 1, exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
 	    },
 	    {
-	      id: 2, exact: false, linkTo: 'displays', text: 'Displays', icon: 'television', count: true, number: displays ? `${displays.length}/${devices.length}` : '...', 
+	      id: 2, exact: false, linkTo: 'displays', text: 'Displays', icon: 'tv', count: true, number: displays ? `${displays.length}/${devices.length}` : '...',
 	    },
 	    {
-	      id: 3, exact: false, linkTo: 'images', text: 'Imagenes', icon: 'picture-o', count: true, number: images ? String(images.length) : '...',
+	      id: 3, exact: false, linkTo: 'images', text: 'Imagenes', icon: ['far', 'images'], count: true, number: images ? String(images.length) : '...',
 	    },
 	    {
-	      id: 4, exact: false, linkTo: 'groups', text: 'Grupos', icon: 'list', count: true, number: groups ? String(groups.length) : '...',
+	      id: 4, exact: false, linkTo: 'groups', text: 'Grupos', icon: 'layer-group', count: true, number: groups ? String(groups.length) : '...',
 	    },
 	  ];
 
@@ -44,7 +45,7 @@ class Navigation extends Component {
 	      id: 1, exact: true, linkTo: '', text: 'Vista general', icon: 'eye', count: false, number: '',
 	    },
 	    {
-	      id: 2, exact: false, linkTo: 'devices', text: 'Dispositivos', icon: 'tablet', count: true, number: devices ? String(devices.length) : '...',
+	      id: 2, exact: false, linkTo: 'devices', text: 'Dispositivos', icon: 'tablet-alt', count: true, number: devices ? String(devices.length) : '...',
 	    },
 	    {
 	      id: 3, exact: false, linkTo: 'gateways', text: 'Puertas de enlace', icon: 'sitemap', count: true, number: gateways ? String(gateways.length) : '...',
@@ -64,7 +65,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 						<button onClick={() => syncApi(token)} type="button" className="btn btn-nav btn-block mb-1">
-							<Icon icon="refresh" mr={2} fw />
+							<FontAwesomeIcon icon="sync" className="mr-2" fixedWidth />
 							Buscar dispositivos
 						</button>
 				  </li>
@@ -78,7 +79,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 				    <button onClick={() => sync()} type="button" className="btn btn-nav btn-block mb-1">
-				      <Icon icon="link" mr={2} fw />
+				      <FontAwesomeIcon icon="link" className="mr-2" fixedWidth />
 								Sincronizar
         		</button>
 				  </li>
@@ -86,27 +87,13 @@ class Navigation extends Component {
 	      break;
 	    }
 
-	    // synced
+	    // syncing
 	    case 2:
 	    {
 	      syncButton = (
 				  <li>
-				    <button type="button" className="btn btn-nav btn-block mb-1">
-				      <Icon icon="check" mr={2} fw />
-							Sincronizado
-        		</button>
-				  </li>
-	      );
-	      break;
-	    }
-
-	    // syncing
-	    case 3:
-	    {
-	      syncButton = (
-				  <li>
 				    <button onClick={() => syncApi(token)} type="button" className="btn btn-nav btn-block mb-1" disabled>
-				      <Icon icon="refresh" mr={2} fw spin />
+				      <FontAwesomeIcon icon="sync" className="mr-2" fixedWidth spin />
 							Sincronizando
 				    </button>
 				  </li>
@@ -139,14 +126,13 @@ class Navigation extends Component {
         <div className="mb-3">
           <p>SISTEMA</p>
           <ul className="nav-list">
-						{ user && !user.admin && <NavButton key="state" linkTo="state" text={estado} icon="cloud-upload" /> }
+						{ user && !user.admin && <NavButton key="state" linkTo="state" text={estado} icon="cloud-upload-alt" /> }
             {syncButton}
             { user && user.admin && <NavButton key="settings" linkTo="settings" text="Configuración" icon="cogs" /> }
             <li>
               <a tabIndex={-1} href="/disconect">
                 <button type="button" className="btn btn-nav btn-block mb-1">
-                  <Icon icon="sign-out" mr={2} fw />
-                  {' '}
+                  <FontAwesomeIcon icon="sign-out-alt" className="mr-2" fixedWidth />
 									Desconectar
                 </button>
               </a>
@@ -166,23 +152,8 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  data: PropTypes.shape({
-    displays: PropTypes.any,
-    groups: PropTypes.any,
-    images: PropTypes.any,
-    devices: PropTypes.any,
-    gateways: PropTypes.any,
-    screens: PropTypes.any,
-    locations: PropTypes.any,
-    users: PropTypes.any,
-  }),
-  user: PropTypes.shape({
-    admin: PropTypes.bool,
-    createdAt: PropTypes.string,
-    name: PropTypes.string,
-    url: PropTypes.string,
-    _id: PropTypes.string,
-  }),
+  data: PropTypes.shape(Shapes.data),
+  user: PropTypes.shape(Shapes.user),
   syncStatus: PropTypes.number.isRequired,
   token: PropTypes.string,
   filterValue: PropTypes.string,

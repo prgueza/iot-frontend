@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Shapes } from '../../util';
 
 /* IMPORT COMPONENTS */
 import Title from '../../tags/title';
@@ -22,7 +23,7 @@ const ContentState = ({ data, ...rest }) => {
       </div>
       <div className="row-panel">
         <div className="panel">
-          <Title appearance="card title-displays" icon="cloud-upload" />
+          <Title appearance="card title-displays" icon="cloud-upload-alt" />
           <div className="row controls">
 						<div className="col-12">
             	{logs}
@@ -35,7 +36,7 @@ const ContentState = ({ data, ...rest }) => {
 };
 
 ContentState.propTypes = {
-  data: PropTypes.shape({}),
+  data: PropTypes.shape(Shapes.data),
 };
 
 ContentState.defaultProps = {

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import User from '../../../lists/lists-components/user';
@@ -103,16 +104,16 @@ class ManageUsers extends Component {
 	      if (res.status === 201 || res.status === 200) {
 	        switch (method) {
 	          case 'put':
-	            notify('Usuario modificado con éxito', 'notify-success', 'floppy-o', res.data.notify);
+	            notify('Usuario modificado con éxito', 'notify-success', 'save', res.data.notify);
 	            update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	            break;
 	          case 'post':
-	            notify('Usuario creado con éxito', 'notify-success', 'upload');
+	            notify('Usuario creado con éxito', 'notify-success', 'upload', res.data.notify);
 	           	update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
 	            this.edit(res.data.resourceId);
 	            break;
 	          case 'delete':
-	            notify('Usuario eliminado con éxito', 'notify-success', 'trash');
+	            notify('Usuario eliminado con éxito', 'notify-success', 'trash', res.data.notify);
 	            this.cancel();
 	            update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
 	            break;
@@ -126,7 +127,7 @@ class ManageUsers extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {
@@ -161,7 +162,7 @@ class ManageUsers extends Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
-                <h2 className="detalles-titulo"><i className="fa fa-user mr-3" aria-hidden="true" />Usuarios</h2>
+                <h2 className="detalles-titulo"><FontAwesomeIcon icon="user" className="mr-3" fixedWidth />Usuarios</h2>
               </li>
             </ul>
           </div>
@@ -173,32 +174,32 @@ class ManageUsers extends Component {
                 <form>
                   <div className="form-row">
                     <div className="form-group col">
-                      <label htmlFor="login"><i className="fa fa-user-o mr-2" />Usuario</label>
+                      <label htmlFor="login"><FontAwesomeIcon icon="user" className="mr-2" fixedWidth />Usuario</label>
                       <input type="text" className="form-control" id="login" placeholder="Nombre de usuario" name="login" value={login} onChange={this.handleInputChange} />
                     </div>
                     <div className="form-group col">
-                      <label htmlFor="name"><i className="fa fa-id-card-o mr-2" />Nombre</label>
+                      <label htmlFor="name"><FontAwesomeIcon icon="id-card-alt" className="mr-2" fixedWidth />Nombre</label>
                       <input type="text" className="form-control" id="name" placeholder="Nombre completo" name="name" value={name} onChange={this.handleInputChange} />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group col">
-                      <label htmlFor="email"><i className="fa fa-envelope-o mr-2" />Correo electrónico</label>
+                      <label htmlFor="email"><FontAwesomeIcon icon="envelope" className="mr-2" fixedWidth />Correo electrónico</label>
                       <input type="email" className="form-control" id="email" placeholder="Correo electrónico" name="email" value={email} onChange={this.handleInputChange} />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group col">
-                      <label htmlFor="password"><i className="fa fa-key mr-2" />{edit ? 'Nueva contraseña' : 'Contraseña'}</label>
+                      <label htmlFor="password"><FontAwesomeIcon icon="key" className="mr-2" fixedWidth />{edit ? 'Nueva contraseña' : 'Contraseña'}</label>
                       <input autoComplete="on" type="password" className="form-control" id="password" placeholder="Contraseña" name="password" value={password} onChange={this.handleInputChange} />
                     </div>
                     <div className="form-group col">
-                      <label htmlFor="checkPassword"><i className="fa fa-key mr-2" />Confirmar contraseña</label>
+                      <label htmlFor="checkPassword"><FontAwesomeIcon icon="key" className="mr-2" fixedWidth />Confirmar contraseña</label>
                       <input autoComplete="on" type="password" className="form-control" id="checkPassword" placeholder="Confirmar contraseña" name="checkPassword" value={checkPassword} onChange={this.handleInputChange} />
                     </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="userGroup"><i className="fa fa-users mr-2" />Grupo de gestión de dispositivos</label>
+                    <label htmlFor="userGroup"><FontAwesomeIcon icon="users" className="mr-2" fixedWidth />Grupo de gestión de dispositivos</label>
                     <div>
                       <select className="custom-select" name="userGroup" value={userGroup} onChange={this.handleInputChange}>
                         <option value="" key="0">Sin asignar</option>
@@ -213,12 +214,12 @@ class ManageUsers extends Component {
 										</div>
                   </div>
                   { !edit
-                    ? <button onClick={() => this.handleSubmit('post')} type="button" className="btn btn-block btn-small btn-success"><i className="fa fa-plus-circle mr-1" aria-hidden="true" />Añadir</button>
+                    ? <button onClick={() => this.handleSubmit('post')} type="button" className="btn btn-block btn-small btn-success"><FontAwesomeIcon icon="plus-circle" className="mr-2" fixedWidth />Añadir</button>
                     : (
                     <div className="d-flex w-100 justify-content-between">
-                      <button onClick={() => this.handleSubmit('put')} type="button" className="btn btn-block btn-small btn-success mr-2"><i className="fa fa-floppy-o mr-1" aria-hidden="true" />Actualizar</button>
-                      <button onClick={() => this.handleSubmit('delete')} type="button" className="btn btn-block btn-small btn-danger ml-1 mr-1"><i className="fa fa-trash-o mr-1" aria-hidden="true" />Eliminar</button>
-                      <button onClick={() => this.cancel()} type="button" className="btn btn-block btn-small btn-warning ml-2"><i className="fa fa-times mr-1" aria-hidden="true" />Cancelar</button>
+                      <button onClick={() => this.handleSubmit('put')} type="button" className="btn btn-block btn-small btn-success mr-2"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Actualizar</button>
+                      <button onClick={() => this.handleSubmit('delete')} type="button" className="btn btn-block btn-small btn-danger ml-1 mr-1"><FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />Eliminar</button>
+                      <button onClick={() => this.cancel()} type="button" className="btn btn-block btn-small btn-warning ml-2"><FontAwesomeIcon icon={['far', 'times-circle']} className="mr-2" fixedWidth />Cancelar</button>
                     </div>
                     )
                   }

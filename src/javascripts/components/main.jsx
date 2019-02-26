@@ -13,22 +13,6 @@ import Notification from './tags/notification';
 /* CONFIGURE AXIOS */
 axios.defaults.baseURL = process.env.API_URL;
 
-const notifications = {
-  image: {
-    post: 'Imagen configurada con éxito',
-    put: 'Imagen actualizada con éxito',
-    delete: 'Imagen eliminada con éxito',
-  },
-  display: {
-    post: 'Display configurado con éxito',
-    put: 'Display actualizado con éxito',
-    delete: 'Display eliminado con éxito',
-  },
-  post: {
-    icon: 'upload',
-  },
-};
-
 /* COMPONENT */
 class Main extends Component {
   constructor(props) {
@@ -43,7 +27,7 @@ class Main extends Component {
       data: {},
       // sync
       syncedDevices: [],
-      // 0: unsynced 1: sync_ready 2: synced 3: syncing
+      // 0: unsynced 1: sync_ready 2: syncing
       syncStatus: 0,
       sendingImage: false,
       lastSynced: null,
@@ -79,7 +63,7 @@ class Main extends Component {
   /* SET SOCKET.IO */
   socketio = (token) => {
     // Manage socket interaction
-    const socket = io('http://localhost:4000');
+    const socket = io(process.env.API_URL);
     socket.emit('login', token);
     socket.on('update queue', (queue) => {
       this.setState({ queue });
@@ -163,8 +147,8 @@ class Main extends Component {
 	/* SYNC DATA */
 	syncApi = (token) => {
 	  // set state to syncing
-	  this.setState({ syncStatus: 3, lastSynced: moment() });
-	  this.notifySync('Buscando dispositivos...', 'notify-success', 'refresh', 'Esto puede llevar varios minutos');
+	  this.setState({ syncStatus: 2, lastSynced: moment() });
+	  this.notifySync('Buscando dispositivos...', 'notify-success', 'sync-alt', 'Esto puede tardar hasta 40s');
 
 	  // request the update
 	  axios.get('/update', {
@@ -176,7 +160,7 @@ class Main extends Component {
 	    .then(
 	      (res) => {
 	        if (res.status === 200) {
-	          this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false, 'Sincronice la aplicación con los dispositivos encontrados');
+	          this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false, 'Sincronice los dispositivos encontrados');
 	          this.setState({ syncedDevices: res.data, syncStatus: 1, lastSynced: moment() });
 	        } else {
 	          this.updateSync('Error en la búsqueda', 'notify-warning', 'exclamation-triangle', false, res.data.notify, 'warning');
@@ -201,7 +185,7 @@ class Main extends Component {
 	  const devices = syncedDevices;
 	  data.devices = devices;
 	  this.updateSync('Dispositivos sincronizados', 'notify-success', 'check', true, 'Dispositivos sincronizados con éxito');
-	  this.setState({ data, syncStatus: 2 });
+	  this.setState({ data, syncStatus: 0 });
 	}
 
 	/* HANDLE SEARCH */
@@ -266,11 +250,12 @@ class Main extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  return (
-  <div className="row main">
-    <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
-    <Navigation filterData={this.filterData} sync={this.sync} syncApi={this.syncApi} {...this.state} />
-    <Content filterData={this.filterData} filterFound={this.filterFound} filterConfigured={this.filterConfigured} update={this.update} notify={this.notify} {...this.state} />
-  </div>);
+      <div className="row main">
+        <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
+        <Navigation filterData={this.filterData} sync={this.sync} syncApi={this.syncApi} {...this.state} />
+        <Content filterData={this.filterData} filterFound={this.filterFound} filterConfigured={this.filterConfigured} update={this.update} notify={this.notify} {...this.state} />
+      </div>
+	  );
 	}
 }
 

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 
@@ -31,12 +32,12 @@ class DeviceDelete extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status >= 200) {
-	        notify('Dispositivo eliminado con éxito', 'notify-success', 'trash-o');
-	        update('devices', res.resourceId, 'remove'); // update dataset
+	        notify('Dispositivo eliminado con éxito', 'notify-success', 'trash', res.data.notify);
+	        update('devices', res.data.resourceId, 'remove'); // update dataset
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al eliminar el dispositivo', 'notify-error', 'exclamation-triangle'));
+	    .catch(() => notify('Error al eliminar el dispositivo', 'notify-error', 'exclamation-triangle', false, 'error'));
 	}
 
 	render() {
@@ -48,7 +49,7 @@ class DeviceDelete extends Component {
       <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
         <li className="nav-item mr-auto">
           <h2 className="detalles-titulo">
-            <i className="fa fa-trash mr-3" aria-hidden="true" />
+            <FontAwesomeIcon icon="trash" className="mr-3" fixedWidth />
 						Eliminar dispositivo físico
           </h2>
         </li>
@@ -56,11 +57,11 @@ class DeviceDelete extends Component {
     </div>
     <div className="card-body">
       <div className="text-center">
-        <h1>¿Eliminar dispositivo físico</h1>
+        <h1>¿Eliminar dispositivo físico?</h1>
         <hr className="card-division" />
         <p>Esta acción no se puede deshacer</p>
         <button onClick={this.handleDelete} type="button" className="btn btn-block btn-danger">
-          <i className="fa fa-trash mr-1" aria-hidden="true" />
+          <FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />
 					Eliminar
         </button>
       </div>

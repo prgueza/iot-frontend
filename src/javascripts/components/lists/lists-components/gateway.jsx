@@ -2,6 +2,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 const cx = require('classnames');
@@ -27,20 +28,20 @@ const Gateway = ({
           <div className="d-flex w-100 justify-content-between">
             <h5 className="w-60"><strong>{name}</strong></h5>
             <small>
-              <i className="fa fa-wifi mr-2" aria-hidden="true" />
               {ip}
+              <FontAwesomeIcon icon="wifi" className="ml-2" fixedWidth />
             </small>
           </div>
           <hr className="element-division" />
           <p className="mb-3 mt-2">{description}</p>
           <div className="d-flex w-100 justify-content-between mt-3">
             <small>
-              <i className="fa fa-server mr-2" aria-hidden="true" />
+              <FontAwesomeIcon icon="server" className="mr-2" fixedWidth />
               {mac}
             </small>
             <small>
               {created}
-              <i className="fa fa-calendar-o ml-1" aria-hidden="true" />
+              <FontAwesomeIcon icon={['far', 'calendar']} className="ml-2" fixedWidth />
             </small>
           </div>
         </div>

@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 const cx = require('classnames');
@@ -10,7 +11,7 @@ moment.locale('es');
 /* COMPONENT */
 const Screen = ({
   screen: {
-    _id, name, width, height, description, screenCode, colorProfile, createdAt,
+    _id, name, width, height, description, screenCode, color, createdAt,
   }, edit, active,
 }) => {
   const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { active });
@@ -20,7 +21,7 @@ const Screen = ({
         <div className="d-flex w-100 justify-content-between">
           <h5 className="mb-1">
             <strong>
-              <i className="fa fa-window-maximize mr-2" aria-hidden="true" />
+              <FontAwesomeIcon icon={['far', 'window-maximize']} className="mr-2" fixedWidth />
               {name}
             </strong>
           </h5>
@@ -35,13 +36,13 @@ const Screen = ({
         </div>
         <div className="d-flex w-100 justify-content-between">
           <small>
-            <i className="fa fa-code mr-1" aria-hidden="true" />
+            <FontAwesomeIcon icon="fingerprint" className="mr-2" fixedWidth />
             {screenCode}
-            <i className="fa fa-adjust ml-3 mr-1" aria-hidden="true" />
-            {colorProfile}
+            <FontAwesomeIcon icon="adjust" className="mr-2 ml-3" fixedWidth />
+            {color}
           </small>
           <small>
-            <i className="fa fa-calendar-o mr-2" aria-hidden="true" />
+            <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />
             {moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')}
           </small>
         </div>

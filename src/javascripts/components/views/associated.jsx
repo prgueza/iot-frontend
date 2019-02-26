@@ -2,9 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-/* IMPORT COMPONENTS */
-import Icon from '../icons/icon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* COMPONENT */
 const Associated = ({
@@ -16,6 +14,13 @@ const Associated = ({
     return (
       <div className="list-group list-group-small mb-3">
         {content.map((element) => {
+          const battery = [
+            { icon: 'battery-empty', set: element.batt < 20 },
+            { icon: 'battery-quarter', set: element.batt >= 20 && element.batt < 40 },
+            { icon: 'battery-half', set: element.batt >= 40 && element.batt < 60 },
+            { icon: 'battery-three-quarters', set: element.batt >= 60 && element.batt < 80 },
+            { icon: 'battery-full', set: element.batt >= 80 },
+          ];
           const className = `d-flex elemento ${appearance}`;
           const location = {
             pathname: `/${category}/${element._id}`,
@@ -28,28 +33,28 @@ const Associated = ({
                     ? (
                       <div className="d-flex elemento elemento-dispositivo w-100 justify-content-between align-items-center">
                         <div className="mb-0">
-                          <Icon icon={icon} mr={3} />
+                          <FontAwesomeIcon icon={icon} className="mr-3" />
                           {element.name}
                         </div>
                         { element.found
                           ? (
                             <span>
                               <small className="mb-0">
-                                <Icon icon="battery" mr={1} />
                                 {element.batt}
-                                <Icon icon="signal" mr={1} ml={2} />
+                                <FontAwesomeIcon icon={battery.find(bat => bat.set).icon} className="mr-3 ml-1" fixedWidth />
                                 {element.rssi}
+                                <FontAwesomeIcon icon="wifi" className="ml-1" fixedWidth />
                               </small>
                             </span>
                           )
-                          : <span><small className="mb-0"><Icon icon="chain-broken" mr={1} /></small></span>
+                          : <span><small className="mb-0"><FontAwesomeIcon icon="unlink" fixedWidth /></small></span>
                       }
                       </div>
                     )
                     : (
                       <div className={className}>
                         <p className="mb-0">
-                          <Icon icon={icon} mr={3} />
+                          <FontAwesomeIcon icon={icon} className="mr-3" />
                           {element.name}
                         </p>
                       </div>
@@ -66,8 +71,8 @@ const Associated = ({
 
 Associated.propTypes = {
   content: PropTypes.arrayOf(PropTypes.object),
-  category: PropTypes.string.isRequired,
   active: PropTypes.shape({}),
+  category: PropTypes.string.isRequired,
   appearance: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
 };

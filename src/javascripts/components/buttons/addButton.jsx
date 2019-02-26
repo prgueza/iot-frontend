@@ -1,9 +1,8 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const cx = require('classnames');
 
@@ -15,20 +14,10 @@ const AddButton = ({ category }) => {
   };
   return (
     <Link to={location}>
-      { category !== 'displays'
-        ? (
-          <button type="button" className={claseBoton}>
-            <i className="fa fa-plus-circle mr-1" aria-hidden="true" />
-						Añadir
-          </button>
-        )
-        : (
-          <button type="button" className={claseBoton}>
-            <i className="fa fa-wrench mr-1" aria-hidden="true" />
-						Configurar
-          </button>
-        )
-      }
+      <button type="button" className={claseBoton}>
+        <FontAwesomeIcon icon="plus-circle" className="mr-1" />
+				Añadir
+      </button>
     </Link>
   );
 };

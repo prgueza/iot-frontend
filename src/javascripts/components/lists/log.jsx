@@ -2,9 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
-import Icon from '../icons/icon';
 import Timeline from '../tags/timeline';
 
 /* COMPONENT */
@@ -17,10 +17,8 @@ class Log extends React.Component {
   }
 
   showTimeline = () => {
-    const { display: { updating } } = this.props;
-    if (updating) {
-      return;
-    }
+    const { display: { updating, timeline } } = this.props;
+    if (updating || timeline === '') { return; }
     const { showTimeline } = this.state;
     this.setState({ showTimeline: !showTimeline });
   }
@@ -41,7 +39,7 @@ class Log extends React.Component {
 	    },
 	  }).then((res) => {
 	    if (res.status === 200 || res.status === 201) { // with success
-	       notify('Cambios realizados', 'notify-success', 'cloud-upload', res.data.notify); // notify success
+	       notify('Cambios realizados', 'notify-success', 'cloud-upload-alt', res.data.notify); // notify success
 	    } else {
 	      notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify, true); // notify error
 	    }
@@ -62,7 +60,7 @@ class Log extends React.Component {
     if (index === 0) { // if it's the first one in queue
       result = 'updating';
       spin = true;
-      icon = 'refresh';
+      icon = 'sync-alt';
       mod = 'text-warning';
     } else if (index !== -1) { // if it's in the queue but it's not the first one
       result = 'updating';
@@ -70,29 +68,34 @@ class Log extends React.Component {
       mod = 'text-warning';
     } else if (display.lastUpdateResult) { // if it's not in the queue but was updated correctly
       result = 'success';
-      icon = 'check-circle-o';
+      icon = ['far', 'check-circle'];
       mod = 'text-success';
     } else { // if it's not in the queue but was not updated correctly
       result = 'error';
-      icon = 'times-circle-o';
+      icon = ['far', 'times-circle'];
       mod = 'text-error';
     }
     return (
       <div className={`card log card-${result}`}>
         <div className="card-body row">
           <div className={`col-1 d-flex align-items-center justify-content-center ${mod}`}>
-            <Icon icon={icon} fw size={3} spin={spin} />
+            <FontAwesomeIcon icon={icon} size="2x" fixedWidth spin={spin} />
           </div>
-          <div className="col-8 d-flex align-items-center">
+          <div className="col-8 my-2 d-flex align-items-center">
             <h4 onClick={this.showTimeline} className="mb-0">
-              <Icon icon={showTimeline ? 'caret-down' : 'caret-right'} mr={1} />
+              <FontAwesomeIcon icon={showTimeline ? 'caret-down' : 'caret-right'} className="mr-2" fixedWidth />
+              {display && display.name && <FontAwesomeIcon icon="tv" className="mr-2 ml-2" fixedWidth />}
               {display && display.name}
-              <Icon icon="arrow-right" mr={2} ml={2} />
+              {display && display.activeImage && (
+                <span>
+                  <FontAwesomeIcon icon="arrow-right" className="mr-2 ml-2" fixedWidth />
+                  <FontAwesomeIcon icon={['far', 'image']} className="mr-2 ml-2" fixedWidth />
+                </span>)}
               {display && display.activeImage && display.activeImage.name}
             </h4>
           </div>
           <div className={`col-3 d-flex align-items-center justify-content-end ${mod}`}>
-            {!display.updating && <button onClick={this.handleSendImage} type="button" className="btn btn-primary"><Icon icon="cloud-upload" fw mr={2} />Enviar imagen</button>}
+            {!display.updating && <button onClick={this.handleSendImage} type="button" className="btn btn-primary"><FontAwesomeIcon icon="cloud-upload-alt" className="mr-2" fixedWidth />Enviar imagen</button>}
           </div>
           {showTimeline && !display.updating
             && (

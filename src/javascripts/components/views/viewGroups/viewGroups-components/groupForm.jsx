@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import Tag from '../../../tags/tag';
@@ -16,66 +17,36 @@ class GroupForm extends Component {
   constructor(props) {
     super(props);
     const { group, user } = this.props;
-    let createdBy = user;
-    let activeImage = '';
-    if (group && group.activeImage) {
-      const aux = group.activeImage;
-      activeImage = aux;
-    }
-    if (group && group.CreatedBy) {
-      createdBy = group.CreatedBy;
-    } else if (group) {
-      createdBy = 'Usuario eliminado';
-    }
     this.state = {
-      // form data stored in state
-      activeImage,
-      createdBy,
       name: group ? group.name : '',
       description: group ? group.description : '',
-      updatedBy: user.name,
       tags: group ? group.tags : [],
       images: group ? group.images.map(image => image._id) : [],
       displays: group ? group.displays.map(display => display._id) : [],
-      optionsActiveImage: [],
+      createdAt: group ? moment(group.createdAt) : moment(),
+      updatedAt: moment(),
+      createdBy: group ? group.createdBy || null : user,
+      updatedBy: user.name,
       redirect: false,
-      redirectLocation: '',
     };
-  }
-
-  /* INITIAL VALUES FOR FORM INPUTS */
-  componentDidMount() {
-    const { data, group } = this.props;
-    const { images } = this.state;
-    // options for select inputs
-    const optionsActiveImage = data.images.filter(image => images.find(c => c === image._id))
-      .map(image => <option value={image._id} key={image._id}>{image.name}</option>);
-    // set state with initial values
-    this.setState({
-      optionsActiveImage,
-      redirectLocation: group ? `/groups/${group._id}` : '/groups/',
-    });
   }
 
   /* HANDLE INPUT CHANGE (CONTROLLED FORM) */
 	handleInputChange = (event) => {
-	  const { target, target: { name } } = event;
-	  let value;
-	  if (name === 'tags') {
-	    value = target.value.split(','); // TODO: better string to array conversion
-	  } else {
-	    const { value: aux } = target;
-	    value = aux;
-	  }
-	  this.setState({
-	    [name]: value,
-	  });
+	  const { target: { name, value } } = event;
+	  this.setState({ [name]: value });
 	}
+
+  handleTagsChange = (event) => {
+    const { target, target: { name } } = event;
+    const value = target.value.split(',');
+	  this.setState({ [name]: value });
+  }
 
 	/* HANDLE MULTIPLE CHECKBOX */
 	handleCheckDisplays = (event) => {
 	  // get value from the checkbox
-	  const { target: { value } } = event;
+	  const { target, target: { value } } = event;
 	  const { displays } = this.state;
 	  // check if the checkbox has been selected
 	  if (!displays.find(c => c === value)) { // check if value is stored in state
@@ -83,11 +54,13 @@ class GroupForm extends Component {
 	    const prevState = displays;
 	    prevState.push(value);
 	    this.setState({ displays: prevState });
+	    target.checked = true;
 	  } else {
 	    // if it IS stored, save the state, splice the old value and save back the new state
 	    const prevState = displays;
 	    prevState.splice(prevState.indexOf(value), 1);
 	    this.setState({ displays: prevState });
+	    target.checked = false;
 	  }
 	}
 
@@ -95,7 +68,6 @@ class GroupForm extends Component {
 	  // get value from the checkbox
 	  const { target, target: { value } } = event;
 	  const { images } = this.state;
-	  const { data } = this.props;
 	  // check if the checkbox has been selected
 	  if (!images.find(c => c === value)) { // check if value is stored in state
 	    // if it is NOT stored, save the state, push the new value and save back the new state
@@ -110,43 +82,27 @@ class GroupForm extends Component {
 	    this.setState({ images: prevState });
 	    target.checked = false;
 	  }
-	  if (images.length === 1) {
-	    // set when first image is selected
-	    this.setState({ activeImage: images[0] });
-	  } else if (images.length === 0) {
-	    // if there are no images deselect
-	    this.setState({ activeImage: '' });
-	  }
-	  this.setState({
-	    optionsActiveImage: data.images.filter(image => images.find(c => c === image._id))
-	      .map(image => <option value={image._id} key={image._id}>{image.name}</option>),
-	  });
-	} // TODO: filter options and hide unselected options for reviewing / Also limit images could be an option
+	}
 
 	/* HANDLE SUBMIT */
 	handleSubmit = () => {
 	  // get image if any
 	  const {
-	    group, user, token, notify, update,
+	    group, token, notify, update,
 	  } = this.props;
 	  const {
-	    name, description, updatedBy, tags, activeImage, displays, images,
+	    name, description, updatedBy, createdBy, tags, displays, images,
 	  } = this.state;
 	  // define form values to send
 	  const form = {
 	    name,
 	    description,
-	    tags,
-	    activeImage: null,
-	    displays: [],
-	    images: [],
-	    updatedBy: updatedBy._id, // send user_id
+	    displays,
+	    images,
+	    tags: tags.map(tag => tag.trim()),
+	    createdBy: createdBy._id,
+	    updatedBy: updatedBy._id,
 	  };
-	  // possible empty fields
-	  if (!group) form.createdBy = user._id;
-	  if (activeImage !== '') form.activeImage = activeImage;
-	  if (displays.length > 0) form.displays = displays;
-	  if (images.length > 0) form.images = images;
 	  // HTTP request
 	  axios({
 	    method: group ? 'put' : 'post',
@@ -155,10 +111,10 @@ class GroupForm extends Component {
 	    headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
 	  })
 	    .then((res) => {
-	      if (res.status === 201) {
+	      if (res.status >= 200) {
+	        this.setState({ redirectLocation: `/groups/${res.data.resourceId}` });
 	        notify('Grupo configurado con éxito', 'notify-success', 'check', res.data.notify);
-	        const action = group ? 'edit' : 'add';
-	        update('groups', res.resourceId, action, res.data.resource); // update dataset
+	        update('groups', res.data.resourceId, group ? 'edit' : 'add', res.data.resource); // update dataset
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))
@@ -171,13 +127,13 @@ class GroupForm extends Component {
 	    data,
 	  } = this.props;
 	  const {
-	    displays, images, redirect, redirectLocation, name, description, activeImage, optionsActiveImage, tags, createdAt, updatedAt, createdBy,
+	    displays, images, redirect, redirectLocation, name, description, tags, createdAt, updatedAt, createdBy,
 	  } = this.state;
 	  // Options
 	  const optionsDisplays = data.displays.sort((a, b) => a.updated_at - b.updated_at)
 	    .map(display => (
         <div key={display._id} className="custom-control custom-checkbox">
-				  <input onChange={this.handleCheckDisplays} id={display._id} type="checkbox" defaultChecked={displays.find(c => c === data.displays._id)} name={display._id} defaultValue={display._id} className="custom-control-input" />
+				  <input onChange={this.handleCheckDisplays} id={display._id} type="checkbox" defaultChecked={displays.find(c => c === display._id)} name={display._id} defaultValue={display._id} className="custom-control-input" />
 				  <label className="custom-control-label" htmlFor={display._id}>{display.name}</label>
 				</div>
 	    ));
@@ -199,14 +155,14 @@ class GroupForm extends Component {
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
               { group
-                ? <h2 className="detalles-titulo"><i className="fa fa-pencil mr-3" aria-hidden="true" />Editar un grupo</h2>
-                : <h2 className="detalles-titulo"><i className="fa fa-plus-circle mr-3" aria-hidden="true" />Añadir un nuevo Grupo</h2>
+                ? <h2 className="detalles-titulo"><FontAwesomeIcon icon={['far', 'edit']} className="mr-3" fixedWidth />Editar un grupo</h2>
+                : <h2 className="detalles-titulo"><FontAwesomeIcon icon="plus-circle" className="mr-3" fixedWidth />Añadir un nuevo Grupo</h2>
               }
               </li>
               <li className="nav-item ml-2">
               { group
-                ? <button onClick={() => this.handleSubmit()} type="button" className="btn btn-warning"><i className="fa fa-save mr-2" aria-hidden="true" />Guardar cambios</button>
-                : <button onClick={() => this.handleSubmit()} type="button" className="btn btn-warning"><i className="fa fa-plus-circle mr-2" aria-hidden="true" />Añadir</button>
+                ? <button onClick={() => this.handleSubmit()} type="button" className="btn btn-warning"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Guardar cambios</button>
+                : <button onClick={() => this.handleSubmit()} type="button" className="btn btn-warning"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Añadir</button>
               }
               </li>
             </ul>
@@ -214,29 +170,22 @@ class GroupForm extends Component {
           <div className="card-body">
             <form id="form">
               <div className="form-group">
-                <label htmlFor="name"><i className="fa fa-picture-o mr-2" />Nombre</label>
+                <label htmlFor="name"><FontAwesomeIcon icon="layer-group" className="mr-2" fixedWidth />Nombre</label>
                 <input type="text" className="form-control" id="name" name="name" value={name} onChange={this.handleInputChange} placeholder="Nombre del grupo" />
               </div>
               <div className="form-group">
-                <label htmlFor="description"><i className="fa fa-info-circle mr-2" />Descripcion</label>
+                <label htmlFor="description"><FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />Descripcion</label>
                 <input type="text" className="form-control" id="description" name="description" value={description} onChange={this.handleInputChange} placeholder="Descripcion del Grupo" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="activeImage"><i className="fa fa-picture-o mr-2" />Seleccionar la imagen activa</label>
-                <select className="custom-select" id="activeImage" name="activeImage" value={activeImage} onChange={this.handleInputChange}>
-                  <option value="" key={0}>Sin imagen activa</option>
-                  {optionsActiveImage}
-                </select>
               </div>
               <div className="form-row">
                 <div className="form-group col">
-                  <label htmlFor="images"><i className="fa fa-picture-o mr-2" />Asociar una o varias imágenes</label>
+                  <label htmlFor="images"><FontAwesomeIcon icon={['far', 'images']} className="mr-2" fixedWidth />Asociar una o varias imágenes</label>
                   <div className="custom-controls-stacked">
                     {optionsImages}
                   </div>
                 </div>
                 <div className="form-group col">
-                  <label htmlFor="displays"><i className="fa fa-television mr-2" />Asociar uno o varios displays</label>
+                  <label htmlFor="displays"><FontAwesomeIcon icon="tv" className="mr-2" fixedWidth />Asociar uno o varios displays</label>
                   <div className="custom-controls-stacked">
                     {optionsDisplays}
                   </div>
@@ -244,15 +193,15 @@ class GroupForm extends Component {
               </div>
               <div className="form-row">
                 <div className="form-group col">
-                  <label htmlFor="tags"><i className="fa fa-tags mr-2" />Etiquetas</label>
-                  <input type="text" className="form-control" name="tags" id="tags" value={tags} onChange={this.handleInputChange} />
+                  <label htmlFor="tags"><FontAwesomeIcon icon="tags" className="mr-2" fixedWidth />Etiquetas</label>
+                  <input type="text" className="form-control" name="tags" id="tags" value={tags} onChange={this.handleTagsChange} />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col">
                   {
                     tags.map(
-                      tag => (tag.length > 1
+                      tag => (tag.trim().length
                         ? <Tag key={tag} tag={tag} category="groups" />
                         : ''),
                     )
@@ -261,17 +210,17 @@ class GroupForm extends Component {
               </div>
               <div className="form-row">
                 <div className="form-group col-md-6">
-                  <label htmlFor="fechaCreacion"><i className="fa fa-calendar-o mr-2" />Fecha de creación</label>
+                  <label htmlFor="fechaCreacion"><FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Fecha de creación</label>
                   <input type="text" className="form-control" id="fechaCreacion" name="created_at " value={moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
                 </div>
                 <div className="form-group col-md-6">
-                  <label htmlFor="fechaModificacion"><i className="fa fa-calendar-o mr-2" />Fecha de modificación</label>
+                  <label htmlFor="fechaModificacion"><FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Fecha de modificación</label>
                   <input type="text" className="form-control" id="fechaModificacion" name="updated_at" value={moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="creador"><i className="fa fa-user-o mr-2" />Creador</label>
-                <input type="text" className="form-control" id="creador" name="user" value={createdBy.name} readOnly />
+                <label htmlFor="creador"><FontAwesomeIcon icon="user" className="mr-2" fixedWidth />Creador</label>
+                <input type="text" className="form-control" id="creador" name="user" value={createdBy ? createdBy.name : 'Usuario eliminado'} readOnly />
               </div>
             </form>
           </div>
@@ -281,12 +230,12 @@ class GroupForm extends Component {
 }
 
 GroupForm.propTypes = {
-  group: PropTypes.shape,
-  user: PropTypes.shape.isRequired,
-  data: PropTypes.shape.isRequired,
+  group: PropTypes.shape({}),
+  user: PropTypes.shape({}).isRequired,
+  data: PropTypes.shape({}).isRequired,
   token: PropTypes.string.isRequired,
-  update: PropTypes.shape.isRequired,
-  notify: PropTypes.shape.isRequired,
+  update: PropTypes.func.isRequired,
+  notify: PropTypes.func.isRequired,
 };
 
 GroupForm.defaultProps = {

@@ -22,16 +22,16 @@ const Overview = ({
     { !user.admin
         && (
         <div className="row row-panel">
-          <Panel content={displays} devices={devices} {...rest} category="displays" appearance="card title-displays" icon="television" size="small" />
-          <Panel content={images} {...rest} category="images" appearance="card title-images" icon="picture-o" size="small" />
-          <Panel content={groups} {...rest} category="groups" appearance="card title-groups" icon="list" size="small" />
+          <Panel content={displays} devices={devices} {...rest} category="displays" appearance="card title-displays" icon="tv" size="small" />
+          <Panel content={images} {...rest} category="images" appearance="card title-images" icon={['far', 'images']} size="small" />
+          <Panel content={groups} {...rest} category="groups" appearance="card title-groups" icon="layer-group" size="small" />
         </div>
         )
       }
     { user.admin
         && (
         <div className="row row-panel">
-          <Panel content={devices} {...rest} category="devices" appearance="card title-devices" icon="tablet" size="big" />
+          <Panel content={devices} {...rest} category="devices" appearance="card title-devices" icon="tablet-alt" size="big" />
           <Panel content={gateways} {...rest} category="gateways" appearance="card title-gateways" icon="sitemap" size="big" />
         </div>
         )

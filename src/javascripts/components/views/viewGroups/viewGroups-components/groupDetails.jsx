@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import Associated from '../../associated';
@@ -71,16 +72,16 @@ class GroupDetails extends Component {
       <div className="card-header">
         <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
           <li className="nav-item mr-auto">
-            <h2 className="detalles-titulo"><i className="fa fa-list mr-3" aria-hidden="true" />{name}</h2>
+            <h2 className="detalles-titulo"><FontAwesomeIcon icon="layer-group" className="mr-3" fixedWidth />{name}</h2>
           </li>
           <li className="nav-item mr-2">
             <Link to={linktoEdit}>
-              <button type="button" className="btn btn-warning"><i className="fa fa-pencil-square-o mr-1" aria-hidden="true" />Editar</button>
+              <button type="button" className="btn btn-warning"><FontAwesomeIcon icon={['far', 'edit']} className="mr-2" fixedWidth />Editar</button>
             </Link>
           </li>
           <li className="nav-item ml-2">
             <Link to={linktoDelete}>
-              <button type="button" className="btn btn-danger"><i className="fa fa-trash-o" aria-hidden="true" />Eliminar</button>
+              <button type="button" className="btn btn-danger"><FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />Eliminar</button>
             </Link>
           </li>
         </ul>
@@ -92,9 +93,9 @@ class GroupDetails extends Component {
         <div className="row">
           <div className="col-lg-6">
             <p className="titulo">DETALLES</p>
-            <p className="card-text"><i className="fa fa-fw fa-info-circle mr-2" aria-hidden="true" />{description}</p>
-            <p className="card-text"><i className="fa fa-fw fa-calendar-o mr-2" aria-hidden="true" />{created}</p>
-            <p className="card-text"><i className="fa fa-fw fa-user-o mr-2" aria-hidden="true" /> {createdBy ? createdBy.name : 'Usuario eliminado'}</p>
+            <p className="card-text"><FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />{description}</p>
+            <p className="card-text"><FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />{created}</p>
+            <p className="card-text"><FontAwesomeIcon icon="user" className="mr-2" fixedWidth />{createdBy ? createdBy.name : 'Usuario eliminado'}</p>
             <p className="titulo">ETIQUETAS</p>
             {tagList}
           </div>
@@ -124,13 +125,13 @@ class GroupDetails extends Component {
           <div className="col">
             <div className="asociados">
               <p className="titulo">DISPLAYS ({displays.length})</p>
-              <Associated content={displays} category="displays" appearance="elemento-display" icon="television" />
+              <Associated content={displays} category="displays" appearance="elemento-display" icon="tv" />
             </div>
           </div>
           <div className="col">
             <div className="asociados">
               <p className="titulo text-right">IMAGENES ASOCIADAS ({images.length})</p>
-              <Associated content={images} category="images" appearance="elemento-imagen" icon="picture-o" active={activeImage} />
+              <Associated content={images} category="images" appearance="elemento-imagen" icon={['far', 'image']} active={activeImage} />
             </div>
           </div>
         </div>

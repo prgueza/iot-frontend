@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* IMPORT COMPONENTS */
 import UserGroup from '../../../lists/lists-components/userGroup';
@@ -80,7 +81,7 @@ class ManageUserGroups extends Component {
 	      if (res.status === 201 || res.status === 200) {
 	        switch (method) {
 	          case 'put':
-	            notify('Grupo modificado con éxito', 'notify-success', 'floppy-o', res.data.notify);
+	            notify('Grupo modificado con éxito', 'notify-success', 'save', res.data.notify);
 	            update('userGroups', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	            break;
 	          case 'post':
@@ -103,10 +104,11 @@ class ManageUserGroups extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {
+	  const { data } = this.props;
 	  const {
 	    userGroups, error, isLoaded, elementId, edit, name, description,
 	  } = this.state;
@@ -118,9 +120,9 @@ class ManageUserGroups extends Component {
 	  }
 	  const list = userGroups.map((userGroup) => {
 	    if (userGroup._id === elementId) {
-	      return <UserGroup userGroup={userGroup} key={userGroup._id} edit={this.edit} active />;
+	      return <UserGroup userGroup={userGroup} key={userGroup._id} edit={this.edit} data={data} active />;
 	    }
-	      return <UserGroup userGroup={userGroup} key={userGroup._id} edit={this.edit} active={false} />;
+	      return <UserGroup userGroup={userGroup} key={userGroup._id} edit={this.edit} data={data} active={false} />;
 	  });
 	  list.push(
 				<div key="0" className="list-group-item-action list-group-item flex-column align-items-start">
@@ -137,7 +139,7 @@ class ManageUserGroups extends Component {
           <div className="card-header">
             <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
               <li className="nav-item mr-auto">
-                <h2 className="detalles-titulo"><i className="fa fa-users mr-3" aria-hidden="true" />Grupos de gestión</h2>
+                <h2 className="detalles-titulo"><FontAwesomeIcon icon="users" className="mr-2" fixedWidth />Grupos de gestión</h2>
               </li>
             </ul>
           </div>
@@ -149,24 +151,24 @@ class ManageUserGroups extends Component {
                 <form>
                   <div className="form-row">
                     <div className="form-group col">
-                      <label htmlFor="name"><i className="fa fa-users mr-2" />Nombre</label>
+                      <label htmlFor="name"><FontAwesomeIcon icon="users" className="mr-2" fixedWidth />Nombre</label>
                       <input type="text" className="form-control" id="name" placeholder="Nombre del grupo de gestión" name="name" value={name} onChange={this.handleInputChange} />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group col">
-                      <label htmlFor="description"><i className="fa fa-info-circle mr-2" />Descripción</label>
+                      <label htmlFor="description"><FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />Descripción</label>
                       <input type="description" className="form-control" id="description" placeholder="Descripción del grupo de gestión" name="description" value={description} onChange={this.handleInputChange} />
                     </div>
                   </div>
                   { !edit
-                    ? <button onClick={() => this.handleSubmit('post')} type="button" className="btn btn-block btn-small btn-success"><i className="fa fa-plus-circle mr-1" aria-hidden="true" />Añadir</button>
+                    ? <button onClick={() => this.handleSubmit('post')} type="button" className="btn btn-block btn-small btn-success"><FontAwesomeIcon icon="plus-circle" className="mr-2" fixedWidth />Añadir</button>
                     : (
-											<div className="d-flex w-100 justify-content-between">
-	                      <button onClick={() => this.handleSubmit('put')} type="button" className="btn btn-block btn-small btn-success mr-2"><i className="fa fa-floppy-o mr-1" aria-hidden="true" />Actualizar</button>
-	                      <button onClick={() => this.handleSubmit('delete')} type="button" className="btn btn-block btn-small btn-danger ml-1 mr-1"><i className="fa fa-trash-o mr-1" aria-hidden="true" />Eliminar</button>
-	                      <button onClick={() => this.cancel()} type="button" className="btn btn-block btn-small btn-warning ml-2"><i className="fa fa-times mr-1" aria-hidden="true" />Cancelar</button>
-                    	</div>
+                      <div className="d-flex w-100 justify-content-between">
+                        <button onClick={() => this.handleSubmit('put')} type="button" className="btn btn-block btn-small btn-success mr-2"><FontAwesomeIcon icon="save" className="mr-2" fixedWidth />Actualizar</button>
+                        <button onClick={() => this.handleSubmit('delete')} type="button" className="btn btn-block btn-small btn-danger ml-1 mr-1"><FontAwesomeIcon icon="trash" className="mr-2" fixedWidth />Eliminar</button>
+                        <button onClick={() => this.cancel()} type="button" className="btn btn-block btn-small btn-warning ml-2"><FontAwesomeIcon icon={['far', 'times-circle']} className="mr-2" fixedWidth />Cancelar</button>
+                      </div>
                     )
                   }
                 </form>

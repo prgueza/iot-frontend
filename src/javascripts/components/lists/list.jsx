@@ -47,10 +47,10 @@ class List extends Component {
 	    elements = content.map(element => (!element.display && <Device device={element} key={element._id} editDisplay />));
 	    elementName = 'dispositivos sin configurar';
 	  } else if (category === 'images') {
-	    elements = content.map((element, index) => <Image image={element} index={index} key={element._id} />);
+	    elements = content.map(element => <Image image={element} key={element._id} />);
 	    elementName = 'imágenes';
 	  } else if (category === 'groups') {
-	    elements = content.map((element, index) => <Group group={element} index={index} key={element._id} />);
+	    elements = content.map(element => <Group group={element} key={element._id} />);
 	    elementName = 'grupos';
 	  } else if (category === 'devices') {
 		  elements = content.map(element => <Device device={element} key={element._id} />);

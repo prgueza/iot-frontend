@@ -1,9 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
-
-/* IMPORT COMPONENTS */
-import Icon from '../icons/icon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function parseTimeline(element) {
   let message;
@@ -37,7 +35,7 @@ class Timeline extends React.Component {
       const icon = result && index !== timeline.length - 1 ? 'check' : 'times';
       const color = result && index !== timeline.length - 1 ? 'text-success' : 'text-error';
       if (element !== '') {
-        return (<p key={element} className={color}><Icon icon={icon} mr={1} />{parseTimeline(element)}</p>);
+        return (<p key={element} className={color}><FontAwesomeIcon icon={icon} className="mr-1" fixedWidth />{parseTimeline(element)}</p>);
       }
       return false;
     });

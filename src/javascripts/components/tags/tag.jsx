@@ -1,6 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const cx = require('classnames');
 
@@ -8,7 +9,7 @@ const cx = require('classnames');
 const Tag = ({ category, tag, filterData }) => {
   const tagClass = cx('btn mr-1', { 'btn-success': category === 'displays' }, { 'btn-info': category === 'images' }, { 'btn-warning': category === 'groups' },
     'btn-tiny');
-  return <button onClick={() => filterData && filterData(tag)} type="button" className={tagClass}>{tag}</button>;
+  return <button onClick={() => filterData && filterData(tag)} type="button" className={tagClass}><FontAwesomeIcon icon="tag" className="mr-1" fixedWidth />{tag}</button>;
 };
 
 Tag.propTypes = {

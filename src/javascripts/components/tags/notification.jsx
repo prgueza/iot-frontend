@@ -1,9 +1,7 @@
 /* IMPORT MODULES */
 import React from 'react';
 import PropTypes from 'prop-types';
-
-/* IMPORT COMPONENTS */
-import Icon from '../icons/icon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /* COMPONENTS */
 const Notification = ({
@@ -16,7 +14,7 @@ const Notification = ({
     <div className="notify-content">
       <div className={notifyIconContainer}>
         <div className="notify-icon">
-          <Icon icon={icon} size={2} fw spin={spin} />
+          <FontAwesomeIcon icon={icon} size="2x" className="ml-1 mr-1" fixedWidth spin={spin} />
         </div>
       </div>
       <div className="notify-text">

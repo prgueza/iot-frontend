@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const moment = require('moment');
 
@@ -13,15 +14,14 @@ moment.locale('es');
 class DeviceForm extends Component {
   constructor(props) {
     super(props);
-    const { device, user, data: { gateways } } = this.props;
+    const { device, user } = this.props;
     this.state = {
       name: device.name,
       description: device.description,
-      updatedBy: user.name,
+      updatedBy: user,
       createdAt: moment(device.createdAt),
       updatedAt: moment(),
       mac: device.mac,
-      prefGateway: device.prefGateway ? device.prefGateway._id : gateways[0]._id,
       userGroup: device.userGroup ? device.userGroup._id : '',
       redirect: false,
       redirectLocation: '/devices',
@@ -50,13 +50,12 @@ class DeviceForm extends Component {
 	    device, token, notify, update,
 	  } = this.props;
 	  const {
-	    name, description, prefGateway, mac, userGroup, updatedBy: { _id },
+	    name, description, mac, userGroup, updatedBy: { _id },
 	  } = this.state;
 	  // define form values to send
 	  const form = {
 	    name,
 	    description,
-	    prefGateway,
 	    mac,
 	    userGroup: undefined,
 	    updatedBy: _id, // send user_id
@@ -75,27 +74,25 @@ class DeviceForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status >= 200) {
-	        notify('Dispositivo configurado con éxito', 'notify-success', 'upload');
-	        const action = device ? 'edit' : 'add';
-	        return update('devices', res.data.resourceId, action, res.data.resource); // update dataset
+	        notify('Dispositivo configurado con éxito', 'notify-success', device ? 'save' : 'upload', res.data.notify);
+	        return update('devices', res.data.resourceId, device ? 'edit' : 'add', res.data.resource); // update dataset
 	      }
 	      return null;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle'));
+	    .catch(() => notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', false, 'error'));
 	}
 
 	/* RENDER COMPONENT */
 	render() {
-	  const { device, data: { gateways, screens, userGroups } } = this.props;
+	  const { device, data: { screens, userGroups } } = this.props;
 	  const {
-	    redirect, redirectLocation, name, description, updatedBy, updatedAt, createdAt, mac, prefGateway, userGroup,
+	    redirect, redirectLocation, name, description, updatedBy, updatedAt, createdAt, mac, userGroup,
 	  } = this.state;
 
 	  const linkBack = `/devices/${device._id}`;
 
 	  // Options
-	  const optionsGateway = gateways.map(gateway => <option value={gateway._id} key={gateway._id}>{gateway.name}</option>);
 	  const optionsUserGroup = userGroups.map(ug => <option value={ug._id} key={ug._id}>{ug.name}</option>);
 
 	  const screen = screens.find(s => s.screenCode === device.screen);
@@ -109,21 +106,21 @@ class DeviceForm extends Component {
       <ul className="nav nav-pills card-header-pills justify-content-end mx-1">
         <li className="nav-item mr-auto">
           <h2 className="detalles-titulo">
-            <i className="fa fa-fw fa-pencil mr-3" aria-hidden="true" />
-						Configurar un dispositivo físico
+            <FontAwesomeIcon icon={['far', 'edit']} className="mr-3" fixedWidth />
+						Configurar un dispositivo
           </h2>
         </li>
         <li className="nav-item mr-2">
           <Link to={linkBack}>
             <button type="button" className="btn btn-warning">
-              <i className="fa fa-times mr-2" aria-hidden="true" />
+              <FontAwesomeIcon icon="times" className="mr-2" fixedWidth />
 							Cancelar
             </button>
           </Link>
         </li>
         <li className="nav-item ml-2">
           <button onClick={this.handleSubmit} type="button" className="btn btn-primary">
-            <i className="fa  fa-fw fa-floppy-o mr-2" aria-hidden="true" />
+            <FontAwesomeIcon icon="save" className="mr-2" fixedWidth />
 						Guardar cambios
           </button>
         </li>
@@ -133,21 +130,21 @@ class DeviceForm extends Component {
       <form id="form">
         <div className="form-group">
           <label htmlFor="nombre">
-            <i className="fa fa-fw fa-tablet mr-2" />
+            <FontAwesomeIcon icon="tablet-alt" className="mr-2" fixedWidth />
 						Nombre
           </label>
           <input type="text" className="form-control" id="nombre" placeholder="Nombre del dispositivo físico" name="name" value={name} onChange={this.handleInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="descripcion">
-            <i className="fa fa-fw fa-info-circle mr-2" />
+            <FontAwesomeIcon icon="info-circle" className="mr-2" fixedWidth />
 						Descripcion
           </label>
           <input type="text" className="form-control" id="descripcion" placeholder="Descripcion de la puerta de enlace" name="description" value={description} onChange={this.handleInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="mac">
-            <i className="fa fa-fw fa-server mr-2" />
+            <FontAwesomeIcon icon="server" className="mr-2" fixedWidth />
 						Dirección MAC
           </label>
           <input type="text" className="form-control" id="mac" placeholder="Dirección MAC de la puerta de enlace" name="mac" value={mac} readOnly />
@@ -155,54 +152,41 @@ class DeviceForm extends Component {
         <div className="form-row">
           <div className="form-group col">
             <label htmlFor="screen">
-              <i className="fa fa-fw fa-tint mr-2" />
+              <FontAwesomeIcon icon={['far', 'window-maximize']} className="mr-2" fixedWidth />
 							Pantalla
             </label>
             <input type="text" className="form-control" id="screen" name="screen" value={screenName} readOnly />
           </div>
           <div className="form-group col">
-            <label htmlFor="gateway">
-              <i className="fa fa-fw fa-sitemap mr-2" />
-							Puerta de enlace preferida
+            <label htmlFor="userGroup">
+              <FontAwesomeIcon icon="users" className="mr-2" fixedWidth />
+  						Grupo de gestión del dispositivo
             </label>
             <div>
-              <select className="custom-select" name="prefGateway" value={prefGateway} onChange={this.handleInputChange}>
-                {optionsGateway}
+              <select className="custom-select" name="userGroup" value={userGroup} onChange={this.handleInputChange}>
+                <option value="" key="0">Ninguno seleccionado</option>
+                {optionsUserGroup}
               </select>
             </div>
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="userGroup">
-            <i className="fa fa-fw fa-users mr-2" />
-						Grupo de gestión del dispositivo
-          </label>
-          <div>
-            <select className="custom-select" name="userGroup" value={userGroup} onChange={this.handleInputChange}>
-              <option value="" key="0">Ninguno seleccionado</option>
-              {optionsUserGroup}
-            </select>
-          </div>
-        </div>
-        <div className="form-group">
           <label htmlFor="updatedBy">
-            <i className="fa fa-fw fa-user-o mr-2" />
+            <FontAwesomeIcon icon="user" className="mr-2" fixedWidth />
 						Ultima modificación por
           </label>
-          <input type="text" className="form-control" id="updatedBy" name="updatedBy" value={updatedBy} readOnly />
+          <input type="text" className="form-control" id="updatedBy" name="updatedBy" value={updatedBy.name} readOnly />
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="fechaCreacion">
-              <i className="fa fa-fw fa-calendar-o mr-2" />
-							Fecha de creación
+              <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Primera vez localizado
             </label>
             <input type="text" className="form-control" id="fechaCreacion" name="createdAt " value={moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="fechaModificacion">
-              <i className="fa fa-fw fa-calendar-o mr-2" />
-							Fecha de modificación
+              <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />Fecha de modificación
             </label>
             <input type="text" className="form-control" id="fechaModificacion" name="updatedAt" value={moment(updatedAt).format('dddd, D [de] MMMM [de] YYYY')} readOnly />
           </div>

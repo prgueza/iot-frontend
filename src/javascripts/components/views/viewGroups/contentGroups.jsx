@@ -25,7 +25,7 @@ const ContentGroups = ({ filterValue, ...props }) => {
       </div>
       <div className="row-panel">
         <div className="panel">
-          <Title total={groups.length} appearance="card title-groups" icon="list" />
+          <Title total={groups.length} appearance="card title-groups" icon="layer-group" />
           <div className="row controls">
             <div className="col-4">
               <List filterValue={filterValue} category="groups" content={groups} />
