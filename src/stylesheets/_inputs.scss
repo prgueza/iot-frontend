@@ -1,0 +1,13 @@
+.input-no-border {
+  border: 0;
+  background-color: hsl(206, 9%, 96%);
+  border: 1px solid white;
+  box-shadow: none;
+}
+
+.input-no-border:focus {
+  border: 0;
+  background-color: white;
+  border: 1px solid $primary-color;
+  box-shadow: none;
+}

@@ -1,33 +1,78 @@
 /* IMPORT MODULES */
-import React from 'react'
-import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom'
-const moment = require( 'moment' )
-moment.locale( 'es' )
-const cx = require( 'classnames' )
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const moment = require('moment');
+const cx = require('classnames');
+
+moment.locale('es');
 
 /* COMPONENT */
-export const UserGroup = ( { userGroup: { url, _id, name, description, createdAt, devices, displays, groups, images, users }, edit, active } ) => {
-	const elementClass = cx( 'list-group-item-action list-group-item flex-column align-items-start', { 'active': active } )
-	return (
-		<div className={elementClass} onClick={() => edit(_id)}>
-      <div className='elemento elemento-configuracion'>
-        <div className='d-flex w-100 justify-content-between'>
-          <h5 className='mb-1'><strong><i className='fa fa-users mr-2' aria-hidden='true'></i>{name}</strong></h5>
+const UserGroup = ({
+  data: {
+    devices, displays, images, groups, users,
+  },
+  userGroup: {
+    _id, name, description, createdAt,
+  }, edit, active,
+}) => {
+  const elementClass = cx('list-group-item-action list-group-item flex-column align-items-start', { active });
+  return (
+    <div className={elementClass} role="button" tabIndex={0} onClick={() => edit(_id)} onKeyDown={() => edit(_id)}>
+      <div className="elemento elemento-configuracion">
+        <div className="d-flex w-100 justify-content-between">
+          <h5 className="mb-1">
+            <strong>
+              <FontAwesomeIcon icon="users" className="mr-2" fixedWidth />
+              {name}
+            </strong>
+          </h5>
           <small>
-            <i className='fa fa-user-o mr-2' aria-hidden='true'></i>{users ? users.length : '0'}
+            <i className="fa fa-user-o mr-2" aria-hidden="true" />
+            {users ? users.filter(user => user.userGroup._id === _id).length : '0'}
           </small>
         </div>
-        <p className='mb-1'>{description}</p>
-        <div className='d-flex w-100 justify-content-between'>
+        <p className="mb-1">{description}</p>
+        <div className="d-flex w-100 justify-content-between">
           <small>
-            <i className='fa fa-tablet mr-2' aria-hidden='true'></i>{devices ? devices.length : '0'}
-            <i className='fa fa-television mr-2 ml-2' aria-hidden='true'></i>{displays ? displays.length : '0'}
-            <i className='fa fa-picture-o mr-2 ml-2' aria-hidden='true'></i>{images ? images.length : '0'}
-            <i className='fa fa-list mr-2 ml-2' aria-hidden='true'></i>{groups ? groups.length : '0'}
+            <FontAwesomeIcon icon="tablet-alt" className="mr-1" fixedWidth />
+            {devices ? devices.filter(device => device.userGroup === _id).length : '0'}
+            <FontAwesomeIcon icon="tv" className="mr-1 ml-2" fixedWidth />
+            {displays ? displays.filter(display => display.userGroup === _id).length : '0'}
+            <FontAwesomeIcon icon={['far', 'images']} className="mr-1 ml-2" fixedWidth />
+            {images ? images.filter(image => image.userGroup === _id).length : '0'}
+            <FontAwesomeIcon icon="layer-group" className="mr-1 ml-2" fixedWidth />
+            {groups ? groups.filter(group => group.userGroup === _id).length : '0'}
           </small>
-          <small><i className='fa fa-calendar-o mr-2' aria-hidden='true'></i>{moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')}</small>
+          <small>
+            <FontAwesomeIcon icon={['far', 'calendar']} className="mr-2" fixedWidth />
+            {moment(createdAt).format('dddd, D [de] MMMM [de] YYYY')}
+          </small>
         </div>
       </div>
     </div>
-	)
-}
+  );
+};
+
+UserGroup.propTypes = {
+  data: PropTypes.shape({
+
+  }),
+  userGroup: PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+    description: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+  edit: PropTypes.func,
+  active: PropTypes.bool,
+};
+
+UserGroup.defaultProps = {
+  data: null,
+  edit: () => false,
+  active: false,
+};
+
+export default UserGroup;

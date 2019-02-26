@@ -4,6 +4,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'forms';
 @import 'text';
+@import 'logs';
 @import 'nav';
 @import 'notifications';
 @import 'titles';
@@ -13,6 +14,7 @@
 @import 'botones';
 @import 'modal';
 @import 'image';
+@import 'inputs';
 @import 'react-select/dist/react-select.css';
 
 // style
@@ -23,7 +25,9 @@ html {
 body{
   height: 100vh;
   max-height: 100vh;
-  font-family: "etica-display";
+  //font-family: "etica-display";
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   user-select: none !important;
 }
 
@@ -82,18 +86,6 @@ body{
   overflow-y: scroll;
 }
 
-.settings{
-
-}
-
-.settings .card-body{
-
-}
-
-.asociados{
-
-}
-
 ::-webkit-scrollbar{
   display: none;
 }
@@ -127,4 +119,16 @@ a:hover{
 
 .disponible{
   color: #495057;
+}
+
+.border-success {
+  border: 1px solid $success-color;
+}
+
+.border-error {
+  border: 1px solid $danger-color;
+}
+
+.border-warning {
+  border: 1px solid $warning-color;
 }

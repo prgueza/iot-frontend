@@ -1,35 +1,92 @@
 .notify-content{
-  min-width: 400px;
+  min-width: 600px;
+  height: 100%;
 }
 
 .notify-success{
-  position: absolute;
-  right: 40px;
+  position: relative;
+  padding: 0;
   min-width: 400px;
-  background-color: $primary-color;
-  border: 1px solid $primary-color;
-  color: white;
+  color: $primary-color;
   border-radius: 0.25rem;
-  box-shadow: $box-shadow !important;
+  box-shadow: $shadow !important;
 }
 
 .notify-error{
-  position: absolute;
-  right: 40px;
+  position: relative;
+  padding: 0;
   min-width: 400px;
-  background-color: $danger-color;
-  border: 1px solid $danger-color;
-  color: white;
+  color: $danger-color;
   border-radius: 0.25rem;
-  box-shadow: $box-shadow !important;
+  box-shadow: $shadow !important;
 }
 
-.notify-division{
-  border-color: white;
+.notify-warning{
+  position: relative;
+  padding: 0;
+  min-width: 400px;
+  color: $warning-color;
+  border-radius: 0.25rem;
+  box-shadow: $shadow !important;
+}
+
+.notify-icon-container{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 80px;
+  padding: 24px 10px 0px 10px;
+}
+
+.notify-icon{
+  vertical-align: middle;
+  color: white;
+  text-align: center;
+}
+
+.notify-text {
+  vertical-align: middle;
+  display: inline-block;
+  padding: 10px;
+}
+
+.notify-icon-success {
+  background-color: $primary-color;
+}
+
+.notify-icon-error {
+  background-color: $danger-color;
+}
+
+.notify-icon-warning {
+  background-color: $warning-color;
+}
+
+.notify-division {
   margin-top: 3px;
   margin-bottom: 3px;
 }
 
-.notify-info{
-  color: white;
+.notify-division-success{
+  border-color: $primary-color;
+}
+
+.notify-division-error{
+  border-color: $danger-color;
+}
+
+.notify-division-warning{
+  border-color: $warning-color;
+}
+
+.notify-info-success{
+  color: $primary-color;
+}
+
+.notify-info-error{
+  color: $danger-color;
+}
+
+.notify-info-warning{
+  color: $warning-color;
 }

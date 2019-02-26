@@ -1,3 +1,30 @@
+.a:not(:disabled):not(.disabled):active:focus,
+.a:not(:disabled):not(.disabled).active:focus
+.a:not(:disabled):not(.disabled):active,
+.a:not(:disabled):not(.disabled).active,
+.btn:not(:disabled):not(.disabled):active:focus,
+.btn:not(:disabled):not(.disabled).active:focus
+.btn:not(:disabled):not(.disabled):active,
+.btn:not(:disabled):not(.disabled).active {
+  background-image: none;
+  box-shadow: none;
+}
+
+:focus {
+  outline: none !important;
+}
+
+a:focus{
+  background-image: none;
+  box-shadow: none;
+}
+
+.btn:focus,
+.btn.focus {
+    border: 1px solid $primary-color;
+    box-shadow: none;
+}
+
 .btn-tiny{
   padding: 0.2rem;
   font-size: 0.75rem;
@@ -26,4 +53,27 @@
 
 .btn-warning{
   color: white !important;
+}
+
+.btn-split{
+  background-color: white;
+  background-image: none;
+  border-color: $display-color;
+  color: $display-color;
+}
+
+.btn-split-active{
+  background-color: $display-color;
+  background-image: none;
+  color: white;
+}
+
+.btn-split:first-child{
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-split:last-child{
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
