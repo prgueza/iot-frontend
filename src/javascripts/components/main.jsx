@@ -63,7 +63,7 @@ class Main extends Component {
   /* SET SOCKET.IO */
   socketio = (token) => {
     // Manage socket interaction
-    const socket = io('http://localhost:4000');
+    const socket = io(process.env.API_URL);
     socket.emit('login', token);
     socket.on('update queue', (queue) => {
       this.setState({ queue });
@@ -250,11 +250,12 @@ class Main extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  return (
-  <div className="row main">
-    <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
-    <Navigation filterData={this.filterData} sync={this.sync} syncApi={this.syncApi} {...this.state} />
-    <Content filterData={this.filterData} filterFound={this.filterFound} filterConfigured={this.filterConfigured} update={this.update} notify={this.notify} {...this.state} />
-  </div>);
+      <div className="row main">
+        <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
+        <Navigation filterData={this.filterData} sync={this.sync} syncApi={this.syncApi} {...this.state} />
+        <Content filterData={this.filterData} filterFound={this.filterFound} filterConfigured={this.filterConfigured} update={this.update} notify={this.notify} {...this.state} />
+      </div>
+	  );
 	}
 }
 
