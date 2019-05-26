@@ -31,12 +31,12 @@ class GatewayDelete extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status === 200) {
-	        notify('Puerta de enlace eliminado con éxito', 'notify-success', 'trash');
-	        update('gateways', res.resourceId, 'remove');
+	        notify('Puerta de enlace eliminado con éxito', 'notify-success', 'trash', res.data.notify);
+	        update('gateways', res.data.resourceId, 'remove');
 	      }
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al eliminar la puerta de enlace', 'notify-error', 'exclamation-triangle'));
+	    .catch(() => notify('Error al eliminar la puerta de enlace', 'notify-error', 'exclamation-triangle', false, 'error'));
 	}
 
 	render() {

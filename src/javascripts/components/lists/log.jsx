@@ -39,7 +39,7 @@ class Log extends React.Component {
 	    },
 	  }).then((res) => {
 	    if (res.status === 200 || res.status === 201) { // with success
-	       notify('Cambios realizados', 'notify-success', 'cloud-upload', res.data.notify); // notify success
+	       notify('Cambios realizados', 'notify-success', 'cloud-upload-alt', res.data.notify); // notify success
 	    } else {
 	      notify('Error al realizar los cambios', 'notify-error', 'times', res.data.notify, true); // notify error
 	    }
@@ -81,7 +81,7 @@ class Log extends React.Component {
           <div className={`col-1 d-flex align-items-center justify-content-center ${mod}`}>
             <FontAwesomeIcon icon={icon} size="2x" fixedWidth spin={spin} />
           </div>
-          <div className="col-8 d-flex align-items-center">
+          <div className="col-8 my-2 d-flex align-items-center">
             <h4 onClick={this.showTimeline} className="mb-0">
               <FontAwesomeIcon icon={showTimeline ? 'caret-down' : 'caret-right'} className="mr-2" fixedWidth />
               {display && display.name && <FontAwesomeIcon icon="tv" className="mr-2 ml-2" fixedWidth />}

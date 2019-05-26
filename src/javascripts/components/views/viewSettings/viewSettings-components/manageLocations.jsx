@@ -74,7 +74,7 @@ class ManageLocations extends Component {
 	  // HTTP request
 	  axios({
 	    method,
-	    url: edit ? `http://localhost:4000/locations/${elementId}` : 'http://localhost:4000/locations',
+	    url: edit ? `${process.env.API_URL}locations/${elementId}` : `${process.env.API_URL}locations`,
 	    data: form,
 	    headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
 	  })
@@ -105,7 +105,7 @@ class ManageLocations extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar localización', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {

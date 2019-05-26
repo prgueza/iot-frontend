@@ -87,22 +87,8 @@ class Navigation extends Component {
 	      break;
 	    }
 
-	    // synced
-	    case 2:
-	    {
-	      syncButton = (
-				  <li>
-				    <button type="button" className="btn btn-nav btn-block mb-1">
-				      <Icon icon="check" mr={2} fw />
-							Sincronizado
-        		</button>
-				  </li>
-	      );
-	      break;
-	    }
-
 	    // syncing
-	    case 3:
+	    case 2:
 	    {
 	      syncButton = (
 				  <li>

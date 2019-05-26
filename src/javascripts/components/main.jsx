@@ -27,7 +27,7 @@ class Main extends Component {
       data: {},
       // sync
       syncedDevices: [],
-      // 0: unsynced 1: sync_ready 2: synced 3: syncing
+      // 0: unsynced 1: sync_ready 2: syncing
       syncStatus: 0,
       sendingImage: false,
       lastSynced: null,
@@ -63,7 +63,7 @@ class Main extends Component {
   /* SET SOCKET.IO */
   socketio = (token) => {
     // Manage socket interaction
-    const socket = io('http://localhost:4000');
+    const socket = io(process.env.API_URL);
     socket.emit('login', token);
     socket.on('update queue', (queue) => {
       this.setState({ queue });
@@ -147,7 +147,7 @@ class Main extends Component {
 	/* SYNC DATA */
 	syncApi = (token) => {
 	  // set state to syncing
-	  this.setState({ syncStatus: 3, lastSynced: moment() });
+	  this.setState({ syncStatus: 2, lastSynced: moment() });
 	  this.notifySync('Buscando dispositivos...', 'notify-success', 'sync-alt', 'Esto puede tardar hasta 40s');
 
 	  // request the update
@@ -160,7 +160,7 @@ class Main extends Component {
 	    .then(
 	      (res) => {
 	        if (res.status === 200) {
-	          this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false, 'Sincronice la aplicación con los dispositivos encontrados');
+	          this.updateSync('Pulse para sincronizar', 'notify-success', 'link', false, 'Sincronice los dispositivos encontrados');
 	          this.setState({ syncedDevices: res.data, syncStatus: 1, lastSynced: moment() });
 	        } else {
 	          this.updateSync('Error en la búsqueda', 'notify-warning', 'exclamation-triangle', false, res.data.notify, 'warning');
@@ -185,7 +185,7 @@ class Main extends Component {
 	  const devices = syncedDevices;
 	  data.devices = devices;
 	  this.updateSync('Dispositivos sincronizados', 'notify-success', 'check', true, 'Dispositivos sincronizados con éxito');
-	  this.setState({ data, syncStatus: 2 });
+	  this.setState({ data, syncStatus: 0 });
 	}
 
 	/* HANDLE SEARCH */

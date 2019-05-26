@@ -66,7 +66,7 @@ class ImageForm extends Component {
 	  // HTTP request
 	  axios({
 	    method: image ? 'put' : 'post',
-	    url: image ? image.url : 'http://localhost:4000/images',
+	    url: image ? image.url : `${process.env.API_URL}images`,
 	    data: form,
 	    headers: {
 	      Accept: 'application/json',

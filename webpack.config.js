@@ -4,7 +4,7 @@ const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
-  watch: true,
+  watch: process.env.NODE_ENV === 'development',
   watchOptions: {
     ignored: /node_modules/,
     poll: 1000,
@@ -49,15 +49,9 @@ module.exports = {
     extensions: ['.jsx', '.js', '.json', '*'],
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default'],
-    }),
     new webpack.DefinePlugin({
       'process.env': {
-        API_URL: JSON.stringify('http://localhost:4000/'),
+        API_URL: process.env.API_URL || JSON.stringify('http://localhost:4000/'),
         TIMEOUT: 50000,
       },
     }),

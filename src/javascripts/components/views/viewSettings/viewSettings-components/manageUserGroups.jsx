@@ -73,7 +73,7 @@ class ManageUserGroups extends Component {
 	  };
 	  axios({
 	    method,
-	    url: edit ? `http://localhost:4000/userGroups/${elementId}` : 'http://localhost:4000/userGroups',
+	    url: edit ? `${process.env.API_URL}userGroups/${elementId}` : `${process.env.API_URL}userGroups`,
 	    data: form,
 	    headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
 	  })
@@ -104,7 +104,7 @@ class ManageUserGroups extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar grupo', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {

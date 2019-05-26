@@ -74,14 +74,13 @@ class DeviceForm extends Component {
 	  })
 	    .then((res) => {
 	      if (res.status >= 200) {
-	        notify('Dispositivo configurado con éxito', 'notify-success', 'upload');
-	        const action = device ? 'edit' : 'add';
-	        return update('devices', res.data.resourceId, action, res.data.resource); // update dataset
+	        notify('Dispositivo configurado con éxito', 'notify-success', device ? 'save' : 'upload', res.data.notify);
+	        return update('devices', res.data.resourceId, device ? 'edit' : 'add', res.data.resource); // update dataset
 	      }
 	      return null;
 	    })
 	    .then(() => this.setState({ redirect: true }))
-	    .catch(() => notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle'));
+	    .catch(() => notify('Error al configurar el dispositivo', 'notify-error', 'exclamation-triangle', false, 'error'));
 	}
 
 	/* RENDER COMPONENT */
@@ -108,7 +107,7 @@ class DeviceForm extends Component {
         <li className="nav-item mr-auto">
           <h2 className="detalles-titulo">
             <FontAwesomeIcon icon={['far', 'edit']} className="mr-3" fixedWidth />
-						Configurar un dispositivo físico
+						Configurar un dispositivo
           </h2>
         </li>
         <li className="nav-item mr-2">

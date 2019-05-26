@@ -96,7 +96,7 @@ class ManageUsers extends Component {
 	  if (checkPassword !== '') { form.checkPassword = checkPassword; }
 	  axios({
 	    method,
-	    url: edit ? `http://localhost:4000/users/${elementId}` : 'http://localhost:4000/users/signup',
+	    url: edit ? `${process.env.API_URL}users/${elementId}` : `${process.env.API_URL}users/signup`,
 	    data: form,
 	    headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
 	  })
@@ -108,12 +108,12 @@ class ManageUsers extends Component {
 	            update('users', res.data.resourceId, 'edit', res.data.resource); // update dataset
 	            break;
 	          case 'post':
-	            notify('Usuario creado con éxito', 'notify-success', 'upload');
+	            notify('Usuario creado con éxito', 'notify-success', 'upload', res.data.notify);
 	           	update('users', res.data.resourceId, 'add', res.data.resource); // update dataset
 	            this.edit(res.data.resourceId);
 	            break;
 	          case 'delete':
-	            notify('Usuario eliminado con éxito', 'notify-success', 'trash');
+	            notify('Usuario eliminado con éxito', 'notify-success', 'trash', res.data.notify);
 	            this.cancel();
 	            update('users', res.data.resourceId, 'remove', res.data.resource); // update dataset
 	            break;
@@ -127,7 +127,7 @@ class ManageUsers extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar usuario', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {

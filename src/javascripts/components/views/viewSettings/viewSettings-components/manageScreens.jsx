@@ -91,7 +91,7 @@ class ManageScreens extends Component {
 	  if (description !== '') { form.description = description; }
 	  axios({
 	    method,
-	    url: edit ? `http://localhost:4000/screens/${elementId}` : 'http://localhost:4000/screens',
+	    url: edit ? `${process.env.API_URL}screens/${elementId}` : `${process.env.API_URL}screens`,
 	    data: form,
 	    headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
 	  })
@@ -122,7 +122,7 @@ class ManageScreens extends Component {
 	        });
 	      }
 	    })
-	    .catch(() => notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle'));
+	    .catch(error => notify('Error al añadir/modificar una pantalla', 'notify-error', 'exclamation-triangle', error.response.data.notify, 'error'));
 	}
 
 	render() {
