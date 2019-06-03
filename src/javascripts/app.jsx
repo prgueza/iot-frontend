@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faLink, faUpload, faExclamationTriangle, faToggleOn, faToggleOff, faWrench, faExchangeAlt, faObjectGroup, faArrowsAlt, faCheck, faTimes, faDatabase, faFileImage, faFolderOpen, faArrowsAltH, faArrowsAltV, faTrash, faSave, faInfoCircle, faKey, faEnvelope, faIdCardAlt, faCaretRight, faCaretDown, faArrowRight, faArrowLeft, faEllipsisH, faUser, faUsers, faUserTie, faFingerprint, faAdjust, faBarcode, faPlusCircle, faEye, faTabletAlt, faSitemap, faSyncAlt, faCogs, faSignOutAlt, faTv, faLayerGroup, faCloudUploadAlt, faBatteryEmpty, faBatteryQuarter, faBatteryHalf, faBatteryThreeQuarters, faBatteryFull, faUnlink, faTag, faTags, faWifi, faServer, faMapMarkerAlt,
+  faSync, faLink, faUpload, faExclamationTriangle, faToggleOn, faToggleOff, faWrench, faExchangeAlt, faObjectGroup, faArrowsAlt, faCheck, faTimes, faDatabase, faFileImage, faFolderOpen, faArrowsAltH, faArrowsAltV, faTrash, faSave, faInfoCircle, faKey, faEnvelope, faIdCardAlt, faCaretRight, faCaretDown, faArrowRight, faArrowLeft, faEllipsisH, faUser, faUsers, faUserTie, faFingerprint, faAdjust, faBarcode, faPlusCircle, faEye, faTabletAlt, faSitemap, faSyncAlt, faCogs, faSignOutAlt, faTv, faLayerGroup, faCloudUploadAlt, faBatteryEmpty, faBatteryQuarter, faBatteryHalf, faBatteryThreeQuarters, faBatteryFull, faUnlink, faTag, faTags, faWifi, faServer, faMapMarkerAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faEdit, faTimesCircle, faCheckCircle, faImages, faImage, faHdd, faCalendar, faWindowMaximize,
@@ -14,7 +14,7 @@ import {
 import Main from './components/main';
 import Login from './components/login/login';
 
-library.add(faEdit, faTimesCircle, faCheckCircle, faImages, faImage, faWindowMaximize, faLink, faUpload, faExclamationTriangle, faToggleOn, faToggleOff, faWrench, faExchangeAlt, faObjectGroup, faArrowsAlt, faCheck, faTimes, faDatabase, faFileImage, faFolderOpen, faArrowsAltH, faArrowsAltV, faTrash, faSave, faInfoCircle, faKey, faEnvelope, faIdCardAlt, faCaretRight, faCaretDown, faArrowRight, faArrowLeft, faEllipsisH, faUser, faUsers, faUserTie, faFingerprint, faAdjust, faBarcode, faPlusCircle, faEye, faTabletAlt, faSitemap, faSyncAlt, faCogs, faSignOutAlt, faTv, faLayerGroup, faCloudUploadAlt, faHdd, faBatteryEmpty, faBatteryQuarter, faBatteryHalf, faBatteryThreeQuarters, faBatteryFull, faUnlink, faTag, faTags, faCalendar, faWifi, faServer, faMapMarkerAlt);
+library.add(faSync, faEdit, faTimesCircle, faCheckCircle, faImages, faImage, faWindowMaximize, faLink, faUpload, faExclamationTriangle, faToggleOn, faToggleOff, faWrench, faExchangeAlt, faObjectGroup, faArrowsAlt, faCheck, faTimes, faDatabase, faFileImage, faFolderOpen, faArrowsAltH, faArrowsAltV, faTrash, faSave, faInfoCircle, faKey, faEnvelope, faIdCardAlt, faCaretRight, faCaretDown, faArrowRight, faArrowLeft, faEllipsisH, faUser, faUsers, faUserTie, faFingerprint, faAdjust, faBarcode, faPlusCircle, faEye, faTabletAlt, faSitemap, faSyncAlt, faCogs, faSignOutAlt, faTv, faLayerGroup, faCloudUploadAlt, faHdd, faBatteryEmpty, faBatteryQuarter, faBatteryHalf, faBatteryThreeQuarters, faBatteryFull, faUnlink, faTag, faTags, faCalendar, faWifi, faServer, faMapMarkerAlt);
 
 /* COMPONENTS */
 class App extends Component {

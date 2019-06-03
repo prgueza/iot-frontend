@@ -1,11 +1,11 @@
 /* IMPORT MODULES */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Shapes } from '../util';
 
 /* IMPORT COMPONENTS */
 import NavButton from '../buttons/navButton';
-import Icon from '../icons/icon';
 
 /* COMPONENT */
 class Navigation extends Component {
@@ -65,7 +65,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 						<button onClick={() => syncApi(token)} type="button" className="btn btn-nav btn-block mb-1">
-							<Icon icon="refresh" mr={2} fw />
+							<FontAwesomeIcon icon="sync" className="mr-2" fixedWidth />
 							Buscar dispositivos
 						</button>
 				  </li>
@@ -79,7 +79,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 				    <button onClick={() => sync()} type="button" className="btn btn-nav btn-block mb-1">
-				      <Icon icon="link" mr={2} fw />
+				      <FontAwesomeIcon icon="link" className="mr-2" fixedWidth />
 								Sincronizar
         		</button>
 				  </li>
@@ -93,7 +93,7 @@ class Navigation extends Component {
 	      syncButton = (
 				  <li>
 				    <button onClick={() => syncApi(token)} type="button" className="btn btn-nav btn-block mb-1" disabled>
-				      <Icon icon="refresh" mr={2} fw spin />
+				      <FontAwesomeIcon icon="sync" className="mr-2" fixedWidth spin />
 							Sincronizando
 				    </button>
 				  </li>
@@ -132,8 +132,7 @@ class Navigation extends Component {
             <li>
               <a tabIndex={-1} href="/disconect">
                 <button type="button" className="btn btn-nav btn-block mb-1">
-                  <Icon icon="sign-out" mr={2} fw />
-                  {' '}
+                  <FontAwesomeIcon icon="sign-out-alt" className="mr-2" fixedWidth />
 									Desconectar
                 </button>
               </a>

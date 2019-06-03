@@ -250,11 +250,12 @@ class Main extends Component {
 	/* RENDER COMPONENT */
 	render() {
 	  return (
-  <div className="row main">
-    <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
-    <Navigation filterData={this.filterData} sync={this.sync} syncApi={this.syncApi} {...this.state} />
-    <Content filterData={this.filterData} filterFound={this.filterFound} filterConfigured={this.filterConfigured} update={this.update} notify={this.notify} {...this.state} />
-  </div>);
+      <div className="row main">
+        <ToastContainer closeButton={false} hideProgressBar transition={Slide} />
+        <Navigation filterData={this.filterData} sync={this.sync} syncApi={this.syncApi} {...this.state} />
+        <Content filterData={this.filterData} filterFound={this.filterFound} filterConfigured={this.filterConfigured} update={this.update} notify={this.notify} {...this.state} />
+      </div>
+	  );
 	}
 }
 
