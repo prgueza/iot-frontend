@@ -1,7 +1,5 @@
 node_modules
-src
 Dockerfile
-.babelrc
 .eslintrc
 .gitignore
 README.md
