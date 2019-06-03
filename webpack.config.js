@@ -3,7 +3,8 @@ const path = require('path');
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 
-module.exports = {
+module.exports = env => ({
+  watch: env && env.watch,
   watch: process.env.NODE_ENV === 'development',
   watchOptions: {
     ignored: /node_modules/,
