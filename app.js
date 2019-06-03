@@ -42,4 +42,6 @@ app.use((err, req, res) => {
   res.render('error');
 });
 
+console.log('iot-api url: ', process.env.API_URL)
+
 module.exports = app;

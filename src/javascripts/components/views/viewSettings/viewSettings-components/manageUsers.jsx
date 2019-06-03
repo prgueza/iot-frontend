@@ -96,7 +96,7 @@ class ManageUsers extends Component {
 	  if (checkPassword !== '') { form.checkPassword = checkPassword; }
 	  axios({
 	    method,
-	    url: edit ? `http://localhost:4000/users/${elementId}` : 'http://localhost:4000/users/signup',
+	    url: edit ? `${process.env.API_URL}users/${elementId}` : `${process.env.API_URL}users/signup`,
 	    data: form,
 	    headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
 	  })

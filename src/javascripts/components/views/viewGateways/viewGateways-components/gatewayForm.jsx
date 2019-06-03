@@ -82,7 +82,7 @@ class GatewayForm extends Component {
 	  // HTTP request
 	  axios({
 	    method: gateway ? 'put' : 'post',
-	    url: gateway ? gateway.url : 'http://localhost:4000/gateways',
+	    url: gateway ? gateway.url : `${process.env.API_URL}gateways`,
 	    data: form,
 	    headers: {
 	      Accept: 'application/json',

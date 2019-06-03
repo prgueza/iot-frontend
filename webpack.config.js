@@ -49,15 +49,9 @@ module.exports = env => ({
     extensions: ['.jsx', '.js', '.json', '*'],
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default'],
-    }),
     new webpack.DefinePlugin({
       'process.env': {
-        API_URL: JSON.stringify('http://localhost:4000/'),
+        API_URL: JSON.stringify(process.env.API_URL) || JSON.stringify('http://localhost:4000/'),
         TIMEOUT: 50000,
       },
     }),

@@ -91,7 +91,7 @@ class ManageScreens extends Component {
 	  if (description !== '') { form.description = description; }
 	  axios({
 	    method,
-	    url: edit ? `http://localhost:4000/screens/${elementId}` : 'http://localhost:4000/screens',
+	    url: edit ? `${process.env.API_URL}screens/${elementId}` : `${process.env.API_URL}screens`,
 	    data: form,
 	    headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
 	  })

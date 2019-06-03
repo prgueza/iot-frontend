@@ -106,7 +106,7 @@ class GroupForm extends Component {
 	  // HTTP request
 	  axios({
 	    method: group ? 'put' : 'post',
-	    url: group ? group.url : 'http://localhost:4000/groups',
+	    url: group ? group.url : `${process.env.API_URL}groups`,
 	    data: form,
 	    headers: { Accept: 'application/json', 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
 	  })
