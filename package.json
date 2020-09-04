@@ -27,7 +27,7 @@
     "mongoose": "^4.13.2",
     "morgan": "^1.9.1",
     "node-fetch": "^1.7.3",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "prop-types": "^15.6.2",
     "react": "^16.1.1",
     "react-cookie": "^2.2.0",
