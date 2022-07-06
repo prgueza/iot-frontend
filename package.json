@@ -23,7 +23,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "glamor": "^2.20.40",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "mongoose": "^4.13.2",
     "morgan": "^1.9.1",
     "node-fetch": "^1.7.3",
